@@ -54,9 +54,25 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion
-
-        public static bool Add(string databasePath, string name,long gunId, long maintenancePlanId, string operationDate, string operationDueDate, long roundsFired, string Notes, string ammoUsed, long barrelSystemId, bool doesCount, out string errOut)
+        #endregion        
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="maintenancePlanId">The maintenance plan identifier.</param>
+        /// <param name="operationDate">The operation date.</param>
+        /// <param name="operationDueDate">The operation due date.</param>
+        /// <param name="roundsFired">The rounds fired.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="ammoUsed">The ammo used.</param>
+        /// <param name="barrelSystemId">The barrel system identifier.</param>
+        /// <param name="doesCount">if set to <c>true</c> [does count].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Add(string databasePath, string name,long gunId, long maintenancePlanId, string operationDate, string operationDueDate, long roundsFired, string notes, string ammoUsed, long barrelSystemId, bool doesCount, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -64,7 +80,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 int iCount = doesCount ? 1 : 0;
                 string sql = $"INSERT INTO Maintance_Details(gid,mpid,Name,OpDate,OpDueDate,RndFired,Notes,au,BSID,DC,sync_lastupdate) VALUES(" +
-                             $"{gunId},{maintenancePlanId},'{name}','{operationDate}','{operationDueDate}',{roundsFired},'{Notes}','{ammoUsed}'" +
+                             $"{gunId},{maintenancePlanId},'{name}','{operationDate}','{operationDueDate}',{roundsFired},'{notes}','{ammoUsed}'" +
                              $",{barrelSystemId},{iCount},Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
@@ -75,14 +91,24 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
-        public static bool Exist(string databasePath, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate, long roundsFired, string Notes, string ammoUsed, long barrelSystemId, bool doesCount, out string errOut)
+        /// <summary>
+        /// Exists the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="maintenancePlanId">The maintenance plan identifier.</param>
+        /// <param name="operationDate">The operation date.</param>
+        /// <param name="operationDueDate">The operation due date.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Exist(string databasePath, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate,  out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                int iCount = doesCount ? 1 : 0;
                 string sql = $"SELECT * from  Maintance_Details where gid={gunId} and mpid={maintenancePlanId} and Name='{name}' and" +
                              $"OpDate='{operationDate}' and OpDueDate='{operationDueDate}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
@@ -95,7 +121,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
             bool bAns = false;
@@ -112,15 +145,25 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
-        public static long GetId(string databasePath, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate, long roundsFired, string Notes, string ammoUsed, long barrelSystemId, bool doesCount, out string errOut)
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="maintenancePlanId">The maintenance plan identifier.</param>
+        /// <param name="operationDate">The operation date.</param>
+        /// <param name="operationDueDate">The operation due date.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate,  out string errOut)
         {
             long lAns = 0;
             errOut = @"";
             try
             {
-                int iCount = doesCount ? 1 : 0;
-                string sql = $"SELECT * from  Maintance_Details where gid={gunId} and mpid={maintenancePlanId} and Name='{name}' and" +
+                string sql = $"SELECT * from  Maintance_Details where gid={gunId} and mpid={maintenancePlanId} and Name='{name}' and " +
                              $"OpDate='{operationDate}' and OpDueDate='{operationDueDate}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
