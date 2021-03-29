@@ -6,7 +6,7 @@ namespace BurnSoft.Applications.MGC.Types
     /// Class MaintancePlans to hold the information from the Maintance_Plans table
     /// </summary>
     [Serializable]
-    public class MaintancePlans
+    public class MaintancePlansList
     {
         /// <summary>
         /// Gets or sets the identifier.
