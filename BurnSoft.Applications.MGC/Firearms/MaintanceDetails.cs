@@ -5,6 +5,8 @@ using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurnSoft.Applications.MGC.Types;
+
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.Firearms
@@ -177,6 +179,45 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("GetId", e);
             }
             return lAns;
+        }
+        /// <summary>
+        /// General List Generator where all you have to do is pass the datatable of informatmion and it will convert it
+        /// into the MaintancenDetails List 
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintanceDetailsList&gt;.</returns>
+        private static List<MaintanceDetailsList> MyList(DataTable dt, out string errOut)
+        {
+            List<MaintanceDetailsList> lst = new List<MaintanceDetailsList>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new MaintanceDetailsList()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        AmmoUsed = d["au"].ToString(),
+                        Name = d["name"].ToString(),
+                        BarrelSystemId = Convert.ToInt32(d["bsid"]),
+                        LastSync = d["sync_lastupdate"].ToString(),
+                        Notes = d["notes"].ToString(),
+                        DoesCount = Convert.ToInt32(d["dc"]) > 0,
+                        GunId = Convert.ToInt32(d["gid"]),
+                        OperationDueDate = d["opduedate"].ToString(),
+                        OperationStartDate = d["opdate"].ToString(),
+                        RoundsFired = Convert.ToInt32(d["rndfired"].ToString()),
+                        PlanId = Convert.ToInt32(d["mpid"].ToString())
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+
+            return lst;
         }
     }
 }
