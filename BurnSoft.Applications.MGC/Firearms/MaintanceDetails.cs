@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Security.AccessControl;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
@@ -192,11 +191,10 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                List<MaintanceDetailsList> lst = new List<MaintanceDetailsList>();
                 string sql = $"SELECT * from  Maintance_Details where id={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
-                lst = MyList(dt, out errOut);
+                List<MaintanceDetailsList> lst = MyList(dt, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (MaintanceDetailsList l in lst)
                 {

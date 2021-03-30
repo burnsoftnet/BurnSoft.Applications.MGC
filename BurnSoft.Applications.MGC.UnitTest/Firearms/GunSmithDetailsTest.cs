@@ -101,7 +101,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             if (!GunSmithDetails.Exists(_databasePath, _gunId, GunSmith_Name, GunDetails_OrderDetails, out _errOut))
             {
-                if (!BurnSoft.Applications.MGC.PeopleAndPlaces.GunSmiths.Exists(_databasePath, GunSmith_Name,
+                if (!MGC.PeopleAndPlaces.GunSmiths.Exists(_databasePath, GunSmith_Name,
                     out _errOut))
                 {
                     MGC.PeopleAndPlaces.GunSmiths.Add(_databasePath, GunSmith_Name,out _errOut);
@@ -121,7 +121,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             if (GunSmithDetails.Exists(_databasePath, _gunId, GunSmith_Name, GunDetails_OrderDetails, out _errOut))
             {
 
-                if (!BurnSoft.Applications.MGC.PeopleAndPlaces.GunSmiths.Exists(_databasePath, GunSmith_Name,
+                if (!MGC.PeopleAndPlaces.GunSmiths.Exists(_databasePath, GunSmith_Name,
                     out _errOut))
                 {
                     MGC.PeopleAndPlaces.GunSmiths.Add(_databasePath, GunSmith_Name, out _errOut);
