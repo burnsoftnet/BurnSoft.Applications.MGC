@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using BurnSoft.Applications.MGC.AutoFill;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
@@ -28,35 +27,35 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// The maintenance details plan identifier
         /// </summary>
-        private long MaintenanceDetails_PlanId;
+        private long _maintenanceDetailsPlanId;
         /// <summary>
         /// The maintenance details name
         /// </summary>
-        private string MaintenanceDetails_Name;
+        private string _maintenanceDetailsName;
         /// <summary>
         /// The maintenance details operation date
         /// </summary>
-        private string MaintenanceDetails_OperationDate;
+        private string _maintenanceDetailsOperationDate;
         /// <summary>
         /// The maintenance details operation due date
         /// </summary>
-        private string MaintenanceDetails_OperationDueDate;
+        private string _maintenanceDetailsOperationDueDate;
         /// <summary>
         /// The maintenance details rounds fired
         /// </summary>
-        private long MaintenanceDetails_RoundsFired;
+        private long _maintenanceDetailsRoundsFired;
         /// <summary>
         /// The maintenance details notes
         /// </summary>
-        private string MaintenanceDetails_Notes;
+        private string _maintenanceDetailsNotes;
         /// <summary>
         /// The maintenance details barrel system identifier
         /// </summary>
-        private long MaintenanceDetails_BarrelSystemId;
+        private long _maintenanceDetailsBarrelSystemId;
         /// <summary>
         /// The maintenance details does count
         /// </summary>
-        private bool MaintenanceDetails_DoesCount;
+        private bool _maintenanceDetailsDoesCount;
         /// <summary>
         /// The database path
         /// </summary>
@@ -73,14 +72,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
-            MaintenanceDetails_PlanId = Vs2019.IGetSetting("MaintenanceDetails_PlanId", TestContext);
-            MaintenanceDetails_Name = Vs2019.GetSetting("MaintenanceDetails_Name", TestContext);
-            MaintenanceDetails_OperationDate = Vs2019.GetSetting("MaintenanceDetails_OperationDate", TestContext);
-            MaintenanceDetails_OperationDueDate = Vs2019.GetSetting("MaintenanceDetails_OperationDueDate", TestContext);
-            MaintenanceDetails_RoundsFired = Vs2019.IGetSetting("MaintenanceDetails_RoundsFired", TestContext);
-            MaintenanceDetails_Notes = Vs2019.GetSetting("MaintenanceDetails_Notes", TestContext);
-            MaintenanceDetails_BarrelSystemId = Vs2019.IGetSetting("MaintenanceDetails_BarrelSystemId", TestContext);
-            MaintenanceDetails_DoesCount = Vs2019.BGetSetting("MaintenanceDetails_DoesCount", TestContext);
+            _maintenanceDetailsPlanId = Vs2019.IGetSetting("MaintenanceDetails_PlanId", TestContext);
+            _maintenanceDetailsName = Vs2019.GetSetting("MaintenanceDetails_Name", TestContext);
+            _maintenanceDetailsOperationDate = Vs2019.GetSetting("MaintenanceDetails_OperationDate", TestContext);
+            _maintenanceDetailsOperationDueDate = Vs2019.GetSetting("MaintenanceDetails_OperationDueDate", TestContext);
+            _maintenanceDetailsRoundsFired = Vs2019.IGetSetting("MaintenanceDetails_RoundsFired", TestContext);
+            _maintenanceDetailsNotes = Vs2019.GetSetting("MaintenanceDetails_Notes", TestContext);
+            _maintenanceDetailsBarrelSystemId = Vs2019.IGetSetting("MaintenanceDetails_BarrelSystemId", TestContext);
+            _maintenanceDetailsDoesCount = Vs2019.BGetSetting("MaintenanceDetails_DoesCount", TestContext);
         }
         /// <summary>
         /// Prints the list.
@@ -114,9 +113,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         private void VerifyExists()
         {
 
-            if (!MaintanceDetails.Exists(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut))
+            if (!MaintanceDetails.Exists(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, out _errOut))
             {
-                MaintanceDetails.Add(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, MaintenanceDetails_RoundsFired, MaintenanceDetails_Notes, "N/A", MaintenanceDetails_BarrelSystemId, MaintenanceDetails_DoesCount, out _errOut);
+                MaintanceDetails.Add(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, _maintenanceDetailsRoundsFired, _maintenanceDetailsNotes, "N/A", _maintenanceDetailsBarrelSystemId, _maintenanceDetailsDoesCount, out _errOut);
             }
         }
         /// <summary>
@@ -124,9 +123,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// </summary>
         private void VerifyDoesntExist()
         {
-            if (MaintanceDetails.Exists(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut))
+            if (MaintanceDetails.Exists(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, out _errOut))
             {
-                long value = MaintanceDetails.GetId(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut);
+                long value = MaintanceDetails.GetId(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, out _errOut);
                 MaintanceDetails.Delete(_databasePath, value, out _errOut);
             }
         }
@@ -137,7 +136,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void AddTest()
         {
             VerifyDoesntExist();
-            bool value = MaintanceDetails.Add(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, MaintenanceDetails_RoundsFired, MaintenanceDetails_Notes, "N/A", MaintenanceDetails_BarrelSystemId, MaintenanceDetails_DoesCount, out _errOut);
+            bool value = MaintanceDetails.Add(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, _maintenanceDetailsRoundsFired, _maintenanceDetailsNotes, "N/A", _maintenanceDetailsBarrelSystemId, _maintenanceDetailsDoesCount, out _errOut);
             General.HasTrueValue(value, _errOut);
 
         }
@@ -148,8 +147,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void ExistsTest()
         {
             VerifyExists();
-            bool value = MaintanceDetails.Exists(_databasePath, MaintenanceDetails_Name, _gunId,
-                MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate,
+            bool value = MaintanceDetails.Exists(_databasePath, _maintenanceDetailsName, _gunId,
+                _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate,
                 out _errOut);
             General.HasTrueValue(value, _errOut);
 
@@ -161,7 +160,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void DeleteTest()
         {
             VerifyExists();
-            long id = MaintanceDetails.GetId(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut);
+            long id = MaintanceDetails.GetId(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, out _errOut);
             bool value = MaintanceDetails.Delete(_databasePath, id, out _errOut);
             General.HasTrueValue(value, _errOut);
 
@@ -173,7 +172,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void GetIdTest()
         {
             VerifyExists();
-            long id = MaintanceDetails.GetId(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut);
+            long id = MaintanceDetails.GetId(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, out _errOut);
             TestContext.WriteLine($"id: {id}");
             General.HasTrueValue(id > 0, _errOut);
 
@@ -185,7 +184,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void GetNameTest()
         {
             VerifyExists();
-            long id = MaintanceDetails.GetId(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut);
+            long id = MaintanceDetails.GetId(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, out _errOut);
             string name = MaintanceDetails.GetName(_databasePath, id, out _errOut);
             TestContext.WriteLine($"Name: {name}");
             General.HasTrueValue(name.Length > 0, _errOut);
@@ -198,7 +197,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void ListFromGunAndBarrelTest()
         {
             VerifyExists();
-            List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, _gunId, MaintenanceDetails_BarrelSystemId, out _errOut);
+            List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, _gunId, _maintenanceDetailsBarrelSystemId, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
