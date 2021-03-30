@@ -3,6 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
+using BurnSoft.Universal;
+
 // ReSharper disable UnusedMember.Local
 
 
@@ -56,12 +58,13 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void Init()
         {
             // Vs2019.GetSetting("", TestContext);
+            BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
-            _gunSmithName = Vs2019.GetSetting("GunSmith_Name", TestContext);
-            _gunDetailsOrderDetails = Vs2019.GetSetting("GunDetails_OrderDetails", TestContext);
-            _gunDetailsNotes = Vs2019.GetSetting("GunDetails_Notes", TestContext);
+            _gunSmithName = obj.FC(Vs2019.GetSetting("GunSmith_Name", TestContext));
+            _gunDetailsOrderDetails = obj.FC(Vs2019.GetSetting("GunDetails_OrderDetails", TestContext));
+            _gunDetailsNotes = obj.FC(Vs2019.GetSetting("GunDetails_Notes", TestContext));
             _gunDetailsStartDate = Vs2019.GetSetting("GunDetails_StartDate", TestContext);
             _gunDetailsReturnDate = Vs2019.GetSetting("GunDetails_ReturnDate", TestContext);
         }

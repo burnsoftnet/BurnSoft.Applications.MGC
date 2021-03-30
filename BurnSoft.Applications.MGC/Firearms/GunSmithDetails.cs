@@ -165,7 +165,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"select * from  GunSmith_Details where GID={gunId} and gsid={gunSmithId} and od={orderDetails}";
+                string sql = $"select * from  GunSmith_Details where GID={gunId} and gsid={gunSmithId} and od='{orderDetails}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 List<GunSmithWorkDone> lst = GetData(dt, out errOut);
@@ -305,14 +305,14 @@ namespace BurnSoft.Applications.MGC.Firearms
                     lst.Add(new GunSmithWorkDone()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        GunId = Convert.ToInt32(d["gid"]),
-                        GunSmithId = Convert.ToInt32(d["gsid"]),
-                        OrderDetails = d["od"].ToString(),
-                        ReturnDate = d["rdate"].ToString(),
-                        StartDate = d["sdate"].ToString(),
-                        Notes = d["notes"].ToString(),
-                        GunSmithName = d["gsmith"].ToString(),
-                        LastSync = d["sync_lastupdate"].ToString()
+                        GunId = d["gid"] != null ?  Convert.ToInt32(d["gid"]) : 0,
+                        GunSmithId = d["gsid"] != null ? Convert.ToInt32(d["gsid"]) : 0,
+                        OrderDetails = d["od"] != null ?  d["od"].ToString() : "",
+                        ReturnDate = d["rdate"] != null ? d["rdate"].ToString() : "",
+                        StartDate = d["sdate"] != null ?  d["sdate"].ToString() : "",
+                        Notes = d["notes"] !=null ?  d["notes"].ToString() : "",
+                        GunSmithName = d["gsmith"] != null ?  d["gsmith"].ToString() : "",
+                        LastSync = d["sync_lastupdate"] != null ? d["sync_lastupdate"].ToString() : ""
                     });
                 }
             }
