@@ -119,5 +119,28 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
 
         }
+
+        [TestMethod]
+        public void ExistsTest()
+        {
+            VerifyExists();
+            bool value = MaintanceDetails.Exists(_databasePath, MaintenanceDetails_Name, _gunId,
+                MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate,
+                out _errOut);
+            General.HasTrueValue(value, _errOut);
+
+        }
+
+        [TestMethod]
+        public void DeleteTest()
+        {
+            VerifyExists();
+            long id = MaintanceDetails.GetId(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut);
+            bool value = MaintanceDetails.Delete(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+
+        }
+
+
     }
 }
