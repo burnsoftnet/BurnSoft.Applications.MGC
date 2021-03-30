@@ -101,16 +101,22 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             if (!GunSmithDetails.Exists(_databasePath, _gunId, GunSmith_Name, GunDetails_OrderDetails, out _errOut))
             {
-                if (!MGC.PeopleAndPlaces.GunSmiths.Exists(_databasePath, GunSmith_Name,
-                    out _errOut))
-                {
-                    MGC.PeopleAndPlaces.GunSmiths.Add(_databasePath, GunSmith_Name,out _errOut);
-                }
-
+                VerifyContactExists();
                 long gsid = MGC.PeopleAndPlaces.GunSmiths.GetId(_databasePath, GunSmith_Name, out _errOut);
 
                 GunSmithDetails.Add(_databasePath, _gunId, GunSmith_Name, gsid, GunDetails_OrderDetails, GunDetails_Notes, GunDetails_StartDate, GunDetails_ReturnDate, out _errOut);
 
+            }
+        }
+        /// <summary>
+        /// Verifies the contact exists.
+        /// </summary>
+        private void VerifyContactExists()
+        {
+            if (!MGC.PeopleAndPlaces.GunSmiths.Exists(_databasePath, GunSmith_Name,
+                out _errOut))
+            {
+                MGC.PeopleAndPlaces.GunSmiths.Add(_databasePath, GunSmith_Name, out _errOut);
             }
         }
         /// <summary>
@@ -120,13 +126,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             if (GunSmithDetails.Exists(_databasePath, _gunId, GunSmith_Name, GunDetails_OrderDetails, out _errOut))
             {
-
-                if (!MGC.PeopleAndPlaces.GunSmiths.Exists(_databasePath, GunSmith_Name,
-                    out _errOut))
-                {
-                    MGC.PeopleAndPlaces.GunSmiths.Add(_databasePath, GunSmith_Name, out _errOut);
-                }
-
+                VerifyContactExists();
                 long gsid = MGC.PeopleAndPlaces.GunSmiths.GetId(_databasePath, GunSmith_Name, out _errOut);
                 long value = GunSmithDetails.GetId(_databasePath, _gunId, gsid, GunDetails_OrderDetails, out _errOut);
                 GunSmithDetails.Delete(_databasePath, value, out _errOut);
@@ -136,8 +136,33 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         //TODO: Complete Unit Tests #22
 
         [TestMethod]
-        public void TestMethod1()
+        public void AddTest()
         {
+            VerifyDoesntExist();
+            VerifyContactExists();
+            long gsid = MGC.PeopleAndPlaces.GunSmiths.GetId(_databasePath, GunSmith_Name, out _errOut);
+
+            bool value = GunSmithDetails.Add(_databasePath, _gunId, GunSmith_Name, gsid, GunDetails_OrderDetails, GunDetails_Notes, GunDetails_StartDate, GunDetails_ReturnDate, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod]
+        public void ExistsTest()
+        {
+            VerifyExists();
+            bool value = GunSmithDetails.Exists(_databasePath, _gunId, GunSmith_Name, GunDetails_OrderDetails,
+                out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod]
+        public void DeleteTest()
+        {
+            VerifyExists();
+            long gsid = MGC.PeopleAndPlaces.GunSmiths.GetId(_databasePath, GunSmith_Name, out _errOut);
+            long id = GunSmithDetails.GetId(_databasePath, _gunId, gsid, GunDetails_OrderDetails, out _errOut);
+            bool value = GunSmithDetails.Delete(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
     }
 }
