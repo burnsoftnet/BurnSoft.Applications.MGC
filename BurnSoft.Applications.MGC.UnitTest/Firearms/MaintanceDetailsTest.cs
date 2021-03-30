@@ -68,7 +68,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void Init()
         {
             // Vs2019.GetSetting("", TestContext);
-            BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
