@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Security.AccessControl;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
@@ -175,6 +176,38 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("GetId", e);
             }
             return lAns;
+        }
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, long id, out string errOut)
+        {
+            string sAns = @"";
+            errOut = @"";
+            try
+            {
+                List<MaintanceDetailsList> lst = new List<MaintanceDetailsList>();
+                string sql = $"SELECT * from  Maintance_Details where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (MaintanceDetailsList l in lst)
+                {
+                    sAns = l.Name;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return sAns;
         }
         /// <summary>
         /// Listses the specified database path.
