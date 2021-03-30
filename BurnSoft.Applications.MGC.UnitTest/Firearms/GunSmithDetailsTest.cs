@@ -133,8 +133,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             }
         }
 
-        //TODO: Complete Unit Tests #22
-
+        /// <summary>
+        /// Defines the test method AddTest.
+        /// </summary>
         [TestMethod]
         public void AddTest()
         {
@@ -145,7 +146,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = GunSmithDetails.Add(_databasePath, _gunId, GunSmith_Name, gsid, GunDetails_OrderDetails, GunDetails_Notes, GunDetails_StartDate, GunDetails_ReturnDate, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method ExistsTest.
+        /// </summary>
         [TestMethod]
         public void ExistsTest()
         {
@@ -154,7 +157,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method DeleteTest.
+        /// </summary>
         [TestMethod]
         public void DeleteTest()
         {
@@ -164,7 +169,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = GunSmithDetails.Delete(_databasePath, id, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method UpdateTest.
+        /// </summary>
         [TestMethod]
         public void UpdateTest()
         {
@@ -174,7 +181,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = GunSmithDetails.Update(_databasePath, id, _gunId, GunSmith_Name, gsid, GunDetails_OrderDetails,$"UPDATED {GunDetails_Notes}", GunDetails_StartDate, GunDetails_ReturnDate, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method GetIdTest.
+        /// </summary>
         [TestMethod]
         public void GetIdTest()
         {
@@ -184,7 +193,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(id > 0, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method ListAllTest.
+        /// </summary>
         [TestMethod]
         public void ListAllTest()
         {
@@ -194,7 +205,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(value.Count > 0, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method ListByGunTest.
+        /// </summary>
         [TestMethod]
         public void ListByGunTest()
         {
