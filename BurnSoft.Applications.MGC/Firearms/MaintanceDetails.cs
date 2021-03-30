@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
@@ -180,6 +176,64 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lAns;
         }
+        /// <summary>
+        /// Listses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintanceDetailsList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static List<MaintanceDetailsList> Lists(string databasePath, long gunId, out string errOut)
+        {
+            List<MaintanceDetailsList> lst = new List<MaintanceDetailsList>();
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from  Maintance_Details where gid={gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Lists", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
+        /// Listses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="barrelSystem">The barrel system.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintanceDetailsList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static List<MaintanceDetailsList> Lists(string databasePath, long gunId, long barrelSystem, out string errOut)
+        {
+            List<MaintanceDetailsList> lst = new List<MaintanceDetailsList>();
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from  Maintance_Details where gid={gunId} and bsid={barrelSystem}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Lists", e);
+            }
+
+            return lst;
+        }
+
         /// <summary>
         /// General List Generator where all you have to do is pass the datatable of informatmion and it will convert it
         /// into the MaintancenDetails List 
