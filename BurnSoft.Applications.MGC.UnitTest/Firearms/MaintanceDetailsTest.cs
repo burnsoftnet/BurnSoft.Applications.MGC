@@ -25,18 +25,37 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// The gun identifier
         /// </summary>
         private int _gunId;
-
+        /// <summary>
+        /// The maintenance details plan identifier
+        /// </summary>
         private long MaintenanceDetails_PlanId;
-
+        /// <summary>
+        /// The maintenance details name
+        /// </summary>
         private string MaintenanceDetails_Name;
-
+        /// <summary>
+        /// The maintenance details operation date
+        /// </summary>
         private string MaintenanceDetails_OperationDate;
- 
+        /// <summary>
+        /// The maintenance details operation due date
+        /// </summary>
         private string MaintenanceDetails_OperationDueDate;
-
+        /// <summary>
+        /// The maintenance details rounds fired
+        /// </summary>
         private long MaintenanceDetails_RoundsFired;
+        /// <summary>
+        /// The maintenance details notes
+        /// </summary>
         private string MaintenanceDetails_Notes;
+        /// <summary>
+        /// The maintenance details barrel system identifier
+        /// </summary>
         private long MaintenanceDetails_BarrelSystemId;
+        /// <summary>
+        /// The maintenance details does count
+        /// </summary>
         private bool MaintenanceDetails_DoesCount;
         /// <summary>
         /// The database path
@@ -111,6 +130,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 MaintanceDetails.Delete(_databasePath, value, out _errOut);
             }
         }
+        /// <summary>
+        /// Defines the test method AddTest.
+        /// </summary>
         [TestMethod]
         public void AddTest()
         {
@@ -119,7 +141,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
 
         }
-
+        /// <summary>
+        /// Defines the test method ExistsTest.
+        /// </summary>
         [TestMethod]
         public void ExistsTest()
         {
@@ -130,7 +154,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
 
         }
-
+        /// <summary>
+        /// Defines the test method DeleteTest.
+        /// </summary>
         [TestMethod]
         public void DeleteTest()
         {
@@ -140,7 +166,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
 
         }
-
+        /// <summary>
+        /// Defines the test method GetIdTest.
+        /// </summary>
         [TestMethod]
         public void GetIdTest()
         {
@@ -150,7 +178,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(id > 0, _errOut);
 
         }
-
+        /// <summary>
+        /// Defines the test method GetNameTest.
+        /// </summary>
         [TestMethod]
         public void GetNameTest()
         {
@@ -161,7 +191,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(name.Length > 0, _errOut);
 
         }
-
+        /// <summary>
+        /// Defines the test method ListFromGunAndBarrelTest.
+        /// </summary>
         [TestMethod]
         public void ListFromGunAndBarrelTest()
         {
@@ -170,7 +202,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method ListFromGunTest.
+        /// </summary>
         [TestMethod]
         public void ListFromGunTest()
         {
