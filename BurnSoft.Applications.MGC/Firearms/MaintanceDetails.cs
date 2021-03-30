@@ -107,8 +107,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"SELECT * from  Maintance_Details where gid={gunId} and mpid={maintenancePlanId} and Name='{name}' and" +
-                             $"OpDate='{operationDate}' and OpDueDate='{operationDueDate}";
+                string sql = $"SELECT * from  Maintance_Details where gid={gunId} and mpid={maintenancePlanId} and Name='{name}' and " +
+                             $"OpDate='{operationDate}' and OpDueDate='{operationDueDate}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 bAns = dt.Rows.Count > 0;
@@ -162,7 +162,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql = $"SELECT * from  Maintance_Details where gid={gunId} and mpid={maintenancePlanId} and Name='{name}' and " +
-                             $"OpDate='{operationDate}' and OpDueDate='{operationDueDate}";
+                             $"OpDate='{operationDate}' and OpDueDate='{operationDueDate}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)

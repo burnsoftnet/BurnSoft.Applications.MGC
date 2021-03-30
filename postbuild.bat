@@ -51,8 +51,9 @@ nuget delete %HELPFILENAME% %ver% burnsoft -Source %USENUGETSERVER% -NonInteract
 echo "Uploading %nupak%.%NUGETEXT%"
 nuget push %nupak%.%NUGETEXT% burnsoft -Source %USENUGETSERVER%
 
-rem if "%ConfigurationName%" == %RELEASE% (
+if "%ConfigurationName%" == %RELEASE% (
 	echo "nuget guthub push"
+	nuget delete %HELPFILENAME% %ver% -source "github"
 	nuget push %nupak%.%NUGETEXT% -source "github"
-rem )
+)
 cd ..
