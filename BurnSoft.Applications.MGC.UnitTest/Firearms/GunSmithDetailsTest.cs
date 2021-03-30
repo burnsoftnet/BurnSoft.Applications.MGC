@@ -164,5 +164,45 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = GunSmithDetails.Delete(_databasePath, id, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod]
+        public void UpdateTest()
+        {
+            VerifyExists();
+            long gsid = MGC.PeopleAndPlaces.GunSmiths.GetId(_databasePath, GunSmith_Name, out _errOut);
+            long id = GunSmithDetails.GetId(_databasePath, _gunId, gsid, GunDetails_OrderDetails, out _errOut);
+            bool value = GunSmithDetails.Update(_databasePath, id, _gunId, GunSmith_Name, gsid, GunDetails_OrderDetails,$"UPDATED {GunDetails_Notes}", GunDetails_StartDate, GunDetails_ReturnDate, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod]
+        public void GetIdTest()
+        {
+            VerifyExists();
+            long gsid = MGC.PeopleAndPlaces.GunSmiths.GetId(_databasePath, GunSmith_Name, out _errOut);
+            long id = GunSmithDetails.GetId(_databasePath, _gunId, gsid, GunDetails_OrderDetails, out _errOut);
+
+            General.HasTrueValue(id > 0, _errOut);
+        }
+
+        [TestMethod]
+        public void ListAllTest()
+        {
+            VerifyExists();
+            List<GunSmithWorkDone> value = GunSmithDetails.Lists(_databasePath, out _errOut);
+            PrintList(value);
+
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod]
+        public void ListByGunTest()
+        {
+            VerifyExists();
+            List<GunSmithWorkDone> value = GunSmithDetails.Lists(_databasePath, _gunId, out _errOut);
+            PrintList(value);
+
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
     }
 }
