@@ -141,6 +141,43 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
         }
 
+        [TestMethod]
+        public void GetIdTest()
+        {
+            VerifyExists();
+            long id = MaintanceDetails.GetId(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut);
+            TestContext.WriteLine($"id: {id}");
+            General.HasTrueValue(id > 0, _errOut);
 
+        }
+
+        [TestMethod]
+        public void GetNameTest()
+        {
+            VerifyExists();
+            long id = MaintanceDetails.GetId(_databasePath, MaintenanceDetails_Name, _gunId, MaintenanceDetails_PlanId, MaintenanceDetails_OperationDate, MaintenanceDetails_OperationDueDate, out _errOut);
+            string name = MaintanceDetails.GetName(_databasePath, id, out _errOut);
+            TestContext.WriteLine($"Name: {name}");
+            General.HasTrueValue(name.Length > 0, _errOut);
+
+        }
+
+        [TestMethod]
+        public void ListFromGunAndBarrelTest()
+        {
+            VerifyExists();
+            List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, _gunId, MaintenanceDetails_BarrelSystemId, out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod]
+        public void ListFromGunTest()
+        {
+            VerifyExists();
+            List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, _gunId,  out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
     }
 }
