@@ -81,6 +81,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("GunDetails_Notes", "Did some stuff to it, it didn't blow up so it's good"));
             ls.Add(new Tuple<string, string>("GunDetails_StartDate", "1/1/2021"));
             ls.Add(new Tuple<string, string>("GunDetails_ReturnDate", "2/1/2021"));
+            ls.Add(new Tuple<string, string>("MaintenanceDetails_PlanId", "1"));
+            ls.Add(new Tuple<string, string>("MaintenanceDetails_Name", "Complete Cleaning"));
+            ls.Add(new Tuple<string, string>("MaintenanceDetails_OperationDate", "4/16/2021 8:58:54 AM"));
+            ls.Add(new Tuple<string, string>("MaintenanceDetails_OperationDueDate", "4/16/2021 8:58:54 AM"));
+            ls.Add(new Tuple<string, string>("MaintenanceDetails_RoundsFired", "300"));
+            ls.Add(new Tuple<string, string>("MaintenanceDetails_Notes", "Test"));
+            ls.Add(new Tuple<string, string>("MaintenanceDetails_BarrelSystemId", "1"));
+            ls.Add(new Tuple<string, string>("MaintenanceDetails_DoesCount", "true"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }

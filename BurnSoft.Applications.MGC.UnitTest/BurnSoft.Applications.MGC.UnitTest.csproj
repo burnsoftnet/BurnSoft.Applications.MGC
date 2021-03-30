@@ -71,6 +71,7 @@
     <Compile Include="Firearms\ExtraBarrelConvoKitsTest.cs" />
     <Compile Include="Firearms\ClassifcationTest.cs" />
     <Compile Include="Firearms\GunSmithDetailsTest.cs" />
+    <Compile Include="Firearms\MaintanceDetailsTest.cs" />
     <Compile Include="General.cs" />
     <Compile Include="PeopleAndPlaces\ShopsTest.cs" />
     <Compile Include="PeopleAndPlaces\GunSmithsTest.cs" />

@@ -132,6 +132,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 GunSmithDetails.Delete(_databasePath, value, out _errOut);
             }
         }
+
+        //TODO: Complete Unit Tests #22
+
         [TestMethod]
         public void TestMethod1()
         {

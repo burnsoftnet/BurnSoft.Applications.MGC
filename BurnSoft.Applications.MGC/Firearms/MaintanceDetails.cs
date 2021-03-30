@@ -102,7 +102,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Exist(string databasePath, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate,  out string errOut)
+        public static bool Exists(string databasePath, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate,  out string errOut)
         {
             bool bAns = false;
             errOut = @"";
