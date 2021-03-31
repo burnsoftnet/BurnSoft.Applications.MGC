@@ -205,6 +205,17 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(value.Count > 0, _errOut);
         }
+
+        [TestMethod]
+        public void ListByGunSmithTest()
+        {
+            VerifyExists();
+            List<GunSmithWorkDone> value = GunSmithDetails.Lists(_databasePath, _gunSmithName, out _errOut);
+            PrintList(value);
+
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
         /// <summary>
         /// Defines the test method ListByGunTest.
         /// </summary>
