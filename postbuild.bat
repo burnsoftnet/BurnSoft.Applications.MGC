@@ -53,7 +53,6 @@ nuget push %nupak%.%NUGETEXT% burnsoft -Source %USENUGETSERVER%
 
 if "%ConfigurationName%" == %RELEASE% (
 	echo "nuget guthub push"
-	nuget delete %HELPFILENAME% %ver% -source "github"
 	nuget push %nupak%.%NUGETEXT% -source "github"
 )
 cd ..
