@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
+// ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.Firearms
 {
@@ -72,7 +70,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"INSERT INTO Maintance_Plans(name, od, iid, iirf,notes,sync_lastupdate) VALUES(" +
+                string sql = "INSERT INTO Maintance_Plans(name, od, iid, iirf,notes,sync_lastupdate) VALUES(" +
                              $"'{name}','{operationDetails}','{intervalInRoundsFired}','{intervalInRoundsFired}','{notes}',,Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
