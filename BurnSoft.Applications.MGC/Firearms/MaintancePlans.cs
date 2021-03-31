@@ -71,7 +71,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql = "INSERT INTO Maintance_Plans(name, od, iid, iirf,notes,sync_lastupdate) VALUES(" +
-                             $"'{name}','{operationDetails}','{intervalInRoundsFired}','{intervalInRoundsFired}','{notes}',,Now())";
+                             $"'{name}','{operationDetails}','{intervalsInDays}','{intervalInRoundsFired}','{notes}',Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
             }

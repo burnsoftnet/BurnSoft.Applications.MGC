@@ -118,6 +118,18 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
 
         }
+        /// <summary>
+        /// Defines the test method UpdateTest.
+        /// </summary>
+        [TestMethod]
+        public void UpdateTest()
+        {
+            VerifyExists();
+            long id = MaintancePlans.GetId(_databasePath, _maintenancePlansName, out _errOut);
+            bool value = MaintancePlans.Update(_databasePath,id, _maintenancePlansName, $"UPDATED - {_maintenancePlansOperationDetails}", _maintenancePlansIntervalsInDays, _maintenancePlansIntervalInRoundsFired, _maintenancePlansNotes, out _errOut);
+            General.HasTrueValue(value, _errOut);
+
+        }
 
         /// <summary>
         /// Defines the test method ExistsTest.
