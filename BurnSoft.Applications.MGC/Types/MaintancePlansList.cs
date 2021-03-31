@@ -14,6 +14,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The identifier.</value>
         public long Id { get; set; }
         /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name { get; set; }
+        /// <summary>
         /// Gets or sets the operation details. is od in the table
         /// </summary>
         /// <value>The operation details.</value>
