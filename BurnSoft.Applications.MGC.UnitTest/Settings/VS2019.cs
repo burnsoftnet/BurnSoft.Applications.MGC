@@ -89,6 +89,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("MaintenanceDetails_Notes", "Test"));
             ls.Add(new Tuple<string, string>("MaintenanceDetails_BarrelSystemId", "1"));
             ls.Add(new Tuple<string, string>("MaintenanceDetails_DoesCount", "true"));
+            ls.Add(new Tuple<string, string>("MaintenancePlans_Name", "Unit Test Cleaning"));
+            ls.Add(new Tuple<string, string>("MaintenancePlans_OperationDetails", "Doesn't have anything"));
+            ls.Add(new Tuple<string, string>("MaintenancePlans_IntervalsInDays", "0"));
+            ls.Add(new Tuple<string, string>("MaintenancePlans_IntervalInRoundsFired", "500"));
+            ls.Add(new Tuple<string, string>("MaintenancePlans_Notes", "It's a miricle if it works"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }

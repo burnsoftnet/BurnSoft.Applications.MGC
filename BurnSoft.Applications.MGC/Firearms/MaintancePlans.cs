@@ -164,14 +164,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="name">The name.</param>
-        /// <param name="gunId">The gun identifier.</param>
-        /// <param name="maintenancePlanId">The maintenance plan identifier.</param>
-        /// <param name="operationDate">The operation date.</param>
-        /// <param name="operationDueDate">The operation due date.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate, out string errOut)
+        public static long GetId(string databasePath, string name, out string errOut)
         {
             long lAns = 0;
             errOut = @"";
@@ -222,22 +218,23 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return sAns;
         }
+
         /// <summary>
         /// Listses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="id">the identifier</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;MaintancePlansList&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        public static List<MaintancePlansList> Lists(string databasePath, long gunId, out string errOut)
+        public static List<MaintancePlansList> Lists(string databasePath, long id, out string errOut)
         {
             List<MaintancePlansList> lst = new List<MaintancePlansList>();
             errOut = @"";
             try
             {
-                string sql = $"SELECT * from  Maintance_Details where gid={gunId}";
+                string sql = $"SELECT * from  Maintance_Plans where id={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 lst = MyList(dt, out errOut);
@@ -254,19 +251,46 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Listses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="gunId">The gun identifier.</param>
-        /// <param name="barrelSystem">The barrel system.</param>
+        /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;MaintancePlansList&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        public static List<MaintancePlansList> Lists(string databasePath, long gunId, long barrelSystem, out string errOut)
+        public static List<MaintancePlansList> Lists(string databasePath, string name, out string errOut)
         {
             List<MaintancePlansList> lst = new List<MaintancePlansList>();
             errOut = @"";
             try
             {
-                string sql = $"SELECT * from  Maintance_Details where gid={gunId} and bsid={barrelSystem}";
+                string sql = $"SELECT * from  Maintance_Plans where name='{name}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Lists", e);
+            }
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Listses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintancePlansList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static List<MaintancePlansList> Lists(string databasePath, out string errOut)
+        {
+            List<MaintancePlansList> lst = new List<MaintancePlansList>();
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from  Maintance_Plans";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 lst = MyList(dt, out errOut);
@@ -297,12 +321,12 @@ namespace BurnSoft.Applications.MGC.Firearms
                     lst.Add(new MaintancePlansList()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        OperationDetails = d["od"].ToString(),
-                        Name = d["name"].ToString(),
-                        LastSync = d["sync_lastupdate"].ToString(),
-                        Notes = d["notes"].ToString(),
-                        IntervalsInDays = d["iid"].ToString(),
-                        IntervalInRoundsFired = d["iirf"].ToString()
+                        OperationDetails = d["od"] != DBNull.Value ? d["od"].ToString() : "",
+                        Name = d["name"] != DBNull.Value ? d["name"].ToString() : "",
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString() : "",
+                        Notes = d["notes"] != DBNull.Value ? d["notes"].ToString() : "",
+                        IntervalsInDays = d["iid"] != DBNull.Value ? d["iid"].ToString() : "",
+                        IntervalInRoundsFired = d["iirf"] != DBNull.Value ? d["iirf"].ToString() : ""
                     });
                 }
             }
