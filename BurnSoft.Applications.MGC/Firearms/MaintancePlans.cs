@@ -8,6 +8,9 @@ using BurnSoft.Applications.MGC.Types;
 
 namespace BurnSoft.Applications.MGC.Firearms
 {
+    /// <summary>
+    /// Class MaintancePlans, Main class that handles the Maintance_Plans table data
+    /// </summary>
     public class MaintancePlans
     {
         #region "Exception Error Handling"        
@@ -50,8 +53,19 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion        
-
+        #endregion                
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="operationDetails">The operation details.</param>
+        /// <param name="intervalsInDays">The intervals in days.</param>
+        /// <param name="intervalInRoundsFired">The interval in rounds fired.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Add(string databasePath, string name, string operationDetails, string intervalsInDays, string intervalInRoundsFired, string notes,  out string errOut)
         {
             bool bAns = false;
@@ -69,7 +83,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Existses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Exists(string databasePath, string name, out string errOut)
         {
             bool bAns = false;
@@ -87,7 +108,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
             bool bAns = false;
@@ -104,7 +132,18 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="maintenancePlanId">The maintenance plan identifier.</param>
+        /// <param name="operationDate">The operation date.</param>
+        /// <param name="operationDueDate">The operation due date.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static long GetId(string databasePath, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate, out string errOut)
         {
             long lAns = 0;
@@ -125,7 +164,15 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         public static string GetName(string databasePath, long id, out string errOut)
         {
             string sAns = @"";
@@ -148,7 +195,15 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return sAns;
         }
-
+        /// <summary>
+        /// Listses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintancePlansList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         public static List<MaintancePlansList> Lists(string databasePath, long gunId, out string errOut)
         {
             List<MaintancePlansList> lst = new List<MaintancePlansList>();
@@ -168,7 +223,16 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return lst;
         }
-
+        /// <summary>
+        /// Listses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="barrelSystem">The barrel system.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintancePlansList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         public static List<MaintancePlansList> Lists(string databasePath, long gunId, long barrelSystem, out string errOut)
         {
             List<MaintancePlansList> lst = new List<MaintancePlansList>();
@@ -189,7 +253,12 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lst;
         }
 
-
+        /// <summary>
+        /// Mies the list.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintancePlansList&gt;.</returns>
         private static List<MaintancePlansList> MyList(DataTable dt, out string errOut)
         {
             List<MaintancePlansList> lst = new List<MaintancePlansList>();
