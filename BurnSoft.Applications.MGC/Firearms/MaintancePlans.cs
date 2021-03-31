@@ -82,6 +82,35 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="operationDetails">The operation details.</param>
+        /// <param name="intervalsInDays">The intervals in days.</param>
+        /// <param name="intervalInRoundsFired">The interval in rounds fired.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Update(string databasePath,long id, string name, string operationDetails, string intervalsInDays, string intervalInRoundsFired, string notes, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Update Maintance_Plans set name='{name}', od='{operationDetails}', iid='{intervalsInDays}', iirf='{intervalInRoundsFired}',notes='{notes}',sync_lastupdate=Now() where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Existses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
