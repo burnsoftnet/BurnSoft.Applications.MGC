@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
@@ -302,16 +303,26 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 foreach (DataRow d in dt.Rows)
                 {
+                    long id = Convert.ToInt32(d["id"]);
+                    long gunId = d["gid"] != DBNull.Value ? Convert.ToInt32(d["gid"]) : 0;
+                    long gsid = d["gsid"] != DBNull.Value  ? Convert.ToInt32(d["gsid"]) : 0;
+
+                    string orderDetails = d["od"] != DBNull.Value ? d["od"].ToString() : "";
+                    string rDate = d["rdate"] != DBNull.Value ? d["rdate"].ToString() : "";
+                    string sDate = d["sdate"] != DBNull.Value ? d["sdate"].ToString() : "";
+                    string notes = d["notes"] != DBNull.Value ? d["notes"].ToString() : "";
+                    string smith = d["gsmith"] != DBNull.Value ? d["gsmith"].ToString() : "";
+
                     lst.Add(new GunSmithWorkDone()
                     {
-                        Id = Convert.ToInt32(d["id"]),
-                        GunId = d["gid"] != null ?  Convert.ToInt32(d["gid"]) : 0,
-                        GunSmithId = d["gsid"] != null ? Convert.ToInt32(d["gsid"]) : 0,
-                        OrderDetails = d["od"] != null ?  d["od"].ToString() : "",
-                        ReturnDate = d["rdate"] != null ? d["rdate"].ToString() : "",
-                        StartDate = d["sdate"] != null ?  d["sdate"].ToString() : "",
-                        Notes = d["notes"] !=null ?  d["notes"].ToString() : "",
-                        GunSmithName = d["gsmith"] != null ?  d["gsmith"].ToString() : "",
+                        Id = id,
+                        GunId = gunId,
+                        GunSmithId = gsid,
+                        OrderDetails = orderDetails,
+                        ReturnDate = rDate,
+                        StartDate = sDate,
+                        Notes = notes,
+                        GunSmithName = smith,
                         LastSync = d["sync_lastupdate"] != null ? d["sync_lastupdate"].ToString() : ""
                     });
                 }
