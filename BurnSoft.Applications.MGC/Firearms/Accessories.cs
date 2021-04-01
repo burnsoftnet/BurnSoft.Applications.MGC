@@ -319,6 +319,32 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lst;
         }
         /// <summary>
+        /// Return a List of the accessoriy based on it's id
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<AccessoriesList> List(string databasePath, int id, out string errOut)
+        {
+            List<AccessoriesList> lst = new List<AccessoriesList>();
+            try
+            {
+                string sql = $"select * from Gun_Collection_Accessories where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
         /// Send a datable to get that converted into an AcceeoriesList type
         /// </summary>
         /// <param name="dt"></param>
