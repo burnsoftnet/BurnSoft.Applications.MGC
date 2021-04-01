@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Data.Odbc;
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC
 {
+    /// <summary>
+    /// Class Database. General Database functions needed.
+    /// </summary>
     public class Database
     {
 

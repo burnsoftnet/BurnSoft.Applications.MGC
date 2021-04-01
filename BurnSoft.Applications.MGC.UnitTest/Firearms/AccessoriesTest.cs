@@ -240,7 +240,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             long id = Accessories.GetId(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
                 _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
                 _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
-            List<AccessoriesList> value = Accessories.List(_databasePath, id, out _errOut);
+            List<AccessoriesList> value = Accessories.List(_databasePath, (int)id, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }

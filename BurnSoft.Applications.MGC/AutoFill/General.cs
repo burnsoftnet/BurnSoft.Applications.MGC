@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace BurnSoft.Applications.MGC.AutoFill
 {
+    /// <summary>
+    /// Class General.
+    /// </summary>
     public class General
     {
         #region "Exception Error Handling"        
