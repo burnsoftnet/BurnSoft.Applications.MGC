@@ -65,5 +65,10 @@
         /// </summary>
         /// <value><c>true</c> if this instance is choke; otherwise, <c>false</c>.</value>
         public bool IsChoke { get; set; }
+        /// <summary>
+        /// Gets or sets the last synchronize. Is called sync_lastupdate in the table
+        /// </summary>
+        /// <value>The last synchronize.</value>
+        public string LastSync { get; set; }
     }
 }

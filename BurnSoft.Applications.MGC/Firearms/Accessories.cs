@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using BurnSoft.Applications.MGC.Types;
+
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.Firearms
@@ -232,6 +234,60 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
 
             return bAns;
+        }
+
+        public static List<AccessoriesList> List(string databasePath, string errOut)
+        {
+            List<AccessoriesList> lst = new List<AccessoriesList>();
+
+            return lst;
+        }
+
+        private static List<AccessoriesList> MyList(DataTable dt, out string errOut)
+        {
+            List<AccessoriesList> lst = new List<AccessoriesList>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    bool countinValue = false;
+                    bool isChoke = false;
+
+                    if (d["CIV"] != DBNull.Value)
+                    {
+                        countinValue = Convert.ToInt32(d["CIV"]) == 1;
+                    }
+
+                    if (d["IC"] != DBNull.Value)
+                    {
+                        isChoke = Convert.ToInt32(d["IC"]) == 1;
+                    }
+
+                    lst.Add(new AccessoriesList()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        GunId = Convert.ToInt32(d["gid"]),
+                        Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString() : "",
+                        Model = d["Model"] != DBNull.Value ? d["Model"].ToString() : "",
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString() : "",
+                        Notes = d["notes"] != DBNull.Value ? d["notes"].ToString() : "",
+                        SerialNumber = d["SerialNumber"] != DBNull.Value ? d["SerialNumber"].ToString() : "",
+                        Condition = d["Condition"] != DBNull.Value ? d["Condition"].ToString() : "",
+                        Use = d["Use"] != DBNull.Value ? d["Use"].ToString() : "",
+                        PurchaseValue = d["PurValue"] != DBNull.Value ? d["PurValue"].ToString() : "",
+                        AppriasedValue = d["AppValue"] != DBNull.Value ? d["AppValue"].ToString() : "",
+                        CountInValue = countinValue,
+                        IsChoke = isChoke
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+
+            return lst;
         }
     }
 }
