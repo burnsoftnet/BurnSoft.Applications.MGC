@@ -235,14 +235,95 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return bAns;
         }
+        /// <summary>
+        /// Get the Fulle name, Manufacture and model name in one from the accessories table
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static string GetFullName(string databasePath, long id, out string errOut)
+        {
+            string sAns = @"";
+            try
+            {
+                string sql = $"select * from Gun_Collection_Accessories where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                List<AccessoriesList> lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
 
-        public static List<AccessoriesList> List(string databasePath, string errOut)
+                foreach (AccessoriesList l in lst)
+                {
+                    sAns = $"{l.Manufacturer.Trim()} {l.Model.Trim()}";
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetFullName", e);
+            }
+
+            return sAns;
+        }
+        /// <summary>
+        /// Get a list of all the accessories
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<AccessoriesList> List(string databasePath, out string errOut)
         {
             List<AccessoriesList> lst = new List<AccessoriesList>();
+            errOut = @"";
+            try
+            {
+                string sql = "select * from Gun_Collection_Accessories";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
 
             return lst;
         }
 
+        /// <summary>
+        /// Get all the accessories for a particular firearm
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="gunId"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<AccessoriesList> List(string databasePath, long gunId,out string errOut)
+        {
+            List<AccessoriesList> lst = new List<AccessoriesList>();
+            try
+            {
+                string sql = $"select * from Gun_Collection_Accessories where gid={gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
+        /// Send a datable to get that converted into an AcceeoriesList type
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
         private static List<AccessoriesList> MyList(DataTable dt, out string errOut)
         {
             List<AccessoriesList> lst = new List<AccessoriesList>();
