@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Universal;
 
 // ReSharper disable UnusedMember.Local
 
@@ -264,6 +265,38 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
 
             return sAns;
+        }
+        /// <summary>
+        /// Copies the specified accessory to another firearm..
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="itemId">The item identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        public static bool Copy(string databasePath, long itemId, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                BSOtherObjects obj = new BSOtherObjects();
+                List<AccessoriesList> details = List(databasePath, (int) itemId, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (AccessoriesList d in details)
+                {
+                    bAns = Add(databasePath, gunId, obj.FC(d.Manufacturer), obj.FC(d.Model), obj.FC(d.SerialNumber), obj.FC(d.Condition), obj.FC(d.Notes),
+                        obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue), Convert.ToDouble(d.AppriasedValue), d.CountInValue,
+                        d.IsChoke, out errOut);
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Copy", e);
+            }
+            return bAns;
         }
         /// <summary>
         /// Get a list of all the accessories
