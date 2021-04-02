@@ -1,13 +1,12 @@
-﻿
-using System;
+﻿using System;
 
 namespace BurnSoft.Applications.MGC.Types
 {
     /// <summary>
-    /// Class ModelList which will contain all the information gathered form the Gun_Model table
+    /// Class NationalityList. Container for the results in the Gun_Nationality table
     /// </summary>
     [Serializable]
-    public class ModelList
+    public class NationalityList
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -15,12 +14,7 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The identifier.</value>
         public long Id { get; set; }
         /// <summary>
-        /// Gets or sets the manufacturer identifier.  This is GMID in the tabl
-        /// </summary>
-        /// <value>The manufacturer identifier.</value>
-        public long ManufacturerId { get; set; }
-        /// <summary>
-        /// Gets or sets the name. Is field is Model in the table.
+        /// Gets or sets the name. Is called Country in the table
         /// </summary>
         /// <value>The name.</value>
         public string Name { get; set; }

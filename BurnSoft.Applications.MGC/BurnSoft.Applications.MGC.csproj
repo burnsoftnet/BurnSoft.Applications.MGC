@@ -72,6 +72,7 @@
     <Compile Include="Firearms\Manufacturers.cs" />
     <Compile Include="Firearms\Models.cs" />
     <Compile Include="Firearms\MyCollection.cs" />
+    <Compile Include="Firearms\Nationality.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Global\DatabaseRelated.cs" />
     <Compile Include="PeopleAndPlaces\GunSmiths.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Types\MaintanceDetailsList.cs" />
     <Compile Include="Types\MaintancePlansList.cs" />
     <Compile Include="Types\ModelList.cs" />
+    <Compile Include="Types\NationalityList.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

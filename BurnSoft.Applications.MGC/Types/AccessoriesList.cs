@@ -1,8 +1,11 @@
-﻿namespace BurnSoft.Applications.MGC.Types
+﻿using System;
+
+namespace BurnSoft.Applications.MGC.Types
 {
     /// <summary>
     /// Class AccessoriesList list container that will contain the information from the Gun_Collection_Accessories table.
     /// </summary>
+    [Serializable]
     public class AccessoriesList
     {
         /// <summary>
