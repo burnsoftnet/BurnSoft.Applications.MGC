@@ -88,6 +88,7 @@
     <Compile Include="Types\GunSmithWorkDone.cs" />
     <Compile Include="Types\MaintanceDetailsList.cs" />
     <Compile Include="Types\MaintancePlansList.cs" />
+    <Compile Include="Types\ModelList.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
