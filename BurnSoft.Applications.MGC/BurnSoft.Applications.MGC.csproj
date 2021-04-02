@@ -70,6 +70,7 @@
     <Compile Include="Firearms\MaintanceDetails.cs" />
     <Compile Include="Firearms\MaintancePlans.cs" />
     <Compile Include="Firearms\Manufacturers.cs" />
+    <Compile Include="Firearms\Models.cs" />
     <Compile Include="Firearms\MyCollection.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Global\DatabaseRelated.cs" />

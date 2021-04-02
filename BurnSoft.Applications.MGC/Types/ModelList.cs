@@ -2,7 +2,7 @@
 namespace BurnSoft.Applications.MGC.Types
 {
     /// <summary>
-    /// Class ModelList which will contain all the information gathered form teh Gun_Model table
+    /// Class ModelList which will contain all the information gathered form the Gun_Model table
     /// </summary>
     public class ModelList
     {
