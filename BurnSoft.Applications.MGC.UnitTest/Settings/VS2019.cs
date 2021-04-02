@@ -94,6 +94,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("MaintenancePlans_IntervalsInDays", "0"));
             ls.Add(new Tuple<string, string>("MaintenancePlans_IntervalInRoundsFired", "500"));
             ls.Add(new Tuple<string, string>("MaintenancePlans_Notes", "It's a miricle if it works"));
+            ls.Add(new Tuple<string, string>("Models_ManufacturerId", "15"));
+            ls.Add(new Tuple<string, string>("Models_Name", "Glock gXXX"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }
