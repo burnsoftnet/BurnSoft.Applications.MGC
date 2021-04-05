@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 // ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
 
 namespace BurnSoft.Applications.MGC.Firearms
 {
