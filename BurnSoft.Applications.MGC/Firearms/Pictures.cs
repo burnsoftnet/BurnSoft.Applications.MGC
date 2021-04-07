@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using ADODB;
 
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
@@ -81,12 +82,19 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
 
-        public static bool Save(string databasePath, string file, string ApplicationPathData, out string errOut)
+        public static bool Save(string databasePath, string file, string ApplicationPathData, long gunId,string name, string notes, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
+
+                FileStream st = new FileStream(file, FileMode.Open, FileAccess.Read);
+                BinaryReader mbr = new BinaryReader(st);
+                byte[] buffer = new byte[st.Length + 1];
+                mbr.Read(buffer, 0, System.Convert.ToInt32(st.Length));
+                st.Close();
+
                 int intPicHeight = 64;
                 int intPicWidth = 64;
                 string sThumbName = $"{ApplicationPathData}\\mgc_thumb.jpg";
@@ -99,6 +107,33 @@ namespace BurnSoft.Applications.MGC.Firearms
                 myNewPic.Save(sThumbName, ImageFormat.Jpeg);
                 myNewPic.Dispose();
                 FileStream stT = new FileStream(sThumbName, FileMode.Open, FileAccess.Read);
+                BinaryReader mbrT = new BinaryReader(stT);
+                byte[] bufferT = new byte[stT.Length + 1];
+                mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
+                stT.Close();
+
+                Connection conn = new Connection();
+                conn.Open(Database.ConnectionString(databasePath, out errOut));
+                Recordset rs = new Recordset();
+                rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
+                rs.AddNew();
+                rs["CID"].Value = gunId;
+                rs["PICTURE"].AppendChunk(buffer);
+                rs["THUMB"].AppendChunk(bufferT);
+                if (IsFirstPic(databasePath, gunId.ToString(), out errOut))
+                {
+                    rs["ISMAIN"].Value = 1;
+                }
+                else
+                {
+                    rs["ISMAIN"].Value = 0;
+                }
+
+                rs["pd_name"].Value = name;
+                rs["pd_note"].Value = notes;
+                rs["sync_lastupdate"].Value = DateTime.Now;
+                rs.Update();
+                rs.Close();
             }
             catch (Exception e)
             {

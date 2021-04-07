@@ -36,6 +36,11 @@
     <DocumentationFile>bin\Release\BurnSoft.Applications.MGC.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>.\adodb.dll</HintPath>
+    </Reference>
     <Reference Include="BurnSoft.Universal, Version=4.0.32.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BurnSoft.Universal.4.0.32.2\lib\net40\BurnSoft.Universal.dll</HintPath>
     </Reference>
@@ -97,6 +102,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="adodb.dll" />
     <Content Include="bswtsicon.png" />
     <Content Include="icon.png" />
   </ItemGroup>
