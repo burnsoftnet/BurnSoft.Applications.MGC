@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 
@@ -77,5 +81,31 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
 
+        public static bool Save(string databasePath, string file, string ApplicationPathData, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                int intPicHeight = 64;
+                int intPicWidth = 64;
+                string sThumbName = $"{ApplicationPathData}\\mgc_thumb.jpg";
+
+                Image myBitmap = Image.FromFile(file);
+                Image.GetThumbnailImageAbort myPicCallback = null;
+                Image myNewPic = myBitmap.GetThumbnailImage(intPicWidth, intPicHeight, myPicCallback, IntPtr.Zero);
+                myBitmap.Dispose();
+                File.Delete(sThumbName);
+                myNewPic.Save(sThumbName, ImageFormat.Jpeg);
+                myNewPic.Dispose();
+                FileStream stT = new FileStream(sThumbName, FileMode.Open, FileAccess.Read);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Save", e);
+            }
+
+            return bAns;
+        }
     }
 }
