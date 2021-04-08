@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
 
@@ -149,6 +150,35 @@ namespace BurnSoft.Applications.MGC.Other
             }
 
             return bAns;
+        }
+
+        private static List<WishlistList> MyList(DataTable dt, out string errOut)
+        {
+            List<WishlistList> lst = new List<WishlistList>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new WishlistList()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString() : "",
+                        Model = d["Model"] != DBNull.Value ? d["Model"].ToString() : "",
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString() : "",
+                        Notes = d["notes"] != DBNull.Value ? d["notes"].ToString() : "",
+                        Qty = d["Qty"] != DBNull.Value ? d["Qty"].ToString() : "",
+                        Value = d["Value"] != DBNull.Value ? d["Value"].ToString() : "",
+                        PlacetoBuy = d["PlacetoBuy"] != DBNull.Value ? d["Use"].ToString() : ""
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+
+            return lst;
         }
     }
 }
