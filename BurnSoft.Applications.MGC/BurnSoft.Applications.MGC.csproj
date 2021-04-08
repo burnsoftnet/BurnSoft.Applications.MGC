@@ -99,6 +99,7 @@
     <Compile Include="Types\MaintancePlansList.cs" />
     <Compile Include="Types\ModelList.cs" />
     <Compile Include="Types\NationalityList.cs" />
+    <Compile Include="Types\WishlistList.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
