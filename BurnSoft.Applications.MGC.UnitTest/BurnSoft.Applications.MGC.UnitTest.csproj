@@ -77,6 +77,7 @@
     <Compile Include="Firearms\NationalityTest.cs" />
     <Compile Include="General.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Other\WishlistTest.cs" />
     <Compile Include="PeopleAndPlaces\ShopsTest.cs" />
     <Compile Include="PeopleAndPlaces\GunSmithsTest.cs" />
     <Compile Include="Settings\VS2019.cs" />
