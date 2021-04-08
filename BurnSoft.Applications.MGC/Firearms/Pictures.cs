@@ -115,25 +115,26 @@ namespace BurnSoft.Applications.MGC.Firearms
                 Connection conn = new Connection();
                 conn.Open(Database.ConnectionString(databasePath, out errOut));
                 Recordset rs = new Recordset();
-                rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
-                rs.AddNew();
-                rs["CID"].Value = gunId;
-                rs["PICTURE"].AppendChunk(buffer);
-                rs["THUMB"].AppendChunk(bufferT);
-                if (IsFirstPic(databasePath, gunId.ToString(), out errOut))
-                {
-                    rs["ISMAIN"].Value = 1;
-                }
-                else
-                {
-                    rs["ISMAIN"].Value = 0;
-                }
+                //TODO: #7 Finish Importing the picture function and figure out why the ADODB is glitching in c# or get the right format
+                //rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
+                //rs.AddNew();
+                //rs("CID").Value = gunId;
+                //rs("PICTURE").AppendChunk(buffer);
+                //rs("THUMB").AppendChunk(bufferT);
+                //if (IsFirstPic(databasePath, gunId.ToString(), out errOut))
+                //{
+                //    rs("ISMAIN").Value = 1;
+                //}
+                //else
+                //{
+                //    rs("ISMAIN").Value = 0;
+                //}
 
-                rs["pd_name"].Value = name;
-                rs["pd_note"].Value = notes;
-                rs["sync_lastupdate"].Value = DateTime.Now;
-                rs.Update();
-                rs.Close();
+                //rs("pd_name").Value = name;
+                //rs("pd_note").Value = notes;
+                //rs("sync_lastupdate").Value = DateTime.Now;
+                //rs.Update();
+                //rs.Close();
             }
             catch (Exception e)
             {
