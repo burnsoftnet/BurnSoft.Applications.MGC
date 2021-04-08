@@ -152,6 +152,48 @@ namespace BurnSoft.Applications.MGC.Other
             return bAns;
         }
 
+        public static List<WishlistList> List(string databasePath, out string errOut)
+        {
+            List<WishlistList> lst = new List<WishlistList>();
+            errOut = @"";
+            try
+            {
+                string sql = "select * from Wishlist";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+
+        public static List<WishlistList> List(string databasePath,long id, out string errOut)
+        {
+            List<WishlistList> lst = new List<WishlistList>();
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Wishlist where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+
         private static List<WishlistList> MyList(DataTable dt, out string errOut)
         {
             List<WishlistList> lst = new List<WishlistList>();
