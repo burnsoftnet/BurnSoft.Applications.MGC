@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
@@ -55,8 +52,19 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion                        
-
+        #endregion                                
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="placetoBuy">The placeto buy.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath,  string manufacturer, string model, string placetoBuy, string qty, string value, string notes, out string errOut)
         {
             bool bAns = false;
@@ -75,6 +83,19 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="placetoBuy">The placeto buy.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Update(string databasePath, long id, string manufacturer, string model, string placetoBuy, string qty, string value, string notes, out string errOut)
         {
             bool bAns = false;
@@ -92,6 +113,15 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+        /// <summary>
+        /// Existses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
         public static bool Exists(string databasePath, string manufacturer, string model, out string errOut)
         {
             bool bAns = false;
@@ -111,7 +141,15 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
-
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="Exception"></exception>
         public static long GetId(string databasePath, string manufacturer, string model, out string errOut)
         {
             long lAns = 0;
@@ -134,7 +172,13 @@ namespace BurnSoft.Applications.MGC.Other
 
             return lAns;
         }
-
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
             bool bAns = false;
@@ -151,7 +195,14 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
-
+        /// <summary>
+        /// Lists the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;WishlistList&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
         public static List<WishlistList> List(string databasePath, out string errOut)
         {
             List<WishlistList> lst = new List<WishlistList>();
@@ -172,7 +223,15 @@ namespace BurnSoft.Applications.MGC.Other
 
             return lst;
         }
-
+        /// <summary>
+        /// Lists the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;WishlistList&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
         public static List<WishlistList> List(string databasePath,long id, out string errOut)
         {
             List<WishlistList> lst = new List<WishlistList>();
@@ -193,7 +252,12 @@ namespace BurnSoft.Applications.MGC.Other
 
             return lst;
         }
-
+        /// <summary>
+        /// Mies the list.
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;WishlistList&gt;.</returns>
         private static List<WishlistList> MyList(DataTable dt, out string errOut)
         {
             List<WishlistList> lst = new List<WishlistList>();
