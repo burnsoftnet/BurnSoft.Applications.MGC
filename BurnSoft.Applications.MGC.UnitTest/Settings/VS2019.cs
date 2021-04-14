@@ -103,6 +103,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("WishList_Qty", "2"));
             ls.Add(new Tuple<string, string>("WishList_Price", "99.99"));
             ls.Add(new Tuple<string, string>("WishList_Notes", "one for each hand"));
+            ls.Add(new Tuple<string, string>("CR_ReportName", "Test Report"));
+            ls.Add(new Tuple<string, string>("CR_SQL", "select * from somtable"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }
