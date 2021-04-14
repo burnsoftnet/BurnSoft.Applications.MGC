@@ -60,7 +60,7 @@ namespace BurnSoft.Applications.MGC.Reports
             try
             {
                 string sql =
-                    $"INSERT INTO CR_SavedReports (ReportName,MySQL) VALUES('{reportName}','{mySql}')";
+                    $"INSERT INTO CR_SavedReports (ReportName,MySQL,sync_lastupdate) VALUES('{reportName}','{mySql}',Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -78,7 +78,7 @@ namespace BurnSoft.Applications.MGC.Reports
             try
             {
                 string sql =
-                    $"UPDATE CR_SavedReports set ReportName='{reportName}',MySQL='{mySql}' where ID={reportId}";
+                    $"UPDATE CR_SavedReports set ReportName='{reportName}',MySQL='{mySql}',sync_lastupdate=Now() where ID={reportId}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
