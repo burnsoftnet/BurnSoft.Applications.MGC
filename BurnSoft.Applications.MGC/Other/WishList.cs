@@ -275,7 +275,7 @@ namespace BurnSoft.Applications.MGC.Other
                         Notes = d["notes"] != DBNull.Value ? d["notes"].ToString() : "",
                         Qty = d["Qty"] != DBNull.Value ? d["Qty"].ToString() : "",
                         Value = d["Value"] != DBNull.Value ? d["Value"].ToString() : "",
-                        PlacetoBuy = d["PlacetoBuy"] != DBNull.Value ? d["Use"].ToString() : ""
+                        PlacetoBuy = d["PlacetoBuy"] != DBNull.Value ? d["PlacetoBuy"].ToString() : ""
                     });
                 }
             }
