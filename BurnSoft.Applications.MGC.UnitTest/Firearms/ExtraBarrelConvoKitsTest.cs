@@ -199,6 +199,15 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 _barrelConvoKitAddHeight, _barrelConvoKitAddType, _barrelConvoKitAddIsDefault, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod, TestCategory("Barrel/Conversion Kits")]
+        public void DeleteTest()
+        {
+            long id = ExtraBarrelConvoKits.GetBarrelId(_databasePath, _gunId, _barrelConvoKitAddModelName, out _errOut);
+            bool value = ExtraBarrelConvoKits.Delete(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
         /// <summary>
         /// Defines the test method AddLinkTest.
         /// </summary>
