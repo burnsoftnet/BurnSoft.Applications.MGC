@@ -91,6 +91,7 @@
     <Compile Include="Types\Ammunition.cs" />
     <Compile Include="Types\BarrelSystems.cs" />
     <Compile Include="Types\ClassificationList.cs" />
+    <Compile Include="Types\CustomReportsLists.cs" />
     <Compile Include="Types\DocumentList.cs" />
     <Compile Include="Types\GlobalCaliberList.cs" />
     <Compile Include="Types\GunCollectionList.cs" />
