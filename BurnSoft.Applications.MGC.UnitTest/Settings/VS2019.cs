@@ -97,6 +97,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("Models_ManufacturerId", "15"));
             ls.Add(new Tuple<string, string>("Models_Name", "Glock gXXX"));
             ls.Add(new Tuple<string, string>("Nationality_Name", "RugerCountry"));
+            ls.Add(new Tuple<string, string>("WishList_Manufacturer", ""));
+            ls.Add(new Tuple<string, string>("WishList_Model", ""));
+            ls.Add(new Tuple<string, string>("WishList_PlaceToBuy", ""));
+            ls.Add(new Tuple<string, string>("WishList_Qty", ""));
+            ls.Add(new Tuple<string, string>("WishList_Price", ""));
+            ls.Add(new Tuple<string, string>("WishList_Notes", ""));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }
