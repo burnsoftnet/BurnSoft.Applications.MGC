@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurnSoft.Applications.MGC.Types;
 
 namespace BurnSoft.Applications.MGC.Reports
 {
@@ -144,6 +145,32 @@ namespace BurnSoft.Applications.MGC.Reports
             }
 
             return bAns;
+        }
+
+        private static List<CustomReportsLists> MyList(DataTable dt, out string errOut)
+        {
+            List<CustomReportsLists> lst = new List<CustomReportsLists>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new CustomReportsLists()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        ReportName = d["ReportName"] != DBNull.Value ? d["ReportName"].ToString() : "",
+                        Sql = d["MySQL"] != DBNull.Value ? d["MySQL"].ToString() : "",
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString() : "",
+                        DateAdded = d["DTC"] != DBNull.Value ? d["DTC"].ToString() : "",
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+
+            return lst;
         }
     }
 }
