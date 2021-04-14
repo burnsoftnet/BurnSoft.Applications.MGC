@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BurnSoft.Applications.MGC.Firearms;
-using BurnSoft.Applications.MGC.Other;
 using BurnSoft.Applications.MGC.Reports;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
@@ -28,11 +26,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
         /// <summary>
         /// The cr report name
         /// </summary>
-        private string CR_ReportName;
+        private string _crReportName;
         /// <summary>
         /// The cr SQL
         /// </summary>
-        private string CR_SQL;
+        private string _crSql;
 
         /// <summary>
         /// Initializes this instance.
@@ -44,17 +42,17 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
             BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
-            CR_ReportName = obj.FC(Vs2019.GetSetting("CR_ReportName", TestContext));
-            CR_SQL = obj.FC(Vs2019.GetSetting("CR_SQL", TestContext));
+            _crReportName = obj.FC(Vs2019.GetSetting("CR_ReportName", TestContext));
+            _crSql = obj.FC(Vs2019.GetSetting("CR_SQL", TestContext));
         }
         /// <summary>
         /// Verifies the doesnt exist.
         /// </summary>
         private void VerifyDoesntExist()
         {
-            if (CustomReports.Exists(_databasePath, CR_ReportName,  out _errOut))
+            if (CustomReports.Exists(_databasePath, _crReportName,  out _errOut))
             {
-                long id = CustomReports.GetId(_databasePath, CR_ReportName,  out _errOut);
+                long id = CustomReports.GetId(_databasePath, _crReportName,  out _errOut);
                 CustomReports.Delete(_databasePath, id, out _errOut);
             }
         }
@@ -63,9 +61,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
         /// </summary>
         private void VerifyExists()
         {
-            if (!CustomReports.Exists(_databasePath, CR_ReportName,  out _errOut))
+            if (!CustomReports.Exists(_databasePath, _crReportName,  out _errOut))
             {
-                CustomReports.Add(_databasePath, CR_ReportName, CR_SQL, out _errOut);
+                CustomReports.Add(_databasePath, _crReportName, _crSql, out _errOut);
             }
         }
         /// <summary>
@@ -96,8 +94,75 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
         public void AddTest()
         {
             VerifyDoesntExist();
-            bool value = CustomReports.Add(_databasePath, CR_ReportName, CR_SQL, out _errOut);
+            bool value = CustomReports.Add(_databasePath, _crReportName, _crSql, out _errOut);
             General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Custom Reports")]
+        public void ExistsTest()
+        {
+            VerifyExists();
+            bool value = CustomReports.Exists(_databasePath, _crReportName,  out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetId.
+        /// </summary>
+        [TestMethod, TestCategory("Custom Reports")]
+        public void GetId()
+        {
+            VerifyExists();
+            long value = CustomReports.GetId(_databasePath, _crReportName, out _errOut);
+            TestContext.WriteLine($"ID = {value}");
+            General.HasTrueValue(value > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method UpdateTest.
+        /// </summary>
+        [TestMethod, TestCategory("Custom Reports")]
+        public void UpdateTest()
+        {
+            VerifyExists();
+            long id = CustomReports.GetId(_databasePath, _crReportName, out _errOut);
+
+            bool value = CustomReports.Update(_databasePath, id, _crReportName, $"{_crSql} where id={id}", out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+
+        /// <summary>
+        /// Defines the test method DeleteTest.
+        /// </summary>
+        [TestMethod, TestCategory("Custom Reports")]
+        public void DeleteTest()
+        {
+            VerifyExists();
+            long id = CustomReports.GetId(_databasePath, _crReportName, out _errOut);
+            bool value = CustomReports.Delete(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method ListByIDTest.
+        /// </summary>
+        [TestMethod, TestCategory("Custom Reports")]
+        public void ListByIdTest()
+        {
+            VerifyExists();
+            long id = CustomReports.GetId(_databasePath, _crReportName, out _errOut);
+            List<CustomReportsLists> value = CustomReports.List(_databasePath, (int)id, out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method ListTest.
+        /// </summary>
+        [TestMethod, TestCategory("Custom Reports")]
+        public void ListTest()
+        {
+            VerifyExists();
+            List<CustomReportsLists> value = CustomReports.List(_databasePath, out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
         }
     }
 }

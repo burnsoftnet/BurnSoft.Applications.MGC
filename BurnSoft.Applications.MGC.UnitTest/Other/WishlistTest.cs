@@ -165,7 +165,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         {
             VerifyExists();
             long id = WishList.GetId(_databasePath, _wishListManufacturer, _wishListModel, out _errOut);
-            bool value = Accessories.Delete(_databasePath, id, out _errOut);
+            bool value = WishList.Delete(_databasePath, id, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
