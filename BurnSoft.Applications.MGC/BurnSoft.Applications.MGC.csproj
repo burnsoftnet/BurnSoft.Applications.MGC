@@ -86,11 +86,13 @@
     <Compile Include="PeopleAndPlaces\GunSmiths.cs" />
     <Compile Include="PeopleAndPlaces\Shops.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\ColumnList.cs" />
     <Compile Include="Reports\CustomReports.cs" />
     <Compile Include="Types\AccessoriesList.cs" />
     <Compile Include="Types\Ammunition.cs" />
     <Compile Include="Types\BarrelSystems.cs" />
     <Compile Include="Types\ClassificationList.cs" />
+    <Compile Include="Types\ColumnLists.cs" />
     <Compile Include="Types\CustomReportsLists.cs" />
     <Compile Include="Types\DocumentList.cs" />
     <Compile Include="Types\GlobalCaliberList.cs" />
