@@ -147,6 +147,48 @@ namespace BurnSoft.Applications.MGC.Reports
             return bAns;
         }
 
+        public static List<CustomReportsLists> List(string databasePath, long id, out string errOut)
+        {
+            List<CustomReportsLists> lst = new List<CustomReportsLists>();
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from CR_SavedReports where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+
+        public static List<CustomReportsLists> List(string databasePath, out string errOut)
+        {
+            List<CustomReportsLists> lst = new List<CustomReportsLists>();
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from CR_SavedReports";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+
         private static List<CustomReportsLists> MyList(DataTable dt, out string errOut)
         {
             List<CustomReportsLists> lst = new List<CustomReportsLists>();
