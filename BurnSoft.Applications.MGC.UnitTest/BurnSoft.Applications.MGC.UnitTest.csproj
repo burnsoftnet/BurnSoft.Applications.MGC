@@ -81,6 +81,7 @@
     <Compile Include="PeopleAndPlaces\ShopsTest.cs" />
     <Compile Include="PeopleAndPlaces\GunSmithsTest.cs" />
     <Compile Include="ReportTesting\CustomReportsTest.cs" />
+    <Compile Include="ReportTesting\ColumnListsTest.cs" />
     <Compile Include="Settings\VS2019.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

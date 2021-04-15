@@ -105,6 +105,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("WishList_Notes", "one for each hand"));
             ls.Add(new Tuple<string, string>("CR_ReportName", "Test Report"));
             ls.Add(new Tuple<string, string>("CR_SQL", "select * from somtable"));
+            ls.Add(new Tuple<string, string>("CR_Column_TableId", "4"));
+            ls.Add(new Tuple<string, string>("CR_Column_DisplayName", "Full Name"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }
