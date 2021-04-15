@@ -11,6 +11,10 @@ namespace BurnSoft.Applications.MGC.Reports
     /// </summary>
     public class CustomReports
     {
+        /// <summary>
+        /// The file types for the save report export as options
+        /// </summary>
+        public const string FileTypes = @"Excel File(*.xls)|*.xls|Text File(*.txt)|*.txt|XML File(*.xml)|*.xml|HTML File(*.html)|*.html|CVS File(*.cvs)|*.cvs";
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
