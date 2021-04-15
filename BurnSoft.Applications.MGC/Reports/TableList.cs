@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +56,27 @@ namespace BurnSoft.Applications.MGC.Reports
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion        
+        #endregion
+
+        public static string GetTableName(string databasePath, long tableId, out string errOut)
+        {
+            string sAns = @"";
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from CR_TableList where id={tableId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    sAns = d["Tables"].ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetTableName", e);
+            }
+            return sAns;
+        }
     }
 }
