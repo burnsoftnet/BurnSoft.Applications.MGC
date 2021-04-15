@@ -4,6 +4,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurnSoft.Applications.MGC.Types;
+
 // ReSharper disable RedundantAssignment
 
 // ReSharper disable UnusedMember.Global
@@ -77,6 +79,36 @@ namespace BurnSoft.Applications.MGC.Reports
                 errOut = ErrorMessage("GetTableName", e);
             }
             return sAns;
+        }
+        /// <summary>
+        /// Private list to be used for any of the public list just by passing the Datatable, to have one section handle
+        /// the datatable to list functions so you don't have to update every list function if you change, add or delete something in the database
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;TableLists&gt;.</returns>
+        private static List<TableLists> MyList(DataTable dt, out string errOut)
+        {
+            List<TableLists> lst = new List<TableLists>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new TableLists()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        Tables = d["Tables"] != DBNull.Value ? d["Tables"].ToString() : "",
+                        DisplayName = d["DN"] != DBNull.Value ? d["DN"].ToString() : ""
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+
+            return lst;
         }
     }
 }

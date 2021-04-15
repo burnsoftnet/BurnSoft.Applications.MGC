@@ -111,7 +111,13 @@ namespace BurnSoft.Applications.MGC.Reports
             }
             return lst;
         }
-
+        /// <summary>
+        /// Private list to be used for any of the public list just by passing the Datatable, to have one section handle
+        /// the datatable to list functions so you don't have to update every list function if you change, add or delete something in the database
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ColumnLists&gt;.</returns>
         private static List<ColumnLists> MyList(DataTable dt, out string errOut)
         {
             List<ColumnLists> lst = new List<ColumnLists>();
