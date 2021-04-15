@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable RedundantAssignment
@@ -58,8 +55,15 @@ namespace BurnSoft.Applications.MGC.Reports
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion
-
+        #endregion        
+        /// <summary>
+        /// Gets the name of the table.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="tableId">The table identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="Exception"></exception>
         public static string GetTableName(string databasePath, long tableId, out string errOut)
         {
             string sAns = @"";
@@ -80,6 +84,26 @@ namespace BurnSoft.Applications.MGC.Reports
             }
             return sAns;
         }
+
+        public static List<TableLists> GetList(string databasePath, long tableId, out string errOut)
+        {
+            List<TableLists> lst = new List<TableLists>();
+            errOut = @"";
+            try
+            {
+                string sql = $"Select * from CR_TableList where id={tableId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            return lst;
+        }
+
         /// <summary>
         /// Private list to be used for any of the public list just by passing the Datatable, to have one section handle
         /// the datatable to list functions so you don't have to update every list function if you change, add or delete something in the database
