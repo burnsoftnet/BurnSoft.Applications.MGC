@@ -88,6 +88,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reports\ColumnList.cs" />
     <Compile Include="Reports\CustomReports.cs" />
+    <Compile Include="Reports\TableList.cs" />
     <Compile Include="Types\AccessoriesList.cs" />
     <Compile Include="Types\Ammunition.cs" />
     <Compile Include="Types\BarrelSystems.cs" />
@@ -104,6 +105,7 @@
     <Compile Include="Types\MaintancePlansList.cs" />
     <Compile Include="Types\ModelList.cs" />
     <Compile Include="Types\NationalityList.cs" />
+    <Compile Include="Types\TableLists.cs" />
     <Compile Include="Types\WishlistList.cs" />
   </ItemGroup>
   <ItemGroup />
