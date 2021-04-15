@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using BurnSoft.Applications.MGC.Types;
+// ReSharper disable RedundantAssignment
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable UnusedMember.Local
@@ -53,8 +54,16 @@ namespace BurnSoft.Applications.MGC.Reports
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion
-
+        #endregion        
+        /// <summary>
+        /// Gets the name of the column.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="tableId">The table identifier.</param>
+        /// <param name="displayName">The display name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="Exception"></exception>
         public static string GetColumnName(string databasePath, long tableId, string displayName, out string errOut)
         {
             string sAns = "";
@@ -76,7 +85,14 @@ namespace BurnSoft.Applications.MGC.Reports
 
             return sAns;
         }
-
+        /// <summary>
+        /// Gets the list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="tableId">The table identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;ColumnLists&gt;.</returns>
+        /// <exception cref="Exception"></exception>
         public static List<ColumnLists> GetList(string databasePath, long tableId, out string errOut)
         {
             List<ColumnLists> lst = new List<ColumnLists>();
