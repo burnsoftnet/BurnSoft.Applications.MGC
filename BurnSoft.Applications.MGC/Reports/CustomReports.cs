@@ -210,6 +210,17 @@ namespace BurnSoft.Applications.MGC.Reports
             return lst;
         }
         /// <summary>
+        /// Determines whether the saved reports reports table has anything listed or not..
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if [has saved reports] [the specified database path]; otherwise, <c>false</c>.</returns>
+        public static bool HasSavedReports(string databasePath, out string errOut)
+        {
+            return List(databasePath, out errOut).Count > 0;
+        }
+
+        /// <summary>
         /// Lists the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>

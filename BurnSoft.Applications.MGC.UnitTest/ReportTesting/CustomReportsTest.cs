@@ -164,5 +164,15 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
+        /// <summary>
+        /// Defines the test method HasSavedReportsTest.
+        /// </summary>
+        [TestMethod, TestCategory("Custom Reports")]
+        public void HasSavedReportsTest()
+        {
+            VerifyExists();
+            bool value = CustomReports.HasSavedReports(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }
