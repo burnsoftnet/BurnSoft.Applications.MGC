@@ -77,6 +77,25 @@ namespace BurnSoft.Applications.MGC.Reports
             return sAns;
         }
 
+        public static List<ColumnLists> GetList(string databasePath, long tableId, out string errOut)
+        {
+            List<ColumnLists> lst = new List<ColumnLists>();
+            errOut = @"";
+            try
+            {
+                string sql = $"Select * from CR_ColumnList where tid={tableId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            return lst;
+        }
+
         private static List<ColumnLists> MyList(DataTable dt, out string errOut)
         {
             List<ColumnLists> lst = new List<ColumnLists>();
