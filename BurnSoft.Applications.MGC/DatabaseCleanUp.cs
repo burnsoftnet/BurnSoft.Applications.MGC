@@ -52,5 +52,18 @@ namespace BurnSoft.Applications.MGC
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
+
+        /// <summary>
+        /// Deletes the record.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="Id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool DeleteRecord(string databasePath, string table, long Id, out string errOut)
+        {
+            return Database.Execute(databasePath, $"DELETE from {table} where id={Id}", out errOut);
+        }
     }
 }
