@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 // ReSharper disable UnusedMember.Local
@@ -90,26 +91,27 @@ namespace BurnSoft.Applications.MGC
             return Database.Execute(databasePath, $"DELETE from {table}", out errOut);
         }
         /// <summary>
-        /// Clears the grip types.
+        /// Selectivelies the clear values.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="collectionId">The collection identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
         /// <exception cref="Exception"></exception>
-        public static bool ClearGripTypes(string databasePath, out string errOut)
+        internal static bool SelectivelyClearValues(string databasePath, string table, string collectionId,
+            out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                string table = "Gun_GripType";
-                string collectionId = "GripId";
-
                 string sql = $"SELECT {table}.* from {table} inner join Gun_Collection on Gun_Collection.{collectionId} = {table}.ID";
 
                 if (Database.DataExists(databasePath, sql, out errOut))
                 {
+                    sql = $"select id from {table}";
                     DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                     if (errOut.Length > 0) throw new Exception(errOut);
                     foreach (DataRow d in dt.Rows)
@@ -121,16 +123,29 @@ namespace BurnSoft.Applications.MGC
                 }
                 else
                 {
-                    if (!KillData(databasePath, table, out errOut)) throw  new Exception(errOut);
+                    if (!KillData(databasePath, table, out errOut)) throw new Exception(errOut);
                 }
 
                 bAns = true;
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("ClearGripTypes", e);
+                errOut = ErrorMessage("SelectivelyClearValues", e);
             }
             return bAns;
+        }
+    
+        /// <summary>
+        /// Clears the grip types.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        public static bool ClearGripTypes(string databasePath, out string errOut)
+        {
+            return SelectivelyClearValues(databasePath, "Gun_GripType", "GripId", out errOut);
         }
     }
 }
