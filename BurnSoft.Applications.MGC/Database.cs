@@ -312,6 +312,31 @@ namespace BurnSoft.Applications.MGC
             Database obj = new Database();
             return obj.GetData(con, sql, out errOut);
         }
+        /// <summary>
+        /// Datas the exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool DataExists(string databasePath, string sql, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                DataTable dt = GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = dt.Rows.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DataExists", e);
+            }
+
+            return bAns;
+        }
         #endregion
         #region "Gun Collection Related"        
         /// <summary>

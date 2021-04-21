@@ -65,5 +65,28 @@ namespace BurnSoft.Applications.MGC
         {
             return Database.Execute(databasePath, $"DELETE from {table} where id={Id}", out errOut);
         }
+        /// <summary>
+        /// Existses the in collection.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="Id">The identifier.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        internal static bool ExistsInCollection(string databasePath, long Id, string column, out string errOut)
+        {
+            return Database.DataExists(databasePath, $"select * from gun_collection where {column}={Id}", out errOut);
+        }
+        /// <summary>
+        /// Kills the data.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool KillData(string databasePath, string table, out string errOut)
+        {
+            return Database.Execute(databasePath, $"DELETE from {table}", out errOut);
+        }
     }
 }
