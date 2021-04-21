@@ -167,5 +167,15 @@ namespace BurnSoft.Applications.MGC
         {
             return SelectivelyClearValues(databasePath, "Gun_Shop_Details", "SID", out errOut);
         }
+
+        public static bool ClearNationality(string databasePath, out string errOut)
+        {
+            return SelectivelyClearValues(databasePath, "Gun_Nationality", "NatID", out errOut);
+        }
+
+        public static bool ClearModels(string databasePath, out string errOut)
+        {
+            return SelectivelyClearValues(databasePath, "Gun_Model", "ModelID", out errOut);
+        }
     }
 }
