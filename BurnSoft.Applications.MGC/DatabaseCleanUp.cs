@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
+
 // ReSharper disable UnusedMember.Local
 namespace BurnSoft.Applications.MGC
 {
@@ -60,24 +56,24 @@ namespace BurnSoft.Applications.MGC
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="table">The table.</param>
-        /// <param name="Id">The identifier.</param>
+        /// <param name="id">The identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool DeleteRecord(string databasePath, string table, long Id, out string errOut)
+        public static bool DeleteRecord(string databasePath, string table, long id, out string errOut)
         {
-            return Database.Execute(databasePath, $"DELETE from {table} where id={Id}", out errOut);
+            return Database.Execute(databasePath, $"DELETE from {table} where id={id}", out errOut);
         }
         /// <summary>
         /// Existses the in collection.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="Id">The identifier.</param>
+        /// <param name="id">The identifier.</param>
         /// <param name="column">The column.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        internal static bool ExistsInCollection(string databasePath, long Id, string column, out string errOut)
+        internal static bool ExistsInCollection(string databasePath, long id, string column, out string errOut)
         {
-            return Database.DataExists(databasePath, $"select * from gun_collection where {column}={Id}", out errOut);
+            return Database.DataExists(databasePath, $"select * from gun_collection where {column}={id}", out errOut);
         }
         /// <summary>
         /// Kills the data.
