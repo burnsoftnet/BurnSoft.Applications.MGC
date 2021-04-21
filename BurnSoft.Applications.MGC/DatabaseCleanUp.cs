@@ -147,5 +147,25 @@ namespace BurnSoft.Applications.MGC
         {
             return SelectivelyClearValues(databasePath, "Gun_GripType", "GripId", out errOut);
         }
+        /// <summary>
+        /// Clears the buyer list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ClearBuyerList(string databasePath, out string errOut)
+        {
+            return SelectivelyClearValues(databasePath, "Gun_Collection_SoldTo", "BID", out errOut);
+        }
+        /// <summary>
+        /// Clears the gun shop list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ClearGunShopList(string databasePath, out string errOut)
+        {
+            return SelectivelyClearValues(databasePath, "Gun_Shop_Details", "SID", out errOut);
+        }
     }
 }
