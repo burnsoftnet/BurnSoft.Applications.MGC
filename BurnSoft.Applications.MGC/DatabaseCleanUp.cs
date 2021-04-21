@@ -197,5 +197,36 @@ namespace BurnSoft.Applications.MGC
         {
             return SelectivelyClearValues(databasePath, "Gun_Manufacturer", "MID", out errOut);
         }
+        /// <summary>
+        /// Clears the collection.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        public static bool ClearCollection(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                if (!KillData(databasePath, "Gun_Collection_Accessories", out errOut)) throw new Exception(errOut);
+                if (!KillData(databasePath, "Gun_Collection_Pictures", out errOut)) throw new Exception(errOut);
+                if (!KillData(databasePath, "Maintance_Details", out errOut)) throw new Exception(errOut);
+                if (!KillData(databasePath, "GunSmith_Details", out errOut)) throw new Exception(errOut);
+                if (!KillData(databasePath, "Gun_Collection_Ext", out errOut)) throw new Exception(errOut);
+                if (!KillData(databasePath, "Gun_Collection", out errOut)) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ClearCollection", e);
+            }
+            return bAns;
+        }
     }
 }
