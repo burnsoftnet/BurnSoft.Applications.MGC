@@ -167,15 +167,35 @@ namespace BurnSoft.Applications.MGC
         {
             return SelectivelyClearValues(databasePath, "Gun_Shop_Details", "SID", out errOut);
         }
-
+        /// <summary>
+        /// Clears the nationality.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool ClearNationality(string databasePath, out string errOut)
         {
             return SelectivelyClearValues(databasePath, "Gun_Nationality", "NatID", out errOut);
         }
-
+        /// <summary>
+        /// Clears the models.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool ClearModels(string databasePath, out string errOut)
         {
             return SelectivelyClearValues(databasePath, "Gun_Model", "ModelID", out errOut);
+        }
+        /// <summary>
+        /// Clears the manufacturers.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ClearManufacturers(string databasePath, out string errOut)
+        {
+            return SelectivelyClearValues(databasePath, "Gun_Manufacturer", "MID", out errOut);
         }
     }
 }
