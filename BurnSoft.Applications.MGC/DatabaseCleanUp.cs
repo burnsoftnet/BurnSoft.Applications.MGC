@@ -221,6 +221,7 @@ namespace BurnSoft.Applications.MGC
                 if (!KillData(databasePath, "GunSmith_Details", out errOut)) throw new Exception(errOut);
                 if (!KillData(databasePath, "Gun_Collection_Ext", out errOut)) throw new Exception(errOut);
                 if (!KillData(databasePath, "Gun_Collection", out errOut)) throw new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {
