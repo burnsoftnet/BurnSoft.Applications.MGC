@@ -85,6 +85,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value><c>true</c> if this instance is default; otherwise, <c>false</c>.</value>
         public bool IsDefault { get; set; }
         /// <summary>
+        /// Gets or sets the type of the ext type, this is Type in the database table.
+        /// </summary>
+        /// <value>The type of the ext.</value>
+        public string ExtType { get; set; }
+        /// <summary>
         /// Gets or sets the last updated.
         /// </summary>
         /// <value>The last updated.</value>

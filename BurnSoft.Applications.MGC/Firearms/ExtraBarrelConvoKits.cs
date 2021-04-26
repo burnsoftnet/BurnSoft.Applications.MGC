@@ -388,6 +388,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                         FeedSystem = d["FeedSystem"].ToString(),
                         BarrelLength = d["BarrelLength"].ToString(),
                         Height = d["Height"].ToString(),
+                        ExtType =  d["Type"].ToString(),
                         Action = d["Action"].ToString(),
                         Sights = d["Sights"].ToString(),
                         LastUpdated = d["sync_lastupdate"].ToString()
