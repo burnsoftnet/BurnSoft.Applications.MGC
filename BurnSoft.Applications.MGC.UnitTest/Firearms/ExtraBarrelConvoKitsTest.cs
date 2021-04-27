@@ -199,7 +199,23 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 _barrelConvoKitAddHeight, _barrelConvoKitAddType, _barrelConvoKitAddIsDefault, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method UpdateTest.
+        /// </summary>
+        [TestMethod, TestCategory("Barrel/Conversion Kits")]
+        public void UpdateTest()
+        {
+            long id = ExtraBarrelConvoKits.GetBarrelId(_databasePath, _gunId, _barrelConvoKitAddModelName, out _errOut);
+            bool value = ExtraBarrelConvoKits.Update(_databasePath,id, _gunId, _barrelConvoKitAddModelName,
+                _barrelConvoKitAddCaliber, _barrelConvoKitAddFinish, _barrelConvoKitAddBarrelLength,
+                _barrelConvoKitAddPetLoads, _barrelConvoKitAddAction, _barrelConvoKitAddFeedsystem,
+                _barrelConvoKitAddSights, _barrelConvoKitAddPurchasedPrice, _barrelConvoKitAddPurchasedFrom,
+                _barrelConvoKitAddHeight, _barrelConvoKitAddType, _barrelConvoKitAddIsDefault, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method DeleteTest.
+        /// </summary>
         [TestMethod, TestCategory("Barrel/Conversion Kits")]
         public void DeleteTest()
         {
@@ -219,7 +235,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = ExtraBarrelConvoKits.AddLink(_databasePath, barrelId,_gunId, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method ExistsTest.
+        /// </summary>
         [TestMethod, TestCategory("Barrel/Conversion Kits")]
         public void ExistsTest()
         {
