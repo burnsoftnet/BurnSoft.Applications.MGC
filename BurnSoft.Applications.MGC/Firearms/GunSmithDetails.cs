@@ -307,11 +307,11 @@ namespace BurnSoft.Applications.MGC.Firearms
                     long gunId = d["gid"] != DBNull.Value ? Convert.ToInt32(d["gid"]) : 0;
                     long gsid = d["gsid"] != DBNull.Value  ? Convert.ToInt32(d["gsid"]) : 0;
 
-                    string orderDetails = d["od"] != DBNull.Value ? d["od"].ToString() : "";
-                    string rDate = d["rdate"] != DBNull.Value ? d["rdate"].ToString() : "";
-                    string sDate = d["sdate"] != DBNull.Value ? d["sdate"].ToString() : "";
-                    string notes = d["notes"] != DBNull.Value ? d["notes"].ToString() : "";
-                    string smith = d["gsmith"] != DBNull.Value ? d["gsmith"].ToString() : "";
+                    string orderDetails = d["od"] != DBNull.Value ? d["od"].ToString().Trim() : "";
+                    string rDate = d["rdate"] != DBNull.Value ? d["rdate"].ToString().Trim() : "";
+                    string sDate = d["sdate"] != DBNull.Value ? d["sdate"].ToString().Trim() : "";
+                    string notes = d["notes"] != DBNull.Value ? d["notes"].ToString().Trim() : "";
+                    string smith = d["gsmith"] != DBNull.Value ? d["gsmith"].ToString().Trim() : "";
 
                     lst.Add(new GunSmithWorkDone()
                     {
