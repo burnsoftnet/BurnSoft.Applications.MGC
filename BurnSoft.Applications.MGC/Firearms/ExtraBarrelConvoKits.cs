@@ -126,6 +126,39 @@ namespace BurnSoft.Applications.MGC.Firearms
             return Database.Execute(databasePath, sql, out errOut);
         }
         /// <summary>
+        /// update the barrel  or conversion kit information in the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="barrelId"></param>
+        /// <param name="gunId"></param>
+        /// <param name="modelName"></param>
+        /// <param name="caliber"></param>
+        /// <param name="finish"></param>
+        /// <param name="barrelLength"></param>
+        /// <param name="petLoads"></param>
+        /// <param name="action"></param>
+        /// <param name="feedSystem"></param>
+        /// <param name="sights"></param>
+        /// <param name="purchasePrice"></param>
+        /// <param name="purchasedFrom"></param>
+        /// <param name="height"></param>
+        /// <param name="type"></param>
+        /// <param name="isDefault"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Update(string databasePath,long barrelId, long gunId, string modelName, string caliber, string finish,
+            string barrelLength, string petLoads, string action, string feedSystem, string sights, string purchasePrice,
+            string purchasedFrom, string height, string type, bool isDefault, out string errOut)
+        {
+            int iDefault = isDefault ? 1 : 0;
+            string sql = $"UPDATE Gun_Collection_Ext set GID={gunId}, ModelName='{modelName}', Caliber='{caliber}', " +
+                         $"Finish='{finish}', BarrelLength='{barrelLength}', PetLoads='{petLoads}', Action='{action}'," +
+                         $"Feedsystem='{feedSystem}',Sights='{sights}',PurchasedPrice='{purchasePrice}'," +
+                         $"PurchasedFrom='{purchasedFrom}',Height='{height}',Type='{type}',IsDefault={iDefault}," +
+                         $"sync_lastupdate=Now() where id={barrelId}";
+            return Database.Execute(databasePath, sql, out errOut);
+        }
+        /// <summary>
         /// Existses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
