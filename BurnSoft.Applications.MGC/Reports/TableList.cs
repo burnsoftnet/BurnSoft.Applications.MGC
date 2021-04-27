@@ -84,7 +84,14 @@ namespace BurnSoft.Applications.MGC.Reports
             }
             return sAns;
         }
-
+        /// <summary>
+        /// Gets the list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="tableId">The table identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;TableLists&gt;.</returns>
+        /// <exception cref="Exception"></exception>
         public static List<TableLists> GetList(string databasePath, long tableId, out string errOut)
         {
             List<TableLists> lst = new List<TableLists>();

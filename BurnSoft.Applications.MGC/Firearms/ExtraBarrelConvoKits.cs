@@ -455,7 +455,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                         ExtType =  d["Type"].ToString(),
                         Action = d["Action"].ToString(),
                         Sights = d["Sights"].ToString(),
-                        LastUpdated = d["sync_lastupdate"].ToString()
+                        LastUpdated = d["sync_lastupdate"].ToString(),
+                        PurchasedFrom = d["PurchasedFrom"].ToString(),
+                        PurchasedPrice = d["PurchasedPrice"].ToString()
 
                     });
                 }
