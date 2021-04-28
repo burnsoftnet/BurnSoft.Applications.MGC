@@ -239,6 +239,34 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Listses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
+        /// <param name="maintenanceId">The maintenance identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintanceDetailsList&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        public static List<MaintanceDetailsList> Lists(string databasePath, int maintenanceId, out string errOut)
+        {
+            List<MaintanceDetailsList> lst = new List<MaintanceDetailsList>();
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from  Maintance_Details where id={maintenanceId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Lists", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
+        /// Listses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
         /// <param name="gunId">The gun identifier.</param>
         /// <param name="barrelSystem">The barrel system.</param>
         /// <param name="errOut">The error out.</param>
