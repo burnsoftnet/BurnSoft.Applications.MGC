@@ -355,7 +355,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                         Notes = d["notes"] != null ? d["notes"].ToString() : "",
                         DoesCount = Convert.ToInt32(d["dc"]) > 0,
                         GunId = Convert.ToInt32(d["gid"]),
-                        OperationDueDate = d["auopduedate"] != null ? d["opduedate"].ToString() : "",
+                        OperationDueDate = d["opduedate"] != null ? d["opduedate"].ToString() : "",
                         OperationStartDate = d["opdate"] != null ? d["opdate"].ToString() : "",
                         RoundsFired = Convert.ToInt32(d["rndfired"].ToString()),
                         PlanId = Convert.ToInt32(d["mpid"].ToString())

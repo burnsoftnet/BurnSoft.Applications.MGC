@@ -81,7 +81,17 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Saves the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="file">The file.</param>
+        /// <param name="ApplicationPathData">The application path data.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Save(string databasePath, string file, string ApplicationPathData, long gunId,string name, string notes, out string errOut)
         {
             bool bAns = false;
