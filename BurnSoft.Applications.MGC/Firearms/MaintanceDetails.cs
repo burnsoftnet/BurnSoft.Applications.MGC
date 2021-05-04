@@ -90,6 +90,43 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="maintenancePlanId">The maintenance plan identifier.</param>
+        /// <param name="operationDate">The operation date.</param>
+        /// <param name="operationDueDate">The operation due date.</param>
+        /// <param name="roundsFired">The rounds fired.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="ammoUsed">The ammo used.</param>
+        /// <param name="barrelSystemId">The barrel system identifier.</param>
+        /// <param name="doesCount">if set to <c>true</c> [does count].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool Update(string databasePath, long id, string name, long gunId, long maintenancePlanId, string operationDate, string operationDueDate, long roundsFired, string notes, string ammoUsed, long barrelSystemId, bool doesCount, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                int iCount = doesCount ? 1 : 0;
+                string sql = $"UPDATE Maintance_Details set gid={gunId},mpid={maintenancePlanId},Name='{name}',OpDate='{operationDate}'," +
+                             $"OpDueDate='{operationDueDate}',RndFired={roundsFired},Notes='{notes}',au='{ammoUsed}',BSID={barrelSystemId},DC={iCount},sync_lastupdate=Now() where id={id}";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Exists the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -311,15 +348,15 @@ namespace BurnSoft.Applications.MGC.Firearms
                     lst.Add(new MaintanceDetailsList()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        AmmoUsed = d["au"].ToString(),
-                        Name = d["name"].ToString(),
+                        AmmoUsed = d["au"] != null ? d["au"].ToString() : "",
+                        Name = d["name"] != null ? d["name"].ToString() : "",
                         BarrelSystemId = Convert.ToInt32(d["bsid"]),
                         LastSync = d["sync_lastupdate"].ToString(),
-                        Notes = d["notes"].ToString(),
+                        Notes = d["notes"] != null ? d["notes"].ToString() : "",
                         DoesCount = Convert.ToInt32(d["dc"]) > 0,
                         GunId = Convert.ToInt32(d["gid"]),
-                        OperationDueDate = d["opduedate"].ToString(),
-                        OperationStartDate = d["opdate"].ToString(),
+                        OperationDueDate = d["auopduedate"] != null ? d["opduedate"].ToString() : "",
+                        OperationStartDate = d["opdate"] != null ? d["opdate"].ToString() : "",
                         RoundsFired = Convert.ToInt32(d["rndfired"].ToString()),
                         PlanId = Convert.ToInt32(d["mpid"].ToString())
                     });
