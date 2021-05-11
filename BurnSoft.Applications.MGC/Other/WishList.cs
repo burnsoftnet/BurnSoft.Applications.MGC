@@ -102,7 +102,6 @@ namespace BurnSoft.Applications.MGC.Other
             errOut = @"";
             try
             {
-
                 string sql = $"UPDATE Wishlist set Manufacturer='{manufacturer}',Model='{model}',PlacetoBuy='{placetoBuy}',Qty='{qty}',[Value]='{value}',Notes='{notes}',sync_lastupdate=Now() where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }

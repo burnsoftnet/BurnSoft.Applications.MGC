@@ -190,6 +190,34 @@ namespace BurnSoft.Applications.MGC.Firearms
             return Database.Execute(databasePath, sql, out errOut);
         }
         /// <summary>
+        /// Moves the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="barrelId">The barrel identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        public static bool Move(string databasePath, long gunId, long barrelId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                if (!Database.Execute(databasePath,$"Update Gun_Collection_Ext set GID={gunId} where id={barrelId}", out errOut)) throw new Exception(errOut);
+                if (!Database.Execute(databasePath, $"update Gun_Collection_Ext_Links set gid={gunId} where bsid={barrelId}", out errOut)) throw new Exception(errOut);
+                if (!Database.Execute(databasePath, $"UPDATE Maintance_Details set GID={gunId} where bsid={barrelId}", out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Move", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Existses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
