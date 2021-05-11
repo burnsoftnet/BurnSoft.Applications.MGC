@@ -79,6 +79,7 @@
     <Compile Include="Firearms\Manufacturers.cs" />
     <Compile Include="Firearms\Models.cs" />
     <Compile Include="Firearms\MyCollection.cs" />
+    <Compile Include="Firearms\MyCollectionQry.cs" />
     <Compile Include="Firearms\Nationality.cs" />
     <Compile Include="Firearms\Pictures.cs" />
     <Compile Include="GlobalSuppressions.cs" />
