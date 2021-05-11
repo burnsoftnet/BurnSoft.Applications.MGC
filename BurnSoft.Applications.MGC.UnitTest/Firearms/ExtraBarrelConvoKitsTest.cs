@@ -223,6 +223,16 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = ExtraBarrelConvoKits.Delete(_databasePath, id, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
+        /// <summary>
+        /// Defines the test method MoveTest.
+        /// </summary>
+        [TestMethod, TestCategory("Barrel/Conversion Kits")]
+        public void MoveTest()
+        {
+            long id = ExtraBarrelConvoKits.GetBarrelId(_databasePath, _gunId, _barrelConvoKitAddModelName, out _errOut);
+            bool value = ExtraBarrelConvoKits.Move(_databasePath,_gunId, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
 
         /// <summary>
         /// Defines the test method AddLinkTest.
