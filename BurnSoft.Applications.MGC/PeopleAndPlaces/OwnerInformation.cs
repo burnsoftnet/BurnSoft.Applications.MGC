@@ -191,7 +191,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                     lst.Add(new OwnerInfo()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Name = d["gName"].ToString().Trim(),
+                        Name = d["Name"].ToString().Trim(),
                         Address = d["Address"].ToString().Trim(),
                         City = d["City"].ToString().Trim(),
                         State = d["State"].ToString().Trim(),
