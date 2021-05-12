@@ -82,7 +82,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <param name="forgotPhrase">The forgot phrase.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool Add(string databasePath, string name, string address, string city, string state, string zip,
+        public static bool Add(string databasePath, string name, string address, string city, string state, string zip,
             string phone, string ccdwl, bool usePwd, string pwd, string uid, string forgotWord, string forgotPhrase,
             out string errOut)
         {
@@ -121,7 +121,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <param name="forgotPhrase">The forgot phrase.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public bool Update(string databasePath,long id, string name, string address, string city, string state, string zip,
+        public static bool Update(string databasePath,long id, string name, string address, string city, string state, string zip,
             string phone, string ccdwl, bool usePwd, string pwd, string uid, string forgotWord, string forgotPhrase,
             out string errOut)
         {
