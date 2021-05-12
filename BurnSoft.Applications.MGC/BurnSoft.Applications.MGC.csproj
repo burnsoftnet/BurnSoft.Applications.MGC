@@ -85,6 +85,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Global\DatabaseRelated.cs" />
     <Compile Include="Other\WishList.cs" />
+    <Compile Include="PeopleAndPlaces\Buyers.cs" />
     <Compile Include="PeopleAndPlaces\GunSmiths.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformation.cs" />
     <Compile Include="PeopleAndPlaces\Shops.cs" />
@@ -109,6 +110,7 @@
     <Compile Include="Types\ModelList.cs" />
     <Compile Include="Types\NationalityList.cs" />
     <Compile Include="Types\OwnerInfo.cs" />
+    <Compile Include="Types\BuyersList.cs" />
     <Compile Include="Types\TableLists.cs" />
     <Compile Include="Types\WishlistList.cs" />
   </ItemGroup>
