@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +64,38 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         private static string ErrorMessage(string functionName, ArgumentNullException e) =>
             $"{ClassLocation}.{functionName} - {e.Message}";
 
-        #endregion
+        #endregion        
+        /// <summary>
+        /// Existses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="address">The address.</param>
+        /// <param name="address2">The address2.</param>
+        /// <param name="city">The city.</param>
+        /// <param name="state">The state.</param>
+        /// <param name="zipCode">The zip code.</param>
+        /// <param name="dob">The dob.</param>
+        /// <param name="dLic">The d lic.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool Exists(string databasePath, string name,string address, string address2, string city, string state, string zipCode,string dob, string dLic, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Gun_Collection_SoldTo where name='{name}' and Address1='{address}' and Address2='{address2}' and City='{city}' and State='{state}' and ZipCode='{zipCode}' and DOB='{dob}' and DLic='{dLic}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                bAns = dt.Rows.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Exists", e);
+            }
+            return bAns;
+        }
     }
 }
