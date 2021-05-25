@@ -97,5 +97,30 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return bAns;
         }
+        /// <summary>
+        /// Stolens the buyer exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool StolenBuyerExists(string databasePath, string name,out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Gun_Collection_SoldTo where name='{name}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                bAns = dt.Rows.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("StolenBuyerExists", e);
+            }
+            return bAns;
+        }
     }
 }
