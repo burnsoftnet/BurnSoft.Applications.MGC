@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurnSoft.Applications.MGC.Types;
 
 namespace BurnSoft.Applications.MGC.PeopleAndPlaces
 {
@@ -12,6 +13,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
     /// </summary>
     public class Buyers
     {
+        //TODO: Create unit test for this class
         #region "Exception Error Handling"
 
         /// <summary>
@@ -121,6 +123,140 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                 errOut = ErrorMessage("StolenBuyerExists", e);
             }
             return bAns;
+        }
+
+        public static long GetID(string databasePath, string name, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Gun_Collection_SoldTo where name='{name}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetID", e);
+            }
+            return lAns;
+        }
+        //// <summary>
+        /// 
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<BuyersList> Get(string databasePath, long id, out string errOut)
+        {
+            List<BuyersList> lst = new List<BuyersList>();
+            try
+            {
+                string sql = $"select * from Gun_Collection_SoldTo where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = GetList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Get", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
+        /// Get the buyer information based on a specific name
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="name"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<BuyersList> Get(string databasePath, string name, out string errOut)
+        {
+            List<BuyersList> lst = new List<BuyersList>();
+            try
+            {
+                string sql = $"select * from Gun_Collection_SoldTo where name=='{name}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = GetList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Get", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
+        /// Get all the Buyers List from the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<BuyersList> Get(string databasePath, out string errOut)
+        {
+            List<BuyersList> lst = new List<BuyersList>();
+            try
+            {
+                string sql = $"select * from Gun_Collection_SoldTo";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = GetList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Get", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
+        /// Internat list get function that will go through the datatable and put the values in the BuyersList
+        /// One stop shopping for updates
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        internal static List<BuyersList> GetList(DataTable dt, out string errOut)
+        {
+            List<BuyersList> lst = new List<BuyersList>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new BuyersList()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        Name = d["Name"].ToString(),
+                        Address1 = d["Address1"].ToString(),
+                        Address2 = d["Address2"].ToString(),
+                        City = d["City"].ToString(),
+                        State = d["State"].ToString(),
+                        ZipCode = d["ZipCode"].ToString(),
+                        Phone = d["Phone"].ToString(),
+                        Country = d["Country"].ToString(),
+                        Email = d["Email"].ToString(),
+                        Lic = d["Lic"].ToString(),
+                        WebSite = d["WebSite"].ToString(),
+                        Fax = d["Fax"].ToString(),
+                        Dob = d["DOB"].ToString(),
+                        Dlic = d["DLic"].ToString(),
+                        Resident = d["Resident"].ToString()
+                    });
+                }
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Get", e);
+            }
+            return lst;
         }
     }
 }
