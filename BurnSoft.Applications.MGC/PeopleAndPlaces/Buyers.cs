@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
+// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
 
 namespace BurnSoft.Applications.MGC.PeopleAndPlaces
 {
@@ -124,16 +123,25 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return bAns;
         }
-
-        public static long GetID(string databasePath, string name, out string errOut)
+        /// <summary>
+        /// Get the Id of the buyer record
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="name"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static long GetId(string databasePath, string name, out string errOut)
         {
             long lAns = 0;
             errOut = @"";
             try
             {
-                string sql = $"select * from Gun_Collection_SoldTo where name='{name}'";
-                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut?.Length > 0) throw new Exception(errOut);
+                List<BuyersList> lst = Get(databasePath, name, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (BuyersList l in lst)
+                {
+                    lAns = l.Id;
+                }
             }
             catch (Exception e)
             {
@@ -141,9 +149,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return lAns;
         }
-        //// <summary>
-        /// 
-        /// </summary>
+        /// <summary>Get information from the database based on the buyers ID</summary>
         /// <param name="databasePath"></param>
         /// <param name="id"></param>
         /// <param name="errOut"></param>
@@ -202,7 +208,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             List<BuyersList> lst = new List<BuyersList>();
             try
             {
-                string sql = $"select * from Gun_Collection_SoldTo";
+                string sql = "select * from Gun_Collection_SoldTo";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 lst = GetList(dt, out errOut);
@@ -254,7 +260,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("Get", e);
+                errOut = ErrorMessage("GetList", e);
             }
             return lst;
         }
