@@ -264,5 +264,46 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return lst;
         }
+        /// <summary>
+        /// Add a new buyer and related information into the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="name"></param>
+        /// <param name="address1"></param>
+        /// <param name="address2"></param>
+        /// <param name="city"></param>
+        /// <param name="state"></param>
+        /// <param name="zipCode"></param>
+        /// <param name="phone"></param>
+        /// <param name="country"></param>
+        /// <param name="eMail"></param>
+        /// <param name="lic"></param>
+        /// <param name="webSite"></param>
+        /// <param name="fax"></param>
+        /// <param name="dob"></param>
+        /// <param name="dLic"></param>
+        /// <param name="resident"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Add(string databasePath, string name, string address1, string address2,
+            string city, string state, string zipCode, string phone, string country, string eMail,
+            string lic, string webSite, string fax, string dob, string dLic, string resident, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"INSERT INTO Gun_Collection_SoldTo(Name,Address1,Address2,City,State,Country,Phone" +
+                             $",fax,website,email,lic,DOB,Dlic,Resident,ZipCode,sync_lastupdate) VALUES('{name}'," +
+                             $"'{address1}','{address2}','{city}','{state}','{country}','{phone}','{fax}','{webSite}'" +
+                             $",'{eMail}','{lic}','{dob}','{dLic}','{resident}','{zipCode}',Now())";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Add", e);
+            }
+            return bAns;
+        }
     }
 }
