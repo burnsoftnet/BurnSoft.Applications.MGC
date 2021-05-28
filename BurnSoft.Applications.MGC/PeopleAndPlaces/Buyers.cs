@@ -306,6 +306,29 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             return bAns;
         }
         /// <summary>
+        /// Delete a buyer from the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Delete(string databasePath, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"DELETE from Gun_Collection_SoldTo where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Update a buyers information in the database
         /// </summary>
         /// <param name="databasePath"></param>
