@@ -305,5 +305,45 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return bAns;
         }
+        /// <summary>
+        /// Update a buyers information in the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="address1"></param>
+        /// <param name="address2"></param>
+        /// <param name="city"></param>
+        /// <param name="state"></param>
+        /// <param name="zipCode"></param>
+        /// <param name="phone"></param>
+        /// <param name="country"></param>
+        /// <param name="eMail"></param>
+        /// <param name="lic"></param>
+        /// <param name="webSite"></param>
+        /// <param name="fax"></param>
+        /// <param name="dob"></param>
+        /// <param name="dLic"></param>
+        /// <param name="resident"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Update(string databasePath,long id, string name, string address1, string address2,
+            string city, string state, string zipCode, string phone, string country, string eMail,
+            string lic, string webSite, string fax, string dob, string dLic, string resident, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Update Gun_Collection_SoldTo set Name='{name}',Address1='{address1}',Address2='{address2}',City='{city}',State='{state}',Country='{country}',Phone='{phone}'" +
+                             $",fax='{fax}',website='{webSite}',email='{eMail}',lic='{lic}',DOB='{dob}',Dlic='{dLic}',Resident='{resident}',ZipCode='{zipCode}',sync_lastupdate=Now() where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+            return bAns;
+        }
     }
 }
