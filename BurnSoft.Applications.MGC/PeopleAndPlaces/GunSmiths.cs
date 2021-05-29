@@ -390,14 +390,15 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             {
                 foreach (DataRow d in dt.Rows)
                 {
+                    //d[""] == DBNull.Value ? "N/A" : 
                     lst.Add(new GunSmithContacts()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Name = d["gName"].ToString(),
-                        Address1 = d["Address1"].ToString(),
-                        Address2 = d["Address2"].ToString(),
-                        City = d["City"].ToString(),
-                        State = d["State"].ToString(),
+                        Name = d["gName"] == DBNull.Value ? "N/A" : d["gName"].ToString(),
+                        Address1 = d["Address1"] == DBNull.Value ? "N/A" : d["Address1"].ToString(),
+                        Address2 = d["Address2"] == DBNull.Value ? "N/A" : d["Address2"].ToString(),
+                        City = d["City"] == DBNull.Value ? "N/A" : d["City"].ToString(),
+                        State = d["State"] == DBNull.Value ? "N/A" : d["State"].ToString(),
                         ZipCode = d["Zip"].ToString(),
                         Phone = d["Phone"].ToString(),
                         Country = d["Country"].ToString(),
