@@ -135,7 +135,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// </summary>
         private void VerifyExists()
         {
-            if (Buyers.Exists(_databasePath, Buyer_Name, Buyer_Address1, Buyer_Address2, Buyer_City, Buyer_State, Buyer_ZipCode, Buyer_DOB, Buyer_dLic, out _errOut))
+            if (!Buyers.Exists(_databasePath, Buyer_Name, Buyer_Address1, Buyer_Address2, Buyer_City, Buyer_State, Buyer_ZipCode, Buyer_DOB, Buyer_dLic, out _errOut))
             {
                 bool value = Buyers.Add(_databasePath, Buyer_Name, Buyer_Address1, Buyer_Address2, Buyer_City, Buyer_State, Buyer_ZipCode, Buyer_Phone, Buyer_Country, Buyer_eMail, Buyer_Lic , Buyer_WebSite, Buyer_Fax, Buyer_DOB, Buyer_dLic, Buyer_Resident, out _errOut);
             }

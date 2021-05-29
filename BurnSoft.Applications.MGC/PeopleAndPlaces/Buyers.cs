@@ -184,7 +184,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             List<BuyersList> lst = new List<BuyersList>();
             try
             {
-                string sql = $"select * from Gun_Collection_SoldTo where name=='{name}'";
+                string sql = $"select * from Gun_Collection_SoldTo where name='{name}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 lst = GetList(dt, out errOut);
