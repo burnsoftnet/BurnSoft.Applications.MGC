@@ -81,6 +81,7 @@
     <Compile Include="PeopleAndPlaces\ShopsTest.cs" />
     <Compile Include="PeopleAndPlaces\GunSmithsTest.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInfoTest.cs" />
+    <Compile Include="PeopleAndPlaces\BuyersTest.cs" />
     <Compile Include="ReportTesting\CustomReportsTest.cs" />
     <Compile Include="ReportTesting\ColumnListsTest.cs" />
     <Compile Include="ReportTesting\TableListTest.cs" />

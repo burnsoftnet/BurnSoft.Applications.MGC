@@ -107,6 +107,19 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("CR_SQL", "select * from somtable"));
             ls.Add(new Tuple<string, string>("CR_Column_TableId", "4"));
             ls.Add(new Tuple<string, string>("CR_Column_DisplayName", "Full Name"));
+            ls.Add(new Tuple<string, string>("Buyer_Name", "test user"));
+            ls.Add(new Tuple<string, string>("Buyer_Address1", "test address"));
+            ls.Add(new Tuple<string, string>("Buyer_Address2", "32323"));
+            ls.Add(new Tuple<string, string>("Buyer_City", "testton"));
+            ls.Add(new Tuple<string, string>("Buyer_State", "test"));
+            ls.Add(new Tuple<string, string>("Buyer_ZipCode", "24332"));
+            ls.Add(new Tuple<string, string>("Buyer_Phone", "555-555-5555"));
+            ls.Add(new Tuple<string, string>("Buyer_Country", "usa"));
+            ls.Add(new Tuple<string, string>("Buyer_eMail", "tets@test.com"));
+            ls.Add(new Tuple<string, string>("Buyer_Lic", "222-333-4455-555-"));
+            ls.Add(new Tuple<string, string>("Buyer_dLic", "3333333333"));
+            ls.Add(new Tuple<string, string>("Buyer_DOB", "33/33/3333"));
+            ls.Add(new Tuple<string, string>("Buyer_Resident", "franlkin county"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }
