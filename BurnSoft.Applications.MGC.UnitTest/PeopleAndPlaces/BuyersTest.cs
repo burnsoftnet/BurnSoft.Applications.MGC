@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.PeopleAndPlaces;
 using BurnSoft.Applications.MGC.Types;
@@ -223,7 +224,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method GetListAllTest.
+        /// </summary>
         [TestMethod, TestCategory("Buyers")]
         public void GetListAllTest()
         {
@@ -231,6 +234,28 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             List<BuyersList> value = Buyers.Get(_databasePath, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method DeleteTest.
+        /// </summary>
+        [TestMethod, TestCategory("Buyers")]
+        public void DeleteTest()
+        {
+            VerifyExists();
+            long id = Buyers.GetId(_databasePath, Buyer_Name, out _errOut);
+            bool value = Buyers.Delete(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method SoldFirearmTest.
+        /// </summary>
+        [TestMethod, TestCategory("Buyers")]
+        public void SoldFirearmTest()
+        {
+            VerifyExists();
+            long id = Buyers.GetId(_databasePath, Buyer_Name, out _errOut);
+            bool value = Buyers.FirearmBought(_databasePath, _gunId, id, DateTime.Now.ToString(), "400.00", out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
 
     }
