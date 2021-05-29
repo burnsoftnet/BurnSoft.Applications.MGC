@@ -199,6 +199,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             TestContext.WriteLine($"ids: {value}");
             General.HasTrueValue(value > 0, _errOut);
         }
+
         /// <summary>
         /// Defines the test method GetListByIdTest.
         /// </summary>

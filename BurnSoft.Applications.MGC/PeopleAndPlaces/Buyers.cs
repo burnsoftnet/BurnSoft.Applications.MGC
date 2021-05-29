@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
@@ -366,6 +367,20 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Firearms the bought.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="buyerId">The buyer identifier.</param>
+        /// <param name="dateSold">The date sold.</param>
+        /// <param name="salePrice">The sale price.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool FirearmBought(string databasePath, long gunId, long buyerId, string dateSold,
+            string salePrice, out string errOut)
+        {
+            return MyCollection.MarkAsSold(databasePath, gunId, buyerId, dateSold, salePrice, out errOut);
+        }
     }
 }
