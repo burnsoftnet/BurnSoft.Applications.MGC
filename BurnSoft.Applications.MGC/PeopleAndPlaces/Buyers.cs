@@ -238,22 +238,23 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                 {
                     lst.Add(new BuyersList()
                     {
+                        //d[""] == DBNull.Value ? "N/A" : 
                         Id = Convert.ToInt32(d["id"]),
-                        Name = d["Name"].ToString(),
-                        Address1 = d["Address1"].ToString(),
-                        Address2 = d["Address2"].ToString(),
-                        City = d["City"].ToString(),
-                        State = d["State"].ToString(),
-                        ZipCode = d["ZipCode"].ToString(),
-                        Phone = d["Phone"].ToString(),
-                        Country = d["Country"].ToString(),
-                        Email = d["Email"].ToString(),
-                        Lic = d["Lic"].ToString(),
-                        WebSite = d["WebSite"].ToString(),
-                        Fax = d["Fax"].ToString(),
-                        Dob = d["DOB"].ToString(),
-                        Dlic = d["DLic"].ToString(),
-                        Resident = d["Resident"].ToString()
+                        Name = d["Name"] == DBNull.Value ? "N/A" : d["Name"].ToString().Trim(),
+                        Address1 = d["Address1"] == DBNull.Value ? "N/A" : d["Address1"].ToString().Trim(),
+                        Address2 = d["Address2"] == DBNull.Value ? "N/A" : d["Address2"].ToString().Trim(),
+                        City = d["City"] == DBNull.Value ? "N/A" : d["City"].ToString().Trim(),
+                        State = d["State"] == DBNull.Value ? "N/A" : d["State"].ToString().Trim(),
+                        ZipCode = d["ZipCode"] == DBNull.Value ? "N/A" : d["ZipCode"].ToString().Trim(),
+                        Phone = d["Phone"] == DBNull.Value ? "N/A" : d["Phone"].ToString().Trim(),
+                        Country = d["Country"] == DBNull.Value ? "N/A" : d["Country"].ToString().Trim(),
+                        Email = d["eMail"] == DBNull.Value ? "N/A" : d["Email"].ToString().Trim(),
+                        Lic = d["Lic"] == DBNull.Value ? "N/A" : d["Lic"].ToString().Trim(),
+                        WebSite = d["WebSite"] == DBNull.Value ? "N/A" : d["WebSite"].ToString().Trim(),
+                        Fax = d["Fax"] == DBNull.Value ? "N/A" : d["Fax"].ToString().Trim(),
+                        Dob = d["DOB"] == DBNull.Value ? "N/A" : d["DOB"].ToString().Trim(),
+                        Dlic = d["DLic"] == DBNull.Value ? "N/A" : d["DLic"].ToString().Trim(),
+                        Resident = d["Resident"] == DBNull.Value ? "N/A" : d["Resident"].ToString().Trim()
                     });
                 }
 
