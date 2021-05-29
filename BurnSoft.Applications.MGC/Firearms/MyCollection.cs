@@ -217,5 +217,33 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+        /// <summary>
+        /// Marks as sold.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="buyerId">The buyer identifier.</param>
+        /// <param name="dateSold">The date sold.</param>
+        /// <param name="salePrice">The sale price.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool MarkAsSold(string databasePath, long gunId, long buyerId, string dateSold, string salePrice,
+            out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection set ItemSold=1,BID={buyerId},dtSold='{dateSold}',AppraisedValue='{salePrice}',sync_lastupdate=Now() where ID={gunId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MarkAsSold", e);
+            }
+            return bAns;
+        }
     }
 }

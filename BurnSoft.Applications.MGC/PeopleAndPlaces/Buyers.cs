@@ -12,7 +12,6 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
     /// </summary>
     public class Buyers
     {
-        //TODO: Create unit test for this class
         #region "Exception Error Handling"
 
         /// <summary>
@@ -327,7 +326,6 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return bAns;
         }
-
         /// <summary>
         /// Update a buyers information in the database
         /// </summary>
@@ -368,5 +366,6 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return bAns;
         }
+
     }
 }
