@@ -84,6 +84,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// </summary>
         private string Buyer_Resident;
         /// <summary>
+        /// The buyer fax
+        /// </summary>
+        private string Buyer_Fax;
+        /// <summary>
+        /// The buyer web site
+        /// </summary>
+        private string Buyer_WebSite;
+        /// <summary>
         /// Initializes this instance.
         /// </summary>
         [TestInitialize]
@@ -108,6 +116,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             Buyer_dLic = obj.FC(Vs2019.GetSetting("Buyer_dLic", TestContext));
             Buyer_DOB = obj.FC(Vs2019.GetSetting("Buyer_DOB", TestContext));
             Buyer_Resident = obj.FC(Vs2019.GetSetting("Buyer_Resident", TestContext));
+            Buyer_Fax = obj.FC(Vs2019.GetSetting("Buyer_Fax", TestContext));
+            Buyer_WebSite = obj.FC(Vs2019.GetSetting("Buyer_WebSite", TestContext));
         }
         /// <summary>
         /// Verifies the doesnt exist.
@@ -127,7 +137,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         {
             if (Buyers.Exists(_databasePath, Buyer_Name, Buyer_Address1, Buyer_Address2, Buyer_City, Buyer_State, Buyer_ZipCode, Buyer_DOB, Buyer_dLic, out _errOut))
             {
-                bool value = Buyers.Add(_databasePath, Buyer_Name, Buyer_Address1, Buyer_Address2, Buyer_City, Buyer_State, Buyer_ZipCode, Buyer_Phone, Buyer_Country, Buyer_eMail, Buyer_Lic , "", "", Buyer_DOB, Buyer_dLic, Buyer_Resident, out _errOut);
+                bool value = Buyers.Add(_databasePath, Buyer_Name, Buyer_Address1, Buyer_Address2, Buyer_City, Buyer_State, Buyer_ZipCode, Buyer_Phone, Buyer_Country, Buyer_eMail, Buyer_Lic , Buyer_WebSite, Buyer_Fax, Buyer_DOB, Buyer_dLic, Buyer_Resident, out _errOut);
             }
         }
         /// <summary>
@@ -165,7 +175,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         public void AddTest()
         {
             VerifyDoesntExist();
-            bool value = Buyers.Add(_databasePath, Buyer_Name, Buyer_Address1, Buyer_Address2, Buyer_City, Buyer_State, Buyer_ZipCode, Buyer_Phone, Buyer_Country, Buyer_eMail, Buyer_Lic, "", "", Buyer_DOB, Buyer_dLic, Buyer_Resident, out _errOut);
+            bool value = Buyers.Add(_databasePath, Buyer_Name, Buyer_Address1, Buyer_Address2, Buyer_City, Buyer_State, Buyer_ZipCode, Buyer_Phone, Buyer_Country, Buyer_eMail, Buyer_Lic, Buyer_WebSite, Buyer_Fax, Buyer_DOB, Buyer_dLic, Buyer_Resident, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -243,6 +253,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         {
             VerifyExists();
             long id = Buyers.GetId(_databasePath, Buyer_Name, out _errOut);
+            TestContext.WriteLine($"Deleting Buyr with the id of {id} ");
             bool value = Buyers.Delete(_databasePath, id, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
