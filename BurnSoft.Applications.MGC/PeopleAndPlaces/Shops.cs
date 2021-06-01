@@ -333,18 +333,18 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                     lst.Add(new GunShopDetails()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Name = d["Name"].ToString(),
-                        Address1 = d["Address1"].ToString(),
-                        Address2 = d["Address2"].ToString(),
-                        City = d["City"].ToString(),
-                        State = d["State"].ToString(),
-                        ZipCode = d["Zip"].ToString(),
-                        Phone = d["Phone"].ToString(),
-                        Country = d["Country"].ToString(),
-                        Email = d["Email"].ToString(),
-                        Lic = d["Lic"].ToString(),
-                        WebSite = d["WebSite"].ToString(),
-                        Fax = d["Fax"].ToString(),
+                        Name = d["Name"] == DBNull.Value ? "N/A" : d["Name"].ToString(),
+                        Address1 = d["Address1"] == DBNull.Value ? "N/A" : d["Address1"].ToString(),
+                        Address2 = d["Address2"] == DBNull.Value ? "N/A" : d["Address2"].ToString(),
+                        City = d["City"] == DBNull.Value ? "N/A" : d["City"].ToString(),
+                        State = d["State"] == DBNull.Value ? "N/A" : d["State"].ToString(),
+                        ZipCode = d["Zip"] == DBNull.Value ? "N/A" : d["Zip"].ToString(),
+                        Phone = d["Phone"] == DBNull.Value ? "N/A" : d["Phone"].ToString(),
+                        Country = d["Country"] == DBNull.Value ? "N/A" : d["Country"].ToString(),
+                        Email = d["Email"] == DBNull.Value ? "N/A" : d["Email"].ToString(),
+                        Lic = d["Lic"] == DBNull.Value ? "N/A" : d["Lic"].ToString(),
+                        WebSite = d["WebSite"] == DBNull.Value ? "N /A" : d["WebSite"].ToString(),
+                        Fax = d["Fax"] == DBNull.Value ? "N/A" : d["Fax"].ToString(),
                         StillInBusiness = (Convert.ToInt32(d["SIB"].ToString()) == 1)
                     });
                 }
