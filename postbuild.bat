@@ -22,16 +22,15 @@ cd "%ProjectDir%"
 copy /Y "%SolutionDir%Help\%HELPFILENAME%.chm" "%ProjectDir%bin\%ConfigurationName%\%HELPFILENAME%.chm"
 cd "%ProjectDir%"
 del /Q %ProjectDir%*.nupkg
+SET USENUGETSERVER="http://nuget.burnsoft.prod"
 
 if "%ConfigurationName%" == %DEBUG% (
 	echo "nuget Dev packing"
-	SET USENUGETSERVER="http://nuget.burnsoft.prod"
 	nuget pack
 )
 
 if "%ConfigurationName%" == %RELEASE% (
 	echo "nuget Production Packing"
-	SET USENUGETSERVER="http://nuget.burnsoft.prod"
 	nuget pack -Prop Configuration=Release
 )
 
@@ -51,8 +50,8 @@ nuget delete %HELPFILENAME% %ver% burnsoft -Source %USENUGETSERVER% -NonInteract
 echo "Uploading %nupak%.%NUGETEXT%"
 nuget push %nupak%.%NUGETEXT% burnsoft -Source %USENUGETSERVER%
 
-if "%ConfigurationName%" == %RELEASE% (
+rem if "%ConfigurationName%" == %RELEASE% (
 	echo "nuget guthub push"
 	nuget push %nupak%.%NUGETEXT% -source "github"
-)
+rem )
 cd ..
