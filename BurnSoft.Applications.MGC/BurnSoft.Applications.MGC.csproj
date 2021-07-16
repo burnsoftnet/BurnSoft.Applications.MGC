@@ -84,6 +84,7 @@
     <Compile Include="Firearms\Pictures.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Global\DatabaseRelated.cs" />
+    <Compile Include="Global\Helpers.cs" />
     <Compile Include="Other\WishList.cs" />
     <Compile Include="PeopleAndPlaces\Buyers.cs" />
     <Compile Include="PeopleAndPlaces\GunSmiths.cs" />
