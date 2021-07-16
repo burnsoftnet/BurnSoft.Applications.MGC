@@ -16,7 +16,7 @@ namespace BurnSoft.Applications.MGC.Global
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string FormatFromXML(string value)
+        public static string FormatFromXml(string value)
         {
             string sAns = value.Replace("&amp;", "&");
             sAns = sAns.Replace("'", "''");
