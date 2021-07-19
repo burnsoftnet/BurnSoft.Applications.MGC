@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.InteropServices;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 // ReSharper disable UnusedMember.Local
@@ -131,6 +132,29 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Gets the last identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        public static long GetLastId(string databasePath, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = "SELECT Top 1 ID from Gun_Collection order by ID DESC";
+                lAns = Database.GetIDFromTableBasedOnTSQL(databasePath, sql, "ID", out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetLastId", e);
+            }
+            return lAns;
+        }
+
         /// <summary>
         /// Updates the name of the shop for all the guns that was bought from it due to a name change
         /// </summary>
