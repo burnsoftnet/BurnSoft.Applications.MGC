@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Security.AccessControl;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 // ReSharper disable UnusedMember.Local
@@ -17,53 +16,53 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MGC.Firearms.MyCollection";
+        private static string _classLocation = "BurnSoft.Applications.MGC.Firearms.MyCollection";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for access violations
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for invalid cast exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message argument exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, ArgumentException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for argument null exception.
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion
 
-        public static bool Add(long OwnerId, long ManufactureId, string FullName, string ModelName, long ModelID, string SerialNumber,
-            string firearmType, string Caliber, string Finish, string Condition,
-            string CustomID, long NatID, long GripID, string Qty, string Weight, string Height, string StockType,
-            string BarrelLength, string BarrelWidth, string BarrelHeight,
-            string Action, string Feedsystem, string Sights, string PurchasedPrice, string PurchasedFrom,
-            string AppraisedValue, string AppraisalDate, string AppraisedBy,
-            string InsuredValue, string StorageLocation, string ConditionComments, string AdditionalNotes,
-            string Produced, string PetLoads, string dtp, bool IsCandR, string Importer, string ReManDT, string POI,
-            bool SGChoke, out string errOut)
+        public static bool Add(string databasePath,long ownerId, long manufactureId, string fullName, string modelName, long modelId, string serialNumber,
+            string firearmType, string caliber, string finish, string condition,
+            string customId, long natId, long gripId, string weight, string height, string stockType,
+            string barrelLength, string barrelWidth, string barrelHeight,
+            string action, string feedsystem, string sights, string purchasedPrice, string purchasedFrom,
+            string appraisedValue, string appraisalDate, string appraisedBy,
+            string insuredValue, string storageLocation, string conditionComments, string additionalNotes,
+            string produced, string petLoads, string dtp, bool isCandR, string importer, string reManDt, string poi,
+            string sgChoke, out string errOut)
         {
             errOut = "";
             bool bAns = false;
@@ -73,8 +72,13 @@ namespace BurnSoft.Applications.MGC.Firearms
                 "CustomID,NatID,GripID,Qty,Weight,Height,StockType,BarrelLength,BarrelWidth,BarrelHeight," +
                 "Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
                 "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
-                $"ReManDT,POI,SGChoke,sync_lastupdate) VALUES({OwnerId},{ManufactureId},'{FullName}','{ModelName}')";
-
+                $"ReManDT,POI,SGChoke,sync_lastupdate) VALUES({ownerId},{manufactureId},'{fullName}','{modelName}', {modelName}, '{serialNumber}'," +
+                $"'{firearmType}','{caliber}','{finish}','{condition}','{customId}',{natId},{gripId},1,'{weight}','{height}','{stockType}','{barrelLength}'" +
+                $",'{barrelWidth}','{barrelHeight}','{action}','{feedsystem}','{sights}','{purchasedPrice}','{purchasedFrom}','{appraisedValue}'," +
+                $"'{appraisalDate}','{appraisedBy}','{insuredValue}','{storageLocation}','{condition}','{additionalNotes}','{produced}'," +
+                $"'{petLoads}','{dtp}','{isCandR}','{importer}','{reManDt}','{poi}','{sgChoke}',Now())";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (!bAns) throw new Exception(errOut);
             }
             catch (Exception e)
             {
