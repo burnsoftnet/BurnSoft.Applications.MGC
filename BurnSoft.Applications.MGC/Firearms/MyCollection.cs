@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Security.AccessControl;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 // ReSharper disable UnusedMember.Local
@@ -52,7 +53,35 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion        
+        #endregion
+
+        public static bool Add(long OwnerId, long ManufactureId, string FullName, string ModelName, long ModelID, string SerialNumber,
+            string firearmType, string Caliber, string Finish, string Condition,
+            string CustomID, long NatID, long GripID, string Qty, string Weight, string Height, string StockType,
+            string BarrelLength, string BarrelWidth, string BarrelHeight,
+            string Action, string Feedsystem, string Sights, string PurchasedPrice, string PurchasedFrom,
+            string AppraisedValue, string AppraisalDate, string AppraisedBy,
+            string InsuredValue, string StorageLocation, string ConditionComments, string AdditionalNotes,
+            string Produced, string PetLoads, string dtp, bool IsCandR, string Importer, string ReManDT, string POI,
+            bool SGChoke, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"INSERT INTO Gun_Collection(OID,MID,FullName,ModelName,ModelID,SerialNumber,Type,Caliber,Finish,Condition," +
+                "CustomID,NatID,GripID,Qty,Weight,Height,StockType,BarrelLength,BarrelWidth,BarrelHeight," +
+                "Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
+                "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
+                $"ReManDT,POI,SGChoke,sync_lastupdate) VALUES({OwnerId},{ManufactureId},'{FullName}','{ModelName}')";
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Add", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Updates the name of the shop for all the guns that was bought from it due to a name change
         /// </summary>
