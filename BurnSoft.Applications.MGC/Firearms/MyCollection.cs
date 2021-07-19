@@ -52,8 +52,53 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion
-
+        #endregion        
+        /// <summary>
+        /// Adds the specified firearm to the database
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="ownerId">The owner identifier.</param>
+        /// <param name="manufactureId">The manufacture identifier.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="modelName">Name of the model.</param>
+        /// <param name="modelId">The model identifier.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="firearmType">Type of the firearm.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="finish">The finish.</param>
+        /// <param name="condition">The condition.</param>
+        /// <param name="customId">The custom identifier.</param>
+        /// <param name="natId">The nat identifier.</param>
+        /// <param name="gripId">The grip identifier.</param>
+        /// <param name="weight">The weight.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="stockType">Type of the stock.</param>
+        /// <param name="barrelLength">Length of the barrel.</param>
+        /// <param name="barrelWidth">Width of the barrel.</param>
+        /// <param name="barrelHeight">Height of the barrel.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="feedsystem">The feedsystem.</param>
+        /// <param name="sights">The sights.</param>
+        /// <param name="purchasedPrice">The purchased price.</param>
+        /// <param name="purchasedFrom">The purchased from.</param>
+        /// <param name="appraisedValue">The appraised value.</param>
+        /// <param name="appraisalDate">The appraisal date.</param>
+        /// <param name="appraisedBy">The appraised by.</param>
+        /// <param name="insuredValue">The insured value.</param>
+        /// <param name="storageLocation">The storage location.</param>
+        /// <param name="conditionComments">The condition comments.</param>
+        /// <param name="additionalNotes">The additional notes.</param>
+        /// <param name="produced">The produced.</param>
+        /// <param name="petLoads">The pet loads.</param>
+        /// <param name="dtp">The DTP.</param>
+        /// <param name="isCandR">if set to <c>true</c> [is cand r].</param>
+        /// <param name="importer">The importer.</param>
+        /// <param name="reManDt">The re man dt.</param>
+        /// <param name="poi">The poi.</param>
+        /// <param name="sgChoke">The sg choke.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
         public static bool Add(string databasePath,long ownerId, long manufactureId, string fullName, string modelName, long modelId, string serialNumber,
             string firearmType, string caliber, string finish, string condition,
             string customId, long natId, long gripId, string weight, string height, string stockType,
@@ -75,7 +120,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 $"ReManDT,POI,SGChoke,sync_lastupdate) VALUES({ownerId},{manufactureId},'{fullName}','{modelName}', {modelName}, '{serialNumber}'," +
                 $"'{firearmType}','{caliber}','{finish}','{condition}','{customId}',{natId},{gripId},1,'{weight}','{height}','{stockType}','{barrelLength}'" +
                 $",'{barrelWidth}','{barrelHeight}','{action}','{feedsystem}','{sights}','{purchasedPrice}','{purchasedFrom}','{appraisedValue}'," +
-                $"'{appraisalDate}','{appraisedBy}','{insuredValue}','{storageLocation}','{condition}','{additionalNotes}','{produced}'," +
+                $"'{appraisalDate}','{appraisedBy}','{insuredValue}','{storageLocation}','{conditionComments}','{additionalNotes}','{produced}'," +
                 $"'{petLoads}','{dtp}','{isCandR}','{importer}','{reManDt}','{poi}','{sgChoke}',Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
