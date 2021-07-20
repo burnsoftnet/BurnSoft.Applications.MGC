@@ -125,6 +125,33 @@ namespace BurnSoft.Applications.MGC.Firearms
                 $"'{petLoads}','{dtp}','{isCandR}','{importer}','{reManDt}','{poi}','{sgChoke}',Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
+                
+                //Not Time to add the extra barrel and sellers if they don't exist, get those id's and update the main table with the id's
+                long id = GetLastId(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = ExtraBarrelConvoKits.Add(databasePath, id, modelName, caliber, finish, barrelLength, petLoads,
+                    action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", true, out errOut);
+                long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = UpdateDefaultBarrel(databasePath, barrelId, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = ExtraBarrelConvoKits.AddLink(databasePath, barrelId, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                if (purchasedFrom.Trim().Length > 0)
+                {
+                    if (!PeopleAndPlaces.Shops.Exists(databasePath, purchasedFrom, out errOut))
+                    {
+                        PeopleAndPlaces.Shops.Add(databasePath, purchasedFrom, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                    }
+
+                    long gunShopId = PeopleAndPlaces.Shops.GetId(databasePath, purchasedFrom, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    bAns = UpdateSellerId(databasePath, gunShopId, id, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                }
+                
             }
             catch (Exception e)
             {
@@ -132,6 +159,57 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Updates the default barrel in the main database collection table
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="barrelId">The barrel identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool UpdateDefaultBarrel(string databasePath, long barrelId, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection set DBID={barrelId} where ID={gunId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (!bAns) throw  new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateDefaultBarrel", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the seller identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sellerId">The seller identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool UpdateSellerId(string databasePath, long sellerId, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection set SID={sellerId} where ID={gunId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (!bAns) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateSellerId", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Gets the last identifier.
         /// </summary>
