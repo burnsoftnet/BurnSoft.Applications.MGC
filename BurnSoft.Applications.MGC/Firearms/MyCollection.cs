@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Runtime.InteropServices;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 // ReSharper disable UnusedMember.Local
@@ -151,7 +150,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                     bAns = UpdateSellerId(databasePath, gunShopId, id, out errOut);
                     if (errOut.Length > 0) throw new Exception(errOut);
                 }
-                
+
+                if (!Ammo.GlobalList.Exists(databasePath, caliber, out errOut))
+                    Ammo.GlobalList.Add(databasePath, caliber, out errOut);
             }
             catch (Exception e)
             {
