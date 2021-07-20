@@ -161,6 +161,37 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Gets the catalog next identifier number.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="Exception"></exception>
+        public static long GetCatalogNextIdNumber(string databasePath, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = "SELECT Max(CustomID) as CID from Gun_Collection";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["cid"]);
+                }
+
+                lAns++;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetCatalogNextIDNumber", e);
+            }
+            return lAns;
+        }
+
+        /// <summary>
         /// Updates the default barrel in the main database collection table
         /// </summary>
         /// <param name="databasePath">The database path.</param>
