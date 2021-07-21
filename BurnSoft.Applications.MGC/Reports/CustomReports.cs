@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
 
@@ -19,43 +20,55 @@ namespace BurnSoft.Applications.MGC.Reports
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MGC.Reports.CustomReports";
+        private static string _classLocation = "BurnSoft.Applications.MGC.Reports.CustomReports";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for access violations
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for invalid cast exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message argument exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, ArgumentException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for argument null exception.
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion        
+        /// <summary>
+        /// Gets the report SQL.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        public static string GetReportSql(string databasePath,long id, out string errOut)
+        {
+            return DatabaseRelated.GetName(databasePath,$"SELECT * from CR_SavedReports where id={id}", "MySQL", out errOut);
+        }
+
         /// <summary>
         /// Adds the specified database path.
         /// </summary>
