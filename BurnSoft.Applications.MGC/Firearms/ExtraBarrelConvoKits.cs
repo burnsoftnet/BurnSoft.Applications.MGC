@@ -429,6 +429,41 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lAns;
         }
         /// <summary>
+        /// Gets the default barrel identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetDefaultBarrelId(string databasePath, long gunId,  out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT ID from Gun_Collection_Ext where IsDefault=1 and GID={gunId}";
+                List<BarrelSystems> lst = GetList(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                int i = 0;
+                foreach (BarrelSystems b in lst)
+                {
+                    if (i >= 1)
+                    {
+                        FixDefaultBarrelMarkers(databasePath, gunId, out errOut, lAns);
+                        break;
+                    }
+                    lAns = b.Id;
+                    i++;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetDefaultBarrelID", e);
+            }
+            return lAns;
+        }
+        /// <summary>
         /// Gets the list.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
