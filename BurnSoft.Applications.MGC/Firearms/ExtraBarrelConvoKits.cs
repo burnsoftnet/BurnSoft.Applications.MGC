@@ -52,7 +52,65 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion
+        #endregion        
+        /// <summary>
+        /// Fixes the default barrel markers.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="barrelId">The barrel identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool FixDefaultBarrelMarkers(string databasePath, long gunId, out string errOut,
+            long barrelId = 0)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Ext set IsDefault=0,sync_lastupdate=Now() where GID={gunId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw  new Exception(errOut);
+                long dbid = GetDatabaseIdxtLinks(databasePath, gunId, out errOut);
+                sql = $"UPDATE Gun_Collection_Ext set IsDefault=1,sync_lastupdate=Now() where ID={dbid}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("FixDefaultBarrelMarkers", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Gets the database idxt links.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        public static long GetDatabaseIdxtLinks(string databasePath, long gunId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT DBID from Gun_Collection where ID={gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                List<GunCollectionList> myList = MyCollection.MyList(dt, out errOut);
+                foreach (GunCollectionList m in myList)
+                {
+                    lAns = m.DbId;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetDatabaseIdxtLinks", e);
+            }
+            return lAns;
+        }
 
         /// <summary>
         /// Ges the current barrel detailst list.
