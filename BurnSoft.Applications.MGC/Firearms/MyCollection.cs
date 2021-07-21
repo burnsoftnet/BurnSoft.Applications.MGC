@@ -62,21 +62,27 @@ namespace BurnSoft.Applications.MGC.Firearms
             string appraisedValue, string appraisalDate, string appraisedBy,
             string insuredValue, string storageLocation, string conditionComments, string additionalNotes,
             string produced, string petLoads, string dtp, bool isCandR, string importer, string reManDt, string poi,
-            string sgChoke, out string errOut)
+            string sgChoke,bool isInBoundBook,string twistRate, string lbsTrigger,string caliber3,string classification,string dateofCr,bool isClassIii,string classIiiOwner, out string errOut)
         {
             errOut = "";
             bool bAns = false;
             try
             {
+                int iBoundBook = isInBoundBook ? 1 : 0;
+                int iIsClassIII = isClassIii ? 1 : 0;
+                int iisCandR = isCandR ? 1 : 0;
+
                 string sql = $"INSERT INTO Gun_Collection(OID,MID,FullName,ModelName,ModelID,SerialNumber,Type,Caliber,Finish,Condition," +
                 "CustomID,NatID,GripID,Qty,Weight,Height,StockType,BarrelLength,BarrelWidth,BarrelHeight," +
                 "Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
                 "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
-                $"ReManDT,POI,SGChoke,sync_lastupdate) VALUES({ownerId},{manufactureId},'{fullName}','{modelName}', {modelName}, '{serialNumber}'," +
+                "ReManDT,POI,SGChoke,sync_lastupdate,HasMB,DBID,IsInBoundBook,TwistRate,lbs_trigger,Caliber3,Classification,DateofCR," +
+                $"ItemSold,BID,IsClassIII,ClassIII_owner) VALUES({ownerId},{manufactureId},'{fullName}','{modelName}', {modelId}, '{serialNumber}'," +
                 $"'{firearmType}','{caliber}','{finish}','{condition}','{customId}',{natId},{gripId},1,'{weight}','{height}','{stockType}','{barrelLength}'" +
                 $",'{barrelWidth}','{barrelHeight}','{action}','{feedsystem}','{sights}','{purchasedPrice}','{purchasedFrom}','{appraisedValue}'," +
                 $"'{appraisalDate}','{appraisedBy}','{insuredValue}','{storageLocation}','{conditionComments}','{additionalNotes}','{produced}'," +
-                $"'{petLoads}','{dtp}','{isCandR}','{importer}','{reManDt}','{poi}','{sgChoke}',Now())";
+                $"'{petLoads}','{dtp}','{iisCandR}','{importer}','{reManDt}','{poi}','{sgChoke}',Now(),0,0,{iBoundBook},'{twistRate}','{lbsTrigger}'" +
+                $",'{caliber3}','{classification}','{dateofCr}',0,2,{iIsClassIII},'{classIiiOwner}')";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
                 
