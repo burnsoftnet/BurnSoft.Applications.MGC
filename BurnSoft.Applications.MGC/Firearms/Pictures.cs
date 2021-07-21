@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using ADODB;
+// ReSharper disable ExpressionIsAlwaysNull
 
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
@@ -19,42 +20,42 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MGC.Firearms.Pictures";
+        private static string _classLocation = "BurnSoft.Applications.MGC.Firearms.Pictures";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for access violations
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for invalid cast exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message argument exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, ArgumentException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for argument null exception.
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion        
         /// <summary>
         /// Determines whether the firearm ( collection id ) already has a default picture set or not
@@ -82,20 +83,105 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
 
+        /// <summary>
+        /// Determines whether [has default picture] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="defaultPic"></param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="addPic">if set to <c>true</c> [add pic].</param>
+        /// <returns><c>true</c> if [has default picture] [the specified database path]; otherwise, <c>false</c>.</returns>
+        public static bool HasDefaultPicture(string databasePath, long id, string defaultPic,out string errOut, bool addPic = false)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection_Pictures where CID={id} and IsMain=1";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (!bAns && addPic) AddDefaultPic(databasePath, id, defaultPic, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AddDefaultPic", e);
+            }
+            return bAns;
+        }
 
+        /// <summary>
+        /// Adds the default pic.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="defaultPic"></param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool AddDefaultPic(string databasePath, long id, string defaultPic, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sFileName = Path.Combine(Directory.GetCurrentDirectory(), defaultPic);
+                string sThumbName = Path.Combine(Directory.GetCurrentDirectory(), @"\mgc_thumb.jpg");
+                // ---Start Function to convert picture to database format-----
+                FileStream st = new FileStream(sFileName, FileMode.Open, FileAccess.Read);
+                BinaryReader mbr = new BinaryReader(st);
+                byte[] buffer = new byte[st.Length + 1];
+                mbr.Read(buffer, 0, Convert.ToInt32(st.Length));
+                st.Close();
+                // ---End Function to convert picture to database format-----
+                // --Start Function to convert picture to thumbnail for database format--
+                int intPicHeight = 64;
+                int intPicWidth = 64;
+                var myBitmap = Image.FromFile(sFileName);
+                Image.GetThumbnailImageAbort myPicCallback = null/* TODO Change to default(_) if this is not a reference type */;
+                var myNewPic = myBitmap.GetThumbnailImage(intPicWidth, intPicHeight, myPicCallback, IntPtr.Zero);
+                myBitmap.Dispose();
+                File.Delete(sThumbName);
+                myNewPic.Save(sThumbName, ImageFormat.Jpeg);
+                myNewPic.Dispose();
+                FileStream stT = new FileStream(sThumbName, FileMode.Open, FileAccess.Read);
+                BinaryReader mbrT = new BinaryReader(stT);
+                byte[] bufferT = new byte[stT.Length + 1];
+                mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
+                stT.Close();
+                // --End Function to convert picture to thumbnail for database format--
+               
+                Connection myConn = new Connection();
+                myConn.Open(Database.ConnectionString(databasePath, out errOut));
+                Recordset rs = new Recordset();
+                rs.Open("Gun_Collection_Pictures", myConn, CursorTypeEnum.adOpenStatic , LockTypeEnum.adLockPessimistic);
+                rs.AddNew();
+                rs.Fields["CID"].Value = id; 
+                rs.Fields["PICTURE"].AppendChunk(buffer);
+                rs.Fields["THUMB"].AppendChunk(bufferT);
+                rs.Fields["ISMAIN"].Value = 1;
+                rs.Fields["sync_lastupdate"].Value = DateTime.Now;
+                rs.Update();
+                rs.Close();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AddDefaultPic", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Saves the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="file">The file.</param>
-        /// <param name="ApplicationPathData">The application path data.</param>
+        /// <param name="applicationPathData">The application path data.</param>
         /// <param name="gunId">The gun identifier.</param>
         /// <param name="name">The name.</param>
         /// <param name="notes">The notes.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Save(string databasePath, string file, string ApplicationPathData, long gunId,string name, string notes, out string errOut)
+        public static bool Save(string databasePath, string file, string applicationPathData, long gunId,string name, string notes, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -105,12 +191,12 @@ namespace BurnSoft.Applications.MGC.Firearms
                 FileStream st = new FileStream(file, FileMode.Open, FileAccess.Read);
                 BinaryReader mbr = new BinaryReader(st);
                 byte[] buffer = new byte[st.Length + 1];
-                mbr.Read(buffer, 0, System.Convert.ToInt32(st.Length));
+                mbr.Read(buffer, 0, Convert.ToInt32(st.Length));
                 st.Close();
 
                 int intPicHeight = 64;
                 int intPicWidth = 64;
-                string sThumbName = $"{ApplicationPathData}\\mgc_thumb.jpg";
+                string sThumbName = $"{applicationPathData}\\mgc_thumb.jpg";
 
                 Image myBitmap = Image.FromFile(file);
                 Image.GetThumbnailImageAbort myPicCallback = null;
@@ -129,25 +215,19 @@ namespace BurnSoft.Applications.MGC.Firearms
                 conn.Open(Database.ConnectionString(databasePath, out errOut));
                 Recordset rs = new Recordset();
                 //TODO: #7 Finish Importing the picture function and figure out why the ADODB is glitching in c# or get the right format
-                //rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
-                //rs.AddNew();
-                //rs("CID").Value = gunId;
-                //rs("PICTURE").AppendChunk(buffer);
-                //rs("THUMB").AppendChunk(bufferT);
-                //if (IsFirstPic(databasePath, gunId.ToString(), out errOut))
-                //{
-                //    rs("ISMAIN").Value = 1;
-                //}
-                //else
-                //{
-                //    rs("ISMAIN").Value = 0;
-                //}
+                rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
+                rs.AddNew();
+                rs.Fields["CID"].Value = gunId;
+                rs.Fields["PICTURE"].AppendChunk(buffer);
+                rs.Fields["THUMB"].AppendChunk(bufferT);
+                rs.Fields["ISMAIN"].Value = IsFirstPic(databasePath, gunId.ToString(), out errOut) ? 1 : 0;
 
-                //rs("pd_name").Value = name;
-                //rs("pd_note").Value = notes;
-                //rs("sync_lastupdate").Value = DateTime.Now;
-                //rs.Update();
-                //rs.Close();
+                rs.Fields["pd_name"].Value = name;
+                rs.Fields["pd_note"].Value = notes;
+                rs.Fields["sync_lastupdate"].Value = DateTime.Now;
+                rs.Update();
+                rs.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
