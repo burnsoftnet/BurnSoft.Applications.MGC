@@ -328,7 +328,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string sql = "select * from Gun_Collection";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
-                lst = MyList(dt, out errOut);
+                lst = MyList(dt, out errOut, databasePath);
             }
             catch (Exception e)
             {
@@ -353,7 +353,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string sql = $"select * from Gun_Collection where id={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
-                lst = MyList(dt, out errOut);
+                lst = MyList(dt, out errOut, databasePath);
             }
             catch (Exception e)
             {
@@ -361,13 +361,15 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
         /// <summary>
         /// Private class to sort the informatimon from a datatable into the Gun Collection List ype
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="dbPath"></param>
         /// <returns>List&lt;GunCollectionList&gt;.</returns>
-        internal static List<GunCollectionList> MyList(DataTable dt, out string errOut)
+        internal static List<GunCollectionList> MyList(DataTable dt, out string errOut, string dbPath = "")
         {
             List<GunCollectionList> lst = new List<GunCollectionList>();
             errOut = @"";
@@ -377,72 +379,80 @@ namespace BurnSoft.Applications.MGC.Firearms
                 foreach (DataRow d in dt.Rows)
                 {
                     int appriaserId = 0;
-                    if (d["AppriaserID"] != null && d["AppriaserID"].ToString().Length > 0)
+                    try
                     {
-                        appriaserId = Convert.ToInt32(d["AppriaserID"]);
+                        if (d["AppriaserID"] != null && d["AppriaserID"].ToString().Length > 0)
+                        {
+                            appriaserId = Convert.ToInt32(d["AppriaserID"]);
+                        }
                     }
-                    
+                    catch (Exception)
+                    {
+                        //Don't care default is 0
+                    }
+
                     lst.Add(new GunCollectionList()
                     {
                         Id = Convert.ToInt32(d["id"]),
                         Oid = Convert.ToInt32(d["oid"]),
                         Mid = Convert.ToInt32(d["mid"]),
-                        FullName = d["FullName"].ToString(),
-                        ModelName = d["ModelName"].ToString(),
+                        Manufacturer = dbPath.Length > 0 ? Manufacturers.GetName(dbPath, Convert.ToInt32(d["mid"]), out _) : "",
+                        FullName = d["FullName"].ToString().Trim(),
+                        ModelName = d["ModelName"].ToString().Trim(),
                         ModelId = Convert.ToInt32(d["ModelID"]),
-                        SerialNumber = d["SerialNumber"].ToString(),
-                        Type = d["Type"].ToString(),
-                        Caliber = d["Caliber"].ToString(),
-                        Caliber3 = d["Caliber3"].ToString(),
-                        PetLoads = d["PetLoads"].ToString(),
-                        Finish = d["Finish"].ToString(),
-                        FeedSystem = d["FeedSystem"].ToString(),
-                        Condition = d["Condition"].ToString(),
-                        CustomId = d["CustomId"].ToString(),
+                        SerialNumber = d["SerialNumber"].ToString().Trim(),
+                        Type = d["Type"].ToString().Trim(),
+                        Caliber = d["Caliber"].ToString().Trim(),
+                        Caliber3 = d["Caliber3"].ToString().Trim(),
+                        PetLoads = d["PetLoads"].ToString().Trim(),
+                        Finish = d["Finish"].ToString().Trim(),
+                        FeedSystem = d["FeedSystem"].ToString().Trim(),
+                        Condition = d["Condition"].ToString().Trim(),
+                        CustomId = d["CustomId"].ToString().Trim(),
                         NationalityId = Convert.ToInt32(d["NatId"].ToString()),
-                        BarrelLength = d["BarrelLength"].ToString(),
+                        BarrelLength = d["BarrelLength"].ToString().Trim(),
                         GripId = Convert.ToInt32(d["GripID"].ToString()),
                         Qty = Convert.ToInt32(d["Qty"].ToString()),
-                        Weight = d["Weight"].ToString(),
-                        Height = d["Height"].ToString(),
-                        StockType = d["StockType"].ToString(),
-                        BarrelHeight = d["BarrelHeight"].ToString(),
-                        BarrelWidth = d["BarrelWidth"].ToString(),
-                        Action = d["Action"].ToString(),
-                        Sights = d["Sights"].ToString(),
-                        PurchasePrice = d["PurchasedPrice"].ToString(),
-                        PurchaseFrom = d["PurchasedFrom"].ToString(),
-                        AppriasedBy = d["AppraisedBy"].ToString(),
-                        AppriasedValue = d["AppraisedValue"].ToString(),
+                        Weight = d["Weight"].ToString().Trim(),
+                        Height = d["Height"].ToString().Trim(),
+                        StockType = d["StockType"].ToString().Trim(),
+                        BarrelHeight = d["BarrelHeight"].ToString().Trim(),
+                        BarrelWidth = d["BarrelWidth"].ToString().Trim(),
+                        Action = d["Action"].ToString().Trim(),
+                        Sights = d["Sights"].ToString().Trim(),
+                        PurchasePrice = d["PurchasedPrice"].ToString().Trim(),
+                        PurchaseFrom = d["PurchasedFrom"].ToString().Trim(),
+                        AppriasedBy = d["AppraisedBy"].ToString().Trim(),
+                        AppriasedValue = d["AppraisedValue"].ToString().Trim(),
                         AppriaserId = appriaserId,
-                        AppraisalDate = d["AppraisalDate"].ToString(),
-                        InsuredValue = d["InsuredValue"].ToString(),
-                        StorageLocation = d["StorageLocation"].ToString(),
-                        ConditionComments = d["ConditionComments"].ToString(),
-                        AdditionalNotes = d["AdditionalNotes"].ToString(),
+                        AppraisalDate = d["AppraisalDate"].ToString().Trim(),
+                        InsuredValue = d["InsuredValue"].ToString().Trim(),
+                        StorageLocation = d["StorageLocation"].ToString().Trim(),
+                        ConditionComments = d["ConditionComments"].ToString().Trim(),
+                        AdditionalNotes = d["AdditionalNotes"].ToString().Trim(),
                         HasAccessory = obj.ConvertIntToBool(Convert.ToInt32(d["HasAss"])),
-                        DateProduced = d["Produced"].ToString(),
-                        DateTimeAddedInDb = d["dt"].ToString(),
+                        DateProduced = d["Produced"].ToString().Trim(),
+                        DateTimeAddedInDb = d["dt"].ToString().Trim(),
                         ItemSold = obj.ConvertIntToBool(Convert.ToInt32(d["ItemSold"].ToString())),
                         Sid = Convert.ToInt32(d["SID"].ToString()),
                         Bid = Convert.ToInt32(d["BID"].ToString()),
-                        DateSold = d["dtSold"].ToString(),
+                        DateSold = d["dtSold"].ToString().Trim(),
                         IsCAndR = obj.ConvertIntToBool(Convert.ToInt32(d["IsCandR"].ToString())),
-                        DateTimeAdded = d["dtp"].ToString(),
-                        Importer = d["Importer"].ToString(),
-                        RemanufactureDate = d["ReManDT"].ToString(),
-                        Poi = d["POI"].ToString(),
+                        DateTimeAdded = d["dtp"].ToString().Trim(),
+                        Importer = d["Importer"].ToString().Trim(),
+                        RemanufactureDate = d["ReManDT"].ToString().Trim(),
+                        Poi = d["POI"].ToString().Trim(),
                         HasMb = obj.ConvertIntToBool(Convert.ToInt32(d["HasMB"].ToString())),
                         DbId = Convert.ToInt32(d["DBID"].ToString()),
-                        ShotGunChoke = d["SGChoke"].ToString(),
+                        ShotGunChoke = d["SGChoke"].ToString().Trim(),
                         IsInBoundBook = obj.ConvertIntToBool(Convert.ToInt32(d["IsInBoundBook"].ToString())),
-                        TwistRate = d["TwistRate"].ToString(),
-                        TriggerPullInPounds = d["lbs_trigger"].ToString(),
-                        Classification = d["Classification"].ToString(),
-                        DateOfCAndR = d["DateofCR"].ToString(),
-                        LastSyncDate = d["sync_lastupdate"].ToString(),
+                        TwistRate = d["TwistRate"].ToString().Trim(),
+                        TriggerPullInPounds = d["lbs_trigger"].ToString().Trim(),
+                        Classification = d["Classification"].ToString().Trim(),
+                        DateOfCAndR = d["DateofCR"].ToString().Trim(),
+                        LastSyncDate = d["sync_lastupdate"].ToString().Trim(),
                         IsClass3Item = obj.ConvertIntToBool(Convert.ToInt32(d["IsClassIII"].ToString())),
-                        Class3Owner = d["ClassIII_owner"].ToString()
+                        Class3Owner = d["ClassIII_owner"].ToString().Trim()
 
                     });
                 }

@@ -24,6 +24,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The mid.</value>
         public int Mid { get; set; }
         /// <summary>
+        /// Gets or sets the manufacture.
+        /// </summary>
+        /// <value>The manufacture.</value>
+        public string Manufacturer { get; set; }
+        /// <summary>
         /// Gets or sets the full name.
         /// </summary>
         /// <value>The full name.</value>

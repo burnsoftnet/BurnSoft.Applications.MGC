@@ -92,6 +92,35 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lAns;
         }
         /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="Exception"></exception>
+        public static string GetName(string databasePath, int id, out string errOut)
+        {
+            string sAns = "";
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT Brand from Gun_Manufacturer where ID={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    sAns = d["Brand"].ToString().Trim();
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GeGetName", e);
+            }
+
+            return sAns;
+        }
+        /// <summary>
         /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
