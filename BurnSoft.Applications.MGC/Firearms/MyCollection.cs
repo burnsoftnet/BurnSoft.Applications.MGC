@@ -413,7 +413,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                         Nationality = dbPath.Length > 0 ? Nationality.GetName(dbPath, Convert.ToInt32(d["NatId"]), out _) : "",
                         BarrelLength = d["BarrelLength"].ToString().Trim(),
                         GripId = Convert.ToInt32(d["GripID"].ToString()),
-                        //GripType = 
+                        GripType = dbPath.Length > 0 ? Grips.GetName(dbPath, Convert.ToInt32(d["GripID"].ToString()), out _) : "",
                         Qty = Convert.ToInt32(d["Qty"].ToString()),
                         Weight = d["Weight"].ToString().Trim(),
                         Height = d["Height"].ToString().Trim(),

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Data;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
 
 namespace BurnSoft.Applications.MGC.Firearms
 {
     /// <summary>
-    /// Class Classification, handdles all the management of the Gun_Collection_Classification table.
+    /// Class Grips. Handles data relating to gun grips
     /// </summary>
-    public class Classification
+    public class Grips
     {
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MGC.Firearms.Classification";
+        private static string ClassLocation = "BurnSoft.Applications.MGC.Firearms.Grips";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
@@ -56,17 +57,17 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="className">Name of the class.</param>
+        /// <param name="gripName">Name of the class.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Add(string databasePath, string className, out string errOut)
+        public static bool Add(string databasePath, string gripName, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
                 string sql =
-                    $"INSERT INTO Gun_Collection_Classification(myclass,sync_lastupdate) VALUES('{className}',Now());";
+                    $"INSERT INTO Gun_GripType(grip,sync_lastupdate) VALUES('{gripName}',Now());";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -80,18 +81,18 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Existses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="className">Name of the class.</param>
+        /// <param name="gripName">Name of the class.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
-        public static bool Exists(string databasePath, string className, out string errOut)
+        public static bool Exists(string databasePath, string gripName, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
                 string sql =
-                    $"SELECT * from  Gun_Collection_Classification where myclass='{className}'";
+                    $"SELECT * from Gun_GripType where grip='{gripName}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = dt.Rows.Count > 0;
@@ -108,17 +109,17 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
-        /// <param name="className">Name of the class.</param>
+        /// <param name="gripName">Name of the class.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath, long id, string className, out string errOut)
+        public static bool Update(string databasePath, long id, string gripName, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
                 string sql =
-                    $"Update Gun_Collection_Classification set myclass='{className}', sync_lastupdate=Now() where id={id};";
+                    $"Update Gun_GripType set grip='{gripName}', sync_lastupdate=Now() where id={id};";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -128,34 +129,7 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return bAns;
         }
-        /// <summary>
-        /// Determines whether [is not in use] in the gun collection table.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="className">Name of the class.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if [is not in use] [the specified database path]; otherwise, <c>false</c>.</returns>
-        /// <exception cref="Exception"></exception>
-        public static bool IsNotInUse(string databasePath, string className, out string errOut)
-        {
-            bool bAns = false;
-            errOut = @"";
-            try
-            {
-                string sql =
-                    $"SELECT * from  Gun_Collection where Classification='{className}'";
-                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                bAns = dt.Rows.Count == 0;
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("IsNotInUse", e);
-            }
 
-            return bAns;
-
-        }
         /// <summary>
         /// Deletes the specified database path.
         /// </summary>
@@ -170,7 +144,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql =
-                    $"Delete from Gun_Collection_Classification where id={id};";
+                    $"Delete from Gun_GripType where id={id};";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -184,18 +158,18 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Gets the identifier.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="className">Name of the class.</param>
+        /// <param name="gripName">Name of the class.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="Exception"></exception>
-        public static long GetId(string databasePath, string className, out string errOut)
+        public static long GetId(string databasePath, string gripName, out string errOut)
         {
             long lAns = 0;
             errOut = @"";
             try
             {
                 string sql =
-                    $"SELECT * from  Gun_Collection_Classification where myclass='{className}'";
+                    $"SELECT * from Gun_GripType where id='{gripName}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)
@@ -225,12 +199,12 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql =
-                    $"SELECT * from  Gun_Collection_Classification where id={id}";
+                    $"SELECT * from Gun_GripType where id={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)
                 {
-                    sAns = d["myclass"].ToString().Trim();
+                    sAns = d["grip"].ToString().Trim();
                 }
             }
             catch (Exception e)
@@ -247,15 +221,15 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;ClassificationList&gt;.</returns>
         /// <exception cref="Exception"></exception>
-        public static List<ClassificationList> Lists(string databasePath, out string errOut)
+        public static List<GripLists> Lists(string databasePath, out string errOut)
         {
-            List<ClassificationList> lst = new List<ClassificationList>();
+            List<GripLists> lst = new List<GripLists>();
             errOut = @"";
             try
             {
-                string sql = $"select * from Gun_Collection_Classification";
+                string sql = $"select * from Gun_GripType";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw  new Exception(errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 lst = GetList(dt, out errOut);
             }
             catch (Exception e)
@@ -268,17 +242,17 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Listses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="className">Name of the class.</param>
+        /// <param name="gripName">Name of the class.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;ClassificationList&gt;.</returns>
         /// <exception cref="Exception"></exception>
-        public static List<ClassificationList> Lists(string databasePath,string className, out string errOut)
+        public static List<GripLists> Lists(string databasePath, string gripName, out string errOut)
         {
-            List<ClassificationList> lst = new List<ClassificationList>();
+            List<GripLists> lst = new List<GripLists>();
             errOut = @"";
             try
             {
-                string sql = $"select * from Gun_Collection_Classification where myclass='{className}'";
+                string sql = $"select * from Gun_GripType where grip='{gripName}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 lst = GetList(dt, out errOut);
@@ -295,15 +269,15 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;ClassificationList&gt;.</returns>
-        private static List<ClassificationList> GetList(DataTable dt, out string errOut)
+        private static List<GripLists> GetList(DataTable dt, out string errOut)
         {
-            List<ClassificationList> lst = new List<ClassificationList>();
+            List<GripLists> lst = new List<GripLists>();
             errOut = @"";
             try
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    lst.Add(new ClassificationList()
+                    lst.Add(new GripLists()
                     {
                         Id = Convert.ToInt32(d["id"]),
                         Name = d["myclass"].ToString().Trim(),

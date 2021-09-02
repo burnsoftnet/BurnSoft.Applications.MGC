@@ -73,6 +73,7 @@
     <Compile Include="Firearms\Classification.cs" />
     <Compile Include="Firearms\Documents.cs" />
     <Compile Include="Firearms\ExtraBarrelConvoKits.cs" />
+    <Compile Include="Firearms\Grips.cs" />
     <Compile Include="Firearms\GunSmithDetails.cs" />
     <Compile Include="Firearms\MaintanceDetails.cs" />
     <Compile Include="Firearms\MaintancePlans.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Types\CustomReportsLists.cs" />
     <Compile Include="Types\DocumentList.cs" />
     <Compile Include="Types\GlobalCaliberList.cs" />
+    <Compile Include="Types\GripLists.cs" />
     <Compile Include="Types\GunCollectionList.cs" />
     <Compile Include="Types\GunShopDetails.cs" />
     <Compile Include="Types\GunSmithContacts.cs" />
