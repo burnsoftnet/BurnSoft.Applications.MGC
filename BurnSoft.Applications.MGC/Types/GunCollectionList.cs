@@ -89,6 +89,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The grip identifier.</value>
         public int GripId { get; set; }
         /// <summary>
+        /// Gets or sets the type of the grip.
+        /// </summary>
+        /// <value>The type of the grip.</value>
+        public string GripType { get; set; }
+        /// <summary>
         /// Gets or sets the qty.
         /// </summary>
         /// <value>The qty.</value>
