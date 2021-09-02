@@ -79,6 +79,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The nationality identifier.</value>
         public int NationalityId { get; set; }
         /// <summary>
+        /// Gets or sets the nationality.
+        /// </summary>
+        /// <value>The nationality.</value>
+        public string Nationality { get; set; }
+        /// <summary>
         /// Gets or sets the grip identifier.
         /// </summary>
         /// <value>The grip identifier.</value>
