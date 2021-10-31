@@ -311,6 +311,55 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Existses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool Exists(string databasePath, string fullName, string caliber, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection where FullName='{fullName}' and Caliber='{caliber}'";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Exists", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Existses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool Exists(string databasePath, string fullName, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection where FullName='{fullName}'";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Exists", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Gets the catalog next identifier number.
