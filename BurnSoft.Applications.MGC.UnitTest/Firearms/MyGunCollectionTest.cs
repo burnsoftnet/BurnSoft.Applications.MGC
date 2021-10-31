@@ -49,6 +49,16 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _shopOldName =obj.FC(Vs2019.GetSetting("MyGunCollection_ShopOldName", TestContext));
             _shopNewName = obj.FC(Vs2019.GetSetting("MyGunCollection_ShopNewName", TestContext));
         }
+
+        [TestMethod, TestCategory("Gun Collection - Add Firearm")]
+        private void AddFirearm()
+        {
+            //TODO: #19 Finish Unit Test
+            bool value = true;
+            //bool value = BurnSoft.Applications.MGC.Firearms.MyCollection.Add(_databasePath, );
+
+            General.HasTrueValue(value, _errOut);
+        }
         /// <summary>
         /// Prints the list.
         /// </summary>
