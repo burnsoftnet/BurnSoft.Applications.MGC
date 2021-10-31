@@ -185,6 +185,68 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
 
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="useNumberOnlyCatalog">if set to <c>true</c> [use number only catalog].</param>
+        /// <param name="ownerId">The owner identifier.</param>
+        /// <param name="manufactureId">The manufacture identifier.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="modelName">Name of the model.</param>
+        /// <param name="modelId">The model identifier.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="firearmType">Type of the firearm.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="finish">The finish.</param>
+        /// <param name="condition">The condition.</param>
+        /// <param name="customId">The custom identifier.</param>
+        /// <param name="natId">The nat identifier.</param>
+        /// <param name="gripId">The grip identifier.</param>
+        /// <param name="weight">The weight.</param>
+        /// <param name="height">The height.</param>
+        /// <param name="stockType">Type of the stock.</param>
+        /// <param name="barrelLength">Length of the barrel.</param>
+        /// <param name="barrelWidth">Width of the barrel.</param>
+        /// <param name="barrelHeight">Height of the barrel.</param>
+        /// <param name="action">The action.</param>
+        /// <param name="feedsystem">The feedsystem.</param>
+        /// <param name="sights">The sights.</param>
+        /// <param name="purchasedPrice">The purchased price.</param>
+        /// <param name="purchasedFrom">The purchased from.</param>
+        /// <param name="appraisedValue">The appraised value.</param>
+        /// <param name="appraisalDate">The appraisal date.</param>
+        /// <param name="appraisedBy">The appraised by.</param>
+        /// <param name="insuredValue">The insured value.</param>
+        /// <param name="storageLocation">The storage location.</param>
+        /// <param name="conditionComments">The condition comments.</param>
+        /// <param name="additionalNotes">The additional notes.</param>
+        /// <param name="produced">The produced.</param>
+        /// <param name="petLoads">The pet loads.</param>
+        /// <param name="dtp">The DTP.</param>
+        /// <param name="isCandR">if set to <c>true</c> [is cand r].</param>
+        /// <param name="importer">The importer.</param>
+        /// <param name="reManDt">The re man dt.</param>
+        /// <param name="poi">The poi.</param>
+        /// <param name="sgChoke">The sg choke.</param>
+        /// <param name="isInBoundBook">if set to <c>true</c> [is in bound book].</param>
+        /// <param name="twistRate">The twist rate.</param>
+        /// <param name="lbsTrigger">The LBS trigger.</param>
+        /// <param name="caliber3">The caliber3.</param>
+        /// <param name="classification">The classification.</param>
+        /// <param name="dateofCr">The dateof cr.</param>
+        /// <param name="isClassIii">if set to <c>true</c> [is class iii].</param>
+        /// <param name="isSold">if set to <c>true</c> [is sold].</param>
+        /// <param name="dateTimeSold">The date time sold.</param>
+        /// <param name="classIiiOwner">The class iii owner.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
         public static bool Update(string databasePath,int firearmId, bool useNumberOnlyCatalog, long ownerId, long manufactureId, string fullName, string modelName, long modelId, string serialNumber,
             string firearmType, string caliber, string finish, string condition,
             string customId, long natId, long gripId, string weight, string height, string stockType,
@@ -221,16 +283,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
 
-                //Not Time to add the extra barrel and sellers if they don't exist, get those id's and update the main table with the id's
-                long id = firearmId;
-                if (errOut.Length > 0) throw new Exception(errOut);
-                bAns = ExtraBarrelConvoKits.Add(databasePath, id, modelName, caliber, finish, barrelLength, petLoads,
-                    action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", true, out errOut);
-                long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, id, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                bAns = UpdateDefaultBarrel(databasePath, barrelId, id, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                bAns = ExtraBarrelConvoKits.AddLink(databasePath, barrelId, id, out errOut);
+                long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, firearmId, out errOut);
+                bAns = ExtraBarrelConvoKits.Update(databasePath, firearmId,barrelId, modelName, caliber, finish, barrelLength, petLoads,
+                    action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
 
                 if (purchasedFrom.Trim().Length > 0)
@@ -243,7 +298,7 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                     long gunShopId = PeopleAndPlaces.Shops.GetId(databasePath, purchasedFrom, out errOut);
                     if (errOut.Length > 0) throw new Exception(errOut);
-                    bAns = UpdateSellerId(databasePath, gunShopId, id, out errOut);
+                    bAns = UpdateSellerId(databasePath, gunShopId, firearmId, out errOut);
                     if (errOut.Length > 0) throw new Exception(errOut);
                 }
 
