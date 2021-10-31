@@ -66,6 +66,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 long gripId = Grips.GetId(_databasePath, "Plastice", out _errOut);
                 string fullName = "Glock Super Carry";
 
+                if (MyCollection.Exists(_databasePath, fullName, out _errOut))
+                {
+                    long gunId = MyCollection.GetLastId(_databasePath, out _errOut);
+
+                }
+
                 value = MyCollection.Add(_databasePath, false, 0, manufacturesId,
                     fullName, "G26", modelId, "RIA2323423", "pistol:single action", "9mm luger", "black",
                     "new in box", "", nationalityId, gripId, "16oz", "4", "plastice", "5 in", "", "", "single", "10 round mag",

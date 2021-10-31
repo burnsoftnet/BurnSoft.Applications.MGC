@@ -141,10 +141,11 @@ namespace BurnSoft.Applications.MGC.Firearms
                 "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
                 "ReManDT,POI,SGChoke,sync_lastupdate,HasMB,DBID,IsInBoundBook,TwistRate,lbs_trigger,Caliber3,Classification,DateofCR," +
                 $"ItemSold,BID,IsClassIII,ClassIII_owner) VALUES({ownerId},{manufactureId},'{fullName}','{modelName}', {modelId}, '{serialNumber}'," +
-                $"'{firearmType}','{caliber}','{finish}','{condition}',{Helpers.SetCatalogInsType(useNumberOnlyCatalog,customId, out _)},{natId},{gripId},1,'{weight}','{height}','{stockType}','{barrelLength}'" +
+                $"'{firearmType}','{caliber}','{finish}','{condition}',{Helpers.SetCatalogInsType(useNumberOnlyCatalog,customId, out _)},{natId}," +
+                $"{gripId},1,'{weight}','{height}','{stockType}','{barrelLength}'" +
                 $",'{barrelWidth}','{barrelHeight}','{action}','{feedsystem}','{sights}','{purchasedPrice}','{purchasedFrom}','{appraisedValue}'," +
                 $"'{appraisalDate}','{appraisedBy}','{insuredValue}','{storageLocation}','{conditionComments}','{additionalNotes}','{produced}'," +
-                $"'{petLoads}','{dtp}','{iisCandR}','{importer}','{reManDt}','{poi}','{sgChoke}',Now(),0,0,{iBoundBook},'{twistRate}','{lbsTrigger}'" +
+                $"'{petLoads}','{dtp}',{iisCandR},'{importer}','{reManDt}','{poi}','{sgChoke}',Now(),0,0,{iBoundBook},'{twistRate}','{lbsTrigger}'" +
                 $",'{caliber3}','{classification}','{dateofCr}',0,2,{iIsClassIii},'{classIiiOwner}')";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
@@ -308,6 +309,30 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("Add", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool Delete(string databasePath, int firearmId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"Delete from Gun_Collection where id={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
             }
             return bAns;
         }
