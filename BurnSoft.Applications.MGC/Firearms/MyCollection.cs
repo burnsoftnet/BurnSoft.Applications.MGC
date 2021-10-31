@@ -184,6 +184,76 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
+        public static bool Update(string databasePath,int firearmId, bool useNumberOnlyCatalog, long ownerId, long manufactureId, string fullName, string modelName, long modelId, string serialNumber,
+            string firearmType, string caliber, string finish, string condition,
+            string customId, long natId, long gripId, string weight, string height, string stockType,
+            string barrelLength, string barrelWidth, string barrelHeight,
+            string action, string feedsystem, string sights, string purchasedPrice, string purchasedFrom,
+            string appraisedValue, string appraisalDate, string appraisedBy,
+            string insuredValue, string storageLocation, string conditionComments, string additionalNotes,
+            string produced, string petLoads, string dtp, bool isCandR, string importer, string reManDt, string poi,
+            string sgChoke, bool isInBoundBook, string twistRate, string lbsTrigger, string caliber3, string classification, string dateofCr, bool isClassIii, string classIiiOwner, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                int iBoundBook = isInBoundBook ? 1 : 0;
+                int iIsClassIii = isClassIii ? 1 : 0;
+                int iisCandR = isCandR ? 1 : 0;
+
+                string sql =
+                    $"UPDATE Gun_Collection set OID={ownerId},MID={manufactureId},FullName='{fullName}',ModelName='{modelName}',ModelID={modelId}" +
+                    $",SerialNumber='{serialNumber}',Type='{firearmType}',Caliber='{caliber}',Finish='{finish}',Condition='{condition}'," +
+                    $"CustomID={Helpers.SetCatalogInsType(useNumberOnlyCatalog, customId, out _)},NatID={natId},GripID={gripId}," +
+                    $"Qty=1,Weight='{weight}',Height='{height}',StockType='{stockType}',BarrelLength='{barrelLength}',BarrelWidth='{barrelWidth}',BarrelHeight='{barrelHeight}'," +
+                    $"Action='{action}',Feedsystem='{feedsystem}',Sights='{sights}',PurchasedPrice='{purchasedPrice}'," +
+                    $"PurchasedFrom='{purchasedFrom}',AppraisedValue='{appraisedValue}',AppraisalDate='{appraisalDate}',AppraisedBy='{appraisedBy}'," +
+                    $"InsuredValue='{insuredValue}',StorageLocation='{storageLocation}',ConditionComments='{conditionComments}'," +
+                    $"AdditionalNotes='{additionalNotes}',Produced='{produced}',PetLoads='{petLoads}',dtp='{dtp}',IsCandR='{iisCandR}',Importer='{importer}'," +
+                    $"ReManDT='{reManDt}',POI='{poi}',SGChoke='{sgChoke}',sync_lastupdate=Now(),IsInBoundBook={iBoundBook}," +
+                    $"TwistRate='{twistRate}',lbs_trigger='{lbsTrigger}',Caliber3='{caliber3}',Classification='{classification}',DateofCR='{dateofCr}'," +
+                    $"IsClassIII={iIsClassIii},ClassIII_owner='{classIiiOwner}' where id={firearmId};";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (!bAns) throw new Exception(errOut);
+
+                //Not Time to add the extra barrel and sellers if they don't exist, get those id's and update the main table with the id's
+                long id = GetLastId(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = ExtraBarrelConvoKits.Add(databasePath, id, modelName, caliber, finish, barrelLength, petLoads,
+                    action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", true, out errOut);
+                long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = UpdateDefaultBarrel(databasePath, barrelId, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = ExtraBarrelConvoKits.AddLink(databasePath, barrelId, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                if (purchasedFrom.Trim().Length > 0)
+                {
+                    if (!PeopleAndPlaces.Shops.Exists(databasePath, purchasedFrom, out errOut))
+                    {
+                        PeopleAndPlaces.Shops.Add(databasePath, purchasedFrom, out errOut);
+                        if (errOut.Length > 0) throw new Exception(errOut);
+                    }
+
+                    long gunShopId = PeopleAndPlaces.Shops.GetId(databasePath, purchasedFrom, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    bAns = UpdateSellerId(databasePath, gunShopId, id, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                }
+
+                if (!Ammo.GlobalList.Exists(databasePath, caliber, out errOut))
+                    Ammo.GlobalList.Add(databasePath, caliber, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Add", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Gets the catalog next identifier number.
         /// </summary>
@@ -361,7 +431,6 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
-
         /// <summary>
         /// Private class to sort the informatimon from a datatable into the Gun Collection List ype
         /// </summary>
