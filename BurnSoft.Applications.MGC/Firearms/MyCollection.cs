@@ -135,18 +135,43 @@ namespace BurnSoft.Applications.MGC.Firearms
                 int iIsClassIii = isClassIii ? 1 : 0;
                 int iisCandR = isCandR ? 1 : 0;
 
-                string sql = "INSERT INTO Gun_Collection(OID,MID,FullName,ModelName,ModelID,SerialNumber,Type,Caliber,Finish,Condition," +
-                "CustomID,NatID,GripID,Qty,Weight,Height,StockType,BarrelLength,BarrelWidth,BarrelHeight," +
-                "Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
-                "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
-                "ReManDT,POI,SGChoke,sync_lastupdate,HasMB,DBID,IsInBoundBook,TwistRate,lbs_trigger,Caliber3,Classification,DateofCR," +
-                $"ItemSold,BID,IsClassIII,ClassIII_owner) VALUES({ownerId},{manufactureId},'{fullName}','{modelName}', {modelId}, '{serialNumber}'," +
-                $"'{firearmType}','{caliber}','{finish}','{condition}',{Helpers.SetCatalogInsType(useNumberOnlyCatalog,customId, out _)},{natId}," +
-                $"{gripId},1,'{weight}','{height}','{stockType}','{barrelLength}'" +
-                $",'{barrelWidth}','{barrelHeight}','{action}','{feedsystem}','{sights}','{purchasedPrice}','{purchasedFrom}','{appraisedValue}'," +
-                $"'{appraisalDate}','{appraisedBy}','{insuredValue}','{storageLocation}','{conditionComments}','{additionalNotes}','{produced}'," +
-                $"'{petLoads}','{dtp}',{iisCandR},'{importer}','{reManDt}','{poi}','{sgChoke}',Now(),0,0,{iBoundBook},'{twistRate}','{lbsTrigger}'" +
-                $",'{caliber3}','{classification}','{dateofCr}',0,2,{iIsClassIii},'{classIiiOwner}')";
+                //string sql = "INSERT INTO Gun_Collection(OID,MID,FullName,ModelName,ModelID,SerialNumber,Type,Caliber,Finish,Condition," +
+                //"CustomID,NatID,GripID,Qty,Weight,Height,StockType,BarrelLength,BarrelWidth,BarrelHeight," +
+                //"Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
+                //"InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
+                //"ReManDT,POI,SGChoke,sync_lastupdate,HasMB,DBID,IsInBoundBook,TwistRate,lbs_trigger,Caliber3,Classification,DateofCR," +
+                //$"ItemSold,BID,IsClassIII,ClassIII_owner) VALUES({ownerId},{manufactureId},'{fullName}','{modelName}', {modelId}, '{serialNumber}'," +
+                //$"'{firearmType}','{caliber}','{finish}','{condition}',{Helpers.SetCatalogInsType(useNumberOnlyCatalog,customId, out _)},{natId}," +
+                //$"{gripId},1,'{weight}','{height}','{stockType}','{barrelLength}'" +
+                //$",'{barrelWidth}','{barrelHeight}','{action}','{feedsystem}','{sights}','{purchasedPrice}','{purchasedFrom}','{appraisedValue}'," +
+                //$"'{appraisalDate}','{appraisedBy}','{insuredValue}','{storageLocation}','{conditionComments}','{additionalNotes}','{produced}'," +
+                //$"'{petLoads}','{dtp}',{iisCandR},'{importer}','{reManDt}','{poi}','{sgChoke}',Now(),0,0,{iBoundBook},'{twistRate}','{lbsTrigger}'" +
+                //$",'{caliber3}','{classification}','{dateofCr}',0,2,{iIsClassIii},'{classIiiOwner}')";
+
+                string sql =
+                    "INSERT INTO Gun_Collection(OID,MID,FullName,ModelName,ModelID,SerialNumber,Type,Caliber,Finish,Condition," +
+                    "CustomID,NatID,GripID,Qty,Weight,Height,StockType,BarrelLength,BarrelWidth,BarrelHeight," +
+                    "Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
+                    "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
+                    "ReManDT,POI,HasMB,DBID,SGChoke,IsInBoundBook,TwistRate,lbs_trigger,Caliber3,Classification,DateofCR,ItemSold," +
+                    "BID,sync_lastupdate,IsClassIII,ClassIII_owner) VALUES(" +
+                    ownerId + "," + manufactureId + ",'" + fullName + "','" + modelName + "'," + modelId + ",'" +
+                    serialNumber + "','" +
+                    firearmType + "','" + caliber + "','" + finish + "','" + condition + "'," +
+                    Helpers.SetCatalogInsType(useNumberOnlyCatalog, customId, out _) + "," +
+                    natId + "," + gripId + "," + 1 + ",'" + weight + "','" + height + "','" +
+                    stockType + "','" + barrelLength + "','" + barrelWidth + "','" + barrelHeight + "','" + action +
+                    "','" +
+                    feedsystem + "','" + sights + "','" + purchasedPrice + "','" + purchasedFrom + "','" + appraisedValue +
+                    "','" +
+                    appraisalDate + "','" + appraisedBy + "','" + insuredValue + "','" + storageLocation + "','" + conditionComments + "','" +
+                    additionalNotes +
+                    "','" + produced + "','" + petLoads + "','" + dtp + "'," + iisCandR + ",'" +
+                    importer +
+                    "','" + reManDt + "','" + poi + "',0,0,'" + sgChoke + "'," + iBoundBook + ",'" + twistRate + "','" +
+                    lbsTrigger +
+                    "','" + caliber3 + "','" + classification + "','" + dateofCr + "',0,2,Now()," + iIsClassIii +
+                    ",'" + classIiiOwner + "')";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
                 
