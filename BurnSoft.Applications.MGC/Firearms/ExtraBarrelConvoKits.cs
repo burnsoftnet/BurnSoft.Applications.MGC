@@ -241,12 +241,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             string barrelLength, string petLoads, string action, string feedSystem, string sights, string purchasePrice,
             string purchasedFrom, string height, string type, out string errOut)
         {
-            string sql = $"UPDATE Gun_Collection_Ext set GID={gunId}, ModelName='{modelName}', Caliber='{caliber}', " +
-                         $"Finish='{finish}', BarrelLength='{barrelLength}', PetLoads='{petLoads}', Action='{action}'," +
-                         $"Feedsystem='{feedSystem}',Sights='{sights}',PurchasedPrice='{purchasePrice}'," +
-                         $"PurchasedFrom='{purchasedFrom}',Height='{height}',Type='{type}'," +
-                         $"sync_lastupdate=Now() where id={barrelId}";
-            return Database.Execute(databasePath, sql, out errOut);
+            return Update(databasePath, barrelId, gunId, modelName, caliber, finish, barrelLength, petLoads, action,
+                feedSystem, sights, purchasePrice, purchasedFrom, height, type, false, out errOut);
         }
         /// <summary>
         /// Moves the specified database path.
