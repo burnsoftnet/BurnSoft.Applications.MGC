@@ -55,7 +55,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Gun Collection - Add Firearm")]
         private void AddFirearm()
         {
-            //TODO: #19 Finish Unit Test
+            //TODO: #13 Finish Unit Test
             //bool value = true;
             long manufacturesId = Manufacturers.GetId(_databasePath, "Glock", out _errOut);
             long modelId = Models.GetId(_databasePath, "", manufacturesId, out _errOut);
@@ -69,6 +69,25 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod, TestCategory("Gun Collection - Update Firearm")]
+        private void UpdateFirearm()
+        {
+            //TODO: #19 Finish Unit Test
+            //bool value = true;
+            long manufacturesId = Manufacturers.GetId(_databasePath, "Glock", out _errOut);
+            long modelId = Models.GetId(_databasePath, "", manufacturesId, out _errOut);
+            long nationalityId = Nationality.GetId(_databasePath, "USA", out _errOut);
+            long gripId = Grips.GetId(_databasePath, "Plastice", out _errOut);
+            bool value = MyCollection.Add(_databasePath, false, 0, manufacturesId,
+                "Glock Super Carry", "G26", modelId, "RIA2323423", "pistol:single action", "9mm luger", "black",
+                "new in box", "", nationalityId, gripId, "16oz", "4", "plastice", "5 in", "", "", "single", "10 round mag",
+                "iron", "400.00", "billy bob", "500.00", "10/31/2021", "MSRP", "500.00", "Safe", "", "", "1990", "",
+                DateTime.Now.ToString(), false, "", "", "", "", true, "1-8", "2 lbs", "", "Modern", "", false, "", out _errOut);
+
+            General.HasTrueValue(value, _errOut);
+        }
+
         /// <summary>
         /// Prints the list.
         /// </summary>
