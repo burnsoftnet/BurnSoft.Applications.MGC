@@ -193,7 +193,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             string appraisedValue, string appraisalDate, string appraisedBy,
             string insuredValue, string storageLocation, string conditionComments, string additionalNotes,
             string produced, string petLoads, string dtp, bool isCandR, string importer, string reManDt, string poi,
-            string sgChoke, bool isInBoundBook, string twistRate, string lbsTrigger, string caliber3, string classification, string dateofCr, bool isClassIii, string classIiiOwner, out string errOut)
+            string sgChoke, bool isInBoundBook, string twistRate, string lbsTrigger, string caliber3, string classification, string dateofCr, bool isClassIii, 
+            bool isSold,string dateTimeSold, string classIiiOwner, out string errOut)
         {
             errOut = "";
             bool bAns = false;
@@ -214,12 +215,14 @@ namespace BurnSoft.Applications.MGC.Firearms
                     $"AdditionalNotes='{additionalNotes}',Produced='{produced}',PetLoads='{petLoads}',dtp='{dtp}',IsCandR='{iisCandR}',Importer='{importer}'," +
                     $"ReManDT='{reManDt}',POI='{poi}',SGChoke='{sgChoke}',sync_lastupdate=Now(),IsInBoundBook={iBoundBook}," +
                     $"TwistRate='{twistRate}',lbs_trigger='{lbsTrigger}',Caliber3='{caliber3}',Classification='{classification}',DateofCR='{dateofCr}'," +
-                    $"IsClassIII={iIsClassIii},ClassIII_owner='{classIiiOwner}' where id={firearmId};";
+                    $"IsClassIII={iIsClassIii},ClassIII_owner='{classIiiOwner}'";
+                if (isSold) sql += $", dtsold='{dateTimeSold}'";
+                sql += $" where id={firearmId};";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
 
                 //Not Time to add the extra barrel and sellers if they don't exist, get those id's and update the main table with the id's
-                long id = GetLastId(databasePath, out errOut);
+                long id = firearmId;
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = ExtraBarrelConvoKits.Add(databasePath, id, modelName, caliber, finish, barrelLength, petLoads,
                     action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", true, out errOut);
