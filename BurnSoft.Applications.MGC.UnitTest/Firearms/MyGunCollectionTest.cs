@@ -37,6 +37,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// The shop new name
         /// </summary>
         private string _shopNewName;
+
+        private string fullName;
+        private long manufacturesId;
+        private long modelId;
+        private long nationalityId;
+        private long gripId;
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -50,6 +56,28 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             _shopOldName =obj.FC(Vs2019.GetSetting("MyGunCollection_ShopOldName", TestContext));
             _shopNewName = obj.FC(Vs2019.GetSetting("MyGunCollection_ShopNewName", TestContext));
+            fullName = "Glock Super Carry";
+            manufacturesId = Manufacturers.GetId(_databasePath, "Glock", out _errOut);
+            modelId = Models.GetId(_databasePath, "G26", manufacturesId, out _errOut);
+            nationalityId = Nationality.GetId(_databasePath, "USA", out _errOut);
+            gripId = Grips.GetId(_databasePath, "Plastic", out _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Get Firearm ID")]
+        public void GetFirearmIdByFullName()
+        {
+            long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
+            TestContext.WriteLine($"FireArm Id from full name {fullName} is {gunId}");
+            General.HasTrueValue(gunId > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Delete Firearm")]
+        public void DeleteFirearm()
+        {
+            long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
+            TestContext.WriteLine($"FireArm Id from full name {fullName} is {gunId}");
+            bool value = MyCollection.Delete(_databasePath, gunId, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
 
         [TestMethod, TestCategory("Gun Collection - Add Firearm")]
@@ -59,17 +87,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = false;
             try
             {
-                //bool value = true;
-                long manufacturesId = Manufacturers.GetId(_databasePath, "Glock", out _errOut);
-                long modelId = Models.GetId(_databasePath, "", manufacturesId, out _errOut);
-                long nationalityId = Nationality.GetId(_databasePath, "USA", out _errOut);
-                long gripId = Grips.GetId(_databasePath, "Plastice", out _errOut);
-                string fullName = "Glock Super Carry";
-
                 if (MyCollection.Exists(_databasePath, fullName, out _errOut))
                 {
-                    long gunId = MyCollection.GetLastId(_databasePath, out _errOut);
-
+                    long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
+                    MyCollection.Delete(_databasePath, gunId, out _errOut);
                 }
 
                 value = MyCollection.Add(_databasePath, false, 0, manufacturesId,

@@ -169,7 +169,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql =
-                    $"SELECT * from Gun_GripType where id='{gripName}'";
+                    $"SELECT * from Gun_GripType where grip='{gripName}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)

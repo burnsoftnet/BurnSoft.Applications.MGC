@@ -312,6 +312,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
         /// <summary>
         /// Deletes the specified database path.
         /// </summary>
@@ -320,7 +321,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
-        public static bool Delete(string databasePath, int firearmId, out string errOut)
+        public static bool Delete(string databasePath, long firearmId, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -384,6 +385,40 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("Exists", e);
             }
             return bAns;
+        }
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="Exception"></exception>
+        public static long GetId(string databasePath, string fullName, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                List<GunCollectionList> lst = new List<GunCollectionList>();
+                errOut = @"";
+            
+                string sql = $"select * from Gun_Collection where FullName='{fullName}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut, databasePath);
+
+                foreach (GunCollectionList g in lst)
+                {
+                    lAns = g.Id;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
         }
 
         /// <summary>
