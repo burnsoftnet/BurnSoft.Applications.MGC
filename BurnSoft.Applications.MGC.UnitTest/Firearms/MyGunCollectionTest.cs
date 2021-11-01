@@ -72,7 +72,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         }
 
         [TestMethod, TestCategory("Gun Collection - Delete Firearm")]
-        public void DeleteFirearm()
+        public void RemoveFirearm()
         {
             long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
             TestContext.WriteLine($"FireArm Id from full name {fullName} is {gunId}");
