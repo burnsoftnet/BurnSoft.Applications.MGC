@@ -94,9 +94,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 }
 
                 value = MyCollection.Add(_databasePath, false, 0, manufacturesId,
-                    fullName, "G26", modelId, "RIA2323423", "pistol:single action", "9mm luger", "black",
-                    "new in box", " ", nationalityId, gripId, "16oz", "4", "plastice", "5 in", " ", " ", "single", "10 round mag",
-                    "iron", "400.00", "billy bob", "500.00", "10/31/2021", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
+                    fullName, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
+                    "New", " ", nationalityId, gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
+                    "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
                     DateTime.Now.ToString(), false, " ", " ", " ", " ", true, "1-8", "2 lbs", " ", "Modern", " ", false," ", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 bool exists = MyCollection.Exists(_databasePath, fullName, out _errOut);

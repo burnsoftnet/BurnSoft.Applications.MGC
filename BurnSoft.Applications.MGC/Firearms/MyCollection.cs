@@ -149,12 +149,12 @@ namespace BurnSoft.Applications.MGC.Firearms
                 //$",'{caliber3}','{classification}','{dateofCr}',0,2,{iIsClassIii},'{classIiiOwner}')";
 
                 string sql =
-                    "INSERT INTO Gun_Collection(OID,MID,FullName,ModelName,ModelID,SerialNumber,Type,Caliber,Finish,Condition," +
+                    "INSERT INTO Gun_Collection (OID,MID,FullName,ModelName,ModelID,SerialNumber,Type,Caliber,Finish,Condition," +
                     "CustomID,NatID,GripID,Qty,Weight,Height,StockType,BarrelLength,BarrelWidth,BarrelHeight," +
                     "Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
                     "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
                     "ReManDT,POI,HasMB,DBID,SGChoke,IsInBoundBook,TwistRate,lbs_trigger,Caliber3,Classification,DateofCR,ItemSold," +
-                    "BID,sync_lastupdate,IsClassIII,ClassIII_owner) VALUES(" +
+                    "BID,sync_lastupdate,IsClassIII,ClassIII_owner,dt,HasAss,SID,AppriaserID) VALUES(" +
                     ownerId + "," + manufactureId + ",'" + fullName + "','" + modelName + "'," + modelId + ",'" +
                     serialNumber + "','" +
                     firearmType + "','" + caliber + "','" + finish + "','" + condition + "'," +
@@ -171,7 +171,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     "','" + reManDt + "','" + poi + "',0,0,'" + sgChoke + "'," + iBoundBook + ",'" + twistRate + "','" +
                     lbsTrigger +
                     "','" + caliber3 + "','" + classification + "','" + dateofCr + "',0,2,Now()," + iIsClassIii +
-                    ",'" + classIiiOwner + "')";
+                    ",'" + classIiiOwner + "',Now(),0,0,0)";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
                 
