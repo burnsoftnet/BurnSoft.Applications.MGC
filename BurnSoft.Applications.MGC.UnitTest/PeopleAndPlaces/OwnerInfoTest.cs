@@ -8,6 +8,7 @@ using BurnSoft.Universal;
 // ReSharper disable UnusedVariable
 // ReSharper disable UnusedMember.Local
 // ReSharper disable NotAccessedField.Local
+#pragma warning disable 414
 
 namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
 {

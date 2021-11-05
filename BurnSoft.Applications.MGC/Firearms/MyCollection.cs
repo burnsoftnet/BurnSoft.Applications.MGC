@@ -154,7 +154,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     "Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
                     "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
                     "ReManDT,POI,HasMB,DBID,SGChoke,IsInBoundBook,TwistRate,lbs_trigger,Caliber3,Classification,DateofCR,ItemSold," +
-                    "BID,sync_lastupdate,IsClassIII,ClassIII_owner,dt,HasAss,SID,AppriaserID) VALUES(" +
+                    "BID,sync_lastupdate,IsClassIII,ClassIII_owner) VALUES(" +
                     ownerId + "," + manufactureId + ",'" + fullName + "','" + modelName + "'," + modelId + ",'" +
                     serialNumber + "','" +
                     firearmType + "','" + caliber + "','" + finish + "','" + condition + "'," +
@@ -171,7 +171,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     "','" + reManDt + "','" + poi + "',0,0,'" + sgChoke + "'," + iBoundBook + ",'" + twistRate + "','" +
                     lbsTrigger +
                     "','" + caliber3 + "','" + classification + "','" + dateofCr + "',0,2,Now()," + iIsClassIii +
-                    ",'" + classIiiOwner + "',Now(),0,0,0)";
+                    ",'" + classIiiOwner + "')";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
                 
