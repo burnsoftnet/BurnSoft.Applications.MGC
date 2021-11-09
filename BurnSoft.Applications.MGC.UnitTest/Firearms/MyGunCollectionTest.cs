@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
@@ -67,7 +68,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             // Vs2019.GetSetting("", TestContext);
             BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
-            _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
+            _databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Vs2019.GetSetting("DatabasePath", TestContext));
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             _shopOldName =obj.FC(Vs2019.GetSetting("MyGunCollection_ShopOldName", TestContext));
             _shopNewName = obj.FC(Vs2019.GetSetting("MyGunCollection_ShopNewName", TestContext));

@@ -320,7 +320,8 @@ namespace BurnSoft.Applications.MGC
             try
             {
                 Database obj = new Database();
-                DataTable dt = obj.GetData(connection, sql, out errOut);
+                string con = ConnectionString(connection, out errOut);
+                DataTable dt = obj.GetData(con, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (DataRow dr in dt.Rows)
                 {
