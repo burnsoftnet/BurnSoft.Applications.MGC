@@ -131,12 +131,23 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void UpdateFirearm()
         {
             //TODO: #19 Finish Unit Test
-            
-            bool value = MyCollection.Add(_databasePath, false, 0, manufacturesId,
-                "Glock Super Carry", "G26", modelId, "RIA2323423", "pistol:single action", "9mm luger", "black",
-                "new in box", "", nationalityId, gripId, "16oz", "4", "plastice", "5 in", "", "", "single", "10 round mag",
-                "iron", "400.00", "billy bob", "500.00", "10/31/2021", "MSRP", "500.00", "Safe", "", "", "1990", "",
-                DateTime.Now.ToString(CultureInfo.InvariantCulture), false, "", "", "", "", true, "1-8", "2 lbs", "", "Modern", "", false, "", out _errOut);
+            if (!MyCollection.Exists(_databasePath, fullName, out _errOut))
+            {
+                MyCollection.Add(_databasePath, false, 2, manufacturesId,
+                    fullName, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
+                    "New", " ", nationalityId, gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
+                    "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
+                    DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ", 
+                    true, "1-8", "2 lbs", " ", "Modern", "11/09/2021 14:20:45", false, " ", out _errOut);
+            }
+
+            long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
+
+            bool value = MyCollection.Update(_databasePath, (int)gunId, false, 2, manufacturesId, fullName, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
+                "New", " ", nationalityId, gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
+                "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
+                DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ",
+                true, "1-8", "2 lbs", " ", "Modern", "2021/11/02",false,false,"","", out _errOut);
 
             General.HasTrueValue(value, _errOut);
         }
