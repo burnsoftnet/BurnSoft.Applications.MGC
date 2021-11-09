@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Globalization;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
@@ -37,11 +38,25 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// The shop new name
         /// </summary>
         private string _shopNewName;
-
+        /// <summary>
+        /// The full name
+        /// </summary>
         private string fullName;
+        /// <summary>
+        /// The manufactures identifier
+        /// </summary>
         private long manufacturesId;
+        /// <summary>
+        /// The model identifier
+        /// </summary>
         private long modelId;
+        /// <summary>
+        /// The nationality identifier
+        /// </summary>
         private long nationalityId;
+        /// <summary>
+        /// The grip identifier
+        /// </summary>
         private long gripId;
         /// <summary>
         /// Initializes this instance.
@@ -93,11 +108,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     MyCollection.Delete(_databasePath, gunId, out _errOut);
                 }
 
-                value = MyCollection.Add(_databasePath, false, 0, manufacturesId,
+                value = MyCollection.Add(_databasePath, false, 2, manufacturesId,
                     fullName, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
                     "New", " ", nationalityId, gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
                     "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
-                    DateTime.Now.ToString(), false, " ", " ", " ", " ", true, "1-8", "2 lbs", " ", "Modern", " ", false," ", out _errOut);
+                    DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ", true, "1-8", "2 lbs", " ", "Modern", "11/09/2021 14:20:45", false," ", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 bool exists = MyCollection.Exists(_databasePath, fullName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
@@ -115,16 +130,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void UpdateFirearm()
         {
             //TODO: #19 Finish Unit Test
-            //bool value = true;
-            long manufacturesId = Manufacturers.GetId(_databasePath, "Glock", out _errOut);
-            long modelId = Models.GetId(_databasePath, "", manufacturesId, out _errOut);
-            long nationalityId = Nationality.GetId(_databasePath, "USA", out _errOut);
-            long gripId = Grips.GetId(_databasePath, "Plastice", out _errOut);
+            
             bool value = MyCollection.Add(_databasePath, false, 0, manufacturesId,
                 "Glock Super Carry", "G26", modelId, "RIA2323423", "pistol:single action", "9mm luger", "black",
                 "new in box", "", nationalityId, gripId, "16oz", "4", "plastice", "5 in", "", "", "single", "10 round mag",
                 "iron", "400.00", "billy bob", "500.00", "10/31/2021", "MSRP", "500.00", "Safe", "", "", "1990", "",
-                DateTime.Now.ToString(), false, "", "", "", "", true, "1-8", "2 lbs", "", "Modern", "", false, "", out _errOut);
+                DateTime.Now.ToString(CultureInfo.InvariantCulture), false, "", "", "", "", true, "1-8", "2 lbs", "", "Modern", "", false, "", out _errOut);
 
             General.HasTrueValue(value, _errOut);
         }

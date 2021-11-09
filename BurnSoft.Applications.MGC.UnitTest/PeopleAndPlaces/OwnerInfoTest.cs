@@ -1,8 +1,5 @@
-﻿using System.Collections.Generic;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BurnSoft.Applications.MGC.Ammo;
-using BurnSoft.Applications.MGC.PeopleAndPlaces;
-using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
 // ReSharper disable UnusedVariable
@@ -33,8 +30,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// The database path
         /// </summary>
         private string _databasePath;
-
-        private string GunSmith_Name;
+        /// <summary>
+        /// The gun smith name
+        /// </summary>
+        private string _gunSmithName;
 
         /// <summary>
         /// Initializes this instance.
@@ -47,7 +46,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
-            GunSmith_Name = obj.FC(Vs2019.GetSetting("GunSmith_Name", TestContext));
+            _gunSmithName = obj.FC(Vs2019.GetSetting("GunSmith_Name", TestContext));
 
         }
     }
