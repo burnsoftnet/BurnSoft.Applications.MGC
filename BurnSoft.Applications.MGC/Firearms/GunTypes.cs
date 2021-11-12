@@ -101,5 +101,28 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Get the ID tied to the name fo the gun type based ont he name from the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="value"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static int GetId(string databasePath, string value, out string errOut)
+        {
+            int iAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"select id from Gun_Type where Type='{value}'";
+                iAns = Database.GetIDFromTableBasedOnTSQL(databasePath, sql, "id", out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("getId", e);
+            }
+            return iAns;
+        }
     }
 }
