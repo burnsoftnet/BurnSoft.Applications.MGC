@@ -54,6 +54,24 @@
                         <Property Name="DisplayName" Value="UpdateTest" />
                       </Rule>
                     </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.GetListAllTest" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetListAllTest" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.GetListByIdTest" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="GetListByIdTest" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.UpdateGunTypeTest" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="UpdateGunTypeTest" />
+                      </Rule>
+                    </Rule>
                   </Rule>
                 </Rule>
               </Rule>

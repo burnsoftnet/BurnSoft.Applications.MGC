@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
@@ -125,6 +126,57 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             int id = GunTypes.GetId(_databasePath, _gunTypeName, out _errOut);
             bool value = GunTypes.Update(_databasePath,id, $"{_gunTypeName} NEW", out _errOut);
             TestContext.WriteLine(value ? $"{_gunTypeName} was updated to {_gunTypeName} NEW!" : $"{_gunTypeName} was not updated to {_gunTypeName} NEW");
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Prints the list.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        private void PrintList(List<Types.GunTypes> value)
+        {
+            if (value.Count > 0)
+            {
+                foreach (Types.GunTypes v in value)
+                {
+                    TestContext.WriteLine($"id: {v.Id}");
+                    TestContext.WriteLine($"Name/Type: {v.Name}");
+                    TestContext.WriteLine($"Last Sync: {v.LastSync}");
+                }
+            }
+        }
+        /// <summary>
+        /// Defines the test method GetListByIdTest.
+        /// </summary>
+        [TestMethod]
+        public void GetListByIdTest()
+        {
+            DoesneExist();
+            int id = GunTypes.GetId(_databasePath, _gunTypeName, out _errOut);
+            List<Types.GunTypes> value = GunTypes.GetList(_databasePath, id, out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetListAllTest.
+        /// </summary>
+        [TestMethod]
+        public void GetListAllTest()
+        {
+            DoesneExist();
+            
+            List<Types.GunTypes> value = GunTypes.GetList(_databasePath,  out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method UpdateGunTypeTest.
+        /// </summary>
+        [TestMethod]
+        public void UpdateGunTypeTest()
+        {
+            DoesEixst();
+
+            bool value = GunTypes.UpdateGunType(_databasePath,_gunTypeName, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
     }

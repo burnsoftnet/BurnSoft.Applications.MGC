@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.Firearms
@@ -193,6 +192,111 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("Update", e);
             }
             return bAns;
+        }
+        /// <summary>
+        /// Check to see if the gun type exists int he database, if it does not then add it.
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="value"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool UpdateGunType(string databasePath, string value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                if (!Exists(databasePath, value, out errOut))
+                {
+                    bAns = Add(databasePath, value, out errOut);
+                }
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Get a list of all the Gun Types in the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<Types.GunTypes> GetList(string databasePath, out string errOut)
+        {
+            List<Types.GunTypes> lst = new List<Types.GunTypes>();
+            errOut = @"";
+            try
+            {
+                string sql = "select * from Gun_Type";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut, databasePath);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+        }
+        /// <summary>
+        /// Get a lit os the Gun Types by the ID, 
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<Types.GunTypes> GetList(string databasePath, long id, out string errOut)
+        {
+            List<Types.GunTypes> lst = new List<Types.GunTypes>();
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Gun_Type where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut, databasePath);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+        }
+
+
+        /// <summary>
+        /// Private class to sort the informatimon from a datatable into the Gun Collection List ype
+        /// </summary>
+        /// <param name="dt">The dt.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="dbPath"></param>
+        /// <returns>List&lt;GunCollectionList&gt;.</returns>
+        internal static List<Types.GunTypes> MyList(DataTable dt, out string errOut, string dbPath = "")
+        {
+            List<Types.GunTypes> lst = new List<Types.GunTypes>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new Types.GunTypes()
+                    {
+                        Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0), 
+                        Name = d["Type"] != DBNull.Value ? d["Type"].ToString().Trim() : "",
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : ""
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+            return lst;
         }
     }
 }
