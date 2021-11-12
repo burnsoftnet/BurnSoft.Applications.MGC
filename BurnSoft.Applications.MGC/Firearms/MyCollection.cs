@@ -445,6 +445,40 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return lAns;
         }
+        /// <summary>
+        /// Catalogs the exists details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="customId">The custom identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string CatalogExistsDetails(string databasePath, string customId, out string errOut,
+            int gunId = 0)
+        {
+            string sAns = "";
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection where CustomID='{customId}'";
+                if (gunId > 0) sql += $" and ID <> {gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                List<GunCollectionList> lst = MyList(dt, out errOut, databasePath);
+                sAns = $"The following firearms have been found {Environment.NewLine} with the same Catalog ID({customId}):{Environment.NewLine}";
+                foreach (GunCollectionList l in lst)
+                {
+                    sAns += $"{l.FullName}{Environment.NewLine}";
+                }
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CatalogExistsDetails", e);
+            }
+            return sAns;
+        }
 
         /// <summary>
         /// Gets the catalog next identifier number.
