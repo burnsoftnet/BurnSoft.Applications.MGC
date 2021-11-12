@@ -70,7 +70,7 @@ namespace BurnSoft.Applications.MGC.AutoFill
             errOut = @"";
             try
             {
-                if (sql.Length == 0) sql = $"SELECT {strColumn} from {strTable} order by {strColumn} ASC";
+                if (sql.Length == 0) sql = $"SELECT DISTINCT({strColumn}) from {strTable} order by {strColumn} ASC";
 
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);

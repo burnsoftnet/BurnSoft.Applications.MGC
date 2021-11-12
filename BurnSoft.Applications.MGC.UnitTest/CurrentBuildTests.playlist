@@ -18,60 +18,6 @@
                         <Property Name="DisplayName" Value="TestMethod1" />
                       </Rule>
                     </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.AddTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="AddTest" />
-                      </Rule>
-                    </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.ExistsTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="ExistsTest" />
-                      </Rule>
-                    </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.GetIdTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="GetIdTest" />
-                      </Rule>
-                    </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.DeleteByNameTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="DeleteByNameTest" />
-                      </Rule>
-                    </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.DeleteByIdTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="DeleteByIdTest" />
-                      </Rule>
-                    </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.UpdateTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="UpdateTest" />
-                      </Rule>
-                    </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.GetListAllTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="GetListAllTest" />
-                      </Rule>
-                    </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.GetListByIdTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="GetListByIdTest" />
-                      </Rule>
-                    </Rule>
-                    <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.UpdateGunTypeTest" />
-                      <Rule Match="Any">
-                        <Property Name="DisplayName" Value="UpdateGunTypeTest" />
-                      </Rule>
-                    </Rule>
                   </Rule>
                 </Rule>
               </Rule>
