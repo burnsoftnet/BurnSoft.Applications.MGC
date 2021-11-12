@@ -75,6 +75,7 @@
     <Compile Include="Firearms\MaintancePlansTest.cs" />
     <Compile Include="Firearms\ModelsTest.cs" />
     <Compile Include="Firearms\NationalityTest.cs" />
+    <Compile Include="Firearms\GunTypeTest.cs" />
     <Compile Include="General.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Other\WishlistTest.cs" />

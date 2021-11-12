@@ -1,0 +1,42 @@
+<Playlist Version="2.0">
+  <Rule Name="Includes" Match="Any">
+    <Rule Match="All">
+      <Property Name="Solution" />
+      <Rule Match="Any">
+        <Rule Match="All">
+          <Property Name="Project" Value="BurnSoft.Applications.MGC.UnitTest" />
+          <Rule Match="Any">
+            <Rule Match="All">
+              <Property Name="Namespace" Value="BurnSoft.Applications.MGC.UnitTest.Firearms" />
+              <Rule Match="Any">
+                <Rule Match="All">
+                  <Property Name="Class" Value="GunTypeTest" />
+                  <Rule Match="Any">
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.TestMethod1" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="TestMethod1" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.AddTest" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="AddTest" />
+                      </Rule>
+                    </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.ExistsTest" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="ExistsTest" />
+                      </Rule>
+                    </Rule>
+                  </Rule>
+                </Rule>
+              </Rule>
+            </Rule>
+          </Rule>
+        </Rule>
+      </Rule>
+    </Rule>
+  </Rule>
+</Playlist>
