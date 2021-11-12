@@ -19,17 +19,13 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// </summary>
         private string _errOut;
         /// <summary>
-        /// The gun identifier
-        /// </summary>
-        private int _gunId;
-        /// <summary>
         /// The database path
         /// </summary>
         private string _databasePath;
         /// <summary>
         /// The gun type name
         /// </summary>
-        private string GunTypeName;
+        private string _gunTypeName;
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -39,25 +35,96 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             // Vs2019.GetSetting("", TestContext);
             _errOut = @"";
             _databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Vs2019.GetSetting("DatabasePath", TestContext));
-            _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
-            GunTypeName = "Pistol: Triple Action";
+            _gunTypeName = "Pistol: Triple Action";
         }
-
+        /// <summary>
+        /// Doesnes the exist.
+        /// </summary>
+        private void DoesneExist()
+        {
+            if (!GunTypes.Exists(_databasePath, _gunTypeName, out _errOut))
+            {
+                GunTypes.Add(_databasePath, _gunTypeName, out _errOut);
+            }
+        }
+        /// <summary>
+        /// Doeses the eixst.
+        /// </summary>
+        private void DoesEixst()
+        {
+            if (GunTypes.Exists(_databasePath, _gunTypeName, out _errOut))
+            {
+                GunTypes.Delete(_databasePath, _gunTypeName, out _errOut);
+            }
+        }
+        /// <summary>
+        /// Defines the test method AddTest.
+        /// </summary>
         [TestMethod]
         public void AddTest()
         {
-            bool value = BurnSoft.Applications.MGC.Firearms.GunTypes.Add(_databasePath, GunTypeName, out _errOut);
+            DoesEixst();
+            bool value = GunTypes.Add(_databasePath, _gunTypeName, out _errOut);
             string result = value ? "Was" : "Was not";
-            result += $" able to add gun type {GunTypeName} to database";
+            result += $" able to add gun type {_gunTypeName} to database";
             TestContext.WriteLine(result);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method ExistsTest.
+        /// </summary>
         [TestMethod]
         public void ExistsTest()
         {
-            bool value = BurnSoft.Applications.MGC.Firearms.GunTypes.Exists(_databasePath, GunTypeName, out _errOut);
-            TestContext.WriteLine(value ? $"{GunTypeName} exists!" : $"{GunTypeName} does not exist");
+            DoesneExist();
+            bool value = GunTypes.Exists(_databasePath, _gunTypeName, out _errOut);
+            TestContext.WriteLine(value ? $"{_gunTypeName} exists!" : $"{_gunTypeName} does not exist");
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetIdTest.
+        /// </summary>
+        [TestMethod]
+        public void GetIdTest()
+        {
+            DoesneExist();
+            int value = GunTypes.GetId(_databasePath, _gunTypeName, out _errOut);
+            TestContext.WriteLine($"{_gunTypeName} id is {value}!");
+            General.HasTrueValue(value > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method DeleteByNameTest.
+        /// </summary>
+        [TestMethod]
+        public void DeleteByNameTest()
+        {
+            DoesneExist();
+            bool value = GunTypes.Delete(_databasePath, _gunTypeName, out _errOut);
+            TestContext.WriteLine(value ? $"{_gunTypeName} was delete!" : $"{_gunTypeName} was not deleted");
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method DeleteByIdTest.
+        /// </summary>
+        [TestMethod]
+        public void DeleteByIdTest()
+        {
+            DoesneExist();
+            int id = GunTypes.GetId(_databasePath, _gunTypeName, out _errOut);
+            bool value = GunTypes.Delete(_databasePath, id, out _errOut);
+            TestContext.WriteLine(value ? $"{_gunTypeName} was delete!" : $"{_gunTypeName} was not deleted");
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method UpdateTest.
+        /// </summary>
+        [TestMethod]
+        public void UpdateTest()
+        {
+            DoesneExist();
+            int id = GunTypes.GetId(_databasePath, _gunTypeName, out _errOut);
+            bool value = GunTypes.Update(_databasePath,id, $"{_gunTypeName} NEW", out _errOut);
+            TestContext.WriteLine(value ? $"{_gunTypeName} was delete!" : $"{_gunTypeName} was not deleted");
             General.HasTrueValue(value, _errOut);
         }
     }
