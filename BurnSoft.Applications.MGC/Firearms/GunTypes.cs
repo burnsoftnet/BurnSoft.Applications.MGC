@@ -124,5 +124,51 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return iAns;
         }
+        /// <summary>
+        /// Delete the gun type from the database based on the id
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Delete(string databasePath, int id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Delete from Gun_Type where id={id}";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Delete the gun type from the database based on tie name
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="value"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Delete(string databasePath, string value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Delete from Gun_Type where Type='{value}'";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
     }
 }
