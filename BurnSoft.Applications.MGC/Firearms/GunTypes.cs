@@ -78,5 +78,28 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Check to see if the value already exists in the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="value"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Exists(string databasePath, string value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Gun_Type where Type='{value}'";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Exists", e);
+            }
+            return bAns;
+        }
     }
 }
