@@ -6,6 +6,7 @@ using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
+// ReSharper disable RedundantAssignment
 
 namespace BurnSoft.Applications.MGC.Firearms
 {
@@ -445,6 +446,36 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return lAns;
         }
+        /// <summary>
+        /// Catalogs the identifier exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="customId">The custom identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CatalogIdExists(string databasePath, string customId, out string errOut,
+            int gunId = 0)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection where CustomID='{customId}'";
+                if (gunId > 0) sql += $" and ID <> {gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                List<GunCollectionList> lst = MyList(dt, out errOut, databasePath);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CatalogIDExists", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Catalogs the exists details.
         /// </summary>
