@@ -124,7 +124,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             DoesneExist();
             int id = GunTypes.GetId(_databasePath, _gunTypeName, out _errOut);
             bool value = GunTypes.Update(_databasePath,id, $"{_gunTypeName} NEW", out _errOut);
-            TestContext.WriteLine(value ? $"{_gunTypeName} was delete!" : $"{_gunTypeName} was not deleted");
+            TestContext.WriteLine(value ? $"{_gunTypeName} was updated to {_gunTypeName} NEW!" : $"{_gunTypeName} was not updated to {_gunTypeName} NEW");
             General.HasTrueValue(value, _errOut);
         }
     }
