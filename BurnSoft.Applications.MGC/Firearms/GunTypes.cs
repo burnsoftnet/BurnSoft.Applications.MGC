@@ -138,7 +138,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql = $"Delete from Gun_Type where id={id}";
-                bAns = Database.DataExists(databasePath, sql, out errOut);
+                bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
@@ -161,12 +161,36 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql = $"Delete from Gun_Type where Type='{value}'";
-                bAns = Database.DataExists(databasePath, sql, out errOut);
+                bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Update the gun type in the database
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Update(string databasePath,int id, string value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Update Gun_Type set Type='{value}',sync_lastupdate=Now() where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
             }
             return bAns;
         }
