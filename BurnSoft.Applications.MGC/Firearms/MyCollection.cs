@@ -637,6 +637,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 string sql = $"update gun_collection set PurchasedFrom='{newName}' where PurchasedFrom='{oldName}'";
                 bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
@@ -644,6 +645,36 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Determines whether [has collection attached] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="buyerId">The buyer identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static int HasCollectionAttached(string databasePath, int buyerId, out string errOut)
+        {
+            int iAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT Count(*) as Total from Gun_Collection where ItemSold=1 and BID={buyerId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<GunCollectionList> lst = MyList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                iAns = lst.Count;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("HasCollectionAttached", e);
+            }
+            return iAns;
+        }
+
         /// <summary>
         /// Gets all the firearms in the database and their details
         /// </summary>
