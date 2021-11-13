@@ -329,6 +329,11 @@ namespace BurnSoft.Applications.MGC.Firearms
                     if (errOut.Length > 0) throw new Exception(errOut);
                 }
 
+                //if (appraisedBy.Trim().Length > 0)
+                //{
+                //    if (!PeopleAndPlaces)
+                //}
+
                 if (!Ammo.GlobalList.Exists(databasePath, caliber, out errOut))
                     Ammo.GlobalList.Add(databasePath, caliber, out errOut);
             }

@@ -88,6 +88,7 @@
     <Compile Include="Global\DatabaseRelated.cs" />
     <Compile Include="Global\Helpers.cs" />
     <Compile Include="Other\WishList.cs" />
+    <Compile Include="PeopleAndPlaces\Appraisers.cs" />
     <Compile Include="PeopleAndPlaces\Buyers.cs" />
     <Compile Include="PeopleAndPlaces\GunSmiths.cs" />
     <Compile Include="PeopleAndPlaces\OwnerInformation.cs" />
@@ -98,6 +99,7 @@
     <Compile Include="Reports\TableList.cs" />
     <Compile Include="Types\AccessoriesList.cs" />
     <Compile Include="Types\Ammunition.cs" />
+    <Compile Include="Types\AppraisersContactDetails.cs" />
     <Compile Include="Types\BarrelSystems.cs" />
     <Compile Include="Types\ClassificationList.cs" />
     <Compile Include="Types\ColumnLists.cs" />
