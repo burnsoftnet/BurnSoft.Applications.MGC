@@ -216,7 +216,6 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="useNumberOnlyCatalog">if set to <c>true</c> [use number only catalog].</param>
         /// <param name="ownerId">The owner identifier.</param>
         /// <param name="manufactureId">The manufacture identifier.</param>
-        /// <param name="fullName">The full name.</param>
         /// <param name="modelName">Name of the model.</param>
         /// <param name="modelId">The model identifier.</param>
         /// <param name="serialNumber">The serial number.</param>
@@ -270,7 +269,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="Exception"></exception>
         /// <exception cref="Exception"></exception>
         /// <exception cref="Exception"></exception>
-        public static bool Update(string databasePath,int firearmId, bool useNumberOnlyCatalog, long ownerId, long manufactureId, string fullName, string modelName, long modelId, string serialNumber,
+        public static bool Update(string databasePath,int firearmId, bool useNumberOnlyCatalog, long ownerId, long manufactureId, string modelName, long modelId, string serialNumber,
             string firearmType, string caliber, string finish, string condition,
             string customId, long natId, long gripId, string weight, string height, string stockType,
             string barrelLength, string barrelWidth, string barrelHeight,
@@ -290,7 +289,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 int iisCandR = isCandR ? 1 : 0;
 
                 string sql =
-                    $"UPDATE Gun_Collection set OID={ownerId},MID={manufactureId},FullName='{fullName}',ModelName='{modelName}',ModelID={modelId}" +
+                    $"UPDATE Gun_Collection set OID={ownerId},MID={manufactureId},ModelName='{modelName}',ModelID={modelId}" +
                     $",SerialNumber='{serialNumber}',Type='{firearmType}',Caliber='{caliber}',Finish='{finish}',Condition='{condition}'," +
                     $"CustomID={Helpers.SetCatalogInsType(useNumberOnlyCatalog, customId, out _)},NatID={natId},GripID={gripId}," +
                     $"Qty=1,Weight='{weight}',Height='{height}',StockType='{stockType}',BarrelLength='{barrelLength}',BarrelWidth='{barrelWidth}',BarrelHeight='{barrelHeight}'," +

@@ -141,7 +141,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
 
-            bool value = MyCollection.Update(_databasePath, (int)gunId, false, 2, manufacturesId, fullName, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
+            bool value = MyCollection.Update(_databasePath, (int)gunId, false, 2, manufacturesId, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
                 "New", " ", nationalityId, gripId, "18oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
                 "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
                 DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ",
