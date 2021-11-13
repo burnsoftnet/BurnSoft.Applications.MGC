@@ -661,7 +661,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"SELECT Count(*) as Total from Gun_Collection where ItemSold=1 and BID={buyerId}";
+                string sql = $"SELECT * from Gun_Collection where ItemSold=1 and BID={buyerId}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 List<GunCollectionList> lst = MyList(dt, out errOut);
