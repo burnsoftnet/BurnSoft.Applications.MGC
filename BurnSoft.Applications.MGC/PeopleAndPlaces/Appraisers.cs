@@ -213,7 +213,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             errOut = @"";
             try
             {
-                string sql = $"SELECT gname from Appriaser_Contact_Details where id={id}";
+                string sql = $"SELECT aname from Appriaser_Contact_Details where id={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)

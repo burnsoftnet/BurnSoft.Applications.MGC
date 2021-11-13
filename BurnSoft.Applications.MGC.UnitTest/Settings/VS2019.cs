@@ -122,6 +122,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("Buyer_Resident", "franlkin county"));
             ls.Add(new Tuple<string, string>("Buyer_Fax", "N/A"));
             ls.Add(new Tuple<string, string>("Buyer_WebSite", "N/A"));
+            ls.Add(new Tuple<string, string>("Appraisers_Name", "Joe Gun Grabers"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }
