@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
+// ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.PeopleAndPlaces
 {
@@ -18,7 +16,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <summary>
         /// The class location
         /// </summary>
-        private static string _classLocation = "";
+        private static string _classLocation = "BurnSoft.Applications.MGC.PeopleAndPlaces.Appraisers";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
@@ -96,13 +94,40 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             {
                 int sib = stillInBusiness ? 1 : 0;
                 string sql =
-                    $"INSERT INTO Appriaser_Contact_Details (aname,Address1,City,State,Zip,country, phone, fax, website,email, lic,sib,sync_lastupdate) " +
+                    "INSERT INTO Appriaser_Contact_Details (aname,Address1,City,State,Zip,country, phone, fax, website,email, lic,sib,sync_lastupdate) " +
                     $"VALUES('{name}','{address}','{city}','{state}','{zipCode}','{country}','{phone}','{fax}','{webSite}','{eMail}','{license}',{sib},Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("Add", e);
+            }
+
+            return bAns;
+        }
+
+        /// <summary>
+        /// Existses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        public static bool Exists(string databasePath, string name, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Appriaser_Contact_Details where aname like '{name}%'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                bAns = dt.Rows.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Exists", e);
             }
 
             return bAns;
@@ -150,6 +175,161 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
 
             return bAns;
+        }
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Delete(string databasePath, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Delete from Appriaser_Contact_Details where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+
+            return bAns;
+        }
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, long id, out string errOut)
+        {
+            string sAns = @"";
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT gname from Appriaser_Contact_Details where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    sAns = d["aname"].ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+
+            return sAns;
+        }
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath, string name, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT id from Appriaser_Contact_Details where aname='{name}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["id"].ToString());
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
+        /// <summary>
+        /// Gets the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;GunSmithContacts&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        public static List<AppraisersContactDetails> Get(string databasePath, out string errOut)
+        {
+            List<AppraisersContactDetails> lst = new List<AppraisersContactDetails>();
+            try
+            {
+                string sql = $"select * from Appriaser_Contact_Details";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = GetList(dt, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Get", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
+        /// Gets the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;GunSmithContacts&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        public static List<AppraisersContactDetails> Get(string databasePath, long id, out string errOut)
+        {
+            List<AppraisersContactDetails> lst = new List<AppraisersContactDetails>();
+            try
+            {
+                string sql = $"select * from Appriaser_Contact_Details where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = GetList(dt, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Get", e);
+            }
+
+            return lst;
+        }
+        /// <summary>
+        /// Gets the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;GunSmithContacts&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        public static List<AppraisersContactDetails> Get(string databasePath, string name, out string errOut)
+        {
+            List<AppraisersContactDetails> lst = new List<AppraisersContactDetails>();
+            try
+            {
+                string sql = $"select * from Appriaser_Contact_Details where aname='{name}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = GetList(dt, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Get", e);
+            }
+
+            return lst;
         }
 
         /// <summary>

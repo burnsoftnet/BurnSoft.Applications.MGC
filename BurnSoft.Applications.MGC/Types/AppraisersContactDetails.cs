@@ -6,7 +6,7 @@ namespace BurnSoft.Applications.MGC.Types
     /// Container for the Appraisers_Contact_Details table
     /// </summary>
     [Serializable]
-    class AppraisersContactDetails
+    public class AppraisersContactDetails
     {
         /// <summary>
         /// Gets or sets the identifier.
