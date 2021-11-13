@@ -99,7 +99,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Gun Collection - Add Firearm")]
         public void AddFirearm()
         {
-            //TODO: #13 Finish Unit Test
             bool value = false;
             try
             {
@@ -130,7 +129,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Gun Collection - Update Firearm")]
         public void UpdateFirearm()
         {
-            //TODO: #19 Finish Unit Test
             if (!MyCollection.Exists(_databasePath, fullName, out _errOut))
             {
                 MyCollection.Add(_databasePath, false, 2, manufacturesId,
