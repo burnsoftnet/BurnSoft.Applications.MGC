@@ -149,6 +149,33 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return lAns;
         }
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetName(string databasePath, int id, out string errOut)
+        {
+            string sAns = "";
+            errOut = @"";
+            try
+            {
+                List<BuyersList> lst = Get(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (BuyersList l in lst)
+                {
+                    sAns = l.Name;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetName", e);
+            }
+            return sAns;
+        }
         /// <summary>Get information from the database based on the buyers ID</summary>
         /// <param name="databasePath"></param>
         /// <param name="id"></param>
