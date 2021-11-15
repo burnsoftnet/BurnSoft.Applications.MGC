@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using BurnSoft.Applications.MGC.Types;
+// ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.Firearms
 {
@@ -84,6 +83,31 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
 
             return lAns;
+        }
+        /// <summary>
+        /// Performs the document link.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="documentId">The document identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool PerformDocLink(string databasePath, int firearmId, int documentId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"INSERT INTO Gun_Collection_Docs_Links (GID,DID) VALUES({firearmId},{documentId})";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("PerformDocLink", e);
+            }
+            return bAns;
         }
 
         /// <summary>
