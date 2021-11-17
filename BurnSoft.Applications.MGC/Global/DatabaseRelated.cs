@@ -138,5 +138,34 @@ namespace BurnSoft.Applications.MGC.Global
             }
             return sAns;
         }
+        /// <summary>
+        /// Gets the total from a sql queretm have your sum or total defined as T
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="fromFunction">From function.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetTotal(string databasePath, string sql, string fromFunction, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["T"]);
+                }
+
+            }
+            catch (Exception e)
+            {
+                errOut = $"{fromFunction}::{ErrorMessage("GetTotal", e)}";
+            }
+            return lAns;
+        }
     }
 }

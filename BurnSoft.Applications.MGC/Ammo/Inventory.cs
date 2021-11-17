@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Net.NetworkInformation;
+using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
@@ -157,23 +158,9 @@ namespace BurnSoft.Applications.MGC.Ammo
         /// <exception cref="System.Exception"></exception>
         public static long GetTotalInventory(string databasePath, out string errOut)
         {
-            long lAns = 0;
-            errOut = "";
-            try
-            {
-                string sql = "SELECT SUM(QTY) as T from Gun_Collection_Ammo";
-                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (DataRow d in dt.Rows)
-                {
-                    lAns = Convert.ToInt32(d["T"]);
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("GetTotalInventory", e);
-            }
-            return lAns;
+            return DatabaseRelated.GetTotal(databasePath,
+                "SELECT SUM(QTY) as T from Gun_Collection_Ammo",
+                "GetTotalInventory", out errOut);
         }
 
         /// <summary>

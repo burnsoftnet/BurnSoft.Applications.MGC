@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
@@ -99,23 +100,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="System.Exception"></exception>
         public static long TotalRoundsFiredBs(string databasePath, int barrelSystemId, out string errOut)
         {
-            long lAns = 0;
-            errOut = "";
-            try
-            {
-                string sql = $"SELECT SUM(cInt(RndFired)) as T from Maintance_Details where BSID={barrelSystemId} and DC=1";
-                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (DataRow d in dt.Rows)
-                {
-                    lAns = Convert.ToInt32(d["T"]);
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("TotalRoundsFiredBS", e);
-            }
-            return lAns;
+            return DatabaseRelated.GetTotal(databasePath,
+                $"SELECT SUM(cInt(RndFired)) as T from Maintance_Details where BSID={barrelSystemId} and DC=1",
+                "TotalRoundsFiredBS",out errOut);
         }
         /// <summary>
         /// Totals the rounds fired.
@@ -127,23 +114,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="System.Exception"></exception>
         public static long TotalRoundsFired(string databasePath, int gunId, out string errOut)
         {
-            long lAns = 0;
-            errOut = "";
-            try
-            {
-                string sql = $"SELECT SUM(cInt(RndFired)) as T from Maintance_Details where GID={gunId} and DC=1";
-                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (DataRow d in dt.Rows)
-                {
-                    lAns = Convert.ToInt32(d["T"]);
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("TotalRoundsFired", e);
-            }
-            return lAns;
+            return DatabaseRelated.GetTotal(databasePath,
+                $"SELECT SUM(cInt(RndFired)) as T from Maintance_Details where GID={gunId} and DC=1",
+                "TotalRoundsFired", out errOut);
         }
         /// <summary>
         /// Averages the rounds fired.
@@ -155,23 +128,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="System.Exception"></exception>
         public static long AverageRoundsFired(string databasePath,int gunId, out string errOut)
         {
-            long lAns = 0;
-            errOut = "";
-            try
-            {
-                string sql = $"SELECT AVG(cInt(RndFired)) as T from Maintance_Details where GID={gunId} and DC=1";
-                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (DataRow d in dt.Rows)
-                {
-                    lAns = Convert.ToInt32(d["T"]);
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("AverageRoundsFired", e);
-            }
-            return lAns;
+            return DatabaseRelated.GetTotal(databasePath,
+                $"SELECT AVG(cInt(RndFired)) as T from Maintance_Details where GID={gunId} and DC=1",
+                "AverageRoundsFired", out errOut);
         }
         /// <summary>
         /// Averages the rounds fired bs.
@@ -182,23 +141,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="System.Exception"></exception>
         public static long AverageRoundsFiredBs(string databasePath, out string errOut)
         {
-            long lAns = 0;
-            errOut = "";
-            try
-            {
-                string sql = "SELECT SUM(QTY) as T from Gun_Collection_Ammo";
-                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (DataRow d in dt.Rows)
-                {
-                    lAns = Convert.ToInt32(d["T"]);
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("AverageRoundsFiredBS", e);
-            }
-            return lAns;
+            return DatabaseRelated.GetTotal(databasePath,
+                "SELECT SUM(QTY) as T from Gun_Collection_Ammo",
+                "AverageRoundsFiredBS", out errOut);
         }
 
         /// <summary>
