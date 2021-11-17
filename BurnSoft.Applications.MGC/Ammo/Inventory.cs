@@ -162,6 +162,61 @@ namespace BurnSoft.Applications.MGC.Ammo
                 "SELECT SUM(QTY) as T from Gun_Collection_Ammo",
                 "GetTotalInventory", out errOut);
         }
+        /// <summary>
+        /// Totals the rounds fired.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        public static long TotalRoundsFired(string databasePath,int gunId, out string errOut)
+        {
+            return DatabaseRelated.GetTotal(databasePath,
+                $"SELECT SUM(cInt(RndFired)) as T from Maintance_Details where GID={gunId} and DC=1",
+                "TotalRoundsFired", out errOut);
+        }
+        /// <summary>
+        /// Totals the ammo selected.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        public static long TotalAmmoSelected(string databasePath, string caliber, out string errOut)
+        {
+            return DatabaseRelated.GetTotal(databasePath,
+                $"SELECT SUM(QTY) as T from Gun_Collection_Ammo where Cal='{caliber}'",
+                "TotalRoundsFired", out errOut);
+        }
+        /// <summary>
+        /// Totals the ammo selected.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="caliber2">The caliber2.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        public static long TotalAmmoSelected(string databasePath, string caliber,string caliber2, out string errOut)
+        {
+            return DatabaseRelated.GetTotal(databasePath,
+                $"SELECT SUM(QTY) as T from Gun_Collection_Ammo where Cal='{caliber}' or Cal='{caliber2}'",
+                "TotalRoundsFired", out errOut);
+        }
+        /// <summary>
+        /// Totals the ammo selected.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="caliber2">The caliber2.</param>
+        /// <param name="caliber3">The caliber3.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        public static long TotalAmmoSelected(string databasePath, string caliber, string caliber2,string caliber3, out string errOut)
+        {
+            return DatabaseRelated.GetTotal(databasePath,
+                $"SELECT SUM(QTY) as T from Gun_Collection_Ammo where Cal='{caliber}' or Cal='{caliber2}' or Cal='{caliber3}'",
+                "TotalRoundsFired", out errOut);
+        }
 
         /// <summary>
         /// Gets the qty.
