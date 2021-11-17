@@ -132,17 +132,19 @@ namespace BurnSoft.Applications.MGC.Firearms
                 $"SELECT AVG(cInt(RndFired)) as T from Maintance_Details where GID={gunId} and DC=1",
                 "AverageRoundsFired", out errOut);
         }
+
         /// <summary>
         /// Averages the rounds fired bs.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
+        /// <param name="barrelSystemId">barrel system id</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long AverageRoundsFiredBs(string databasePath, out string errOut)
+        public static long AverageRoundsFiredBs(string databasePath, int barrelSystemId, out string errOut)
         {
             return DatabaseRelated.GetTotal(databasePath,
-                "SELECT SUM(QTY) as T from Gun_Collection_Ammo",
+                $"SELECT AVG(cInt(RndFired)) as T from Maintance_Details where BSID={barrelSystemId} and DC=1",
                 "AverageRoundsFiredBS", out errOut);
         }
 
