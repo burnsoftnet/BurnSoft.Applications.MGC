@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
@@ -158,7 +159,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     _barrelConvoKitAddCaliber, _barrelConvoKitAddFinish, _barrelConvoKitAddBarrelLength,
                     _barrelConvoKitAddPetLoads, _barrelConvoKitAddAction, _barrelConvoKitAddFeedsystem,
                     _barrelConvoKitAddSights, _barrelConvoKitAddPurchasedPrice, _barrelConvoKitAddPurchasedFrom,
-                    _barrelConvoKitAddHeight, _barrelConvoKitAddType, _barrelConvoKitAddIsDefault, out _errOut);
+                    _barrelConvoKitAddHeight, _barrelConvoKitAddType, _barrelConvoKitAddIsDefault, $"{DateTime.Now}", out _errOut);
             }
         }
         /// <summary>
@@ -196,7 +197,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 _barrelConvoKitAddCaliber, _barrelConvoKitAddFinish, _barrelConvoKitAddBarrelLength,
                 _barrelConvoKitAddPetLoads, _barrelConvoKitAddAction, _barrelConvoKitAddFeedsystem,
                 _barrelConvoKitAddSights, _barrelConvoKitAddPurchasedPrice, _barrelConvoKitAddPurchasedFrom,
-                _barrelConvoKitAddHeight, _barrelConvoKitAddType, _barrelConvoKitAddIsDefault, out _errOut);
+                _barrelConvoKitAddHeight, _barrelConvoKitAddType, _barrelConvoKitAddIsDefault,$"{DateTime.Now}", out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>

@@ -167,7 +167,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 long id = GetLastId(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = ExtraBarrelConvoKits.Add(databasePath, id, modelName, caliber, finish, barrelLength, petLoads,
-                    action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", true, out errOut);
+                    action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", true, dtp, out errOut);
                 long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = UpdateDefaultBarrel(databasePath, barrelId, id, out errOut);
