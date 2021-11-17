@@ -186,6 +186,36 @@ namespace BurnSoft.Applications.MGC.Firearms
                 $"'{purchasePrice}','{purchasedFrom}','{datePurchased}','{height}','{type}',{iDefault},Now())";
             return Database.Execute(databasePath, sql, out errOut);
         }
+
+        /// <summary>
+        /// Average Round Fired out of barrel System
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="barrelSystemId"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public static long AverageRoundsFiredBs(string databasePath, int barrelSystemId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT AVG(cInt(RndFired)) as T from Maintance_Details where BSID={barrelSystemId} and DC=1";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["T"]);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AverageRoundsFiredBS", e);
+            }
+            return lAns;
+        }
+
         /// <summary>
         /// update the barrel  or conversion kit information in the database
         /// </summary>
