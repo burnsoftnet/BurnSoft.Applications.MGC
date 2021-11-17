@@ -90,6 +90,118 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Totals the rounds fired bs.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="barrelSystemId">The barrel system identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long TotalRoundsFiredBs(string databasePath, int barrelSystemId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT SUM(cInt(RndFired)) as T from Maintance_Details where BSID={barrelSystemId} and DC=1";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["T"]);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("TotalRoundsFiredBS", e);
+            }
+            return lAns;
+        }
+        /// <summary>
+        /// Totals the rounds fired.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long TotalRoundsFired(string databasePath, int gunId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT SUM(cInt(RndFired)) as T from Maintance_Details where GID={gunId} and DC=1";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["T"]);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("TotalRoundsFired", e);
+            }
+            return lAns;
+        }
+        /// <summary>
+        /// Averages the rounds fired.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long AverageRoundsFired(string databasePath,int gunId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT AVG(cInt(RndFired)) as T from Maintance_Details where GID={gunId} and DC=1";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["T"]);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AverageRoundsFired", e);
+            }
+            return lAns;
+        }
+        /// <summary>
+        /// Averages the rounds fired bs.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long AverageRoundsFiredBs(string databasePath, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = "SELECT SUM(QTY) as T from Gun_Collection_Ammo";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["T"]);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AverageRoundsFiredBS", e);
+            }
+            return lAns;
+        }
+
+        /// <summary>
         /// Updates the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
