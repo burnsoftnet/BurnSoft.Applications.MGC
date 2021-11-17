@@ -162,6 +162,7 @@ namespace BurnSoft.Applications.MGC.Ammo
                 "SELECT SUM(QTY) as T from Gun_Collection_Ammo",
                 "GetTotalInventory", out errOut);
         }
+
         /// <summary>
         /// Totals the rounds fired.
         /// </summary>
