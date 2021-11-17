@@ -154,6 +154,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
         /// <summary>
         /// Adds the specified database path.
         /// </summary>
@@ -172,16 +173,17 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="height">The height.</param>
         /// <param name="type">The type.</param>
         /// <param name="isDefault">if set to <c>true</c> [is default].</param>
+        /// <param name="datePurchased"></param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, long gunId, string modelName, string caliber, string finish,
             string barrelLength, string petLoads, string action, string feedSystem, string sights, string purchasePrice,
-            string purchasedFrom, string height, string type, bool isDefault, out string errOut)
+            string purchasedFrom, string height, string type, bool isDefault,string datePurchased, out string errOut)
         {
             int iDefault = isDefault ? 1 : 0;
             string sql = "INSERT INTO Gun_Collection_Ext(GID, ModelName, Caliber, Finish, BarrelLength, PetLoads, Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,dtp,Height,Type,IsDefault,sync_lastupdate) VALUES(" +
                 $"{gunId},'{modelName}','{caliber}','{finish}','{barrelLength}','{petLoads}','{action}','{feedSystem}','{sights}'," +
-                $"'{purchasePrice}','{purchasedFrom}',DATE(),'{height}','{type}',{iDefault},Now())";
+                $"'{purchasePrice}','{purchasedFrom}','{datePurchased}','{height}','{type}',{iDefault},Now())";
             return Database.Execute(databasePath, sql, out errOut);
         }
         /// <summary>
