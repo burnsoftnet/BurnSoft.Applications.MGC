@@ -390,6 +390,42 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Deletes the barrel system. and return sa message if it was able to delete it, or
+        /// if it couldn't because it was setup as the default barrel and needs to be corrected before deleting.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="msg">The MSG.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool DeleteBarrelSystem(string databasePath, long id,out string msg, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            msg = @"";
+
+            try
+            {
+                if (!IsCurrentlyinUseBarrel(databasePath, id, out errOut))
+                {
+                    if (!Delete(databasePath, id, out errOut)) throw new Exception(errOut);
+                    bAns = true;
+                    msg = "Barrel/Conversion Kit was removed!";
+                }
+                else
+                {
+                    msg = $"Barrel/Conversion Kit is set as a default barrel.{Environment.NewLine}Please correct before removing!";
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DeleteBarrelSystem", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Determines whether [is currentlyin use barrel] [the specified database path].
         /// </summary>
         /// <param name="databasePath">The database path.</param>
