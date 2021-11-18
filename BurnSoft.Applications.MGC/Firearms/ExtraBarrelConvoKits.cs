@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Global
 
@@ -441,6 +442,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 string sql = $"SELECT * from Gun_Collection where DBID={id}";
                 bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
@@ -448,8 +450,32 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Determines whether [has multi barrels listed] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if [has multi barrels listed] [the specified database path]; otherwise, <c>false</c>.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool HasMultiBarrelsListed(string databasePath, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
 
-
+            try
+            {
+                string sql = $"SELECT Count(*) as Total from Gun_Collection_Ext where GID={id}";
+                long count = DatabaseRelated.GetTotal(databasePath, sql, "HasMultiBarrelsListed", out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("HasMultiBarrelsListed", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Gets the barrel identifier.
