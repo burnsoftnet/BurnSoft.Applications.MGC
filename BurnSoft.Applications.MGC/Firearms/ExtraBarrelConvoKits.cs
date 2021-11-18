@@ -389,6 +389,29 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Determines whether [is currentlyin use barrel] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if [is currentlyin use barrel] [the specified database path]; otherwise, <c>false</c>.</returns>
+        public static bool IsCurrentlyinUseBarrel(string databasePath, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection where DBID={id}";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("IsCurrentlyinUseBarrel", e);
+            }
+            return bAns;
+        }
 
 
 
