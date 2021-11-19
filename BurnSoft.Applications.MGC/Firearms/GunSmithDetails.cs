@@ -116,6 +116,31 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Determines whether [has collection attached] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static int HasCollectionAttached(string databasePath, string name, out string errOut)
+        {
+            int iAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT Count(*) as Total from GunSmith_Details where gsmith='{name}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                iAns = dt.Rows.Count;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("HasCollectionAttached", e);
+            }
+            return iAns;
+        }
+        /// <summary>
         /// Updates The gun smith details for a firearm
         /// </summary>
         /// <param name="databasePath">The database path.</param>
