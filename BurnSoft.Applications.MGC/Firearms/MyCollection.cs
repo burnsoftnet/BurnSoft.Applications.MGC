@@ -345,7 +345,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Deletes the specified database path.
+        /// Deletes the the gunid from all the tables.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="firearmId">The firearm identifier.</param>
@@ -361,6 +361,31 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string sql = $"Delete from Gun_Collection where id={firearmId}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
+
+                sql = $"DELETE from Maintance_Details where GID={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                sql = $"DELETE from Gun_Collection_Pictures where CID={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                sql = $"DELETE from Gun_Collection_Accessories where GID={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                sql = $"DELETE from GunSmith_Details where GID={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                sql = $"DELETE from Gun_Collection_Ext where GID={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                sql = $"DELETE FROM Gun_Collection_Ext_Links where GID={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
             }
             catch (Exception e)
             {
