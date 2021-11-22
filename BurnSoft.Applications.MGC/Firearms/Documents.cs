@@ -323,6 +323,17 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+        /// <summary>
+        /// Determines whether [has documents attached] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if [has documents attached] [the specified database path]; otherwise, <c>false</c>.</returns>
+        public static bool HasDocumentsAttached(string databasePath, int gunId, out string errOut)
+        {
+            return Database.DataExists(databasePath, $"select * from Gun_Collection_Docs_Links where GID={gunId}", out errOut);
+        }
 
         /// <summary>
         /// Mies the list.
