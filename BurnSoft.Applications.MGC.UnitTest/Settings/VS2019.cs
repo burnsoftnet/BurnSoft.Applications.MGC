@@ -123,6 +123,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("Buyer_Fax", "N/A"));
             ls.Add(new Tuple<string, string>("Buyer_WebSite", "N/A"));
             ls.Add(new Tuple<string, string>("Appraisers_Name", "Joe Gun Grabers"));
+            ls.Add(new Tuple<string, string>("Doc_Title", "ATI 9mm PCC Super POP"));
+            ls.Add(new Tuple<string, string>("Doc_Description", "ATI 9mm Proof of purchase"));
+            ls.Add(new Tuple<string, string>("Doc_Category", "Proof of Purchase"));
+            ls.Add(new Tuple<string, string>("Doc_Ext", "pdf"));
+            ls.Add(new Tuple<string, string>("Doc_Ext_Number", "1"));
+            ls.Add(new Tuple<string, string>("Doc_Path", "data\\mgc_doc.pdf"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }
