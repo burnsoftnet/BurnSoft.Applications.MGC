@@ -109,6 +109,59 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Gets the list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;DocumentList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static List<DocumentList> GetList(string databasePath, out string errOut)
+        {
+            List<DocumentList> lst = new List<DocumentList>();
+            errOut = @"";
+            try
+            {
+                string sql = "select * from Gun_Collection_Docs";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+        }
+        /// <summary>
+        /// Gets the list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;DocumentList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static List<DocumentList> GetList(string databasePath,int id, out string errOut)
+        {
+            List<DocumentList> lst = new List<DocumentList>();
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Gun_Collection_Docs where ID={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+        }
 
         /// <summary>
         /// Mies the list.
