@@ -52,6 +52,46 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion        
+
+        /// <summary>
+        /// The file filter list
+        /// </summary>
+        public static string FileFilterList = "PDF Files(*.pdf)|*.pdf|Text Files(*.txt)|*.txt|Jpg Files(*.jpg)|*.jpg|Bitmap(*.bmp)|*.bmp|Microsoft Word(*.doc)|*.doc|Microsoft Word Open XML(*.docx)|*.docx|Portable Network Graphics(*.png)|*.png";
+        /// <summary>
+        /// Gets the type of the document.
+        /// </summary>
+        /// <param name="selectedIndex">Index of the selected.</param>
+        /// <returns>System.String.</returns>
+        public static string GetDocType(int selectedIndex)
+        {
+            string sAns = "";
+            switch (selectedIndex)
+            {
+                case 1:
+                    sAns = "pdf";
+                    break;
+                case 2:
+                    sAns = "txt";
+                    break;
+                case 3:
+                    sAns = "jpg";
+                    break;
+                case 4:
+                    sAns = "bmp";
+                    break;
+                case 5:
+                    sAns = "doc";
+                    break;
+                case 6:
+                    sAns = "docx";
+                    break;
+                case 7:
+                    sAns = "png";
+                    break;
+            }
+            return sAns;
+        }
+        
         /// <summary>
         /// Gets the last identifier.
         /// </summary>
