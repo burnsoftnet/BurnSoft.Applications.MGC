@@ -124,7 +124,7 @@ namespace BurnSoft.Applications.MGC
         /// <b>Results</b><br/>
         /// Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source="C:\test\test.mdb";
         /// </example>
-        public static string ConnectionStringOle(string databasePath, string databaseName, out string errOut, string password = "")
+        public static string ConnectionStringOle(string databasePath, string databaseName, out string errOut, string password = "14un0t2n0")
         {
             string sAns = "";
             errOut = @"";
@@ -145,7 +145,7 @@ namespace BurnSoft.Applications.MGC
         /// <param name="errOut">The error out.</param>
         /// <param name="password">The password.</param>
         /// <returns>System.String.</returns>
-        public static string ConnectionStringOle(string databasePathAndName, out string errOut, string password = "")
+        public static string ConnectionStringOle(string databasePathAndName, out string errOut, string password = "14un0t2n0")
         {
             string sAns = "";
             errOut = @"";

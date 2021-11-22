@@ -197,6 +197,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 addDoc.Parameters.Add(new OleDbParameter("@doc_description", description));
                 addDoc.Parameters.Add(new OleDbParameter("@doc_cat", category));
                 Byte[] doc = GetDocFromHdd(filePathAndName, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 addDoc.Parameters.Add(new OleDbParameter("@doc_filename", Path.GetFileName(filePathAndName)));
                 addDoc.Parameters.Add(new OleDbParameter("@doc_file", doc));
                 addDoc.Parameters.Add(new OleDbParameter("@length", doc.Length));
