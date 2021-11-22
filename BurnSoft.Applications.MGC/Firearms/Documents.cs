@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.IO;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
 
 namespace BurnSoft.Applications.MGC.Firearms
 {
@@ -159,10 +160,55 @@ namespace BurnSoft.Applications.MGC.Firearms
                 addDoc.Parameters.Add(new OleDbParameter("@did", documentId));
                 addDoc.ExecuteNonQuery();
                 conn.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("Update", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="category">The category.</param>
+        /// <param name="filePathAndName">Name of the file path and.</param>
+        /// <param name="selectedFileType">Type of the selected file.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Add(string databasePath, string title, string description, string category, string filePathAndName, int selectedFileType, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                OleDbConnection conn = new OleDbConnection(Database.ConnectionStringOle(databasePath, "MGC.mdb", out errOut));
+                conn.Open();
+                String sql =
+                    "insert into Gun_Collection_Docs (doc_name,doc_description,doc_filename,doc_file,length,doc_ext,doc_cat) values(@doc_name,@doc_description,@doc_filename,@doc_file,@length,@doc_ext,@doc_cat)";
+
+                OleDbCommand addDoc = conn.CreateCommand();
+                addDoc.CommandText = sql;
+                addDoc.Connection = conn;
+                addDoc.Parameters.Add(new OleDbParameter("@doc_name", title));
+                addDoc.Parameters.Add(new OleDbParameter("@doc_description", description));
+                addDoc.Parameters.Add(new OleDbParameter("@doc_cat", category));
+                Byte[] doc = GetDocFromHdd(filePathAndName, out errOut);
+                addDoc.Parameters.Add(new OleDbParameter("@doc_filename", Path.GetFileName(filePathAndName)));
+                addDoc.Parameters.Add(new OleDbParameter("@doc_file", doc));
+                addDoc.Parameters.Add(new OleDbParameter("@length", doc.Length));
+                addDoc.Parameters.Add(new OleDbParameter("@doc_ext", GetDocType(selectedFileType)));
+                
+                addDoc.ExecuteNonQuery();
+                conn.Close();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Add", e);
             }
             return bAns;
         }
