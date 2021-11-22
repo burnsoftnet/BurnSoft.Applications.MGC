@@ -65,7 +65,9 @@
     <Compile Include="AutoFill\GunCollectionTest.cs" />
     <Compile Include="AutoFill\GunsmithTest.cs" />
     <Compile Include="AutoFill\WishlistTest.cs" />
-    <Compile Include="Firearms\MyGunCollectionTest.cs" />
+    <Compile Include="Firearms\MyGunCollectionTest.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Firearms\ManufacturersTest.cs" />
     <Compile Include="Firearms\AccessoriesTest.cs" />
     <Compile Include="Firearms\ExtraBarrelConvoKitsTest.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Firearms\ModelsTest.cs" />
     <Compile Include="Firearms\NationalityTest.cs" />
     <Compile Include="Firearms\GunTypeTest.cs" />
+    <Compile Include="Firearms\DocumentTests.cs" />
     <Compile Include="General.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Other\WishlistTest.cs" />
@@ -93,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BurnSoft.Universal.chm" />
+    <None Include="data\mgc_doc.pdf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
