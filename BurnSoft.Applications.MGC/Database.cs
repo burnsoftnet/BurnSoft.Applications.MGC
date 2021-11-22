@@ -130,7 +130,7 @@ namespace BurnSoft.Applications.MGC
             errOut = @"";
             try
             {
-                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};" : $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePath}\\{databaseName}\";";
+                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};" : $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
             }
             catch (Exception e)
             {
@@ -138,6 +138,28 @@ namespace BurnSoft.Applications.MGC
             }
             return sAns;
         }
+        /// <summary>
+        /// Connections the string OLE.
+        /// </summary>
+        /// <param name="databasePathAndName">Name of the database path and.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="password">The password.</param>
+        /// <returns>System.String.</returns>
+        public static string ConnectionStringOle(string databasePathAndName, out string errOut, string password = "")
+        {
+            string sAns = "";
+            errOut = @"";
+            try
+            {
+                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePathAndName}\";Jet OLEDB:Database Password={password};" : $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ConnectionString", e);
+            }
+            return sAns;
+        }
+
         #endregion
         #region "Base Database Commands"
         /// <summary>
