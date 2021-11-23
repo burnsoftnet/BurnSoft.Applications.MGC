@@ -193,6 +193,14 @@ namespace BurnSoft.Applications.MGC.Firearms
                 OleDbCommand addDoc = conn.CreateCommand();
                 addDoc.CommandText = sql;
                 addDoc.Connection = conn;
+
+                OleDbParameter docName = new OleDbParameter("@doc_name", OleDbType.VarChar);
+                OleDbParameter docDesc = new OleDbParameter("@doc_description", OleDbType.VarChar);
+                OleDbParameter docCat = new OleDbParameter("@doc_cat", OleDbType.VarChar);
+                OleDbParameter docFile = new OleDbParameter("@doc_filename", OleDbType.VarChar);
+
+
+                //TODO #33 This does not  match the ad din the form need to update to match above.
                 addDoc.Parameters.Add(new OleDbParameter("@doc_name", title));
                 addDoc.Parameters.Add(new OleDbParameter("@doc_description", description));
                 addDoc.Parameters.Add(new OleDbParameter("@doc_cat", category));
