@@ -186,31 +186,43 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 OleDbConnection conn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
-                conn.Open();
+                //conn.Open();
                 String sql =
                     "insert into Gun_Collection_Docs (doc_name,doc_description,doc_filename,doc_file,length,doc_ext,doc_cat) values(@doc_name,@doc_description,@doc_filename,@doc_file,@length,@doc_ext,@doc_cat)";
 
-                OleDbCommand addDoc = conn.CreateCommand();
-                addDoc.CommandText = sql;
-                addDoc.Connection = conn;
+                OleDbCommand addDoc = new OleDbCommand(sql,conn);
+                OleDbDataAdapter myDataAdapter = new OleDbDataAdapter();
+                myDataAdapter.InsertCommand = addDoc;
+                //addDoc.CommandText = sql;
+                //addDoc.Connection = conn;
+
+                Byte[] doc = GetDocFromHdd(filePathAndName, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
 
                 OleDbParameter docName = new OleDbParameter("@doc_name", OleDbType.VarChar);
                 OleDbParameter docDesc = new OleDbParameter("@doc_description", OleDbType.VarChar);
                 OleDbParameter docCat = new OleDbParameter("@doc_cat", OleDbType.VarChar);
                 OleDbParameter docFile = new OleDbParameter("@doc_filename", OleDbType.VarChar);
+                OleDbParameter docPar = new OleDbParameter("@doc_file", OleDbType.VarBinary, doc.Length);
+                OleDbParameter length = new OleDbParameter("@length", OleDbType.Integer);
+                OleDbParameter docType = new OleDbParameter("@doc_ext", OleDbType.VarChar);
+                docPar.Value = doc;
+                length.Value = doc.Length;
+                docFile.Value = Path.GetFileName(filePathAndName);
+                docType.Value = GetDocType(selectedFileType);
+                docName.Value = title;
+                docDesc.Value = description;
+                docCat.Value = category;
 
+                myDataAdapter.InsertCommand.Parameters.Add(docName);
+                myDataAdapter.InsertCommand.Parameters.Add(docDesc);
+                myDataAdapter.InsertCommand.Parameters.Add(docFile);
+                myDataAdapter.InsertCommand.Parameters.Add(docPar);
+                myDataAdapter.InsertCommand.Parameters.Add(length);
+                myDataAdapter.InsertCommand.Parameters.Add(docType);
+                myDataAdapter.InsertCommand.Parameters.Add(docCat);
 
-                //TODO #33 This does not  match the ad din the form need to update to match above.
-                addDoc.Parameters.Add(new OleDbParameter("@doc_name", title));
-                addDoc.Parameters.Add(new OleDbParameter("@doc_description", description));
-                addDoc.Parameters.Add(new OleDbParameter("@doc_cat", category));
-                Byte[] doc = GetDocFromHdd(filePathAndName, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-                addDoc.Parameters.Add(new OleDbParameter("@doc_filename", Path.GetFileName(filePathAndName)));
-                addDoc.Parameters.Add(new OleDbParameter("@doc_file", doc));
-                addDoc.Parameters.Add(new OleDbParameter("@length", doc.Length));
-                addDoc.Parameters.Add(new OleDbParameter("@doc_ext", GetDocType(selectedFileType)));
-                
+                conn.Open();
                 addDoc.ExecuteNonQuery();
                 conn.Close();
                 bAns = true;
