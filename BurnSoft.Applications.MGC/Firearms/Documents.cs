@@ -190,6 +190,33 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Deletes the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Delete(string databasePath, int id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"delete from Gun_Collection_Docs_Links where did={id}";
+                if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                sql = $"delete from Gun_Collection_Docs where id={id}";
+                if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Adds the specified database path.
