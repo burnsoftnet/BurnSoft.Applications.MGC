@@ -169,6 +169,29 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Existses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Exists(string databasePath, string title, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                bAns = Database.DataExists(databasePath, $"Select * from Gun_Collection_Docs where doc_name='{title}'", out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Exists", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Adds the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
