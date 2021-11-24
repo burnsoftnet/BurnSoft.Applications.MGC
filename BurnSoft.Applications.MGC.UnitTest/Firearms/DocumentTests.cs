@@ -46,13 +46,74 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             Doc_Path = Vs2019.GetSetting("Doc_Path", TestContext);
             Doc_Ext_Number = Convert.ToInt32(Vs2019.GetSetting("Doc_Ext_Number", TestContext));
         }
+        /// <summary>
+        /// Verifies the doesnt exists.
+        /// </summary>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public void VerifyDoesntExists()
+        {
+            try
+            {
+                if (Documents.Exists(_databasePath, Doc_Title, out _errOut))
+                {
+                    long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                    if (_errOut.Length > 0) throw new Exception(_errOut);
+                    if (!Documents.Delete(_databasePath, id, out _errOut)) throw new Exception(_errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"ERROR: {e}");
+            }
+        }
+        /// <summary>
+        /// Verifies the exists.
+        /// </summary>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public void VerifyExists()
+        {
+            try
+            {
+                if (!Documents.Exists(_databasePath, Doc_Title, out _errOut))
+                {
+                    if (!Documents.Add(_databasePath, Doc_Title, Doc_Description, Doc_Category, Doc_Path, Doc_Ext_Number,
+                        out _errOut)) throw new Exception(_errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"ERROR: {e}");
+            }
+        }
+
         [TestMethod]
         public void AddTest()
         {
+            VerifyDoesntExists();
             bool value = Documents.Add(_databasePath, Doc_Title, Doc_Description, Doc_Category, Doc_Path, Doc_Ext_Number,
                 out _errOut);
 
             General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod]
+        public void ExistsTest()
+        {
+            VerifyExists();
+            bool value = Documents.Exists(_databasePath, Doc_Title, out _errOut);
+
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod]
+        public void GetIdTest()
+        {
+            VerifyExists();
+            long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+            TestContext.WriteLine($"ID for {Doc_Title} is {id}");
+            General.HasTrueValue(id > 0, _errOut);
         }
     }
 }
