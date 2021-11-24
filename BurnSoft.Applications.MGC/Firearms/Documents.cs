@@ -329,7 +329,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = "select top 1 id from Gun_Collection_Docs order by ID DESC";
+                string sql = "select top 1 * from Gun_Collection_Docs order by ID DESC";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw  new Exception(errOut);
                 List<DocumentList> lst = MyList(dt, out errOut);
@@ -372,6 +372,46 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        public static long GetDocLinkId(string databasePath, long docId, long gunId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"Select * from Gun_Collection_Docs_Links where DID={docId} and GID={gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<DocumentList> lst = MyList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DocumentList d in lst)
+                {
+                    lAns = d.Id;
+                }
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
+        public static bool DeleteDocLink(string databasePath, int firearmId, int documentId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"T INTO Gun_Collection_Docs_Links (GID,DID) VALUES({firearmId},{documentId})";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("PerformDocLink", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Gets the list.
         /// </summary>
@@ -395,6 +435,30 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+        }
+        /// <summary>
+        /// Get all the Doc Link Lists
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static List<DocumentLinkList> GetLinkList(string databasePath, out string errOut)
+        {
+            List<DocumentLinkList> lst = new List<DocumentLinkList>();
+            errOut = @"";
+            try
+            {
+                string sql = "select * from Gun_Collection_Docs_Links";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = MyListLinks(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetLinkList", e);
             }
             return lst;
         }
@@ -471,6 +535,37 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("MyList", e);
+            }
+            return lst;
+        }
+        /// <summary>
+        /// Get the doc link list from the data table and convert it into the doc link list container
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        internal static List<DocumentLinkList> MyListLinks(DataTable dt, out string errOut)
+        {
+            List<DocumentLinkList> lst = new List<DocumentLinkList>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new DocumentLinkList()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        GunId = Convert.ToInt32(d["gid"]),
+                        DocId = Convert.ToInt32(d["did"]),
+                        Dta = d["dta"].ToString(),
+                        LastSync = d["sync_lastupdate"].ToString()
+
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyListLinks", e);
             }
             return lst;
         }

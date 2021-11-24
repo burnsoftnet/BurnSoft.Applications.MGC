@@ -104,6 +104,7 @@
     <Compile Include="Types\ClassificationList.cs" />
     <Compile Include="Types\ColumnLists.cs" />
     <Compile Include="Types\CustomReportsLists.cs" />
+    <Compile Include="Types\DocumentLinkList.cs" />
     <Compile Include="Types\DocumentList.cs" />
     <Compile Include="Types\GlobalCaliberList.cs" />
     <Compile Include="Types\GripLists.cs" />

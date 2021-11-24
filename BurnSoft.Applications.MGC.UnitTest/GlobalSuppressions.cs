@@ -32,3 +32,7 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "<Pending>", Scope = "member", Target = "~F:BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces.AppraisersTest._gunId")]
 [assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>", Scope = "member", Target = "~M:BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces.AppraisersTest.VerifyDoesntExist")]
 [assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>", Scope = "member", Target = "~M:BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces.AppraisersTest.VerifyExists")]
+[assembly: SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "<Pending>", Scope = "member", Target = "~F:BurnSoft.Applications.MGC.UnitTest.Firearms.DocumentTests._gunId")]
+[assembly: SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "<Pending>", Scope = "member", Target = "~F:BurnSoft.Applications.MGC.UnitTest.Firearms.DocumentTests.Doc_Ext")]
+[assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>", Scope = "member", Target = "~M:BurnSoft.Applications.MGC.UnitTest.Firearms.DocumentTests.DeleteTest")]
+[assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>", Scope = "member", Target = "~M:BurnSoft.Applications.MGC.UnitTest.Firearms.DocumentTests.GetListAllTest")]

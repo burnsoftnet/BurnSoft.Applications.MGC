@@ -21,7 +21,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// The error out
         /// </summary>
         private string _errOut;
-
+        /// <summary>
+        /// The gun identifier
+        /// </summary>
+        private int _gunId;
         /// <summary>
         /// The database path
         /// </summary>
@@ -42,6 +45,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
+            _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             Doc_Title = obj.FC(Vs2019.GetSetting("Doc_Title", TestContext));
             Doc_Description = obj.FC(Vs2019.GetSetting("Doc_Description", TestContext));
             Doc_Category = obj.FC(Vs2019.GetSetting("Doc_Category", TestContext));
@@ -186,6 +190,27 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             }
         }
         /// <summary>
+        /// Print the Doc link list data
+        /// </summary>
+        /// <param name="value"></param>
+        public void PrintLinkList(List<DocumentLinkList> value)
+        {
+            if (value.Count > 0)
+            {
+                foreach (DocumentLinkList d in value)
+                {
+                    TestContext.WriteLine($"");
+                    TestContext.WriteLine($"id: {d.Id}");
+                    TestContext.WriteLine($"gun id: {d.GunId}");
+                    TestContext.WriteLine($"doc id: {d.DocId}");
+                    TestContext.WriteLine($"Dta: {d.Dta}");
+                    TestContext.WriteLine($"Last Sync: {d.LastSync}");
+                    TestContext.WriteLine($"");
+                    TestContext.WriteLine($"-------------------------------------------------------");
+                }
+            }
+        }
+        /// <summary>
         /// Defines the test method GetListAllTest.
         /// </summary>
         [TestMethod]
@@ -207,6 +232,17 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             long id = Documents.GetLastId(_databasePath, out _errOut);
             List<DocumentList> value = Documents.GetList(_databasePath,id, out _errOut);
             PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        [TestMethod]
+        public void GetListLinkAllTest()
+        {
+            VerifyExists();
+            List<DocumentLinkList> value = Documents.GetLinkList(_databasePath, out _errOut);
+            PrintLinkList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }
