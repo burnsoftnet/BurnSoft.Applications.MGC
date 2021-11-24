@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Security.Policy;
 using BurnSoft.Applications.MGC.Firearms;
+using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
 
@@ -157,6 +159,55 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             long id = Documents.GetLastId(_databasePath, out _errOut);
             TestContext.WriteLine($"ID for {Doc_Title} is {id}");
             General.HasTrueValue(id > 0, _errOut);
+        }
+        /// <summary>
+        /// Prints the list.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        public void PrintList(List<DocumentList> value)
+        {
+            if (value.Count > 0)
+            {
+                foreach (DocumentList d in value)
+                {
+                    TestContext.WriteLine($"");
+                    TestContext.WriteLine($"id: {d.Id}");
+                    TestContext.WriteLine($"DocName: {d.DocName}");
+                    TestContext.WriteLine($"DocDescription: {d.DocDescription}");
+                    TestContext.WriteLine($"Length: {d.Length}");
+                    TestContext.WriteLine($"Category: {d.Category}");
+                    TestContext.WriteLine($"DocExt: {d.DocExt}");
+                    TestContext.WriteLine($"DocFilename: {d.DocFilename}");
+                    TestContext.WriteLine($"Dta: {d.Dta}");
+                    TestContext.WriteLine($"DataFile: {d.DataFile}");
+                    TestContext.WriteLine($"");
+                    TestContext.WriteLine($"-------------------------------------------------------");
+                }
+            }
+        }
+        /// <summary>
+        /// Defines the test method GetListAllTest.
+        /// </summary>
+        [TestMethod]
+        public void GetListAllTest()
+        {
+            VerifyExists();
+            long id = Documents.GetLastId(_databasePath, out _errOut);
+            List<DocumentList> value = Documents.GetList(_databasePath, out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetListByIdTest.
+        /// </summary>
+        [TestMethod]
+        public void GetListByIdTest()
+        {
+            VerifyExists();
+            long id = Documents.GetLastId(_databasePath, out _errOut);
+            List<DocumentList> value = Documents.GetList(_databasePath,id, out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
         }
     }
 }

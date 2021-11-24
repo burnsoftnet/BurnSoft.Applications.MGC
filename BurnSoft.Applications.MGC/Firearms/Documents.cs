@@ -407,7 +407,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <returns>List&lt;DocumentList&gt;.</returns>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        public static List<DocumentList> GetList(string databasePath,int id, out string errOut)
+        public static List<DocumentList> GetList(string databasePath,long id, out string errOut)
         {
             List<DocumentList> lst = new List<DocumentList>();
             errOut = @"";
