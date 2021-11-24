@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Security.Policy;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
@@ -87,7 +88,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 Console.WriteLine($"ERROR: {e}");
             }
         }
-
+        /// <summary>
+        /// Defines the test method AddTest.
+        /// </summary>
         [TestMethod]
         public void AddTest()
         {
@@ -97,7 +100,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method ExistsTest.
+        /// </summary>
         [TestMethod]
         public void ExistsTest()
         {
@@ -106,12 +111,50 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method DeleteTest.
+        /// </summary>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        [TestMethod]
+        public void DeleteTest()
+        {
+            VerifyExists();
+            bool value = false;
+            try
+            {
+                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                if (!Documents.Delete(_databasePath, id, out _errOut)) throw new Exception(_errOut);
+                value = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetIdTest.
+        /// </summary>
         [TestMethod]
         public void GetIdTest()
         {
             VerifyExists();
             long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+            TestContext.WriteLine($"ID for {Doc_Title} is {id}");
+            General.HasTrueValue(id > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetLastIdTest.
+        /// </summary>
+        [TestMethod]
+        public void GetLastIdTest()
+        {
+            VerifyExists();
+            long id = Documents.GetLastId(_databasePath, out _errOut);
             TestContext.WriteLine($"ID for {Doc_Title} is {id}");
             General.HasTrueValue(id > 0, _errOut);
         }

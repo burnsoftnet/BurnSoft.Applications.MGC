@@ -236,15 +236,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 OleDbConnection conn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
-                //conn.Open();
+ 
                 String sql =
                     "insert into Gun_Collection_Docs (doc_name,doc_description,doc_filename,doc_file,length,doc_ext,doc_cat) values(@doc_name,@doc_description,@doc_filename,@doc_file,@length,@doc_ext,@doc_cat)";
 
                 OleDbCommand addDoc = new OleDbCommand(sql,conn);
                 OleDbDataAdapter myDataAdapter = new OleDbDataAdapter();
                 myDataAdapter.InsertCommand = addDoc;
-                //addDoc.CommandText = sql;
-                //addDoc.Connection = conn;
+
 
                 Byte[] doc = GetDocFromHdd(filePathAndName, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
