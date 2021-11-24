@@ -356,7 +356,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool PerformDocLink(string databasePath, int firearmId, int documentId, out string errOut)
+        public static bool PerformDocLink(string databasePath, long firearmId, long documentId, out string errOut)
         {
             bool bAns = false;
             errOut = @"";

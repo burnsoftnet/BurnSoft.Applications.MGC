@@ -241,9 +241,19 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void GetListLinkAllTest()
         {
             VerifyExists();
-            List<DocumentLinkList> value = Documents.GetLinkList(_databasePath, out _errOut);
-            PrintLinkList(value);
-            General.HasTrueValue(value.Count > 0, _errOut);
+            long documentId = Documents.GetLastId(_databasePath, out _errOut);
+            bool didPass = Documents.PerformDocLink(_databasePath, _gunId, documentId, out _errOut);
+            if (didPass)
+            {
+                List<DocumentLinkList> value = Documents.GetLinkList(_databasePath, out _errOut);
+                PrintLinkList(value);
+                General.HasTrueValue(value.Count > 0, _errOut);
+            }
+            else
+            {
+                General.HasTrueValue(false,_errOut);
+            }
+            
         }
     }
 }
