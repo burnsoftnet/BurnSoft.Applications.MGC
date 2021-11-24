@@ -283,7 +283,39 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Gets the identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath,string title, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"Select * from Gun_Collection_Docs where doc_name='{title}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<DocumentList> lst = MyList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DocumentList d in lst)
+                {
+                    lAns = d.Id;
+                }
 
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
         /// <summary>
         /// Gets the last identifier.
         /// </summary>
@@ -311,7 +343,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("", e);
+                errOut = ErrorMessage("GetLastId", e);
             }
 
             return lAns;
