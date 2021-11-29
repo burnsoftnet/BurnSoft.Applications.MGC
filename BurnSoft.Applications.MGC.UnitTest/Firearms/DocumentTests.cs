@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Security.Policy;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
@@ -253,7 +252,136 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             {
                 General.HasTrueValue(false,_errOut);
             }
-            
+        }
+        /// <summary>
+        /// verify that the doc link already exists, if it doesn't then add it.
+        /// </summary>
+        /// <param name="docId"></param>
+        /// <param name="gunid"></param>
+        public void VerifyDockLinkExists(long docId, long gunid)
+        {
+            if (!Documents.DocLinkExists(_databasePath, gunid, docId, out _errOut))
+            {
+                Documents.PerformDocLink(_databasePath, gunid, docId, out _errOut);
+            }
+        }
+        /// <summary>
+        /// verify the doc link does no exists, if it does delete it
+        /// </summary>
+        /// <param name="docId"></param>
+        /// <param name="gunid"></param>
+        public void VerifyDockLinkDoesNotExists(long docId, long gunid)
+        {
+            if (Documents.DocLinkExists(_databasePath, gunid, docId, out _errOut))
+            {
+                
+                Documents.DeleteFirearmFromLinkList(_databasePath, gunid, out _errOut);
+            }
+        }
+        /// <summary>
+        /// Adds the doc link
+        /// </summary>
+        [TestMethod]
+        public void AddDockLinkTest()
+        {
+            VerifyExists();
+            bool value = false;
+            try
+            {
+                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                VerifyDockLinkDoesNotExists(id, _gunId);
+
+                if (!Documents.PerformDocLink(_databasePath, _gunId, id, out _errOut)) throw new Exception(_errOut);
+                value = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Delete Doc Link test
+        /// </summary>
+        [TestMethod]
+        public void DeleteDocLinkTest()
+        {
+            VerifyExists();
+            bool value = false;
+            try
+            {
+                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                VerifyDockLinkExists(id, _gunId);
+                long linkId = Documents.GetDocLinkId(_databasePath, id, _gunId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+
+                if (!Documents.DeleteDocLink(_databasePath, linkId, out _errOut)) throw new Exception(_errOut);
+                value = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Verify doc link exists
+        /// </summary>
+        [TestMethod]
+        public void DocLinkExistsTest()
+        {
+            VerifyExists();
+            bool value = false;
+            try
+            {
+                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                VerifyDockLinkExists(id, _gunId);
+                long linkId = Documents.GetDocLinkId(_databasePath, id, _gunId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+
+                if (!Documents.DocLinkExists(_databasePath, linkId,id, out _errOut)) throw new Exception(_errOut);
+                value = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Get doc link Id test
+        /// </summary>
+        [TestMethod]
+        public void GetDocLinkIdTest()
+        {
+            VerifyExists();
+            bool value = false;
+            try
+            {
+                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                VerifyDockLinkExists(id, _gunId);
+                long linkId = Documents.GetDocLinkId(_databasePath, id, _gunId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                TestContext.WriteLine($"Doc Link id is: {linkId}");
+                value = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            General.HasTrueValue(value, _errOut);
         }
     }
 }
