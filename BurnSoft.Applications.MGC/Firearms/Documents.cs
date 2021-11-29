@@ -373,6 +373,30 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Check to seeif a doc link already exists between the firearm and the document
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="firearmId"></param>
+        /// <param name="documentId"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool DocLinkExists(string databasePath, long firearmId, long documentId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Select * from Gun_Collection_Docs_Links where GID={firearmId} and DID={documentId}";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DocLinkExists", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Get the Doc link Id
         /// </summary>
         /// <param name="databasePath"></param>
@@ -399,7 +423,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("GetId", e);
+                errOut = ErrorMessage("GetDocLinkId", e);
             }
 
             return lAns;
