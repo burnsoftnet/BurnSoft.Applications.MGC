@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
@@ -564,6 +565,29 @@ namespace BurnSoft.Applications.MGC.Firearms
         public static bool HasDocumentsAttached(string databasePath, int gunId, out string errOut)
         {
             return Database.DataExists(databasePath, $"select * from Gun_Collection_Docs_Links where GID={gunId}", out errOut);
+        }
+        /// <summary>
+        /// Count the number of firearms this document is attached to.
+        /// </summary>
+        /// <param name="databasePath">database path and name</param>
+        /// <param name="id">document id</param>
+        /// <param name="errOut">exception message if any</param>
+        /// <returns></returns>
+        public static long CountLinkedDocs(string databasePath, long id, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = $"select count(*) as T from Gun_Collection_Docs_Links where did={id}";
+                lAns = DatabaseRelated.GetTotal(databasePath, sql, "CountLinkedDocs", out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CountLinkedDocs", e);
+            }
+            return lAns;
         }
 
         /// <summary>
