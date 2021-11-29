@@ -261,6 +261,16 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
+        /// Defines the test method HasMultiBarrelsListedTest.
+        /// </summary>
+        [TestMethod, TestCategory("Barrel/Conversion Kits")]
+        public void HasMultiBarrelsListedTest()
+        {
+            VerifyExists();
+            bool value = ExtraBarrelConvoKits.HasMultiBarrelsListed(_databasePath, _gunId,  out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
         /// Defines the test method GetBarrelIdTest.
         /// </summary>
         [TestMethod, TestCategory("Barrel/Conversion Kits")]

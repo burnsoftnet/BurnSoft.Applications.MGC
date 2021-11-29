@@ -465,7 +465,7 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             try
             {
-                string sql = $"SELECT Count(*) as Total from Gun_Collection_Ext where GID={id}";
+                string sql = $"SELECT Count(*) as T from Gun_Collection_Ext where GID={id}";
                 long count = DatabaseRelated.GetTotal(databasePath, sql, "HasMultiBarrelsListed", out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = count > 0;
