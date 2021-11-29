@@ -378,5 +378,27 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(value, _errOut);
         }
+        /// <summary>
+        /// Get documentat from database test
+        /// </summary>
+        [TestMethod]
+        public void GetDocumentFromDbTest()
+        {
+            VerifyExists();
+            bool value = false;
+            try
+            {
+                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                if (!Documents.GetDocumentFromDb(_databasePath,AppDomain.CurrentDomain.BaseDirectory, id, out _errOut)) throw new Exception(_errOut);
+                value = true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }
