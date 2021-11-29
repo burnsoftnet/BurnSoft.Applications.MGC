@@ -413,9 +413,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string sql = $"Select * from Gun_Collection_Docs_Links where DID={docId} and GID={gunId}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                List<DocumentList> lst = MyList(dt, out errOut);
+                List<DocumentLinkList> lst = MyListLinks(dt, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (DocumentList d in lst)
+                foreach (DocumentLinkList d in lst)
                 {
                     lAns = d.Id;
                 }

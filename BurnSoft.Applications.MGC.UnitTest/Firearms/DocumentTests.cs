@@ -136,7 +136,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
             
             General.HasTrueValue(value, _errOut);
@@ -298,7 +297,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
 
             General.HasTrueValue(value, _errOut);
@@ -325,7 +323,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
 
             General.HasTrueValue(value, _errOut);
@@ -352,7 +349,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
 
             General.HasTrueValue(value, _errOut);
@@ -378,7 +374,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
 
             General.HasTrueValue(value, _errOut);
