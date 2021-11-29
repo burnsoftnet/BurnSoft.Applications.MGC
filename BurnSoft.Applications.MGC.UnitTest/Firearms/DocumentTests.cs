@@ -400,5 +400,24 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(value, _errOut);
         }
+        [TestMethod, TestCategory("Documents")]
+        public void CountLinkedDocsTest()
+        {
+            long value = 0;
+            try
+            {
+                VerifyExists();
+                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                VerifyDockLinkExists(id, _gunId);
+                value = Documents.CountLinkedDocs(_databasePath, id, out _errOut);
+                TestContext.WriteLine($"There are {value} documents that are attached to a firearm");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            General.HasTrueValue(value >0, _errOut);
+        }
     }
 }
