@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
@@ -655,8 +656,10 @@ namespace BurnSoft.Applications.MGC.Firearms
                 foreach (DocumentList d in lst)
                 {
                     string saveTo = Path.Combine(applicationPathData, $"mgc_doc_view.{d.DocExt}");
-                    if (!SaveDocToHdd(Convert.ToByte(d.DataFile), saveTo, out errOut)) throw new Exception(errOut);
+                    if (!SaveDocToHdd(d.DataFile, saveTo, out errOut)) throw new Exception(errOut);
                 }
+
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -671,7 +674,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="path"></param>
         /// <param name="errOut"></param>
         /// <returns></returns>
-        internal static bool SaveDocToHdd(Byte data, string path, out string errOut)
+        internal static bool SaveDocToHdd(object data, string path, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -680,7 +683,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (File.Exists(path)) File.Delete(path);
                 FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
                 BinaryWriter bw = new BinaryWriter(fs);
-                bw.Write(data);
+                bw.Write(ObjectToByteArray(data));
                 bw.Close();
                 fs.Close();
                 if (!OpenFile(path, out errOut)) throw  new Exception(errOut);
@@ -691,6 +694,20 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("SaveDocToHdd", e);
             }
             return bAns;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private static byte[] ObjectToByteArray(Object obj)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            using (var ms = new MemoryStream())
+            {
+                bf.Serialize(ms, obj);
+                return ms.ToArray();
+            }
         }
         /// <summary>
         /// Open file with default viewer
