@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
+using System.Diagnostics;
 using System.IO;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
@@ -670,17 +671,50 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="path"></param>
         /// <param name="errOut"></param>
         /// <returns></returns>
-        public static bool SaveDocToHdd(Byte data, string path, out string errOut)
+        internal static bool SaveDocToHdd(Byte data, string path, out string errOut)
         {
             bool bAns = false;
             errOut = "";
             try
             {
-
+                if (File.Exists(path)) File.Delete(path);
+                FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
+                BinaryWriter bw = new BinaryWriter(fs);
+                bw.Write(data);
+                bw.Close();
+                fs.Close();
+                if (!OpenFile(path, out errOut)) throw  new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("SaveDocToHdd", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Open file with default viewer
+        /// </summary>
+        /// <param name="filePathAndName"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        internal static bool OpenFile(string filePathAndName, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                Process p = new Process();
+                ProcessStartInfo s = new ProcessStartInfo(filePathAndName);
+                s.UseShellExecute = true;
+                s.WindowStyle = ProcessWindowStyle.Normal;
+                p.StartInfo = s;
+                p.Start();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("OpenFile", e);
             }
             return bAns;
         }
