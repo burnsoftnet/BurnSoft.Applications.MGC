@@ -632,5 +632,57 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+        /// <summary>
+        /// Get the Data of the document from the database and save it to the hard drive to view or export
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="applicationPathData"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool GetDocumentFromDb(string databasePath,string applicationPathData, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Gun_Collection_Docs where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<DocumentList> lst = MyList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (DocumentList d in lst)
+                {
+                    string saveTo = Path.Combine(applicationPathData, $"mgc_doc_view.{d.DocExt}");
+                    if (!SaveDocToHdd(Convert.ToByte(d.DataFile), saveTo, out errOut)) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetDocumentfromDb", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Take the data from the database and save it to the hard drive
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="path"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool SaveDocToHdd(Byte data, string path, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SaveDocToHdd", e);
+            }
+            return bAns;
+        }
     }
 }
