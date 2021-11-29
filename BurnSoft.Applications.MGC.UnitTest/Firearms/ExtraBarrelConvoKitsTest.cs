@@ -271,6 +271,18 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
+        /// Defines the test method GetDefaultBarrelIdTest.
+        /// </summary>
+        [TestMethod, TestCategory("Barrel/Conversion Kits")]
+        public void GetDefaultBarrelIdTest()
+        {
+            VerifyExists();
+            long value = ExtraBarrelConvoKits.GetDefaultBarrelId(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine($"Barrel Id: {value}");
+            General.HasTrueValue(value == _barrelConvoKitDefaultId, _errOut);
+        }
+
+        /// <summary>
         /// Defines the test method GetBarrelIdTest.
         /// </summary>
         [TestMethod, TestCategory("Barrel/Conversion Kits")]

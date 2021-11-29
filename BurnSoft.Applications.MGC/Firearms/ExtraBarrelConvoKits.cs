@@ -556,7 +556,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"SELECT ID from Gun_Collection_Ext where IsDefault=1 and GID={gunId}";
+                string sql = $"SELECT * from Gun_Collection_Ext where IsDefault=1 and GID={gunId}";
                 List<BarrelSystems> lst = GetList(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 int i = 0;
