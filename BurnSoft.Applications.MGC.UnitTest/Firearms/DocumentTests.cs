@@ -400,6 +400,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
             General.HasTrueValue(value, _errOut);
         }
+        /// <summary>
+        /// Test the count lined documents test
+        /// </summary>
         [TestMethod, TestCategory("Documents")]
         public void CountLinkedDocsTest()
         {
