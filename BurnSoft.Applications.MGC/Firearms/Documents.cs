@@ -372,6 +372,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Get the Doc link Id
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="docId"></param>
+        /// <param name="gunId"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
         public static long GetDocLinkId(string databasePath, long docId, long gunId, out string errOut)
         {
             long lAns = 0;
@@ -396,19 +404,50 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return lAns;
         }
-        public static bool DeleteDocLink(string databasePath, int firearmId, int documentId, out string errOut)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool DeleteDocLink(string databasePath, long id, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                string sql = $"T INTO Gun_Collection_Docs_Links (GID,DID) VALUES({firearmId},{documentId})";
+                string sql = $"DELETE from Gun_Collection_Docs_Links where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("PerformDocLink", e);
+                errOut = ErrorMessage("DeleteDocLink", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Remove firearm from link lists
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="gunId"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool DeleteFirearmFromLinkList(string databasePath, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"DELETE from Gun_Collection_Docs_Links where gid={gunId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("DeleteDocLink", e);
             }
             return bAns;
         }
