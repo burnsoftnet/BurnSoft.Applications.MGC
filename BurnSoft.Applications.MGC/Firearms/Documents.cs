@@ -707,7 +707,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (File.Exists(path)) File.Delete(path);
                 FileStream fs = new FileStream(path, FileMode.Create, FileAccess.ReadWrite);
                 BinaryWriter bw = new BinaryWriter(fs);
-                bw.Write(ObjectToByteArray(data));
+                bw.Write(Helpers.ObjectToByteArray(data));
                 bw.Close();
                 fs.Close();
                 if (!OpenFile(path, out errOut)) throw  new Exception(errOut);
@@ -719,20 +719,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        private static byte[] ObjectToByteArray(Object obj)
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            using (var ms = new MemoryStream())
-            {
-                bf.Serialize(ms, obj);
-                return ms.ToArray();
-            }
-        }
+        
         /// <summary>
         /// Open file with default viewer
         /// </summary>

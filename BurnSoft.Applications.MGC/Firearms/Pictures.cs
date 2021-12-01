@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using ADODB;
+using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 
@@ -330,20 +331,40 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 BSOtherObjects obj = new BSOtherObjects();
-                BSDateTime objDf = new BSDateTime();
 
                 foreach (DataRow d in dt.Rows)
                 {
+                    object oThumb = d["thumb"] != DBNull.Value ? d["thumb"] : "";
+                    object oPic = d["Picture"] != DBNull.Value ? d["Picture"] : "";
+                    Byte[] bThumb = Helpers.ObjectToByteArray(oThumb);
+                    Byte[] bPic = Helpers.ObjectToByteArray(oPic);
+
+                    MemoryStream thumbStream = new MemoryStream();
+                    MemoryStream picStream = new MemoryStream();
+                    if (bThumb.Length > 0)
+                    {
+                        thumbStream = new MemoryStream(bThumb, true);
+                        thumbStream.Write(bThumb,0,bThumb.Length);
+                        thumbStream.Close();
+                    }
+                    if (bPic.Length > 0)
+                    {
+                        picStream = new MemoryStream(bPic, true);
+                        picStream.Write(bPic, 0, bPic.Length);
+                        picStream.Close();
+                    }
                     lst.Add(new PictureDetails()
                     {
                         Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
                         LastSyncDate = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : "",
                         CollectionId = Convert.ToInt32(d["CID"] != DBNull.Value ? d["CID"] : 0),
-                        Picture = d["Picture"] != DBNull.Value ? d["Picture"] : "",
+                        Picture = oPic,
                         IsMain = obj.ConvertIntToBool(Convert.ToInt32(d["ISMAIN"] != DBNull.Value ? d["ISMAIN"] : 0)),
-                        Thumb = d["thumb"] != DBNull.Value ? d["thumb"] : "",
+                        Thumb = oThumb,
                         PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
                         PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : "",
+                        ThumbMemoryStream = thumbStream,
+                        PictureMemoryStream = picStream
                     });
                 }
             }
