@@ -119,6 +119,7 @@
     <Compile Include="Types\NationalityList.cs" />
     <Compile Include="Types\OwnerInfo.cs" />
     <Compile Include="Types\BuyersList.cs" />
+    <Compile Include="Types\PictureDetails.cs" />
     <Compile Include="Types\TableLists.cs" />
     <Compile Include="Types\WishlistList.cs" />
   </ItemGroup>
