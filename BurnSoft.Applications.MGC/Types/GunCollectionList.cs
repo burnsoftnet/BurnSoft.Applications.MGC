@@ -207,10 +207,25 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The date time added in database.</value>
         public string DateTimeAddedInDb { get; set; }
         /// <summary>
-        /// Gets or sets a value indicating whether [item sold].
+        /// Gets or sets a value indicating whether [item sold or stolesn, is 0 then instock, if 1 then item sold, if 2 then item is stolen
         /// </summary>
         /// <value><c>true</c> if [item sold]; otherwise, <c>false</c>.</value>
-        public bool ItemSold { get; set; }
+        public int ItemSold { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is shot gun.
+        /// </summary>
+        /// <value><c>true</c> if this instance is shot gun; otherwise, <c>false</c>.</value>
+        public bool IsShotGun { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [was stolen].
+        /// </summary>
+        /// <value><c>true</c> if [was stolen]; otherwise, <c>false</c>.</value>
+        public bool WasStolen { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [was sold].
+        /// </summary>
+        /// <value><c>true</c> if [was sold]; otherwise, <c>false</c>.</value>
+        public bool WasSold { get; set; }
         /// <summary>
         /// Gets or sets the seller id.
         /// </summary>

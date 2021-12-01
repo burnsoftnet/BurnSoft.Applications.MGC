@@ -778,6 +778,31 @@ namespace BurnSoft.Applications.MGC.Firearms
                         //Don't care default is 0
                     }
 
+                    string myType = d["Type"] != DBNull.Value ? d["Type"].ToString().Trim() : "";
+                    int itemSold = Convert.ToInt32(d["ItemSold"] != DBNull.Value ? d["ItemSold"].ToString() : "0");
+                    bool wasSold = false;
+                    bool wasStolen = false;
+
+                    switch (itemSold)
+                    {
+                        case 0:
+                            wasStolen = false;
+                            wasSold = false;
+                            break;
+                        case 1:
+                            wasStolen = false;
+                            wasSold = true;
+                            break;
+                        case 2:
+                            wasStolen = true;
+                            wasSold = false;
+                            break;
+                        default:
+                            wasStolen = false;
+                            wasSold = false;
+                            break;
+                    }
+
                     lst.Add(new GunCollectionList()
                     {
                         Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
@@ -788,7 +813,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                         ModelName = d["ModelName"] != DBNull.Value ? d["ModelName"].ToString().Trim() : "",
                         ModelId = Convert.ToInt32(d["ModelID"] != DBNull.Value ? d["ModelID"] : "0"),
                         SerialNumber = d["SerialNumber"] != DBNull.Value ? d["SerialNumber"].ToString().Trim() : "",
-                        Type = d["Type"] != DBNull.Value ? d["Type"].ToString().Trim(): "",
+                        Type = myType,
                         Caliber = d["Caliber"] != DBNull.Value ? d["Caliber"].ToString().Trim() : "",
                         Caliber3 = d["Caliber3"] != DBNull.Value ? d["Caliber3"].ToString().Trim() : "",
                         PetLoads = d["PetLoads"] != DBNull.Value ? d["PetLoads"].ToString().Trim() : "",
@@ -822,7 +847,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         HasAccessory = obj.ConvertIntToBool(Convert.ToInt32(d["HasAss"] != DBNull.Value ? d["HasAss"] : 0)),
                         DateProduced = d["Produced"] != DBNull.Value ? d["Produced"].ToString().Trim() : "",
                         DateTimeAddedInDb = d["dt"] != DBNull.Value ? d["dt"].ToString().Trim() : "",
-                        ItemSold = obj.ConvertIntToBool(Convert.ToInt32(d["ItemSold"] != DBNull.Value ? d["ItemSold"].ToString() : "0")),
+                        ItemSold = Convert.ToInt32(d["ItemSold"] != DBNull.Value ? d["ItemSold"].ToString() : "0"),
+                        IsShotGun = myType.ToLower().Contains("shotgun"),
                         Sid = Convert.ToInt32(d["SID"] != DBNull.Value ? d["SID"].ToString() : "0"),
                         Bid = Convert.ToInt32(d["BID"] != DBNull.Value ? d["BID"].ToString() : "0"),
                         DateSold = d["dtSold"] != DBNull.Value ? d["dtSold"].ToString().Trim() : "",
@@ -841,7 +867,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                         DateOfCAndR = d["DateofCR"] != DBNull.Value ? d["DateofCR"].ToString().Trim() : "",
                         LastSyncDate = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : "",
                         IsClass3Item = obj.ConvertIntToBool(Convert.ToInt32(d["IsClassIII"] != DBNull.Value ? d["IsClassIII"].ToString():"0")),
-                        Class3Owner = d["ClassIII_owner"] != DBNull.Value ? d["ClassIII_owner"].ToString().Trim() : ""
+                        Class3Owner = d["ClassIII_owner"] != DBNull.Value ? d["ClassIII_owner"].ToString().Trim() : "",
+                        WasStolen = wasStolen,
+                        WasSold = wasSold
 
                     });
                 }

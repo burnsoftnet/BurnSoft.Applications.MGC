@@ -42,23 +42,23 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// The full name
         /// </summary>
-        private string fullName;
+        private string _fullName;
         /// <summary>
         /// The manufactures identifier
         /// </summary>
-        private long manufacturesId;
+        private long _manufacturesId;
         /// <summary>
         /// The model identifier
         /// </summary>
-        private long modelId;
+        private long _modelId;
         /// <summary>
         /// The nationality identifier
         /// </summary>
-        private long nationalityId;
+        private long _nationalityId;
         /// <summary>
         /// The grip identifier
         /// </summary>
-        private long gripId;
+        private long _gripId;
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -72,26 +72,26 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             _shopOldName =obj.FC(Vs2019.GetSetting("MyGunCollection_ShopOldName", TestContext));
             _shopNewName = obj.FC(Vs2019.GetSetting("MyGunCollection_ShopNewName", TestContext));
-            fullName = "Glock Super Carry";
-            manufacturesId = Manufacturers.GetId(_databasePath, "Glock", out _errOut);
-            modelId = Models.GetId(_databasePath, "G26", manufacturesId, out _errOut);
-            nationalityId = Nationality.GetId(_databasePath, "USA", out _errOut);
-            gripId = Grips.GetId(_databasePath, "Plastic", out _errOut);
+            _fullName = "Glock Super Carry";
+            _manufacturesId = Manufacturers.GetId(_databasePath, "Glock", out _errOut);
+            _modelId = Models.GetId(_databasePath, "G26", _manufacturesId, out _errOut);
+            _nationalityId = Nationality.GetId(_databasePath, "USA", out _errOut);
+            _gripId = Grips.GetId(_databasePath, "Plastic", out _errOut);
         }
 
         [TestMethod, TestCategory("Gun Collection - Get Firearm ID")]
         public void GetFirearmIdByFullName()
         {
-            long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
-            TestContext.WriteLine($"FireArm Id from full name {fullName} is {gunId}");
+            long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
+            TestContext.WriteLine($"FireArm Id from full name {_fullName} is {gunId}");
             General.HasTrueValue(gunId > 0, _errOut);
         }
 
         [TestMethod, TestCategory("Gun Collection - Delete Firearm")]
         public void RemoveFirearm()
         {
-            long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
-            TestContext.WriteLine($"FireArm Id from full name {fullName} is {gunId}");
+            long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
+            TestContext.WriteLine($"FireArm Id from full name {_fullName} is {gunId}");
             bool value = MyCollection.Delete(_databasePath, gunId, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
@@ -102,19 +102,19 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = false;
             try
             {
-                if (MyCollection.Exists(_databasePath, fullName, out _errOut))
+                if (MyCollection.Exists(_databasePath, _fullName, out _errOut))
                 {
-                    long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
+                    long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
                     MyCollection.Delete(_databasePath, gunId, out _errOut);
                 }
 
-                value = MyCollection.Add(_databasePath, false, 2, manufacturesId,
-                    fullName, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
-                    "New", " ", nationalityId, gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
+                value = MyCollection.Add(_databasePath, false, 2, _manufacturesId,
+                    _fullName, "G26", _modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
+                    "New", " ", _nationalityId, _gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
                     "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
                     DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ", true, "1-8", "2 lbs", " ", "Modern", "11/09/2021 14:20:45", false," ", out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                bool exists = MyCollection.Exists(_databasePath, fullName, out _errOut);
+                bool exists = MyCollection.Exists(_databasePath, _fullName, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 value = exists;
             }
@@ -129,20 +129,20 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Gun Collection - Update Firearm")]
         public void UpdateFirearm()
         {
-            if (!MyCollection.Exists(_databasePath, fullName, out _errOut))
+            if (!MyCollection.Exists(_databasePath, _fullName, out _errOut))
             {
-                MyCollection.Add(_databasePath, false, 2, manufacturesId,
-                    fullName, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
-                    "New", " ", nationalityId, gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
+                MyCollection.Add(_databasePath, false, 2, _manufacturesId,
+                    _fullName, "G26", _modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
+                    "New", " ", _nationalityId, _gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
                     "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
                     DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ", 
                     true, "1-8", "2 lbs", " ", "Modern", "11/09/2021 14:20:45", false, " ", out _errOut);
             }
 
-            long gunId = MyCollection.GetId(_databasePath, fullName, out _errOut);
+            long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
 
-            bool value = MyCollection.Update(_databasePath, (int)gunId, false, 2, manufacturesId, "G26", modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
-                "New", " ", nationalityId, gripId, "18oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
+            bool value = MyCollection.Update(_databasePath, (int)gunId, false, 2, _manufacturesId, "G26", _modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
+                "New", " ", _nationalityId, _gripId, "18oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
                 "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
                 DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ",
                 true, "1-8", "1 lbs", " ", "Modern", "2021/11/02",false,false,"","", out _errOut);
@@ -219,6 +219,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     TestContext.WriteLine($"LastSyncDate: {g.LastSyncDate}");
                     TestContext.WriteLine($"IsClass3Item: {g.IsClass3Item}");
                     TestContext.WriteLine($"Class3Owner: {g.Class3Owner}");
+                    TestContext.WriteLine($"WaS Stolen: {g.WasStolen}");
+                    TestContext.WriteLine($"Was Sold: {g.WasSold}");
+                    TestContext.WriteLine($"Is Stogun: {g.IsShotGun}");
                     TestContext.WriteLine("--------------------------------------");
                     TestContext.WriteLine("");
                 }
