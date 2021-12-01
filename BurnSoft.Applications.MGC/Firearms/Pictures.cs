@@ -265,7 +265,13 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return bAns;
         }
-
+        /// <summary>
+        /// Generate a list of the data returned from the datatable query relating to the pictures table.
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="errOut"></param>
+        /// <param name="dbPath"></param>
+        /// <returns></returns>
         internal static List<PictureDetails> MyList(DataTable dt, out string errOut, string dbPath = "")
         {
             List<PictureDetails> lst = new List<PictureDetails>();
