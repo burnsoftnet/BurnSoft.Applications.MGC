@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using ADODB;
+using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Universal;
+
 // ReSharper disable ExpressionIsAlwaysNull
 
 // ReSharper disable UnusedMember.Local
@@ -260,6 +264,37 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
 
             return bAns;
+        }
+
+        internal static List<PictureDetails> MyList(DataTable dt, out string errOut, string dbPath = "")
+        {
+            List<PictureDetails> lst = new List<PictureDetails>();
+            errOut = @"";
+            try
+            {
+                BSOtherObjects obj = new BSOtherObjects();
+                BSDateTime objDf = new BSDateTime();
+
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new PictureDetails()
+                    {
+                        Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
+                        LastSyncDate = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : "",
+                        CollectionId = Convert.ToInt32(d["CID"] != DBNull.Value ? d["CID"] : 0),
+                        Picture = d["Picture"] != DBNull.Value ? d["Picture"] : "",
+                        IsMain = obj.ConvertIntToBool(Convert.ToInt32(d["ISMAIN"] != DBNull.Value ? d["ISMAIN"] : 0)),
+                        Thumb = d["thumb"] != DBNull.Value ? d["thumb"] : "",
+                        PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
+                        PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : "",
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+            return lst;
         }
     }
 }
