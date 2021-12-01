@@ -266,6 +266,57 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Count all the pictures that are tied to a particular firearm
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="gunId"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public long CountPics(string databasePath, long gunId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                List<PictureDetails> lst = GetPicturesForFirearm(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lAns = lst.Count;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CountPics", e);
+            }
+            return lAns;
+
+        }
+        /// <summary>
+        /// Get all the data from teh tabl based on the firearm they are attached to.
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="gunId"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public List<PictureDetails> GetPicturesForFirearm(string databasePath, long gunId, out string errOut)
+        {
+            List<PictureDetails> lst = new List<PictureDetails>();
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection_Pictures where CID={gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetPicturesForFirearm", e);
+            }
+            return lst;
+
+        }
+
+        /// <summary>
         /// Generate a list of the data returned from the datatable query relating to the pictures table.
         /// </summary>
         /// <param name="dt"></param>
