@@ -44,19 +44,27 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Convert.ToInt32(Vs2019.GetSetting("MyGunCollectionID", TestContext));
         }
+        /// <summary>
+        /// Defines the test method HasDefaultPictureTestNoAdd.
+        /// </summary>
         [TestMethod]
         public void HasDefaultPictureTestNoAdd()
         {
             bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, "", out _errOut);
             General.HasTrueValue(value, _errOut);
         }
+        /// <summary>
+        /// Defines the test method IsFirstPicTest.
+        /// </summary>
         [TestMethod]
         public void IsFirstPicTest()
         {
             bool value = Pictures.IsFirstPic(_databasePath, _gunId, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method CountPicsTest.
+        /// </summary>
         [TestMethod]
         public void CountPicsTest()
         {
@@ -64,7 +72,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             TestContext.WriteLine($"Number of pics in collection: {value}");
             General.HasTrueValue(value > 0, _errOut);
         }
-
+        /// <summary>
+        /// Prints the list.
+        /// </summary>
+        /// <param name="p">The p.</param>
         public void PrintList(List<PictureDetails> p)
         {
             if (p.Count > 0)
@@ -90,7 +101,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 TestContext.WriteLine("NO DATA IN LIST!");
             }
         }
-
+        /// <summary>
+        /// Defines the test method GetPicturesForFirearmTest.
+        /// </summary>
         [TestMethod]
         public void GetPicturesForFirearmTest()
         {
