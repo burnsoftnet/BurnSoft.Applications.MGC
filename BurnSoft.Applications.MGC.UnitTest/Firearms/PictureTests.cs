@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using BurnSoft.Applications.MGC.Firearms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Types;
@@ -62,6 +63,40 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             long value = Pictures.CountPics(_databasePath, _gunId, out _errOut);
             TestContext.WriteLine($"Number of pics in collection: {value}");
             General.HasTrueValue(value > 0, _errOut);
+        }
+
+        public void PrintList(List<PictureDetails> p)
+        {
+            if (p.Count > 0)
+            {
+                foreach (PictureDetails d in p)
+                {
+                    TestContext.WriteLine("");
+                    TestContext.WriteLine($"id: {d.Id}");
+                    TestContext.WriteLine($"isMain: {d.IsMain}");
+                    TestContext.WriteLine($"Last Sync: {d.LastSyncDate}");
+                    TestContext.WriteLine($"Picture: {d.Picture}");
+                    TestContext.WriteLine($"Thumb: {d.Thumb}");
+                    TestContext.WriteLine($"Display Name: {d.PictureDisplayName}");
+                    TestContext.WriteLine($"Display Note: {d.PictureNotes}");
+                    TestContext.WriteLine($"Pic Stream: {d.PictureMemoryStream}");
+                    TestContext.WriteLine($"Thum Stream: {d.ThumbMemoryStream}");
+                    TestContext.WriteLine("");
+                    TestContext.WriteLine("----------------------------------------");
+                }
+            }
+            else
+            {
+                TestContext.WriteLine("NO DATA IN LIST!");
+            }
+        }
+
+        [TestMethod]
+        public void GetPicturesForFirearmTest()
+        {
+            List<PictureDetails> value = Pictures.GetPicturesForFirearm(_databasePath, _gunId, out _errOut);
+            PrintList(value);
+            General.HasTrueValue(value.Count > 0, _errOut);
         }
     }
 }
