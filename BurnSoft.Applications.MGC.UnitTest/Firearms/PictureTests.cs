@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using BurnSoft.Applications.MGC.Firearms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
@@ -43,8 +44,24 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _gunId = Convert.ToInt32(Vs2019.GetSetting("MyGunCollectionID", TestContext));
         }
         [TestMethod]
-        public void TestMethod1()
+        public void HasDefaultPictureTestNoAdd()
         {
+            bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, "", out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        [TestMethod]
+        public void IsFirstPicTest()
+        {
+            bool value = Pictures.IsFirstPic(_databasePath, _gunId, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod]
+        public void CountPicsTest()
+        {
+            long value = Pictures.CountPics(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine($"Number of pics in collection: {value}");
+            General.HasTrueValue(value > 0, _errOut);
         }
     }
 }

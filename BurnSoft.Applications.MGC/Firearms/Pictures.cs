@@ -70,7 +70,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if [is first pic] [the specified database path]; otherwise, <c>false</c>.</returns>
         /// <exception cref="Exception"></exception>
-        public static bool IsFirstPic(string databasePath, string collectionId, out string errOut)
+        public static bool IsFirstPic(string databasePath, long collectionId, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -250,7 +250,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 rs.Fields["CID"].Value = gunId;
                 rs.Fields["PICTURE"].AppendChunk(buffer);
                 rs.Fields["THUMB"].AppendChunk(bufferT);
-                rs.Fields["ISMAIN"].Value = IsFirstPic(databasePath, gunId.ToString(), out errOut) ? 1 : 0;
+                rs.Fields["ISMAIN"].Value = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
 
                 rs.Fields["pd_name"].Value = name;
                 rs.Fields["pd_note"].Value = notes;
@@ -273,7 +273,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="gunId"></param>
         /// <param name="errOut"></param>
         /// <returns></returns>
-        public long CountPics(string databasePath, long gunId, out string errOut)
+        public static long CountPics(string databasePath, long gunId, out string errOut)
         {
             long lAns = 0;
             errOut = @"";
@@ -297,7 +297,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="gunId"></param>
         /// <param name="errOut"></param>
         /// <returns></returns>
-        public List<PictureDetails> GetPicturesForFirearm(string databasePath, long gunId, out string errOut)
+        public static List<PictureDetails> GetPicturesForFirearm(string databasePath, long gunId, out string errOut)
         {
             List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
