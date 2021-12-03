@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurnSoft.Applications.MGC.Types;
+
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.Firearms
@@ -56,5 +58,58 @@ namespace BurnSoft.Applications.MGC.Firearms
         #endregion
         //End Snippet
 
+        public static bool Generate(string databasePath, long gunId,string appVersion, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string xmlData = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>{Environment.NewLine}";
+                xmlData = $"<Firearm>{Environment.NewLine}";
+                xmlData = $"    <MGC>{Environment.NewLine}";
+                xmlData = $"        <version>{appVersion}</version>{Environment.NewLine}";
+                xmlData = $"    <MGC>{Environment.NewLine}";
+                xmlData = $"{Environment.NewLine}";
+                xmlData = $"{Environment.NewLine}";
+                xmlData = $"{Environment.NewLine}";
+                xmlData = $"</Firearm>{Environment.NewLine}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Generate", e);
+            }
+            return bAns;
+        }
+
+        private static string GenerateDetails(string databasePath, long gunId, out string errOut)
+        {
+            string sAns = $"   <Details>{Environment.NewLine}";
+            errOut = "";
+            try
+            {
+                List<GunCollectionList> lst = MyCollection.GetList(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw  new Exception(errOut);
+                foreach (GunCollectionList l in lst)
+                {
+                    sAns = $"       <FullName>{l.FullName}</FullName>{Environment.NewLine}";
+                    sAns = $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                }
+                sAns = $"{Environment.NewLine}";
+                sAns = $"{Environment.NewLine}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GenerateDetails", e);
+            }
+            sAns = $"   </Details>{Environment.NewLine}";
+            return sAns;
+        }
     }
 }
