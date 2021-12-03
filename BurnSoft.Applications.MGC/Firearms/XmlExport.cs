@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
+// ReSharper disable RedundantAssignment
 
 // ReSharper disable UnusedMember.Local
 
@@ -73,6 +74,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 xmlData = $"{Environment.NewLine}";
                 xmlData = $"{Environment.NewLine}";
                 xmlData = $"</Firearm>{Environment.NewLine}";
+
             }
             catch (Exception e)
             {
@@ -93,6 +95,27 @@ namespace BurnSoft.Applications.MGC.Firearms
                 {
                     sAns = $"       <FullName>{l.FullName}</FullName>{Environment.NewLine}";
                     sAns = $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
+                    sAns = $"       <ModelName>{l.ModelName}</ModelName>{Environment.NewLine}";
+                    sAns = $"       <SerialNumber>{l.SerialNumber}</SerialNumber>{Environment.NewLine}";
+                    sAns = $"       <Type>{l.Type}</Type>{Environment.NewLine}";
+                    sAns = $"       <Caliber>{l.Caliber}</Caliber>{Environment.NewLine}";
+                    sAns = $"       <Finish>{l.Finish}</Finish>{Environment.NewLine}";
+                    sAns = $"       <Condition>{l.Condition}</Condition>{Environment.NewLine}";
+                    sAns = $"       <CustomID>{l.CustomId}</CustomID>{Environment.NewLine}";
+                    sAns = $"       <NatID>{l.Nationality}</NatID>{Environment.NewLine}";
+                    sAns = $"       <GripID>{l.GripType}</GripID>{Environment.NewLine}";
+                    sAns = $"       <Weight>{l.Weight}</Weight>{Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       {Environment.NewLine}";
                     sAns = $"       {Environment.NewLine}";
                     sAns = $"       {Environment.NewLine}";
                     sAns = $"       {Environment.NewLine}";
