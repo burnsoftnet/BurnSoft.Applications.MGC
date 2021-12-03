@@ -91,7 +91,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     TestContext.WriteLine($"Display Name: {d.PictureDisplayName}");
                     TestContext.WriteLine($"Display Note: {d.PictureNotes}");
                     TestContext.WriteLine($"Pic Stream: {d.PictureMemoryStream}");
-                    TestContext.WriteLine($"Thum Stream: {d.ThumbMemoryStream}");
+                    TestContext.WriteLine($"Thumb Stream: {d.ThumbMemoryStream}");
                     TestContext.WriteLine("");
                     TestContext.WriteLine("----------------------------------------");
                 }
