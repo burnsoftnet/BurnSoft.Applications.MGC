@@ -120,20 +120,29 @@ namespace BurnSoft.Applications.MGC.Firearms
                     sAns = $"       <InsuredValue>{l.InsuredValue}</InsuredValue>{Environment.NewLine}";
                     sAns = $"       <StorageLocation>{l.StorageLocation}</StorageLocation>{Environment.NewLine}";
                     sAns = $"       <ConditionComments>{l.ConditionComments}</ConditionComments>{Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       <AdditionalNotes>{l.AdditionalNotes}</AdditionalNotes>{Environment.NewLine}";
+                    sAns = $"       <Produced>{l.DateProduced}</Produced>{Environment.NewLine}";
+                    sAns = $"       <IsCandR>{l.IsCAndR}</IsCandR>{Environment.NewLine}";
+                    sAns = $"       <PetLoads>{l.PetLoads}</PetLoads>{Environment.NewLine}";
+                    sAns = $"       <dtp>{l.DateTimeAdded}</dtp>{Environment.NewLine}";
+                    sAns = $"       <Importer>{l.Importer}</Importer>{Environment.NewLine}";
+                    sAns = $"       <ReManDT>{l.RemanufactureDate}</ReManDT>{Environment.NewLine}";
+                    sAns = $"       <POI>{l.Poi}</POI>{Environment.NewLine}";
+                    sAns = $"       <SGChoke>{l.ShotGunChoke}</SGChoke>{Environment.NewLine}";
+                    sAns = $"       <Caliber3>{l.Caliber3}</Caliber3>{Environment.NewLine}";
+                    sAns = $"       <TwistOfRate>{l.TwistRate}</TwistOfRate>{Environment.NewLine}";
+                    sAns = $"       <TriggerPull>{l.TriggerPullInPounds}</TriggerPull>{Environment.NewLine}";
+                    sAns = $"       <BoundBook>{l.IsInBoundBook}</BoundBook>{Environment.NewLine}";
+                    sAns = $"       <Classification>{l.Classification}</Classification>{Environment.NewLine}";
+                    sAns = $"       <DateofCR>{l.DateOfCAndR}</DateofCR>{Environment.NewLine}";
+                    sAns = $"       <IsClassIII>{l.IsClass3Item}</IsClassIII>{Environment.NewLine}";
+                    sAns = $"       <ClassIiiOwner>{l.Class3Owner}</ClassIiiOwner>{Environment.NewLine}";
+                    //sAns = $"       {Environment.NewLine}";
+                    //sAns = $"       {Environment.NewLine}";
+                    //sAns = $"       {Environment.NewLine}";
                 }
-                sAns = $"{Environment.NewLine}";
-                sAns = $"{Environment.NewLine}";
+                //sAns = $"{Environment.NewLine}";
+                //sAns = $"{Environment.NewLine}";
             }
             catch (Exception e)
             {
