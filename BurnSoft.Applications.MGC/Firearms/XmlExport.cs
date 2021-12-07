@@ -111,7 +111,15 @@ namespace BurnSoft.Applications.MGC.Firearms
                     sAns = $"       <BarHei>{l.BarrelHeight}</BarHei>{Environment.NewLine}";
                     sAns = $"       <Action>{l.Action}</Action>{Environment.NewLine}";
                     sAns = $"       <Feedsystem>{l.FeedSystem}</Feedsystem>{Environment.NewLine}";
-                    sAns = $"       {Environment.NewLine}";
+                    sAns = $"       <Sights>{l.Sights}</Sights>{Environment.NewLine}";
+                    sAns = $"       <PurchasedPrice>{l.PurchasePrice}</PurchasedPrice>{Environment.NewLine}";
+                    sAns = $"       <PurchasedFrom>{l.PurchaseFrom}</PurchasedFrom>{Environment.NewLine}";
+                    sAns = $"       <AppraisedValue>{l.AppriasedValue}</AppraisedValue>{Environment.NewLine}";
+                    sAns = $"       <AppraisalDate>{l.AppraisalDate}</AppraisalDate>{Environment.NewLine}";
+                    sAns = $"       <AppraisedBy>{l.AppriasedBy}</AppraisedBy>{Environment.NewLine}";
+                    sAns = $"       <InsuredValue>{l.InsuredValue}</InsuredValue>{Environment.NewLine}";
+                    sAns = $"       <StorageLocation>{l.StorageLocation}</StorageLocation>{Environment.NewLine}";
+                    sAns = $"       <ConditionComments>{l.ConditionComments}</ConditionComments>{Environment.NewLine}";
                     sAns = $"       {Environment.NewLine}";
                     sAns = $"       {Environment.NewLine}";
                     sAns = $"       {Environment.NewLine}";
