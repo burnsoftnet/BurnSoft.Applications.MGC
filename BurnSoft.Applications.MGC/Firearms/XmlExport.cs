@@ -210,5 +210,32 @@ namespace BurnSoft.Applications.MGC.Firearms
             sAns = $"   </Maintance_Details>{Environment.NewLine}";
             return sAns;
         }
+
+        private static string GenerateGunSmitheDetails(string databasePath, long gunId, out string errOut)
+        {
+            string sAns = $"   <GunSmith_Details>{Environment.NewLine}";
+            errOut = "";
+            try
+            {
+                List<GunSmithWorkDone> lst = GunSmithDetails.Lists(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (GunSmithWorkDone l in lst)
+                {
+                    sAns = $"       <gsmith>{l.GunSmithName}</gsmith>{Environment.NewLine}";
+                    sAns = $"       <sdate>{l.StartDate}</sdate>{Environment.NewLine}";
+                    sAns = $"       <rdate>{l.ReturnDate}</rdate>{Environment.NewLine}";
+                    sAns = $"       <od>{l.OrderDetails}</od>{Environment.NewLine}";
+                    sAns = $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
+                }
+                //sAns = $"{Environment.NewLine}";
+                //sAns = $"{Environment.NewLine}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GenerateGunSmitheDetails", e);
+            }
+            sAns = $"   </GunSmith_Details>{Environment.NewLine}";
+            return sAns;
+        }
     }
 }
