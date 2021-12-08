@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Universal;
 // ReSharper disable RedundantAssignment
 // ReSharper disable NotAccessedVariable
 
@@ -65,6 +66,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="databasePath">The database path.</param>
         /// <param name="gunId">The gun identifier.</param>
         /// <param name="appVersion">The application version.</param>
+        /// <param name="file">the file name and path to save to</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
@@ -72,7 +74,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        public static bool Generate(string databasePath, long gunId,string appVersion, out string errOut)
+        public static bool Generate(string databasePath, long gunId,string appVersion,string file, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -95,7 +97,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 xmlData += $"</Firearm>{Environment.NewLine}";
                 xmlData = xmlData.Replace("&", "&amp;");
-                //BSFileSystem objFs = new BSFileSystem();
+                FileIO objFs = new FileIO();
+                objFs.AppendToFile(file, xmlData);
+                bAns = true;
             }
             catch (Exception e)
             {
