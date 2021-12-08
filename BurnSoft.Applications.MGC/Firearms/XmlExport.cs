@@ -82,7 +82,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Generates the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GenerateDetails(string databasePath, long gunId, out string errOut)
         {
             string sAns = $"   <Details>{Environment.NewLine}";
@@ -151,7 +158,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             sAns = $"   </Details>{Environment.NewLine}";
             return sAns;
         }
-
+        /// <summary>
+        /// Generates the accessories.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GenerateAccessories(string databasePath, long gunId, out string errOut)
         {
             string sAns = $"   <Accessories>{Environment.NewLine}";
@@ -183,6 +197,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             sAns = $"   </Accessories>{Environment.NewLine}";
             return sAns;
         }
+        /// <summary>
+        /// Generates the maintance details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GenerateMaintanceDetails(string databasePath, long gunId, out string errOut)
         {
             string sAns = $"   <Maintance_Details>{Environment.NewLine}";
@@ -210,7 +232,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             sAns = $"   </Maintance_Details>{Environment.NewLine}";
             return sAns;
         }
-
+        /// <summary>
+        /// Generates the gun smithe details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
         private static string GenerateGunSmitheDetails(string databasePath, long gunId, out string errOut)
         {
             string sAns = $"   <GunSmith_Details>{Environment.NewLine}";
