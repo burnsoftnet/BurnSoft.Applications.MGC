@@ -151,5 +151,37 @@ namespace BurnSoft.Applications.MGC.Firearms
             sAns = $"   </Details>{Environment.NewLine}";
             return sAns;
         }
+
+        private static string GenerateAccessories(string databasePath, long gunId, out string errOut)
+        {
+            string sAns = $"   <Accessories>{Environment.NewLine}";
+            errOut = "";
+            try
+            {
+                List<AccessoriesList> lst = Accessories.List(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (AccessoriesList l in lst)
+                {
+                    sAns = $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
+                    sAns = $"       <Model>{l.Model}</Model>{Environment.NewLine}";
+                    sAns = $"       <SerialNumber>{l.SerialNumber}</SerialNumber>{Environment.NewLine}";
+                    sAns = $"       <Condition>{l.Condition}</Condition>{Environment.NewLine}";
+                    sAns = $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
+                    sAns = $"       <Use>{l.Use}</Use>{Environment.NewLine}";
+                    sAns = $"       <PurValue>{l.PurchaseValue}</PurValue>{Environment.NewLine}";
+                    sAns = $"       <appValue>{l.AppriasedValue}</appValue>{Environment.NewLine}";
+                    sAns = $"       <civ>{l.CountInValue}</civ>{Environment.NewLine}";
+                    sAns = $"       <ic>{l.IsChoke}</ic>{Environment.NewLine}";
+                }
+                //sAns = $"{Environment.NewLine}";
+                //sAns = $"{Environment.NewLine}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GenerateAccessories", e);
+            }
+            sAns = $"   </Accessories>{Environment.NewLine}";
+            return sAns;
+        }
     }
 }
