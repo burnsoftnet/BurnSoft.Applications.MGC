@@ -79,23 +79,23 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string xmlData = $"<?xml version=\"1.0\" encoding=\"utf-8\" ?>{Environment.NewLine}";
-                xmlData = $"<Firearm>{Environment.NewLine}";
-                xmlData = $"    <MGC>{Environment.NewLine}";
-                xmlData = $"        <version>{appVersion}</version>{Environment.NewLine}";
-                xmlData = $"    <MGC>{Environment.NewLine}";
-                xmlData = GenerateDetails(databasePath, gunId, out errOut);
+                xmlData += $"<Firearm>{Environment.NewLine}";
+                xmlData += $"    <MGC>{Environment.NewLine}";
+                xmlData += $"        <version>{appVersion}</version>{Environment.NewLine}";
+                xmlData += $"    <MGC>{Environment.NewLine}";
+                xmlData += GenerateDetails(databasePath, gunId, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                xmlData = GenerateAccessories(databasePath, gunId, out errOut);
+                xmlData += GenerateAccessories(databasePath, gunId, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                xmlData = GenerateGunSmitheDetails(databasePath, gunId, out errOut);
+                xmlData += GenerateGunSmitheDetails(databasePath, gunId, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                xmlData = GenerateMaintanceDetails(databasePath, gunId, out errOut);
+                xmlData += GenerateMaintanceDetails(databasePath, gunId, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                xmlData = GenerateBarrelConversKit(databasePath, gunId, out errOut);
+                xmlData += GenerateBarrelConversKit(databasePath, gunId, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                xmlData = $"</Firearm>{Environment.NewLine}";
-
-
+                xmlData += $"</Firearm>{Environment.NewLine}";
+                xmlData = xmlData.Replace("&", "&amp;");
+                //BSFileSystem objFs = new BSFileSystem();
             }
             catch (Exception e)
             {
