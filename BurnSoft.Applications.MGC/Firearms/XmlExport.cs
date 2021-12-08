@@ -183,5 +183,32 @@ namespace BurnSoft.Applications.MGC.Firearms
             sAns = $"   </Accessories>{Environment.NewLine}";
             return sAns;
         }
+        private static string GenerateMaintanceDetails(string databasePath, long gunId, out string errOut)
+        {
+            string sAns = $"   <Maintance_Details>{Environment.NewLine}";
+            errOut = "";
+            try
+            {
+                List<MaintanceDetailsList> lst = MaintanceDetails.Lists(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (MaintanceDetailsList l in lst)
+                {
+                    sAns = $"       <Name>{l.Name}</Name>{Environment.NewLine}";
+                    sAns = $"       <OpDate>{l.OperationStartDate}</OpDate>{Environment.NewLine}";
+                    sAns = $"       <OpDueDate>{l.OperationDueDate}</OpDueDate>{Environment.NewLine}";
+                    sAns = $"       <RndFired>{l.RoundsFired}</RndFired>{Environment.NewLine}";
+                    sAns = $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
+                    sAns = $"       <ammoUsed>{l.AmmoUsed}</ammoUsed>{Environment.NewLine}";
+                }
+                //sAns = $"{Environment.NewLine}";
+                //sAns = $"{Environment.NewLine}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GenerateMaintanceDetails", e);
+            }
+            sAns = $"   </Maintance_Details>{Environment.NewLine}";
+            return sAns;
+        }
     }
 }
