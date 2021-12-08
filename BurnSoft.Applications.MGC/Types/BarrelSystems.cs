@@ -60,6 +60,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The purchased from.</value>
         public string PurchasedFrom { get; set; }
         /// <summary>
+        /// Gets or sets the purchase date. also set as dtp in the table.
+        /// </summary>
+        /// <value>The purchase date.</value>
+        public string PurchaseDate { get; set; }
+        /// <summary>
         /// Gets or sets the finish.
         /// </summary>
         /// <value>The finish.</value>

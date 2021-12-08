@@ -266,5 +266,49 @@ namespace BurnSoft.Applications.MGC.Firearms
             sAns = $"   </GunSmith_Details>{Environment.NewLine}";
             return sAns;
         }
+        /// <summary>
+        /// Generates the barrel convers kit.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        private static string GenerateBarrelConversKit(string databasePath, long gunId, out string errOut)
+        {
+            string sAns = $"   <BarrelConverstionKit_Details>{Environment.NewLine}";
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection_Ext where GID={gunId}";
+                List<BarrelSystems> lst = ExtraBarrelConvoKits.GetList(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (BarrelSystems l in lst)
+                {
+                    sAns = $"       <ModelName>{l.ModelName}</ModelName>{Environment.NewLine}";
+                    sAns = $"       <Caliber>{l.Caliber}</Caliber>{Environment.NewLine}";
+                    sAns = $"       <Finish>{l.Finish}</Finish>{Environment.NewLine}";
+                    sAns = $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
+                    sAns = $"       <PetLoads>{l.PetLoads}</PetLoads>{Environment.NewLine}";
+                    sAns = $"       <Action>{l.Action}</Action>{Environment.NewLine}";
+                    sAns = $"       <Feedsystem>{l.FeedSystem}</Feedsystem>{Environment.NewLine}";
+                    sAns = $"       <Sights>{l.Sights}</Sights>{Environment.NewLine}";
+                    sAns = $"       <PurchasedPrice>{l.PurchasedPrice}</PurchasedPrice>{Environment.NewLine}";
+                    sAns = $"       <PurchasedFrom>{l.PurchasedFrom}</PurchasedFrom>{Environment.NewLine}";
+                    sAns = $"       <dtp>{l.PurchaseDate}</dtp>{Environment.NewLine}";
+                    sAns = $"       <Height>{l.Height}</Height>{Environment.NewLine}";
+                    sAns = $"       <IsDefault>{l.IsDefault}</IsDefault>{Environment.NewLine}";
+                    sAns = $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
+                }
+                //sAns = $"{Environment.NewLine}";
+                //sAns = $"{Environment.NewLine}";
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GenerateBarrelConversKit", e);
+            }
+            sAns = $"   </BarrelConverstionKit_Details>{Environment.NewLine}";
+            return sAns;
+        }
     }
 }

@@ -692,7 +692,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         Sights = d["Sights"].ToString(),
                         LastUpdated = d["sync_lastupdate"].ToString(),
                         PurchasedFrom = d["PurchasedFrom"].ToString(),
-                        PurchasedPrice = d["PurchasedPrice"].ToString()
+                        PurchasedPrice = d["PurchasedPrice"].ToString(),
+                        PurchaseDate = d["dtp"].ToString()
 
                     });
                 }
