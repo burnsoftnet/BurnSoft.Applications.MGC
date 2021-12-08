@@ -80,6 +80,7 @@
     <Compile Include="Firearms\GunTypeTest.cs" />
     <Compile Include="Firearms\DocumentTests.cs" />
     <Compile Include="Firearms\PictureTests.cs" />
+    <Compile Include="Firearms\ExportXmlTest.cs" />
     <Compile Include="General.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Other\WishlistTest.cs" />
