@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable RedundantAssignment
+// ReSharper disable NotAccessedVariable
 
 // ReSharper disable UnusedMember.Local
 
@@ -57,8 +58,20 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion
-        //End Snippet
-
+        //End Snippet        
+        /// <summary>
+        /// Generates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="appVersion">The application version.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         public static bool Generate(string databasePath, long gunId,string appVersion, out string errOut)
         {
             bool bAns = false;
@@ -70,10 +83,18 @@ namespace BurnSoft.Applications.MGC.Firearms
                 xmlData = $"    <MGC>{Environment.NewLine}";
                 xmlData = $"        <version>{appVersion}</version>{Environment.NewLine}";
                 xmlData = $"    <MGC>{Environment.NewLine}";
-                xmlData = $"{Environment.NewLine}";
-                xmlData = $"{Environment.NewLine}";
-                xmlData = $"{Environment.NewLine}";
+                xmlData = GenerateDetails(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                xmlData = GenerateAccessories(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                xmlData = GenerateGunSmitheDetails(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                xmlData = GenerateMaintanceDetails(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                xmlData = GenerateBarrelConversKit(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 xmlData = $"</Firearm>{Environment.NewLine}";
+
 
             }
             catch (Exception e)
