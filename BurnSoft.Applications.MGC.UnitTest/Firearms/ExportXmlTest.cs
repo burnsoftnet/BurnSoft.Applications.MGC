@@ -1,12 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using BurnSoft.Applications.MGC.Firearms;
-using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
-using BurnSoft.Universal;
+
 // ReSharper disable ConvertIfStatementToConditionalTernaryExpression
 
 
@@ -43,7 +40,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void Init()
         {
             // Vs2019.GetSetting("", TestContext);
-            BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Vs2019.GetSetting("DatabasePath", TestContext));
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
@@ -54,6 +50,15 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             if (File.Exists(_saveToFile)) File.Delete(_saveToFile);
             bool value = XmlExport.Generate(_databasePath, _gunId, "7.x", _saveToFile, out _errOut);
+
+            if (value && File.Exists(_saveToFile))
+            {
+                TestContext.WriteLine($"File was saved to {_saveToFile}");
+            }
+            else
+            {
+                TestContext.WriteLine("Unable to save file!");
+            }
             General.HasTrueValue(value && File.Exists(_saveToFile), _errOut);
         }
     }

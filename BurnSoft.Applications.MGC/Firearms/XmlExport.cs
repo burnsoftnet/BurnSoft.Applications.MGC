@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 // ReSharper disable RedundantAssignment
@@ -125,62 +122,57 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw  new Exception(errOut);
                 foreach (GunCollectionList l in lst)
                 {
-                    sAns = $"       <FullName>{l.FullName}</FullName>{Environment.NewLine}";
-                    sAns = $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
-                    sAns = $"       <ModelName>{l.ModelName}</ModelName>{Environment.NewLine}";
-                    sAns = $"       <SerialNumber>{l.SerialNumber}</SerialNumber>{Environment.NewLine}";
-                    sAns = $"       <Type>{l.Type}</Type>{Environment.NewLine}";
-                    sAns = $"       <Caliber>{l.Caliber}</Caliber>{Environment.NewLine}";
-                    sAns = $"       <Finish>{l.Finish}</Finish>{Environment.NewLine}";
-                    sAns = $"       <Condition>{l.Condition}</Condition>{Environment.NewLine}";
-                    sAns = $"       <CustomID>{l.CustomId}</CustomID>{Environment.NewLine}";
-                    sAns = $"       <NatID>{l.Nationality}</NatID>{Environment.NewLine}";
-                    sAns = $"       <GripID>{l.GripType}</GripID>{Environment.NewLine}";
-                    sAns = $"       <Weight>{l.Weight}</Weight>{Environment.NewLine}";
-                    sAns = $"       <Height>{l.Height}</Height>{Environment.NewLine}";
-                    sAns = $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
-                    sAns = $"       <BarWid>{l.BarrelWidth}</BarWid>{Environment.NewLine}";
-                    sAns = $"       <BarHei>{l.BarrelHeight}</BarHei>{Environment.NewLine}";
-                    sAns = $"       <Action>{l.Action}</Action>{Environment.NewLine}";
-                    sAns = $"       <Feedsystem>{l.FeedSystem}</Feedsystem>{Environment.NewLine}";
-                    sAns = $"       <Sights>{l.Sights}</Sights>{Environment.NewLine}";
-                    sAns = $"       <PurchasedPrice>{l.PurchasePrice}</PurchasedPrice>{Environment.NewLine}";
-                    sAns = $"       <PurchasedFrom>{l.PurchaseFrom}</PurchasedFrom>{Environment.NewLine}";
-                    sAns = $"       <AppraisedValue>{l.AppriasedValue}</AppraisedValue>{Environment.NewLine}";
-                    sAns = $"       <AppraisalDate>{l.AppraisalDate}</AppraisalDate>{Environment.NewLine}";
-                    sAns = $"       <AppraisedBy>{l.AppriasedBy}</AppraisedBy>{Environment.NewLine}";
-                    sAns = $"       <InsuredValue>{l.InsuredValue}</InsuredValue>{Environment.NewLine}";
-                    sAns = $"       <StorageLocation>{l.StorageLocation}</StorageLocation>{Environment.NewLine}";
-                    sAns = $"       <ConditionComments>{l.ConditionComments}</ConditionComments>{Environment.NewLine}";
-                    sAns = $"       <AdditionalNotes>{l.AdditionalNotes}</AdditionalNotes>{Environment.NewLine}";
-                    sAns = $"       <Produced>{l.DateProduced}</Produced>{Environment.NewLine}";
-                    sAns = $"       <IsCandR>{l.IsCAndR}</IsCandR>{Environment.NewLine}";
-                    sAns = $"       <PetLoads>{l.PetLoads}</PetLoads>{Environment.NewLine}";
-                    sAns = $"       <dtp>{l.DateTimeAdded}</dtp>{Environment.NewLine}";
-                    sAns = $"       <Importer>{l.Importer}</Importer>{Environment.NewLine}";
-                    sAns = $"       <ReManDT>{l.RemanufactureDate}</ReManDT>{Environment.NewLine}";
-                    sAns = $"       <POI>{l.Poi}</POI>{Environment.NewLine}";
-                    sAns = $"       <SGChoke>{l.ShotGunChoke}</SGChoke>{Environment.NewLine}";
-                    sAns = $"       <Caliber3>{l.Caliber3}</Caliber3>{Environment.NewLine}";
-                    sAns = $"       <TwistOfRate>{l.TwistRate}</TwistOfRate>{Environment.NewLine}";
-                    sAns = $"       <TriggerPull>{l.TriggerPullInPounds}</TriggerPull>{Environment.NewLine}";
-                    sAns = $"       <BoundBook>{l.IsInBoundBook}</BoundBook>{Environment.NewLine}";
-                    sAns = $"       <Classification>{l.Classification}</Classification>{Environment.NewLine}";
-                    sAns = $"       <DateofCR>{l.DateOfCAndR}</DateofCR>{Environment.NewLine}";
-                    sAns = $"       <IsClassIII>{l.IsClass3Item}</IsClassIII>{Environment.NewLine}";
-                    sAns = $"       <ClassIiiOwner>{l.Class3Owner}</ClassIiiOwner>{Environment.NewLine}";
-                    //sAns = $"       {Environment.NewLine}";
-                    //sAns = $"       {Environment.NewLine}";
-                    //sAns = $"       {Environment.NewLine}";
+                    sAns += $"       <FullName>{l.FullName}</FullName>{Environment.NewLine}";
+                    sAns += $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
+                    sAns += $"       <ModelName>{l.ModelName}</ModelName>{Environment.NewLine}";
+                    sAns += $"       <SerialNumber>{l.SerialNumber}</SerialNumber>{Environment.NewLine}";
+                    sAns += $"       <Type>{l.Type}</Type>{Environment.NewLine}";
+                    sAns += $"       <Caliber>{l.Caliber}</Caliber>{Environment.NewLine}";
+                    sAns += $"       <Finish>{l.Finish}</Finish>{Environment.NewLine}";
+                    sAns += $"       <Condition>{l.Condition}</Condition>{Environment.NewLine}";
+                    sAns += $"       <CustomID>{l.CustomId}</CustomID>{Environment.NewLine}";
+                    sAns += $"       <NatID>{l.Nationality}</NatID>{Environment.NewLine}";
+                    sAns += $"       <GripID>{l.GripType}</GripID>{Environment.NewLine}";
+                    sAns += $"       <Weight>{l.Weight}</Weight>{Environment.NewLine}";
+                    sAns += $"       <Height>{l.Height}</Height>{Environment.NewLine}";
+                    sAns += $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
+                    sAns += $"       <BarWid>{l.BarrelWidth}</BarWid>{Environment.NewLine}";
+                    sAns += $"       <BarHei>{l.BarrelHeight}</BarHei>{Environment.NewLine}";
+                    sAns += $"       <Action>{l.Action}</Action>{Environment.NewLine}";
+                    sAns += $"       <Feedsystem>{l.FeedSystem}</Feedsystem>{Environment.NewLine}";
+                    sAns += $"       <Sights>{l.Sights}</Sights>{Environment.NewLine}";
+                    sAns += $"       <PurchasedPrice>{l.PurchasePrice}</PurchasedPrice>{Environment.NewLine}";
+                    sAns += $"       <PurchasedFrom>{l.PurchaseFrom}</PurchasedFrom>{Environment.NewLine}";
+                    sAns += $"       <AppraisedValue>{l.AppriasedValue}</AppraisedValue>{Environment.NewLine}";
+                    sAns += $"       <AppraisalDate>{l.AppraisalDate}</AppraisalDate>{Environment.NewLine}";
+                    sAns += $"       <AppraisedBy>{l.AppriasedBy}</AppraisedBy>{Environment.NewLine}";
+                    sAns += $"       <InsuredValue>{l.InsuredValue}</InsuredValue>{Environment.NewLine}";
+                    sAns += $"       <StorageLocation>{l.StorageLocation}</StorageLocation>{Environment.NewLine}";
+                    sAns += $"       <ConditionComments>{l.ConditionComments}</ConditionComments>{Environment.NewLine}";
+                    sAns += $"       <AdditionalNotes>{l.AdditionalNotes}</AdditionalNotes>{Environment.NewLine}";
+                    sAns += $"       <Produced>{l.DateProduced}</Produced>{Environment.NewLine}";
+                    sAns += $"       <IsCandR>{l.IsCAndR}</IsCandR>{Environment.NewLine}";
+                    sAns += $"       <PetLoads>{l.PetLoads}</PetLoads>{Environment.NewLine}";
+                    sAns += $"       <dtp>{l.DateTimeAdded}</dtp>{Environment.NewLine}";
+                    sAns += $"       <Importer>{l.Importer}</Importer>{Environment.NewLine}";
+                    sAns += $"       <ReManDT>{l.RemanufactureDate}</ReManDT>{Environment.NewLine}";
+                    sAns += $"       <POI>{l.Poi}</POI>{Environment.NewLine}";
+                    sAns += $"       <SGChoke>{l.ShotGunChoke}</SGChoke>{Environment.NewLine}";
+                    sAns += $"       <Caliber3>{l.Caliber3}</Caliber3>{Environment.NewLine}";
+                    sAns += $"       <TwistOfRate>{l.TwistRate}</TwistOfRate>{Environment.NewLine}";
+                    sAns += $"       <TriggerPull>{l.TriggerPullInPounds}</TriggerPull>{Environment.NewLine}";
+                    sAns += $"       <BoundBook>{l.IsInBoundBook}</BoundBook>{Environment.NewLine}";
+                    sAns += $"       <Classification>{l.Classification}</Classification>{Environment.NewLine}";
+                    sAns += $"       <DateofCR>{l.DateOfCAndR}</DateofCR>{Environment.NewLine}";
+                    sAns += $"       <IsClassIII>{l.IsClass3Item}</IsClassIII>{Environment.NewLine}";
+                    sAns += $"       <ClassIiiOwner>{l.Class3Owner}</ClassIiiOwner>{Environment.NewLine}";
                 }
-                //sAns = $"{Environment.NewLine}";
-                //sAns = $"{Environment.NewLine}";
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("GenerateDetails", e);
             }
-            sAns = $"   </Details>{Environment.NewLine}";
+            sAns += $"   </Details>{Environment.NewLine}";
             return sAns;
         }
         /// <summary>
@@ -201,25 +193,23 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (AccessoriesList l in lst)
                 {
-                    sAns = $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
-                    sAns = $"       <Model>{l.Model}</Model>{Environment.NewLine}";
-                    sAns = $"       <SerialNumber>{l.SerialNumber}</SerialNumber>{Environment.NewLine}";
-                    sAns = $"       <Condition>{l.Condition}</Condition>{Environment.NewLine}";
-                    sAns = $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
-                    sAns = $"       <Use>{l.Use}</Use>{Environment.NewLine}";
-                    sAns = $"       <PurValue>{l.PurchaseValue}</PurValue>{Environment.NewLine}";
-                    sAns = $"       <appValue>{l.AppriasedValue}</appValue>{Environment.NewLine}";
-                    sAns = $"       <civ>{l.CountInValue}</civ>{Environment.NewLine}";
-                    sAns = $"       <ic>{l.IsChoke}</ic>{Environment.NewLine}";
+                    sAns += $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
+                    sAns += $"       <Model>{l.Model}</Model>{Environment.NewLine}";
+                    sAns += $"       <SerialNumber>{l.SerialNumber}</SerialNumber>{Environment.NewLine}";
+                    sAns += $"       <Condition>{l.Condition}</Condition>{Environment.NewLine}";
+                    sAns += $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
+                    sAns += $"       <Use>{l.Use}</Use>{Environment.NewLine}";
+                    sAns += $"       <PurValue>{l.PurchaseValue}</PurValue>{Environment.NewLine}";
+                    sAns += $"       <appValue>{l.AppriasedValue}</appValue>{Environment.NewLine}";
+                    sAns += $"       <civ>{l.CountInValue}</civ>{Environment.NewLine}";
+                    sAns += $"       <ic>{l.IsChoke}</ic>{Environment.NewLine}";
                 }
-                //sAns = $"{Environment.NewLine}";
-                //sAns = $"{Environment.NewLine}";
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("GenerateAccessories", e);
             }
-            sAns = $"   </Accessories>{Environment.NewLine}";
+            sAns += $"   </Accessories>{Environment.NewLine}";
             return sAns;
         }
         /// <summary>
@@ -240,21 +230,19 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (MaintanceDetailsList l in lst)
                 {
-                    sAns = $"       <Name>{l.Name}</Name>{Environment.NewLine}";
-                    sAns = $"       <OpDate>{l.OperationStartDate}</OpDate>{Environment.NewLine}";
-                    sAns = $"       <OpDueDate>{l.OperationDueDate}</OpDueDate>{Environment.NewLine}";
-                    sAns = $"       <RndFired>{l.RoundsFired}</RndFired>{Environment.NewLine}";
-                    sAns = $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
-                    sAns = $"       <ammoUsed>{l.AmmoUsed}</ammoUsed>{Environment.NewLine}";
+                    sAns += $"       <Name>{l.Name}</Name>{Environment.NewLine}";
+                    sAns += $"       <OpDate>{l.OperationStartDate}</OpDate>{Environment.NewLine}";
+                    sAns += $"       <OpDueDate>{l.OperationDueDate}</OpDueDate>{Environment.NewLine}";
+                    sAns += $"       <RndFired>{l.RoundsFired}</RndFired>{Environment.NewLine}";
+                    sAns += $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
+                    sAns += $"       <ammoUsed>{l.AmmoUsed}</ammoUsed>{Environment.NewLine}";
                 }
-                //sAns = $"{Environment.NewLine}";
-                //sAns = $"{Environment.NewLine}";
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("GenerateMaintanceDetails", e);
             }
-            sAns = $"   </Maintance_Details>{Environment.NewLine}";
+            sAns += $"   </Maintance_Details>{Environment.NewLine}";
             return sAns;
         }
         /// <summary>
@@ -275,20 +263,18 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (GunSmithWorkDone l in lst)
                 {
-                    sAns = $"       <gsmith>{l.GunSmithName}</gsmith>{Environment.NewLine}";
-                    sAns = $"       <sdate>{l.StartDate}</sdate>{Environment.NewLine}";
-                    sAns = $"       <rdate>{l.ReturnDate}</rdate>{Environment.NewLine}";
-                    sAns = $"       <od>{l.OrderDetails}</od>{Environment.NewLine}";
-                    sAns = $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
+                    sAns += $"       <gsmith>{l.GunSmithName}</gsmith>{Environment.NewLine}";
+                    sAns += $"       <sdate>{l.StartDate}</sdate>{Environment.NewLine}";
+                    sAns += $"       <rdate>{l.ReturnDate}</rdate>{Environment.NewLine}";
+                    sAns += $"       <od>{l.OrderDetails}</od>{Environment.NewLine}";
+                    sAns += $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
                 }
-                //sAns = $"{Environment.NewLine}";
-                //sAns = $"{Environment.NewLine}";
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("GenerateGunSmitheDetails", e);
             }
-            sAns = $"   </GunSmith_Details>{Environment.NewLine}";
+            sAns += $"   </GunSmith_Details>{Environment.NewLine}";
             return sAns;
         }
         /// <summary>
@@ -310,29 +296,27 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (BarrelSystems l in lst)
                 {
-                    sAns = $"       <ModelName>{l.ModelName}</ModelName>{Environment.NewLine}";
-                    sAns = $"       <Caliber>{l.Caliber}</Caliber>{Environment.NewLine}";
-                    sAns = $"       <Finish>{l.Finish}</Finish>{Environment.NewLine}";
-                    sAns = $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
-                    sAns = $"       <PetLoads>{l.PetLoads}</PetLoads>{Environment.NewLine}";
-                    sAns = $"       <Action>{l.Action}</Action>{Environment.NewLine}";
-                    sAns = $"       <Feedsystem>{l.FeedSystem}</Feedsystem>{Environment.NewLine}";
-                    sAns = $"       <Sights>{l.Sights}</Sights>{Environment.NewLine}";
-                    sAns = $"       <PurchasedPrice>{l.PurchasedPrice}</PurchasedPrice>{Environment.NewLine}";
-                    sAns = $"       <PurchasedFrom>{l.PurchasedFrom}</PurchasedFrom>{Environment.NewLine}";
-                    sAns = $"       <dtp>{l.PurchaseDate}</dtp>{Environment.NewLine}";
-                    sAns = $"       <Height>{l.Height}</Height>{Environment.NewLine}";
-                    sAns = $"       <IsDefault>{l.IsDefault}</IsDefault>{Environment.NewLine}";
-                    sAns = $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
+                    sAns += $"       <ModelName>{l.ModelName}</ModelName>{Environment.NewLine}";
+                    sAns += $"       <Caliber>{l.Caliber}</Caliber>{Environment.NewLine}";
+                    sAns += $"       <Finish>{l.Finish}</Finish>{Environment.NewLine}";
+                    sAns += $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
+                    sAns += $"       <PetLoads>{l.PetLoads}</PetLoads>{Environment.NewLine}";
+                    sAns += $"       <Action>{l.Action}</Action>{Environment.NewLine}";
+                    sAns += $"       <Feedsystem>{l.FeedSystem}</Feedsystem>{Environment.NewLine}";
+                    sAns += $"       <Sights>{l.Sights}</Sights>{Environment.NewLine}";
+                    sAns += $"       <PurchasedPrice>{l.PurchasedPrice}</PurchasedPrice>{Environment.NewLine}";
+                    sAns += $"       <PurchasedFrom>{l.PurchasedFrom}</PurchasedFrom>{Environment.NewLine}";
+                    sAns += $"       <dtp>{l.PurchaseDate}</dtp>{Environment.NewLine}";
+                    sAns += $"       <Height>{l.Height}</Height>{Environment.NewLine}";
+                    sAns += $"       <IsDefault>{l.IsDefault}</IsDefault>{Environment.NewLine}";
+                    sAns += $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
                 }
-                //sAns = $"{Environment.NewLine}";
-                //sAns = $"{Environment.NewLine}";
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("GenerateBarrelConversKit", e);
             }
-            sAns = $"   </BarrelConverstionKit_Details>{Environment.NewLine}";
+            sAns += $"   </BarrelConverstionKit_Details>{Environment.NewLine}";
             return sAns;
         }
     }
