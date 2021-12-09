@@ -81,7 +81,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 xmlData += $"<Firearm>{Environment.NewLine}";
                 xmlData += $"    <MGC>{Environment.NewLine}";
                 xmlData += $"        <version>{appVersion}</version>{Environment.NewLine}";
-                xmlData += $"    <MGC>{Environment.NewLine}";
+                xmlData += $"    </MGC>{Environment.NewLine}";
                 xmlData += GenerateDetails(databasePath, gunId, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 xmlData += GenerateAccessories(databasePath, gunId, out errOut);
@@ -308,7 +308,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     sAns += $"       <PurchasedFrom>{l.PurchasedFrom}</PurchasedFrom>{Environment.NewLine}";
                     sAns += $"       <dtp>{l.PurchaseDate}</dtp>{Environment.NewLine}";
                     sAns += $"       <Height>{l.Height}</Height>{Environment.NewLine}";
-                    sAns += $"       <IsDefault>{l.IsDefault}</IsDefault>{Environment.NewLine}";
+                    sAns += $"       <IsDefault>{l.Idefault}</IsDefault>{Environment.NewLine}";
                     sAns += $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
                 }
             }

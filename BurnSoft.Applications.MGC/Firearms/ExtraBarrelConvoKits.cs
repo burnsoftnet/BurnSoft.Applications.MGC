@@ -679,6 +679,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                         Id = Convert.ToInt32(d["id"]),
                         GunId = Convert.ToInt32(d["gid"]),
                         IsDefault = Convert.ToInt32(d["IsDefault"]) == 1,
+                        Idefault = Convert.ToInt32(d["IsDefault"]),
                         FullName = fullName,
                         ModelName = d["ModelName"].ToString(),
                         Caliber = d["Caliber"].ToString(),
