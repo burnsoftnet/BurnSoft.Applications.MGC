@@ -202,6 +202,20 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
 
+        public static bool Accessories(string databasePath, string Path, int gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Accessories", e);
+            }
+            return bAns;
+        }
 
     }
 }
