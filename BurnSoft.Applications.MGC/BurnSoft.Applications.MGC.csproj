@@ -85,6 +85,7 @@
     <Compile Include="Firearms\Nationality.cs" />
     <Compile Include="Firearms\Pictures.cs" />
     <Compile Include="Firearms\XmlExport.cs" />
+    <Compile Include="Firearms\XmlImport.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Global\DatabaseRelated.cs" />
     <Compile Include="Global\Helpers.cs" />
