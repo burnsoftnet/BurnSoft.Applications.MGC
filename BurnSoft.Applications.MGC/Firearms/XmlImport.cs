@@ -85,15 +85,17 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 XmlDocument doc = new XmlDocument();
+                string serialNumber = "";
+                string fullName = "";
 
                 doc.Load(strPath);
                 XmlNodeList elemlist = doc.GetElementsByTagName(strNodeName);
                 foreach (XmlNode xn in elemlist)
                 {
-                    string fullName = Helpers.FormatFromXml(GetXmlNode(xn["FirstName"]));
+                    fullName = Helpers.FormatFromXml(GetXmlNode(xn["FirstName"]));
                     string manufacturer = Helpers.FormatFromXml(GetXmlNode(xn["Manufacturer"]));
                     string modelName = Helpers.FormatFromXml(GetXmlNode(xn["ModelName"]));
-                    string serialNumber = Helpers.FormatFromXml(GetXmlNode(xn["SerialNumber"]));
+                    serialNumber = Helpers.FormatFromXml(GetXmlNode(xn["SerialNumber"]));
                     string sType = Helpers.FormatFromXml(GetXmlNode(xn["Type"]));
                     string caliber = Helpers.FormatFromXml(GetXmlNode(xn["Caliber"]));
                     string finish = Helpers.FormatFromXml(GetXmlNode(xn["Finish"]));
@@ -162,8 +164,13 @@ namespace BurnSoft.Applications.MGC.Firearms
                         additionalNotes, produced, petLoads, dtp, Convert.ToBoolean(isCandR), importer, reManDt, poi, sgChoke, Convert.ToBoolean(bBoundBook), sTwist, sTrigger, sCaliber3, sClassification, sDateOfCr, isClassIii, sClassIiiOwner, out errOut))
                         throw new Exception(errOut);
                 }
-                
-                bAns = true;
+
+                long id = MyCollection.GetLastId(databasePath, out errOut);
+                if (errOut.Length > 0)
+                    throw new Exception(errOut);
+                bAns = MyCollection.Verify(databasePath, id, fullName, serialNumber, out errOut);
+                if (errOut.Length > 0)
+                    throw new Exception(errOut);
             }
             catch (Exception ex)
             {
