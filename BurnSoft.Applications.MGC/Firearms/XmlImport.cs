@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Xml;
 using BurnSoft.Applications.MGC.Global;
+using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 // ReSharper disable RedundantAssignment
@@ -86,7 +88,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// information of the firearm and needs to be ran first before the other import function.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="strPath">The string path.</param>
+        /// <param name="xmlPath">The string path.</param>
         /// <param name="ownerId">The owner identifier.</param>
         /// <param name="useNumberCatOnly">if set to <c>true</c> [use number cat only].</param>
         /// <param name="errOut">The error out.</param>
@@ -99,7 +101,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        public static bool Details(string databasePath,string strPath,int ownerId,bool useNumberCatOnly,  out string errOut)
+        public static bool Details(string databasePath,string xmlPath,int ownerId,bool useNumberCatOnly,  out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -109,7 +111,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string serialNumber = "";
                 string fullName = "";
 
-                doc.Load(strPath);
+                doc.Load(xmlPath);
                 XmlNodeList elemlist = doc.GetElementsByTagName("Details");
                 foreach (XmlNode xn in elemlist)
                 {
@@ -201,14 +203,44 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return bAns;
         }
-
-        public static bool Accessories(string databasePath, string Path, int gunId, out string errOut)
+        /// <summary>
+        /// Accessorieses the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="xmlPath">The XML path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Accessories(string databasePath, string xmlPath, int gunId, out string errOut)
         {
             bool bAns = false;
             errOut = "";
             try
             {
+                XmlDocument doc = new XmlDocument();
 
+                doc.Load(xmlPath);
+                XmlNodeList elemlist = doc.GetElementsByTagName("Accessories");
+                foreach (XmlNode xn in elemlist)
+                {
+
+                    string manufacturer = Helpers.FormatFromXml(GetXmlNode(xn["Manufacturer"]));
+                    string model = Helpers.FormatFromXml(GetXmlNode(xn["Model"]));
+                    string serialNumber = Helpers.FormatFromXml(GetXmlNode(xn["SerialNumber"]));
+                    string condition = Helpers.FormatFromXml(GetXmlNode(xn["Condition"]));
+                    string notes = Helpers.FormatFromXml(GetXmlNode(xn["Notes"]));
+                    string use = Helpers.FormatFromXml(GetXmlNode(xn["Use"]));
+                    double purValue = Convert.ToDouble(Helpers.FormatFromXml(GetXmlNode(xn["PurValue"])));
+                    double appValue = Convert.ToDouble(Helpers.FormatFromXml(GetXmlNode(xn["appValue"])));
+                    Boolean civ = Convert.ToBoolean(Helpers.FormatFromXml(GetXmlNode(xn["civ"])));
+                    Boolean ic = Convert.ToBoolean(Helpers.FormatFromXml(GetXmlNode(xn["ic"])));
+
+                    if (!Firearms.Accessories.Add(databasePath, gunId, manufacturer, model, serialNumber, condition,
+                        notes, use, purValue, appValue, civ, ic, out errOut)) throw new Exception(errOut);
+                }
+
+                bAns = true;
             }
             catch (Exception e)
             {
