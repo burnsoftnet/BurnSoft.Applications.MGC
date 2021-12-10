@@ -104,20 +104,23 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
         /// <summary>
         /// Strings the helper.  Some fields in the database are set to non zero length strings, this will just check to see if the string is blank
         /// if so, then att a few spaces
         /// </summary>
         /// <param name="value">The value.</param>
+        /// <param name="isDate"></param>
+        /// <param name="defaultFiller"></param>
         /// <returns>System.String.</returns>
-        private static string StringHelper(string value, bool isdate = false)
+        private static string StringHelper(string value, bool isDate = false, string defaultFiller = "N/A")
         {
             string sAns = value;
-            if (value.Length == 0)
+            if (value.Trim().Length == 0)
             {
-                if (!isdate)
+                if (!isDate)
                 {
-                    sAns = "N/A";
+                    sAns = defaultFiller;
                 }
                 else
                 {
@@ -220,12 +223,12 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (AccessoriesList l in lst)
                 {
-                    sAns += $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
-                    sAns += $"       <Model>{l.Model}</Model>{Environment.NewLine}";
-                    sAns += $"       <SerialNumber>{l.SerialNumber}</SerialNumber>{Environment.NewLine}";
-                    sAns += $"       <Condition>{l.Condition}</Condition>{Environment.NewLine}";
-                    sAns += $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
-                    sAns += $"       <Use>{l.Use}</Use>{Environment.NewLine}";
+                    sAns += $"       <Manufacturer>{StringHelper(l.Manufacturer)}</Manufacturer>{Environment.NewLine}";
+                    sAns += $"       <Model>{StringHelper(l.Model)}</Model>{Environment.NewLine}";
+                    sAns += $"       <SerialNumber>{StringHelper(l.SerialNumber)}</SerialNumber>{Environment.NewLine}";
+                    sAns += $"       <Condition>{StringHelper(l.Condition)}</Condition>{Environment.NewLine}";
+                    sAns += $"       <Notes>{StringHelper(l.Notes)}</Notes>{Environment.NewLine}";
+                    sAns += $"       <Use>{StringHelper(l.Use)}</Use>{Environment.NewLine}";
                     sAns += $"       <PurValue>{l.PurchaseValue}</PurValue>{Environment.NewLine}";
                     sAns += $"       <appValue>{l.AppriasedValue}</appValue>{Environment.NewLine}";
                     sAns += $"       <civ>{l.CountInValue}</civ>{Environment.NewLine}";
