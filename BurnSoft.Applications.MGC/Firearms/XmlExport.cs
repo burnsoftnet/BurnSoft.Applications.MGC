@@ -260,11 +260,11 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (MaintanceDetailsList l in lst)
                 {
-                    sAns += $"       <Name>{l.Name}</Name>{Environment.NewLine}";
-                    sAns += $"       <OpDate>{l.OperationStartDate}</OpDate>{Environment.NewLine}";
-                    sAns += $"       <OpDueDate>{l.OperationDueDate}</OpDueDate>{Environment.NewLine}";
+                    sAns += $"       <Name>{StringHelper(l.Name)}</Name>{Environment.NewLine}";
+                    sAns += $"       <OpDate>{StringHelper(l.OperationStartDate,true)}</OpDate>{Environment.NewLine}";
+                    sAns += $"       <OpDueDate>{StringHelper(l.OperationDueDate,true)}</OpDueDate>{Environment.NewLine}";
                     sAns += $"       <RndFired>{l.RoundsFired}</RndFired>{Environment.NewLine}";
-                    sAns += $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
+                    sAns += $"       <Notes>{StringHelper(l.Notes)}</Notes>{Environment.NewLine}";
                     sAns += $"       <ammoUsed>{l.AmmoUsed}</ammoUsed>{Environment.NewLine}";
                 }
             }
@@ -293,11 +293,11 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (GunSmithWorkDone l in lst)
                 {
-                    sAns += $"       <gsmith>{l.GunSmithName}</gsmith>{Environment.NewLine}";
-                    sAns += $"       <sdate>{l.StartDate}</sdate>{Environment.NewLine}";
-                    sAns += $"       <rdate>{l.ReturnDate}</rdate>{Environment.NewLine}";
-                    sAns += $"       <od>{l.OrderDetails}</od>{Environment.NewLine}";
-                    sAns += $"       <Notes>{l.Notes}</Notes>{Environment.NewLine}";
+                    sAns += $"       <gsmith>{StringHelper(l.GunSmithName)}</gsmith>{Environment.NewLine}";
+                    sAns += $"       <sdate>{StringHelper(l.StartDate,true)}</sdate>{Environment.NewLine}";
+                    sAns += $"       <rdate>{StringHelper(l.ReturnDate,true)}</rdate>{Environment.NewLine}";
+                    sAns += $"       <od>{StringHelper(l.OrderDetails)}</od>{Environment.NewLine}";
+                    sAns += $"       <Notes>{StringHelper(l.Notes)}</Notes>{Environment.NewLine}";
                 }
             }
             catch (Exception e)
@@ -326,20 +326,20 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (BarrelSystems l in lst)
                 {
-                    sAns += $"       <ModelName>{l.ModelName}</ModelName>{Environment.NewLine}";
-                    sAns += $"       <Caliber>{l.Caliber}</Caliber>{Environment.NewLine}";
-                    sAns += $"       <Finish>{l.Finish}</Finish>{Environment.NewLine}";
-                    sAns += $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
-                    sAns += $"       <PetLoads>{l.PetLoads}</PetLoads>{Environment.NewLine}";
-                    sAns += $"       <Action>{l.Action}</Action>{Environment.NewLine}";
-                    sAns += $"       <Feedsystem>{l.FeedSystem}</Feedsystem>{Environment.NewLine}";
-                    sAns += $"       <Sights>{l.Sights}</Sights>{Environment.NewLine}";
+                    sAns += $"       <ModelName>{StringHelper(l.ModelName)}</ModelName>{Environment.NewLine}";
+                    sAns += $"       <Caliber>{StringHelper(l.Caliber)}</Caliber>{Environment.NewLine}";
+                    sAns += $"       <Finish>{StringHelper(l.Finish)}</Finish>{Environment.NewLine}";
+                    sAns += $"       <BarrelLength>{StringHelper(l.BarrelLength)}</BarrelLength>{Environment.NewLine}";
+                    sAns += $"       <PetLoads>{StringHelper(l.PetLoads)}</PetLoads>{Environment.NewLine}";
+                    sAns += $"       <Action>{StringHelper(l.Action)}</Action>{Environment.NewLine}";
+                    sAns += $"       <Feedsystem>{StringHelper(l.FeedSystem)}</Feedsystem>{Environment.NewLine}";
+                    sAns += $"       <Sights>{StringHelper(l.Sights)}</Sights>{Environment.NewLine}";
                     sAns += $"       <PurchasedPrice>{l.PurchasedPrice}</PurchasedPrice>{Environment.NewLine}";
-                    sAns += $"       <PurchasedFrom>{l.PurchasedFrom}</PurchasedFrom>{Environment.NewLine}";
-                    sAns += $"       <dtp>{l.PurchaseDate}</dtp>{Environment.NewLine}";
-                    sAns += $"       <Height>{l.Height}</Height>{Environment.NewLine}";
+                    sAns += $"       <PurchasedFrom>{StringHelper(l.PurchasedFrom)}</PurchasedFrom>{Environment.NewLine}";
+                    sAns += $"       <dtp>{StringHelper(l.PurchaseDate,true)}</dtp>{Environment.NewLine}";
+                    sAns += $"       <Height>{StringHelper(l.Height)}</Height>{Environment.NewLine}";
                     sAns += $"       <IsDefault>{l.Idefault}</IsDefault>{Environment.NewLine}";
-                    sAns += $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
+                    sAns += $"       <BarrelLength>{StringHelper(l.BarrelLength)}</BarrelLength>{Environment.NewLine}";
                 }
             }
             catch (Exception e)
