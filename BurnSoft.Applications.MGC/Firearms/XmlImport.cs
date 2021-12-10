@@ -57,8 +57,12 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion
-
+        #endregion        
+        /// <summary>
+        /// Gets the XML node.
+        /// </summary>
+        /// <param name="instance">The instance.</param>
+        /// <returns>System.String.</returns>
         internal static string GetXmlNode(XmlNode instance)
         {
             string sAns;
@@ -77,8 +81,25 @@ namespace BurnSoft.Applications.MGC.Firearms
             return sAns;
         }
 
-
-        public static bool Details(string databasePath,string strPath,int ownerId, string strNodeName,bool useNumberCatOnly,  out string errOut)
+        /// <summary>
+        /// Get the details from the xml file and insert it into the database, this is the main
+        /// information of the firearm and needs to be ran first before the other import function.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="strPath">The string path.</param>
+        /// <param name="ownerId">The owner identifier.</param>
+        /// <param name="useNumberCatOnly">if set to <c>true</c> [use number cat only].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Details(string databasePath,string strPath,int ownerId,bool useNumberCatOnly,  out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -89,7 +110,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string fullName = "";
 
                 doc.Load(strPath);
-                XmlNodeList elemlist = doc.GetElementsByTagName(strNodeName);
+                XmlNodeList elemlist = doc.GetElementsByTagName("Details");
                 foreach (XmlNode xn in elemlist)
                 {
                     fullName = Helpers.FormatFromXml(GetXmlNode(xn["FirstName"]));
