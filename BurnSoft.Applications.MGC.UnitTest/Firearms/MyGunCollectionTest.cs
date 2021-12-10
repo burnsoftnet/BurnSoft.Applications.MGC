@@ -60,6 +60,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// </summary>
         private long _gripId;
         /// <summary>
+        /// The serial number
+        /// </summary>
+        private string _serialNumber;
+        /// <summary>
         /// Initializes this instance.
         /// </summary>
         [TestInitialize]
@@ -73,12 +77,15 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _shopOldName =obj.FC(Vs2019.GetSetting("MyGunCollection_ShopOldName", TestContext));
             _shopNewName = obj.FC(Vs2019.GetSetting("MyGunCollection_ShopNewName", TestContext));
             _fullName = "Glock Super Carry";
+            _serialNumber = "RIA2323423";
             _manufacturesId = Manufacturers.GetId(_databasePath, "Glock", out _errOut);
             _modelId = Models.GetId(_databasePath, "G26", _manufacturesId, out _errOut);
             _nationalityId = Nationality.GetId(_databasePath, "USA", out _errOut);
             _gripId = Grips.GetId(_databasePath, "Plastic", out _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method GetFirearmIdByFullName.
+        /// </summary>
         [TestMethod, TestCategory("Gun Collection - Get Firearm ID")]
         public void GetFirearmIdByFullName()
         {
@@ -87,6 +94,58 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(gunId > 0, _errOut);
         }
 
+        [TestMethod, TestCategory("Gun Collection - Verify Firearm by Name")]
+        public void VerifyByFullName()
+        {
+            bool value = false;
+            long gunId = 0;
+            try
+            {
+                VerifyExists();
+                gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                value = MyCollection.Verify(_databasePath, gunId, _fullName, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"ERROR: {e.Message}");
+            }
+
+            string msg = value ? "does exists" : "does not exist";
+            TestContext.WriteLine($"FireArm Id from full name {_fullName} is {gunId} and {msg}");
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method VerifyByFullNameAndSerial.
+        /// </summary>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        [TestMethod, TestCategory("Gun Collection - Verify Firearm by Name and serial")]
+        public void VerifyByFullNameAndSerial()
+        {
+            bool value = false;
+            long gunId = 0;
+            try
+            {
+                VerifyExists();
+                gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                value = MyCollection.Verify(_databasePath, gunId, _fullName,_serialNumber, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"ERROR: {e.Message}");
+            }
+
+            string msg = value ? "does exists" : "does not exist";
+            TestContext.WriteLine($"FireArm Id from full name {_fullName} is {gunId} and {msg}");
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method RemoveFirearm.
+        /// </summary>
         [TestMethod, TestCategory("Gun Collection - Delete Firearm")]
         public void RemoveFirearm()
         {
@@ -95,18 +154,44 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = MyCollection.Delete(_databasePath, gunId, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Verifies the does not exists.
+        /// </summary>
+        private void VerifyDoesNotExists()
+        {
+            if (MyCollection.Exists(_databasePath, _fullName, out _errOut))
+            {
+                long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
+                MyCollection.Delete(_databasePath, gunId, out _errOut);
+            }
+        }
+        /// <summary>
+        /// Verifies the exists.
+        /// </summary>
+        private void VerifyExists()
+        {
+            if (!MyCollection.Exists(_databasePath, _fullName, out _errOut))
+            {
+                MyCollection.Add(_databasePath, false, 2, _manufacturesId,
+                    _fullName, "G26", _modelId, _serialNumber, "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
+                    "New", " ", _nationalityId, _gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
+                    "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
+                    DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ",
+                    true, "1-8", "2 lbs", " ", "Modern", "11/09/2021 14:20:45", false, " ", out _errOut);
+            }
+        }
+        /// <summary>
+        /// Defines the test method AddFirearm.
+        /// </summary>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         [TestMethod, TestCategory("Gun Collection - Add Firearm")]
         public void AddFirearm()
         {
             bool value = false;
             try
             {
-                if (MyCollection.Exists(_databasePath, _fullName, out _errOut))
-                {
-                    long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
-                    MyCollection.Delete(_databasePath, gunId, out _errOut);
-                }
+                VerifyDoesNotExists();
 
                 value = MyCollection.Add(_databasePath, false, 2, _manufacturesId,
                     _fullName, "G26", _modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
@@ -125,19 +210,13 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method UpdateFirearm.
+        /// </summary>
         [TestMethod, TestCategory("Gun Collection - Update Firearm")]
         public void UpdateFirearm()
         {
-            if (!MyCollection.Exists(_databasePath, _fullName, out _errOut))
-            {
-                MyCollection.Add(_databasePath, false, 2, _manufacturesId,
-                    _fullName, "G26", _modelId, "RIA2323423", "Pistol: Semi-Auto - SA/DA", "9mm Luger", "black",
-                    "New", " ", _nationalityId, _gripId, "16oz", "4", "plastic", "5 in", " ", " ", "single", "10 round mag",
-                    "iron", "400.00", "billy bob", "500.00", " ", "MSRP", "500.00", "Safe", " ", " ", "1990", " ",
-                    DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ", 
-                    true, "1-8", "2 lbs", " ", "Modern", "11/09/2021 14:20:45", false, " ", out _errOut);
-            }
+            VerifyExists();
 
             long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
 

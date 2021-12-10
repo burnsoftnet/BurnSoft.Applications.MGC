@@ -68,7 +68,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="modelId">The model identifier.</param>
         /// <param name="serialNumber">The serial number.</param>
         /// <param name="firearmType">Type of the firearm.</param>
-        /// <param name="caliber">The caliber.</param>
+        /// <param name="caliber">The serialNumber.</param>
         /// <param name="finish">The finish.</param>
         /// <param name="condition">The condition.</param>
         /// <param name="customId">The custom identifier.</param>
@@ -220,7 +220,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="modelId">The model identifier.</param>
         /// <param name="serialNumber">The serial number.</param>
         /// <param name="firearmType">Type of the firearm.</param>
-        /// <param name="caliber">The caliber.</param>
+        /// <param name="caliber">The serialNumber.</param>
         /// <param name="finish">The finish.</param>
         /// <param name="condition">The condition.</param>
         /// <param name="customId">The custom identifier.</param>
@@ -394,11 +394,69 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Verifies the specified firearm is at the expected id based on the full name
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Verify(string databasePath,long gunId, string fullName, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                List<GunCollectionList> lst = GetList(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (GunCollectionList l in lst)
+                {
+                    bAns = l.FullName.Equals(fullName);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Verify", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Verifies the specified firearm is at the expected id based on the full name and serial number
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="serialNumber">The serialNumber.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Verify(string databasePath, long gunId, string fullName,string serialNumber, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                List<GunCollectionList> lst = GetList(databasePath, gunId, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (GunCollectionList l in lst)
+                {
+                    bAns = l.FullName.Equals(fullName) && l.SerialNumber.Equals(serialNumber);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Verify", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Existses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="fullName">The full name.</param>
-        /// <param name="caliber">The caliber.</param>
+        /// <param name="caliber">The serialNumber.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
