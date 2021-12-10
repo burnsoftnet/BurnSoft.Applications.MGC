@@ -105,6 +105,33 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Strings the helper.  Some fields in the database are set to non zero length strings, this will just check to see if the string is blank
+        /// if so, then att a few spaces
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        private static string StringHelper(string value, bool isdate = false)
+        {
+            string sAns = value;
+            if (value.Length == 0)
+            {
+                if (!isdate)
+                {
+                    sAns = "N/A";
+                }
+                else
+                {
+                    sAns = $"{DateTime.Now}";
+                }
+                
+            }
+            else
+            {
+                sAns = value.Replace("'", "''");
+            }
+            return sAns;
+        }
+        /// <summary>
         /// Generates the details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -122,50 +149,50 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw  new Exception(errOut);
                 foreach (GunCollectionList l in lst)
                 {
-                    sAns += $"       <FullName>{l.FullName}</FullName>{Environment.NewLine}";
-                    sAns += $"       <Manufacturer>{l.Manufacturer}</Manufacturer>{Environment.NewLine}";
-                    sAns += $"       <ModelName>{l.ModelName}</ModelName>{Environment.NewLine}";
-                    sAns += $"       <SerialNumber>{l.SerialNumber}</SerialNumber>{Environment.NewLine}";
-                    sAns += $"       <Type>{l.Type}</Type>{Environment.NewLine}";
-                    sAns += $"       <Caliber>{l.Caliber}</Caliber>{Environment.NewLine}";
-                    sAns += $"       <Finish>{l.Finish}</Finish>{Environment.NewLine}";
-                    sAns += $"       <Condition>{l.Condition}</Condition>{Environment.NewLine}";
-                    sAns += $"       <CustomID>{l.CustomId}</CustomID>{Environment.NewLine}";
-                    sAns += $"       <NatID>{l.Nationality}</NatID>{Environment.NewLine}";
-                    sAns += $"       <GripID>{l.GripType}</GripID>{Environment.NewLine}";
-                    sAns += $"       <Weight>{l.Weight}</Weight>{Environment.NewLine}";
-                    sAns += $"       <Height>{l.Height}</Height>{Environment.NewLine}";
-                    sAns += $"       <BarrelLength>{l.BarrelLength}</BarrelLength>{Environment.NewLine}";
-                    sAns += $"       <BarWid>{l.BarrelWidth}</BarWid>{Environment.NewLine}";
-                    sAns += $"       <BarHei>{l.BarrelHeight}</BarHei>{Environment.NewLine}";
-                    sAns += $"       <Action>{l.Action}</Action>{Environment.NewLine}";
-                    sAns += $"       <Feedsystem>{l.FeedSystem}</Feedsystem>{Environment.NewLine}";
-                    sAns += $"       <Sights>{l.Sights}</Sights>{Environment.NewLine}";
-                    sAns += $"       <PurchasedPrice>{l.PurchasePrice}</PurchasedPrice>{Environment.NewLine}";
-                    sAns += $"       <PurchasedFrom>{l.PurchaseFrom}</PurchasedFrom>{Environment.NewLine}";
-                    sAns += $"       <AppraisedValue>{l.AppriasedValue}</AppraisedValue>{Environment.NewLine}";
-                    sAns += $"       <AppraisalDate>{l.AppraisalDate}</AppraisalDate>{Environment.NewLine}";
-                    sAns += $"       <AppraisedBy>{l.AppriasedBy}</AppraisedBy>{Environment.NewLine}";
-                    sAns += $"       <InsuredValue>{l.InsuredValue}</InsuredValue>{Environment.NewLine}";
-                    sAns += $"       <StorageLocation>{l.StorageLocation}</StorageLocation>{Environment.NewLine}";
-                    sAns += $"       <ConditionComments>{l.ConditionComments}</ConditionComments>{Environment.NewLine}";
-                    sAns += $"       <AdditionalNotes>{l.AdditionalNotes}</AdditionalNotes>{Environment.NewLine}";
-                    sAns += $"       <Produced>{l.DateProduced}</Produced>{Environment.NewLine}";
+                    sAns += $"       <FullName>{StringHelper(l.FullName)}</FullName>{Environment.NewLine}";
+                    sAns += $"       <Manufacturer>{StringHelper(l.Manufacturer)}</Manufacturer>{Environment.NewLine}";
+                    sAns += $"       <ModelName>{StringHelper(l.ModelName)}</ModelName>{Environment.NewLine}";
+                    sAns += $"       <SerialNumber>{StringHelper(l.SerialNumber)}</SerialNumber>{Environment.NewLine}";
+                    sAns += $"       <Type>{StringHelper(l.Type)}</Type>{Environment.NewLine}";
+                    sAns += $"       <Caliber>{StringHelper(l.Caliber)}</Caliber>{Environment.NewLine}";
+                    sAns += $"       <Finish>{StringHelper(l.Finish)}</Finish>{Environment.NewLine}";
+                    sAns += $"       <Condition>{StringHelper(l.Condition)}</Condition>{Environment.NewLine}";
+                    sAns += $"       <CustomID>{StringHelper(l.CustomId)}</CustomID>{Environment.NewLine}";
+                    sAns += $"       <NatID>{StringHelper(l.Nationality)}</NatID>{Environment.NewLine}";
+                    sAns += $"       <GripID>{StringHelper(l.GripType)}</GripID>{Environment.NewLine}";
+                    sAns += $"       <Weight>{StringHelper(l.Weight)}</Weight>{Environment.NewLine}";
+                    sAns += $"       <Height>{StringHelper(l.Height)}</Height>{Environment.NewLine}";
+                    sAns += $"       <BarrelLength>{StringHelper(l.BarrelLength)}</BarrelLength>{Environment.NewLine}";
+                    sAns += $"       <BarWid>{StringHelper(l.BarrelWidth)}</BarWid>{Environment.NewLine}";
+                    sAns += $"       <BarHei>{StringHelper(l.BarrelHeight)}</BarHei>{Environment.NewLine}";
+                    sAns += $"       <Action>{StringHelper(l.Action)}</Action>{Environment.NewLine}";
+                    sAns += $"       <Feedsystem>{StringHelper(l.FeedSystem)}</Feedsystem>{Environment.NewLine}";
+                    sAns += $"       <Sights>{StringHelper(l.Sights)}</Sights>{Environment.NewLine}";
+                    sAns += $"       <PurchasedPrice>{StringHelper(l.PurchasePrice)}</PurchasedPrice>{Environment.NewLine}";
+                    sAns += $"       <PurchasedFrom>{StringHelper(l.PurchaseFrom)}</PurchasedFrom>{Environment.NewLine}";
+                    sAns += $"       <AppraisedValue>{StringHelper(l.AppriasedValue)}</AppraisedValue>{Environment.NewLine}";
+                    sAns += $"       <AppraisalDate>{StringHelper(l.AppraisalDate)}</AppraisalDate>{Environment.NewLine}";
+                    sAns += $"       <AppraisedBy>{StringHelper(l.AppriasedBy)}</AppraisedBy>{Environment.NewLine}";
+                    sAns += $"       <InsuredValue>{StringHelper(l.InsuredValue)}</InsuredValue>{Environment.NewLine}";
+                    sAns += $"       <StorageLocation>{StringHelper(l.StorageLocation)}</StorageLocation>{Environment.NewLine}";
+                    sAns += $"       <ConditionComments>{StringHelper(l.ConditionComments)}</ConditionComments>{Environment.NewLine}";
+                    sAns += $"       <AdditionalNotes>{StringHelper(l.AdditionalNotes)}</AdditionalNotes>{Environment.NewLine}";
+                    sAns += $"       <Produced>{StringHelper(l.DateProduced)}</Produced>{Environment.NewLine}";
                     sAns += $"       <IsCandR>{l.IsCAndR}</IsCandR>{Environment.NewLine}";
-                    sAns += $"       <PetLoads>{l.PetLoads}</PetLoads>{Environment.NewLine}";
-                    sAns += $"       <dtp>{l.DateTimeAdded}</dtp>{Environment.NewLine}";
-                    sAns += $"       <Importer>{l.Importer}</Importer>{Environment.NewLine}";
-                    sAns += $"       <ReManDT>{l.RemanufactureDate}</ReManDT>{Environment.NewLine}";
-                    sAns += $"       <POI>{l.Poi}</POI>{Environment.NewLine}";
-                    sAns += $"       <SGChoke>{l.ShotGunChoke}</SGChoke>{Environment.NewLine}";
-                    sAns += $"       <Caliber3>{l.Caliber3}</Caliber3>{Environment.NewLine}";
-                    sAns += $"       <TwistOfRate>{l.TwistRate}</TwistOfRate>{Environment.NewLine}";
-                    sAns += $"       <TriggerPull>{l.TriggerPullInPounds}</TriggerPull>{Environment.NewLine}";
+                    sAns += $"       <PetLoads>{StringHelper(l.PetLoads)}</PetLoads>{Environment.NewLine}";
+                    sAns += $"       <dtp>{StringHelper(l.DateTimeAdded,true)}</dtp>{Environment.NewLine}";
+                    sAns += $"       <Importer>{StringHelper(l.Importer)}</Importer>{Environment.NewLine}";
+                    sAns += $"       <ReManDT>{StringHelper(l.RemanufactureDate,true)}</ReManDT>{Environment.NewLine}";
+                    sAns += $"       <POI>{StringHelper(l.Poi)}</POI>{Environment.NewLine}";
+                    sAns += $"       <SGChoke>{StringHelper(l.ShotGunChoke)}</SGChoke>{Environment.NewLine}";
+                    sAns += $"       <Caliber3>{StringHelper(l.Caliber3)}</Caliber3>{Environment.NewLine}";
+                    sAns += $"       <TwistOfRate>{StringHelper(l.TwistRate)}</TwistOfRate>{Environment.NewLine}";
+                    sAns += $"       <TriggerPull>{StringHelper(l.TriggerPullInPounds)}</TriggerPull>{Environment.NewLine}";
                     sAns += $"       <BoundBook>{l.IsInBoundBook}</BoundBook>{Environment.NewLine}";
-                    sAns += $"       <Classification>{l.Classification}</Classification>{Environment.NewLine}";
-                    sAns += $"       <DateofCR>{l.DateOfCAndR}</DateofCR>{Environment.NewLine}";
+                    sAns += $"       <Classification>{StringHelper(l.Classification)}</Classification>{Environment.NewLine}";
+                    sAns += $"       <DateofCR>{StringHelper(l.DateOfCAndR,true)}</DateofCR>{Environment.NewLine}";
                     sAns += $"       <IsClassIII>{l.IsClass3Item}</IsClassIII>{Environment.NewLine}";
-                    sAns += $"       <ClassIiiOwner>{l.Class3Owner}</ClassIiiOwner>{Environment.NewLine}";
+                    sAns += $"       <ClassIiiOwner>{StringHelper(l.Class3Owner)}</ClassIiiOwner>{Environment.NewLine}";
                 }
             }
             catch (Exception e)
