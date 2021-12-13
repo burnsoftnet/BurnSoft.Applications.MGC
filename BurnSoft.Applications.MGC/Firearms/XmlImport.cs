@@ -248,6 +248,54 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Guns the smith details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="xmlPath">The XML path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool GunSmithDetails(string databasePath, string xmlPath, int gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                XmlDocument doc = new XmlDocument();
 
+                doc.Load(xmlPath);
+                XmlNodeList elemlist = doc.GetElementsByTagName("Accessories");
+                foreach (XmlNode xn in elemlist)
+                {
+
+                    string gsmith = Helpers.FormatFromXml(GetXmlNode(xn["gsmith"]));
+                    string sdate = Helpers.FormatFromXml(GetXmlNode(xn["sdate"]));
+                    string rdate = Helpers.FormatFromXml(GetXmlNode(xn["rdate"]));
+                    string od = Helpers.FormatFromXml(GetXmlNode(xn["od"]));
+                    string notes = Helpers.FormatFromXml(GetXmlNode(xn["notes"]));
+                    
+                    if (!PeopleAndPlaces.GunSmiths.Exists(databasePath, gsmith, out errOut))
+                    {
+                        if (!PeopleAndPlaces.GunSmiths.Add(databasePath, gsmith, out errOut)) throw new Exception(errOut);
+                    }
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    long gunSmithId = PeopleAndPlaces.GunSmiths.GetId(databasePath, gsmith, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    if (!Firearms.GunSmithDetails.Add(databasePath, gunId, gsmith, gunSmithId, od, notes, sdate, rdate,out errOut)) throw new Exception(errOut);
+                }
+
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Accessories", e);
+            }
+            return bAns;
+        }
     }
 }
