@@ -269,7 +269,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 XmlDocument doc = new XmlDocument();
 
                 doc.Load(xmlPath);
-                XmlNodeList elemlist = doc.GetElementsByTagName("Accessories");
+                XmlNodeList elemlist = doc.GetElementsByTagName("GunSmith_Details");
                 foreach (XmlNode xn in elemlist)
                 {
 
@@ -294,6 +294,63 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("Accessories", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Barrels the converstion kit details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="xmlPath">The XML path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool BarrelConverstionKitDetails(string databasePath, string xmlPath, int gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+
+                doc.Load(xmlPath);
+                XmlNodeList elemlist = doc.GetElementsByTagName("BarrelConverstionKit_Details");
+                foreach (XmlNode xn in elemlist)
+                {
+                    string modelName = Helpers.FormatFromXml(GetXmlNode(xn["ModelName"]));
+                    string caliber = Helpers.FormatFromXml(GetXmlNode(xn["Caliber"]));
+                    string finish = Helpers.FormatFromXml(GetXmlNode(xn["Finish"]));
+                    string barrelLength = Helpers.FormatFromXml(GetXmlNode(xn["BarrelLength"]));
+                    string petLoads = Helpers.FormatFromXml(GetXmlNode(xn["petLoads"]));
+
+                    string action = Helpers.FormatFromXml(GetXmlNode(xn["Action"]));
+                    string feedsystem = Helpers.FormatFromXml(GetXmlNode(xn["Feedsystem"]));
+                    string sights = Helpers.FormatFromXml(GetXmlNode(xn["Sights"]));
+                    string purchasedPrice = Helpers.FormatFromXml(GetXmlNode(xn["PurchasedPrice"]));
+                    string purchasedFrom = Helpers.FormatFromXml(GetXmlNode(xn["PurchasedFrom"])); 
+                    string dtp = Helpers.FormatFromXml(GetXmlNode(xn["dtp"]));
+                    string height = Helpers.FormatFromXml(GetXmlNode(xn["Height"]));
+                    string type = Helpers.FormatFromXml(GetXmlNode(xn["Type"]));
+                    bool isDefault = Convert.ToInt32(Helpers.FormatFromXml(GetXmlNode(xn["IsDefault"]))) == 1;
+
+                    if (!ExtraBarrelConvoKits.Exists(databasePath, gunId, modelName, caliber, finish,
+                        barrelLength, petLoads, action, feedsystem, sights, purchasedPrice,
+                        purchasedFrom, height, type, isDefault, out errOut))
+                    {
+                        if (!ExtraBarrelConvoKits.Add(databasePath, gunId, modelName, caliber, finish,
+                            barrelLength, petLoads, action, feedsystem, sights, purchasedPrice,
+                            purchasedFrom, height, type, isDefault, dtp, out errOut)) throw new Exception(errOut);
+                    }
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                }
+
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("BarrelConverstionKitDetails", e);
             }
             return bAns;
         }
