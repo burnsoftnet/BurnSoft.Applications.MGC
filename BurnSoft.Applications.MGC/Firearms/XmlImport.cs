@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
 using System.Xml;
 using BurnSoft.Applications.MGC.Global;
-using BurnSoft.Applications.MGC.Firearms;
-using BurnSoft.Applications.MGC.Types;
-using BurnSoft.Universal;
 // ReSharper disable RedundantAssignment
 // ReSharper disable NotAccessedVariable
+// ReSharper disable UnusedMember.Global
+// ReSharper disable ConvertIfStatementToConditionalTernaryExpression
+#pragma warning disable 168
 
 // ReSharper disable UnusedMember.Local
 namespace BurnSoft.Applications.MGC.Firearms
@@ -351,6 +347,61 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("BarrelConverstionKitDetails", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Maintances the details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="xmlPath">The XML path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool MaintanceDetails(string databasePath, string xmlPath, int gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                XmlDocument doc = new XmlDocument();
+
+                doc.Load(xmlPath);
+                XmlNodeList elemlist = doc.GetElementsByTagName("Maintance_Details");
+                foreach (XmlNode xn in elemlist)
+                {
+
+                    string name = Helpers.FormatFromXml(GetXmlNode(xn["Name"]));
+                    string opDate = Helpers.FormatFromXml(GetXmlNode(xn["OpDate"]));
+                    string opDueDate = Helpers.FormatFromXml(GetXmlNode(xn["OpDueDate"]));
+                    long rndFired = Convert.ToInt32(Helpers.FormatFromXml(GetXmlNode(xn["RndFired"])));
+                    string ammoUsed = Helpers.FormatFromXml(GetXmlNode(xn["ammoUsed"]));
+                    string notes = Helpers.FormatFromXml(GetXmlNode(xn["Notes"]));
+
+                    if (!MaintancePlans.Exists(databasePath, name, out errOut))
+                    {
+                        if (!MaintancePlans.Add(databasePath, name, "N/A from Import", "N/A from Import", "N/A from Import", "N/A from Import", out errOut)) throw new Exception(errOut);
+                    }
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    long maintenancePlansId = MaintancePlans.GetId(databasePath, name, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    long defaultBarrelId =
+                        ExtraBarrelConvoKits.GetDefaultBarrelId(databasePath, gunId, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    if (!Firearms.MaintanceDetails.Add(databasePath, name, gunId, maintenancePlansId, opDate, opDueDate, rndFired, notes, ammoUsed,defaultBarrelId, rndFired > 0, out errOut)) throw new Exception(errOut);
+
+                }
+
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MaintanceDetails", e);
             }
             return bAns;
         }
