@@ -208,7 +208,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Accessories(string databasePath, string xmlPath, int gunId, out string errOut)
+        public static bool Accessories(string databasePath, string xmlPath, long gunId, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -256,7 +256,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        public static bool GunSmithDetails(string databasePath, string xmlPath, int gunId, out string errOut)
+        public static bool GunSmithDetails(string databasePath, string xmlPath, long gunId, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -303,7 +303,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        public static bool BarrelConverstionKitDetails(string databasePath, string xmlPath, int gunId, out string errOut)
+        public static bool BarrelConverstionKitDetails(string databasePath, string xmlPath, long gunId, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -363,7 +363,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        public static bool MaintanceDetails(string databasePath, string xmlPath, int gunId, out string errOut)
+        public static bool MaintanceDetails(string databasePath, string xmlPath, long gunId, out string errOut)
         {
             bool bAns = false;
             errOut = "";
