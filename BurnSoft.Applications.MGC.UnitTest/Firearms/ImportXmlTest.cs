@@ -70,7 +70,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 
                 }
 
-                if (!XmlImport.Details(_databasePath, _databasePath, _ownerId, false, out _errOut )) throw new Exception(_errOut);
+                if (!XmlImport.Details(_databasePath, _xmlImportFile, _ownerId, false, out _errOut )) throw new Exception(_errOut);
                 long gunId = MyCollection.GetLastId(_databasePath, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 if (!XmlImport.Accessories(_databasePath, _xmlImportFile, gunId, out _errOut)) throw new Exception(_errOut);
