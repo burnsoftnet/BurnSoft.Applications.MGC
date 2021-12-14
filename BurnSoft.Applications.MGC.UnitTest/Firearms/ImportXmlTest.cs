@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Runtime.CompilerServices;
 using BurnSoft.Applications.MGC.Firearms;
+using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 
 // ReSharper disable ConvertIfStatementToConditionalTernaryExpression
@@ -77,8 +79,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 if (!XmlImport.BarrelConverstionKitDetails(_databasePath, _xmlImportFile, gunId, out _errOut)) throw new Exception(_errOut);
                 if (!XmlImport.GunSmithDetails(_databasePath, _xmlImportFile, gunId, out _errOut)) throw new Exception(_errOut);
                 if (!XmlImport.MaintanceDetails(_databasePath, _xmlImportFile, gunId, out _errOut)) throw new Exception(_errOut);
-
-
+                
+                List<GunCollectionList> lst = MyCollection.GetList(_databasePath, gunId, out _errOut);
+                if (_errOut.Length > 0) throw new Exception(_errOut);
+                MyGunCollectionTest obj = new MyGunCollectionTest();
+                obj.PrintList(lst);
+                value = true;
             }
             catch (Exception e)
             {

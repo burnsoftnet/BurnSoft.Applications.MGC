@@ -233,7 +233,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// Prints the list.
         /// </summary>
         /// <param name="value">The value.</param>
-        private void PrintList(List<GunCollectionList> value)
+        public void PrintList(List<GunCollectionList> value)
         {
             if (value.Count > 0)
             {
