@@ -111,7 +111,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 XmlNodeList elemlist = doc.GetElementsByTagName("Details");
                 foreach (XmlNode xn in elemlist)
                 {
-                    fullName = Helpers.FormatFromXml(GetXmlNode(xn["FirstName"]));
+                    fullName = Helpers.FormatFromXml(GetXmlNode(xn["FullName"]));
                     string manufacturer = Helpers.FormatFromXml(GetXmlNode(xn["Manufacturer"]));
                     string modelName = Helpers.FormatFromXml(GetXmlNode(xn["ModelName"]));
                     serialNumber = Helpers.FormatFromXml(GetXmlNode(xn["SerialNumber"]));
@@ -380,7 +380,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     string opDate = Helpers.FormatFromXml(GetXmlNode(xn["OpDate"]));
                     string opDueDate = Helpers.FormatFromXml(GetXmlNode(xn["OpDueDate"]));
                     long rndFired = Convert.ToInt32(Helpers.FormatFromXml(GetXmlNode(xn["RndFired"])));
-                    string ammoUsed = Helpers.FormatFromXml(GetXmlNode(xn["ammoUsed"]));
+                    string ammoUsed = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["ammoUsed"])));
                     string notes = Helpers.FormatFromXml(GetXmlNode(xn["Notes"]));
 
                     if (!MaintancePlans.Exists(databasePath, name, out errOut))

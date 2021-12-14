@@ -113,7 +113,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="isDate"></param>
         /// <param name="defaultFiller"></param>
         /// <returns>System.String.</returns>
-        private static string StringHelper(string value, bool isDate = false, string defaultFiller = "N/A")
+        internal static string StringHelper(string value, bool isDate = false, string defaultFiller = "N/A")
         {
             string sAns = value;
             if (value.Trim().Length == 0)

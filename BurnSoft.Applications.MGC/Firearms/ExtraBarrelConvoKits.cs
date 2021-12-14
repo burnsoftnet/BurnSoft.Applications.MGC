@@ -99,7 +99,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"SELECT DBID from Gun_Collection where ID={gunId}";
+                string sql = $"SELECT * from Gun_Collection where ID={gunId}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 List<GunCollectionList> myList = MyCollection.MyList(dt, out errOut);
                 foreach (GunCollectionList m in myList)
