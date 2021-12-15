@@ -280,9 +280,12 @@ namespace BurnSoft.Applications.MGC.Firearms
                         if (!PeopleAndPlaces.GunSmiths.Add(databasePath, gsmith, out errOut)) throw new Exception(errOut);
                     }
                     if (errOut.Length > 0) throw new Exception(errOut);
-                    long gunSmithId = PeopleAndPlaces.GunSmiths.GetId(databasePath, gsmith, out errOut);
-                    if (errOut.Length > 0) throw new Exception(errOut);
-                    if (!Firearms.GunSmithDetails.Add(databasePath, gunId, gsmith, gunSmithId, od, notes, sdate, rdate,out errOut)) throw new Exception(errOut);
+                    //TODO: #39 Un Comment the code below to use for this issue
+                    //long gunSmithId = PeopleAndPlaces.GunSmiths.GetId(databasePath, gsmith, out errOut);
+                    //if (errOut.Length > 0) throw new Exception(errOut);
+                    //if (!Firearms.GunSmithDetails.Add(databasePath, gunId, gsmith, gunSmithId, od, notes, sdate, rdate,out errOut)) throw new Exception(errOut);
+                    //TODO: #39 Delete the code below to use for this issue
+                    if (!Firearms.GunSmithDetails.Add(databasePath, gunId, gsmith,  od, notes, sdate, rdate, out errOut)) throw new Exception(errOut);
                 }
 
                 bAns = true;

@@ -116,6 +116,22 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Adds the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="smithName">Name of the smith.</param>
+        /// <param name="orderDetails">The order details.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="startDate">The start date.</param>
+        /// <param name="returnDate">The return date.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Add(string databasePath, long gunId, string smithName, string orderDetails, string notes, string startDate, string returnDate, out string errOut)
+        {
+            return Add(databasePath, gunId, smithName, 0, orderDetails, notes, startDate, returnDate, out errOut);
+        }
+        /// <summary>
         /// Determines whether [has collection attached] [the specified database path].
         /// </summary>
         /// <param name="databasePath">The database path.</param>
