@@ -132,7 +132,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"INSERT INTO GunSmith_Details(GID,gsmith,GSID,od,notes,sdate,rdate,sync_lastupdate) VALUES({gunId}," +
+                string sql = $"INSERT INTO GunSmith_Details(GID,gsmith,od,notes,sdate,rdate,sync_lastupdate) VALUES({gunId}," +
                              $"'{smithName}','{orderDetails}','{notes}','{startDate}','{returnDate}',Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
