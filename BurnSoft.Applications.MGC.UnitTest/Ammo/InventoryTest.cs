@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Ammo;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
-using BurnSoft.Universal;
+
 // ReSharper disable UnusedVariable
 
 namespace BurnSoft.Applications.MGC.UnitTest.Ammo

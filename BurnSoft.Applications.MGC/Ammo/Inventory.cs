@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Net.NetworkInformation;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 

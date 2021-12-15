@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
