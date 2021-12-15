@@ -128,7 +128,21 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, long gunId, string smithName, string orderDetails, string notes, string startDate, string returnDate, out string errOut)
         {
-            return Add(databasePath, gunId, smithName, 0, orderDetails, notes, startDate, returnDate, out errOut);
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"INSERT INTO GunSmith_Details(GID,gsmith,GSID,od,notes,sdate,rdate,sync_lastupdate) VALUES({gunId}," +
+                             $"'{smithName}','{orderDetails}','{notes}','{startDate}','{returnDate}',Now())";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Add", e);
+            }
+
+            return bAns;
         }
         /// <summary>
         /// Determines whether [has collection attached] [the specified database path].
