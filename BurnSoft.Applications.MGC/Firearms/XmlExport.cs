@@ -130,19 +130,51 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             else
             {
-                sAns = value.Replace("'", "''");
+                if (!isDate)
+                {
+                    sAns = value.Replace("'", "''");
+                }
+                else
+                {
+                    if (!CheckDate(value))
+                    {
+                        sAns = $"{DateTime.Now}";
+                    }
+                    else
+                    {
+                        sAns = value.Replace("'", "''");
+                    }
+                }
+                    
             }
             return sAns;
         }
         /// <summary>
-        /// Generates the details.
+        /// Checks the date.
         /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="gunId">The gun identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>System.String.</returns>
-        /// <exception cref="System.Exception"></exception>
-        private static string GenerateDetails(string databasePath, long gunId, out string errOut)
+        /// <param name="date">The date.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        internal static bool CheckDate(String date)
+        {
+            try
+            {
+                DateTime dt = DateTime.Parse(date);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+/// <summary>
+/// Generates the details.
+/// </summary>
+/// <param name="databasePath">The database path.</param>
+/// <param name="gunId">The gun identifier.</param>
+/// <param name="errOut">The error out.</param>
+/// <returns>System.String.</returns>
+/// <exception cref="System.Exception"></exception>
+private static string GenerateDetails(string databasePath, long gunId, out string errOut)
         {
             string sAns = $"   <Details>{Environment.NewLine}";
             errOut = "";

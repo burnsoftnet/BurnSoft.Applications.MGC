@@ -131,7 +131,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     string purchasedPrice = Helpers.FormatFromXml(GetXmlNode(xn["PurchasedPrice"]));
                     string purchasedFrom = Helpers.FormatFromXml(GetXmlNode(xn["PurchasedFrom"]));
                     string appraisedValue = Helpers.FormatFromXml(GetXmlNode(xn["AppraisedValue"]));
-                    string appraisalDate = Helpers.FormatFromXml(GetXmlNode(xn["AppraisalDate"]));
+                    string appraisalDate = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["AppraisalDate"])), true);
                     string appraisedBy = Helpers.FormatFromXml(GetXmlNode(xn["AppraisedBy"]));
                     string insuredValue = Helpers.FormatFromXml(GetXmlNode(xn["InsuredValue"]));
                     string sgChoke = Helpers.FormatFromXml(GetXmlNode(xn["SGChoke"]));
@@ -140,8 +140,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                     string additionalNotes = Helpers.FormatFromXml(GetXmlNode(xn["AdditionalNotes "]));
                     string produced = Helpers.FormatFromXml(GetXmlNode(xn["Produced"]));
                     string isCandR = Helpers.FormatFromXml(GetXmlNode(xn["IsCandR"]));
-                    string petLoads = Helpers.FormatFromXml(GetXmlNode(xn["PetLoads"]));
-                    string dtp = Helpers.FormatFromXml(GetXmlNode(xn["dtp"]));
+                    string petLoads = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["PetLoads"])));
+                    string dtp = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["dtp"])), true);
                     string importer = Helpers.FormatFromXml(GetXmlNode(xn["Importer"]));
                     string reManDt = Helpers.FormatFromXml(GetXmlNode(xn["ReManDT"]));
                     bool bBoundBook = Convert.ToBoolean(Helpers.FormatFromXml(GetXmlNode(xn["BoundBook"])));
@@ -149,7 +149,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     string sTwist = Helpers.FormatFromXml(GetXmlNode(xn["TwistOfRate"]));
                     string sTrigger = Helpers.FormatFromXml(GetXmlNode(xn["TriggerPull"]));
                     string sClassification = Helpers.FormatFromXml(GetXmlNode(xn["Classification"]));
-                    string sDateOfCr = Helpers.FormatFromXml(GetXmlNode(xn["DateofCR"]));
+                    string sDateOfCr = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["DateofCR"])),true);
                     string strBarWid = Helpers.FormatFromXml(GetXmlNode(xn["BarWid"]));
                     string strBarHei = Helpers.FormatFromXml(GetXmlNode(xn["BarHei"]));
                     string sClassIiiOwner = Helpers.FormatFromXml(GetXmlNode(xn["ClassIiiOwner"]));
@@ -270,8 +270,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                 {
 
                     string gsmith = Helpers.FormatFromXml(GetXmlNode(xn["gsmith"]));
-                    string sdate = Helpers.FormatFromXml(GetXmlNode(xn["sdate"]));
-                    string rdate = Helpers.FormatFromXml(GetXmlNode(xn["rdate"]));
+                    string sdate = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["sdate"])), true);
+                    string rdate = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["rdate"])), true);
                     string od = Helpers.FormatFromXml(GetXmlNode(xn["od"]));
                     string notes = Helpers.FormatFromXml(GetXmlNode(xn["notes"]));
                     
@@ -322,7 +322,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     string caliber = Helpers.FormatFromXml(GetXmlNode(xn["Caliber"]));
                     string finish = Helpers.FormatFromXml(GetXmlNode(xn["Finish"]));
                     string barrelLength = Helpers.FormatFromXml(GetXmlNode(xn["BarrelLength"]));
-                    string petLoads = Helpers.FormatFromXml(GetXmlNode(xn["petLoads"]));
+                    string petLoads = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["petLoads"])));
 
                     string action = Helpers.FormatFromXml(GetXmlNode(xn["Action"]));
                     string feedsystem = Helpers.FormatFromXml(GetXmlNode(xn["Feedsystem"]));
@@ -380,8 +380,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                 {
 
                     string name = Helpers.FormatFromXml(GetXmlNode(xn["Name"]));
-                    string opDate = Helpers.FormatFromXml(GetXmlNode(xn["OpDate"]));
-                    string opDueDate = Helpers.FormatFromXml(GetXmlNode(xn["OpDueDate"]));
+                    string opDate = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["OpDate"])), true);
+                    string opDueDate = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["OpDueDate"])), true);
                     long rndFired = Convert.ToInt32(Helpers.FormatFromXml(GetXmlNode(xn["RndFired"])));
                     string ammoUsed = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["ammoUsed"])));
                     string notes = Helpers.FormatFromXml(GetXmlNode(xn["Notes"]));
