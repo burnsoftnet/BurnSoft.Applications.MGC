@@ -36,3 +36,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "<Pending>", Scope = "member", Target = "~F:BurnSoft.Applications.MGC.UnitTest.Firearms.DocumentTests.Doc_Ext")]
 [assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>", Scope = "member", Target = "~M:BurnSoft.Applications.MGC.UnitTest.Firearms.DocumentTests.DeleteTest")]
 [assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>", Scope = "member", Target = "~M:BurnSoft.Applications.MGC.UnitTest.Firearms.DocumentTests.GetListAllTest")]
+[assembly: SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "<Pending>", Scope = "member", Target = "~F:BurnSoft.Applications.MGC.UnitTest.Firearms.ImportXmlTest._gunId")]
