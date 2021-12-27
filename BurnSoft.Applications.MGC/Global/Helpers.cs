@@ -210,7 +210,7 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="strTitle">The string title.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if the specified string value is required; otherwise, <c>false</c>.</returns>
-        public bool IsRequired(string strValue, string strField, string strTitle, out string errOut)
+        public static bool IsRequired(string strValue, string strField, string strTitle, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -236,7 +236,7 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="strTitle">The string title.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if the specified l value is required; otherwise, <c>false</c>.</returns>
-        public bool IsRequired(long lValue, long lDefault, string strField, string strTitle, out string errOut)
+        public static bool IsRequired(long lValue, long lDefault, string strField, string strTitle, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -262,7 +262,7 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="strTitle">The string title.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if the specified l value is required; otherwise, <c>false</c>.</returns>
-        public bool IsRequired(double lValue, double lDefault, string strField, string strTitle, out string errOut)
+        public static bool IsRequired(double lValue, double lDefault, string strField, string strTitle, out string errOut)
         {
             bool bAns = false;
             errOut = "";
