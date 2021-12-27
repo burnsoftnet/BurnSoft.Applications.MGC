@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Security.RegularEncryption.SHA;
+
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.PeopleAndPlaces
@@ -175,6 +177,40 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             return lst;
         }
         /// <summary>
+        /// Gets the owner identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="ownerName">Name of the owner.</param>
+        /// <param name="ownerLic">The owner lic.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetOwnerId(string databasePath,out string ownerName,out string ownerLic,  out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            ownerName = "";
+            ownerLic = "";
+            try
+            {
+                DataTable dt = Database.GetDataFromTable(databasePath, "SELECT TOP 1 * from Owner_Info", out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<OwnerInfo> lst = GetList(dt, out errOut);
+
+                foreach (OwnerInfo l in lst)
+                {
+                    lAns = l.Id;
+                    ownerName = l.Name;
+                    ownerLic = One.Decrypt(l.Ccdwl);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetOwnerId", e);
+            }
+            return lAns;
+        }
+        /// <summary>
         /// Gets the list.
         /// </summary>
         /// <param name="dt">The dt.</param>
@@ -191,17 +227,17 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                     lst.Add(new OwnerInfo()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Name = d["Name"].ToString().Trim(),
-                        Address = d["Address"].ToString().Trim(),
-                        City = d["City"].ToString().Trim(),
-                        State = d["State"].ToString().Trim(),
-                        ZipCode = d["Zip"].ToString().Trim(),
-                        Phone = d["Phone"].ToString().Trim(),
-                        Ccdwl = d["Ccdwl"].ToString().Trim(),
+                        Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
+                        Address = d["Address"] != DBNull.Value ? d["Address"].ToString().Trim() : "",
+                        City = d["City"] != DBNull.Value ? d["City"].ToString().Trim() : "",
+                        State = d["State"] != DBNull.Value ? d["State"].ToString().Trim() : "",
+                        ZipCode = d["Zip"] != DBNull.Value ? d["Zip"].ToString().Trim() : "",
+                        Phone = d["Phone"] != DBNull.Value ? d["Phone"].ToString().Trim() : "",
+                        Ccdwl = d["Ccdwl"] != DBNull.Value ? d["Ccdwl"].ToString().Trim() : "",
                         UsePassword = Convert.ToInt32(d["UsePWD"]) == 1,
-                        UserName = d["uid"].ToString().Trim(),
-                        ForgotWord = d["forgot_word"].ToString().Trim(),
-                        ForgotPhrase = d["forgot_phrase"].ToString().Trim(),
+                        UserName = d["uid"] != DBNull.Value ? d["uid"].ToString().Trim() : "",
+                        ForgotWord = d["forgot_word"] != DBNull.Value ? d["forgot_word"].ToString().Trim() : "",
+                        ForgotPhrase = d["forgot_phrase"] != DBNull.Value ? d["forgot_phrase"].ToString().Trim() : "",
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }
