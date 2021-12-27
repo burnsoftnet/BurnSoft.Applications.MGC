@@ -112,6 +112,9 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="data\ExportFirearm_Glock_G17_Open_Class.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="data\MGC.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

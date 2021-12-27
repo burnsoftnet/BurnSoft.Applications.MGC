@@ -1,0 +1,987 @@
+<?xml version="1.0" encoding="utf-8" ?><Firearm>
+   <MGC>       <version>Version 6.5.1.10</version>   </MGC>    <Details>
+       <FullName>Glock G17 Open Class</FullName>
+       <Manufacturer>Glock</Manufacturer>
+       <ModelName>G17 GEN3</ModelName>
+       <SerialNumber>vul696</SerialNumber>
+       <Type>Semi-Auto Pistol</Type>
+       <Caliber>9mm Luger</Caliber>
+       <Finish>Black</Finish>
+       <Condition>New</Condition>
+       <CustomID></CustomID>
+       <NatID>AUSTRIA</NatID>
+       <GripID>Plastic</GripID>
+       <Weight>625 g / 22.04 oz (unloaded)</Weight>
+       <Height>10.32 in</Height>
+       <BarrelLength>5.03 in</BarrelLength>
+       <BarWid></BarWid>
+       <BarHei></BarHei>
+       <Action>Safe Action</Action>
+       <Feedsystem>Safe Action</Feedsystem>
+       <Sights>Fixed front and rear</Sights>
+       <PurchasedPrice>479.00</PurchasedPrice>
+       <PurchasedFrom>Mike's Guns</PurchasedFrom>
+       <AppraisedValue>865.00</AppraisedValue>
+       <AppraisalDate>11/9/2016 12:20:09 PM</AppraisalDate>
+       <AppraisedBy>BlueBook + Accessories</AppraisedBy>
+       <InsuredValue>865.00</InsuredValue>
+       <StorageLocation>Armory Rack</StorageLocation>
+       <ConditionComments></ConditionComments>
+       <AdditionalNotes></AdditionalNotes>
+       <Produced>8-26-2013</Produced>
+       <IsCandR>False</IsCandR>
+       <PetLoads></PetLoads>
+       <dtp>12/23/2013 12:20:09 PM</dtp>
+       <Importer>Glock USA</Importer>
+       <ReManDT>12/26/2013</ReManDT>
+       <POI></POI>
+       <SGChoke></SGChoke>
+       <Caliber3></Caliber3>
+       <TwistOfRate></TwistOfRate>
+       <TriggerPull>5</TriggerPull>
+       <BoundBook>True</BoundBook>
+       <Classification>Modern</Classification>
+       <DateofCR>8/13/2017</DateofCR>
+       <IsClassIII>False</IsClassIII>
+       <ClassIiiOwner></ClassIiiOwner>
+    </Details>
+    <Accessories>
+       <Manufacturer>Prramid</Manufacturer>
+       <Model>Pyramid Trigger Ultimate System-9mm (All except 4th Generation)-Black-Blue</Model>
+       <SerialNumber>N/A</SerialNumber>
+       <Condition>New</Condition>
+       <Notes>Our deluxe kit adds the ?Skeletonized? Striker with extended firing pin for faster ?pin to primer? speeds and greater primer penetration, even with ?hard primer" ammunition.</Notes>
+       <Use>Performance Trigger</Use>
+       <PurValue>249.99</PurValue>
+       <appValue>200</appValue>
+       <civ>True</civ>
+       <ic>True</ic>
+    </Accessories>
+    <Accessories>
+       <Manufacturer>Trijicon</Manufacturer>
+       <Model>Trijicon HD? Night Sights</Model>
+       <SerialNumber>N/A</SerialNumber>
+       <Condition>New</Condition>
+       <Notes>NOTE:  Front sight is installed, but the rear site was removed for red dot  Apprisial Prive split from 100 to 40</Notes>
+       <Use>Sights</Use>
+       <PurValue>143.99</PurValue>
+       <appValue>40</appValue>
+       <civ>True</civ>
+       <ic>False</ic>
+    </Accessories>
+    <Accessories>
+       <Manufacturer>Vortex</Manufacturer>
+       <Model>Vortex Viper Red Dot</Model>
+       <SerialNumber>N/A</SerialNumber>
+       <Condition>New</Condition>
+       <Notes> </Notes>
+       <Use>Sights</Use>
+       <PurValue>229.99</PurValue>
+       <appValue>200</appValue>
+       <civ>True</civ>
+       <ic>True</ic>
+    </Accessories>
+    <Accessories>
+       <Manufacturer>MagPul</Manufacturer>
+       <Model>MagPul 21 Rnd Mag</Model>
+       <SerialNumber>N/A</SerialNumber>
+       <Condition>New</Condition>
+       <Notes> </Notes>
+       <Use>Comp Mag</Use>
+       <PurValue>18.99</PurValue>
+       <appValue>15</appValue>
+       <civ>False</civ>
+       <ic>True</ic>
+    </Accessories>
+    <Accessories>
+       <Manufacturer>MagPul</Manufacturer>
+       <Model>MagPul 21 Rnd Mag</Model>
+       <SerialNumber>N/A</SerialNumber>
+       <Condition>New</Condition>
+       <Notes> </Notes>
+       <Use>Comp Mag</Use>
+       <PurValue>18.99</PurValue>
+       <appValue>15</appValue>
+       <civ>False</civ>
+       <ic>True</ic>
+    </Accessories>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>3/8/2014 12:03:32 PM</OpDate>
+       <OpDueDate>3/8/2014 12:03:32 PM</OpDueDate>
+       <RndFired>80</RndFired>
+       <Notes>Gun Break-in and Sighting</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>3/19/2014 3:01:19 PM</OpDate>
+       <OpDueDate>3/19/2014 3:01:19 PM</OpDueDate>
+       <RndFired>95</RndFired>
+       <Notes>adjusting sight</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>3/23/2014 8:34:01 AM</OpDate>
+       <OpDueDate>3/23/2014 8:34:01 AM</OpDueDate>
+       <RndFired>90</RndFired>
+       <Notes>3 gun competition</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>4/19/2014 8:50:34 AM</OpDate>
+       <OpDueDate>4/27/2014 8:50:34 AM</OpDueDate>
+       <RndFired>236</RndFired>
+       <Notes>IDPA + Classifier</Notes>
+       <ammoUsed>Wolf 9mm, TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>5/20/2014 8:59:24 AM</OpDate>
+       <OpDueDate>5/20/2014 8:59:24 AM</OpDueDate>
+       <RndFired>10</RndFired>
+       <Notes>Reload test, the latest reloads would not eject properly, testing out in different firearms to see if it is the firearm or ammo, it was the ammo.</Notes>
+       <ammoUsed>HL8016U, HL8016UTB</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>5/23/2014 1:13:49 PM</OpDate>
+       <OpDueDate>5/23/2014 1:13:49 PM</OpDueDate>
+       <RndFired>30</RndFired>
+       <Notes>Testing reloads</Notes>
+       <ammoUsed>HL8016UTB, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>5/24/2014 1:14:47 PM</OpDate>
+       <OpDueDate>5/25/2014 1:14:47 PM</OpDueDate>
+       <RndFired>124</RndFired>
+       <Notes>3 gun competition</Notes>
+       <ammoUsed>TulAmmo 9mm 115G, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>6/1/2014 8:01:31 AM</OpDate>
+       <OpDueDate>6/1/2014 8:01:31 AM</OpDueDate>
+       <RndFired>210</RndFired>
+       <Notes>USPSA Match</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>6/15/2014 12:03:14 PM</OpDate>
+       <OpDueDate>6/15/2014 12:03:14 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>HL8016UTB, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>6/17/2014 8:13:20 AM</OpDate>
+       <OpDueDate>6/17/2014 8:13:20 AM</OpDueDate>
+       <RndFired>30</RndFired>
+       <Notes>Test and Adjust new Trijicon HD? Night Sights</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>7/26/2014 11:22:59 PM</OpDate>
+       <OpDueDate>7/26/2014 11:22:59 PM</OpDueDate>
+       <RndFired>45</RndFired>
+       <Notes>3 Gun Competition</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>9/21/2014 8:44:09 AM</OpDate>
+       <OpDueDate>9/22/2014 8:44:09 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Testing new Meprolight Glock Tru-Dot Night Sights</Notes>
+       <ammoUsed>HL8016UTB</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>3/9/2015 7:47:57 AM</OpDate>
+       <OpDueDate>3/19/2015 7:47:57 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>HL8016UTB</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>3/21/2015 7:51:21 AM</OpDate>
+       <OpDueDate>3/21/2015 7:51:21 AM</OpDueDate>
+       <RndFired>150</RndFired>
+       <Notes>IDPA Competition</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>3/28/2015 10:47:33 PM</OpDate>
+       <OpDueDate>3/29/2015 10:47:33 PM</OpDueDate>
+       <RndFired>160</RndFired>
+       <Notes>3 Gun Competition</Notes>
+       <ammoUsed>TulAmmo 9mm 115G, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>4/4/2015 10:48:46 PM</OpDate>
+       <OpDueDate>4/4/2015 10:48:46 PM</OpDueDate>
+       <RndFired>10</RndFired>
+       <Notes>Firing pin test</Notes>
+       <ammoUsed>HL8016UTB, TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>4/5/2015 7:32:23 AM</OpDate>
+       <OpDueDate>4/6/2015 7:32:23 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>HL8016UTB, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>5/11/2015 9:00:10 AM</OpDate>
+       <OpDueDate>5/12/2015 9:00:10 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Adjusting rear sight in stable position to properly sight-in firearm</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>5/16/2015 8:31:50 AM</OpDate>
+       <OpDueDate>5/18/2015 8:31:50 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>Chrono test between unique and pistol power, also steel practice</Notes>
+       <ammoUsed>HL8014U, HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Rust Preventer</Name>
+       <OpDate>6/13/2015 11:55:49 PM</OpDate>
+       <OpDueDate>6/13/2015 11:55:49 PM</OpDueDate>
+       <RndFired>0</RndFired>
+       <Notes> </Notes>
+       <ammoUsed> </ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>6/14/2015 6:46:51 PM</OpDate>
+       <OpDueDate>6/14/2015 6:46:51 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>6/27/2015 6:34:09 PM</OpDate>
+       <OpDueDate>6/27/2015 6:34:09 PM</OpDueDate>
+       <RndFired>90</RndFired>
+       <Notes>IDPA Classifier</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>7/20/2015 10:00:49 AM</OpDate>
+       <OpDueDate>7/20/2015 10:00:49 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Practice</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>7/21/2015 12:57:08 PM</OpDate>
+       <OpDueDate>7/22/2015 12:57:08 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>7/25/2015 12:52:52 PM</OpDate>
+       <OpDueDate>7/28/2015 12:52:52 PM</OpDueDate>
+       <RndFired>80</RndFired>
+       <Notes>3 Gun Competition</Notes>
+       <ammoUsed>HL8014U, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>8/18/2015 12:44:10 PM</OpDate>
+       <OpDueDate>8/20/2015 12:44:10 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Distance Draw Practice</Notes>
+       <ammoUsed>HL8015U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>8/22/2015 2:23:31 PM</OpDate>
+       <OpDueDate>8/22/2015 2:23:31 PM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>Distance Draw Practice</Notes>
+       <ammoUsed>TulAmmo 9mm 115G, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>8/28/2015 8:04:29 AM</OpDate>
+       <OpDueDate>9/1/2015 8:04:29 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>practice</Notes>
+       <ammoUsed>HL8015U, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>9/5/2015 1:32:45 PM</OpDate>
+       <OpDueDate>9/5/2015 1:32:45 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Draw on buzzard practice at steel</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>9/6/2015 11:01:14 PM</OpDate>
+       <OpDueDate>9/6/2015 11:01:14 PM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>Draw Practice at single and multi steel targets to emulate IDPA and USPSA</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>9/20/2015 8:08:39 AM</OpDate>
+       <OpDueDate>9/21/2015 8:08:39 AM</OpDueDate>
+       <RndFired>190</RndFired>
+       <Notes>USPSA 3rd Sunday Match</Notes>
+       <ammoUsed>HL8014U, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>10/4/2015 12:20:17 PM</OpDate>
+       <OpDueDate>10/5/2015 12:20:17 PM</OpDueDate>
+       <RndFired>200</RndFired>
+       <Notes>USPSA Match</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>11/1/2015 7:39:36 AM</OpDate>
+       <OpDueDate>11/1/2015 7:39:36 AM</OpDueDate>
+       <RndFired>65</RndFired>
+       <Notes>USPSA and Draw Time Practice</Notes>
+       <ammoUsed>HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>11/15/2015 7:32:07 AM</OpDate>
+       <OpDueDate>11/17/2015 7:32:07 AM</OpDueDate>
+       <RndFired>200</RndFired>
+       <Notes>USPSA Competition</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>12/4/2015 12:29:36 PM</OpDate>
+       <OpDueDate>12/4/2015 12:29:36 PM</OpDueDate>
+       <RndFired>200</RndFired>
+       <Notes>Barrel Brake in and Testing of muzzle Brake.</Notes>
+       <ammoUsed>Blazer 9mm 115g FMJ, TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>12/28/2015 12:08:11 PM</OpDate>
+       <OpDueDate>12/28/2015 12:08:11 PM</OpDueDate>
+       <RndFired>10</RndFired>
+       <Notes>Testing unique powders with extracting on muzzle break.  ran ok</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>12/28/2015 12:09:12 PM</OpDate>
+       <OpDueDate>12/28/2015 12:09:12 PM</OpDueDate>
+       <RndFired>44</RndFired>
+       <Notes>Test Rounds with muzzle break and 14lbs spring, Pistol Powder Failed to fully eject most of the time</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>1/9/2016 9:46:09 PM</OpDate>
+       <OpDueDate>1/9/2016 9:46:09 PM</OpDueDate>
+       <RndFired>120</RndFired>
+       <Notes>factory 15lbs spring, reloads kind of worked with 14lbs spring, but some failures did occur</Notes>
+       <ammoUsed>Magtech 9mm FMJ, HL8014U, HL8016U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>1/11/2016 1:20:07 PM</OpDate>
+       <OpDueDate>1/11/2016 1:20:07 PM</OpDueDate>
+       <RndFired>0</RndFired>
+       <Notes> </Notes>
+       <ammoUsed> </ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>1/21/2016 7:34:44 AM</OpDate>
+       <OpDueDate>1/21/2016 7:34:44 AM</OpDueDate>
+       <RndFired>15</RndFired>
+       <Notes>Testing ammo with new open class configurations.  No jams, all 15 rounds went through without an issue</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>2/4/2016 3:36:56 PM</OpDate>
+       <OpDueDate>2/4/2016 3:36:56 PM</OpDueDate>
+       <RndFired>200</RndFired>
+       <Notes>Practice and Bud's Speed Range</Notes>
+       <ammoUsed>Indpendance 9mm FMJ 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>2/21/2016 7:50:46 AM</OpDate>
+       <OpDueDate>2/22/2016 7:50:46 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>Practice</Notes>
+       <ammoUsed>Indpendance 9mm FMJ 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>2/25/2016 5:40:25 PM</OpDate>
+       <OpDueDate>2/25/2016 5:40:25 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>Indpendance 9mm FMJ 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>3/21/2016 12:32:09 PM</OpDate>
+       <OpDueDate>3/21/2016 12:32:09 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>Indpendance 9mm FMJ 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>4/15/2016 8:05:15 AM</OpDate>
+       <OpDueDate>4/15/2016 8:05:15 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Quick Practice</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>5/1/2016 8:31:34 AM</OpDate>
+       <OpDueDate>5/1/2016 8:31:34 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Draw Practice</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>6/7/2016 12:47:08 PM</OpDate>
+       <OpDueDate>6/7/2016 12:47:08 PM</OpDueDate>
+       <RndFired>71</RndFired>
+       <Notes>3 gun practice</Notes>
+       <ammoUsed>Indpendance 9mm FMJ 115G, TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>6/10/2016 9:29:20 AM</OpDate>
+       <OpDueDate>6/22/2016 9:29:20 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>6/12/2016 9:30:52 AM</OpDate>
+       <OpDueDate>6/12/2016 9:30:52 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>3 Gun Match</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>6/20/2016 9:35:45 AM</OpDate>
+       <OpDueDate>6/21/2016 9:35:45 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Practice &amp;  test od 14 lbs recoil spring</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>7/10/2016 9:24:17 AM</OpDate>
+       <OpDueDate>7/13/2016 9:24:17 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>3 gun match</Notes>
+       <ammoUsed>Indpendance 9mm FMJ 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>9/7/2016 12:47:28 PM</OpDate>
+       <OpDueDate>9/7/2016 12:47:28 PM</OpDueDate>
+       <RndFired>120</RndFired>
+       <Notes>Sight-in red dot and test and practice to get use to something new on the pistol.</Notes>
+       <ammoUsed>Indpendance 9mm FMJ 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>9/9/2016 12:05:28 PM</OpDate>
+       <OpDueDate>9/9/2016 12:05:28 PM</OpDueDate>
+       <RndFired>80</RndFired>
+       <Notes>Practice with Red Dot</Notes>
+       <ammoUsed>Indpendance 9mm FMJ 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>10/25/2016 3:33:03 PM</OpDate>
+       <OpDueDate>10/25/2016 3:33:03 PM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>Practice with Red Dot sight</Notes>
+       <ammoUsed>Steel 115 G, TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>10/30/2016 9:38:27 AM</OpDate>
+       <OpDueDate>10/30/2016 9:38:27 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>3 Gun Match</Notes>
+       <ammoUsed>Steel 115 G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>11/4/2016 9:40:18 AM</OpDate>
+       <OpDueDate>11/4/2016 9:40:18 AM</OpDueDate>
+       <RndFired>150</RndFired>
+       <Notes>Red Dot sight in @ buds, then came home and practice on the steel range</Notes>
+       <ammoUsed>Steel 115 G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>11/12/2016 8:17:30 AM</OpDate>
+       <OpDueDate>11/12/2016 8:17:30 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Quick Practice</Notes>
+       <ammoUsed>Steel 115 G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>11/25/2016 1:31:35 PM</OpDate>
+       <OpDueDate>11/27/2016 1:31:35 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Draw Fire Practice</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>12/29/2016 2:28:48 PM</OpDate>
+       <OpDueDate>12/29/2016 2:28:48 PM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>Practice at buds indoor range</Notes>
+       <ammoUsed>Steel 115 G, TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>12/30/2016 4:44:02 PM</OpDate>
+       <OpDueDate>12/30/2016 4:44:02 PM</OpDueDate>
+       <RndFired>0</RndFired>
+       <Notes> </Notes>
+       <ammoUsed> </ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>4/29/2017 5:12:04 PM</OpDate>
+       <OpDueDate>4/29/2017 5:12:04 PM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>Practice on buzzer</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>5/14/2017 9:48:36 PM</OpDate>
+       <OpDueDate>5/14/2017 9:48:36 PM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>CCFSA May Monthly 3 Gun Nation Match</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>5/20/2017 10:12:07 PM</OpDate>
+       <OpDueDate>5/20/2017 10:12:07 PM</OpDueDate>
+       <RndFired>0</RndFired>
+       <Notes>cleanup from 3 gun</Notes>
+       <ammoUsed> </ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>7/9/2017 12:35:58 AM</OpDate>
+       <OpDueDate>7/9/2017 12:35:58 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>3 Gun Match in Ohio</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>7/19/2017 12:44:17 AM</OpDate>
+       <OpDueDate>7/19/2017 12:44:17 AM</OpDueDate>
+       <RndFired>0</RndFired>
+       <Notes> </Notes>
+       <ammoUsed> </ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>4/29/2018 7:46:50 AM</OpDate>
+       <OpDueDate>4/29/2018 7:46:50 AM</OpDueDate>
+       <RndFired>30</RndFired>
+       <Notes>Quick Practice</Notes>
+       <ammoUsed>HL8014U</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>6/15/2018 5:19:33 AM</OpDate>
+       <OpDueDate>6/15/2018 5:19:33 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>6/23/2018 5:20:32 AM</OpDate>
+       <OpDueDate>6/23/2018 5:20:32 AM</OpDueDate>
+       <RndFired>100</RndFired>
+       <Notes>3 gun match</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>7/26/2018 2:57:51 PM</OpDate>
+       <OpDueDate>7/26/2018 2:57:51 PM</OpDueDate>
+       <RndFired>150</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>9/20/2018 3:18:03 PM</OpDate>
+       <OpDueDate>9/21/2018 3:18:03 PM</OpDueDate>
+       <RndFired>90</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>9/22/2018 7:44:25 PM</OpDate>
+       <OpDueDate>9/23/2018 7:44:25 PM</OpDueDate>
+       <RndFired>47</RndFired>
+       <Notes>3-Gun Match</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>9/28/2018 7:45:06 PM</OpDate>
+       <OpDueDate>9/30/2018 7:45:06 PM</OpDueDate>
+       <RndFired>103</RndFired>
+       <Notes>Red Dot sight in</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>10/7/2018 9:24:33 PM</OpDate>
+       <OpDueDate>10/7/2018 9:24:33 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>AE. 124G 9mm FMJ</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>10/20/2018 5:35:18 AM</OpDate>
+       <OpDueDate>10/20/2018 5:35:18 AM</OpDueDate>
+       <RndFired>2</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>AE. 124G 9mm FMJ</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>6/22/19 10:22:20 AM</OpDate>
+       <OpDueDate>6/22/19 10:22:20 AM</OpDueDate>
+       <RndFired>35</RndFired>
+       <Notes>Light 3 gun match</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>7/22/19 10:23:15 AM</OpDate>
+       <OpDueDate>7/22/19 10:23:15 AM</OpDueDate>
+       <RndFired>75</RndFired>
+       <Notes>Practice</Notes>
+       <ammoUsed>Rem UMC 9mm 115Gr</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>8/30/19 11:44:39 AM</OpDate>
+       <OpDueDate>8/30/19 11:44:39 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>Rem UMC 9mm 115Gr</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>9/1/19 11:46:04 AM</OpDate>
+       <OpDueDate>9/1/19 11:46:04 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>Slide Break In</Notes>
+       <ammoUsed>Rem UMC 9mm 115Gr</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>9/10/19 11:48:26 AM</OpDate>
+       <OpDueDate>9/10/19 11:48:25 AM</OpDueDate>
+       <RndFired>70</RndFired>
+       <Notes>Slide Break In</Notes>
+       <ammoUsed>Rem UMC 9mm 115Gr</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>9/15/19 11:49:13 AM</OpDate>
+       <OpDueDate>9/15/19 11:49:13 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>slide break in</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>11/18/19 11:25:40 AM</OpDate>
+       <OpDueDate>11/18/19 11:25:40 AM</OpDueDate>
+       <RndFired>20</RndFired>
+       <Notes>resight in of red dot on flatter land at 25 yards</Notes>
+       <ammoUsed>Rem UMC 9mm 115Gr</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>2/24/20 8:18:42 AM</OpDate>
+       <OpDueDate>2/24/20 8:18:42 AM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes>testing new slide along with break in, and testing and marking mags that might need a new spring</Notes>
+       <ammoUsed>Wolf WPA Ammo 9mm 115g FMJ</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>3/2/20 10:32:43 AM</OpDate>
+       <OpDueDate>3/3/20 10:32:43 AM</OpDueDate>
+       <RndFired>20</RndFired>
+       <Notes>rear sight was adjusted</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>3/5/20 10:34:19 AM</OpDate>
+       <OpDueDate>3/13/20 10:34:19 AM</OpDueDate>
+       <RndFired>20</RndFired>
+       <Notes>Red dot sight in</Notes>
+       <ammoUsed>Wolf WPA Ammo 9mm 115g FMJ</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Bore Cleaning</Name>
+       <OpDate>3/16/20 10:36:04 AM</OpDate>
+       <OpDueDate>3/18/20 10:36:04 AM</OpDueDate>
+       <RndFired>10</RndFired>
+       <Notes>11 lbs spring test</Notes>
+       <ammoUsed>Wolf WPA Ammo 9mm 115g FMJ</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>3/25/2020 8:14:22 AM</OpDate>
+       <OpDueDate>3/25/2020 8:14:22 AM</OpDueDate>
+       <RndFired>30</RndFired>
+       <Notes>Sight In Red Dot after moving to new slide.</Notes>
+       <ammoUsed>Wolf WPA Ammo 9mm 115g FMJ</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Nothing</Name>
+       <OpDate>6/18/20 7:29:19 AM</OpDate>
+       <OpDueDate>6/22/20 7:29:19 AM</OpDueDate>
+       <RndFired>125</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>HL8020U, TulAmmo 9mm 115G, Wolf WPA Ammo 9mm 115g FMJ, TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>7/4/20 3:02:36 PM</OpDate>
+       <OpDueDate>7/6/20 3:02:36 PM</OpDueDate>
+       <RndFired>50</RndFired>
+       <Notes> </Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <Maintance_Details>
+       <Name>Complete Cleaning</Name>
+       <OpDate>8/22/20 9:21:03 AM</OpDate>
+       <OpDueDate>9/1/20 9:21:03 AM</OpDueDate>
+       <RndFired>150</RndFired>
+       <Notes>3 gun match</Notes>
+       <ammoUsed>TulAmmo 9mm 115G</ammoUsed>
+    </Maintance_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>1/22/2014 8:18:37 AM</sdate>
+       <rdate>1/22/2014 8:18:37 AM</rdate>
+       <od>Replaced standard trigger with the Adjustable Glock Trigger - Ultimate Pyramid Trigger System for Glock</od>
+       <notes>iquely identified gold trigger bar is coated with Titanium Nitride. This coating is extremely hard, and friction-free, which helps give the Pyramid Trigger a crisp, consistent, and even break? allowing you total control of your speed and accuracy. Black trigger with Blue safety
+</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>1/22/2014 8:23:18 AM</sdate>
+       <rdate>1/22/2014 8:23:18 AM</rdate>
+       <od>Replaced standard Safety Plunger with Titanimum Safety Plunger.</od>
+       <notes>his premium plunger features rounded shoulders, and the friction-free coating, for positive safety action and minimal wear</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>1/22/2014 8:24:35 AM</sdate>
+       <rdate>1/22/2014 8:24:35 AM</rdate>
+       <od>Replaced the standard Striker with 5lbs spring with the ?Skeletonized? Striker  with a 4lbs spring.</od>
+       <notes>the ?Skeletonized? Striker with extended firing pin for faster ?pin to primer? speeds and greater primer penetration, even with ?hard primer" ammunition</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>3/20/2014 8:38:03 AM</sdate>
+       <rdate>3/20/2014 8:38:03 AM</rdate>
+       <od>Replaced standard Guide Rod with Stainless Steel 17lbs Guide Rod</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>4/16/2014 8:53:32 AM</sdate>
+       <rdate>4/16/2014 8:53:32 AM</rdate>
+       <od>Replaced 4lbs Striker spring with a 6lbs spring</od>
+       <notes>The 4lbs Spring was having random misfires with Nato and Wolf Primers</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>6/17/2014 8:12:56 AM</sdate>
+       <rdate>6/17/2014 8:12:56 AM</rdate>
+       <od>installed Trijicon HD? Night Sights</od>
+       <notes>Trijicon HD? Night Sights were created with the challenges of law enforcement and military duty in mind. The front sight increases visibility and quickens sight acquisition-even in transitional lighting.</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>9/13/2014 8:42:15 AM</sdate>
+       <rdate>9/13/2014 8:42:15 AM</rdate>
+       <od>Replaced Trijcon Night Sights with Meprolight Glock Tru-Dot Night Sight</od>
+       <notes>Sight is on target, no need to adjust from install</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>4/4/2015 10:50:34 PM</sdate>
+       <rdate>4/4/2015 10:50:34 PM</rdate>
+       <od>?Skeletonized? Striker Broke during 3 gun competition, Replaced it with the orginal firing pin and spring.</od>
+       <notes>Test fine with reloaced and Tul Ammo</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>7/23/2015 12:57:50 PM</sdate>
+       <rdate>7/23/2015 12:57:50 PM</rdate>
+       <od>Replace Spring in Mag 0001</od>
+       <notes>Rounds were not feeding properly</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>12/4/2015 7:49:02 AM</sdate>
+       <rdate>12/4/2015 7:49:02 AM</rdate>
+       <od>Installed Razor Tactical Pistol/Carbine Muzzle Brake on Wolf 5" Thread barrel</od>
+       <notes>Razor Tactical Pistol/Carbine Muzzle Brake For Threaded Glock Factory, Stormlake, Lone Wolf Barrels, Sig, HK, FNX, FNP, Others Metric/SAE Thread Sizes USA</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>12/4/2015 7:52:30 AM</sdate>
+       <rdate>12/4/2015 7:52:30 AM</rdate>
+       <od>Added Rear Slide Cover Plate for Glock - G 17</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>11/27/2015 7:54:27 AM</sdate>
+       <rdate>11/27/2015 7:54:27 AM</rdate>
+       <od>Added New Grip Force Gen 1 2 3 Glock BeaverTail Adapter 17, 19, 22, 23, 24, 31, 32, 34, 35, 37, 38</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>1/8/2016 8:51:48 AM</sdate>
+       <rdate>1/8/2016 8:51:48 AM</rdate>
+       <od>Replae the Razor Tactical Brake with Alpha Wolf Compensator 9mm 1/2 x 28 - Glock OEM Flat Faced - Black Anodized - 9mm and the Slide Cover G17 with LWD Slide Cover Plate Blue</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>6/19/2016 9:37:01 AM</sdate>
+       <rdate>6/20/2016 9:37:01 AM</rdate>
+       <od>Replace Green 15 lbs spring with red 14 lbs recoil spring</od>
+       <notes>minor issue with some reloads with green spring, red spring tested out good.</notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>9/6/2016 12:46:41 PM</sdate>
+       <rdate>9/6/2016 12:46:41 PM</rdate>
+       <od>INstalled Adapter to mount a Red Dot to replace the rear sight and Added a Vortex Viper.</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>8/21/2017 6:01:16 PM</sdate>
+       <rdate>8/21/2017 6:01:16 PM</rdate>
+       <od>Replace front night site with regular sight since red dot is only used</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>2/24/20 8:19:55 AM</sdate>
+       <rdate>2/24/20 8:19:55 AM</rdate>
+       <od>Replaced Spring in G17 Open Mag Black heavy Base Plate</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>3/16/20 10:38:07 AM</sdate>
+       <rdate>3/16/20 10:38:07 AM</rdate>
+       <od>Added 11 lbs. HEAVY TUNGSTEN GUIDE ROD</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <GunSmith_Details>
+       <gsmith>Joe Mireles</gsmith>
+       <sdate>3/7/20 10:43:03 AM</sdate>
+       <rdate>3/7/20 10:43:03 AM</rdate>
+       <od>Replaced Mag spring in heavy black base mag</od>
+       <notes> </notes>
+    </GunSmith_Details>
+    <BarrelConverstionKit_Details>
+       <ModelName>Default Barrel</ModelName>
+       <Caliber>9mm Luger</Caliber>
+       <Finish>Black</Finish>
+       <BarrelLength>4.49 in</BarrelLength>
+       <PetLoads> </PetLoads>
+       <Action>Safe Action</Action>
+       <Feedsystem>Safe Action</Feedsystem>
+       <Sights>Fixed front and rear</Sights>
+       <PurchasedPrice>479.00</PurchasedPrice>
+       <PurchasedFrom>Mike's Guns</PurchasedFrom>
+       <dtp>12/26/2013</dtp>
+       <Height>7.32 in</Height>
+       <Type>Semi-Auto Pistol</Type>
+       <IsDefault>0</IsDefault>
+    </BarrelConverstionKit_Details>
+    <BarrelConverstionKit_Details>
+       <ModelName>Open Class ( Lone Wolf with Brake )</ModelName>
+       <Caliber>9mm Luger</Caliber>
+       <Finish>Black</Finish>
+       <BarrelLength>5.03 in</BarrelLength>
+       <PetLoads> </PetLoads>
+       <Action>Safe Action</Action>
+       <Feedsystem>Safe Action</Feedsystem>
+       <Sights>Fixed front and rear</Sights>
+       <PurchasedPrice>479.00</PurchasedPrice>
+       <PurchasedFrom>Mike's Guns</PurchasedFrom>
+       <dtp>12/4/2015</dtp>
+       <Height>10.32 in</Height>
+       <Type>Semi-Auto Pistol</Type>
+       <IsDefault>1</IsDefault>
+    </BarrelConverstionKit_Details>
+</Firearm>
+
