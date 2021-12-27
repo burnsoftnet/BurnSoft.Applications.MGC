@@ -51,7 +51,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _databasePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Vs2019.GetSetting("DatabasePath", TestContext));
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             _ownerId = Vs2019.IGetSetting("OwnerId", TestContext);
-            _xmlImportFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Vs2019.GetSetting("XMLImport", TestContext));
+            _xmlImportFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Vs2019.GetSetting("XMLImport2", TestContext));
         }
         /// <summary>
         /// Defines the test method ImportFileTest. This will use all the import function just like the application would, but with out the update to the progress bar
@@ -62,7 +62,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = false;
             try
             {
-                string expectedFullName = "Glock G17 Imported unit test";
+                //string expectedFullName = "Glock G17 Imported unit test";
+                string expectedFullName = "Glock G17 Open Class";
                 if (MyCollection.Exists(_databasePath, expectedFullName, out _errOut))
                 {
                     long gId = MyCollection.GetId(_databasePath, expectedFullName, out _errOut);
