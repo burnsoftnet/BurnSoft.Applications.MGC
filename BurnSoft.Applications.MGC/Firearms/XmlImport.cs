@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Xml;
 using BurnSoft.Applications.MGC.Global;
 // ReSharper disable RedundantAssignment
@@ -225,7 +226,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     string model = Helpers.FormatFromXml(GetXmlNode(xn["Model"]));
                     string serialNumber = Helpers.FormatFromXml(GetXmlNode(xn["SerialNumber"]));
                     string condition = Helpers.FormatFromXml(GetXmlNode(xn["Condition"]));
-                    string notes = Helpers.FormatFromXml(GetXmlNode(xn["Notes"]));
+                    string notes = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["Notes"])));
                     string use = Helpers.FormatFromXml(GetXmlNode(xn["Use"]));
                     double purValue = Convert.ToDouble(Helpers.FormatFromXml(GetXmlNode(xn["PurValue"])));
                     double appValue = Convert.ToDouble(Helpers.FormatFromXml(GetXmlNode(xn["appValue"])));
@@ -272,8 +273,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                     string gsmith = Helpers.FormatFromXml(GetXmlNode(xn["gsmith"]));
                     string sdate = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["sdate"])), true);
                     string rdate = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["rdate"])), true);
-                    string od = Helpers.FormatFromXml(GetXmlNode(xn["od"]));
-                    string notes = Helpers.FormatFromXml(GetXmlNode(xn["notes"]));
+                    string od = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["od"])));
+                    string notes = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["notes"])));
                     
                     if (!PeopleAndPlaces.GunSmiths.Exists(databasePath, gsmith, out errOut))
                     {
@@ -384,7 +385,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     string opDueDate = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["OpDueDate"])), true);
                     long rndFired = Convert.ToInt32(Helpers.FormatFromXml(GetXmlNode(xn["RndFired"])));
                     string ammoUsed = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["ammoUsed"])));
-                    string notes = Helpers.FormatFromXml(GetXmlNode(xn["Notes"]));
+                    string notes = XmlExport.StringHelper(Helpers.FormatFromXml(GetXmlNode(xn["Notes"])));
 
                     if (!MaintancePlans.Exists(databasePath, name, out errOut))
                     {
@@ -393,11 +394,12 @@ namespace BurnSoft.Applications.MGC.Firearms
                     if (errOut.Length > 0) throw new Exception(errOut);
                     long maintenancePlansId = MaintancePlans.GetId(databasePath, name, out errOut);
                     if (errOut.Length > 0) throw new Exception(errOut);
+                    //Thread.Sleep(1000);
                     long defaultBarrelId =
                         ExtraBarrelConvoKits.GetDefaultBarrelId(databasePath, gunId, out errOut);
                     if (errOut.Length > 0) throw new Exception(errOut);
                     if (!Firearms.MaintanceDetails.Add(databasePath, name, gunId, maintenancePlansId, opDate, opDueDate, rndFired, notes, ammoUsed,defaultBarrelId, rndFired > 0, out errOut)) throw new Exception(errOut);
-
+                    //Thread.Sleep(1000);
                 }
 
                 bAns = true;

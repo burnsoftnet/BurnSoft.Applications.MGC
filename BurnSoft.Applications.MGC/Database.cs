@@ -208,11 +208,15 @@ namespace BurnSoft.Applications.MGC
             errMsg = @"";
             try
             {
-                if (_conn.State != ConnectionState.Closed)
+                if (_conn != null)
                 {
-                    _conn.Close();
+                    if (_conn.State != ConnectionState.Closed)
+                    {
+                        _conn.Close();
+                    }
+                    _conn = null;
                 }
-                _conn = null;
+                
                 bAns = true;
             }
             catch (Exception e)
@@ -275,7 +279,9 @@ namespace BurnSoft.Applications.MGC
         {
             string con = ConnectionString(databasePath, out errOut);
             Database obj = new Database();
-            return obj.ConnExec(con, sql, out errOut);
+            bool passed = obj.ConnExec(con, sql, out errOut);
+            obj.Close(out _);
+            return passed;
         }
         /// <summary>
         /// Gets the data.
@@ -314,6 +320,8 @@ namespace BurnSoft.Applications.MGC
                 {
                     throw new Exception(errOut);
                 }
+
+                Close(out _);
             }
             catch (Exception e)
             {
@@ -349,6 +357,8 @@ namespace BurnSoft.Applications.MGC
                 {
                     iAns = Convert.ToInt32(dr[identitySeedColumnName]);
                 }
+
+                obj.Close(out _);
             }
             catch (Exception e)
             {
