@@ -734,7 +734,7 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                List<BarrelSystems> collection = ExtraBarrelConvoKits.MyList(dt, out errOut);
+                List<BarrelSystems> collection = MyList(dt, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
 
                 foreach (BarrelSystems b in collection)

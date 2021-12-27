@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+// ReSharper disable TooWideLocalVariableScope
+// ReSharper disable UseNameofExpression
+// ReSharper disable ConvertIfStatementToConditionalTernaryExpression
 
 // ReSharper disable UnusedMember.Local
 
@@ -100,6 +103,103 @@ namespace BurnSoft.Applications.MGC.Global
             }
             return sAns;
         }
+        /// <summary>
+        /// Determines whether the specified text is numeric.
+        /// </summary>
+        /// <param name="text">The text.</param>
+        /// <returns><c>true</c> if the specified text is numeric; otherwise, <c>false</c>.</returns>
+        public static bool IsNumeric(string text) => double.TryParse(text, out _);
+        /// <summary>
+        /// Mids the specified input.
+        /// </summary>
+        /// <param name="input">The input.</param>
+        /// <param name="index">The index.</param>
+        /// <param name="newChar">The new character.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.ArgumentNullException">input</exception>
+        public static string Mid(string input, int index, char newChar)
+        {
+            if (input == null)
+            {
+                throw new ArgumentNullException("input");
+            }
+            char[] chars = input.ToCharArray();
+            chars[index - 1] = newChar;
+            return new string(chars);
+        }
+        /// <summary>
+        /// Mids the specified s.
+        /// </summary>
+        /// <param name="s">The s.</param>
+        /// <param name="a">a.</param>
+        /// <param name="b">The b.</param>
+        /// <returns>System.String.</returns>
+        public static string Mid(string s, int a, int b)
+        {
+            string temp = s.Substring(a - 1, b);
+            return temp;
+        }
+        /// <summary>
+        /// Converts the text to number.
+        /// </summary>
+        /// <param name="strValue">The string value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvertTextToNumber(string strValue, out string errOut)
+        {
+            double dAns = 0;
+            errOut = "";
+            try
+            {
+                int intChar = strValue.Length;
+                int i;
+                string curValue;
+                string newValue = "";
+                string lastValue = "";
+                bool needDiv = false;
+                for (i = 1; i <= intChar; i++)
+                {
+                    curValue = Mid(strValue, i, 1);
+                    if (curValue == " ")
+                        break;
+                    if (IsNumeric(curValue))
+                    {
+                        if (lastValue.Length != 0)
+                            lastValue = Mid(newValue, newValue.Length, 1);
+                        else
+                            lastValue = curValue;
+                        if (!needDiv)
+                            newValue += curValue;
+                        else
+                            newValue =$"{Convert.ToDouble(curValue) / Convert.ToDouble(lastValue)}";
+                        needDiv = false;
+                    }
+                    else
+                        switch (curValue)
+                        {
+                            case ".":
+                            {
+                                newValue += curValue;
+                                needDiv = false;
+                                break;
+                            }
+
+                            case "/":
+                            {
+                                needDiv = true;
+                                break;
+                            }
+                        }
+                }
+                dAns = Convert.ToDouble(newValue);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("ConvertTextToNumber", ex);
+            }
+            return dAns;
+        }
+
 
 
     }
