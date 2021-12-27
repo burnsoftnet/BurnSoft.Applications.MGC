@@ -248,5 +248,54 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return lst;
         }
+        /// <summary>
+        /// Logins the enabled.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="uid">The uid.</param>
+        /// <param name="pwd">The password.</param>
+        /// <param name="forgotWord">The forgot word.</param>
+        /// <param name="forgotPhrase">The forgot phrase.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool LoginEnabled(string databasePath,out string uid, out string pwd, out string forgotWord, out string forgotPhrase,
+            out string errOut)
+        {
+            bool bAns = false;
+            uid = "admin";
+            pwd = "";
+            forgotWord = "burnsoft";
+            forgotPhrase = "The Company that made this App";
+            try
+            {
+                List<OwnerInfo> oi = GetOwnerInfo(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (OwnerInfo o in oi)
+                {
+                    bAns = o.UsePassword;
+                    if (bAns)
+                    {
+                        uid = One.Decrypt(o.UserName);
+                        pwd = One.Decrypt(o.Password);
+                        if (o.ForgotPhrase.Length > 0)
+                        {
+                            forgotPhrase = One.Decrypt(o.ForgotPhrase);
+                        }
+
+                        if (o.ForgotWord.Length > 0)
+                        {
+                            forgotWord = One.Decrypt(o.ForgotWord);
+                        }
+
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("LoginEnabled", e);
+            }
+            return bAns;
+        }
     }
 }
