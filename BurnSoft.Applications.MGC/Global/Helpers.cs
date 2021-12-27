@@ -1,6 +1,9 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Windows.Forms;
+// ReSharper disable CompareOfFloatsByEqualityOperator
+
 // ReSharper disable TooWideLocalVariableScope
 // ReSharper disable UseNameofExpression
 // ReSharper disable ConvertIfStatementToConditionalTernaryExpression
@@ -199,8 +202,83 @@ namespace BurnSoft.Applications.MGC.Global
             }
             return dAns;
         }
-
-
+        /// <summary>
+        /// Determines whether the specified string value is required.
+        /// </summary>
+        /// <param name="strValue">The string value.</param>
+        /// <param name="strField">The string field.</param>
+        /// <param name="strTitle">The string title.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if the specified string value is required; otherwise, <c>false</c>.</returns>
+        public bool IsRequired(string strValue, string strField, string strTitle, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                bAns = (strValue.Trim().Length > 0);
+                if (!bAns)
+                    MessageBox.Show($"Please put in a value for {strField}", strTitle, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("IsRequired", ex);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Determines whether the specified l value is required.
+        /// </summary>
+        /// <param name="lValue">The l value.</param>
+        /// <param name="lDefault">The l default.</param>
+        /// <param name="strField">The string field.</param>
+        /// <param name="strTitle">The string title.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if the specified l value is required; otherwise, <c>false</c>.</returns>
+        public bool IsRequired(long lValue, long lDefault, string strField, string strTitle, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                bAns = lValue != lDefault;
+                if (!bAns)
+                    MessageBox.Show($"Please put in a value for {strField}", strTitle, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("IsRequired", ex);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Determines whether the specified l value is required.
+        /// </summary>
+        /// <param name="lValue">The l value.</param>
+        /// <param name="lDefault">The l default.</param>
+        /// <param name="strField">The string field.</param>
+        /// <param name="strTitle">The string title.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if the specified l value is required; otherwise, <c>false</c>.</returns>
+        public bool IsRequired(double lValue, double lDefault, string strField, string strTitle, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                bAns = lValue != lDefault;
+                if (!bAns)
+                    MessageBox.Show($"Please put in a value for {strField}", strTitle, MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("IsRequired", ex);
+            }
+            return bAns;
+        }
 
     }
 }
