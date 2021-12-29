@@ -67,7 +67,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 TestContext.WriteLine($"forgot word: {forgotWord}");
                 TestContext.WriteLine($"forgot phrase: {forgotPhrase}");
             }
-            General.HasTrueValue(value, _errOut);
+            General.HasTrueValue(!value, _errOut);
         }
         /// <summary>
         /// Defines the test method GetOwnerInfoTest.
