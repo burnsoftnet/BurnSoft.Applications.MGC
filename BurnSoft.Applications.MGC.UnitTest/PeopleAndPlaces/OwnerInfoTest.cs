@@ -53,6 +53,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// <summary>
         /// Logins the enabled test.
         /// </summary>
+        [TestMethod]
         public void LoginEnabledTest()
         {
             bool value = OwnerInformation.LoginEnabled(_databasePath, out var uid, out var pwd, out var forgotWord,
