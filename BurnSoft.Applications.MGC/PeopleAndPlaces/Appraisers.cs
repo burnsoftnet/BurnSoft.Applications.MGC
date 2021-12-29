@@ -190,7 +190,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             errOut = @"";
             try
             {
-                string sql = $"update gun_collection set AppriasedBy='{newName}' where AppriasedBy='{oldName}'";
+                string sql = $"update gun_collection set AppraisedBy='{newName}' where AppraisedBy='{oldName}'";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
