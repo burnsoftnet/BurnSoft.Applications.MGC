@@ -1,5 +1,7 @@
 ﻿
+using System.Collections.Generic;
 using BurnSoft.Applications.MGC.PeopleAndPlaces;
+using BurnSoft.Applications.MGC.Types;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
@@ -60,10 +62,54 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 out var forgotPhrase, out _errOut);
             if (value)
             {
-                TestContext.WriteLine($"uidL {uid}");
+                TestContext.WriteLine($"uid: {uid}");
                 TestContext.WriteLine($"pwd: {pwd}");
                 TestContext.WriteLine($"forgot word: {forgotWord}");
                 TestContext.WriteLine($"forgot phrase: {forgotPhrase}");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetOwnerInfoTest.
+        /// </summary>
+        [TestMethod]
+        public void GetOwnerInfoTest()
+        {
+            List<OwnerInfo> lst = OwnerInformation.GetOwnerInfo(_databasePath, out _errOut);
+            bool value = lst.Count > 0;
+
+            if (value)
+            {
+                foreach (OwnerInfo l in lst)
+                {
+                    TestContext.WriteLine($"uid: {l.UserName}");
+                    TestContext.WriteLine($"pwd: {l.Password}");
+                    TestContext.WriteLine($"forgot word: {l.ForgotWord}");
+                    TestContext.WriteLine($"forgot phrase: {l.ForgotPhrase}");
+                    TestContext.WriteLine($"name: {l.Name}");
+                    TestContext.WriteLine($"License: {l.Ccdwl}");
+                    TestContext.WriteLine($"Address: {l.Address}");
+                    TestContext.WriteLine($"City: {l.City}");
+                    TestContext.WriteLine($"ZipCode: {l.ZipCode}");
+                    TestContext.WriteLine($"State: {l.State}");
+                    TestContext.WriteLine($"id: {l.Id}");
+                }
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetOwnerIdTest.
+        /// </summary>
+        [TestMethod]
+        public void GetOwnerIdTest()
+        {
+            long id = OwnerInformation.GetOwnerId(_databasePath, out var ownerName, out var ownerLic, out _errOut);
+            bool value = id > 0;
+            if (value)
+            {
+                TestContext.WriteLine($"id: {id}");
+                TestContext.WriteLine($"owner name: {ownerName}");
+                TestContext.WriteLine($"License: {ownerLic}");
             }
             General.HasTrueValue(value, _errOut);
         }
