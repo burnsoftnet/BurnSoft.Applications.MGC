@@ -1,4 +1,5 @@
 ﻿
+using BurnSoft.Applications.MGC.PeopleAndPlaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
@@ -48,6 +49,22 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             _gunSmithName = obj.FC(Vs2019.GetSetting("GunSmith_Name", TestContext));
 
+        }
+        /// <summary>
+        /// Logins the enabled test.
+        /// </summary>
+        public void LoginEnabledTest()
+        {
+            bool value = OwnerInformation.LoginEnabled(_databasePath, out var uid, out var pwd, out var forgotWord,
+                out var forgotPhrase, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"uidL {uid}");
+                TestContext.WriteLine($"pwd: {pwd}");
+                TestContext.WriteLine($"forgot word: {forgotWord}");
+                TestContext.WriteLine($"forgot phrase: {forgotPhrase}");
+            }
+            General.HasTrueValue(value, _errOut);
         }
     }
 }
