@@ -227,6 +227,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                     lst.Add(new OwnerInfo()
                     {
                         Id = Convert.ToInt32(d["id"]),
+                        Password = d["pwd"] != DBNull.Value ? d["pwd"].ToString().Trim() : "",
                         Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
                         Address = d["Address"] != DBNull.Value ? d["Address"].ToString().Trim() : "",
                         City = d["City"] != DBNull.Value ? d["City"].ToString().Trim() : "",
