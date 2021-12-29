@@ -196,7 +196,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("Update", e);
+                errOut = ErrorMessage("UpdateCollection", e);
             }
 
             return bAns;

@@ -302,6 +302,31 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             return lAns;
         }
         /// <summary>
+        /// Updates the collection.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="oldName">The old name.</param>
+        /// <param name="newName">The new name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateSmithDetails(string databasePath, string oldName, string newName, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update GunSmith_Details set gsmith='{newName}' where gsmith='{oldName}'";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateSmithDetails", e);
+            }
+
+            return bAns;
+        }
+        /// <summary>
         /// Gets the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
