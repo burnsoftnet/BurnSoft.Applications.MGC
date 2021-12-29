@@ -107,6 +107,31 @@ namespace BurnSoft.Applications.MGC.Global
             return sAns;
         }
         /// <summary>
+        /// Fluffs the content.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="defaultValue">The default value.</param>
+        /// <returns>System.String.</returns>
+        public static string FluffContent(string value, out string errOut, string defaultValue = " ")
+        {
+            string sAns = defaultValue;
+            errOut = "";
+            try
+            {
+                if (value.Length > 0)
+                {
+                    sAns = value.Trim().Replace("'", "''");
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("FluffContent", e);
+            }
+
+            return sAns;
+        }
+        /// <summary>
         /// Determines whether the specified text is numeric.
         /// </summary>
         /// <param name="text">The text.</param>

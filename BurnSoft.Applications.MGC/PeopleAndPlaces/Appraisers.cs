@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
 
@@ -166,6 +167,31 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                     $"Update Appriaser_Contact_Details set aname='{name}',Address1='{address}', Address2='{address2}',City='{city}'," +
                     $"State='{state}',Zip='{zipCode}',country='{country}', phone='{phone}', fax='{fax}', website='{webSite}'" +
                     $",email='{eMail}', lic='{license}',sib={sib},sync_lastupdate=Now() where id={id};";
+
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the collection.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="oldName">The old name.</param>
+        /// <param name="newName">The new name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateCollection(string databasePath, string oldName, string newName, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set AppriasedBy='{Helpers.FluffContent(newName, out _)}' where AppriasedBy='{Helpers.FluffContent(oldName, out _)}'";
 
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
