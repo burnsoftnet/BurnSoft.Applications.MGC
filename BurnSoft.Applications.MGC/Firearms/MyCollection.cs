@@ -996,5 +996,29 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Uns the mark as stolen or sold.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool UnMarkAsStolenOrSold(string databasePath, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection set ItemSold=0,BID=2,dtSold=NULL where ID={gunId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UnMarkAsStolenOrSold", e);
+            }
+            return bAns;
+        }
     }
 }
