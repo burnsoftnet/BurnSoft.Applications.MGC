@@ -135,7 +135,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 string city = "";
                 string zipCode = "";
                 string state = "";
-                bool usepass = false;
                 string phone = "";
                 foreach (OwnerInfo l in lst)
                 {
@@ -149,7 +148,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                     city = l.City;
                     zipCode = l.ZipCode;
                     state = l.State;
-                    usepass = l.UsePassword;
                     phone = l.Phone;
                 }
 
