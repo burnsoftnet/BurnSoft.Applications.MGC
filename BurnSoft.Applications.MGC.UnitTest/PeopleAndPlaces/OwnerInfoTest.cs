@@ -67,7 +67,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 TestContext.WriteLine($"forgot word: {forgotWord}");
                 TestContext.WriteLine($"forgot phrase: {forgotPhrase}");
             }
-            General.HasTrueValue(!value, _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Defines the test method GetOwnerInfoTest.
@@ -113,11 +113,50 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             }
             General.HasTrueValue(value, _errOut);
         }
-
-        public void UpdateTest()
+        /// <summary>
+        /// Defines the test method EditOwnerInformationTest.
+        /// </summary>
+        [TestMethod]
+        public void EditOwnerInformationTest()
         {
             long id = OwnerInformation.GetOwnerId(_databasePath, out var ownerName, out var ownerLic, out _errOut);
-            
+            List<OwnerInfo> lst = OwnerInformation.GetOwnerInfo(_databasePath, out _errOut);
+            bool value = false;
+
+            if (lst.Count > 0)
+            {
+                string username = "";
+                string password = "";
+                string forgotword = "";
+                string forgotphrase = "";
+                string name = "";
+                string license = "";
+                string address = "";
+                string city = "";
+                string zipCode = "";
+                string state = "";
+                bool usepass = false;
+                string phone = "";
+                foreach (OwnerInfo l in lst)
+                {
+                    username = l.UserName;
+                    password = l.Password;
+                    forgotword = l.ForgotWord;
+                    forgotphrase = l.ForgotPhrase;
+                    name = l.Name;
+                    license = l.Ccdwl;
+                    address = l.Address;
+                    city = l.City;
+                    zipCode = l.ZipCode;
+                    state = l.State;
+                    usepass = l.UsePassword;
+                    phone = l.Phone;
+                }
+
+                value = OwnerInformation.Update(_databasePath, id, $"UPDATED: {name}", address, city, state, zipCode,
+                    phone, license, true, password, username, forgotword, forgotphrase, out _errOut);
+            }
+            General.HasTrueValue(value, _errOut);
         }
     }
 }
