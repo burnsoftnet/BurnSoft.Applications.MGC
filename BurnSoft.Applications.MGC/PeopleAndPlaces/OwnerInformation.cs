@@ -95,7 +95,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                 int iUsePassword = usePwd ? 1 : 0;
                 string sql =
                     $"INSERT INTO Owner_Info(name,address,City,State,Zip,Phone,CCDWL,UsePWD,PWD,UID,forgot_word,forgot_phrase,sync_lastupdate) VALUES('" +
-                    $"{name}','{address}','{city}','{state}','{zip}','{phone}','{ccdwl}',{iUsePassword},'{pwd}','{uid}','{forgotWord}','{forgotPhrase}',Now())";
+                    $"{name}','{One.Encrypt(address)}','{city}','{state}','{zip}','{phone}','{One.Encrypt(ccdwl)}',{iUsePassword},'{One.Encrypt(pwd)}','{One.Encrypt(uid)}','{One.Encrypt(forgotWord)}','{One.Encrypt(forgotPhrase)}',Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -140,8 +140,8 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                 {
                     int iUsePassword = usePwd ? 1 : 0;
                     string sql =
-                        $"UPDATE Owner_Info set name='{name}',address='{address}',City='{city}',State='{state}',Zip='{zip}',Phone='{phone}'" +
-                        $",CCDWL='{ccdwl}',UsePWD={iUsePassword},PWD='{pwd}',UID='{uid}',forgot_word='{forgotWord}',forgot_phrase='{forgotPhrase}'" +
+                        $"UPDATE Owner_Info set name='{name}',address='{One.Encrypt(address)}',City='{city}',State='{state}',Zip='{zip}',Phone='{phone}'" +
+                        $",CCDWL='{One.Encrypt(ccdwl)}',UsePWD={iUsePassword},PWD='{One.Encrypt(pwd)}',UID='{One.Encrypt(uid)}',forgot_word='{One.Encrypt(forgotWord)}',forgot_phrase='{One.Encrypt(forgotPhrase)}'" +
                         $",sync_lastupdate=Now() where id={id}";
                     bAns = Database.Execute(databasePath, sql, out errOut);
                 }
@@ -227,18 +227,18 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                     lst.Add(new OwnerInfo()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Password = d["pwd"] != DBNull.Value ? d["pwd"].ToString().Trim() : "",
+                        Password = d["pwd"] != DBNull.Value ? One.Decrypt(d["pwd"].ToString().Trim()) : "",
                         Name = d["Name"] != DBNull.Value ? d["Name"].ToString().Trim() : "",
-                        Address = d["Address"] != DBNull.Value ? d["Address"].ToString().Trim() : "",
+                        Address = d["Address"] != DBNull.Value ? One.Decrypt(d["Address"].ToString().Trim()) : "",
                         City = d["City"] != DBNull.Value ? d["City"].ToString().Trim() : "",
                         State = d["State"] != DBNull.Value ? d["State"].ToString().Trim() : "",
                         ZipCode = d["Zip"] != DBNull.Value ? d["Zip"].ToString().Trim() : "",
                         Phone = d["Phone"] != DBNull.Value ? d["Phone"].ToString().Trim() : "",
-                        Ccdwl = d["Ccdwl"] != DBNull.Value ? d["Ccdwl"].ToString().Trim() : "",
+                        Ccdwl = d["Ccdwl"] != DBNull.Value ? One.Decrypt(d["Ccdwl"].ToString().Trim()) : "",
                         UsePassword = Convert.ToInt32(d["UsePWD"]) == 1,
-                        UserName = d["uid"] != DBNull.Value ? d["uid"].ToString().Trim() : "",
-                        ForgotWord = d["forgot_word"] != DBNull.Value ? d["forgot_word"].ToString().Trim() : "",
-                        ForgotPhrase = d["forgot_phrase"] != DBNull.Value ? d["forgot_phrase"].ToString().Trim() : "",
+                        UserName = d["uid"] != DBNull.Value ? One.Decrypt(d["uid"].ToString().Trim()) : "",
+                        ForgotWord = d["forgot_word"] != DBNull.Value ? One.Decrypt(d["forgot_word"].ToString().Trim()) : "",
+                        ForgotPhrase = d["forgot_phrase"] != DBNull.Value ? One.Decrypt(d["forgot_phrase"].ToString().Trim()) : "",
                         LastSync = d["sync_lastupdate"].ToString().Trim(),
                     });
                 }

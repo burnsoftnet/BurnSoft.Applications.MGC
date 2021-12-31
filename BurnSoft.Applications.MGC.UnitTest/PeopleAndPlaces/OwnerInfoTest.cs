@@ -113,5 +113,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             }
             General.HasTrueValue(value, _errOut);
         }
+
+        public void UpdateTest()
+        {
+            long id = OwnerInformation.GetOwnerId(_databasePath, out var ownerName, out var ownerLic, out _errOut);
+            
+        }
     }
 }
