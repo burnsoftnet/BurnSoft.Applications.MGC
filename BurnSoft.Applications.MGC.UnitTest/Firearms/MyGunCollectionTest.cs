@@ -312,6 +312,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Gun Collection - Get From Table")]
         public void GetList()
         {
+            VerifyExists();
             List<GunCollectionList> value = MyCollection.GetList(_databasePath, _gunId, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);

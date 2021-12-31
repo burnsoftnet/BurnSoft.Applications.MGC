@@ -183,6 +183,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Barrel/Conversion Kits")]
         public void GeCurrentBarrelDetailstListTest()
         {
+            VerifyExists();
             List<BarrelSystems> value = ExtraBarrelConvoKits.GetCurrentBarrelDetailstList(_databasePath, _gunId, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
@@ -288,6 +289,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Barrel/Conversion Kits")]
         public void GetBarrelIdTest()
         {
+            VerifyExists();
             long value = ExtraBarrelConvoKits.GetBarrelId(_databasePath, _gunId, out _errOut, true);
             TestContext.WriteLine($"Barrel Id: {value}");
             General.HasTrueValue(value == _barrelConvoKitDefaultId, _errOut);
@@ -308,6 +310,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Barrel/Conversion Kits")]
         public void GetListByBarrelIdTest()
         {
+            VerifyExists();
             List<BarrelSystems> value = ExtraBarrelConvoKits.GetList(_databasePath, _barrelConvoKitDefaultId, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
