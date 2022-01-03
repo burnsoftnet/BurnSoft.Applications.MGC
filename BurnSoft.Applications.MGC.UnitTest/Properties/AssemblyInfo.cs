@@ -2,12 +2,12 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("BurnSoft.Applications.MGC.UnitTest")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Unit test for the my gun collection application library")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("www.burnsoft.net")]
 [assembly: AssemblyProduct("BurnSoft.Applications.MGC.UnitTest")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCopyright("Copyright ©www.burnsoft.net  2021-2022")]
+[assembly: AssemblyTrademark("www.burnsoft.net")]
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]

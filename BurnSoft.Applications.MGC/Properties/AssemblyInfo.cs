@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("www.burnsoft.net")]
 [assembly: AssemblyProduct("BurnSoft.Applications.MGC")]
-[assembly: AssemblyCopyright("Copyright © www.burnsoft.net  2021")]
+[assembly: AssemblyCopyright("Copyright © www.burnsoft.net  2021-2022")]
 [assembly: AssemblyTrademark("www.burnsoft.net")]
 [assembly: AssemblyCulture("")]
 
