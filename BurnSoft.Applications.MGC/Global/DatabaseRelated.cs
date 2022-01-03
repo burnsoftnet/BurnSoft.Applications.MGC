@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Data;
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
+
+// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
 
 namespace BurnSoft.Applications.MGC.Global
 {
@@ -103,14 +107,19 @@ namespace BurnSoft.Applications.MGC.Global
 
             return bAns;
         }
-
+        /// <summary>
+        /// Gets the database version.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
         public static string GetDatabaseVersion(string databasePath, out string errOut)
         {
             string sAns = "";
             errOut = "";
             try
             {
-                string sql = $"SELECT top 1 dbver from DB_Version order by ID desc";
+                string sql = "SELECT top 1 dbver from DB_Version order by ID desc";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
 
                 foreach (DataRow d in dt.Rows)
