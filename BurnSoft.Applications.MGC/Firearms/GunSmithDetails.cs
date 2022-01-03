@@ -442,8 +442,18 @@ namespace BurnSoft.Applications.MGC.Firearms
                 {
                     long id = Convert.ToInt32(d["id"]);
                     long gunId = d["gid"] != DBNull.Value ? Convert.ToInt32(d["gid"]) : 0;
-                    long gsid = d["gsid"] != DBNull.Value  ? Convert.ToInt32(d["gsid"]) : 0;
-
+                    long gsid = 0;
+                    try
+                    {
+                        gsid = d["gsid"] != DBNull.Value ? Convert.ToInt32(d["gsid"]) : 0;
+                    }
+#pragma warning disable 168
+                    catch (Exception e)
+#pragma warning restore 168
+                    {
+                        //TODO: #39 Once this field is in the hotfix then this can be removed.
+                        //Temp Catch for databases that are missing the gsid field
+                    }
                     string orderDetails = d["od"] != DBNull.Value ? d["od"].ToString().Trim() : "";
                     string rDate = d["rdate"] != DBNull.Value ? d["rdate"].ToString().Trim() : "";
                     string sDate = d["sdate"] != DBNull.Value ? d["sdate"].ToString().Trim() : "";
