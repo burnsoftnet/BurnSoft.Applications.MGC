@@ -376,9 +376,22 @@ namespace BurnSoft.Applications.MGC
         /// <returns>DataTable.</returns>
         public static DataTable GetDataFromTable(string databasePath, string sql, out string errOut)
         {
-            string con = ConnectionString(databasePath, out errOut);
-            Database obj = new Database();
-            return obj.GetData(con, sql, out errOut);
+            DataTable dt = new DataTable();
+            try
+            {
+                string con = ConnectionString(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                Database obj = new Database();
+                dt = obj.GetData(con, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                obj.Close(out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetDataFromTable", e);
+            }
+            return dt;
         }
         /// <summary>
         /// Datas the exists.

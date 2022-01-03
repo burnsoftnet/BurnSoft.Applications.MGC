@@ -103,6 +103,27 @@ namespace BurnSoft.Applications.MGC.Global
 
             return bAns;
         }
+
+        public static string GetDatabaseVersion(string databasePath, out string errOut)
+        {
+            string sAns = "";
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT top 1 dbver from DB_Version order by ID desc";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+
+                foreach (DataRow d in dt.Rows)
+                {
+                    sAns = d["dbver"].ToString();
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetDatabaseVersion", e);
+            }
+            return sAns;
+        }
         /// <summary>
         /// Gets the name.
         /// </summary>
