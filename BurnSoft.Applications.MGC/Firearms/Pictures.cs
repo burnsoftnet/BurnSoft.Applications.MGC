@@ -128,7 +128,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql = $"DELETE from Gun_Collection_Pictures where ID={id}";
-                bAns = Database.DataExists(databasePath, sql, out errOut);
+                bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
