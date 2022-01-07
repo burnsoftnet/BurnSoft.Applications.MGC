@@ -63,6 +63,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion        
         /// <summary>
+        /// The file filter list
+        /// </summary>
+        public static string FileFilterList = "Bmp Files(*.bmp)|*.bmp|Gif Files(*.gif)|*.gif|Jpg Files(*.jpg)|*.jpg";
+        /// <summary>
         /// Determines whether the firearm ( collection id ) already has a default picture set or not
         /// </summary>
         /// <param name="databasePath">The database path.</param>
