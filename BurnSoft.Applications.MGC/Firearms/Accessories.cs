@@ -214,6 +214,33 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lAns;
         }
         /// <summary>
+        /// Sums up purchase value.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        public static double SumUpPurchaseValue(string databasePath, long gunId, out string errOut)
+        {
+            double dAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT SUM(cdbl(PurValue)) as Total from Gun_Collection_Accessories where GID={gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    dAns = d["AppValue"] != DBNull.Value ? Convert.ToInt32(d["Total"]) : 0;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+            return dAns;
+        }
+        /// <summary>
         /// Deletes the specified accessory from the database
         /// </summary>
         /// <param name="databasePath">The database path.</param>
