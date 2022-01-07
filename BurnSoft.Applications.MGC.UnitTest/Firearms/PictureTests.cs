@@ -107,7 +107,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod]
         public void GetPicturesForFirearmTest()
         {
-            List<PictureDetails> value = Pictures.GetPicturesForFirearm(_databasePath, _gunId, out _errOut);
+            List<PictureDetails> value = Pictures.GetList(_databasePath, _gunId, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }

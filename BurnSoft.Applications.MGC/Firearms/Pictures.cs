@@ -278,7 +278,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                List<PictureDetails> lst = GetPicturesForFirearm(databasePath, gunId, out errOut);
+                List<PictureDetails> lst = GetList(databasePath, gunId, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 lAns = lst.Count;
             }
@@ -289,14 +289,16 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lAns;
 
         }
+
         /// <summary>
         /// Get all the data from teh tabl based on the firearm they are attached to.
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="gunId"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">full path and file name to the database</param>
+        /// <param name="gunId">firearm id</param>
+        /// <param name="errOut">exception message</param>
+        /// <param name="isDetails">toggle if just the text is returned or all</param>
         /// <returns></returns>
-        public static List<PictureDetails> GetPicturesForFirearm(string databasePath, long gunId, out string errOut)
+        public static List<PictureDetails> GetList(string databasePath, long gunId, out string errOut, bool isDetails = false)
         {
             List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
@@ -305,12 +307,12 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string sql = $"SELECT * from Gun_Collection_Pictures where CID={gunId}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                lst = MyList(dt, out errOut);
+                lst = MyList(dt, out errOut, isDetails);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("GetPicturesForFirearm", e);
+                errOut = ErrorMessage("GetList", e);
             }
             return lst;
 
@@ -321,9 +323,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// </summary>
         /// <param name="dt"></param>
         /// <param name="errOut"></param>
+        /// <param name="isDetails"></param>
         /// <param name="dbPath"></param>
         /// <returns></returns>
-        internal static List<PictureDetails> MyList(DataTable dt, out string errOut, string dbPath = "")
+        internal static List<PictureDetails> MyList(DataTable dt, out string errOut,bool isDetails = false, string dbPath = "")
         {
             List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
@@ -333,38 +336,54 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                 foreach (DataRow d in dt.Rows)
                 {
-                    object oThumb = d["thumb"] != DBNull.Value ? d["thumb"] : "";
-                    object oPic = d["Picture"] != DBNull.Value ? d["Picture"] : "";
-                    Byte[] bThumb = Helpers.ObjectToByteArray(oThumb);
-                    Byte[] bPic = Helpers.ObjectToByteArray(oPic);
+                    if (!isDetails)
+                    {
+                        object oThumb = d["thumb"] != DBNull.Value ? d["thumb"] : "";
+                        object oPic = d["Picture"] != DBNull.Value ? d["Picture"] : "";
+                        Byte[] bThumb = Helpers.ObjectToByteArray(oThumb);
+                        Byte[] bPic = Helpers.ObjectToByteArray(oPic);
 
-                    MemoryStream thumbStream = new MemoryStream();
-                    MemoryStream picStream = new MemoryStream();
-                    if (bThumb.Length > 0)
-                    {
-                        thumbStream = new MemoryStream(bThumb, true);
-                        thumbStream.Write(bThumb,0,bThumb.Length);
-                        thumbStream.Close();
+                        MemoryStream thumbStream = new MemoryStream();
+                        MemoryStream picStream = new MemoryStream();
+                        if (bThumb.Length > 0)
+                        {
+                            thumbStream = new MemoryStream(bThumb, true);
+                            thumbStream.Write(bThumb, 0, bThumb.Length);
+                            thumbStream.Close();
+                        }
+                        if (bPic.Length > 0)
+                        {
+                            picStream = new MemoryStream(bPic, true);
+                            picStream.Write(bPic, 0, bPic.Length);
+                            picStream.Close();
+                        }
+                        lst.Add(new PictureDetails()
+                        {
+                            Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
+                            LastSyncDate = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : "",
+                            CollectionId = Convert.ToInt32(d["CID"] != DBNull.Value ? d["CID"] : 0),
+                            Picture = oPic,
+                            IsMain = obj.ConvertIntToBool(Convert.ToInt32(d["ISMAIN"] != DBNull.Value ? d["ISMAIN"] : 0)),
+                            Thumb = oThumb,
+                            PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
+                            PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : "",
+                            ThumbMemoryStream = thumbStream,
+                            PictureMemoryStream = picStream
+                        });
                     }
-                    if (bPic.Length > 0)
+                    else
                     {
-                        picStream = new MemoryStream(bPic, true);
-                        picStream.Write(bPic, 0, bPic.Length);
-                        picStream.Close();
+                        lst.Add(new PictureDetails()
+                        {
+                            Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
+                            LastSyncDate = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : "",
+                            CollectionId = Convert.ToInt32(d["CID"] != DBNull.Value ? d["CID"] : 0),
+                            IsMain = obj.ConvertIntToBool(Convert.ToInt32(d["ISMAIN"] != DBNull.Value ? d["ISMAIN"] : 0)),
+                            PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
+                            PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : ""
+                        });
                     }
-                    lst.Add(new PictureDetails()
-                    {
-                        Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
-                        LastSyncDate = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : "",
-                        CollectionId = Convert.ToInt32(d["CID"] != DBNull.Value ? d["CID"] : 0),
-                        Picture = oPic,
-                        IsMain = obj.ConvertIntToBool(Convert.ToInt32(d["ISMAIN"] != DBNull.Value ? d["ISMAIN"] : 0)),
-                        Thumb = oThumb,
-                        PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
-                        PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : "",
-                        ThumbMemoryStream = thumbStream,
-                        PictureMemoryStream = picStream
-                    });
+                    
                 }
             }
             catch (Exception e)
