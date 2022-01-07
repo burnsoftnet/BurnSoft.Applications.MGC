@@ -158,6 +158,20 @@ namespace BurnSoft.Applications.MGC.Ammo
             return Database.Execute(databasePath, sql, out errOut);
         }
         /// <summary>
+        /// Updates the price per bullet.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="ammoId">The ammo identifier.</param>
+        /// <param name="pricePerBullet">The price per bullet.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdatePricePerBullet(string databasePath, long ammoId,double pricePerBullet, out string errOut)
+        {
+            string sql = $"UPDATE Gun_Collection_Ammo_PriceAudit set PPB={pricePerBullet} where ID={ammoId}";
+            return Database.Execute(databasePath, sql, out errOut);
+        }
+
+        /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
         public void Dispose()
