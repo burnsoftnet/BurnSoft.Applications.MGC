@@ -138,7 +138,6 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
 
-
         /// <summary>
         /// Adds the default pic.
         /// </summary>
@@ -373,6 +372,32 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("MyList", e);
             }
             return lst;
+        }
+        /// <summary>
+        /// Updates the picture details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool UpdatePictureDetails(string databasePath, long id,string title, string notes, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Pictures set pd_name='{title}', pd_note='{notes}',sync_lastupdate=Now() where ID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdatePictureDetails", e);
+            }
+            return bAns;
         }
     }
 }
