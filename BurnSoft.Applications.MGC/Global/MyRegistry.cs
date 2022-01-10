@@ -332,8 +332,134 @@ namespace BurnSoft.Applications.MGC.Global
         }
 
 
+        public void GetSettings(ref string lastSucBackup, ref bool alertOnBackUp, ref int trackHistoryDays, ref bool trackHistory, ref bool autoBackup, ref bool uoimg, ref bool usePl, ref bool useIPer, ref bool useCcid, ref bool useaa, ref bool useAacid, ref bool useUniqueCustId, ref bool bUseselectiveboundbook)
+        {
+            RegistryKey myReg;
+            string numberFormat;
+            bool useProxy;
+            bool autoUpdate;
+            string strValue = DefaultRegPath + @"\Settings";
+            try
+            {
+                myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+                if (myReg == null)
+                    SetSettingDetails();
+                if ((myReg != null))
+                {
+                    trackHistoryDays = Convert.ToInt32(GetRegSubKeyValue(strValue, "TrackHistoryDays", RegTrackHistoryDays.ToString())); // CInt(MyReg.GetValue("TrackHistoryDays", ""))
+                    trackHistory = Convert.ToBoolean(GetRegSubKeyValue(strValue, "TrackHistory", RegTrackHistory.ToString()));
+                    numberFormat = Convert.ToString(GetRegSubKeyValue(strValue, "NumberFormat", RegNumberFormat));
+                    autoUpdate = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AutoUpdate", RegAutoUpdate.ToString()));
+                    useProxy = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseProxy", RegUseProxy.ToString()));
+                    lastSucBackup = GetRegSubKeyValue(strValue, "Successful", RegSuccessful);
+                    alertOnBackUp = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AlertOnBackUp", RegAlertOnBackUp.ToString()));
+                    autoBackup = Convert.ToBoolean(GetRegSubKeyValue(strValue, "BackupOnExit", RegBackupOnExit.ToString()));
+                    uoimg = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseOrgImage", RegUseOrgImage.ToString()));
+                    usePl = Convert.ToBoolean(GetRegSubKeyValue(strValue, "ViewPetLoads", RegViewPetLoads.ToString()));
+                    useIPer = Convert.ToBoolean(GetRegSubKeyValue(strValue, "IndvReports", RegIndvReports.ToString()));
+                    useCcid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseNumberCatOnly", RegUseNumberCatOnly.ToString()));
+                    useaa = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AUDITAMMO", RegAuditammo.ToString()));
+                    useAacid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USEAUTOASSIGN", RegUseautoassign.ToString()));
+                    useUniqueCustId = Convert.ToBoolean(GetRegSubKeyValue(strValue, "DISABLEUNIQUECUSTCATID", RegUniquecustcatid.ToString()));
+                    bUseselectiveboundbook = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USESELECTIVEBOUNDBOOK", RegUseselectiveboundbook.ToString()));
+                }
+                else
+                {
+                    trackHistoryDays = RegTrackHistoryDays;
+                    trackHistory = RegTrackHistory;
+                    numberFormat = RegNumberFormat;
+                    autoUpdate = RegAutoUpdate;
+                    useProxy = RegUseProxy;
+                    lastSucBackup = RegSuccessful;
+                    alertOnBackUp = RegAlertOnBackUp;
+                    autoBackup = RegBackupOnExit;
+                    uoimg = RegUseOrgImage;
+                    usePl = RegViewPetLoads;
+                    useIPer = RegIndvReports;
+                    useCcid = RegUseNumberCatOnly;
+                    useaa = RegAuditammo;
+                    useAacid = RegUseautoassign;
+                    useUniqueCustId = RegUniquecustcatid;
+                    bUseselectiveboundbook = RegUseselectiveboundbook;
+                }
+            }
+            catch (Exception ex)
+            {
+                //long myErr = ex.Number;
+                //if (myErr == 13)
+                //    SetSettingDetails();
+            }
+        }
+        public void SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool useProxy, bool alertOnBackUp, bool autoBackup, bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook)
+        {
+            RegistryKey myReg;
+            string strValue = DefaultRegPath + @"\Settings";
+            myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+            if (myReg == null)
+                myReg = Registry.CurrentUser.CreateSubKey(strValue);
+            myReg.SetValue("TrackHistoryDays", trackHistoryDays);
+            myReg.SetValue("TrackHistory", trackHistory);
+            myReg.SetValue("NumberFormat", numberFormat);
+            myReg.SetValue("AutoUpdate", autoUpdate);
+            myReg.SetValue("UseProxy", useProxy);
+            myReg.SetValue("AlertOnBackUp", alertOnBackUp);
+            myReg.SetValue("BackupOnExit", autoBackup);
+            myReg.SetValue("UseOrgImage", uoimg);
+            myReg.SetValue("ViewPetLoads", usePl);
+            myReg.SetValue("IndvReports", useIPer);
+            myReg.SetValue("UseNumberCatOnly", usenccid);
+            myReg.SetValue("AUDITAMMO", useaa);
+            myReg.SetValue("USEAUTOASSIGN", useAacid);
+            myReg.SetValue("DISABLEUNIQUECUSTCATID", useUniqueCustId);
+            myReg.SetValue("USESELECTIVEBOUNDBOOK", bUseselectiveboundbook);
+            myReg.Close();
+        }
 
+        public void SaveLastWorkingDir(string strPath)
+        {
+            RegistryKey myReg;
+            string strValue = DefaultRegPath + @"\Settings";
+            myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
+            if (myReg == null)
+                myReg = Registry.CurrentUser.CreateSubKey(strValue);
+            myReg.SetValue("LastWorkingPath", strPath);
+            myReg.Close();
+        }
 
+        public string GetLastWorkingDir()
+        {
+            string sAns = "";
+            RegistryKey myReg;
+            string strValue = DefaultRegPath + @"\Settings";
+            myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
+            if (myReg == null)
+            {
+                myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                myReg.SetValue("LastWorkingPath", "");
+            }
+            sAns = myReg.GetValue("LastWorkingPath", "").ToString();
+            myReg.Close();
+            return sAns;
+        }
+
+        public void SaveFirearmListSort(string configSort)
+        {
+            string strValue = DefaultRegPath + @"\Settings";
+            if (!RegSubKeyExists(strValue))
+                CreateSubKey(strValue);
+            RegistryKey myReg;
+            myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+            myReg.SetValue("VIEW_FirearmList", configSort);
+            myReg.Close();
+        }
+
+        public string GetViewSettings(string sKey, string sDefault = "")
+        {
+            string sAns = "";
+            string strValue = DefaultRegPath + @"\Settings";
+            sAns = GetRegSubKeyValue(strValue, sKey, sDefault);
+            return sAns;
+        }
 
     }
 }
