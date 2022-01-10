@@ -84,6 +84,7 @@
     <Compile Include="Firearms\ImportXmlTest.cs" />
     <Compile Include="General.cs" />
     <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Global\MyRegistryTest.cs" />
     <Compile Include="Other\WishlistTest.cs" />
     <Compile Include="PeopleAndPlaces\ShopsTest.cs" />
     <Compile Include="PeopleAndPlaces\GunSmithsTest.cs" />
