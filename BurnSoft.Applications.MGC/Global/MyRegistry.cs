@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Microsoft.Win32;
 
 // ReSharper disable UnusedMember.Local
 // ReSharper disable ConvertToAutoProperty
@@ -9,14 +10,14 @@ namespace BurnSoft.Applications.MGC.Global
     /// <summary>
     /// Class Registry.  General Registry class for the My gun Collection Application to read, setups, and write
     /// </summary>
-    public class Registry
+    public class MyRegistry
     {
 
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
         /// </summary>
-        private static string _classLocation = "BurnSoft.Applications.MGC.Global.Registry";
+        private static string _classLocation = "BurnSoft.Applications.MGC.Global.MyRegistry";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
@@ -215,6 +216,124 @@ namespace BurnSoft.Applications.MGC.Global
             get => _regUseselectiveboundbook;
             set => _regUseselectiveboundbook = value;
         }
-        
+        public void CreateSubKey(string strValue)
+        {
+            Registry.CurrentUser.CreateSubKey(strValue);
+        }
+
+        public void UpDateAppDetails(string productVersion, string productName, string executablePath,string appPath, string logFile, string databasePath, string appDataPath)
+        {
+            string strValue = DefaultRegPath;
+            if (!RegSubKeyExists(strValue))
+                CreateSubKey(strValue);
+            RegistryKey myReg;
+            myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+            myReg.SetValue("Version", productVersion);
+            myReg.SetValue("AppName", productName);
+            myReg.SetValue("AppEXE", executablePath);
+            myReg.SetValue("Path", appPath);
+            myReg.SetValue("LogPath", logFile);
+            myReg.SetValue("DataBase", databasePath);
+            myReg.SetValue("AppDataPath", appDataPath);
+            myReg.Close();
+        }
+
+        public bool RegSubKeyExists(string strValue)
+        {
+            bool bAns = false;
+            try
+            {
+                RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+                if (myReg == null)
+                    bAns = false;
+                else
+                    bAns = true;
+            }
+            catch (Exception ex)
+            {
+                bAns = false;
+            }
+            return bAns;
+        }
+
+        public string GetRegSubKeyValue(string strKey, string strValue, string strDefault)
+        {
+            string sAns = "";
+            string strMsg = "";
+            RegistryKey myReg;
+            try
+            {
+                if (RegSubKeyExists(strKey))
+                {
+                    myReg = Registry.CurrentUser.OpenSubKey(strKey, true);
+                    if (myReg.GetValue(strValue).ToString().Length > 0)
+                        sAns = myReg.GetValue(strValue).ToString();
+                    else
+                    {
+                        myReg.SetValue(strValue, strDefault);
+                        sAns = strDefault;
+                    }
+                }
+                else
+                {
+                    CreateSubKey(strKey);
+                    myReg = Registry.CurrentUser.OpenSubKey(strKey, true);
+                    myReg.SetValue(strValue, strDefault);
+                    sAns = strDefault;
+                }
+            }
+            catch (Exception ex)
+            {
+                sAns = strDefault;
+            }
+            return sAns;
+        }
+
+        public void SetSettingDetails()
+        {
+            if (!SettingsExists())
+            {
+                RegistryKey myReg;
+                string strValue = DefaultRegPath + @"\Settings";
+                myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+
+                myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                myReg.SetValue("Successful", RegSuccessful);
+                myReg.SetValue("SetHistListtb", RegSetHistListtb);
+                myReg.SetValue("SetHistListdt", RegSetHistListdt);
+                myReg.SetValue("AlertOnBackUp", RegAlertOnBackUp);
+                myReg.SetValue("TrackHistoryDays", RegTrackHistoryDays);
+                myReg.SetValue("TrackHistory", RegTrackHistory);
+                myReg.SetValue("LastPath", RegLastPath);
+                myReg.SetValue("LastFile", RegLastFile);
+                myReg.SetValue("BackupOnExit", RegBackupOnExit);
+                myReg.SetValue("UseOrgImage", RegUseOrgImage);
+                myReg.SetValue("ViewPetLoads", RegViewPetLoads);
+                myReg.SetValue("IndvReports", RegIndvReports);
+                myReg.SetValue("UseNumberCatOnly", RegUseNumberCatOnly);
+                myReg.SetValue("AUDITAMMO", RegAuditammo);
+                myReg.Close();
+            }
+        }
+
+
+
+        public bool SettingsExists()
+        {
+            bool bAns = false;
+            RegistryKey myReg;
+            string strValue = DefaultRegPath + @"\Settings";
+            myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+            if (myReg == null)
+                bAns = false;
+            else
+                bAns = true;
+            return bAns;
+        }
+
+
+
+
+
     }
 }
