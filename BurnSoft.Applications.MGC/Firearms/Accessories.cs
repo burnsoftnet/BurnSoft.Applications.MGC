@@ -231,12 +231,40 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)
                 {
-                    dAns = d["AppValue"] != DBNull.Value ? Convert.ToInt32(d["Total"]) : 0;
+                    dAns = d["Total"] != DBNull.Value ? Convert.ToInt32(d["Total"]) : 0;
                 }
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("GetId", e);
+                errOut = ErrorMessage("SumUpPurchaseValue", e);
+            }
+            return dAns;
+        }
+        /// <summary>
+        /// Sums up appriase value.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Double.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static double SumUpAppriaseValue(string databasePath, long gunId, out string errOut)
+        {
+            double dAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT SUM(cdbl(AppValue)) as Total from Gun_Collection_Accessories where GID={gunId} and CIV=1";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    dAns = d["Total"] != DBNull.Value ? Convert.ToInt32(d["Total"]) : 0;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SumUpAppriaseValue", e);
             }
             return dAns;
         }
