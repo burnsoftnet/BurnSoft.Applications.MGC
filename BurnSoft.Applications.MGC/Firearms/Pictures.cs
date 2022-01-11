@@ -298,17 +298,19 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Get all the data from teh tabl based on the firearm they are attached to.
         /// </summary>
         /// <param name="databasePath">full path and file name to the database</param>
-        /// <param name="gunId">firearm id</param>
+        /// <param name="id">firearm id/ or picture id if set to direct = true</param>
         /// <param name="errOut">exception message</param>
         /// <param name="isDetails">toggle if just the text is returned or all</param>
+        /// <param name="isDirect">change the sql from looking up the gun id and look up the direct id instead</param>
         /// <returns></returns>
-        public static List<PictureDetails> GetList(string databasePath, long gunId, out string errOut, bool isDetails = false)
+        public static List<PictureDetails> GetList(string databasePath, long id, out string errOut, bool isDetails = true, bool isDirect = false)
         {
             List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
             try
             {
-                string sql = $"SELECT * from Gun_Collection_Pictures where CID={gunId}";
+                string sql = $"SELECT * from Gun_Collection_Pictures where CID={id}";
+                if (isDirect) sql = $"SELECT * from Gun_Collection_Pictures where ID={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 lst = MyList(dt, out errOut, isDetails);
