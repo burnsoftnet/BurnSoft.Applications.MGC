@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using Microsoft.Win32;
+// ReSharper disable PossibleNullReferenceException
+// ReSharper disable RedundantAssignment
+// ReSharper disable TooWideLocalVariableScope
+// ReSharper disable UnusedMember.Global
+// ReSharper disable ConvertIfStatementToNullCoalescingExpression
 
 // ReSharper disable UnusedMember.Local
 // ReSharper disable ConvertToAutoProperty
@@ -54,69 +59,161 @@ namespace BurnSoft.Applications.MGC.Global
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion
-        //End Snippet
-
-        private string _regPath;
-        private string _regSuccessful;
-        private string _regSetHistListtb;
-        private string _regSetHistListdt;
-        private bool _regAlertOnBackUp = true;
-        private int _regTrackHistoryDays;
-        private string _regLastPath;
-        private string _regLastFile;
-        private bool _regBackupOnExit;
-        private bool _regUseOrgImage;
-        private bool _regViewPetLoads = true;
-        private bool _regIndvReports = true;
-        private bool _regTrackHistory = true;
-        private string _regNumberFormat;
-        private bool _regAutoUpdate;
-        private bool _regUseProxy;
-        private bool _regUseNumberCatOnly;
-        private bool _regAuditammo;
-        private bool _regUseautoassign;
-        private bool _regUniquecustcatid;
-        private bool _regUseselectiveboundbook;
+        //End Snippet        
+        /// <summary>
+        /// The reg path
+        /// </summary>
+        private static string _regPath;
+        /// <summary>
+        /// The reg successful
+        /// </summary>
+        private static string _regSuccessful;
+        /// <summary>
+        /// The reg set hist listtb
+        /// </summary>
+        private static string _regSetHistListtb;
+        /// <summary>
+        /// The reg set hist listdt
+        /// </summary>
+        private static string _regSetHistListdt;
+        /// <summary>
+        /// The reg alert on back up
+        /// </summary>
+        private static bool _regAlertOnBackUp = true;
+        /// <summary>
+        /// The reg track history days
+        /// </summary>
+        private static int _regTrackHistoryDays;
+        /// <summary>
+        /// The reg last path
+        /// </summary>
+        private static string _regLastPath;
+        /// <summary>
+        /// The reg last file
+        /// </summary>
+        private static string _regLastFile;
+        /// <summary>
+        /// The reg backup on exit
+        /// </summary>
+        private static bool _regBackupOnExit;
+        /// <summary>
+        /// The reg use org image
+        /// </summary>
+        private static bool _regUseOrgImage;
+        /// <summary>
+        /// The reg view pet loads
+        /// </summary>
+        private static bool _regViewPetLoads = true;
+        /// <summary>
+        /// The reg indv reports
+        /// </summary>
+        private static bool _regIndvReports = true;
+        /// <summary>
+        /// The reg track history
+        /// </summary>
+        private static bool _regTrackHistory = true;
+        /// <summary>
+        /// The reg number format
+        /// </summary>
+        private static string _regNumberFormat;
+        /// <summary>
+        /// The reg automatic update
+        /// </summary>
+        private static bool _regAutoUpdate;
+        /// <summary>
+        /// The reg use proxy
+        /// </summary>
+        private static bool _regUseProxy;
+        /// <summary>
+        /// The reg use number cat only
+        /// </summary>
+        private static bool _regUseNumberCatOnly;
+        /// <summary>
+        /// The reg auditammo
+        /// </summary>
+        private static bool _regAuditammo;
+        /// <summary>
+        /// The reg useautoassign
+        /// </summary>
+        private static bool _regUseautoassign;
+        /// <summary>
+        /// The reg uniquecustcatid/
+        /// </summary>
+        private static bool _regUniquecustcatid;
+        /// <summary>
+        /// The reg useselectiveboundbook
+        /// </summary>
+        private static bool _regUseselectiveboundbook;
         /// <summary>
         /// Gets or sets the default reg path.
         /// </summary>
         /// <value>The default reg path.</value>
-        public string DefaultRegPath
+        public static string DefaultRegPath
         {
             get
             {
+                if (_regPath == null)
+                {
+                    _regPath = @"Software\\BurnSoft\\BSMGC";
+                    return _regPath;
+                }
                 if (_regPath.Length == 0)
                     _regPath = @"Software\\BurnSoft\\BSMGC";
                 return _regPath;
             }
             set => _regPath = value;
         }
-        private string RegSuccessful
+        /// <summary>
+        /// Gets or sets the reg successful.
+        /// </summary>
+        /// <value>The reg successful.</value>
+        private static string RegSuccessful
         {
             get
             {
+                if (_regSuccessful == null)
+                {
+                    _regSuccessful = DateTime.Now.ToString(CultureInfo.InvariantCulture);
+                    return _regSuccessful;
+                }
                 if (_regSuccessful.Length == 0)
                     _regSuccessful = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                 return _regSuccessful;
             }
             set => _regSuccessful = value;
         }
-        private string RegSetHistListtb
+        /// <summary>
+        /// Gets or sets the reg set hist listtb.
+        /// </summary>
+        /// <value>The reg set hist listtb.</value>
+        private static string RegSetHistListtb
         {
             get => _regSetHistListtb;
             set => _regSetHistListtb = value;
         }
-        private string RegSetHistListdt
+        /// <summary>
+        /// Gets or sets the reg set hist listdt.
+        /// </summary>
+        /// <value>The reg set hist listdt.</value>
+        private static string RegSetHistListdt
         {
             get => _regSetHistListdt;
             set => _regSetHistListdt = value;
         }
-        private bool RegAlertOnBackUp
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg alert on back up].
+        /// </summary>
+        /// <value><c>true</c> if [reg alert on back up]; otherwise, <c>false</c>.</value>
+        private static bool RegAlertOnBackUp
         {
             get => _regAlertOnBackUp;
             set => _regAlertOnBackUp = value;
         }
-        private int RegTrackHistoryDays
+        /// <summary>
+        /// Gets or sets the reg track history days.
+        /// </summary>
+        /// <value>The reg track history days.</value>
+        private static int RegTrackHistoryDays
         {
             get
             {
@@ -126,144 +223,263 @@ namespace BurnSoft.Applications.MGC.Global
             }
             set => _regTrackHistoryDays = value;
         }
-        private string RegLastPath
+        /// <summary>
+        /// Gets or sets the reg last path.
+        /// </summary>
+        /// <value>The reg last path.</value>
+        private static string RegLastPath
         {
             get
             {
+                if (_regLastPath == null)
+                {
+                    _regLastPath = @"C:\";
+                    return _regLastPath;
+                }
                 if (_regLastPath.Length == 0)
                     _regLastPath = @"C:\";
                 return _regLastPath;
             }
             set => _regLastPath = value;
         }
-        private string RegLastFile
+        /// <summary>
+        /// Gets or sets the reg last file.
+        /// </summary>
+        /// <value>The reg last file.</value>
+        private static string RegLastFile
         {
             get
             {
+                if (_regLastFile == null)
+                {
+                    _regLastFile = "MGC.MDB";
+                    return _regLastFile;
+                }
                 if (_regLastFile.Length == 0)
                     _regLastFile = "MGC.MDB";
                 return _regLastFile;
             }
             set => _regLastFile = value;
         }
-        private bool RegBackupOnExit
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg backup on exit].
+        /// </summary>
+        /// <value><c>true</c> if [reg backup on exit]; otherwise, <c>false</c>.</value>
+        private static bool RegBackupOnExit
         {
             get => _regBackupOnExit;
             set => _regBackupOnExit = value;
         }
-        private bool RegUseOrgImage
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg use org image].
+        /// </summary>
+        /// <value><c>true</c> if [reg use org image]; otherwise, <c>false</c>.</value>
+        private static bool RegUseOrgImage
         {
             get => _regUseOrgImage;
             set => _regUseOrgImage = value;
         }
-        private bool RegViewPetLoads
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg view pet loads].
+        /// </summary>
+        /// <value><c>true</c> if [reg view pet loads]; otherwise, <c>false</c>.</value>
+        private static bool RegViewPetLoads
         {
             get => _regViewPetLoads;
             set => _regViewPetLoads = value;
         }
-        private bool RegIndvReports
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg indv reports].
+        /// </summary>
+        /// <value><c>true</c> if [reg indv reports]; otherwise, <c>false</c>.</value>
+        private static bool RegIndvReports
         {
             get => _regIndvReports;
             set => _regIndvReports = value;
         }
-        private bool RegTrackHistory
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg track history].
+        /// </summary>
+        /// <value><c>true</c> if [reg track history]; otherwise, <c>false</c>.</value>
+        private static bool RegTrackHistory
         {
             get => _regTrackHistory;
             set => _regTrackHistory = value;
         }
-        private string RegNumberFormat
+        /// <summary>
+        /// Gets or sets the reg number format.
+        /// </summary>
+        /// <value>The reg number format.</value>
+        private static string RegNumberFormat
         {
             get
             {
+                if (_regNumberFormat == null)
+                {
+                    _regNumberFormat = "0000";
+                    return _regNumberFormat;
+                }
                 if (_regNumberFormat.Length == 0)
                     _regNumberFormat = "0000";
                 return _regNumberFormat;
             }
             set => _regNumberFormat = value;
         }
-        private bool RegAutoUpdate
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg automatic update].
+        /// </summary>
+        /// <value><c>true</c> if [reg automatic update]; otherwise, <c>false</c>.</value>
+        private static bool RegAutoUpdate
         {
             get => _regAutoUpdate;
             set => _regAutoUpdate = value;
         }
-        private bool RegUseProxy
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg use proxy].
+        /// </summary>
+        /// <value><c>true</c> if [reg use proxy]; otherwise, <c>false</c>.</value>
+        private static bool RegUseProxy
         {
             get => _regUseProxy;
             set => _regUseProxy = value;
         }
-        private bool RegAuditammo
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg auditammo].
+        /// </summary>
+        /// <value><c>true</c> if [reg auditammo]; otherwise, <c>false</c>.</value>
+        private static bool RegAuditammo
         {
             get => _regAuditammo;
             set => _regAuditammo = value;
         }
-        private bool RegUseNumberCatOnly
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg use number cat only].
+        /// </summary>
+        /// <value><c>true</c> if [reg use number cat only]; otherwise, <c>false</c>.</value>
+        private static bool RegUseNumberCatOnly
         {
             get => _regUseNumberCatOnly;
             set => _regUseNumberCatOnly = value;
         }
-        private bool RegUseautoassign
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg useautoassign].
+        /// </summary>
+        /// <value><c>true</c> if [reg useautoassign]; otherwise, <c>false</c>.</value>
+        private static bool RegUseautoassign
         {
             get => _regUseautoassign;
             set => _regUseautoassign = value;
         }
-        private bool RegUniquecustcatid
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg uniquecustcatid].
+        /// </summary>
+        /// <value><c>true</c> if [reg uniquecustcatid]; otherwise, <c>false</c>.</value>
+        private static bool RegUniquecustcatid
         {
             get => _regUniquecustcatid;
             set => _regUniquecustcatid = value;
         }
-        private bool RegUseselectiveboundbook
+        /// <summary>
+        /// Gets or sets a value indicating whether [reg useselectiveboundbook].
+        /// </summary>
+        /// <value><c>true</c> if [reg useselectiveboundbook]; otherwise, <c>false</c>.</value>
+        private static bool RegUseselectiveboundbook
         {
             get => _regUseselectiveboundbook;
             set => _regUseselectiveboundbook = value;
         }
-        public void CreateSubKey(string strValue)
+        /// <summary>
+        /// Creates the sub key.
+        /// </summary>
+        /// <param name="strValue">The string value.</param>
+        /// <param name="errOut">The error out.</param>
+        public static void CreateSubKey(string strValue, out string errOut)
         {
-            Registry.CurrentUser.CreateSubKey(strValue);
+            errOut = "";
+            try
+            {
+                Registry.CurrentUser.CreateSubKey(strValue);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CreateSubKey", e);
+            }
         }
-
-        public void UpDateAppDetails(string productVersion, string productName, string executablePath,string appPath, string logFile, string databasePath, string appDataPath)
+        /// <summary>
+        /// Ups the date application details.
+        /// </summary>
+        /// <param name="productVersion">The product version.</param>
+        /// <param name="productName">Name of the product.</param>
+        /// <param name="executablePath">The executable path.</param>
+        /// <param name="appPath">The application path.</param>
+        /// <param name="logFile">The log file.</param>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="appDataPath">The application data path.</param>
+        /// <param name="errOut">The error out.</param>
+        public static void UpDateAppDetails(string productVersion, string productName, string executablePath,string appPath, string logFile, string databasePath, string appDataPath, out string errOut)
         {
-            string strValue = DefaultRegPath;
-            if (!RegSubKeyExists(strValue))
-                CreateSubKey(strValue);
-            RegistryKey myReg;
-            myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-            myReg.SetValue("Version", productVersion);
-            myReg.SetValue("AppName", productName);
-            myReg.SetValue("AppEXE", executablePath);
-            myReg.SetValue("Path", appPath);
-            myReg.SetValue("LogPath", logFile);
-            myReg.SetValue("DataBase", databasePath);
-            myReg.SetValue("AppDataPath", appDataPath);
-            myReg.Close();
-        }
+            errOut = "";
+            try
+            {
+                string strValue = DefaultRegPath;
+                if (!RegSubKeyExists(strValue, out errOut))
+                    CreateSubKey(strValue, out errOut);
 
-        public bool RegSubKeyExists(string strValue)
+                RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+                myReg.SetValue("Version", productVersion);
+                myReg.SetValue("AppName", productName);
+                myReg.SetValue("AppEXE", executablePath);
+                myReg.SetValue("Path", appPath);
+                myReg.SetValue("LogPath", logFile);
+                myReg.SetValue("DataBase", databasePath);
+                myReg.SetValue("AppDataPath", appDataPath);
+                myReg.Close();
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpDateAppDetails", e);
+            }
+        }
+        /// <summary>
+        /// Regs the sub key exists.
+        /// </summary>
+        /// <param name="strValue">The string value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool RegSubKeyExists(string strValue, out string errOut)
         {
             bool bAns = false;
+            errOut = "";
             try
             {
                 RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-                if (myReg == null)
-                    bAns = false;
-                else
-                    bAns = true;
+                if (myReg != null) bAns = true;
             }
             catch (Exception ex)
             {
-                bAns = false;
+                errOut = ErrorMessage("RegSubKeyExists", ex);
             }
             return bAns;
         }
-
-        public string GetRegSubKeyValue(string strKey, string strValue, string strDefault)
+        /// <summary>
+        /// Gets the reg sub key value.
+        /// </summary>
+        /// <param name="strKey">The string key.</param>
+        /// <param name="strValue">The string value.</param>
+        /// <param name="strDefault">The string default.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        public static string GetRegSubKeyValue(string strKey, string strValue, string strDefault, out string errOut)
         {
-            string sAns = "";
+            string sAns;
+#pragma warning disable 219
             string strMsg = "";
+#pragma warning restore 219
+            errOut = "";
             RegistryKey myReg;
             try
             {
-                if (RegSubKeyExists(strKey))
+                if (RegSubKeyExists(strKey, out errOut))
                 {
                     myReg = Registry.CurrentUser.OpenSubKey(strKey, true);
                     if (myReg.GetValue(strValue).ToString().Length > 0)
@@ -276,7 +492,7 @@ namespace BurnSoft.Applications.MGC.Global
                 }
                 else
                 {
-                    CreateSubKey(strKey);
+                    CreateSubKey(strKey, out errOut);
                     myReg = Registry.CurrentUser.OpenSubKey(strKey, true);
                     myReg.SetValue(strValue, strDefault);
                     sAns = strDefault;
@@ -285,91 +501,141 @@ namespace BurnSoft.Applications.MGC.Global
             catch (Exception ex)
             {
                 sAns = strDefault;
+                errOut = ErrorMessage("GetRegSubKeyValue", ex);
             }
             return sAns;
         }
-
-        public void SetSettingDetails()
+        /// <summary>
+        /// Sets the setting details.
+        /// </summary>
+        public static void SetSettingDetails(out string errOut)
         {
-            if (!SettingsExists())
+            errOut = "";
+            try
             {
-                RegistryKey myReg;
-                string strValue = DefaultRegPath + @"\Settings";
-                myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+                if (!SettingsExists(out errOut))
+                {
+                    string strValue = DefaultRegPath + @"\Settings";
+                    RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
 
-                myReg = Registry.CurrentUser.CreateSubKey(strValue);
-                myReg.SetValue("Successful", RegSuccessful);
-                myReg.SetValue("SetHistListtb", RegSetHistListtb);
-                myReg.SetValue("SetHistListdt", RegSetHistListdt);
-                myReg.SetValue("AlertOnBackUp", RegAlertOnBackUp);
-                myReg.SetValue("TrackHistoryDays", RegTrackHistoryDays);
-                myReg.SetValue("TrackHistory", RegTrackHistory);
-                myReg.SetValue("LastPath", RegLastPath);
-                myReg.SetValue("LastFile", RegLastFile);
-                myReg.SetValue("BackupOnExit", RegBackupOnExit);
-                myReg.SetValue("UseOrgImage", RegUseOrgImage);
-                myReg.SetValue("ViewPetLoads", RegViewPetLoads);
-                myReg.SetValue("IndvReports", RegIndvReports);
-                myReg.SetValue("UseNumberCatOnly", RegUseNumberCatOnly);
-                myReg.SetValue("AUDITAMMO", RegAuditammo);
-                myReg.Close();
+                    myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                    myReg.SetValue("Successful", RegSuccessful);
+                    myReg.SetValue("SetHistListtb", RegSetHistListtb);
+                    myReg.SetValue("SetHistListdt", RegSetHistListdt);
+                    myReg.SetValue("AlertOnBackUp", RegAlertOnBackUp);
+                    myReg.SetValue("TrackHistoryDays", RegTrackHistoryDays);
+                    myReg.SetValue("TrackHistory", RegTrackHistory);
+                    myReg.SetValue("LastPath", RegLastPath);
+                    myReg.SetValue("LastFile", RegLastFile);
+                    myReg.SetValue("BackupOnExit", RegBackupOnExit);
+                    myReg.SetValue("UseOrgImage", RegUseOrgImage);
+                    myReg.SetValue("ViewPetLoads", RegViewPetLoads);
+                    myReg.SetValue("IndvReports", RegIndvReports);
+                    myReg.SetValue("UseNumberCatOnly", RegUseNumberCatOnly);
+                    myReg.SetValue("AUDITAMMO", RegAuditammo);
+                    myReg.Close();
+                }
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetSettingDetails", e);
             }
         }
 
 
-
-        public bool SettingsExists()
+        /// <summary>
+        /// Settingses the exists.
+        /// </summary>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SettingsExists(out string errOut)
         {
             bool bAns = false;
-            RegistryKey myReg;
-            string strValue = DefaultRegPath + @"\Settings";
-            myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-            if (myReg == null)
-                bAns = false;
-            else
-                bAns = true;
+            errOut = "";
+            try
+            {
+                string strValue = DefaultRegPath + @"\Settings";
+                RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+                if (myReg != null) bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SettingsExists", e);
+            }
             return bAns;
         }
 
-
-        public void GetSettings(ref string lastSucBackup, ref bool alertOnBackUp, ref int trackHistoryDays, ref bool trackHistory, ref bool autoBackup, ref bool uoimg, ref bool usePl, ref bool useIPer, ref bool useCcid, ref bool useaa, ref bool useAacid, ref bool useUniqueCustId, ref bool bUseselectiveboundbook)
+        /// <summary>
+        /// Gets the settings.
+        /// </summary>
+        /// <param name="lastSucBackup">The last suc backup.</param>
+        /// <param name="alertOnBackUp">if set to <c>true</c> [alert on back up].</param>
+        /// <param name="trackHistoryDays">The track history days.</param>
+        /// <param name="trackHistory">if set to <c>true</c> [track history].</param>
+        /// <param name="autoBackup">if set to <c>true</c> [automatic backup].</param>
+        /// <param name="uoimg">if set to <c>true</c> [uoimg].</param>
+        /// <param name="usePl">if set to <c>true</c> [use pl].</param>
+        /// <param name="useIPer">if set to <c>true</c> [use i per].</param>
+        /// <param name="useCcid">if set to <c>true</c> [use ccid].</param>
+        /// <param name="useaa">if set to <c>true</c> [useaa].</param>
+        /// <param name="useAacid">if set to <c>true</c> [use aacid].</param>
+        /// <param name="useUniqueCustId">if set to <c>true</c> [use unique customer identifier].</param>
+        /// <param name="bUseselectiveboundbook">if set to <c>true</c> [b useselectiveboundbook].</param>
+        /// <param name="errOut">The error out.</param>
+        public static void GetSettings(out string lastSucBackup, out bool alertOnBackUp, out int trackHistoryDays, out bool trackHistory, out bool autoBackup, out bool uoimg, out bool usePl, out bool useIPer, out bool useCcid, out bool useaa, out bool useAacid, out bool useUniqueCustId, out bool bUseselectiveboundbook, out string errOut)
         {
+            errOut = "";
+            lastSucBackup = "";
+            alertOnBackUp = false;
+            trackHistoryDays = 30;
+            trackHistory = false;
+            autoBackup = false;
+            uoimg = false;
+            usePl = false;
+            useIPer = false;
+            useCcid = false;
+            useaa = false;
+            useAacid = false;
+            useUniqueCustId = false;
+            bUseselectiveboundbook = false;
+
             RegistryKey myReg;
-            string numberFormat;
-            bool useProxy;
-            bool autoUpdate;
+            //string numberFormat;
+            //bool useProxy;
+            //bool autoUpdate;
             string strValue = DefaultRegPath + @"\Settings";
             try
             {
                 myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
                 if (myReg == null)
-                    SetSettingDetails();
+                    SetSettingDetails(out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 if ((myReg != null))
                 {
-                    trackHistoryDays = Convert.ToInt32(GetRegSubKeyValue(strValue, "TrackHistoryDays", RegTrackHistoryDays.ToString())); // CInt(MyReg.GetValue("TrackHistoryDays", ""))
-                    trackHistory = Convert.ToBoolean(GetRegSubKeyValue(strValue, "TrackHistory", RegTrackHistory.ToString()));
-                    numberFormat = Convert.ToString(GetRegSubKeyValue(strValue, "NumberFormat", RegNumberFormat));
-                    autoUpdate = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AutoUpdate", RegAutoUpdate.ToString()));
-                    useProxy = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseProxy", RegUseProxy.ToString()));
-                    lastSucBackup = GetRegSubKeyValue(strValue, "Successful", RegSuccessful);
-                    alertOnBackUp = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AlertOnBackUp", RegAlertOnBackUp.ToString()));
-                    autoBackup = Convert.ToBoolean(GetRegSubKeyValue(strValue, "BackupOnExit", RegBackupOnExit.ToString()));
-                    uoimg = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseOrgImage", RegUseOrgImage.ToString()));
-                    usePl = Convert.ToBoolean(GetRegSubKeyValue(strValue, "ViewPetLoads", RegViewPetLoads.ToString()));
-                    useIPer = Convert.ToBoolean(GetRegSubKeyValue(strValue, "IndvReports", RegIndvReports.ToString()));
-                    useCcid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseNumberCatOnly", RegUseNumberCatOnly.ToString()));
-                    useaa = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AUDITAMMO", RegAuditammo.ToString()));
-                    useAacid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USEAUTOASSIGN", RegUseautoassign.ToString()));
-                    useUniqueCustId = Convert.ToBoolean(GetRegSubKeyValue(strValue, "DISABLEUNIQUECUSTCATID", RegUniquecustcatid.ToString()));
-                    bUseselectiveboundbook = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USESELECTIVEBOUNDBOOK", RegUseselectiveboundbook.ToString()));
+                    trackHistoryDays = Convert.ToInt32(GetRegSubKeyValue(strValue, "TrackHistoryDays", RegTrackHistoryDays.ToString(), out errOut)); // CInt(MyReg.GetValue("TrackHistoryDays", ""))
+                    trackHistory = Convert.ToBoolean(GetRegSubKeyValue(strValue, "TrackHistory", RegTrackHistory.ToString(), out errOut));
+                    //numberFormat = Convert.ToString(GetRegSubKeyValue(strValue, "NumberFormat", RegNumberFormat, out errOut));
+                    //autoUpdate = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AutoUpdate", RegAutoUpdate.ToString(), out errOut));
+                    //useProxy = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseProxy", RegUseProxy.ToString(), out errOut));
+                    lastSucBackup = GetRegSubKeyValue(strValue, "Successful", RegSuccessful, out errOut);
+                    alertOnBackUp = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AlertOnBackUp", RegAlertOnBackUp.ToString(), out errOut));
+                    autoBackup = Convert.ToBoolean(GetRegSubKeyValue(strValue, "BackupOnExit", RegBackupOnExit.ToString(), out errOut));
+                    uoimg = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseOrgImage", RegUseOrgImage.ToString(), out errOut));
+                    usePl = Convert.ToBoolean(GetRegSubKeyValue(strValue, "ViewPetLoads", RegViewPetLoads.ToString(), out errOut));
+                    useIPer = Convert.ToBoolean(GetRegSubKeyValue(strValue, "IndvReports", RegIndvReports.ToString(), out errOut));
+                    useCcid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseNumberCatOnly", RegUseNumberCatOnly.ToString(), out errOut));
+                    useaa = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AUDITAMMO", RegAuditammo.ToString(), out errOut));
+                    useAacid = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USEAUTOASSIGN", RegUseautoassign.ToString(), out errOut));
+                    useUniqueCustId = Convert.ToBoolean(GetRegSubKeyValue(strValue, "DISABLEUNIQUECUSTCATID", RegUniquecustcatid.ToString(), out errOut));
+                    bUseselectiveboundbook = Convert.ToBoolean(GetRegSubKeyValue(strValue, "USESELECTIVEBOUNDBOOK", RegUseselectiveboundbook.ToString(), out errOut));
                 }
                 else
                 {
                     trackHistoryDays = RegTrackHistoryDays;
                     trackHistory = RegTrackHistory;
-                    numberFormat = RegNumberFormat;
-                    autoUpdate = RegAutoUpdate;
-                    useProxy = RegUseProxy;
+                    //numberFormat = RegNumberFormat;
+                    //autoUpdate = RegAutoUpdate;
+                    //useProxy = RegUseProxy;
                     lastSucBackup = RegSuccessful;
                     alertOnBackUp = RegAlertOnBackUp;
                     autoBackup = RegBackupOnExit;
@@ -385,16 +651,34 @@ namespace BurnSoft.Applications.MGC.Global
             }
             catch (Exception ex)
             {
+                errOut = ErrorMessage("GetSettings", ex);
                 //long myErr = ex.Number;
                 //if (myErr == 13)
                 //    SetSettingDetails();
             }
         }
-        public void SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool useProxy, bool alertOnBackUp, bool autoBackup, bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook)
+        /// <summary>
+        /// Saves the settings.
+        /// </summary>
+        /// <param name="numberFormat">The number format.</param>
+        /// <param name="trackHistory">if set to <c>true</c> [track history].</param>
+        /// <param name="trackHistoryDays">The track history days.</param>
+        /// <param name="autoUpdate">if set to <c>true</c> [automatic update].</param>
+        /// <param name="useProxy">if set to <c>true</c> [use proxy].</param>
+        /// <param name="alertOnBackUp">if set to <c>true</c> [alert on back up].</param>
+        /// <param name="autoBackup">if set to <c>true</c> [automatic backup].</param>
+        /// <param name="uoimg">if set to <c>true</c> [uoimg].</param>
+        /// <param name="usePl">if set to <c>true</c> [use pl].</param>
+        /// <param name="useIPer">if set to <c>true</c> [use i per].</param>
+        /// <param name="usenccid">if set to <c>true</c> [usenccid].</param>
+        /// <param name="useaa">if set to <c>true</c> [useaa].</param>
+        /// <param name="useAacid">if set to <c>true</c> [use aacid].</param>
+        /// <param name="useUniqueCustId">if set to <c>true</c> [use unique customer identifier].</param>
+        /// <param name="bUseselectiveboundbook">if set to <c>true</c> [b useselectiveboundbook].</param>
+        public static void SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool useProxy, bool alertOnBackUp, bool autoBackup, bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook)
         {
-            RegistryKey myReg;
             string strValue = DefaultRegPath + @"\Settings";
-            myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+            RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
             if (myReg == null)
                 myReg = Registry.CurrentUser.CreateSubKey(strValue);
             myReg.SetValue("TrackHistoryDays", trackHistoryDays);
@@ -414,50 +698,101 @@ namespace BurnSoft.Applications.MGC.Global
             myReg.SetValue("USESELECTIVEBOUNDBOOK", bUseselectiveboundbook);
             myReg.Close();
         }
-
-        public void SaveLastWorkingDir(string strPath)
+        /// <summary>
+        /// Saves the last working dir.
+        /// </summary>
+        /// <param name="strPath">The string path.</param>
+        /// <param name="errOut">The error out.</param>
+        public static void SaveLastWorkingDir(string strPath, out string errOut)
         {
-            RegistryKey myReg;
-            string strValue = DefaultRegPath + @"\Settings";
-            myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
-            if (myReg == null)
-                myReg = Registry.CurrentUser.CreateSubKey(strValue);
-            myReg.SetValue("LastWorkingPath", strPath);
-            myReg.Close();
+            errOut = "";
+            try
+            {
+                string strValue = DefaultRegPath + @"\Settings";
+                RegistryKey myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
+                if (myReg == null)
+                    myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                myReg.SetValue("LastWorkingPath", strPath);
+                myReg.Close();
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SaveLastWorkingDir", e);
+            }
         }
-
-        public string GetLastWorkingDir()
+        /// <summary>
+        /// Gets the last working dir.
+        /// </summary>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
+        public static string GetLastWorkingDir(out string errOut)
         {
             string sAns = "";
-            RegistryKey myReg;
-            string strValue = DefaultRegPath + @"\Settings";
-            myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
-            if (myReg == null)
+            errOut = "";
+            try
             {
-                myReg = Registry.CurrentUser.CreateSubKey(strValue);
-                myReg.SetValue("LastWorkingPath", "");
+                string strValue = DefaultRegPath + @"\Settings";
+                RegistryKey myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
+                if (myReg == null)
+                {
+                    myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                    myReg.SetValue("LastWorkingPath", "");
+                }
+                sAns = myReg.GetValue("LastWorkingPath", "").ToString();
+                myReg.Close();
             }
-            sAns = myReg.GetValue("LastWorkingPath", "").ToString();
-            myReg.Close();
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetLastWorkingDir", e);
+            }
             return sAns;
         }
-
-        public void SaveFirearmListSort(string configSort)
+        /// <summary>
+        /// Saves the firearm list sort.
+        /// </summary>
+        /// <param name="configSort">The configuration sort.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <exception cref="System.Exception"></exception>
+        public static void SaveFirearmListSort(string configSort, out string errOut)
         {
-            string strValue = DefaultRegPath + @"\Settings";
-            if (!RegSubKeyExists(strValue))
-                CreateSubKey(strValue);
-            RegistryKey myReg;
-            myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-            myReg.SetValue("VIEW_FirearmList", configSort);
-            myReg.Close();
+            errOut = "";
+            try
+            {
+                string strValue = DefaultRegPath + @"\Settings";
+                if (!RegSubKeyExists(strValue, out errOut))
+                    CreateSubKey(strValue, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+                myReg.SetValue("VIEW_FirearmList", configSort);
+                myReg.Close();
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SaveFirearmListSort", e);
+            }
         }
-
-        public string GetViewSettings(string sKey, string sDefault = "")
+        /// <summary>
+        /// Gets the view settings.
+        /// </summary>
+        /// <param name="sKey">The s key.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="sDefault">The s default.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetViewSettings(string sKey,out string errOut, string sDefault = "")
         {
             string sAns = "";
-            string strValue = DefaultRegPath + @"\Settings";
-            sAns = GetRegSubKeyValue(strValue, sKey, sDefault);
+            errOut = "";
+            try
+            {
+                string strValue = DefaultRegPath + @"\Settings";
+                sAns = GetRegSubKeyValue(strValue, sKey, sDefault, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetViewSettings", e);
+            }
             return sAns;
         }
 

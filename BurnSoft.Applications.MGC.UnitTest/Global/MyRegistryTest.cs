@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
 
@@ -65,9 +66,40 @@ namespace BurnSoft.Applications.MGC.UnitTest.Global
 
         }
         [TestMethod]
-        public void TestMethod1()
+        public void GetSettingsTest()
         {
+            string lastSucBackup = "";
+            bool alertOnBackUp = false;
+            int trackHistoryDays = 30;
+            bool trackHistory = false;
+            bool autoBackup = false;
+            bool uoimg = false;
+            bool usePl = false;
+            bool useIPer = false;
+            bool useCcid = false;
+            bool useaa = false;
+            bool useAacid = false;
+            bool useUniqueCustId = false;
+            bool bUseselectiveboundbook = false;
 
+
+            MyRegistry.GetSettings(out lastSucBackup, out alertOnBackUp, out trackHistoryDays, out trackHistory, out autoBackup, out uoimg, out usePl, out useIPer, out useCcid, out useaa, out useAacid, out useUniqueCustId, out bUseselectiveboundbook);
+
+            TestContext.WriteLine($"lastSucBackup: {lastSucBackup}");
+            TestContext.WriteLine($"alertOnBackUp: {alertOnBackUp}");
+            TestContext.WriteLine($"trackHistoryDays: {trackHistoryDays}");
+            TestContext.WriteLine($"trackHistory: {trackHistory}");
+            TestContext.WriteLine($"autoBackup: {autoBackup}");
+            TestContext.WriteLine($"uoimg: {uoimg}");
+            TestContext.WriteLine($"usePl: {usePl}");
+            TestContext.WriteLine($"useIPer: {useIPer}");
+            TestContext.WriteLine($"useCcid: {useCcid}");
+            TestContext.WriteLine($"useaa: {useaa}");
+            TestContext.WriteLine($"useAacid: {useAacid}");
+            TestContext.WriteLine($"useUniqueCustId: {useUniqueCustId}");
+            TestContext.WriteLine($"bUseselectiveboundbook: {bUseselectiveboundbook}");
+
+            General.HasValue(trackHistory.ToString());
         }
     }
 }
