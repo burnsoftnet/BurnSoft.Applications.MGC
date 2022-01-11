@@ -231,7 +231,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)
                 {
-                    dAns = d["Total"] != DBNull.Value ? Convert.ToInt32(d["Total"]) : 0;
+                    dAns = d["Total"] != DBNull.Value ? Convert.ToDouble(d["Total"]) : 0;
                 }
             }
             catch (Exception e)
@@ -259,7 +259,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)
                 {
-                    dAns = d["Total"] != DBNull.Value ? Convert.ToInt32(d["Total"]) : 0;
+                    dAns = d["Total"] != DBNull.Value ? Convert.ToDouble(d["Total"]) : 0;
                 }
             }
             catch (Exception e)
