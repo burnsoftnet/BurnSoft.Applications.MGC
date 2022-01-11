@@ -416,9 +416,10 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="databasePath">The database path.</param>
         /// <param name="appDataPath">The application data path.</param>
         /// <param name="errOut">The error out.</param>
-        public static void UpDateAppDetails(string productVersion, string productName, string executablePath,string appPath, string logFile, string databasePath, string appDataPath, out string errOut)
+        public static bool UpDateAppDetails(string productVersion, string productName, string executablePath,string appPath, string logFile, string databasePath, string appDataPath, out string errOut)
         {
             errOut = "";
+            bool bAns = false;
             try
             {
                 string strValue = DefaultRegPath;
@@ -434,11 +435,14 @@ namespace BurnSoft.Applications.MGC.Global
                 myReg.SetValue("DataBase", databasePath);
                 myReg.SetValue("AppDataPath", appDataPath);
                 myReg.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("UpDateAppDetails", e);
             }
+
+            return bAns;
         }
         /// <summary>
         /// Regs the sub key exists.
@@ -508,9 +512,10 @@ namespace BurnSoft.Applications.MGC.Global
         /// <summary>
         /// Sets the setting details.
         /// </summary>
-        public static void SetSettingDetails(out string errOut)
+        public static bool SetSettingDetails(out string errOut)
         {
             errOut = "";
+            bool bAns = false;
             try
             {
                 if (!SettingsExists(out errOut))
@@ -536,11 +541,14 @@ namespace BurnSoft.Applications.MGC.Global
                     myReg.Close();
                 }
                 if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("SetSettingDetails", e);
             }
+
+            return bAns;
         }
 
 
@@ -657,6 +665,7 @@ namespace BurnSoft.Applications.MGC.Global
                 //    SetSettingDetails();
             }
         }
+
         /// <summary>
         /// Saves the settings.
         /// </summary>
@@ -664,7 +673,6 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="trackHistory">if set to <c>true</c> [track history].</param>
         /// <param name="trackHistoryDays">The track history days.</param>
         /// <param name="autoUpdate">if set to <c>true</c> [automatic update].</param>
-        /// <param name="useProxy">if set to <c>true</c> [use proxy].</param>
         /// <param name="alertOnBackUp">if set to <c>true</c> [alert on back up].</param>
         /// <param name="autoBackup">if set to <c>true</c> [automatic backup].</param>
         /// <param name="uoimg">if set to <c>true</c> [uoimg].</param>
@@ -675,36 +683,49 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="useAacid">if set to <c>true</c> [use aacid].</param>
         /// <param name="useUniqueCustId">if set to <c>true</c> [use unique customer identifier].</param>
         /// <param name="bUseselectiveboundbook">if set to <c>true</c> [b useselectiveboundbook].</param>
-        public static void SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool useProxy, bool alertOnBackUp, bool autoBackup, bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook)
+        /// <param name="errOut"></param>
+        public static bool SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool alertOnBackUp, bool autoBackup, bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook, out string errOut)
         {
-            string strValue = DefaultRegPath + @"\Settings";
-            RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
-            if (myReg == null)
-                myReg = Registry.CurrentUser.CreateSubKey(strValue);
-            myReg.SetValue("TrackHistoryDays", trackHistoryDays);
-            myReg.SetValue("TrackHistory", trackHistory);
-            myReg.SetValue("NumberFormat", numberFormat);
-            myReg.SetValue("AutoUpdate", autoUpdate);
-            myReg.SetValue("UseProxy", useProxy);
-            myReg.SetValue("AlertOnBackUp", alertOnBackUp);
-            myReg.SetValue("BackupOnExit", autoBackup);
-            myReg.SetValue("UseOrgImage", uoimg);
-            myReg.SetValue("ViewPetLoads", usePl);
-            myReg.SetValue("IndvReports", useIPer);
-            myReg.SetValue("UseNumberCatOnly", usenccid);
-            myReg.SetValue("AUDITAMMO", useaa);
-            myReg.SetValue("USEAUTOASSIGN", useAacid);
-            myReg.SetValue("DISABLEUNIQUECUSTCATID", useUniqueCustId);
-            myReg.SetValue("USESELECTIVEBOUNDBOOK", bUseselectiveboundbook);
-            myReg.Close();
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string strValue = DefaultRegPath + @"\Settings";
+                RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
+                if (myReg == null)
+                    myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                myReg.SetValue("TrackHistoryDays", trackHistoryDays);
+                myReg.SetValue("TrackHistory", trackHistory);
+                myReg.SetValue("NumberFormat", numberFormat);
+                myReg.SetValue("AutoUpdate", autoUpdate);
+                myReg.SetValue("AlertOnBackUp", alertOnBackUp);
+                myReg.SetValue("BackupOnExit", autoBackup);
+                myReg.SetValue("UseOrgImage", uoimg);
+                myReg.SetValue("ViewPetLoads", usePl);
+                myReg.SetValue("IndvReports", useIPer);
+                myReg.SetValue("UseNumberCatOnly", usenccid);
+                myReg.SetValue("AUDITAMMO", useaa);
+                myReg.SetValue("USEAUTOASSIGN", useAacid);
+                myReg.SetValue("DISABLEUNIQUECUSTCATID", useUniqueCustId);
+                myReg.SetValue("USESELECTIVEBOUNDBOOK", bUseselectiveboundbook);
+                myReg.Close();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SaveSettings", e);
+            }
+
+            return bAns;
         }
         /// <summary>
         /// Saves the last working dir.
         /// </summary>
         /// <param name="strPath">The string path.</param>
         /// <param name="errOut">The error out.</param>
-        public static void SaveLastWorkingDir(string strPath, out string errOut)
+        public static bool SaveLastWorkingDir(string strPath, out string errOut)
         {
+            bool bAns = false;
             errOut = "";
             try
             {
@@ -714,11 +735,14 @@ namespace BurnSoft.Applications.MGC.Global
                     myReg = Registry.CurrentUser.CreateSubKey(strValue);
                 myReg.SetValue("LastWorkingPath", strPath);
                 myReg.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("SaveLastWorkingDir", e);
             }
+
+            return bAns;
         }
         /// <summary>
         /// Gets the last working dir.
@@ -753,9 +777,10 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="configSort">The configuration sort.</param>
         /// <param name="errOut">The error out.</param>
         /// <exception cref="System.Exception"></exception>
-        public static void SaveFirearmListSort(string configSort, out string errOut)
+        public static bool SaveFirearmListSort(string configSort, out string errOut)
         {
             errOut = "";
+            bool bAns = false;
             try
             {
                 string strValue = DefaultRegPath + @"\Settings";
@@ -765,11 +790,14 @@ namespace BurnSoft.Applications.MGC.Global
                 RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
                 myReg.SetValue("VIEW_FirearmList", configSort);
                 myReg.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("SaveFirearmListSort", e);
             }
+
+            return bAns;
         }
         /// <summary>
         /// Gets the view settings.
