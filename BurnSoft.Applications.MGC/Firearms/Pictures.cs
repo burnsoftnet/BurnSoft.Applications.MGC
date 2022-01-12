@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -184,19 +185,34 @@ namespace BurnSoft.Applications.MGC.Firearms
                 mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
                 stT.Close();
                 // --End Function to convert picture to thumbnail for database format--
-               
+
                 Connection myConn = new Connection();
                 myConn.Open(Database.ConnectionString(databasePath, out errOut));
                 Recordset rs = new Recordset();
-                rs.Open("Gun_Collection_Pictures", myConn, CursorTypeEnum.adOpenStatic , LockTypeEnum.adLockPessimistic);
+                rs.Open("Gun_Collection_Pictures", myConn, CursorTypeEnum.adOpenStatic, LockTypeEnum.adLockPessimistic);
                 rs.AddNew();
-                rs.Fields["CID"].Value = id; 
+                rs.Fields["CID"].Value = id;
                 rs.Fields["PICTURE"].AppendChunk(buffer);
                 rs.Fields["THUMB"].AppendChunk(bufferT);
                 rs.Fields["ISMAIN"].Value = 1;
                 rs.Fields["sync_lastupdate"].Value = DateTime.Now;
                 rs.Update();
                 rs.Close();
+
+                //OleDbConnection myConn = new OleDbConnection(Database.ConnectionString(databasePath, out errOut));
+
+                //string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate VALUES({id},@Image,@Thumb,{1},Now());";
+                //OleDbCommand cmd = new OleDbCommand();
+                //OleDbParameter param1 = new OleDbParameter();
+                //param1.ParameterName = "Image";
+                //param1.Value = buffer;
+                //cmd.Parameters.Add(param1);
+                //OleDbParameter param2 = new OleDbParameter();
+                //param2.ParameterName = "Thumb";
+                //param2.Value = buffer;
+                //cmd.Parameters.Add(param2);
+                //cmd.Connection = myConn;
+                //cmd.ExecuteScalar();
                 bAns = true;
             }
             catch (Exception e)
@@ -247,23 +263,41 @@ namespace BurnSoft.Applications.MGC.Firearms
                 mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
                 stT.Close();
 
-                Connection conn = new Connection();
-                conn.Open(Database.ConnectionString(databasePath, out errOut));
-                Recordset rs = new Recordset();
-                //TODO: #7 Finish Importing the picture function and figure out why the ADODB is glitching in c# or get the right format
-                rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
-                //rs.Open("Gun_Collection_Pictures", conn, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockBatchOptimistic, 0);
-                rs.AddNew();
-                rs.Fields["CID"].Value = gunId;
-                rs.Fields["PICTURE"].AppendChunk(buffer);
-                rs.Fields["THUMB"].AppendChunk(bufferT);
-                rs.Fields["ISMAIN"].Value = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
+                //Connection conn = new Connection();
+                //conn.Open(Database.ConnectionString(databasePath, out errOut));
+                //Recordset rs = new Recordset();
+                ////TODO: #7 Finish Importing the picture function and figure out why the ADODB is glitching in c# or get the right format
+                //rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
+                ////rs.Open("Gun_Collection_Pictures", conn, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockBatchOptimistic, 0);
+                //rs.AddNew();
+                //rs.Fields["CID"].Value = gunId;
+                //rs.Fields["PICTURE"].AppendChunk(buffer);
+                //rs.Fields["THUMB"].AppendChunk(bufferT);
+                //rs.Fields["ISMAIN"].Value = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
 
-                rs.Fields["pd_name"].Value = name;
-                rs.Fields["pd_note"].Value = notes;
-                rs.Fields["sync_lastupdate"].Value = DateTime.Now;
-                rs.Update();
-                rs.Close();
+                //rs.Fields["pd_name"].Value = name;
+                //rs.Fields["pd_note"].Value = notes;
+                //rs.Fields["sync_lastupdate"].Value = DateTime.Now;
+                //rs.Update();
+                //rs.Close();
+
+                OleDbConnection myConn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
+
+                int iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
+                string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) VALUES({gunId},@Image,@Thumb,{iMain},Now()),'{name}','{notes}')";
+                OleDbCommand cmd = new OleDbCommand(sql);
+                OleDbParameter param1 = new OleDbParameter();
+                param1.ParameterName = "Image";
+                param1.Value = buffer;
+                cmd.Parameters.Add(param1);
+                OleDbParameter param2 = new OleDbParameter();
+                param2.ParameterName = "Thumb";
+                param2.Value = bufferT;
+                cmd.Parameters.Add(param2);
+                myConn.Open();
+                cmd.Connection = myConn;
+                cmd.ExecuteScalar();
+
                 bAns = true;
             }
             catch (Exception e)
