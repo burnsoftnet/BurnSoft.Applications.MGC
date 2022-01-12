@@ -608,9 +608,7 @@ namespace BurnSoft.Applications.MGC.Global
             bUseselectiveboundbook = false;
 
             RegistryKey myReg;
-            //string numberFormat;
-            //bool useProxy;
-            //bool autoUpdate;
+
             string strValue = DefaultRegPath + @"\Settings";
             try
             {
@@ -620,11 +618,8 @@ namespace BurnSoft.Applications.MGC.Global
                 if (errOut.Length > 0) throw new Exception(errOut);
                 if ((myReg != null))
                 {
-                    trackHistoryDays = Convert.ToInt32(GetRegSubKeyValue(strValue, "TrackHistoryDays", RegTrackHistoryDays.ToString(), out errOut)); // CInt(MyReg.GetValue("TrackHistoryDays", ""))
+                    trackHistoryDays = Convert.ToInt32(GetRegSubKeyValue(strValue, "TrackHistoryDays", RegTrackHistoryDays.ToString(), out errOut)); 
                     trackHistory = Convert.ToBoolean(GetRegSubKeyValue(strValue, "TrackHistory", RegTrackHistory.ToString(), out errOut));
-                    //numberFormat = Convert.ToString(GetRegSubKeyValue(strValue, "NumberFormat", RegNumberFormat, out errOut));
-                    //autoUpdate = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AutoUpdate", RegAutoUpdate.ToString(), out errOut));
-                    //useProxy = Convert.ToBoolean(GetRegSubKeyValue(strValue, "UseProxy", RegUseProxy.ToString(), out errOut));
                     lastSucBackup = GetRegSubKeyValue(strValue, "Successful", RegSuccessful, out errOut);
                     alertOnBackUp = Convert.ToBoolean(GetRegSubKeyValue(strValue, "AlertOnBackUp", RegAlertOnBackUp.ToString(), out errOut));
                     autoBackup = Convert.ToBoolean(GetRegSubKeyValue(strValue, "BackupOnExit", RegBackupOnExit.ToString(), out errOut));
@@ -641,9 +636,6 @@ namespace BurnSoft.Applications.MGC.Global
                 {
                     trackHistoryDays = RegTrackHistoryDays;
                     trackHistory = RegTrackHistory;
-                    //numberFormat = RegNumberFormat;
-                    //autoUpdate = RegAutoUpdate;
-                    //useProxy = RegUseProxy;
                     lastSucBackup = RegSuccessful;
                     alertOnBackUp = RegAlertOnBackUp;
                     autoBackup = RegBackupOnExit;
