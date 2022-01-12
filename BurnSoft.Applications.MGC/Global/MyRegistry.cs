@@ -684,7 +684,8 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="useUniqueCustId">if set to <c>true</c> [use unique customer identifier].</param>
         /// <param name="bUseselectiveboundbook">if set to <c>true</c> [b useselectiveboundbook].</param>
         /// <param name="errOut"></param>
-        public static bool SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool alertOnBackUp, bool autoBackup, bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook, out string errOut)
+        public static bool SaveSettings(string numberFormat, bool trackHistory, int trackHistoryDays, bool autoUpdate, bool alertOnBackUp, bool autoBackup, 
+            bool uoimg, bool usePl, bool useIPer, bool usenccid, bool useaa, bool useAacid, bool useUniqueCustId, bool bUseselectiveboundbook, out string errOut)
         {
             bool bAns = false;
             errOut = "";
