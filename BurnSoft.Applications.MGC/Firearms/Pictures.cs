@@ -147,17 +147,18 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
+        /// <param name="applicationPath"></param>
         /// <param name="defaultPic"></param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool AddDefaultPic(string databasePath, long id, string defaultPic, out string errOut)
+        public static bool AddDefaultPic(string databasePath, long id,string applicationPath, string defaultPic, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                string sFileName = Path.Combine(Directory.GetCurrentDirectory(), defaultPic);
-                string sThumbName = Path.Combine(Directory.GetCurrentDirectory(), @"\mgc_thumb.jpg");
+                string sFileName = Path.Combine(applicationPath, defaultPic);
+                string sThumbName = Path.Combine(applicationPath, @"\mgc_thumb.jpg");
                 // ---Start Function to convert picture to database format-----
                 FileStream st = new FileStream(sFileName, FileMode.Open, FileAccess.Read);
                 BinaryReader mbr = new BinaryReader(st);
