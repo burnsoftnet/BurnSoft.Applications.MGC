@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using BurnSoft.Applications.MGC.Firearms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Types;
@@ -50,7 +51,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod]
         public void HasDefaultPictureTestNoAdd()
         {
-            bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, "", out _errOut);
+            bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, Path.GetFullPath(_databasePath), "", out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -71,6 +72,17 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             long value = Pictures.CountPics(_databasePath, _gunId, out _errOut);
             TestContext.WriteLine($"Number of pics in collection: {value}");
             General.HasTrueValue(value > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method SaveTest.
+        /// </summary>
+        [TestMethod]
+        public void SaveTest()
+        {
+            string picPath = "D:\\ProductPics\\MyEssentialOilRemedies.jpg";
+            bool value = Pictures.Save(_databasePath, picPath, AppDomain.CurrentDomain.BaseDirectory, _gunId, "test",
+                "test", out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Prints the list.

@@ -5,6 +5,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using ADODB;
+//using ADODB;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
@@ -251,6 +252,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 Recordset rs = new Recordset();
                 //TODO: #7 Finish Importing the picture function and figure out why the ADODB is glitching in c# or get the right format
                 rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
+                //rs.Open("Gun_Collection_Pictures", conn, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockBatchOptimistic, 0);
                 rs.AddNew();
                 rs.Fields["CID"].Value = gunId;
                 rs.Fields["PICTURE"].AppendChunk(buffer);
