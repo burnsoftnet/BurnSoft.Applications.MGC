@@ -97,11 +97,12 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>
+        /// <param name="applicationPath"></param>
         /// <param name="defaultPic"></param>
         /// <param name="errOut">The error out.</param>
         /// <param name="addPic">if set to <c>true</c> [add pic].</param>
         /// <returns><c>true</c> if [has default picture] [the specified database path]; otherwise, <c>false</c>.</returns>
-        public static bool HasDefaultPicture(string databasePath, long id, string defaultPic,out string errOut, bool addPic = false)
+        public static bool HasDefaultPicture(string databasePath, long id, string applicationPath, string defaultPic,out string errOut, bool addPic = false)
         {
             bool bAns = false;
             errOut = @"";
@@ -109,7 +110,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 string sql = $"SELECT * from Gun_Collection_Pictures where CID={id} and IsMain=1";
                 bAns = Database.DataExists(databasePath, sql, out errOut);
-                if (!bAns && addPic) AddDefaultPic(databasePath, id, defaultPic, out errOut);
+                if (!bAns && addPic) AddDefaultPic(databasePath, id, applicationPath, defaultPic, out errOut);
             }
             catch (Exception e)
             {
