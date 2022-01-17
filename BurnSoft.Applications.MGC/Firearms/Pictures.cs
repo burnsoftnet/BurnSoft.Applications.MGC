@@ -281,22 +281,30 @@ namespace BurnSoft.Applications.MGC.Firearms
                 //rs.Update();
                 //rs.Close();
 
+
                 OleDbConnection myConn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
 
                 int iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
-                string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) VALUES({gunId},@Image,@Thumb,{iMain},Now()),'{name}','{notes}')";
+                string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) " +
+                             $"VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now()),@pd_name,@pd_note)";
                 OleDbCommand cmd = new OleDbCommand(sql);
-                OleDbParameter param1 = new OleDbParameter();
-                param1.ParameterName = "Image";
-                param1.Value = buffer;
-                cmd.Parameters.Add(param1);
-                OleDbParameter param2 = new OleDbParameter();
-                param2.ParameterName = "Thumb";
-                param2.Value = bufferT;
-                cmd.Parameters.Add(param2);
+                //OleDbParameter param1 = new OleDbParameter();
+                //param1.ParameterName = "Image";
+                //param1.Value = buffer;
+                cmd.Parameters.AddWithValue("CID", gunId);
+                cmd.Parameters.AddWithValue("PICTURE", buffer);
+                cmd.Parameters.AddWithValue("THUMB", bufferT);
+                cmd.Parameters.AddWithValue("ISMAIN", iMain);
+                //cmd.Parameters.AddWithValue("sync_lastupdate", "Now()");
+                cmd.Parameters.AddWithValue("pd_name", name);
+                cmd.Parameters.AddWithValue("pd_note", notes);
+                //OleDbParameter param2 = new OleDbParameter();
+                //param2.ParameterName = "Thumb";
+                //param2.Value = bufferT;
+                //cmd.Parameters.Add(param2);
                 myConn.Open();
                 cmd.Connection = myConn;
-                cmd.ExecuteScalar();
+                cmd.ExecuteNonQuery();
 
                 bAns = true;
             }
