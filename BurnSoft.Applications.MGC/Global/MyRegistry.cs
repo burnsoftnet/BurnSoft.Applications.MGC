@@ -531,9 +531,10 @@ namespace BurnSoft.Applications.MGC.Global
                     RegistryKey myReg = Registry.CurrentUser.OpenSubKey(strValue, true);
 
                     myReg = Registry.CurrentUser.CreateSubKey(strValue);
+
                     myReg.SetValue("Successful", RegSuccessful);
-                    myReg.SetValue("SetHistListtb", RegSetHistListtb);
-                    myReg.SetValue("SetHistListdt", RegSetHistListdt);
+                    myReg.SetValue("SetHistListtb", RegSetHistListtb ?? "");
+                    myReg.SetValue("SetHistListdt", RegSetHistListdt ?? "");
                     myReg.SetValue("AlertOnBackUp", RegAlertOnBackUp);
                     myReg.SetValue("TrackHistoryDays", RegTrackHistoryDays);
                     myReg.SetValue("TrackHistory", RegTrackHistory);
