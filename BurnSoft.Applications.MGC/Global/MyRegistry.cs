@@ -486,6 +486,13 @@ namespace BurnSoft.Applications.MGC.Global
                 if (RegSubKeyExists(strKey, out errOut))
                 {
                     myReg = Registry.CurrentUser.OpenSubKey(strKey, true);
+
+                    var checkValueExists = myReg.GetValue(strValue);
+                    if (checkValueExists == null)
+                    {
+                        myReg.SetValue(strValue, strDefault);
+                        sAns = strDefault;
+                    }
                     if (myReg.GetValue(strValue).ToString().Length > 0)
                         sAns = myReg.GetValue(strValue).ToString();
                     else
