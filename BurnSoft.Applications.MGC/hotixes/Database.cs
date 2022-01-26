@@ -87,50 +87,57 @@ namespace BurnSoft.Applications.MGC.hotixes
             return bAns;
         }
         /// <summary>
-        /// Adds the password.
+        /// Class Security.
         /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool AddPassword(string databasePath, out string errOut)
+        public class Security
         {
-            errOut = "";
-            bool bAns = false;
-            try
+            /// <summary>
+            /// Adds the password.
+            /// </summary>
+            /// <param name="databasePath">The database path.</param>
+            /// <param name="errOut">The error out.</param>
+            /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            /// <exception cref="System.Exception"></exception>
+            public static bool AddPassword(string databasePath, out string errOut)
             {
-                string sql = $"ALTER DATABASE PASSWORD {MGC.Database.DbPassword} NULL";
-                if (!ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
-                bAns = true;
+                errOut = "";
+                bool bAns = false;
+                try
+                {
+                    string sql = $"ALTER DATABASE PASSWORD {MGC.Database.DbPassword} NULL";
+                    if (!ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = ErrorMessage("AddPassword", e);
+                }
+                return bAns;
             }
-            catch (Exception e)
+            /// <summary>
+            /// Removes the password.
+            /// </summary>
+            /// <param name="databasePath">The database path.</param>
+            /// <param name="errOut">The error out.</param>
+            /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            /// <exception cref="System.Exception"></exception>
+            public static bool RemovePassword(string databasePath, out string errOut)
             {
-                errOut = ErrorMessage("AddPassword", e);
+                errOut = "";
+                bool bAns = false;
+                try
+                {
+                    string sql = $"ALTER DATABASE PASSWORD NULL {MGC.Database.DbPassword}";
+                    if (!ExecuteSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = ErrorMessage("RemovePassword", e);
+                }
+                return bAns;
             }
-            return bAns;
         }
-        /// <summary>
-        /// Removes the password.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool RemovePassword(string databasePath, out string errOut)
-        {
-            errOut = "";
-            bool bAns = false;
-            try
-            {
-                string sql = $"ALTER DATABASE PASSWORD NULL {MGC.Database.DbPassword}";
-                if (!ExecuteSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
-                bAns = true;
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("RemovePassword", e);
-            }
-            return bAns;
-        }
+        
     }
 }
