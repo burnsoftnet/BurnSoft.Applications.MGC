@@ -52,7 +52,23 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion
+        #endregion        
+
+        /// <summary>
+        /// Databases the connection string.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns>System.String.</returns>
+        internal static string DatabaseConnectionString(string databasePath, bool usePassword = false)
+        {
+            OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
+            builder.ConnectionString = $"Data Source={databasePath}";
+            builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
+            if (usePassword) builder.Add("Jet OLEDB:Database Password", MGC.Database.DbPassword);
+            builder.Add("Mode", 12);
+            return builder.ToString();
+        }
         //End Snippet        
         /// <summary>
         /// Executes the SQL.
@@ -68,14 +84,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             bool bAns = false;
             try
             {
-                OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
-                builder.ConnectionString = $"Data Source={databasePath}";
-                builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
-                if (usePassword)  builder.Add("Jet OLEDB:Database Password", MGC.Database.DbPassword);
-                builder.Add("Mode", 12);
-
-                OleDbConnection conn = new OleDbConnection(builder.ToString());
-                
+                OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                 conn.Open();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
                 cmd.ExecuteNonQuery();
