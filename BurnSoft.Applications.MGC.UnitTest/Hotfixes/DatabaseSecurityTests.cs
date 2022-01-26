@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Universal;
@@ -40,14 +42,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod]
         public void RemovePasswordTest()
         {
-            bool value = hotixes.Database.Security.RemovePassword(_databasePath, out _errOut);
+            bool value = hotixes.Database.Security.RemovePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
 
         [TestMethod]
         public void AddPasswordTest()
         {
-            bool value = hotixes.Database.Security.AddPassword(_databasePath, out _errOut);
+            bool value = hotixes.Database.Security.AddPassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
     }

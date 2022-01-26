@@ -1,5 +1,5 @@
 ﻿using System;
-using ADODB;
+using System.Data.OleDb;
 
 // ReSharper disable UnusedMember.Local
 
@@ -68,17 +68,20 @@ namespace BurnSoft.Applications.MGC.hotixes
             bool bAns = false;
             try
             {
-                Connection conn = new Connection();
-                conn.Provider = "Microsoft.Jet.OLEDB.4.0";
-                conn.ConnectionString = $"Data Source={databasePath}";
-                if (usePassword)
-                {
-                    conn.Properties["Jet OLEDB:Database Password"].Value = MGC.Database.DbPassword;
-                }
-                conn.Mode = ConnectModeEnum.adModeShareExclusive;
+                OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
+                builder.ConnectionString = $"Data Source={databasePath}";
+                builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
+                if (usePassword)  builder.Add("Jet OLEDB:Database Password", MGC.Database.DbPassword);
+                builder.Add("Mode", 12);
+
+                OleDbConnection conn = new OleDbConnection(builder.ToString());
+                
                 conn.Open();
-                conn.Execute(sql, out var rs);
+                OleDbCommand cmd = new OleDbCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+
                 conn.Close();
+                bAns = true;
             }
             catch (Exception e)
             {
