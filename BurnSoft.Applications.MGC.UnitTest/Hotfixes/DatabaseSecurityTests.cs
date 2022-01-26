@@ -52,5 +52,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
             bool value = hotixes.Database.Security.AddPassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod]
+        public void ChangePasswordTest()
+        {
+            bool value = hotixes.Database.Security.ChangePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }

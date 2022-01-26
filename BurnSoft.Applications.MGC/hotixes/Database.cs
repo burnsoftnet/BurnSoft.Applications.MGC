@@ -140,6 +140,29 @@ namespace BurnSoft.Applications.MGC.hotixes
                 }
                 return bAns;
             }
+            /// <summary>
+            /// Changes the password.
+            /// </summary>
+            /// <param name="databasePath">The database path.</param>
+            /// <param name="errOut">The error out.</param>
+            /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            /// <exception cref="System.Exception"></exception>
+            /// <exception cref="System.Exception"></exception>
+            public static bool ChangePassword(string databasePath, out string errOut)
+            {
+                bool bAns = false;
+                try
+                {
+                    if (!RemovePassword(databasePath, out errOut)) throw new Exception(errOut);
+                    if (!AddPassword(databasePath, out errOut)) throw new Exception(errOut);
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = ErrorMessage("ChangePassword", e);
+                }
+                return bAns;
+            }
         }
         
     }
