@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Data.OleDb;
 
 // ReSharper disable UnusedMember.Local
@@ -94,7 +95,35 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("ExecuteSql", e);
+                var w32ex = e as Win32Exception;
+                if (w32ex == null)
+                {
+                    w32ex = e.InnerException as Win32Exception;
+                }
+
+                int code = 0;
+                if (w32ex != null)
+                {
+                    code = w32ex.ErrorCode;
+                    // do stuff
+                }
+
+                switch (code)
+                {
+                    case -2147217887:
+                        errOut = $"{ErrorMessage("ExecuteSql", e)}.  {Environment.NewLine} Field Already Exists in Table{Environment.NewLine}SQL - {sql}";
+                        break;
+                    case -2147217900:
+                        errOut = $"{ErrorMessage("ExecuteSql", e)}.  {Environment.NewLine} Table Already Exists{Environment.NewLine}SQL - {sql}";
+                        break;
+                    case -2147467259:
+                        errOut = $"{ErrorMessage("ExecuteSql", e)}.  {Environment.NewLine} Password invalid or doesn't exist.{Environment.NewLine}SQL - {sql}";
+                        break;
+                    default:
+                        errOut = $"{ErrorMessage("ExecuteSql", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                        break;
+                }
+                //errOut = ErrorMessage("ExecuteSql", e);
             }
             return bAns;
         }
