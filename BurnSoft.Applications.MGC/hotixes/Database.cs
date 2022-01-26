@@ -60,8 +60,9 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <param name="databasePath">The database path.</param>
         /// <param name="sql">The SQL.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        internal static bool ExecuteSql(string databasePath,string sql, out string errOut)
+        internal static bool ExecuteSql(string databasePath,string sql, out string errOut, bool usePassword = false )
         {
             errOut = "";
             bool bAns = false;
@@ -70,6 +71,10 @@ namespace BurnSoft.Applications.MGC.hotixes
                 Connection conn = new Connection();
                 conn.Provider = "Microsoft.Jet.OLEDB.4.0";
                 conn.ConnectionString = $"Data Source={databasePath}";
+                if (usePassword)
+                {
+                    conn.Properties["Jet OLEDB:Database Password"].Value = MGC.Database.DbPassword;
+                }
                 conn.Mode = ConnectModeEnum.adModeShareExclusive;
                 conn.Open();
                 conn.Execute(sql, out var rs);
@@ -101,6 +106,29 @@ namespace BurnSoft.Applications.MGC.hotixes
             catch (Exception e)
             {
                 errOut = ErrorMessage("AddPassword", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Removes the password.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool RemovePassword(string databasePath, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                string sql = $"ALTER DATABASE PASSWORD NULL {MGC.Database.DbPassword}";
+                if (!ExecuteSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("RemovePassword", e);
             }
             return bAns;
         }
