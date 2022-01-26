@@ -53,8 +53,14 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion
-        //End Snippet
-
+        //End Snippet        
+        /// <summary>
+        /// Executes the SQL.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         internal static bool ExecuteSql(string databasePath,string sql, out string errOut)
         {
             errOut = "";
@@ -75,7 +81,13 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Adds the password.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool AddPassword(string databasePath, out string errOut)
         {
             errOut = "";

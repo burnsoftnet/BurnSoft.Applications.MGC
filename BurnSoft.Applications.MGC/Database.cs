@@ -10,6 +10,9 @@ namespace BurnSoft.Applications.MGC
     /// </summary>
     public class Database
     {
+        /// <summary>
+        /// The database password
+        /// </summary>
         internal const string DbPassword = "14un0t2n0";
         #region "Exception Error Handling"        
         /// <summary>
