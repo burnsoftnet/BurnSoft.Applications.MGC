@@ -202,11 +202,24 @@ namespace BurnSoft.Applications.MGC.hotixes
                 return bAns;
             }
         }
-
+        /// <summary>
+        /// Class Management.
+        /// </summary>
         public class Management
         {
+            /// <summary>
+            /// Class Tables.
+            /// </summary>
             public class Tables
             {
+                /// <summary>
+                /// Drops the specified table from the database.
+                /// </summary>
+                /// <param name="databasePath">The database path.</param>
+                /// <param name="table">The table.</param>
+                /// <param name="errOut">The error out.</param>
+                /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+                /// <exception cref="System.Exception"></exception>
                 public static bool Drop(string databasePath, string table,out string errOut)
                 {
                     bool bAns = false;
@@ -223,8 +236,21 @@ namespace BurnSoft.Applications.MGC.hotixes
                     }
                     return bAns;
                 }
+                /// <summary>
+                /// Class Columns.
+                /// </summary>
                 public class Columns
                 {
+                    /// <summary>
+                    /// Adds the specified column to the table
+                    /// </summary>
+                    /// <param name="databasePath">The database path.</param>
+                    /// <param name="name">The name.</param>
+                    /// <param name="table">The table.</param>
+                    /// <param name="type">The type.</param>
+                    /// <param name="errOut">The error out.</param>
+                    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+                    /// <exception cref="System.Exception"></exception>
                     public static bool Add(string databasePath, string name, string table, string type,
                         out string errOut)
                     {
@@ -242,7 +268,17 @@ namespace BurnSoft.Applications.MGC.hotixes
                         }
                         return bAns;
                     }
-
+                    /// <summary>
+                    /// Adds the specified column to the table
+                    /// </summary>
+                    /// <param name="databasePath">The database path.</param>
+                    /// <param name="name">The name.</param>
+                    /// <param name="table">The table.</param>
+                    /// <param name="type">The type.</param>
+                    /// <param name="defaultValue">The default value.</param>
+                    /// <param name="errOut">The error out.</param>
+                    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+                    /// <exception cref="System.Exception"></exception>
                     public static bool Add(string databasePath, string name, string table, string type, string defaultValue,
                         out string errOut)
                     {
@@ -260,6 +296,16 @@ namespace BurnSoft.Applications.MGC.hotixes
                         }
                         return bAns;
                     }
+                    /// <summary>
+                    /// Alters the specified column to the table
+                    /// </summary>
+                    /// <param name="databasePath">The database path.</param>
+                    /// <param name="name">The name.</param>
+                    /// <param name="table">The table.</param>
+                    /// <param name="type">The type.</param>
+                    /// <param name="errOut">The error out.</param>
+                    /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+                    /// <exception cref="System.Exception"></exception>
                     public static bool Alter(string databasePath, string name, string table, string type,
                         out string errOut)
                     {
@@ -280,8 +326,19 @@ namespace BurnSoft.Applications.MGC.hotixes
 
                 }
             }
+            /// <summary>
+            /// Class Views.
+            /// </summary>
             public class Views
             {
+                /// <summary>
+                /// Drops the specified view from the database
+                /// </summary>
+                /// <param name="databasePath">The database path.</param>
+                /// <param name="name">The name.</param>
+                /// <param name="errOut">The error out.</param>
+                /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+                /// <exception cref="System.Exception"></exception>
                 public static bool Drop(string databasePath, string name, out string errOut)
                 {
                     bool bAns = false;
@@ -298,6 +355,15 @@ namespace BurnSoft.Applications.MGC.hotixes
                     }
                     return bAns;
                 }
+                /// <summary>
+                /// Creates  the specified view from the database
+                /// </summary>
+                /// <param name="databasePath">The database path.</param>
+                /// <param name="name">The name.</param>
+                /// <param name="sql">The SQL.</param>
+                /// <param name="errOut">The error out.</param>
+                /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+                /// <exception cref="System.Exception"></exception>
                 public static bool Create(string databasePath, string name, string sql, out string errOut)
                 {
                     bool bAns = false;
@@ -314,6 +380,15 @@ namespace BurnSoft.Applications.MGC.hotixes
                     }
                     return bAns;
                 }
+                /// <summary>
+                /// Alters the specified view from the database
+                /// </summary>
+                /// <param name="databasePath">The database path.</param>
+                /// <param name="name">The name.</param>
+                /// <param name="sql">The SQL.</param>
+                /// <param name="errOut">The error out.</param>
+                /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+                /// <exception cref="System.Exception"></exception>
                 public static bool Alter(string databasePath, string name, string sql, out string errOut)
                 {
                     bool bAns = false;
