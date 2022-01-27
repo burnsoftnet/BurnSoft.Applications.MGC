@@ -202,6 +202,61 @@ namespace BurnSoft.Applications.MGC.hotixes
                 return bAns;
             }
         }
-        
+
+        public class Management
+        {
+            public static bool AddColumn(string databasePath, string name, string table, string type,
+                out string errOut)
+            {
+                bool bAns = false;
+                errOut = "";
+                try
+                {
+                    string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type};";
+                    if (ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = ErrorMessage("AddColumn", e);
+                }
+                return bAns;
+            }
+
+            public static bool AddColumn(string databasePath, string name, string table, string type, string defaultValue,
+                out string errOut)
+            {
+                bool bAns = false;
+                errOut = "";
+                try
+                {
+                    string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} [\"{defaultValue}\"];";
+                    if (ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = ErrorMessage("AddColumn", e);
+                }
+                return bAns;
+            }
+
+            public static bool DropView(string databasePath, string name, out string errOut)
+            {
+                bool bAns = false;
+                errOut = "";
+                try
+                {
+                    string sql = $"DROP VIEW  {name};";
+                    if (ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = ErrorMessage("DropView", e);
+                }
+                return bAns;
+            }
+        }
     }
 }
