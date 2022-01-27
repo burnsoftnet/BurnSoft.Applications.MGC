@@ -1,6 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Data.OleDb;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable ConvertIfStatementToNullCoalescingExpression
+// ReSharper disable UseObjectOrCollectionInitializer
 
 // ReSharper disable UnusedMember.Local
 
@@ -95,16 +98,16 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             catch (Exception e)
             {
-                var w32ex = e as Win32Exception;
-                if (w32ex == null)
+                var w32Ex = e as Win32Exception;
+                if (w32Ex == null)
                 {
-                    w32ex = e.InnerException as Win32Exception;
+                    w32Ex = e.InnerException as Win32Exception;
                 }
 
                 int code = 0;
-                if (w32ex != null)
+                if (w32Ex != null)
                 {
-                    code = w32ex.ErrorCode;
+                    code = w32Ex.ErrorCode;
                     // do stuff
                 }
 
