@@ -74,7 +74,15 @@ namespace BurnSoft.Applications.MGC.hotixes
             builder.Add("Mode", 12);
             return builder.ToString();
         }
-
+        /// <summary>
+        /// Determines whether the specified database path has data.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="fromFunction">From function.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if the specified database path has data; otherwise, <c>false</c>.</returns>
         internal static bool HasData(string databasePath, string sql, string fromFunction, out string errOut, bool usePassword = true)
         {
             errOut = "";
@@ -98,18 +106,46 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Values the does exist.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool ValueDoesExist(string databasePath, string table, string column, string value, out string errOut, bool usePassword = true)
         {
             string sql = $"SELECT * from {table} where {column}='{value}'";
             return HasData(databasePath, sql, "ValueDoesExist", out errOut, usePassword);
         }
+        /// <summary>
+        /// Values the does exist.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool ValueDoesExist(string databasePath, string table, string column, int value, out string errOut, bool usePassword = true)
         {
             string sql = $"SELECT * from {table} where {column}={value}";
             return HasData(databasePath, sql, "ValueDoesExist", out errOut, usePassword);
         }
-
+        /// <summary>
+        /// Values the does exist.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool ValueDoesExist(string databasePath, string table, string column, double value, out string errOut, bool usePassword = true)
         {
             string sql = $"SELECT * from {table} where {column}={value}";
