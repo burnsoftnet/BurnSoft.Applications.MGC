@@ -159,7 +159,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <param name="errOut">The error out.</param>
         /// <param name="usePassword"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        internal static bool ExecuteSql(string databasePath,string sql, out string errOut, bool usePassword = false )
+        internal static bool RunSql(string databasePath,string sql, out string errOut, bool usePassword = false )
         {
             errOut = "";
             bool bAns = false;
@@ -191,19 +191,19 @@ namespace BurnSoft.Applications.MGC.hotixes
                 switch (code)
                 {
                     case -2147217887:
-                        errOut = $"{ErrorMessage("ExecuteSql", e)}.  {Environment.NewLine} Field Already Exists in Table{Environment.NewLine}SQL - {sql}";
+                        errOut = $"{ErrorMessage("RunSql", e)}.  {Environment.NewLine} Field Already Exists in Table{Environment.NewLine}SQL - {sql}";
                         break;
                     case -2147217900:
-                        errOut = $"{ErrorMessage("ExecuteSql", e)}.  {Environment.NewLine} Table Already Exists{Environment.NewLine}SQL - {sql}";
+                        errOut = $"{ErrorMessage("RunSql", e)}.  {Environment.NewLine} Table Already Exists{Environment.NewLine}SQL - {sql}";
                         break;
                     case -2147467259:
-                        errOut = $"{ErrorMessage("ExecuteSql", e)}.  {Environment.NewLine} Password invalid or doesn't exist.{Environment.NewLine}SQL - {sql}";
+                        errOut = $"{ErrorMessage("RunSql", e)}.  {Environment.NewLine} Password invalid or doesn't exist.{Environment.NewLine}SQL - {sql}";
                         break;
                     default:
-                        errOut = $"{ErrorMessage("ExecuteSql", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                        errOut = $"{ErrorMessage("RunSql", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
                         break;
                 }
-                //errOut = ErrorMessage("ExecuteSql", e);
+                //errOut = ErrorMessage("RunSql", e);
             }
             return bAns;
         }
@@ -226,7 +226,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 try
                 {
                     string sql = $"ALTER DATABASE PASSWORD {MGC.Database.DbPassword} NULL";
-                    if (!ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                    if (!RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                     bAns = true;
                 }
                 catch (Exception e)
@@ -249,7 +249,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 try
                 {
                     string sql = $"ALTER DATABASE PASSWORD NULL {MGC.Database.DbPassword}";
-                    if (!ExecuteSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
+                    if (!RunSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
                     bAns = true;
                 }
                 catch (Exception e)
@@ -307,7 +307,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     try
                     {
                         string sql = $"DROP TABLE {table};";
-                        if (ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                        if (RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                         bAns = true;
                     }
                     catch (Exception e)
@@ -339,7 +339,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                         try
                         {
                             string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type};";
-                            if (ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                            if (RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                             bAns = true;
                         }
                         catch (Exception e)
@@ -367,7 +367,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                         try
                         {
                             string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} [\"{defaultValue}\"];";
-                            if (ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                            if (RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                             bAns = true;
                         }
                         catch (Exception e)
@@ -394,7 +394,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                         try
                         {
                             string sql = $"ALTER TABLE {table} ALTER COLUMN {name} {type};";
-                            if (ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                            if (RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                             bAns = true;
                         }
                         catch (Exception e)
@@ -426,7 +426,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     try
                     {
                         string sql = $"DROP VIEW {name};";
-                        if (ExecuteSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                        if (RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                         bAns = true;
                     }
                     catch (Exception e)
@@ -451,7 +451,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     try
                     {
                         string mysql = $"CREATE VIEW {name} AS {sql};";
-                        if (ExecuteSql(databasePath, mysql, out errOut)) throw new Exception(errOut);
+                        if (RunSql(databasePath, mysql, out errOut)) throw new Exception(errOut);
                         bAns = true;
                     }
                     catch (Exception e)
@@ -476,7 +476,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     try
                     {
                         string mysql = $"ALTER VIEW {name} AS ( {sql} );";
-                        if (ExecuteSql(databasePath, mysql, out errOut)) throw new Exception(errOut);
+                        if (RunSql(databasePath, mysql, out errOut)) throw new Exception(errOut);
                         bAns = true;
                     }
                     catch (Exception e)
