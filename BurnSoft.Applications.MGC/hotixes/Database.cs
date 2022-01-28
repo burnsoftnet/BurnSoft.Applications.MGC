@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Data;
 using System.Data.OleDb;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable ConvertIfStatementToNullCoalescingExpression
@@ -73,7 +74,47 @@ namespace BurnSoft.Applications.MGC.hotixes
             builder.Add("Mode", 12);
             return builder.ToString();
         }
-        //End Snippet        
+
+        internal static bool HasData(string databasePath, string sql, string fromFunction, out string errOut, bool usePassword = true)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
+                conn.Open();
+                OleDbCommand cmd = new OleDbCommand(sql, conn);
+
+                using (OleDbDataReader dr = cmd.ExecuteReader())
+                {
+                    bAns = dr.HasRows;
+                }
+
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                errOut = $"{ErrorMessage($"HasData-->{fromFunction}", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+            }
+            return bAns;
+        }
+
+        public static bool ValueDoesExist(string databasePath, string table, string column, string value, out string errOut, bool usePassword = true)
+        {
+            string sql = $"SELECT * from {table} where {column}='{value}'";
+            return HasData(databasePath, sql, "ValueDoesExist", out errOut, usePassword);
+        }
+        public static bool ValueDoesExist(string databasePath, string table, string column, int value, out string errOut, bool usePassword = true)
+        {
+            string sql = $"SELECT * from {table} where {column}={value}";
+            return HasData(databasePath, sql, "ValueDoesExist", out errOut, usePassword);
+        }
+
+        public static bool ValueDoesExist(string databasePath, string table, string column, double value, out string errOut, bool usePassword = true)
+        {
+            string sql = $"SELECT * from {table} where {column}={value}";
+            return HasData(databasePath, sql, "ValueDoesExist", out errOut, usePassword);
+        }
         /// <summary>
         /// Executes the SQL.
         /// </summary>
