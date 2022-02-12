@@ -745,13 +745,15 @@ namespace BurnSoft.Applications.MGC.Global
 
             return bAns;
         }
+
         /// <summary>
         /// Sets the hot fix.
         /// </summary>
         /// <param name="hotfixNumber">The hotfix number.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="installNotice">The Date and Time it was installed, OnInstall will skip the reinstall since that is by current version.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool SetHotFix(string hotfixNumber, out string errOut)
+        public static bool SetHotFix(string hotfixNumber, out string errOut, string installNotice = "OnInstall")
         {
             bool bAns = false;
             errOut = "";
@@ -761,7 +763,7 @@ namespace BurnSoft.Applications.MGC.Global
                 RegistryKey myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
                 if (myReg == null)
                     myReg = Registry.CurrentUser.CreateSubKey(strValue);
-                myReg.SetValue(hotfixNumber, DateTime.Now.ToString());
+                myReg.SetValue(hotfixNumber, installNotice);
                 myReg.Close();
                 bAns = true;
             }
