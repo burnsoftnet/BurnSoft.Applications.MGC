@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Global;
+using BurnSoft.Applications.MGC.hotixes.types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 // ReSharper disable InlineOutVariableDeclaration
 // ReSharper disable RedundantAssignment
@@ -156,6 +158,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Global
             string path = AppDomain.CurrentDomain.BaseDirectory;
             bool value = MyRegistry.UpDateAppDetails("1.0", "My Gun Collection Unit Test", path, $"{path}", Path.Combine(path,"log.err"), _databasePath, Path.GetFullPath(_databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
+        }
+        [TestMethod]
+        public void GetHotxesTest()
+        {
+            List<HotFixList> value = MyRegistry.GetHotxes(out _errOut);
+            General.HasTrueValue(value.Count > 0, _errOut);
         }
     }
 }
