@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using BurnSoft.Applications.MGC.hotixes.types;
 using Microsoft.Win32;
 // ReSharper disable PossibleNullReferenceException
 // ReSharper disable RedundantAssignment
@@ -565,7 +567,21 @@ namespace BurnSoft.Applications.MGC.Global
             return bAns;
         }
 
+        public static List<HotFixList> GetHotxes(out string errOut)
+        {
+            List<HotFixList> lst = new List<HotFixList>();
+            errOut = "";
+            try
+            {
 
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetHotfixes", e);
+            }
+
+            return lst;
+        }
         /// <summary>
         /// Settingses the exists.
         /// </summary>
