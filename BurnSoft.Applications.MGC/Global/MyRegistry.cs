@@ -566,7 +566,11 @@ namespace BurnSoft.Applications.MGC.Global
 
             return bAns;
         }
-
+        /// <summary>
+        /// Gets the hotxes and puts them in a list to process
+        /// </summary>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;HotFixList&gt;.</returns>
         public static List<HotFixList> GetHotxes(out string errOut)
         {
             List<HotFixList> lst = new List<HotFixList>();
