@@ -163,6 +163,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Global
         public void GetHotxesTest()
         {
             List<HotFixList> value = MyRegistry.GetHotxes(out _errOut);
+            foreach (HotFixList h in value)
+            {
+                TestContext.WriteLine($"id: {h.Id}");
+                TestContext.WriteLine($"DateInstalled: {h.DateInstalled}");
+                TestContext.WriteLine($"Was from Install: {h.WasFromInstall}");
+            }
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }

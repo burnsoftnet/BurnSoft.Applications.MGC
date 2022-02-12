@@ -574,32 +574,13 @@ namespace BurnSoft.Applications.MGC.Global
             try
             {
                 string strValue = DefaultRegPath + @"\HotFix";
-                RegistryKey key = Registry.LocalMachine.OpenSubKey(strValue);
-                foreach (var v in key.GetSubKeyNames())
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(strValue);
+                foreach (var v in key.GetValueNames())
                 {
                     //Console.WriteLine(v);
-
-                    //RegistryKey productKey = key.OpenSubKey(v);
-                    //if (productKey != null)
-                    //{
-                    //    foreach (var value in productKey.GetValueNames())
-                    //    {
-                    //        Console.WriteLine("\tValue:" + value);
-
-                    //        // Check for the publisher to ensure it's our product
-                    //        string keyValue = Convert.ToString(productKey.GetValue("Publisher"));
-                    //        if (!keyValue.Equals("MyPublisherCompanyName", StringComparison.OrdinalIgnoreCase))
-                    //            continue;
-
-                    //        string productName = Convert.ToString(productKey.GetValue("DisplayName"));
-                    //        if (!productName.Equals("MyProductName", StringComparison.OrdinalIgnoreCase))
-                    //            return;
-
-                    //        string uninstallPath = Convert.ToString(productKey.GetValue("InstallSource"));
-
-                            // Do something with this valuable information
-                        //}
-                    //}
+                    string hotfixId = v;
+                    string dateinstalled = key.GetValue(v).ToString();
+                    lst.Add(new HotFixList(){ Id = hotfixId, DateInstalled = dateinstalled, WasFromInstall = dateinstalled.Equals("OnInstall") });
                 }
             }
             catch (Exception e)
