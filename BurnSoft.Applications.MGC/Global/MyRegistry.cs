@@ -746,6 +746,33 @@ namespace BurnSoft.Applications.MGC.Global
             return bAns;
         }
         /// <summary>
+        /// Sets the hot fix.
+        /// </summary>
+        /// <param name="hotfixNumber">The hotfix number.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SetHotFix(string hotfixNumber, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string strValue = DefaultRegPath + @"\HotFix";
+                RegistryKey myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
+                if (myReg == null)
+                    myReg = Registry.CurrentUser.CreateSubKey(strValue);
+                myReg.SetValue(hotfixNumber, DateTime.Now.ToString());
+                myReg.Close();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetHotFix", e);
+            }
+
+            return bAns;
+        }
+        /// <summary>
         /// Gets the last working dir.
         /// </summary>
         /// <param name="errOut">The error out.</param>
