@@ -547,6 +547,10 @@ namespace BurnSoft.Applications.MGC.Global
                     myReg.SetValue("UseNumberCatOnly", RegUseNumberCatOnly);
                     myReg.SetValue("AUDITAMMO", RegAuditammo);
                     myReg.Close();
+                    for (int i = 1; i < 9; i++)
+                    {
+                        if (!SetHotFix(i, out errOut)) throw new Exception(errOut);
+                    }
                 }
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = true;
@@ -753,7 +757,7 @@ namespace BurnSoft.Applications.MGC.Global
         /// <param name="errOut">The error out.</param>
         /// <param name="installNotice">The Date and Time it was installed, OnInstall will skip the reinstall since that is by current version.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool SetHotFix(string hotfixNumber, out string errOut, string installNotice = "OnInstall")
+        public static bool SetHotFix(int hotfixNumber, out string errOut, string installNotice = "OnInstall")
         {
             bool bAns = false;
             errOut = "";
@@ -763,7 +767,7 @@ namespace BurnSoft.Applications.MGC.Global
                 RegistryKey myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
                 if (myReg == null)
                     myReg = Registry.CurrentUser.CreateSubKey(strValue);
-                myReg.SetValue(hotfixNumber, installNotice);
+                myReg.SetValue($"{hotfixNumber}", installNotice);
                 myReg.Close();
                 bAns = true;
             }
