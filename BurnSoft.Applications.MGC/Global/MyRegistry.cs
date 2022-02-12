@@ -547,7 +547,9 @@ namespace BurnSoft.Applications.MGC.Global
                     myReg.SetValue("UseNumberCatOnly", RegUseNumberCatOnly);
                     myReg.SetValue("AUDITAMMO", RegAuditammo);
                     myReg.Close();
-                    for (int i = 1; i < 9; i++)
+
+                    int maxHotfix = 9;
+                    for (int i = 1; i < maxHotfix + 1; i++)
                     {
                         if (!SetHotFix(i, out errOut)) throw new Exception(errOut);
                     }
