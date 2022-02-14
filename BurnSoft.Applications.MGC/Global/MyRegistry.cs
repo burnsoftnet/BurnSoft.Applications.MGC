@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using BurnSoft.Applications.MGC.hotixes;
 using BurnSoft.Applications.MGC.hotixes.types;
 using Microsoft.Win32;
 // ReSharper disable PossibleNullReferenceException
@@ -550,8 +551,7 @@ namespace BurnSoft.Applications.MGC.Global
                     myReg.SetValue("AUDITAMMO", RegAuditammo);
                     myReg.Close();
 
-                    int maxHotfix = 9;
-                    for (int i = 1; i < maxHotfix + 1; i++)
+                    for (int i = 1; i < HotFix.NumberOfFixes + 1; i++)
                     {
                         if (!SetHotFix(i, out errOut)) throw new Exception(errOut);
                     }
