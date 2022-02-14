@@ -79,6 +79,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.Management.Tables.Columns.Add(databasePath, "IsCandR", "Gun_Collection", "Number", "0", out errOut))
                     throw new Exception(errOut);
                 if (!MyRegistry.SetHotFix(1, out errOut)) throw new Exception(errOut);
+                if (!MyRegistry.SetLastUpdate(1, out errOut)) throw new Exception(errOut);
             }
             catch (Exception e)
             {
