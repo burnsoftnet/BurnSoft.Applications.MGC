@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurnSoft.Applications.MGC.Global;
+
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.hotixes
@@ -70,6 +72,13 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.Security.AddPassword(databasePath, out errOut)) throw new Exception(errOut);
                 if (!Database.Management.Tables.Columns.Add(databasePath, "PetLoads", "Gun_Collection", "TEXT(255)","'  '", out errOut))
                     throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "dtp", "Gun_Collection", "DATE", "'  '", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.RunSql(databasePath, "Update Gun_Collection set PetLoads=' '", out errOut, true)) throw new Exception(errOut);
+
+                if (!Database.Management.Tables.Columns.Add(databasePath, "IsCandR", "Gun_Collection", "Number", "0", out errOut))
+                    throw new Exception(errOut);
+                if (!MyRegistry.SetHotFix(1, out errOut)) throw new Exception(errOut);
             }
             catch (Exception e)
             {
