@@ -14,7 +14,10 @@ namespace BurnSoft.Applications.MGC.hotixes
     /// </summary>
     public class HotFix
     {
-
+        /// <summary>
+        /// The number of fixes
+        /// </summary>
+        public const int NumberOfFixes = 9;
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
@@ -56,23 +59,41 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion
-        //End Snippet
+        #region "Events"        
+        /// <summary>
+        /// Occurs when [status].
+        /// </summary>
         public event EventHandler<string> Status;
+        /// <summary>
+        /// Occurs when [errors].
+        /// </summary>
         public event EventHandler<string> Errors;
-
+        /// <summary>
+        /// Sends the status.
+        /// </summary>
+        /// <param name="value">The value.</param>
         protected virtual void SendStatus(string value)
         {
             Status?.Invoke(this, value);
         }
+        /// <summary>
+        /// Sends the errors.
+        /// </summary>
+        /// <param name="value">The value.</param>
         protected virtual void SendErrors(string value)
         {
             Errors?.Invoke(this, value);
         }
+        #endregion
+        #region "Private Hotfix Helpers"
         /// <summary>
-        /// The number of fixes
+        /// Updates the reg.
         /// </summary>
-        public const int NumberOfFixes = 9;
-
+        /// <param name="hotfixNumber">The hotfix number.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         private bool UpdateReg(int hotfixNumber, out string errOut)
         {
             errOut = "";
@@ -89,8 +110,22 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
+        #endregion
+        #region "Private Hotfixes"        
 
-        private bool One(string databasePath,out string errOut)
+        /// <summary>
+        /// Ones the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        private bool One(string databasePath, out string errOut)
         {
             errOut = "";
             int hotFixNumber = 1;
@@ -99,7 +134,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             try
             {
                 if (!Database.Security.AddPassword(databasePath, out errOut)) throw new Exception(errOut);
-                if (!Database.Management.Tables.Columns.Add(databasePath, "PetLoads", "Gun_Collection", "TEXT(255)","'  '", out errOut))
+                if (!Database.Management.Tables.Columns.Add(databasePath, "PetLoads", "Gun_Collection", "TEXT(255)", "'  '", out errOut))
                     throw new Exception(errOut);
                 if (!Database.Management.Tables.Columns.Add(databasePath, "dtp", "Gun_Collection", "DATE", "'  '", out errOut))
                     throw new Exception(errOut);
@@ -116,5 +151,6 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
+        #endregion
     }
 }
