@@ -186,7 +186,8 @@ namespace BurnSoft.Applications.MGC.hotixes
 
                 if (doSwapValues)
                 {
-
+                    if (!Database.ApplicationSpecific.SwapValues(databasePath, "Gun_Collection", "dt", "dtp", out errOut))
+                        throw new Exception(errOut);
                 }
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
