@@ -57,16 +57,41 @@ namespace BurnSoft.Applications.MGC.hotixes
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion
         //End Snippet
-        
+        public event EventHandler<string> Status;
+
+        protected virtual void SendStatus(string value)
+        {
+            Status?.Invoke(this, value);
+        }
         /// <summary>
         /// The number of fixes
         /// </summary>
         public const int NumberOfFixes = 9;
 
-        private static bool One(string databasePath,out string errOut)
+        private bool UpdateReg(int hotfixNumber, out string errOut)
         {
             errOut = "";
             bool bAns = false;
+            try
+            {
+                if (!MyRegistry.SetHotFix(hotfixNumber, out errOut)) throw new Exception(errOut);
+                if (!MyRegistry.SetLastUpdate(hotfixNumber, out errOut)) throw new Exception(errOut);
+                SendStatus($"Hotfix {hotfixNumber} is Completed!");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            return bAns;
+        }
+
+        private bool One(string databasePath,out string errOut)
+        {
+            errOut = "";
+            int hotFixNumber = 1;
+            bool bAns = false;
+            SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
                 if (!Database.Security.AddPassword(databasePath, out errOut)) throw new Exception(errOut);
@@ -78,8 +103,8 @@ namespace BurnSoft.Applications.MGC.hotixes
 
                 if (!Database.Management.Tables.Columns.Add(databasePath, "IsCandR", "Gun_Collection", "Number", "0", out errOut))
                     throw new Exception(errOut);
-                if (!MyRegistry.SetHotFix(1, out errOut)) throw new Exception(errOut);
-                if (!MyRegistry.SetLastUpdate(1, out errOut)) throw new Exception(errOut);
+
+                if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
             }
             catch (Exception e)
             {
