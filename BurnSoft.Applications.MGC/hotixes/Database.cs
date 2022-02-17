@@ -122,6 +122,40 @@ namespace BurnSoft.Applications.MGC.hotixes
             return HasData(databasePath, sql, "ValueDoesExist", out errOut, usePassword);
         }
         /// <summary>
+        /// Adds the new data by simplifying the see if value exists, and if it doesn't an there are no errors
+        /// then it will do the RunSQL command on the value, and column agstin the table
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="column">The column.</param>
+        /// <param name="value">The value.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool AddNewData(string databasePath, string table, string column, string value, out string errOut, bool usePassword = true)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                if (!Database.ValueDoesExist(databasePath, table, column, value, out errOut, usePassword))
+                {
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    string sql = $"INSERT INTO {table} ({column}) VALUES ('{value}');";
+                    if (!Database.RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                }
+
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AddNewData", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Values the does exist.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
