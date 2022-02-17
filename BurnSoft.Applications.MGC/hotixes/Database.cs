@@ -1,10 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Data;
 using System.Data.OleDb;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable ConvertIfStatementToNullCoalescingExpression
 // ReSharper disable UseObjectOrCollectionInitializer
+// ReSharper disable ConditionIsAlwaysTrueOrFalse
 
 // ReSharper disable UnusedMember.Local
 
@@ -522,6 +522,58 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
 
 
+        }
+        /// <summary>
+        /// Class ApplicationSpecific relates to non global functions that relate to the Application Speficly
+        /// </summary>
+        public class ApplicationSpecific
+        {
+            /// <summary>
+            /// Swaps the values.
+            /// </summary>
+            /// <param name="databasePath">The database path.</param>
+            /// <param name="table">The table.</param>
+            /// <param name="column1">The column1.</param>
+            /// <param name="column2">The column2.</param>
+            /// <param name="errOut">The error out.</param>
+            /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+            /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            /// <exception cref="System.Exception"></exception>
+            internal static bool SwapValues(string databasePath, string table, string column1, string column2, out string errOut, bool usePassword = true)
+            {
+                errOut = "";
+                bool bAns = false;
+                string sql = "";
+                try
+                {
+                    OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
+                    conn.Open();
+                    OleDbCommand cmd = new OleDbCommand($"Select id,{column1},{column2} from {table}", conn);
+
+                    using (OleDbDataReader dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            var id = dr.GetValue(dr.GetOrdinal("id"));
+                            string col1Value = dr.GetValue(dr.GetOrdinal(column1)).ToString();
+                            string col2Value = dr.GetValue(dr.GetOrdinal(column2)).ToString();
+                            if (col2Value != null)
+                            {
+                                sql = $"UPDATE {table} set {column2}={col1Value} where id = {id}";
+                                if (!Database.RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                            }
+                        }
+                    }
+
+                    conn.Close();
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = $"{ErrorMessage($"SwapValues", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                }
+                return bAns;
+            }
         }
     }
 }
