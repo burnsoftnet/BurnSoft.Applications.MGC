@@ -58,10 +58,15 @@ namespace BurnSoft.Applications.MGC.hotixes
         #endregion
         //End Snippet
         public event EventHandler<string> Status;
+        public event EventHandler<string> Errors;
 
         protected virtual void SendStatus(string value)
         {
             Status?.Invoke(this, value);
+        }
+        protected virtual void SendErrors(string value)
+        {
+            Errors?.Invoke(this, value);
         }
         /// <summary>
         /// The number of fixes
@@ -80,8 +85,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                SendErrors(ErrorMessage("UpdateReg", e));
             }
             return bAns;
         }
@@ -108,8 +112,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                SendErrors(ErrorMessage("One", e));
             }
             return bAns;
         }
