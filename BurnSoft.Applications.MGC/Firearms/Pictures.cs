@@ -121,6 +121,28 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Gets the first picture in collection. This replaces the the GetMainPictureFirstListing in the hotfix application
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
+        public static int GetFirstPictureInCollection(string databasePath, long id, out string errOut)
+        {
+            int lAns = 0;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT TOP 1 ID FROM Gun_Collection_Pictures where CID={id} order by ID ASC";
+                lAns = Database.GetIDFromTableBasedOnTSQL(databasePath, sql,"ID" ,out errOut);
+            }
+            catch (Exception exception)
+            {
+                errOut = ErrorMessage("GetFirstPictureInCollection", exception);
+            }
+            return lAns;
+        }
+        /// <summary>
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
