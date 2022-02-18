@@ -142,7 +142,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lAns;
         }
-
+        /// <summary>
+        /// Sets as default pic.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool SetAsDefaultPic(string databasePath, long id, out string errOut)
         {
             bool bAns = false;
