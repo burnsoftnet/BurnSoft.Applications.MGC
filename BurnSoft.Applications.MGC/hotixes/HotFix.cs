@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Global;
 
 // ReSharper disable UnusedMember.Local
@@ -246,8 +247,8 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.Management.Tables.Columns.Add(databasePath, "ISMAIN", "Gun_Collection_Pictures", "Number", "0", out errOut))
                     throw new Exception(errOut);
                 if (!Database.RunSql(databasePath, "UPDATE Gun_Collection_Pictures set ISMAIN=0 where ISMAIN <> 1", out errOut)) throw new Exception(errOut);
-                //TODO: #42 Import the SetMainPictures function form the old code
-
+  
+                if (!Pictures.SetMainPictures(databasePath, out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
