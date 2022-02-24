@@ -808,30 +808,33 @@ namespace BurnSoft.Applications.MGC.Global
 
             return bAns;
         }
+
         /// <summary>
         /// Sets the setting value.
         /// </summary>
-        /// <param name="keyName">Name of the key.</param>
+        /// <param name="subKey">Name of the sub key with the default to the Main Application Path, if left blank it will insert in root </param>
+        /// <param name="name">name to store the value in the key</param>
         /// <param name="value">The value.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool SetSettingValue(string keyName, string value, out string errOut)
+        public static bool SetValue(string subKey, string name, string value, out string errOut)
         {
             bool bAns = false;
             errOut = "";
             try
             {
-                string strValue = DefaultRegPath + @"\Settings";
+                string strValue = DefaultRegPath;
+                if (subKey.Length > 0) strValue = DefaultRegPath + $"\\{subKey}";
                 RegistryKey myReg = Registry.CurrentUser.CreateSubKey(strValue, RegistryKeyPermissionCheck.Default);
                 if (myReg == null)
                     myReg = Registry.CurrentUser.CreateSubKey(strValue);
-                myReg.SetValue(keyName, value);
+                myReg.SetValue(name, value);
                 myReg.Close();
                 bAns = true;
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("SetSettingValue", e);
+                errOut = ErrorMessage("SetValue", e);
             }
 
             return bAns;
