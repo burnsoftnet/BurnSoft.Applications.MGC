@@ -121,6 +121,28 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Determines whether [has default picture] [the specified database path].
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="id"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool HasDefaultPicture(string databasePath, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection_Pictures where CID={id} and IsMain=1";
+                bAns = Database.DataExists(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AddDefaultPic", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Gets the first picture in collection. This replaces the the GetMainPictureFirstListing in the hotfix application
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -141,6 +163,48 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("GetFirstPictureInCollection", exception);
             }
             return lAns;
+        }
+        /// <summary>
+        /// HOTFIX - If there is no default picture set but collection has pictures, then set the first picture as the default picture
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool SetMainPictures(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT DISTINCT(Gun_Collection_Pictures.CID) as CID FROM Gun_Collection_Pictures";
+                OleDbConnection conn = new OleDbConnection(Database.ConnectionString(databasePath, out errOut));
+                conn.Open();
+                OleDbCommand cmd = new OleDbCommand(sql, conn);
+
+                using (OleDbDataReader dr = cmd.ExecuteReader())
+                {
+                    while (dr.Read())
+                    { 
+                        var cid = (Int32)dr.GetValue(dr.GetOrdinal("cid"));
+                        if (!HasDefaultPicture(databasePath, cid, out errOut))
+                        {
+                            var lid = GetFirstPictureInCollection(databasePath, cid, out errOut);
+                            if (lid > 0)
+                            {
+                                if (!SetAsDefaultPic(databasePath, lid, out errOut)) throw new Exception(errOut);
+                            }
+                        }
+                    }
+                }
+
+                conn.Close();
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetMainPictures", e);
+            }
+            return bAns;
         }
         /// <summary>
         /// Sets as default pic.
