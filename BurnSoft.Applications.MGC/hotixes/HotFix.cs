@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Firearms;
@@ -249,6 +250,49 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.RunSql(databasePath, "UPDATE Gun_Collection_Pictures set ISMAIN=0 where ISMAIN <> 1", out errOut)) throw new Exception(errOut);
   
                 if (!Pictures.SetMainPictures(databasePath, out errOut)) throw new Exception(errOut);
+                if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                SendErrors(ErrorMessage("Three", e));
+            }
+            return bAns;
+        }
+
+        private bool Four(string databasePath, out string errOut)
+        {
+            errOut = "";
+            int hotFixNumber = 4;
+            bool bAns = false;
+            SendStatus($"Starting Hotfix {hotFixNumber}.");
+            try
+            {
+                if (!MyRegistry.SetValue("Settings", "BackupOnExit", "False", out errOut)) throw new Exception(errOut);
+                if (!MyRegistry.SetValue("Settings", "UseOrgImage", "False", out errOut)) throw new Exception(errOut);
+                if (!MyRegistry.SetValue("Settings", "ViewPetLoads", "true", out errOut)) throw new Exception(errOut);
+                if (!MyRegistry.SetValue("Settings", "IndvReports", "true", out errOut)) throw new Exception(errOut);
+                
+                if (!Database.Management.Tables.Columns.Add(databasePath, "Importer", "Gun_Collection", "Text(255)", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Drop(databasePath, "Gun_Collection_Ammo_Details", out errOut)) throw new Exception(errOut);
+                if (!Database.Management.Tables.Drop(databasePath, "Gun_Collection_Ammo_Details_Pictures", out errOut)) throw new Exception(errOut);
+                if (!Database.Management.Tables.Drop(databasePath, "Gun_Shop_SalesEmp", out errOut)) throw new Exception(errOut);
+
+                if (!Database.AddNewData(databasePath, "Gun_Cal", "Cal", ".223 Remington", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Cal", "Cal", "5.56 x 45mm", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Cal", "Cal", ".30-06", out errOut)) throw new Exception(errOut);
+
+                if (!Database.Management.Tables.Columns.Add(databasePath, "UID", "Owner_Info", "Memo", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "forgot_word", "Owner_Info", "Memo", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "forgot_phrase", "Owner_Info", "Memo", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "dcal", "Gun_Collection_Ammo", "number", "0", out errOut))
+                    throw new Exception(errOut);
+
+                //Perform Update in Registry of new hotfix
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
