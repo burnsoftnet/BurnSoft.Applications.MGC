@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
+using Microsoft.VisualBasic;
+// ReSharper disable UnusedMember.Global
 
 // ReSharper disable UnusedMember.Local
 
@@ -17,42 +20,42 @@ namespace BurnSoft.Applications.MGC.Ammo
         /// <summary>
         /// The class location
         /// </summary>
-        private static string ClassLocation = "BurnSoft.Applications.MGC.Ammo.Inventory";
+        private static string _classLocation = "BurnSoft.Applications.MGC.Ammo.Inventory";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, Exception e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, Exception e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for access violations
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, AccessViolationException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for invalid cast exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, InvalidCastException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message argument exception
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, ArgumentException e) => $"{_classLocation}.{functionName} - {e.Message}";
         /// <summary>
         /// Errors the message for argument null exception.
         /// </summary>
         /// <param name="functionName">Name of the function.</param>
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
-        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
+        private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion        
         /// <summary>
         /// Updates the qty.
@@ -310,7 +313,7 @@ namespace BurnSoft.Applications.MGC.Ammo
             errOut = @"";
             try
             {
-                string sql = $"SELECT Top 1 * from Gun_Collection_Ammo order by id desc";
+                string sql = "SELECT Top 1 * from Gun_Collection_Ammo order by id desc";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 List<Ammunition> lst = MyList(dt, out errOut);
                 foreach (Ammunition a in lst)
@@ -386,6 +389,92 @@ namespace BurnSoft.Applications.MGC.Ammo
             return lst;
         }
         /// <summary>
+        /// Convs to number.
+        /// </summary>
+        /// <param name="strValue">The string value.</param>
+        /// <returns>System.Double.</returns>
+        public static double ConvToNum(string strValue)
+        {
+            double dAns;
+            short intChar = (short)strValue.Length;
+            short i;
+            string newValue = "";
+            string lastValue = "";
+            bool needDiv = false;
+            for (i = 1; i <= intChar; i++)
+            {
+                var curValue = Strings.Mid(strValue, i, 1);
+                if (curValue == " ")
+                    break;
+                if (Information.IsNumeric(curValue))
+                {
+                    if (Strings.Len(lastValue) != 0)
+                        lastValue = Strings.Mid(newValue, Strings.Len(newValue), 1);
+                    else
+                        lastValue = curValue;
+                    if (!needDiv)
+                        newValue = newValue + curValue;
+                    else
+                        newValue = Convert.ToString(Convert.ToDouble(curValue) / Convert.ToDouble(lastValue), CultureInfo.InvariantCulture);
+                    needDiv = false;
+                }
+                else
+                    switch (curValue)
+                    {
+                        case ".":
+                        {
+                            newValue = newValue + curValue;
+                            needDiv = false;
+                            break;
+                        }
+
+                        case "/":
+                        {
+                            needDiv = true;
+                            break;
+                        }
+                    }
+            }
+            dAns = Convert.ToDouble(newValue);
+            return dAns;
+        }
+
+        /// <summary>
+        /// Converts the ammo grains to number.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ConvertAmmoGrainsToNum(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                List<Ammunition> lst = GetList(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (Ammunition l in lst)
+                {
+                    if (l.Grain.Length > 0)
+                    {
+                        double dValue = ConvToNum(l.Grain);
+                        string sql = $"UPDATE Gun_Collection_Ammo set dcal={dValue} where id={l.Id}";
+                        if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                    }
+                }
+
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ConvertAmmoGrainsToNum", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Gets the list.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -399,7 +488,7 @@ namespace BurnSoft.Applications.MGC.Ammo
             errOut = @"";
             try
             {
-                string sql = $"select * from Gun_Collection_Ammo";
+                string sql = "select * from Gun_Collection_Ammo";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception($"{errOut}{Environment.NewLine}SQL = {sql}");
                 lst = MyList(dt, out errOut);
@@ -429,16 +518,16 @@ namespace BurnSoft.Applications.MGC.Ammo
                     lst.Add(new Ammunition()
                     {
                         Id = Convert.ToInt32(d["id"]),
-                        Cal = d["cal"].ToString(),
+                        Cal = d["cal"] != DBNull.Value ? d["cal"].ToString().Trim() : "",
                         Dcal = Convert.ToDouble(d["dcal"]),
-                        Grain = d["grain"].ToString(),
-                        Jacket = d["jacket"].ToString(),
-                        Manufacturer = d["Manufacturer"].ToString(),
-                        Name = d["name"].ToString(),
-                        Qty = Convert.ToInt32(d["qty"]),
+                        Grain = d["grain"] != DBNull.Value ? d["grain"].ToString().Trim() : "",
+                        Jacket = d["jacket"] != DBNull.Value ? d["jacket"].ToString().Trim() : "",
+                        Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString().Trim() : "",
+                        Name = d["name"] != DBNull.Value ? d["name"].ToString().Trim() : "",
+                        Qty = d["qty"] != DBNull.Value ? Convert.ToInt32(d["qty"]) : 0,
                         Sync_lastupdate = d["Sync_lastupdate"].ToString(),
-                        Vel_n = Convert.ToInt32(d["Vel_n"]),
-                        Vel_t = d["Vel_t"].ToString()
+                        Vel_n = d["Vel_n"] != DBNull.Value ? Convert.ToInt32(d["Vel_n"]) : 0,
+                        Vel_t = d["Vel_t"] != DBNull.Value ? d["Vel_t"].ToString().Trim() : ""
                     });
                 }
             }

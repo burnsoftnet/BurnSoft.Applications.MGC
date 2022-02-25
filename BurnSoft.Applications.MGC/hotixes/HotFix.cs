@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Global;
 
@@ -105,6 +100,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!MyRegistry.SetHotFix(hotfixNumber, out errOut)) throw new Exception(errOut);
                 if (!MyRegistry.SetLastUpdate(hotfixNumber, out errOut)) throw new Exception(errOut);
                 SendStatus($"Hotfix {hotfixNumber} is Completed!");
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -291,7 +287,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     throw new Exception(errOut);
                 if (!Database.Management.Tables.Columns.Add(databasePath, "dcal", "Gun_Collection_Ammo", "number", "0", out errOut))
                     throw new Exception(errOut);
-
+                if (!Ammo.Inventory.ConvertAmmoGrainsToNum(databasePath, out errOut)) throw new Exception(errOut);
                 //Perform Update in Registry of new hotfix
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;

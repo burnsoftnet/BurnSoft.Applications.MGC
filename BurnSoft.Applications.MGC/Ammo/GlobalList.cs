@@ -185,6 +185,7 @@ namespace BurnSoft.Applications.MGC.Ammo
 
             return lAns;
         }
+
         /// <summary>
         /// Gets the list.
         /// </summary>
