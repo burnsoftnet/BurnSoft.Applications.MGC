@@ -307,7 +307,42 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
-               
+                if (!Database.RunSql(databasePath,
+                    "CREATE TABLE CR_ColumnList (ID AUTOINCREMENT PRIMARY KEY,TID INTEGER, Col Text(255), DN Text(255));",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "CREATE TABLE CR_SavedReports (ID AUTOINCREMENT PRIMARY KEY,ReportName Text(255), MySQL MEMO,DTC DATETIME);",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "CREATE TABLE CR_TableList (ID INTEGER PRIMARY KEY,Tables Text(255), DN Text(255));",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "DELETE from CR_ColumnList",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "DELETE from CR_TableList",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (1,'Gun_Cal','Caliber List')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (2,'Gun_Collection_Ammo','Ammunition Inventory')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (3,'Gun_Manufacturer','Manufacturer List')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (4,'qryGunCollectionDetails','Gun Collection')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (5,'Gun_Shop_Details','Firearm Stores')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (6,'Gun_Collection_SoldTo','Buyer List')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (7,'Wishlist','Wishlist",
+                    out errOut, true)) throw new Exception(errOut);
                 //Perform Update in Registry of new hotfix
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
