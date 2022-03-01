@@ -343,6 +343,36 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.RunSql(databasePath,
                     "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (7,'Wishlist','Wishlist",
                     out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(1,'Cal','Caliber')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(2,'Manufacturer','Manufacturer')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(2,'Name','Name')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(2,'Cal','Caliber')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(2,'Grain','Bullet Grains')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(2,'Jacket','Jacket')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(2,'Qty','Qty')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(3,'Brand','Name')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'FullName','Full Name')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "",
+                    out errOut, true)) throw new Exception(errOut);
                 //Perform Update in Registry of new hotfix
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
