@@ -294,7 +294,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             catch (Exception e)
             {
-                SendErrors(ErrorMessage("Three", e));
+                SendErrors(ErrorMessage("Four", e));
             }
             return bAns;
         }
