@@ -413,15 +413,103 @@ namespace BurnSoft.Applications.MGC.hotixes
                     "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'FeedSystem','Feed System')",
                     out errOut, true)) throw new Exception(errOut);
                 if (!Database.RunSql(databasePath,
-                    "",
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Sights','Sights')",
                     out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'PurchasedPrice','Purchased Price')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'PurchasedFrom','Purchased From')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'AppraisedValue','Appraised Value')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'AppraisedDate','Appraised Date')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'AppraisedBy','Appraised By')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'InsuredValue','Insured Value')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Produced','Produced Date')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Dt','Date Added')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'dtSold','Date Sold')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'dtp','Date Purchased')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Importer','Importer')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Brand','Manufacturer')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'Name','Name')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'Address1','Address')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'Address2','Address 2')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'City','City')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'State','State')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'Zip','Zip Code')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'Country','Country')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'Phone','Phone')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'fax','fax')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'website','website')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'email','email')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(5,'lic','FFL License')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(6,'Name','Name')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(6,'Address1','Address')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(6,'Address2','Address 2')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(6,'City','City')",
+                    out errOut, true)) throw new Exception(errOut);
+                //if (!Database.RunSql(databasePath,
+                //    "",
+                //    out errOut, true)) throw new Exception(errOut);
+
                 //Perform Update in Registry of new hotfix
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
             catch (Exception e)
             {
-                SendErrors(ErrorMessage("Three", e));
+                SendErrors(ErrorMessage("Five", e));
             }
             return bAns;
         }
