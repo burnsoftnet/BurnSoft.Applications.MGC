@@ -371,6 +371,48 @@ namespace BurnSoft.Applications.MGC.hotixes
                     "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'FullName','Full Name')",
                     out errOut, true)) throw new Exception(errOut);
                 if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'ModelName','Model Name')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'SerialNumber','Serial Number')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Type','Firearm Type'",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Caliber','Caliber')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Finish','Finish')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Condition','Condition')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'CustomID','Custom ID')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'NatID','Place of Origin')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Weight','Weight')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Height','Height')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'StockType','Stock')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'BarrelLength','Barrel Length')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Action','Action')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'FeedSystem','Feed System')",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
                     "",
                     out errOut, true)) throw new Exception(errOut);
                 //Perform Update in Registry of new hotfix
