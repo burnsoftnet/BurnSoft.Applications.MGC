@@ -447,7 +447,14 @@ namespace BurnSoft.Applications.MGC
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Saves the database version.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="version">The version.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool SaveDatabaseVersion(string databasePath, string version, out string errOut)
         {
             bool bAns = false;
