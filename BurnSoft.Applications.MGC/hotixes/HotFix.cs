@@ -255,7 +255,12 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
-
+        /// <summary>
+        /// hot fix 4
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
         private bool Four(string databasePath, out string errOut)
         {
             errOut = "";
@@ -298,7 +303,12 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
-
+        /// <summary>
+        /// hot Fix 5
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
         private bool Five(string databasePath, out string errOut)
         {
             errOut = "";
@@ -559,6 +569,12 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
+        /// <summary>
+        /// hot fix 6
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
         private bool Six(string databasePath, out string errOut)
         {
             errOut = "";
