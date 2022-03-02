@@ -591,6 +591,27 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
+
+        private bool Seven(string databasePath, out string errOut)
+        {
+            errOut = "";
+            int hotFixNumber = 6;
+            bool bAns = false;
+            SendStatus($"Starting Hotfix {hotFixNumber}.");
+            try
+            {
+               
+
+                //Perform Update in Registry of new hotfix
+                if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                SendErrors(ErrorMessage("Seven", e));
+            }
+            return bAns;
+        }
         #endregion
     }
 }
