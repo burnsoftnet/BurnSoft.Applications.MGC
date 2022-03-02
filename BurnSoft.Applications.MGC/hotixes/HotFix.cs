@@ -595,7 +595,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         private bool Seven(string databasePath, out string errOut)
         {
             errOut = "";
-            int hotFixNumber = 6;
+            int hotFixNumber = 7;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
