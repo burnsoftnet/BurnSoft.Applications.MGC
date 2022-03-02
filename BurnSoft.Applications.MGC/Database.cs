@@ -462,8 +462,16 @@ namespace BurnSoft.Applications.MGC
             try
             {
                 string sql = $"INSERT INTO DB_Version (dbver,dta) VALUES('{version}',DATE())";
-                bAns = Execute(ConnectionString(databasePath, out errOut), sql, out errOut);
-                if (errOut?.Length > 0) throw new Exception(errOut);
+                if (!DataExists(databasePath, $"select * from DB_Version where dbver='{version}'", out errOut))
+                {
+                    bAns = Execute(ConnectionString(databasePath, out errOut), sql, out errOut);
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                }
+                else
+                {
+                    bAns = true;
+                }
+                
             }
             catch (Exception e)
             {
