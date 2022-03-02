@@ -447,6 +447,23 @@ namespace BurnSoft.Applications.MGC
             }
             return bAns;
         }
+
+        public static bool SaveDatabaseVersion(string databasePath, string version, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"INSERT INTO DB_Version (dbver,dta) VALUES('{version}',DATE())";
+                bAns = Execute(ConnectionString(databasePath, out errOut), sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SaveDatabaseVersion", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Inserts the new contact.
         /// </summary>
