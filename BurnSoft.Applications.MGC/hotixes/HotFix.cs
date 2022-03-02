@@ -619,6 +619,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                
 
                 //Perform Update in Registry of new hotfix
+                if (!MGC.Database.SaveDatabaseVersion(databasePath, "4.5", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
