@@ -715,6 +715,38 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
+
+        private bool Nine(string databasePath, out string errOut)
+        {
+            errOut = "";
+            int hotFixNumber = 9;
+            bool bAns = false;
+            SendStatus($"Starting Hotfix {hotFixNumber}.");
+            try
+            {
+                if (!Database.RunSql(databasePath,
+                    "CREATE TABLE IF NOT EXISTS sync_tables(ID AUTOINCREMENT PRIMARY KEY,tblname TEXT(255));",
+                    out errOut, true)) throw new Exception(errOut);
+                
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Classification", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs_Links", out errOut, true)) throw new Exception(errOut);
+
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "GunSmith_Contact_Details", out errOut, true)) throw new Exception(errOut);
+
+                if (!Database.AddSyncToTable(databasePath, "Appriaser_Contact_Details", out errOut, true)) throw new Exception(errOut);
+
+                //Perform Update in Registry of new hotfix
+                if (!MGC.Database.SaveDatabaseVersion(databasePath, "6.0", out errOut)) throw new Exception(errOut);
+                if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                SendErrors(ErrorMessage("Nine", e));
+            }
+            return bAns;
+        }
         #endregion
     }
 }
