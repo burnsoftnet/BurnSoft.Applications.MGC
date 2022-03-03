@@ -586,7 +586,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.RunSql(databasePath,
                     "CREATE TABLE Gun_Collection_Ammo_PriceAudit (ID AUTOINCREMENT PRIMARY KEY,AID INTEGER,DTA DATETIME,Qty INTEGER,PricePaid DOUBLE,PPB DOUBLE);",
                     out errOut, true)) throw new Exception(errOut);
-                if (!Database.Management.Tables.Columns.Add(databasePath, "ReManDT", "Gun_Collection", "DATETIME", "Date()", out errOut))
+                if (!Database.Management.Tables.Columns.Add(databasePath, "ReManDT", "Gun_Collection", "DATETIME", "Now()", out errOut))
                     throw new Exception(errOut);
                 if (!Database.Management.Tables.Columns.Add(databasePath, "POI", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);

@@ -575,5 +575,28 @@ namespace BurnSoft.Applications.MGC.hotixes
                 return bAns;
             }
         }
+
+        internal static bool AddSyncToTable(string databasePath, string table, out string errOut, bool updateField = false, string syncTableName = "sync_tables")
+        {
+            errOut = "";
+            bool bAns = false;
+            string sql = "";
+            try
+            {
+               
+                if (!Database.AddNewData(databasePath, syncTableName, "tblname", table, out errOut)) throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "sync_lastupdate", table, "DATETIME", "Now()", out errOut))
+                    throw new Exception(errOut);
+                if (updateField)
+                    if (!RunSql(databasePath, $"UPDATE {table} set sync_lastupdate=Now()", out errOut))
+                        throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = $"{ErrorMessage($"AddSyncToTable", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+            }
+            return bAns;
+        }
     }
 }
