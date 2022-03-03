@@ -628,14 +628,25 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Fair", out errOut)) throw new Exception(errOut);
                 if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Poor", out errOut)) throw new Exception(errOut);
                 if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Antique Factory New", out errOut)) throw new Exception(errOut);
-                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
-                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
-                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
-                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
-                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
-                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
-                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
-                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Antique Excellent", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Antique Fine", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Antique Very Good", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Antique Good", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Antique Fair", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Antique Poor", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Refinished", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "100%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "90%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "80%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "70%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "60%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "50%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "40%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "30%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "20%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "10%", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Broken", out errOut)) throw new Exception(errOut);
+
                 //Perform Update in Registry of new hotfix
                 if (!MGC.Database.SaveDatabaseVersion(databasePath, "4.5", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
