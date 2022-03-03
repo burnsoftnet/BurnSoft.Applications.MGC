@@ -668,6 +668,53 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
+
+        private bool Eight(string databasePath, out string errOut)
+        {
+            errOut = "";
+            int hotFixNumber = 8;
+            bool bAns = false;
+            SendStatus($"Starting Hotfix {hotFixNumber}.");
+            try
+            {
+                if (!Database.RunSql(databasePath,
+                    "CREATE TABLE IF NOT EXISTS sync_tables(ID AUTOINCREMENT PRIMARY KEY,tblname TEXT(255));",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "CR_SavedReports", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "GunSmith_Details", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Cal", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Accessories", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Ammo", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Ammo_PriceAudit", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_BarrelSysTypes", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Condition", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Ext", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Ext_Links", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Pictures", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_SoldTo", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_GripType", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Manufacturer", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Model", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Nationality", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Shop_Details", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Type", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Maintance_Details", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Maintance_Plans", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Owner_Info", out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Wishlist", out errOut, true)) throw new Exception(errOut);
+
+                //Perform Update in Registry of new hotfix
+                if (!MGC.Database.SaveDatabaseVersion(databasePath, "5.0", out errOut)) throw new Exception(errOut);
+                if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                SendErrors(ErrorMessage("Eight", e));
+            }
+            return bAns;
+        }
         #endregion
     }
 }
