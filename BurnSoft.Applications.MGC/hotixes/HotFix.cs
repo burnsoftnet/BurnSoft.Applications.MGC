@@ -647,6 +647,16 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "10%", out errOut)) throw new Exception(errOut);
                 if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Broken", out errOut)) throw new Exception(errOut);
 
+                //Create barrel System Types
+                if (!Database.RunSql(databasePath,
+                    "CREATE TABLE Gun_Collection_BarrelSysTypes (ID AUTOINCREMENT PRIMARY KEY, [Name] TEXT(255));",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Regular Barrel", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Ported Barrel", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Threaded Barrel", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Complete Upper", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Conversion Kit", out errOut)) throw new Exception(errOut);
+
                 //Perform Update in Registry of new hotfix
                 if (!MGC.Database.SaveDatabaseVersion(databasePath, "4.5", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
