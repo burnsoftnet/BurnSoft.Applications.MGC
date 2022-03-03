@@ -575,7 +575,18 @@ namespace BurnSoft.Applications.MGC.hotixes
                 return bAns;
             }
         }
-
+        /// <summary>
+        /// Adds the synchronize to table.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="table">The table.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="updateField">if set to <c>true</c> [update field].</param>
+        /// <param name="syncTableName">Name of the synchronize table.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         internal static bool AddSyncToTable(string databasePath, string table, out string errOut, bool updateField = false, string syncTableName = "sync_tables")
         {
             errOut = "";
