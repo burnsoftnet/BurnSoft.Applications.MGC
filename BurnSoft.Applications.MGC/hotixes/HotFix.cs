@@ -616,8 +616,26 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
-               
-
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "New", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "New, Discontinued", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Perfect", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Perfect, Discontinued", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Excellent", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Excellent, Discontinued", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Very Good", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Good", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Good, Discontinued", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Fair", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Poor", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Antique Factory New", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "", out errOut)) throw new Exception(errOut);
                 //Perform Update in Registry of new hotfix
                 if (!MGC.Database.SaveDatabaseVersion(databasePath, "4.5", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
