@@ -725,9 +725,34 @@ namespace BurnSoft.Applications.MGC.hotixes
             try
             {
                 if (!Database.RunSql(databasePath,
-                    "CREATE TABLE IF NOT EXISTS sync_tables(ID AUTOINCREMENT PRIMARY KEY,tblname TEXT(255));",
+                    "UPDATE CR_ColumnList set Col='AppraisalDate' where Col='AppraisedDate'",
                     out errOut, true)) throw new Exception(errOut);
-                
+                if (!Database.Management.Tables.Columns.Add(databasePath, "IsInBoundBook", "Gun_Collection", "number", "0", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "IsClassIII", "Gun_Collection", "number", "0", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "ClassIII_owner", "Gun_Collection", "Text(255)", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "TwistRate", "Gun_Collection", "Text(255)", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "lbs_trigger", "Gun_Collection", "Text(255)", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "Caliber3", "Gun_Collection", "Text(255)", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "Classification", "Gun_Collection", "Text(255)", "N/A", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.Management.Tables.Columns.Add(databasePath, "DateofCR", "Gun_Collection", "DATETIME", "Now()", out errOut))
+                    throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "UPDATE Gun_Collection set IsInBoundBook=1",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "UPDATE Gun_Collection set IsClassIII=0",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "UPDATE Gun_Collection set Classification='Modern'",
+                    out errOut, true)) throw new Exception(errOut);
+
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Classification", out errOut, true)) throw new Exception(errOut);
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs_Links", out errOut, true)) throw new Exception(errOut);
 
