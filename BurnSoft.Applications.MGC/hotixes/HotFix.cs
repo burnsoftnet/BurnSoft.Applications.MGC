@@ -752,14 +752,43 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.RunSql(databasePath,
                     "UPDATE Gun_Collection set Classification='Modern'",
                     out errOut, true)) throw new Exception(errOut);
+                string sql =
+                    "CREATE TABLE Appriaser_Contact_Details (ID AUTOINCREMENT PRIMARY KEY,aName Text(255), Address1 Text(255)" +
+                    ", Address2 Text(255),City Text(255),State Text(255), Country Text(255), Phone Text(255), fax Text(255)" +
+                    ",website Text(255), email Text(255), lic Text(255), zip Text(255), SIB INTEGER);";
+                if (!Database.RunSql(databasePath,
+                    sql,
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Appriaser_Contact_Details", out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE Appriaser_Contact_Details ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE Appriaser_Contact_Details ALTER SIB Number DEFAULT 1 NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
 
+                sql ="CREATE TABLE GunSmith_Contact_Details (ID AUTOINCREMENT PRIMARY KEY,gName Text(255), Address1 Text(255)" +
+                    ", Address2 Text(255),City Text(255),State Text(255), Country Text(255), Phone Text(255), fax Text(255)" +
+                    ",website Text(255), email Text(255), lic Text(255), zip Text(255), SIB INTEGER);";
+                if (!Database.RunSql(databasePath,
+                    sql,
+                    out errOut, true)) throw new Exception(errOut);
+
+                if (!Database.AddSyncToTable(databasePath, "GunSmith_Contact_Details", out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE GunSmith_Contact_Details ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE GunSmith_Contact_Details ALTER SIB Number DEFAULT 1 NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
+
+
+
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs", out errOut, true)) throw new Exception(errOut);
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Classification", out errOut, true)) throw new Exception(errOut);
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs_Links", out errOut, true)) throw new Exception(errOut);
 
-                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs", out errOut, true)) throw new Exception(errOut);
-                if (!Database.AddSyncToTable(databasePath, "GunSmith_Contact_Details", out errOut, true)) throw new Exception(errOut);
-
-                if (!Database.AddSyncToTable(databasePath, "Appriaser_Contact_Details", out errOut, true)) throw new Exception(errOut);
+                
 
                 //Perform Update in Registry of new hotfix
                 if (!MGC.Database.SaveDatabaseVersion(databasePath, "6.0", out errOut)) throw new Exception(errOut);
