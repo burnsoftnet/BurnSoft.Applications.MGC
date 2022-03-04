@@ -873,6 +873,60 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
-        #endregion
+        #endregion        
+        /// <summary>
+        /// Runs the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="hotFixNumber">The hot fix number.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Run(string databasePath, int hotFixNumber, out string errOut)
+        {
+            bool bans = false;
+            errOut = "";
+            try
+            {
+                HotFix hotfix = new HotFix();
+                switch (hotFixNumber)
+                {
+                    case 1:
+                        bans = hotfix.One(databasePath, out errOut);
+                        break;
+                    case 2:
+                        bans = hotfix.Two(databasePath, out errOut);
+                        break;
+                    case 3:
+                        bans = hotfix.Three(databasePath, out errOut);
+                        break;
+                    case 4:
+                        bans = hotfix.Four(databasePath, out errOut);
+                        break;
+                    case 5:
+                        bans = hotfix.Five(databasePath, out errOut);
+                        break;
+                    case 6:
+                        bans = hotfix.Six(databasePath, out errOut);
+                        break;
+                    case 7:
+                        bans = hotfix.Seven(databasePath, out errOut);
+                        break;
+                    case 8:
+                        bans = hotfix.Eight(databasePath, out errOut);
+                        break;
+                    case 9:
+                        bans = hotfix.Nine(databasePath, out errOut);
+                        break;
+                    case 10:
+                        bans = hotfix.Ten(databasePath, out errOut);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Run", e);
+            }
+            return bans;
+        }
     }
 }
