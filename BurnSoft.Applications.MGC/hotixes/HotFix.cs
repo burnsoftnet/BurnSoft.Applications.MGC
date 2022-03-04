@@ -781,7 +781,8 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.RunSql(databasePath,
                     "ALTER TABLE GunSmith_Contact_Details ALTER SIB Number DEFAULT 1 NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
-
+                if (!Database.ApplicationSpecific.MoveAppraisers(databasePath, out errOut)) throw new Exception(errOut);
+                if (!Database.ApplicationSpecific.MoveGunSmiths(databasePath, out errOut)) throw new Exception(errOut);
 
 
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs", out errOut, true)) throw new Exception(errOut);
