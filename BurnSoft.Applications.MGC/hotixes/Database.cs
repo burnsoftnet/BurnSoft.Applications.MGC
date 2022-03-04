@@ -1,6 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.OleDb;
+using BurnSoft.Applications.MGC.Firearms;
+using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Universal;
+
 // ReSharper disable UnusedMember.Global
 // ReSharper disable ConvertIfStatementToNullCoalescingExpression
 // ReSharper disable UseObjectOrCollectionInitializer
@@ -571,6 +576,41 @@ namespace BurnSoft.Applications.MGC.hotixes
                 catch (Exception e)
                 {
                     errOut = $"{ErrorMessage($"SwapValues", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                }
+                return bAns;
+            }
+            /// <summary>
+            /// Moves the appraisers.
+            /// </summary>
+            /// <param name="databasePath">The database path.</param>
+            /// <param name="errOut">The error out.</param>
+            /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            /// <exception cref="System.Exception"></exception>
+            /// <exception cref="System.Exception"></exception>
+            internal static bool MoveAppraisers(string databasePath,  out string errOut)
+            {
+                errOut = "";
+                bool bAns = false;
+                string sql = "";
+                try
+                {
+                    List<GunCollectionList> lst = MyCollection.GetList(databasePath, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    Universal.BSOtherObjects obj = new BSOtherObjects();
+                    foreach (GunCollectionList l in lst)
+                    {
+                        string name = obj.FC(l.AppriasedBy);
+                        if (!Database.ValueDoesExist(databasePath, "Appriaser_Contact_Details", "aName", name, out errOut))
+                        {
+                            if (!PeopleAndPlaces.Appraisers.Add(databasePath, name, out errOut))
+                                throw new Exception(errOut);
+                        }
+                    }
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = $"{ErrorMessage($"MoveAppraisers", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
                 }
                 return bAns;
             }
