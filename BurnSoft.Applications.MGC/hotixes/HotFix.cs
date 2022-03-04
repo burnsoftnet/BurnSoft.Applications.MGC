@@ -715,7 +715,12 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Hotfix Number 9
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
         private bool Nine(string databasePath, out string errOut)
         {
             errOut = "";
@@ -784,12 +789,43 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.ApplicationSpecific.MoveAppraisers(databasePath, out errOut)) throw new Exception(errOut);
                 if (!Database.ApplicationSpecific.MoveGunSmiths(databasePath, out errOut)) throw new Exception(errOut);
 
-
+                sql =
+                    "CREATE TABLE Gun_Collection_Docs (ID AUTOINCREMENT PRIMARY KEY,doc_name Text(255), doc_description Text(255)" +
+                    ", doc_filename Text(255),dta DATETIME,doc_file OLEOBJECT,length Number, doc_thumb OLEOBJECT,doc_ext Text(255), doc_cat Text(255));";
+                if (!Database.RunSql(databasePath,
+                    sql,
+                    out errOut, true)) throw new Exception(errOut);
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs", out errOut, true)) throw new Exception(errOut);
-                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Classification", out errOut, true)) throw new Exception(errOut);
-                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs_Links", out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE Gun_Collection_Docs ALTER dta DATETIME DEFAULT NOW() NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE Gun_Collection_Docs ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
 
-                
+
+                sql = "CREATE TABLE Gun_Collection_Docs_Links (ID AUTOINCREMENT PRIMARY KEY,DID INTEGER, GID INTEGER,dta DATETIME)";
+                if (!Database.RunSql(databasePath,
+                    sql,
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs_Links", out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE Gun_Collection_Docs ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
+
+                sql = "CREATE TABLE Gun_Collection_Classification (ID AUTOINCREMENT PRIMARY KEY,myclass Text(255))";
+                if (!Database.RunSql(databasePath,
+                    sql,
+                    out errOut, true)) throw new Exception(errOut);
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Classification", out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE Gun_Collection_Classification ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
+
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Classification", "[myclass]", "Antique", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Classification", "[myclass]", "C&R", out errOut)) throw new Exception(errOut);
+                if (!Database.AddNewData(databasePath, "Gun_Collection_Classification", "[myclass]", "Modern", out errOut)) throw new Exception(errOut);
+
 
                 //Perform Update in Registry of new hotfix
                 if (!MGC.Database.SaveDatabaseVersion(databasePath, "6.0", out errOut)) throw new Exception(errOut);
@@ -799,6 +835,41 @@ namespace BurnSoft.Applications.MGC.hotixes
             catch (Exception e)
             {
                 SendErrors(ErrorMessage("Nine", e));
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Hot Fix number 10
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        private bool Ten(string databasePath, out string errOut)
+        {
+            errOut = "";
+            int hotFixNumber = 10;
+            bool bAns = false;
+            SendStatus($"Starting Hotfix {hotFixNumber}.");
+            try
+            {
+                if (!Database.RunSql(databasePath,
+                    "CREATE TABLE Gun_Collection_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number,AID Number);'",
+                    out errOut, true)) throw new Exception(errOut);
+                
+                if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Accessories_Link", out errOut, true)) throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    "ALTER TABLE Gun_Collection_Accessories ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
+                
+
+                //Perform Update in Registry of new hotfix
+                if (!MGC.Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);
+                if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                SendErrors(ErrorMessage("Ten", e));
             }
             return bAns;
         }
