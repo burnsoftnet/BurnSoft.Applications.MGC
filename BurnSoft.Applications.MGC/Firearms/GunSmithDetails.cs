@@ -400,24 +400,27 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
         /// <summary>
         /// Listses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="doDistinct"></param>
         /// <returns>List&lt;GunSmithWorkDone&gt;.</returns>
         /// <exception cref="Exception"></exception>
         /// <exception cref="Exception"></exception>
-        public static List<GunSmithWorkDone> Lists(string databasePath,  out string errOut)
+        public static List<GunSmithWorkDone> Lists(string databasePath,  out string errOut, bool doDistinct = false)
         {
             List<GunSmithWorkDone> lst = new List<GunSmithWorkDone>();
             errOut = @"";
             try
             {
                 string sql = $"select * from GunSmith_Details";
+                if (doDistinct) sql = $"SELECT DISTINCT(gsmith) as name from GunSmith_Details";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
-                lst = GetData(dt, out errOut);
+                lst = GetData(dt, out errOut, doDistinct);
                 if (errOut?.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
@@ -426,13 +429,15 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
         /// <summary>
         /// Gets the data.
         /// </summary>
         /// <param name="dt">The dt.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="doDistinctGunSmiths"></param>
         /// <returns>List&lt;GunSmithWorkDone&gt;.</returns>
-        private static List<GunSmithWorkDone> GetData(DataTable dt, out string errOut)
+        private static List<GunSmithWorkDone> GetData(DataTable dt, out string errOut, bool doDistinctGunSmiths = false)
         {
             List<GunSmithWorkDone> lst = new List<GunSmithWorkDone>();
             errOut = @"";
@@ -440,38 +445,58 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 foreach (DataRow d in dt.Rows)
                 {
-                    long id = Convert.ToInt32(d["id"]);
-                    long gunId = d["gid"] != DBNull.Value ? Convert.ToInt32(d["gid"]) : 0;
-                    long gsid = 0;
-                    try
+                    if (!doDistinctGunSmiths)
                     {
-                        gsid = d["gsid"] != DBNull.Value ? Convert.ToInt32(d["gsid"]) : 0;
-                    }
+                        long id = Convert.ToInt32(d["id"]);
+                        long gunId = d["gid"] != DBNull.Value ? Convert.ToInt32(d["gid"]) : 0;
+                        long gsid = 0;
+                        try
+                        {
+                            gsid = d["gsid"] != DBNull.Value ? Convert.ToInt32(d["gsid"]) : 0;
+                        }
 #pragma warning disable 168
-                    catch (Exception e)
+                        catch (Exception e)
 #pragma warning restore 168
-                    {
-                        //TODO: #39 Once this field is in the hotfix then this can be removed.
-                        //Temp Catch for databases that are missing the gsid field
-                    }
-                    string orderDetails = d["od"] != DBNull.Value ? d["od"].ToString().Trim() : "";
-                    string rDate = d["rdate"] != DBNull.Value ? d["rdate"].ToString().Trim() : "";
-                    string sDate = d["sdate"] != DBNull.Value ? d["sdate"].ToString().Trim() : "";
-                    string notes = d["notes"] != DBNull.Value ? d["notes"].ToString().Trim() : "";
-                    string smith = d["gsmith"] != DBNull.Value ? d["gsmith"].ToString().Trim() : "";
+                        {
+                            //TODO: #39 Once this field is in the hotfix then this can be removed.
+                            //Temp Catch for databases that are missing the gsid field
+                        }
+                        string orderDetails = d["od"] != DBNull.Value ? d["od"].ToString().Trim() : "";
+                        string rDate = d["rdate"] != DBNull.Value ? d["rdate"].ToString().Trim() : "";
+                        string sDate = d["sdate"] != DBNull.Value ? d["sdate"].ToString().Trim() : "";
+                        string notes = d["notes"] != DBNull.Value ? d["notes"].ToString().Trim() : "";
+                        string smith = d["gsmith"] != DBNull.Value ? d["gsmith"].ToString().Trim() : "";
 
-                    lst.Add(new GunSmithWorkDone()
+                        lst.Add(new GunSmithWorkDone()
+                        {
+                            Id = id,
+                            GunId = gunId,
+                            GunSmithId = gsid,
+                            OrderDetails = orderDetails,
+                            ReturnDate = rDate,
+                            StartDate = sDate,
+                            Notes = notes,
+                            GunSmithName = smith,
+                            LastSync = d["sync_lastupdate"] != null ? d["sync_lastupdate"].ToString() : ""
+                        });
+                    }
+                    else
                     {
-                        Id = id,
-                        GunId = gunId,
-                        GunSmithId = gsid,
-                        OrderDetails = orderDetails,
-                        ReturnDate = rDate,
-                        StartDate = sDate,
-                        Notes = notes,
-                        GunSmithName = smith,
-                        LastSync = d["sync_lastupdate"] != null ? d["sync_lastupdate"].ToString() : ""
-                    });
+                        string smith = d["name"] != DBNull.Value ? d["name"].ToString().Trim() : "";
+                        lst.Add(new GunSmithWorkDone()
+                        {
+                            Id = 0,
+                            GunId = 0,
+                            GunSmithId = 0,
+                            OrderDetails = "",
+                            ReturnDate = "",
+                            StartDate = "",
+                            Notes = "",
+                            GunSmithName = smith,
+                            LastSync = ""
+                        });
+                    }
+                    
                 }
             }
             catch (Exception e)

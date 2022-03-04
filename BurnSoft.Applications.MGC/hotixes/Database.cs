@@ -145,11 +145,11 @@ namespace BurnSoft.Applications.MGC.hotixes
             bool bAns = false;
             try
             {
-                if (!Database.ValueDoesExist(databasePath, table, column, value, out errOut, usePassword))
+                if (!ValueDoesExist(databasePath, table, column, value, out errOut, usePassword))
                 {
                     if (errOut.Length > 0) throw new Exception(errOut);
                     string sql = $"INSERT INTO {table} ({column}) VALUES ('{value}');";
-                    if (!Database.RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                    if (!RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                 }
 
                 bAns = true;
@@ -565,7 +565,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                             if (col2Value != null)
                             {
                                 sql = $"UPDATE {table} set {column2}={col1Value} where id = {id}";
-                                if (!Database.RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                                if (!RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                             }
                         }
                     }
@@ -575,7 +575,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 }
                 catch (Exception e)
                 {
-                    errOut = $"{ErrorMessage($"SwapValues", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                    errOut = $"{ErrorMessage("SwapValues", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
                 }
                 return bAns;
             }
@@ -596,11 +596,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                 {
                     List<GunCollectionList> lst = MyCollection.GetList(databasePath, out errOut);
                     if (errOut.Length > 0) throw new Exception(errOut);
-                    Universal.BSOtherObjects obj = new BSOtherObjects();
+                    BSOtherObjects obj = new BSOtherObjects();
                     foreach (GunCollectionList l in lst)
                     {
                         string name = obj.FC(l.AppriasedBy);
-                        if (!Database.ValueDoesExist(databasePath, "Appriaser_Contact_Details", "aName", name, out errOut))
+                        if (!ValueDoesExist(databasePath, "Appriaser_Contact_Details", "aName", name, out errOut))
                         {
                             if (!PeopleAndPlaces.Appraisers.Add(databasePath, name, out errOut))
                                 throw new Exception(errOut);
@@ -610,7 +610,42 @@ namespace BurnSoft.Applications.MGC.hotixes
                 }
                 catch (Exception e)
                 {
-                    errOut = $"{ErrorMessage($"MoveAppraisers", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                    errOut = $"{ErrorMessage("MoveAppraisers", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                }
+                return bAns;
+            }
+            /// <summary>
+            /// Moves the gun smiths.
+            /// </summary>
+            /// <param name="databasePath">The database path.</param>
+            /// <param name="errOut">The error out.</param>
+            /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+            /// <exception cref="System.Exception"></exception>
+            /// <exception cref="System.Exception"></exception>
+            internal static bool MoveGunSmiths(string databasePath, out string errOut)
+            {
+                errOut = "";
+                bool bAns = false;
+                string sql = "";
+                try
+                {
+                    List<GunSmithWorkDone> lst = GunSmithDetails.Lists(databasePath, out errOut, true);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    BSOtherObjects obj = new BSOtherObjects();
+                    foreach (GunSmithWorkDone l in lst)
+                    {
+                        string name = obj.FC(l.GunSmithName);
+                        if (!ValueDoesExist(databasePath, "GunSmith_Contact_Details", "gName", name, out errOut))
+                        {
+                            if (!PeopleAndPlaces.GunSmiths.Add(databasePath, name, out errOut))
+                                throw new Exception(errOut);
+                        }
+                    }
+                    bAns = true;
+                }
+                catch (Exception e)
+                {
+                    errOut = $"{ErrorMessage("MoveGunSmiths", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
                 }
                 return bAns;
             }
@@ -635,8 +670,8 @@ namespace BurnSoft.Applications.MGC.hotixes
             try
             {
                
-                if (!Database.AddNewData(databasePath, syncTableName, "tblname", table, out errOut)) throw new Exception(errOut);
-                if (!Database.Management.Tables.Columns.Add(databasePath, "sync_lastupdate", table, "DATETIME", "Now()", out errOut))
+                if (!AddNewData(databasePath, syncTableName, "tblname", table, out errOut)) throw new Exception(errOut);
+                if (!Management.Tables.Columns.Add(databasePath, "sync_lastupdate", table, "DATETIME", "Now()", out errOut))
                     throw new Exception(errOut);
                 if (updateField)
                     if (!RunSql(databasePath, $"UPDATE {table} set sync_lastupdate=Now()", out errOut))
@@ -645,7 +680,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             catch (Exception e)
             {
-                errOut = $"{ErrorMessage($"AddSyncToTable", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                errOut = $"{ErrorMessage("AddSyncToTable", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
             }
             return bAns;
         }
