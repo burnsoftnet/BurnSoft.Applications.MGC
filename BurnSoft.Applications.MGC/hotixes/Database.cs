@@ -408,7 +408,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                         {
                             //sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} [\"{defaultValue}\"];";
                             sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} \"{defaultValue}\";";
-                            if (RunSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
+                            if (!RunSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
                             bAns = true;
                         }
                         catch (Exception e)
