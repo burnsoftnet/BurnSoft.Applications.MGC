@@ -868,6 +868,9 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.Management.Tables.Columns.Add(databasePath, "IsNoLeathal", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
 
+                if (!Database.RunSql(databasePath, "UPDATE Gun_Collection set isCompetition=0,IsNoLeathal=0",
+                    out errOut, true)) throw new Exception(errOut);
+
                 //Perform Update in Registry of new hotfix
                 if (!MGC.Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
