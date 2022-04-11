@@ -766,11 +766,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                     ",website Text(255), email Text(255), lic Text(255), zip Text(255), SIB INTEGER);";
                 if (!Database.RunSql(databasePath,
                     sql,
-                    out errOut, true)) throw new Exception(errOut);
+                    out errOut, true))
+                {
+                    if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                }
                 if (!Database.AddSyncToTable(databasePath, "Appriaser_Contact_Details", out errOut, true)) throw new Exception(errOut);
-                if (!Database.RunSql(databasePath,
-                    "ALTER TABLE Appriaser_Contact_Details ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
-                    out errOut, true)) throw new Exception(errOut);
                 if (!Database.RunSql(databasePath,
                     "ALTER TABLE Appriaser_Contact_Details ALTER SIB Number DEFAULT 1 NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
@@ -780,12 +780,12 @@ namespace BurnSoft.Applications.MGC.hotixes
                     ",website Text(255), email Text(255), lic Text(255), zip Text(255), SIB INTEGER);";
                 if (!Database.RunSql(databasePath,
                     sql,
-                    out errOut, true)) throw new Exception(errOut);
+                    out errOut, true))
+                {
+                    if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                }
 
                 if (!Database.AddSyncToTable(databasePath, "GunSmith_Contact_Details", out errOut, true)) throw new Exception(errOut);
-                if (!Database.RunSql(databasePath,
-                    "ALTER TABLE GunSmith_Contact_Details ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
-                    out errOut, true)) throw new Exception(errOut);
                 if (!Database.RunSql(databasePath,
                     "ALTER TABLE GunSmith_Contact_Details ALTER SIB Number DEFAULT 1 NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
@@ -797,33 +797,33 @@ namespace BurnSoft.Applications.MGC.hotixes
                     ", doc_filename Text(255),dta DATETIME,doc_file OLEOBJECT,length Number, doc_thumb OLEOBJECT,doc_ext Text(255), doc_cat Text(255));";
                 if (!Database.RunSql(databasePath,
                     sql,
-                    out errOut, true)) throw new Exception(errOut);
+                    out errOut, true))
+                {
+                    if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                }
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs", out errOut, true)) throw new Exception(errOut);
                 if (!Database.RunSql(databasePath,
                     "ALTER TABLE Gun_Collection_Docs ALTER dta DATETIME DEFAULT NOW() NOT NULL;",
-                    out errOut, true)) throw new Exception(errOut);
-                if (!Database.RunSql(databasePath,
-                    "ALTER TABLE Gun_Collection_Docs ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
 
 
                 sql = "CREATE TABLE Gun_Collection_Docs_Links (ID AUTOINCREMENT PRIMARY KEY,DID INTEGER, GID INTEGER,dta DATETIME)";
                 if (!Database.RunSql(databasePath,
                     sql,
-                    out errOut, true)) throw new Exception(errOut);
+                    out errOut, true))
+                {
+                    if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                }
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Docs_Links", out errOut, true)) throw new Exception(errOut);
-                if (!Database.RunSql(databasePath,
-                    "ALTER TABLE Gun_Collection_Docs ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
-                    out errOut, true)) throw new Exception(errOut);
 
                 sql = "CREATE TABLE Gun_Collection_Classification (ID AUTOINCREMENT PRIMARY KEY,myclass Text(255))";
                 if (!Database.RunSql(databasePath,
                     sql,
-                    out errOut, true)) throw new Exception(errOut);
+                    out errOut, true))
+                {
+                    if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                }
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Classification", out errOut, true)) throw new Exception(errOut);
-                if (!Database.RunSql(databasePath,
-                    "ALTER TABLE Gun_Collection_Classification ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
-                    out errOut, true)) throw new Exception(errOut);
 
                 if (!Database.AddNewData(databasePath, "Gun_Collection_Classification", "[myclass]", "Antique", out errOut)) throw new Exception(errOut);
                 if (!Database.AddNewData(databasePath, "Gun_Collection_Classification", "[myclass]", "C&R", out errOut)) throw new Exception(errOut);

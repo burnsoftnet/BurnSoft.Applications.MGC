@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.OleDb;
+using System.Security.Principal;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
@@ -202,14 +203,12 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             bool bAns = false;
+            OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
             try
             {
-                OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                 conn.Open();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-
-                conn.Close();
                 bAns = true;
             }
             catch (Exception e)
@@ -244,6 +243,8 @@ namespace BurnSoft.Applications.MGC.hotixes
                 }
                 //errOut = ErrorMessage("RunSql", e);
             }
+
+            conn.Close();
             return bAns;
         }
         /// <summary>
@@ -383,7 +384,14 @@ namespace BurnSoft.Applications.MGC.hotixes
                         }
                         catch (Exception e)
                         {
-                            errOut = ErrorMessage("Management.Tables.Columns.Add", e);
+                            if (!e.Message.Contains("already exists"))
+                            {
+                                errOut = ErrorMessage("Management.Tables.Columns.Add", e);
+                            }
+                            else
+                            {
+                                bAns = true;
+                            }
                         }
                         return bAns;
                     }
@@ -407,13 +415,29 @@ namespace BurnSoft.Applications.MGC.hotixes
                         try
                         {
                             //sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} [\"{defaultValue}\"];";
-                            sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} \"{defaultValue}\";";
+                            if (type.ToLower().Equals("number"))
+                            {
+                                sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} [{defaultValue}];";
+                            }
+                            else
+                            {
+                                sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} \"{defaultValue}\";";
+                            }
+                            
                             if (!RunSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
                             bAns = true;
                         }
                         catch (Exception e)
                         {
-                            errOut = $"{ErrorMessage("Management.Tables.Columns.Add", e)} {Environment.NewLine}SQL - {sql}";
+                            if (!e.Message.Contains("already exists"))
+                            {
+                                errOut = $"{ErrorMessage("Management.Tables.Columns.Add", e)} {Environment.NewLine}SQL - {sql}";
+                            }
+                            else
+                            {
+                                bAns = true;
+                            }
+                            
                         }
                         return bAns;
                     }
@@ -497,7 +521,14 @@ namespace BurnSoft.Applications.MGC.hotixes
                     }
                     catch (Exception e)
                     {
-                        errOut = ErrorMessage("Management.Views.Create", e);
+                        if (!e.Message.Contains("already exists"))
+                        {
+                            errOut = ErrorMessage("Management.Views.Create", e);
+                        }
+                        else
+                        {
+                            bAns = true;
+                        }
                     }
                     return bAns;
                 }
@@ -602,6 +633,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     foreach (GunCollectionList l in lst)
                     {
                         string name = obj.FC(l.AppriasedBy);
+                        if (name?.Length == 0 || name == null) name = "  ";
                         if (!ValueDoesExist(databasePath, "Appriaser_Contact_Details", "aName", name, out errOut))
                         {
                             if (!PeopleAndPlaces.Appraisers.Add(databasePath, name, out errOut))

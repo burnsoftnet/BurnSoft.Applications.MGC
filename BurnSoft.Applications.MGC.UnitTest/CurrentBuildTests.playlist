@@ -18,6 +18,12 @@
                         <Property Name="DisplayName" Value="HotFix10Test" />
                       </Rule>
                     </Rule>
+                    <Rule Match="All">
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Hotfixes.RunHotFixes.HotFix9Test" />
+                      <Rule Match="Any">
+                        <Property Name="DisplayName" Value="HotFix9Test" />
+                      </Rule>
+                    </Rule>
                   </Rule>
                 </Rule>
               </Rule>
