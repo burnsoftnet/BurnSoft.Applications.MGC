@@ -860,7 +860,12 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Database.RunSql(databasePath,
                     "ALTER TABLE Gun_Collection_Accessories ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
-                
+
+                if (!Database.Management.Tables.Columns.Add(databasePath, "isCompetition", "Gun_Collection", "number", "0", out errOut))
+                    throw new Exception(errOut);
+
+                if (!Database.Management.Tables.Columns.Add(databasePath, "IsNoLeathal", "Gun_Collection", "number", "0", out errOut))
+                    throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
                 if (!MGC.Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);
