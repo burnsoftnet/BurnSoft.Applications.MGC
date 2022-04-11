@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BurnSoft.Universal;
 
 namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
 {
@@ -30,7 +28,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         public void Init()
         {
             // Vs2019.GetSetting("", TestContext);
-            BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Global;
 
@@ -83,21 +84,23 @@ namespace BurnSoft.Applications.MGC.hotixes
         }
         #endregion
         #region "Private Hotfix Helpers"
+
         /// <summary>
         /// Updates the reg.
         /// </summary>
         /// <param name="hotfixNumber">The hotfix number.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="installNotice">Default marks as oninstall, but if you apply on update, then use date</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        private bool UpdateReg(int hotfixNumber, out string errOut)
+        private bool UpdateReg(int hotfixNumber, out string errOut, string installNotice = "OnInstall")
         {
             errOut = "";
             bool bAns = false;
             try
             {
-                if (!MyRegistry.SetHotFix(hotfixNumber, out errOut)) throw new Exception(errOut);
+                if (!MyRegistry.SetHotFix(hotfixNumber, out errOut, installNotice)) throw new Exception(errOut);
                 if (!MyRegistry.SetLastUpdate(hotfixNumber, out errOut)) throw new Exception(errOut);
                 SendStatus($"Hotfix {hotfixNumber} is Completed!");
                 bAns = true;
@@ -873,7 +876,7 @@ namespace BurnSoft.Applications.MGC.hotixes
 
                 //Perform Update in Registry of new hotfix
                 if (!MGC.Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);
-                if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
+                if (!UpdateReg(hotFixNumber, out errOut, DateTime.Now.ToString(CultureInfo.InvariantCulture))) throw new Exception(errOut);
                 bAns = true;
             }
             catch (Exception e)
