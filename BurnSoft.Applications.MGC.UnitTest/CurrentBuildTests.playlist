@@ -7,15 +7,15 @@
           <Property Name="Project" Value="BurnSoft.Applications.MGC.UnitTest" />
           <Rule Match="Any">
             <Rule Match="All">
-              <Property Name="Namespace" Value="BurnSoft.Applications.MGC.UnitTest.Firearms" />
+              <Property Name="Namespace" Value="BurnSoft.Applications.MGC.UnitTest.Hotfixes" />
               <Rule Match="Any">
                 <Rule Match="All">
-                  <Property Name="Class" Value="GunTypeTest" />
+                  <Property Name="Class" Value="RunHotFixes" />
                   <Rule Match="Any">
                     <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Firearms.GunTypeTest.TestMethod1" />
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Hotfixes.RunHotFixes.HotFix10Test" />
                       <Rule Match="Any">
-                        <Property Name="DisplayName" Value="TestMethod1" />
+                        <Property Name="DisplayName" Value="HotFix10Test" />
                       </Rule>
                     </Rule>
                   </Rule>

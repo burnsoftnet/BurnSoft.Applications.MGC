@@ -853,13 +853,14 @@ namespace BurnSoft.Applications.MGC.hotixes
             try
             {
                 if (!Database.RunSql(databasePath,
-                    "CREATE TABLE Gun_Collection_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number,AID Number);'",
-                    out errOut, true)) throw new Exception(errOut);
-                
+                    "CREATE TABLE Gun_Collection_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number, AID Number);",
+                    out errOut, true))
+                {
+                    if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                }
+
                 if (!Database.AddSyncToTable(databasePath, "Gun_Collection_Accessories_Link", out errOut, true)) throw new Exception(errOut);
-                if (!Database.RunSql(databasePath,
-                    "ALTER TABLE Gun_Collection_Accessories ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
-                    out errOut, true)) throw new Exception(errOut);
+                
 
                 if (!Database.Management.Tables.Columns.Add(databasePath, "isCompetition", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);

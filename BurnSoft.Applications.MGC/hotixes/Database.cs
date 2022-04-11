@@ -149,7 +149,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 {
                     if (errOut.Length > 0) throw new Exception(errOut);
                     string sql = $"INSERT INTO {table} ({column}) VALUES ('{value}');";
-                    if (!RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                    if (!RunSql(databasePath, sql, out errOut, usePassword)) throw new Exception(errOut);
                 }
 
                 bAns = true;
@@ -403,15 +403,17 @@ namespace BurnSoft.Applications.MGC.hotixes
                     {
                         bool bAns = false;
                         errOut = "";
+                        string sql = "";
                         try
                         {
-                            string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} [\"{defaultValue}\"];";
-                            if (RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                            //sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} [\"{defaultValue}\"];";
+                            sql = $"ALTER TABLE {table} ADD COLUMN {name} {type} \"{defaultValue}\";";
+                            if (RunSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
                             bAns = true;
                         }
                         catch (Exception e)
                         {
-                            errOut = ErrorMessage("Management.Tables.Columns.Add", e);
+                            errOut = $"{ErrorMessage("Management.Tables.Columns.Add", e)} {Environment.NewLine}SQL - {sql}";
                         }
                         return bAns;
                     }
@@ -674,8 +676,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!Management.Tables.Columns.Add(databasePath, "sync_lastupdate", table, "DATETIME", "Now()", out errOut))
                     throw new Exception(errOut);
                 if (updateField)
-                    if (!RunSql(databasePath, $"UPDATE {table} set sync_lastupdate=Now()", out errOut))
+                    if (!RunSql(databasePath, $"UPDATE {table} set sync_lastupdate=Now()", out errOut,true))
                         throw new Exception(errOut);
+                if (!Database.RunSql(databasePath,
+                    $"ALTER TABLE {table} ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
+                    out errOut, true)) throw new Exception(errOut);
                 bAns = true;
             }
             catch (Exception e)
