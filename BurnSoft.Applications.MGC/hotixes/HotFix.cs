@@ -1088,7 +1088,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>List&lt;System.Int32&gt;.</returns>
-        public static List<int> NeedsUpdate(string databasePath, out string errOut)
+        internal static List<int> UpdateList(string databasePath, out string errOut)
         {
             List<int> hotFixList = new List<int>();
             errOut = "";
@@ -1105,29 +1105,51 @@ namespace BurnSoft.Applications.MGC.hotixes
                         hotFixList.Add(t.HotFix);
                     }
                 }
-
+                hotFixList.Sort();
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("NeedsUpdate", e);
+                errOut = ErrorMessage("UpdateList", e);
             }
             return hotFixList;
         }
         /// <summary>
-        /// Applies the missing hot fixes.
+        /// Needses the update.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="hotfixList">The hotfix list.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static bool ApplyMissingHotFixes(string databasePath,List<int> hotfixList, out string errOut)
+        public static bool NeedsUpdate(string databasePath, out string errOut)
         {
             bool bAns = false;
             errOut = "";
             try
             {
-                foreach (int h in hotfixList)
+                List<int> hotFixList = UpdateList(databasePath, out errOut);
+                bAns = hotFixList.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("NeedsUpdate", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Applies the missing hot fixes.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ApplyMissingHotFixes(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                List<int> hotFixList = UpdateList(databasePath, out errOut);
+
+                foreach (int h in hotFixList)
                 {
                     if (!Run(databasePath, h, out errOut)) throw new Exception(errOut);
                 }
