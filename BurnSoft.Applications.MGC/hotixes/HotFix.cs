@@ -954,6 +954,10 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection set isCompetition=0,IsNoLeathal=0",
                     out errOut, true)) throw new Exception(errOut);
 
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GSID", "GunSmith_Details", "number", "0", out errOut))
+                    throw new Exception(errOut);
+
+
                 //Perform Update in Registry of new hotfix
                 if (!Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut, DateTime.Now.ToString(CultureInfo.InvariantCulture))) throw new Exception(errOut);
