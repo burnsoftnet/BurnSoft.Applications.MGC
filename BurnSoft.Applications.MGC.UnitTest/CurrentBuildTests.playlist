@@ -13,15 +13,15 @@
                   <Property Name="Class" Value="RunHotFixes" />
                   <Rule Match="Any">
                     <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Hotfixes.RunHotFixes.HotFix10Test" />
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Hotfixes.RunHotFixes.ApplyMissingUpdateTests" />
                       <Rule Match="Any">
-                        <Property Name="DisplayName" Value="HotFix10Test" />
+                        <Property Name="DisplayName" Value="ApplyMissingUpdateTests" />
                       </Rule>
                     </Rule>
                     <Rule Match="All">
-                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Hotfixes.RunHotFixes.HotFix9Test" />
+                      <Property Name="TestWithNormalizedFullyQualifiedName" Value="BurnSoft.Applications.MGC.UnitTest.Hotfixes.RunHotFixes.NeedsUpdateTest" />
                       <Rule Match="Any">
-                        <Property Name="DisplayName" Value="HotFix9Test" />
+                        <Property Name="DisplayName" Value="NeedsUpdateTest" />
                       </Rule>
                     </Rule>
                   </Rule>

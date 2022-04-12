@@ -91,5 +91,44 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
             bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath),10, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod]
+        public void NeedsUpdateTest()
+        {
+            bool value = hotixes.HotFix.NeedsUpdate(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine("Needs Updates.");
+            }
+            else
+            {
+                TestContext.WriteLine("Does not need Updates.");
+            }
+            General.HasTrueValue(_errOut.Length == 0, _errOut);
+        }
+
+        [TestMethod]
+        public void ApplyMissingUpdateTests()
+        {
+            string appliedFixes = "";
+            bool value = hotixes.HotFix.ApplyMissingHotFixes(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut, out appliedFixes);
+            if (value)
+            {
+                if (appliedFixes.Length > 0)
+                {
+                    TestContext.WriteLine($"Updates were applied: {appliedFixes}");
+                }
+                else
+                {
+                    TestContext.WriteLine($"No Need to Apply Updates");
+                }
+                
+            }
+            else
+            {
+                TestContext.WriteLine("Error while appling updates");
+            }
+            General.HasTrueValue(_errOut.Length == 0, _errOut);
+        }
     }
 }

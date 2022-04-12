@@ -17,13 +17,10 @@ namespace BurnSoft.Applications.MGC.hotixes
     public class HotFix
     {
         /// <summary>
-        /// The number of fixes that was before current version used for the settings on new install
+        /// The number of fixes for this version in the datrabase
         /// </summary>
-        public const int NumberOfFixesBeforeCurrentVersion = 9;
-        /// <summary>
-        /// The number of fixes after current version
-        /// </summary>
-        public const int NumberOfFixesAfterCurrentVersion = 10;
+        public const int NumberOfFixes = 10;
+
         
         #region "Exception Error Handling"        
         /// <summary>
@@ -1073,7 +1070,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             cmd.Add(new HotFixToDbList()
             {
                 HotFix = 9,
-                DbVersion = 6.5
+                DbVersion = 6.0
             });
             cmd.Add(new HotFixToDbList()
             {
@@ -1134,17 +1131,20 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
+
         /// <summary>
         /// Applies the missing hot fixes.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="appliedFixes"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool ApplyMissingHotFixes(string databasePath, out string errOut)
+        public static bool ApplyMissingHotFixes(string databasePath, out string errOut, out string appliedFixes)
         {
             bool bAns = false;
             errOut = "";
+            appliedFixes = "";
             try
             {
                 List<int> hotFixList = UpdateList(databasePath, out errOut);
@@ -1152,9 +1152,15 @@ namespace BurnSoft.Applications.MGC.hotixes
                 foreach (int h in hotFixList)
                 {
                     if (!Run(databasePath, h, out errOut)) throw new Exception(errOut);
+                    appliedFixes += $"{h} ";
                 }
                 bAns = true;
+                if (appliedFixes.Length > 0)
+                {
+                    appliedFixes = appliedFixes.Trim();
+                    appliedFixes = appliedFixes.Replace(" ", ",");
 
+                }
             }
             catch (Exception e)
             {
