@@ -187,7 +187,7 @@ namespace BurnSoft.Applications.MGC.Global
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)
                 {
-                    lAns = Convert.ToInt32(d["T"]);
+                    lAns = d["T"] != DBNull.Value ? Convert.ToInt32(d["T"]) : 0;
                 }
 
             }
