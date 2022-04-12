@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.OleDb;
-using System.Security.Principal;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
@@ -17,17 +16,17 @@ using BurnSoft.Universal;
 namespace BurnSoft.Applications.MGC.hotixes
 {
     /// <summary>
-    /// This Database class uses ADODB for database connection, unlike the Database class in the root
+    /// This HfDatabase class uses ADODB for database connection, unlike the HfDatabase class in the root
     ///  which uses odbc for it's connection methods.  This code was converted from the hotfix application.
     /// </summary>
-    public class Database
+    public class HfDatabase
     {
 
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
         /// </summary>
-        private static string _classLocation = "BurnSoft.Applications.MGC.hotixes.Database";
+        private static string _classLocation = "BurnSoft.Applications.MGC.hotixes.HfDatabase";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
@@ -76,7 +75,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder.ConnectionString = $"Data Source={databasePath}";
             builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
-            if (usePassword) builder.Add("Jet OLEDB:Database Password", MGC.Database.DbPassword);
+            if (usePassword) builder.Add("Jet OLEDB:HfDatabase Password", Database.DbPassword);
             builder.Add("Mode", 12);
             return builder.ToString();
         }
@@ -265,7 +264,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 bool bAns = false;
                 try
                 {
-                    string sql = $"ALTER DATABASE PASSWORD {MGC.Database.DbPassword} NULL";
+                    string sql = $"ALTER DATABASE PASSWORD {Database.DbPassword} NULL";
                     if (!RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                     bAns = true;
                 }
@@ -288,7 +287,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 bool bAns = false;
                 try
                 {
-                    string sql = $"ALTER DATABASE PASSWORD NULL {MGC.Database.DbPassword}";
+                    string sql = $"ALTER DATABASE PASSWORD NULL {Database.DbPassword}";
                     if (!RunSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
                     bAns = true;
                 }
@@ -710,7 +709,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (updateField)
                     if (!RunSql(databasePath, $"UPDATE {table} set sync_lastupdate=Now()", out errOut,true))
                         throw new Exception(errOut);
-                if (!Database.RunSql(databasePath,
+                if (!RunSql(databasePath,
                     $"ALTER TABLE {table} ALTER sync_lastupdate DATETIME DEFAULT NOW() NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
                 bAns = true;

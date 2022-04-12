@@ -42,21 +42,21 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod]
         public void RemovePasswordTest()
         {
-            bool value = hotixes.Database.Security.RemovePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
+            bool value = hotixes.HfDatabase.Security.RemovePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
 
         [TestMethod]
         public void AddPasswordTest()
         {
-            bool value = hotixes.Database.Security.AddPassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
+            bool value = hotixes.HfDatabase.Security.AddPassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
 
         [TestMethod]
         public void ChangePasswordTest()
         {
-            bool value = hotixes.Database.Security.ChangePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
+            bool value = hotixes.HfDatabase.Security.ChangePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
     }

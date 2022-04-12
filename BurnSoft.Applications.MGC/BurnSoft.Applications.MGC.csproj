@@ -94,7 +94,7 @@
     <Compile Include="Global\DatabaseRelated.cs" />
     <Compile Include="Global\Helpers.cs" />
     <Compile Include="Global\MyRegistry.cs" />
-    <Compile Include="hotixes\Database.cs" />
+    <Compile Include="hotixes\HfDatabase.cs" />
     <Compile Include="hotixes\HotFix.cs" />
     <Compile Include="hotixes\types\DbAddData.cs" />
     <Compile Include="hotixes\types\DbColumns.cs" />
