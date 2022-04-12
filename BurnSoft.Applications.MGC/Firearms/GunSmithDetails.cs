@@ -458,7 +458,6 @@ namespace BurnSoft.Applications.MGC.Firearms
                         catch (Exception e)
 #pragma warning restore 168
                         {
-                            //TODO: #39 Once this field is in the hotfix then this can be removed.
                             //Temp Catch for databases that are missing the gsid field
                         }
                         string orderDetails = d["od"] != DBNull.Value ? d["od"].ToString().Trim() : "";

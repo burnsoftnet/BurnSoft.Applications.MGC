@@ -15,7 +15,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
     [TestClass]
     public class OwnerInfoTest
     {
-        //TODO: Finish this unit test
         /// <summary>
         /// Gets or sets the test context.
         /// </summary>
