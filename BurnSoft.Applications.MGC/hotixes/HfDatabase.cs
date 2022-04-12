@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
+// ReSharper disable ConvertIfStatementToConditionalTernaryExpression
 
 // ReSharper disable UnusedMember.Global
 // ReSharper disable ConvertIfStatementToNullCoalescingExpression

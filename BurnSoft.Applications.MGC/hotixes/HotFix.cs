@@ -4,6 +4,8 @@ using System.Globalization;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.hotixes.types;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UseObjectOrCollectionInitializer
 
 // ReSharper disable UnusedMember.Local
 
@@ -1079,6 +1081,64 @@ namespace BurnSoft.Applications.MGC.hotixes
                 DbVersion = 6.1
             });
             return cmd;
+        }
+        /// <summary>
+        /// Needses the update.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;System.Int32&gt;.</returns>
+        public static List<int> NeedsUpdate(string databasePath, out string errOut)
+        {
+            List<int> hotFixList = new List<int>();
+            errOut = "";
+            try
+            {
+                string version = DatabaseRelated.GetDatabaseVersion(databasePath, out errOut);
+                double ver = Convert.ToDouble(version);
+                List<HotFixToDbList> toDoList = HotfixToDbVersion();
+
+                foreach (HotFixToDbList t in toDoList)
+                {
+                    if (t.DbVersion > ver)
+                    {
+                        hotFixList.Add(t.HotFix);
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("NeedsUpdate", e);
+            }
+            return hotFixList;
+        }
+        /// <summary>
+        /// Applies the missing hot fixes.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="hotfixList">The hotfix list.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ApplyMissingHotFixes(string databasePath,List<int> hotfixList, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                foreach (int h in hotfixList)
+                {
+                    if (!Run(databasePath, h, out errOut)) throw new Exception(errOut);
+                }
+                bAns = true;
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ApplyMissingHotFixes", e);
+            }
+            return bAns;
         }
     }
 }

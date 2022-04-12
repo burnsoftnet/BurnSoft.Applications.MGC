@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Odbc;
 // ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
 
 namespace BurnSoft.Applications.MGC
 {
@@ -133,7 +134,7 @@ namespace BurnSoft.Applications.MGC
             errOut = @"";
             try
             {
-                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};" : $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
+                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePath}\\{databaseName}\";Jet OLEDB:Database Password={password};" : "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
             }
             catch (Exception e)
             {
@@ -154,7 +155,7 @@ namespace BurnSoft.Applications.MGC
             errOut = @"";
             try
             {
-                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePathAndName}\";Jet OLEDB:Database Password={password};" : $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
+                sAns = password?.Length > 0 ? $"Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;Data Source=\"{databasePathAndName}\";Jet OLEDB:Database Password={password};" : "Provider=Microsoft.Jet.OLEDB.4.0;Persist Security Info=False;";
             }
             catch (Exception e)
             {

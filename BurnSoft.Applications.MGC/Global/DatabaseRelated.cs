@@ -115,7 +115,7 @@ namespace BurnSoft.Applications.MGC.Global
         /// <returns>System.String.</returns>
         public static string GetDatabaseVersion(string databasePath, out string errOut)
         {
-            string sAns = "";
+            string sAns = "0";
             errOut = "";
             try
             {
