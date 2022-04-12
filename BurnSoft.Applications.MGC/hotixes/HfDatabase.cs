@@ -74,8 +74,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder();
             builder.ConnectionString = $"Data Source={databasePath}";
-            builder.Add("Provider", "Microsoft.Jet.Oledb.4.0");
-            if (usePassword) builder.Add("Jet OLEDB:HfDatabase Password", Database.DbPassword);
+            builder.Add("Provider", "Microsoft.JET.Oledb.4.0");
+            if (usePassword) builder.Add("Jet OLEDB:Database Password", Database.DbPassword);
             builder.Add("Mode", 12);
             return builder.ToString();
         }
