@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Global;
+using BurnSoft.Applications.MGC.hotixes.types;
 
 // ReSharper disable UnusedMember.Local
 
@@ -13,9 +15,14 @@ namespace BurnSoft.Applications.MGC.hotixes
     public class HotFix
     {
         /// <summary>
-        /// The number of fixes
+        /// The number of fixes that was before current version used for the settings on new install
         /// </summary>
-        public const int NumberOfFixes = 9;
+        public const int NumberOfFixesBeforeCurrentVersion = 9;
+        /// <summary>
+        /// The number of fixes after current version
+        /// </summary>
+        public const int NumberOfFixesAfterCurrentVersion = 10;
+        
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
@@ -610,7 +617,50 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Sevens the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         private bool Seven(string databasePath, out string errOut)
         {
             errOut = "";
@@ -671,7 +721,38 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Eights the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         private bool Eight(string databasePath, out string errOut)
         {
             errOut = "";
@@ -939,6 +1020,65 @@ namespace BurnSoft.Applications.MGC.hotixes
                 errOut = ErrorMessage("Run", e);
             }
             return bans;
+        }
+        /// <summary>
+        /// Hotfixes to database version.
+        /// </summary>
+        /// <returns>List&lt;HotFixToDbList&gt;.</returns>
+        private static List<HotFixToDbList> HotfixToDbVersion()
+        {
+            List<HotFixToDbList> cmd = new List<HotFixToDbList>();
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 1,
+                DbVersion = 0
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 2,
+                DbVersion = 0
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 3,
+                DbVersion = 0
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 4,
+                DbVersion = 0
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 5,
+                DbVersion = 0
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 6,
+                DbVersion = 0
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 7,
+                DbVersion = 4.5
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 8,
+                DbVersion = 5.0
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 9,
+                DbVersion = 6.5
+            });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 10,
+                DbVersion = 6.1
+            });
+            return cmd;
         }
     }
 }
