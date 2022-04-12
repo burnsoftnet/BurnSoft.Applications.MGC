@@ -374,6 +374,33 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lst;
         }
         /// <summary>
+        /// Listses the by identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;GunSmithWorkDone&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static List<GunSmithWorkDone> ListsById(string databasePath, long id, out string errOut)
+        {
+            List<GunSmithWorkDone> lst = new List<GunSmithWorkDone>();
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from GunSmith_Details where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = GetData(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Lists", e);
+            }
+            return lst;
+        }
+        /// <summary>
         /// Listses the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
