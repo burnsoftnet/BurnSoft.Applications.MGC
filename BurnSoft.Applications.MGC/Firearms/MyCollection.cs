@@ -680,6 +680,58 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Enum CatalogType
+        /// </summary>
+        public enum CatalogType
+        {
+            /// <summary>
+            /// Use numeric values
+            /// </summary>
+            Numeric,
+            /// <summary>
+            /// Use string values
+            /// </summary>
+            Text
+        }
+        /// <summary>
+        /// Sets the type of the catalog.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetCatalogType(string databasePath, CatalogType type, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = "";
+                switch (type)
+                {
+                    case CatalogType.Numeric:
+                        sql = "ALTER TABLE Gun_Collection ALTER COLUMN CustomID Integer;";
+                        break;
+                    case CatalogType.Text:
+                        sql = "ALTER TABLE Gun_Collection ALTER COLUMN CustomID Text(255);";
+                        break;
+                    default:
+                        sql = "ALTER TABLE Gun_Collection ALTER COLUMN CustomID Text(255);";
+                        break;
+                }
+
+                if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetCatalogValuesToNumeric", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Catalogs the exists details.
