@@ -8,6 +8,7 @@ using BurnSoft.Universal;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 // ReSharper disable RedundantAssignment
+// ReSharper disable RedundantTernaryExpression
 
 namespace BurnSoft.Applications.MGC.Firearms
 {
@@ -565,6 +566,35 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Catalogs the identifier exists.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="customId">The custom identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CatalogIdExists(string databasePath, long customId, out string errOut,
+            int gunId = 0)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection where CustomID={customId}";
+                if (gunId > 0) sql += $" and ID <> {gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                List<GunCollectionList> lst = MyList(dt, out errOut, databasePath);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CatalogIDExists", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Determines whether [is not old enouth for delete] [the specified database path]. If the firearm was just recently sold and
@@ -623,7 +653,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = "";
             try
             {
-                string sql = $"SELECT CustomID from Gun_Collection";
+                string sql = "SELECT CustomID from Gun_Collection";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 long iRowCount = 0;
@@ -659,7 +689,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = "";
             try
             {
-                string sql = $"SELECT ID,CustomID from Gun_Collection";
+                string sql = "SELECT ID,CustomID from Gun_Collection";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 long iCount = 0;
