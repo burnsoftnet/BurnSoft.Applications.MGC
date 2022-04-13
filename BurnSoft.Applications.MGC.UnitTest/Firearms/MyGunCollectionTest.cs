@@ -28,6 +28,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// </summary>
         private int _gunId;
         /// <summary>
+        /// The sold gun identifier
+        /// </summary>
+        private int _soldGunId;
+        /// <summary>
         /// The database path
         /// </summary>
         private string _databasePath;
@@ -82,6 +86,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _modelId = Models.GetId(_databasePath, "G26", _manufacturesId, out _errOut);
             _nationalityId = Nationality.GetId(_databasePath, "USA", out _errOut);
             _gripId = Grips.GetId(_databasePath, "Plastic", out _errOut);
+            _soldGunId = Vs2019.IGetSetting("SoldFirearmId", TestContext);
         }
         /// <summary>
         /// Defines the test method GetFirearmIdByFullName.
@@ -92,6 +97,23 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
             TestContext.WriteLine($"FireArm Id from full name {_fullName} is {gunId}");
             General.HasTrueValue(gunId > 0, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method IsNotOldEnouthForDeleteTest.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - Firearm Sold and Deleted to Early")]
+        public void IsNotOldEnouthForDeleteTest()
+        {
+            bool value = MyCollection.IsNotOldEnouthForDelete(_databasePath, _soldGunId, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine("Can be delete");
+            }
+            else
+            {
+                TestContext.WriteLine("Cannot be delete");
+            }
+            General.HasTrueValue(value, _errOut);
         }
 
         [TestMethod, TestCategory("Gun Collection - Verify Firearm by Name")]

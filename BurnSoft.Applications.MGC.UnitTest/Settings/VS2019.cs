@@ -132,6 +132,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             ls.Add(new Tuple<string, string>("Doc_Ext", "pdf"));
             ls.Add(new Tuple<string, string>("Doc_Ext_Number", "1"));
             ls.Add(new Tuple<string, string>("Doc_Path", "data\\mgc_doc.pdf"));
+            ls.Add(new Tuple<string, string>("SoldFirearmId", "7"));
             //ls.Add(new Tuple<string, string>("", ""));
             return ls;
         }

@@ -565,6 +565,51 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
+        /// Determines whether [is not old enouth for delete] [the specified database path]. If the firearm was just recently sold and
+        /// you attempt to delete it, you will get a warning message saying that it is to new of a sale to delete, to wait a few years
+        /// before deleting.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="defaultYearsToWait"></param>
+        /// <returns><c>true</c> if [is not old enouth for delete] [the specified database path]; otherwise, <c>false</c>.</returns>
+        public static bool IsNotOldEnouthForDelete(string databasePath,long id, out string errOut, int defaultYearsToWait = 5)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT ItemSold, dtSold from qryGunCollectionDetails where ID={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                string date = "";
+                bool isSold = false;
+                foreach (DataRow d in dt.Rows)
+                {
+                    date = (d["dtSold"] != DBNull.Value) ? date = d["dtSold"].ToString() : date = DateTime.Now.ToString();
+                    isSold = Convert.ToInt32(d["ItemSold"].ToString()) == 1 ? true : false;
+                }
+
+                if (isSold)
+                {
+                    //If DateDiff(DateInterval.Year, CDate(strDate), DateTime.Now) < 5 Then bAns = True
+                    DateTime zeroTime = new DateTime(1, 1, 1);
+                    DateTime start = Convert.ToDateTime(date);
+                    DateTime end = DateTime.Now;
+                    TimeSpan dateDiff = end - start;
+                    int years = (zeroTime + dateDiff).Year - 1;
+                    bAns = years < defaultYearsToWait;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("IsNotOldEnouthForDelete", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Catalogs the exists details.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
