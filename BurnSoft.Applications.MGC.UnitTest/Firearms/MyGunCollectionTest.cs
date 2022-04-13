@@ -132,11 +132,31 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             }
             General.HasFalseValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method SetCatalogValuesToNumericTest.
+        /// </summary>
         [TestMethod, TestCategory("Gun Collection - Convert Catalog to  Numeric")]
         public void SetCatalogValuesToNumericTest()
         {
             bool value = MyCollection.SetCatalogValuesToNumeric(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method SetCatalogTypeNumericTest.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - Convert Catalog to  Numeric")]
+        public void SetCatalogTypeNumericTest()
+        {
+            bool value = MyCollection.SetCatalogType(_databasePath, MyCollection.CatalogType.Numeric,out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method SetCatalogTypeTextTest.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - Convert Catalog to  String/TExt")]
+        public void SetCatalogTypeTextTest()
+        {
+            bool value = MyCollection.SetCatalogType(_databasePath, MyCollection.CatalogType.Text, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
