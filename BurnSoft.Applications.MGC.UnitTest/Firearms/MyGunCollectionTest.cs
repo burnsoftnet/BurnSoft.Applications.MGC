@@ -115,7 +115,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             }
             General.HasFalseValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method VerifyByFullName.
+        /// </summary>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
         [TestMethod, TestCategory("Gun Collection - Verify Firearm by Name")]
         public void VerifyByFullName()
         {
