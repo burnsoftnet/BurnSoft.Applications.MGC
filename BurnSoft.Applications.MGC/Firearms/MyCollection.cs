@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
@@ -588,7 +589,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 bool isSold = false;
                 foreach (DataRow d in dt.Rows)
                 {
-                    date = (d["dtSold"] != DBNull.Value) ? date = d["dtSold"].ToString() : date = DateTime.Now.ToString();
+                    date = (d["dtSold"] != DBNull.Value) ? date = d["dtSold"].ToString() : date = DateTime.Now.ToString(CultureInfo.InvariantCulture);
                     isSold = Convert.ToInt32(d["ItemSold"].ToString()) == 1 ? true : false;
                 }
 
@@ -641,6 +642,41 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("CatalogIsNumeric", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Sets the catalog values to numeric.  Don't care if there was somethign special in it, it's gone and now some random number
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetCatalogValuesToNumeric(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT ID,CustomID from Gun_Collection";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                long iCount = 0;
+
+                foreach (DataRow d in dt.Rows)
+                {
+                    iCount++;
+                    long id = Convert.ToInt32(d["id"]);
+                    sql = $"UPDATE Gun_Collection set CustomID='{iCount}',sync_lastupdate=Now() where ID={id}";
+                    if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                }
+
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetCatalogValuesToNumeric", e);
             }
             return bAns;
         }
