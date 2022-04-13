@@ -500,6 +500,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
         /// <summary>
         /// Gets the identifier.
         /// </summary>
@@ -604,6 +605,42 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("IsNotOldEnouthForDelete", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Checks the cataeglog field to see if all the values can be converted to numeric, if there isn't anything like
+        /// Colleotr-001, is that is in there then the column cannot be converted to numeric only.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CatalogIsNumeric(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"SELECT CustomID from Gun_Collection";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                long iRowCount = 0;
+                long iCount = 0;
+
+                foreach (DataRow d in dt.Rows)
+                {
+                    iRowCount++;
+                    string value = d["CustomID"] != DBNull.Value ? d["CustomID"].ToString() : "";
+                    if (value.Trim().Length == 0) value = "N/A";
+                    if (VbFunctions.ValueIsnumeric(value)) iCount++;
+                }
+
+                bAns = iRowCount == iCount;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CatalogIsNumeric", e);
             }
             return bAns;
         }

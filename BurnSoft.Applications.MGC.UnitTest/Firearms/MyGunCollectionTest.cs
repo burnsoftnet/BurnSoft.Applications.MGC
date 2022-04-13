@@ -116,6 +116,23 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasFalseValue(value, _errOut);
         }
         /// <summary>
+        /// Defines the test method CatalogIsNumericTest.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - Catalog Numeric Check")]
+        public void CatalogIsNumericTest()
+        {
+            bool value = MyCollection.CatalogIsNumeric(_databasePath, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine("Catalog can be converted to all numeric");
+            }
+            else
+            {
+                TestContext.WriteLine("Catalot cannot be converted to all numeric");
+            }
+            General.HasFalseValue(value, _errOut);
+        }
+        /// <summary>
         /// Defines the test method VerifyByFullName.
         /// </summary>
         /// <exception cref="System.Exception"></exception>
