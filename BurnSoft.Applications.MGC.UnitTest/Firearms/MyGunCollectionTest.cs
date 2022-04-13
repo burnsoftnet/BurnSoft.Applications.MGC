@@ -132,6 +132,13 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             }
             General.HasFalseValue(value, _errOut);
         }
+
+        [TestMethod, TestCategory("Gun Collection - Convert Catalog to  Numeric")]
+        public void SetCatalogValuesToNumericTest()
+        {
+            bool value = MyCollection.SetCatalogValuesToNumeric(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
         /// <summary>
         /// Defines the test method VerifyByFullName.
         /// </summary>
