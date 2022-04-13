@@ -211,6 +211,57 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             return lAns;
         }
         /// <summary>
+        /// Gets the owner identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="ownerName">Name of the owner.</param>
+        /// <param name="ownerLic">The owner lic.</param>
+        /// <param name="sAddress">The s address.</param>
+        /// <param name="sCity">The s city.</param>
+        /// <param name="sState">State of the s.</param>
+        /// <param name="sZip">The s zip.</param>
+        /// <param name="sPhone">The s phone.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetOwnerId(string databasePath, out string ownerName, out string ownerLic,out string sAddress, 
+            out string sCity,out string sState,out string sZip, out string sPhone, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            ownerName = "";
+            ownerLic = "";
+            sAddress = "";
+            sCity = "";
+            sState = "";
+            sZip = "";
+            sPhone = "";
+            try
+            {
+                DataTable dt = Database.GetDataFromTable(databasePath, "SELECT TOP 1 * from Owner_Info", out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<OwnerInfo> lst = GetList(dt, out errOut);
+
+                foreach (OwnerInfo l in lst)
+                {
+                    lAns = l.Id;
+                    ownerName = l.Name;
+                    ownerLic = One.Decrypt(l.Ccdwl);
+                    sAddress = l.Address;
+                    sCity = l.City;
+                    sState = l.State;
+                    sZip = l.ZipCode;
+                    sPhone = l.Phone;
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetOwnerId", e);
+            }
+            return lAns;
+        }
+        /// <summary>
         /// Gets the list.
         /// </summary>
         /// <param name="dt">The dt.</param>
