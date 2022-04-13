@@ -113,7 +113,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             {
                 TestContext.WriteLine("Cannot be delete");
             }
-            General.HasTrueValue(value, _errOut);
+            General.HasFalseValue(value, _errOut);
         }
 
         [TestMethod, TestCategory("Gun Collection - Verify Firearm by Name")]

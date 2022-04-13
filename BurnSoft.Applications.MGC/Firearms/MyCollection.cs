@@ -593,7 +593,6 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                 if (isSold)
                 {
-                    //If DateDiff(DateInterval.Year, CDate(strDate), DateTime.Now) < 5 Then bAns = True
                     DateTime zeroTime = new DateTime(1, 1, 1);
                     DateTime start = Convert.ToDateTime(date);
                     DateTime end = DateTime.Now;
