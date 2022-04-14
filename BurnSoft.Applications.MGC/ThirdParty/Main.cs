@@ -1,27 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Global;
-using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
 
-namespace BurnSoft.Applications.MGC
+namespace BurnSoft.Applications.MGC.ThirdParty
 {
     /// <summary>
     /// Class Third Party Class for some simply functions that another application can use to interact with the Gun Collection Application. This is mostly based off the My Loader Load Functions
     /// </summary>
-    public class ThirdParty
+    public class Main
     {
-
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
         /// </summary>
-        private static string _classLocation = "BurnSoft.Applications.MGC.ThirdParty";
+        private static string _classLocation = "BurnSoft.Applications.MGC.ThirdParty.Main";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
@@ -85,37 +78,6 @@ namespace BurnSoft.Applications.MGC
         public static bool MyGunCollectionIsInstalled(out string errOut)
         {
             return MyRegistry.MyGunCollectionIsInstalled(out errOut);
-        }
-        /// <summary>
-        /// Counts the firearms.
-        /// </summary>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>System.Int64.</returns>
-        /// <exception cref="System.Exception"></exception>
-        /// <exception cref="System.Exception"></exception>
-        /// <exception cref="System.Exception"></exception>
-        public static long CountFirearms(out string errOut)
-        {
-            long lAns = 0;
-            errOut = "";
-            try
-            {
-                string databasePath = GetDatabaseLocation(out errOut);
-                if (errOut?.Length > 0) throw new Exception(errOut);
-                List<GunCollectionList> lst = new List<GunCollectionList>();
-                string sql = $"SELECT * from Gun_Collection where ItemSold=0";
-                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
-                if (errOut?.Length > 0) throw new Exception(errOut);
-                lst = MyCollection.MyList(dt, out errOut, databasePath);
-                if (errOut?.Length > 0) throw new Exception(errOut);
-                lAns = lst.Count;
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("CountFirearms", e);
-            }
-
-            return lAns;
         }
     }
 }
