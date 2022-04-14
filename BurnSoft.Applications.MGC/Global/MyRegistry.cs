@@ -945,6 +945,28 @@ namespace BurnSoft.Applications.MGC.Global
             }
             return sAns;
         }
+        /// <summary>
+        /// Gets the database location.
+        /// </summary>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="sDefault">The s default.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetDatabaseLocation(out string errOut, string sDefault = "")
+        {
+            string sAns = "";
+            errOut = "";
+            try
+            {
+                sAns = GetRegSubKeyValue(DefaultRegPath, "DataBase", sDefault, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetDatabaseLocation", e);
+            }
+            return sAns;
+        }
 
     }
 }
