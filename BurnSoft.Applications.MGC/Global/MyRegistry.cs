@@ -968,5 +968,49 @@ namespace BurnSoft.Applications.MGC.Global
             return sAns;
         }
 
+        /// <summary>
+        /// Gets the MGC executable path.
+        /// </summary>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="sDefault">The s default.</param>
+        /// <returns>System.String.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static string GetMgcExePath(out string errOut, string sDefault = "")
+        {
+            string sAns = "";
+            errOut = "";
+            try
+            {
+                sAns = GetRegSubKeyValue(DefaultRegPath, "AppEXE", sDefault, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetMgcExePath", e);
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Mies the gun collection is installed.
+        /// </summary>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool MyGunCollectionIsInstalled(out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                bAns = RegSubKeyExists(DefaultRegPath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyGunCollectionIsInstalled", e);
+            }
+            return bAns;
+        }
+
     }
 }
