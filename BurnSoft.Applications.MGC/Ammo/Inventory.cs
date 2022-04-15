@@ -473,7 +473,49 @@ namespace BurnSoft.Applications.MGC.Ammo
             }
             return bAns;
         }
+        /// <summary>
+        /// Ammoes the is already listed.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="cal">The cal.</param>
+        /// <param name="grain">The grain.</param>
+        /// <param name="jacket">The jacket.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="mid">The mid.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static bool AmmoIsAlreadyListed(string databasePath, string manufacturer,string name, string cal, string grain, string jacket,out long qty, out long mid,  out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            qty = 0;
+            mid = 0;
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection_Ammo where Manufacturer = '{manufacturer}' and Name='{name}' and Cal='{cal}' and Grain='{grain}' and Jacket='{jacket}'";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception($"{errOut}{Environment.NewLine}SQL = {sql}");
+                List<Ammunition> lst = MyList(dt, out errOut);
+                if (errOut.Length > 0) throw new Exception($"{errOut}{Environment.NewLine}SQL = {sql}");
+                foreach (Ammunition l in lst)
+                {
+                    qty = l.Qty;
+                    mid = l.Id;
+                }
 
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AmmoIsAlreadyListed", e);
+            }
+
+            return bAns;
+        }
         /// <summary>
         /// Gets the list.
         /// </summary>
