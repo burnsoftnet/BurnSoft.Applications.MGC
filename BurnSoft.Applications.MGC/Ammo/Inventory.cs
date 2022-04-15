@@ -474,7 +474,7 @@ namespace BurnSoft.Applications.MGC.Ammo
             return bAns;
         }
         /// <summary>
-        /// Ammoes the is already listed.
+        /// Ammo the is already listed.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="manufacturer">The manufacturer.</param>

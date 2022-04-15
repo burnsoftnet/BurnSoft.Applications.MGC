@@ -110,6 +110,7 @@
     <Compile Include="Reports\ColumnList.cs" />
     <Compile Include="Reports\CustomReports.cs" />
     <Compile Include="Reports\TableList.cs" />
+    <Compile Include="ThirdParty\Ammunition.cs" />
     <Compile Include="ThirdParty\Firearms.cs" />
     <Compile Include="ThirdParty\Main.cs" />
     <Compile Include="Types\AccessoriesList.cs" />
