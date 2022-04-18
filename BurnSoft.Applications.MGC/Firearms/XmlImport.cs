@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Xml;
 using BurnSoft.Applications.MGC.Global;
 // ReSharper disable RedundantAssignment
@@ -181,7 +180,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     if (!MyCollection.Add(databasePath, useNumberCatOnly, ownerId, manId, fullName, modelName, modId, serialNumber, sType, caliber,
                         finish, condition, customId, lNatId, lGripId, weight, height, gripId, barrelLength, strBarWid, strBarHei, action, feedsystem,
                         sights, purchasedPrice, purchasedFrom, appraisedValue, appraisalDate, appraisedBy, insuredValue, storageLocation, conditionComments,
-                        additionalNotes, produced, petLoads, dtp, Convert.ToBoolean(isCandR), importer, reManDt, poi, sgChoke, Convert.ToBoolean(bBoundBook), sTwist, sTrigger, sCaliber3, sClassification, sDateOfCr, isClassIii, sClassIiiOwner, out errOut))
+                        additionalNotes, produced, petLoads, dtp, Convert.ToBoolean(isCandR), importer, reManDt, poi, sgChoke, Convert.ToBoolean(bBoundBook), sTwist, sTrigger, sCaliber3, sClassification, sDateOfCr, isClassIii, sClassIiiOwner,false,false, out errOut))
                         throw new Exception(errOut);
                 }
 
