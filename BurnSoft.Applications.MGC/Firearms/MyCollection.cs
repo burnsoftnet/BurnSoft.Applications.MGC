@@ -943,7 +943,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 int iComp = isCompetition ? 1 : 0;
-                string sql = $"update gun_collection set isNonLethal={iComp} where id={id}";
+                string sql = $"update gun_collection set isCompetition={iComp} where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }

@@ -332,5 +332,6 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The class3 owner.</value>
         public string Class3Owner { get; set; }
 
-}
+        public bool IsClass3Item { get; set; }
+    }
 }
