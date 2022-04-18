@@ -57,7 +57,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion                
+        #endregion
+
         /// <summary>
         /// Adds the specified database path.
         /// </summary>
@@ -110,7 +111,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="dateofCr">The dateof cr.</param>
         /// <param name="isClassIii">if set to <c>true</c> [is class iii].</param>
         /// <param name="classIiiOwner">The class iii owner.</param>
+        /// <param name="isNonLethal"></param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="isCompetition"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
         /// <exception cref="Exception"></exception>
@@ -128,7 +131,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             string appraisedValue, string appraisalDate, string appraisedBy,
             string insuredValue, string storageLocation, string conditionComments, string additionalNotes,
             string produced, string petLoads, string dtp, bool isCandR, string importer, string reManDt, string poi,
-            string sgChoke,bool isInBoundBook,string twistRate, string lbsTrigger,string caliber3,string classification,string dateofCr,bool isClassIii,string classIiiOwner, out string errOut)
+            string sgChoke,bool isInBoundBook,string twistRate, string lbsTrigger,string caliber3,string classification,string dateofCr,bool isClassIii,
+            string classIiiOwner, bool isCompetition, bool isNonLethal, out string errOut)
         {
             errOut = "";
             bool bAns = false;
@@ -137,6 +141,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                 int iBoundBook = isInBoundBook ? 1 : 0;
                 int iIsClassIii = isClassIii ? 1 : 0;
                 int iisCandR = isCandR ? 1 : 0;
+                int iComp = isCompetition ? 1 : 0;
+                int iNonLethal = isNonLethal ? 1 : 0;
 
                 string sql =
                     "INSERT INTO Gun_Collection (OID,MID,FullName,ModelName,ModelID,SerialNumber,Type,Caliber,Finish,Condition," +
@@ -144,7 +150,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     "Action,Feedsystem,Sights,PurchasedPrice,PurchasedFrom,AppraisedValue,AppraisalDate,AppraisedBy," +
                     "InsuredValue,StorageLocation,ConditionComments,AdditionalNotes,Produced,PetLoads,dtp,IsCandR,Importer," +
                     "ReManDT,POI,HasMB,DBID,SGChoke,IsInBoundBook,TwistRate,lbs_trigger,Caliber3,Classification,DateofCR,ItemSold," +
-                    "BID,sync_lastupdate,IsClassIII,ClassIII_owner) VALUES(" +
+                    "BID,sync_lastupdate,IsClassIII,ClassIII_owner,isCompetition,IsNoLeathal) VALUES(" +
                     ownerId + "," + manufactureId + ",'" + fullName + "','" + modelName + "'," + modelId + ",'" +
                     serialNumber + "','" +
                     firearmType + "','" + caliber + "','" + finish + "','" + condition + "'," +
@@ -161,7 +167,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     "','" + reManDt + "','" + poi + "',0,0,'" + sgChoke + "'," + iBoundBook + ",'" + twistRate + "','" +
                     lbsTrigger +
                     "','" + caliber3 + "','" + classification + "','" + dateofCr + "',0,2,Now()," + iIsClassIii +
-                    ",'" + classIiiOwner + "')";
+                    ",'" + classIiiOwner + $"',{iComp},{iNonLethal})";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (!bAns) throw new Exception(errOut);
                 
@@ -264,7 +270,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="isSold">if set to <c>true</c> [is sold].</param>
         /// <param name="dateTimeSold">The date time sold.</param>
         /// <param name="classIiiOwner">The class iii owner.</param>
+        /// <param name="isNonLethal"></param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="isCompetition"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="Exception"></exception>
         /// <exception cref="Exception"></exception>
@@ -280,7 +288,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             string insuredValue, string storageLocation, string conditionComments, string additionalNotes,
             string produced, string petLoads, string dtp, bool isCandR, string importer, string reManDt, string poi,
             string sgChoke, bool isInBoundBook, string twistRate, string lbsTrigger, string caliber3, string classification, string dateofCr, bool isClassIii, 
-            bool isSold,string dateTimeSold, string classIiiOwner, out string errOut)
+            bool isSold,string dateTimeSold, string classIiiOwner, bool isCompetition, bool isNonLethal, out string errOut)
         {
             errOut = "";
             bool bAns = false;
@@ -289,7 +297,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                 int iBoundBook = isInBoundBook ? 1 : 0;
                 int iIsClassIii = isClassIii ? 1 : 0;
                 int iisCandR = isCandR ? 1 : 0;
-
+                int iComp = isCompetition ? 1 : 0;
+                int iNonLethal = isNonLethal ? 1 : 0;
                 string sql =
                     $"UPDATE Gun_Collection set OID={ownerId},MID={manufactureId},ModelName='{modelName}',ModelID={modelId}" +
                     $",SerialNumber='{serialNumber}',Type='{firearmType}',Caliber='{caliber}',Finish='{finish}',Condition='{condition}'," +
@@ -301,7 +310,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     $"AdditionalNotes='{additionalNotes}',Produced='{produced}',PetLoads='{petLoads}',dtp='{dtp}',IsCandR='{iisCandR}',Importer='{importer}'," +
                     $"ReManDT='{reManDt}',POI='{poi}',SGChoke='{sgChoke}',sync_lastupdate=Now(),IsInBoundBook={iBoundBook}," +
                     $"TwistRate='{twistRate}',lbs_trigger='{lbsTrigger}',Caliber3='{caliber3}',Classification='{classification}',DateofCR='{dateofCr}'," +
-                    $"IsClassIII={iIsClassIii},ClassIII_owner='{classIiiOwner}'";
+                    $"IsClassIII={iIsClassIii},ClassIII_owner='{classIiiOwner}', isCompetition={iComp},IsNoLeathal={iNonLethal}";
                 if (isSold) sql += $", dtsold='{dateTimeSold}'";
                 sql += $" where id={firearmId};";
                 bAns = Database.Execute(databasePath, sql, out errOut);
@@ -1209,7 +1218,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                         IsClass3Item = obj.ConvertIntToBool(Convert.ToInt32(d["IsClassIII"] != DBNull.Value ? d["IsClassIII"].ToString():"0")),
                         Class3Owner = d["ClassIII_owner"] != DBNull.Value ? d["ClassIII_owner"].ToString().Trim() : "",
                         WasStolen = wasStolen,
-                        WasSold = wasSold
+                        WasSold = wasSold,
+                        IsCompetition =  obj.ConvertIntToBool(Convert.ToInt32(d["isCompetition"] != DBNull.Value ? d["isCompetition"].ToString() : "0")),
+                        IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0"))
 
                     });
                 }

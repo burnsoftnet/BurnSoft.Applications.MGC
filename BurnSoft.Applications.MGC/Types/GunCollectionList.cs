@@ -331,7 +331,15 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value>The class3 owner.</value>
         public string Class3Owner { get; set; }
-
-        public bool IsClass3Item { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is competition firearm.
+        /// </summary>
+        /// <value><c>true</c> if this instance is clis competitionass3 item; otherwise, <c>false</c>.</value>
+        public bool IsCompetition { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is no lethal.
+        /// </summary>
+        /// <value><c>true</c> if this instance is no lethal; otherwise, <c>false</c>.</value>
+        public bool IsNonLethal { get; set; }
     }
 }
