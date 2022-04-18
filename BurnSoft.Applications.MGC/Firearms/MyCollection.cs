@@ -927,6 +927,59 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Sets as competition gun.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="isCompetition">if set to <c>true</c> [is competition].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetAsCompetitionGun(string databasePath,int id, bool isCompetition, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                int iComp = isCompetition ? 1 : 0;
+                string sql = $"update gun_collection set isNonLethal={iComp} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetAsCompetitionGun", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Sets as non lethal.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="isNonLethal">if set to <c>true</c> [is non lethal].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetAsNonLethal(string databasePath, int id, bool isNonLethal, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                int iNonLethal = isNonLethal ? 1 : 0;
+                string sql = $"update gun_collection set IsNoLeathal={iNonLethal} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetAsNonLethal", e);
+            }
+            return bAns;
+        }
+
 
         /// <summary>
         /// Determines whether [has collection attached] [the specified database path].

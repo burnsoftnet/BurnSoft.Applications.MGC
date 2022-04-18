@@ -116,7 +116,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("AddDefaultPic", e);
+                errOut = ErrorMessage("HasDefaultPicture", e);
             }
             return bAns;
         }
@@ -138,7 +138,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("AddDefaultPic", e);
+                errOut = ErrorMessage("HasDefaultPicture", e);
             }
             return bAns;
         }
