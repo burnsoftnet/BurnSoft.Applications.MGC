@@ -63,16 +63,16 @@ namespace BurnSoft.Applications.MGC.Ammo
         /// <param name="databasePath">The database path.</param>
         /// <param name="ammoId">The ammo identifier.</param>
         /// <param name="currentQty">The current qty.</param>
-        /// <param name="newQty">The new qty.</param>
+        /// <param name="roundCountUsed">The Number of rounds that was used to be subtracted by the current inventory number</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool UpdateQty(string databasePath, long ammoId, long currentQty, int newQty, out string errOut)
+        public static bool UpdateQty(string databasePath, long ammoId, long currentQty, int roundCountUsed, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                long endTotal = currentQty + newQty;
+                long endTotal = currentQty - roundCountUsed;
                 string sql = $"UPDATE Gun_Collection_Ammo set Qty={endTotal} where id={ammoId}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
