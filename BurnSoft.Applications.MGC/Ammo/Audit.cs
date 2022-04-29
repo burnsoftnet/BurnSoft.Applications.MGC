@@ -75,16 +75,17 @@ namespace BurnSoft.Applications.MGC.Ammo
         /// <param name="price">The price.</param>
         /// <param name="store">The store.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="updateInventory">update inventory</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, long ammoId, string datePurchased, long currentQty,  int qty, double price,
             string store,
-            out string errOut)
+            out string errOut, bool updateInventory = false)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                if (!Inventory.UpdateQty(databasePath, ammoId, currentQty,qty, out errOut)) throw new Exception(errOut);
+                if(updateInventory) if (!Inventory.UpdateQty(databasePath, ammoId, currentQty,qty, out errOut, true)) throw new Exception(errOut);
 
                 double pricePerBullet = Math.Truncate(price / qty);
                 string sql =
@@ -123,14 +124,14 @@ namespace BurnSoft.Applications.MGC.Ammo
             {
                 if (numberOfBoxes == 1)
                 {
-                    bAns = Add(databasePath, ammoId, datePurchased,currentQty, qty, price, store, out errOut);
+                    bAns = Add(databasePath, ammoId, datePurchased,currentQty, qty, price, store, out errOut, true);
                     if (errOut?.Length > 0) throw new Exception(errOut);
                 }
                 else if (numberOfBoxes > 1)
                 {
                     for (int i = 0; i < numberOfBoxes; i++)
                     {
-                        bAns = Add(databasePath, ammoId, datePurchased,currentQty, qty, price, store, out errOut);
+                        bAns = Add(databasePath, ammoId, datePurchased,currentQty, qty, price, store, out errOut, true);
                         currentQty += qty;
                         if (errOut?.Length > 0) throw new Exception(errOut);
                     }

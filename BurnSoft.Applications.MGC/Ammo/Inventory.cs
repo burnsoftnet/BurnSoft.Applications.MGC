@@ -56,7 +56,8 @@ namespace BurnSoft.Applications.MGC.Ammo
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion        
+        #endregion
+
         /// <summary>
         /// Updates the qty.
         /// </summary>
@@ -65,14 +66,17 @@ namespace BurnSoft.Applications.MGC.Ammo
         /// <param name="currentQty">The current qty.</param>
         /// <param name="roundCountUsed">The Number of rounds that was used to be subtracted by the current inventory number</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="doAdd">by default it will subtract, is this is set to true it will add it instead</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool UpdateQty(string databasePath, long ammoId, long currentQty, int roundCountUsed, out string errOut)
+        public static bool UpdateQty(string databasePath, long ammoId, long currentQty, int roundCountUsed,
+            out string errOut, bool doAdd = false)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
                 long endTotal = currentQty - roundCountUsed;
+                if (doAdd) endTotal = currentQty + roundCountUsed;
                 string sql = $"UPDATE Gun_Collection_Ammo set Qty={endTotal} where id={ammoId}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }

@@ -138,7 +138,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
             long id = Inventory.GetId(_databasePath, _ammoManufacturer, _ammoName, _ammoCaliber, _ammoGrain, _ammoJacket, _ammoQty, _ammoDCal, _ammoVelocityNumber, out _errOut);
             long before = Inventory.GetQty(_databasePath, id, out _errOut);
             int addQty = 500;
-            bool value = Inventory.UpdateQty(_databasePath, id,  before, addQty, out _errOut);
+            bool value = Inventory.UpdateQty(_databasePath, id,  before, addQty, out _errOut, true);
             long after = Inventory.GetQty(_databasePath, id, out _errOut);
             string status = value ? "PASSEd! " : "FAILED! ";
             TestContext.WriteLine($"{status}  Attempt to add {addQty} to {before} and after the attempt we have {after}");
