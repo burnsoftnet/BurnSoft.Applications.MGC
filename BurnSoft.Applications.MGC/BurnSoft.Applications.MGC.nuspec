@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0.1.89</version>
+    <version>1.0.1.90-alpha</version>
     <title>$title$</title>
     <authors>burnsoftnet</authors>
 	  <owners>burnsoftnet</owners>
@@ -20,5 +20,6 @@
 	<files>
 		<file src="bswtsicon.png" target="" />
 		<file src="bin/$configuration$/$id$.chm" target="content/$id$.chm" />
+    <file src="bin/$configuration$/adodb.dll" target="lib/net472/adodb.dll" />
 	</files>
 </package>
