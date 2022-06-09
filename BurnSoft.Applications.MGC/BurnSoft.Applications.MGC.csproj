@@ -136,9 +136,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="adodb.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="bswtsicon.png" />
     <Content Include="icon.png" />
   </ItemGroup>
