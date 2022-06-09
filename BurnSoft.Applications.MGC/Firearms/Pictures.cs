@@ -10,6 +10,7 @@ using ADODB;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
+// ReSharper disable MustUseReturnValue
 
 // ReSharper disable ExpressionIsAlwaysNull
 
@@ -176,7 +177,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = "";
             try
             {
-                string sql = $"SELECT DISTINCT(Gun_Collection_Pictures.CID) as CID FROM Gun_Collection_Pictures";
+                string sql = "SELECT DISTINCT(Gun_Collection_Pictures.CID) as CID FROM Gun_Collection_Pictures";
                 OleDbConnection conn = new OleDbConnection(Database.ConnectionString(databasePath, out errOut));
                 conn.Open();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
@@ -333,7 +334,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Saves the specified database path.
+        /// Save a gun picture to the database, this function will convert this picture into a thumbnail and upload the orginal picture and the thumbnail
+        /// to the database, you can also add a name and notes to it.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="file">The file.</param>
@@ -376,8 +378,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                 OleDbConnection myConn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
 
                 int iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
-                string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) " +
-                             $"VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now(),@pd_name,@pd_note)";
+                string sql = "INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) " +
+                             "VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now(),@pd_name,@pd_note)";
                 OleDbCommand cmd = new OleDbCommand(sql);
 
                 cmd.Parameters.AddWithValue("CID", gunId);
