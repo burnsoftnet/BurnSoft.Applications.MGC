@@ -68,7 +68,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// The file filter list
         /// </summary>
-        public static string FileFilterList = "Bmp Files(*.bmp)|*.bmp|Gif Files(*.gif)|*.gif|Jpg Files(*.jpg)|*.jpg";
+        public static string FileFilterList = "Bmp Files(*.bmp)|*.bmp|Gif Files(*.gif)|*.gif|Jpg Files(*.jpg)|*.jpg|PNG Files(*.png)|*.png";
         /// <summary>
         /// Determines whether the firearm ( collection id ) already has a default picture set or not
         /// </summary>
