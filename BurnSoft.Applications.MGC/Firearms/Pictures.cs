@@ -396,7 +396,7 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                 int iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
                 string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) " +
-                             $"VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now()),@pd_name,@pd_note)";
+                             $"VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now(),@pd_name,@pd_note)";
                 OleDbCommand cmd = new OleDbCommand(sql);
                 //OleDbParameter param1 = new OleDbParameter();
                 //param1.ParameterName = "Image";
@@ -405,7 +405,6 @@ namespace BurnSoft.Applications.MGC.Firearms
                 cmd.Parameters.AddWithValue("PICTURE", buffer);
                 cmd.Parameters.AddWithValue("THUMB", bufferT);
                 cmd.Parameters.AddWithValue("ISMAIN", iMain);
-                //cmd.Parameters.AddWithValue("sync_lastupdate", "Now()");
                 cmd.Parameters.AddWithValue("pd_name", name);
                 cmd.Parameters.AddWithValue("pd_note", notes);
                 //OleDbParameter param2 = new OleDbParameter();

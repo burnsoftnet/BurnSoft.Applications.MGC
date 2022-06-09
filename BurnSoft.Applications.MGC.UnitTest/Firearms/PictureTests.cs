@@ -79,7 +79,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod]
         public void SaveTest()
         {
-            string picPath = "D:\\ProductPics\\MyEssentialOilRemedies.jpg";
+            string picPath = "C:\\TestData\\p365-380-web-left.jpg";
             bool value = Pictures.Save(_databasePath, picPath, AppDomain.CurrentDomain.BaseDirectory, _gunId, "test",
                 "test", out _errOut);
             General.HasTrueValue(value, _errOut);
