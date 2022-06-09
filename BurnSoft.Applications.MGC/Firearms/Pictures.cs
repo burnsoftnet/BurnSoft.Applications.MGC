@@ -5,8 +5,6 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using ADODB;
-//using ADODB;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
