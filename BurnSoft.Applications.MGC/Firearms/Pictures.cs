@@ -271,59 +271,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sFileName = Path.Combine(applicationPath, defaultPic);
-                string sThumbName = Path.Combine(applicationPath, @"\mgc_thumb.jpg");
-                // ---Start Function to convert picture to database format-----
-                FileStream st = new FileStream(sFileName, FileMode.Open, FileAccess.Read);
-                BinaryReader mbr = new BinaryReader(st);
-                byte[] buffer = new byte[st.Length + 1];
-                mbr.Read(buffer, 0, Convert.ToInt32(st.Length));
-                st.Close();
-                // ---End Function to convert picture to database format-----
-                // --Start Function to convert picture to thumbnail for database format--
-                int intPicHeight = 64;
-                int intPicWidth = 64;
-                var myBitmap = Image.FromFile(sFileName);
-                Image.GetThumbnailImageAbort myPicCallback = null/* TODO Change to default(_) if this is not a reference type */;
-                var myNewPic = myBitmap.GetThumbnailImage(intPicWidth, intPicHeight, myPicCallback, IntPtr.Zero);
-                myBitmap.Dispose();
-                File.Delete(sThumbName);
-                myNewPic.Save(sThumbName, ImageFormat.Jpeg);
-                myNewPic.Dispose();
-                FileStream stT = new FileStream(sThumbName, FileMode.Open, FileAccess.Read);
-                BinaryReader mbrT = new BinaryReader(stT);
-                byte[] bufferT = new byte[stT.Length + 1];
-                mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
-                stT.Close();
-                // --End Function to convert picture to thumbnail for database format--
-
-                Connection myConn = new Connection();
-                myConn.Open(Database.ConnectionString(databasePath, out errOut));
-                Recordset rs = new Recordset();
-                rs.Open("Gun_Collection_Pictures", myConn, CursorTypeEnum.adOpenStatic, LockTypeEnum.adLockPessimistic);
-                rs.AddNew();
-                rs.Fields["CID"].Value = id;
-                rs.Fields["PICTURE"].AppendChunk(buffer);
-                rs.Fields["THUMB"].AppendChunk(bufferT);
-                rs.Fields["ISMAIN"].Value = 1;
-                rs.Fields["sync_lastupdate"].Value = DateTime.Now;
-                rs.Update();
-                rs.Close();
-
-                //OleDbConnection myConn = new OleDbConnection(Database.ConnectionString(databasePath, out errOut));
-
-                //string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate VALUES({id},@Image,@Thumb,{1},Now());";
-                //OleDbCommand cmd = new OleDbCommand();
-                //OleDbParameter param1 = new OleDbParameter();
-                //param1.ParameterName = "Image";
-                //param1.Value = buffer;
-                //cmd.Parameters.Add(param1);
-                //OleDbParameter param2 = new OleDbParameter();
-                //param2.ParameterName = "Thumb";
-                //param2.Value = buffer;
-                //cmd.Parameters.Add(param2);
-                //cmd.Connection = myConn;
-                //cmd.ExecuteScalar();
+                if (!Save(databasePath, defaultPic, applicationPath, id, " ", " ", out errOut))
+                    throw new Exception(errOut);
                 bAns = true;
             }
             catch (Exception e)
