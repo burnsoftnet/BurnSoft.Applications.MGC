@@ -51,7 +51,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod]
         public void HasDefaultPictureTestNoAdd()
         {
-            bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, Path.GetFullPath(_databasePath), "", out _errOut);
+            bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, AppDomain.CurrentDomain.BaseDirectory, "", out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod]
+        public void HasDefaultPictureTestAdd()
+        {
+            bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, AppDomain.CurrentDomain.BaseDirectory, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mgc_default.jpg"), out _errOut, true);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>

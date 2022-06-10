@@ -111,7 +111,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 string sql = $"SELECT * from Gun_Collection_Pictures where CID={id} and IsMain=1";
                 bAns = Database.DataExists(databasePath, sql, out errOut);
-                if (!bAns && addPic) AddDefaultPic(databasePath, id, applicationPath, defaultPic, out errOut);
+                if (!bAns && addPic) if(!AddDefaultPic(databasePath, id, applicationPath, defaultPic, out errOut)) throw  new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -269,7 +270,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                if (!Save(databasePath, defaultPic, applicationPath, id, " ", " ", out errOut))
+                if (!Save(databasePath, defaultPic, applicationPath, id, " ", " ", out errOut, true))
                     throw new Exception(errOut);
                 bAns = true;
             }
@@ -291,8 +292,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="name">The name.</param>
         /// <param name="notes">The notes.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="setAsDefault"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Save(string databasePath, string file, string applicationPathData, long gunId,string name, string notes, out string errOut)
+        public static bool Save(string databasePath, string file, string applicationPathData, long gunId,string name, string notes, out string errOut, bool setAsDefault = false)
         {
             bool bAns = false;
             errOut = @"";
@@ -324,7 +326,16 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                 OleDbConnection myConn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
 
-                int iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
+                int iMain = 0;
+                if (setAsDefault)
+                {
+                    iMain = 1;
+                }
+                else
+                {
+                    iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
+                }
+                
                 string sql = "INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) " +
                              "VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now(),@pd_name,@pd_note)";
                 OleDbCommand cmd = new OleDbCommand(sql);
