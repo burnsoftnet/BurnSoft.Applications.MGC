@@ -398,7 +398,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                List<PictureDetailsList> lst = GetList(databasePath, gunId, out errOut);
+                List<PictureDetails> lst = GetList(databasePath, gunId, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 lAns = lst.Count;
             }
@@ -419,9 +419,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="isDetails">toggle if just the text is returned or all</param>
         /// <param name="isDirect">change the sql from looking up the gun id and look up the direct id instead</param>
         /// <returns></returns>
-        public static List<PictureDetailsList> GetList(string databasePath, long id, out string errOut, bool isDetails = true, bool isDirect = false)
+        public static List<PictureDetails> GetList(string databasePath, long id, out string errOut, bool isDetails = true, bool isDirect = false)
         {
-            List<PictureDetailsList> lst = new List<PictureDetailsList>();
+            List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
             try
             {
@@ -448,9 +448,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="isDetails"></param>
         /// <param name="dbPath"></param>
         /// <returns></returns>
-        internal static List<PictureDetailsList> MyList(DataTable dt, out string errOut,bool isDetails = false, string dbPath = "")
+        internal static List<PictureDetails> MyList(DataTable dt, out string errOut,bool isDetails = false, string dbPath = "")
         {
-            List<PictureDetailsList> lst = new List<PictureDetailsList>();
+            List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
             try
             {
@@ -479,7 +479,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                             picStream.Write(bPic, 0, bPic.Length);
                             picStream.Close();
                         }
-                        lst.Add(new PictureDetailsList()
+                        lst.Add(new PictureDetails()
                         {
                             Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
                             LastSyncDate = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : "",
@@ -495,7 +495,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                     }
                     else
                     {
-                        lst.Add(new PictureDetailsList()
+                        lst.Add(new PictureDetails()
                         {
                             Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
                             LastSyncDate = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString().Trim() : "",
