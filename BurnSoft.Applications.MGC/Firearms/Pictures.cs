@@ -231,6 +231,31 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Resets the default pic.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="collectionId">The collection identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ResetDefaultPic(string databasePath, long collectionId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Pictures set ISMAIN=0 where CID={collectionId}";
+                if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ResetDefaultPic", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
