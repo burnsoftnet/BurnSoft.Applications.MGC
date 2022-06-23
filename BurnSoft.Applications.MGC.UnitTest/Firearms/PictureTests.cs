@@ -95,11 +95,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// Prints the list.
         /// </summary>
         /// <param name="p">The p.</param>
-        public void PrintList(List<PictureDetails> p)
+        public void PrintList(List<PictureDetailsList> p)
         {
             if (p.Count > 0)
             {
-                foreach (PictureDetails d in p)
+                foreach (PictureDetailsList d in p)
                 {
                     TestContext.WriteLine("");
                     TestContext.WriteLine($"id: {d.Id}");
@@ -126,7 +126,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod]
         public void GetPicturesForFirearmTest()
         {
-            List<PictureDetails> value = Pictures.GetList(_databasePath, _gunId, out _errOut);
+            List<PictureDetailsList> value = Pictures.GetList(_databasePath, _gunId, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }

@@ -130,7 +130,8 @@
     <Compile Include="Types\NationalityList.cs" />
     <Compile Include="Types\OwnerInfo.cs" />
     <Compile Include="Types\BuyersList.cs" />
-    <Compile Include="Types\PictureDetails.cs" />
+    <Compile Include="Types\PictureDetailsList.cs" />
+    <Compile Include="Types\PictureDisplay.cs" />
     <Compile Include="Types\TableLists.cs" />
     <Compile Include="Types\WishlistList.cs" />
   </ItemGroup>
@@ -147,6 +148,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName) - g</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

@@ -7,7 +7,7 @@ namespace BurnSoft.Applications.MGC.Types
     /// Class PictureDetails.  Picture Container for the data that is stored in the Gun_Collection_Pictures table.
     /// </summary>
     [Serializable]
-    public class PictureDetails
+    public class PictureDetailsList
     {
         /// <summary>
         /// Gets or sets the identifier.
