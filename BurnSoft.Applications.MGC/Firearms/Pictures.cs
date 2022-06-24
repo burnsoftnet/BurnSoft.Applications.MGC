@@ -5,6 +5,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Windows.Forms;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
@@ -418,8 +419,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">exception message</param>
         /// <param name="isDetails">toggle if just the text is returned or all</param>
         /// <param name="isDirect">change the sql from looking up the gun id and look up the direct id instead</param>
+        /// <param name="formPictureBox"></param>
         /// <returns></returns>
-        public static List<PictureDetails> GetList(string databasePath, long id, out string errOut, bool isDetails = true, bool isDirect = false)
+        public static List<PictureDetails> GetList(string databasePath, long id, out string errOut, bool isDetails = true, bool isDirect = false, PictureBox formPictureBox = null)
         {
             List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
@@ -429,7 +431,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (isDirect) sql = $"SELECT * from Gun_Collection_Pictures where ID={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                lst = MyList(dt, out errOut, isDetails);
+                lst = MyList(dt, out errOut, isDetails,"", formPictureBox);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
@@ -447,8 +449,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut"></param>
         /// <param name="isDetails"></param>
         /// <param name="dbPath"></param>
+        /// <param name="formPictureBox"></param>
         /// <returns></returns>
-        internal static List<PictureDetails> MyList(DataTable dt, out string errOut,bool isDetails = false, string dbPath = "")
+        internal static List<PictureDetails> MyList(DataTable dt, out string errOut,bool isDetails = false, string dbPath = "", PictureBox formPictureBox = null)
         {
             List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
@@ -467,16 +470,37 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                         MemoryStream thumbStream = new MemoryStream();
                         MemoryStream picStream = new MemoryStream();
+                        Bitmap tBmp = null;
+                        Bitmap bmp = null;
+
                         if (bThumb.Length > 0)
                         {
                             thumbStream = new MemoryStream(bThumb, true);
                             thumbStream.Write(bThumb, 0, bThumb.Length);
+                            if (formPictureBox != null)
+                            {
+                                Image imgT = new Bitmap(thumbStream);
+                                Size imgTSize = ProportionalSize(imgT.Size, formPictureBox.Size);
+                                Bitmap newTimg = new Bitmap(imgTSize.Width, imgTSize.Height);
+                                Graphics g = Graphics.FromImage(newTimg);
+                                g.DrawImage(imgT, 0,0, imgTSize.Width, imgTSize.Height);
+                                tBmp = newTimg;
+                            }
                             thumbStream.Close();
                         }
                         if (bPic.Length > 0)
                         {
                             picStream = new MemoryStream(bPic, true);
                             picStream.Write(bPic, 0, bPic.Length);
+                            if (formPictureBox != null)
+                            {
+                                Image imgT = new Bitmap(picStream);
+                                Size imgTSize = ProportionalSize(imgT.Size, formPictureBox.Size);
+                                Bitmap newTimg = new Bitmap(imgTSize.Width, imgTSize.Height);
+                                Graphics g = Graphics.FromImage(newTimg);
+                                g.DrawImage(imgT, 0, 0, imgTSize.Width, imgTSize.Height);
+                                bmp = newTimg;
+                            }
                             picStream.Close();
                         }
                         lst.Add(new PictureDetails()
@@ -490,7 +514,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                             PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
                             PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : "",
                             ThumbMemoryStream = thumbStream,
-                            PictureMemoryStream = picStream
+                            PictureMemoryStream = picStream,
+                            ThumbBmp = tBmp,
+                            PictureBmp = bmp
                         });
                     }
                     else
@@ -514,6 +540,41 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+        /// <summary>
+        /// Proportionals the size.
+        /// </summary>
+        /// <param name="imageSize">Size of the image.</param>
+        /// <param name="maxWMaxH">The maximum w maximum h.</param>
+        /// <returns>System.Drawing.Size.</returns>
+        public static Size ProportionalSize(Size imageSize, Size maxWMaxH)
+        {
+            double multBy = 1.01;
+            double w = imageSize.Width;
+            double h = imageSize.Height;
+
+            while ((w < maxWMaxH.Width & h < maxWMaxH.Height))
+            {
+                w = imageSize.Width * multBy;
+                h = imageSize.Height * multBy;
+                multBy = multBy + 0.001;
+            }
+
+            while ((w > maxWMaxH.Width | h > maxWMaxH.Height))
+            {
+                multBy = multBy - 0.001;
+                w = imageSize.Width * multBy;
+                h = imageSize.Height * multBy;
+            }
+
+            if ((imageSize.Width < 1))
+                imageSize = new Size(imageSize.Width - imageSize.Width + 1, imageSize.Height - imageSize.Width - 1);
+            else if ((imageSize.Height < 1))
+                imageSize = new Size(imageSize.Width - imageSize.Height - 1, imageSize.Height - imageSize.Height + 1);
+            imageSize = new Size(Convert.ToInt32(w), Convert.ToInt32(h));
+            return imageSize;
+        }
+
+
         /// <summary>
         /// Updates the picture details.
         /// </summary>

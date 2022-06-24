@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 
 namespace BurnSoft.Applications.MGC.Types
@@ -30,6 +31,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The picture ms.</value>
         public MemoryStream PictureMemoryStream { get; set; }
         /// <summary>
+        /// Gets or sets the picture BMP.
+        /// </summary>
+        /// <value>The picture BMP.</value>
+        public Bitmap PictureBmp { get; set; }
+        /// <summary>
         /// Gets or sets a value indicating whether this instance is main.
         /// </summary>
         /// <value><c>true</c> if this instance is main; otherwise, <c>false</c>.</value>
@@ -44,6 +50,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value>The thumb memory stream.</value>
         public MemoryStream ThumbMemoryStream { get; set; }
+        /// <summary>
+        /// Gets or sets the thumb BMP.
+        /// </summary>
+        /// <value>The thumb BMP.</value>
+        public Bitmap ThumbBmp { get; set; }
         /// <summary>
         /// Gets or sets the display name of the picture.  This is also known as pd_name
         /// </summary>
