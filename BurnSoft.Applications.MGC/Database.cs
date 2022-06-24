@@ -506,6 +506,41 @@ namespace BurnSoft.Applications.MGC
             }
             return bAns;
         }
+        /// <summary>
+        /// Gets the pcture.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>Object.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static Object GetPcture(string databasePath, int id, out string errOut)
+        {
+            Object oAns = null;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+                
+                if (obj.ConnectDb(ConnectionString(databasePath, out errOut), out errOut))
+                {
+                    string sql = $"SELECT PICTURE from Gun_Collection_Pictures where ID={id}";
+                    OdbcCommand cmd = new OdbcCommand(sql, obj._conn);
+                    oAns = cmd.ExecuteScalar();
+                    cmd.Connection.Close();
+                    obj._conn = null;
+                }
+                else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetPcture", e);
+            }
+            return oAns;
+        }
 
         #endregion
     }
