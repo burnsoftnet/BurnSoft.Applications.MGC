@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Odbc;
 using System.Data.OleDb;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -601,6 +602,77 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("UpdatePictureDetails", e);
             }
             return bAns;
+        }
+
+        /// <summary>
+        /// Gets the pcture.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>Object.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static Object GetPicture(string databasePath, int id, out string errOut)
+        {
+            Object oAns = null;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+
+                if (obj.ConnectDb(Database.ConnectionString(databasePath, out errOut), out errOut))
+                {
+                    string sql = $"SELECT PICTURE from Gun_Collection_Pictures where ID={id}";
+                    OdbcCommand cmd = new OdbcCommand(sql, obj._conn);
+                    oAns = cmd.ExecuteScalar();
+                    cmd.Connection.Close();
+                    obj._conn = null;
+                }
+                else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetPicture", e);
+            }
+            return oAns;
+        }
+        /// <summary>
+        /// Gets the thumbnail picture.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>Object.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static Object GetThumbnailPicture(string databasePath, int id, out string errOut)
+        {
+            Object oAns = null;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+
+                if (obj.ConnectDb(Database.ConnectionString(databasePath, out errOut), out errOut))
+                {
+                    string sql = $"SELECT THUMB from Gun_Collection_Pictures where ID={id}";
+                    OdbcCommand cmd = new OdbcCommand(sql, obj._conn);
+                    oAns = cmd.ExecuteScalar();
+                    cmd.Connection.Close();
+                    obj._conn = null;
+                }
+                else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetThumbnailPicture", e);
+            }
+            return oAns;
         }
     }
 }
