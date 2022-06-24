@@ -541,7 +541,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lst;
         }
         /// <summary>
-        /// Proportionals the size.
+        /// Proportionals the size. Calculate the Proportional Size of an Image by passing the image size and the MaxSize or Height of the image
+        ///  to return the new size.  The Max Width and Height is the parameters of the container
         /// </summary>
         /// <param name="imageSize">Size of the image.</param>
         /// <param name="maxWMaxH">The maximum w maximum h.</param>
