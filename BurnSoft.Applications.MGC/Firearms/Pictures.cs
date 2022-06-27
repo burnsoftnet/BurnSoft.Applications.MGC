@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Odbc;
 using System.Data.OleDb;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using ADODB;
-//using ADODB;
+using System.Windows.Forms;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
+// ReSharper disable MustUseReturnValue
 
 // ReSharper disable ExpressionIsAlwaysNull
 
@@ -67,7 +68,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// The file filter list
         /// </summary>
-        public static string FileFilterList = "Bmp Files(*.bmp)|*.bmp|Gif Files(*.gif)|*.gif|Jpg Files(*.jpg)|*.jpg";
+        public static string FileFilterList = "Bmp Files(*.bmp)|*.bmp|Gif Files(*.gif)|*.gif|Jpg Files(*.jpg)|*.jpg|PNG Files(*.png)|*.png";
         /// <summary>
         /// Determines whether the firearm ( collection id ) already has a default picture set or not
         /// </summary>
@@ -112,7 +113,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 string sql = $"SELECT * from Gun_Collection_Pictures where CID={id} and IsMain=1";
                 bAns = Database.DataExists(databasePath, sql, out errOut);
-                if (!bAns && addPic) AddDefaultPic(databasePath, id, applicationPath, defaultPic, out errOut);
+                if (!bAns && addPic) if(!AddDefaultPic(databasePath, id, applicationPath, defaultPic, out errOut)) throw  new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -176,7 +178,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = "";
             try
             {
-                string sql = $"SELECT DISTINCT(Gun_Collection_Pictures.CID) as CID FROM Gun_Collection_Pictures";
+                string sql = "SELECT DISTINCT(Gun_Collection_Pictures.CID) as CID FROM Gun_Collection_Pictures";
                 OleDbConnection conn = new OleDbConnection(Database.ConnectionString(databasePath, out errOut));
                 conn.Open();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
@@ -231,6 +233,31 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
+        /// Resets the default pic.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="collectionId">The collection identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ResetDefaultPic(string databasePath, long collectionId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Pictures set ISMAIN=0 where CID={collectionId}";
+                if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ResetDefaultPic", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
         /// Deletes the specified database path.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -270,59 +297,8 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sFileName = Path.Combine(applicationPath, defaultPic);
-                string sThumbName = Path.Combine(applicationPath, @"\mgc_thumb.jpg");
-                // ---Start Function to convert picture to database format-----
-                FileStream st = new FileStream(sFileName, FileMode.Open, FileAccess.Read);
-                BinaryReader mbr = new BinaryReader(st);
-                byte[] buffer = new byte[st.Length + 1];
-                mbr.Read(buffer, 0, Convert.ToInt32(st.Length));
-                st.Close();
-                // ---End Function to convert picture to database format-----
-                // --Start Function to convert picture to thumbnail for database format--
-                int intPicHeight = 64;
-                int intPicWidth = 64;
-                var myBitmap = Image.FromFile(sFileName);
-                Image.GetThumbnailImageAbort myPicCallback = null/* TODO Change to default(_) if this is not a reference type */;
-                var myNewPic = myBitmap.GetThumbnailImage(intPicWidth, intPicHeight, myPicCallback, IntPtr.Zero);
-                myBitmap.Dispose();
-                File.Delete(sThumbName);
-                myNewPic.Save(sThumbName, ImageFormat.Jpeg);
-                myNewPic.Dispose();
-                FileStream stT = new FileStream(sThumbName, FileMode.Open, FileAccess.Read);
-                BinaryReader mbrT = new BinaryReader(stT);
-                byte[] bufferT = new byte[stT.Length + 1];
-                mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
-                stT.Close();
-                // --End Function to convert picture to thumbnail for database format--
-
-                Connection myConn = new Connection();
-                myConn.Open(Database.ConnectionString(databasePath, out errOut));
-                Recordset rs = new Recordset();
-                rs.Open("Gun_Collection_Pictures", myConn, CursorTypeEnum.adOpenStatic, LockTypeEnum.adLockPessimistic);
-                rs.AddNew();
-                rs.Fields["CID"].Value = id;
-                rs.Fields["PICTURE"].AppendChunk(buffer);
-                rs.Fields["THUMB"].AppendChunk(bufferT);
-                rs.Fields["ISMAIN"].Value = 1;
-                rs.Fields["sync_lastupdate"].Value = DateTime.Now;
-                rs.Update();
-                rs.Close();
-
-                //OleDbConnection myConn = new OleDbConnection(Database.ConnectionString(databasePath, out errOut));
-
-                //string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate VALUES({id},@Image,@Thumb,{1},Now());";
-                //OleDbCommand cmd = new OleDbCommand();
-                //OleDbParameter param1 = new OleDbParameter();
-                //param1.ParameterName = "Image";
-                //param1.Value = buffer;
-                //cmd.Parameters.Add(param1);
-                //OleDbParameter param2 = new OleDbParameter();
-                //param2.ParameterName = "Thumb";
-                //param2.Value = buffer;
-                //cmd.Parameters.Add(param2);
-                //cmd.Connection = myConn;
-                //cmd.ExecuteScalar();
+                if (!Save(databasePath, defaultPic, applicationPath, id, " ", " ", out errOut, true))
+                    throw new Exception(errOut);
                 bAns = true;
             }
             catch (Exception e)
@@ -333,7 +309,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Saves the specified database path.
+        /// Save a gun picture to the database, this function will convert this picture into a thumbnail and upload the orginal picture and the thumbnail
+        /// to the database, you can also add a name and notes to it.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="file">The file.</param>
@@ -342,8 +319,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="name">The name.</param>
         /// <param name="notes">The notes.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="setAsDefault"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Save(string databasePath, string file, string applicationPathData, long gunId,string name, string notes, out string errOut)
+        public static bool Save(string databasePath, string file, string applicationPathData, long gunId,string name, string notes, out string errOut, bool setAsDefault = false)
         {
             bool bAns = false;
             errOut = @"";
@@ -373,44 +351,29 @@ namespace BurnSoft.Applications.MGC.Firearms
                 mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
                 stT.Close();
 
-                //Connection conn = new Connection();
-                //conn.Open(Database.ConnectionString(databasePath, out errOut));
-                //Recordset rs = new Recordset();
-                ////TODO: #7 Finish Importing the picture function and figure out why the ADODB is glitching in c# or get the right format
-                //rs.Open("Gun_Collection_Pictures", conn, CursorTypeEnum.adOpenKeyset, LockTypeEnum.adLockOptimistic);
-                ////rs.Open("Gun_Collection_Pictures", conn, ADODB.CursorTypeEnum.adOpenStatic, ADODB.LockTypeEnum.adLockBatchOptimistic, 0);
-                //rs.AddNew();
-                //rs.Fields["CID"].Value = gunId;
-                //rs.Fields["PICTURE"].AppendChunk(buffer);
-                //rs.Fields["THUMB"].AppendChunk(bufferT);
-                //rs.Fields["ISMAIN"].Value = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
-
-                //rs.Fields["pd_name"].Value = name;
-                //rs.Fields["pd_note"].Value = notes;
-                //rs.Fields["sync_lastupdate"].Value = DateTime.Now;
-                //rs.Update();
-                //rs.Close();
-
-
                 OleDbConnection myConn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
 
-                int iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
-                string sql = $"INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) " +
-                             $"VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now(),@pd_name,@pd_note)";
+                int iMain = 0;
+                if (setAsDefault)
+                {
+                    iMain = 1;
+                }
+                else
+                {
+                    iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
+                }
+                
+                string sql = "INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note) " +
+                             "VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now(),@pd_name,@pd_note)";
                 OleDbCommand cmd = new OleDbCommand(sql);
-                //OleDbParameter param1 = new OleDbParameter();
-                //param1.ParameterName = "Image";
-                //param1.Value = buffer;
+
                 cmd.Parameters.AddWithValue("CID", gunId);
                 cmd.Parameters.AddWithValue("PICTURE", buffer);
                 cmd.Parameters.AddWithValue("THUMB", bufferT);
                 cmd.Parameters.AddWithValue("ISMAIN", iMain);
                 cmd.Parameters.AddWithValue("pd_name", name);
                 cmd.Parameters.AddWithValue("pd_note", notes);
-                //OleDbParameter param2 = new OleDbParameter();
-                //param2.ParameterName = "Thumb";
-                //param2.Value = bufferT;
-                //cmd.Parameters.Add(param2);
+
                 myConn.Open();
                 cmd.Connection = myConn;
                 cmd.ExecuteNonQuery();
@@ -457,8 +420,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">exception message</param>
         /// <param name="isDetails">toggle if just the text is returned or all</param>
         /// <param name="isDirect">change the sql from looking up the gun id and look up the direct id instead</param>
+        /// <param name="formPictureBox"></param>
         /// <returns></returns>
-        public static List<PictureDetails> GetList(string databasePath, long id, out string errOut, bool isDetails = true, bool isDirect = false)
+        public static List<PictureDetails> GetList(string databasePath, long id, out string errOut, bool isDetails = true, bool isDirect = false, PictureBox formPictureBox = null)
         {
             List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
@@ -468,7 +432,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (isDirect) sql = $"SELECT * from Gun_Collection_Pictures where ID={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                lst = MyList(dt, out errOut, isDetails);
+                lst = MyList(dt, out errOut, isDetails,"", formPictureBox);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
@@ -486,8 +450,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut"></param>
         /// <param name="isDetails"></param>
         /// <param name="dbPath"></param>
+        /// <param name="formPictureBox"></param>
         /// <returns></returns>
-        internal static List<PictureDetails> MyList(DataTable dt, out string errOut,bool isDetails = false, string dbPath = "")
+        internal static List<PictureDetails> MyList(DataTable dt, out string errOut,bool isDetails = false, string dbPath = "", PictureBox formPictureBox = null)
         {
             List<PictureDetails> lst = new List<PictureDetails>();
             errOut = @"";
@@ -506,16 +471,37 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                         MemoryStream thumbStream = new MemoryStream();
                         MemoryStream picStream = new MemoryStream();
+                        Bitmap tBmp = null;
+                        Bitmap bmp = null;
+
                         if (bThumb.Length > 0)
                         {
                             thumbStream = new MemoryStream(bThumb, true);
                             thumbStream.Write(bThumb, 0, bThumb.Length);
+                            if (formPictureBox != null)
+                            {
+                                Image imgT = new Bitmap(thumbStream);
+                                Size imgTSize = ProportionalSize(imgT.Size, formPictureBox.Size);
+                                Bitmap newTimg = new Bitmap(imgTSize.Width, imgTSize.Height);
+                                Graphics g = Graphics.FromImage(newTimg);
+                                g.DrawImage(imgT, 0,0, imgTSize.Width, imgTSize.Height);
+                                tBmp = newTimg;
+                            }
                             thumbStream.Close();
                         }
                         if (bPic.Length > 0)
                         {
                             picStream = new MemoryStream(bPic, true);
                             picStream.Write(bPic, 0, bPic.Length);
+                            if (formPictureBox != null)
+                            {
+                                Image imgT = new Bitmap(picStream);
+                                Size imgTSize = ProportionalSize(imgT.Size, formPictureBox.Size);
+                                Bitmap newTimg = new Bitmap(imgTSize.Width, imgTSize.Height);
+                                Graphics g = Graphics.FromImage(newTimg);
+                                g.DrawImage(imgT, 0, 0, imgTSize.Width, imgTSize.Height);
+                                bmp = newTimg;
+                            }
                             picStream.Close();
                         }
                         lst.Add(new PictureDetails()
@@ -529,7 +515,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                             PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
                             PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : "",
                             ThumbMemoryStream = thumbStream,
-                            PictureMemoryStream = picStream
+                            PictureMemoryStream = picStream,
+                            ThumbBmp = tBmp,
+                            PictureBmp = bmp
                         });
                     }
                     else
@@ -553,6 +541,42 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+        /// <summary>
+        /// Proportionals the size. Calculate the Proportional Size of an Image by passing the image size and the MaxSize or Height of the image
+        ///  to return the new size.  The Max Width and Height is the parameters of the container
+        /// </summary>
+        /// <param name="imageSize">Size of the image.</param>
+        /// <param name="maxWMaxH">The maximum w maximum h.</param>
+        /// <returns>System.Drawing.Size.</returns>
+        public static Size ProportionalSize(Size imageSize, Size maxWMaxH)
+        {
+            double multBy = 1.01;
+            double w = imageSize.Width;
+            double h = imageSize.Height;
+
+            while ((w < maxWMaxH.Width & h < maxWMaxH.Height))
+            {
+                w = imageSize.Width * multBy;
+                h = imageSize.Height * multBy;
+                multBy = multBy + 0.001;
+            }
+
+            while ((w > maxWMaxH.Width | h > maxWMaxH.Height))
+            {
+                multBy = multBy - 0.001;
+                w = imageSize.Width * multBy;
+                h = imageSize.Height * multBy;
+            }
+
+            if ((imageSize.Width < 1))
+                imageSize = new Size(imageSize.Width - imageSize.Width + 1, imageSize.Height - imageSize.Width - 1);
+            else if ((imageSize.Height < 1))
+                imageSize = new Size(imageSize.Width - imageSize.Height - 1, imageSize.Height - imageSize.Height + 1);
+            imageSize = new Size(Convert.ToInt32(w), Convert.ToInt32(h));
+            return imageSize;
+        }
+
+
         /// <summary>
         /// Updates the picture details.
         /// </summary>
@@ -578,6 +602,77 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("UpdatePictureDetails", e);
             }
             return bAns;
+        }
+
+        /// <summary>
+        /// Gets the pcture.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>Object.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static Object GetPicture(string databasePath, int id, out string errOut)
+        {
+            Object oAns = null;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+
+                if (obj.ConnectDb(Database.ConnectionString(databasePath, out errOut), out errOut))
+                {
+                    string sql = $"SELECT PICTURE from Gun_Collection_Pictures where ID={id}";
+                    OdbcCommand cmd = new OdbcCommand(sql, obj._conn);
+                    oAns = cmd.ExecuteScalar();
+                    cmd.Connection.Close();
+                    obj._conn = null;
+                }
+                else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetPicture", e);
+            }
+            return oAns;
+        }
+        /// <summary>
+        /// Gets the thumbnail picture.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>Object.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static Object GetThumbnailPicture(string databasePath, int id, out string errOut)
+        {
+            Object oAns = null;
+            errOut = "";
+            try
+            {
+                Database obj = new Database();
+
+                if (obj.ConnectDb(Database.ConnectionString(databasePath, out errOut), out errOut))
+                {
+                    string sql = $"SELECT THUMB from Gun_Collection_Pictures where ID={id}";
+                    OdbcCommand cmd = new OdbcCommand(sql, obj._conn);
+                    oAns = cmd.ExecuteScalar();
+                    cmd.Connection.Close();
+                    obj._conn = null;
+                }
+                else
+                {
+                    throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetThumbnailPicture", e);
+            }
+            return oAns;
         }
     }
 }

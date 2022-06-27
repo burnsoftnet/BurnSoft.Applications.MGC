@@ -36,11 +36,6 @@
     <DocumentationFile>bin\Release\BurnSoft.Applications.MGC.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="adodb, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>.\adodb.dll</HintPath>
-    </Reference>
     <Reference Include="BurnSoft.Security.RegularEncryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\BurnSoft.Security.RegularEncryption.1.0.0\lib\net452\BurnSoft.Security.RegularEncryption.dll</HintPath>
     </Reference>
@@ -87,6 +82,7 @@
     <Compile Include="Firearms\MyCollection.cs" />
     <Compile Include="Firearms\MyCollectionQry.cs" />
     <Compile Include="Firearms\Nationality.cs" />
+    <Compile Include="Firearms\PictureDisplay.cs" />
     <Compile Include="Firearms\Pictures.cs" />
     <Compile Include="Firearms\XmlExport.cs" />
     <Compile Include="Firearms\XmlImport.cs" />
@@ -136,14 +132,12 @@
     <Compile Include="Types\OwnerInfo.cs" />
     <Compile Include="Types\BuyersList.cs" />
     <Compile Include="Types\PictureDetails.cs" />
+    <Compile Include="Types\PictureDisplayList.cs" />
     <Compile Include="Types\TableLists.cs" />
     <Compile Include="Types\WishlistList.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Content Include="adodb.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="bswtsicon.png" />
     <Content Include="icon.png" />
   </ItemGroup>
@@ -155,6 +149,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName)</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName) -g</PostBuildEvent>
   </PropertyGroup>
 </Project>
