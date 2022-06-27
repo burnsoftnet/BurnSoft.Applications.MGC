@@ -87,7 +87,8 @@ namespace BurnSoft.Applications.MGC.Ammo
             {
                 if(updateInventory) if (!Inventory.UpdateQty(databasePath, ammoId, currentQty,qty, out errOut, true)) throw new Exception(errOut);
 
-                double pricePerBullet = Math.Truncate(price / qty);
+                //double pricePerBullet = Math.Truncate(price / qty);
+                double pricePerBullet = price / qty;
                 string sql =
                     $"INSERT INTO Gun_Collection_Ammo_PriceAudit (AID,DTA,Qty,PricePaid,PPB,store,sync_lastupdate) VALUES(" +
                     $"{ammoId},'{datePurchased}',{qty},{price},{pricePerBullet},'{store}',Now())";
