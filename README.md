@@ -13,7 +13,7 @@ and any other related program.
 
 ## Release Log
 
-### v1.x
+### v1.7.0.0
 
 - Initial Release
 - Broke Away from teh MyGunCollection Repo.
