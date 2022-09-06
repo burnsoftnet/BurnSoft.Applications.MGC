@@ -333,6 +333,10 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             {
                 foreach (DataRow d in dt.Rows)
                 {
+                    //string pwd = d["pwd"] != DBNull.Value ? One.Decrypt(d["pwd"].ToString().Trim()) : "";
+                    string pwd = d["pwd"].ToString().Trim();
+                    string uid =d["uid"].ToString().Trim();
+                    //string uid = d["uid"] != DBNull.Value ? One.Decrypt(d["uid"].ToString().Trim()) : "";
                     lst.Add(new OwnerInfo()
                     {
                         Id = Convert.ToInt32(d["id"]),
