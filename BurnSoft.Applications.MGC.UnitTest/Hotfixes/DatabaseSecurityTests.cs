@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -39,21 +38,28 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method RemovePasswordTest.
+        /// </summary>
+        [TestMethod, TestCategory("Database Security")]
         public void RemovePasswordTest()
         {
             bool value = hotixes.HfDatabase.Security.RemovePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method AddPasswordTest.
+        /// </summary>
+        [TestMethod, TestCategory("Database Security")]
         public void AddPasswordTest()
         {
             bool value = hotixes.HfDatabase.Security.AddPassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method ChangePasswordTest.
+        /// </summary>
+        [TestMethod, TestCategory("Database Security")]
         public void ChangePasswordTest()
         {
             bool value = hotixes.HfDatabase.Security.ChangePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);

@@ -95,6 +95,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 OwnerInformation.SetLogin(_databasePath, id, false, out _errOut);
             }
         }
+        /// <summary>
+        /// Defines the test method LoginIsEnabledTest.
+        /// </summary>
         [TestMethod, TestCategory("Owner Informaiton")]
         public void LoginIsEnabledTest()
         {
@@ -102,7 +105,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             bool value = OwnerInformation.LoginIsEnabled(_databasePath, OwnerId, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
+        /// <summary>
+        /// Defines the test method GetLoginWhenEnabledTest.
+        /// </summary>
         [TestMethod, TestCategory("Owner Informaiton")]
         public void GetLoginWhenEnabledTest()
         {
