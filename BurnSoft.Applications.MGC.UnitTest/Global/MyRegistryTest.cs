@@ -40,7 +40,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Global
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method GetSettingsTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void GetSettingsTest()
         {
             string lastSucBackup = "";
@@ -76,8 +79,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Global
 
             General.HasValue(trackHistory.ToString(), _errOut);
         }
-
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method SaveSettingsTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void SaveSettingsTest()
         {
             string lastSucBackup = "";
@@ -120,46 +125,67 @@ namespace BurnSoft.Applications.MGC.UnitTest.Global
             General.HasTrueValue(value, _errOut);
 
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method SaveLastWorkingDirTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void SaveLastWorkingDirTest()
         {
             bool value = MyRegistry.SaveLastWorkingDir(Path.GetFullPath(_databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method GetLastWorkingDirTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void GetLastWorkingDirTest()
         {
             string value = MyRegistry.GetLastWorkingDir(out _errOut);
             TestContext.WriteLine(value);
             General.HasValue(value, _errOut);
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method SaveFirearmListSortTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void SaveFirearmListSortTest()
         {
             bool value = MyRegistry.SaveFirearmListSort("In Stock", out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method GetViewSettingsTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void GetViewSettingsTest()
         {
             string value = MyRegistry.GetViewSettings("VIEW_FirearmList", out _errOut, "In Stocks");
             TestContext.WriteLine(value);
             General.HasValue(value, _errOut);
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method SetSettingDetailsTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void SetSettingDetailsTest()
         {
             bool value = MyRegistry.SetSettingDetails(out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method UpDateAppDetailsTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void UpDateAppDetailsTest()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
             bool value = MyRegistry.UpDateAppDetails("1.0", "My Gun Collection Unit Test", path, $"{path}", Path.Combine(path,"log.err"), _databasePath, Path.GetFullPath(_databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method GetHotxesTest.
+        /// </summary>
+        [TestMethod, TestCategory("Registry Tests")]
         public void GetHotxesTest()
         {
             List<HotFixList> value = MyRegistry.GetHotxes(out _errOut);
