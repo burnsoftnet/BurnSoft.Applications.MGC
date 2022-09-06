@@ -45,7 +45,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             _saveToFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "unittest_fiream.xml");
         }
-        [TestMethod]
+        [TestMethod, TestCategory("Export XML")]
         public void GenerateXmlTest()
         {
             if (File.Exists(_saveToFile)) File.Delete(_saveToFile);

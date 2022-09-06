@@ -3,7 +3,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Reports;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
-using BurnSoft.Universal;
 
 namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
 {
@@ -35,7 +34,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
         public void Init()
         {
             // Vs2019.GetSetting("", TestContext);
-            BSOtherObjects obj = new BSOtherObjects();
+           // BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _crColumnTableId = Vs2019.IGetSetting("CR_Column_TableId", TestContext);
@@ -64,7 +63,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
         /// <summary>
         /// Defines the test method GetListTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Table Lists")]
         public void GetListTest()
         {
             List<TableLists> value = TableList.GetList(_databasePath, _crColumnTableId, out _errOut);
@@ -74,7 +73,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
         /// <summary>
         /// Defines the test method GetFullNameTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Table Lists")]
         public void GetFullNameTest()
         {
             string value = TableList.GetTableName(_databasePath, _crColumnTableId, out _errOut);

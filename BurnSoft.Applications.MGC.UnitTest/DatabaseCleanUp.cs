@@ -32,7 +32,7 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// <summary>
         /// Defines the test method KillDataTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Database Cleanup")]
         public void KillDataTest()
         {
             bool value = MGC.DatabaseCleanUp.KillData(_databasePath, "Gun_Type", out _errOut);
@@ -41,7 +41,7 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// <summary>
         /// Defines the test method ClearGripTypesTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Database Cleanup")]
         public void ClearGripTypesTest()
         {
             bool value = MGC.DatabaseCleanUp.ClearGripTypes(_databasePath, out _errOut);
@@ -50,7 +50,7 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// <summary>
         /// Defines the test method ClearBuyerListTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Database Cleanup")]
         public void ClearBuyerListTest()
         {
             bool value = MGC.DatabaseCleanUp.ClearBuyerList(_databasePath, out _errOut);
@@ -59,7 +59,7 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// <summary>
         /// Defines the test method ClearGunShopListTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Database Cleanup")]
         public void ClearGunShopListTest()
         {
             bool value = MGC.DatabaseCleanUp.ClearGunShopList(_databasePath, out _errOut);
@@ -68,7 +68,7 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// <summary>
         /// Defines the test method ClearNationalityTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Database Cleanup")]
         public void ClearNationalityTest()
         {
             bool value = MGC.DatabaseCleanUp.ClearNationality(_databasePath, out _errOut);
@@ -77,7 +77,7 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// <summary>
         /// Defines the test method ClearManufacturersTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Database Cleanup")]
         public void ClearManufacturersTest()
         {
             bool value = MGC.DatabaseCleanUp.ClearGunShopList(_databasePath, out _errOut);
@@ -86,7 +86,7 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// <summary>
         /// Defines the test method ClearModelsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Database Cleanup")]
         public void ClearModelsTest()
         {
             bool value = MGC.DatabaseCleanUp.ClearNationality(_databasePath, out _errOut);
@@ -95,7 +95,7 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// <summary>
         /// Defines the test method ClearCollectionTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Database Cleanup")]
         public void ClearCollectionTest()
         {
             bool value = MGC.DatabaseCleanUp.ClearCollection(_databasePath, out _errOut);
