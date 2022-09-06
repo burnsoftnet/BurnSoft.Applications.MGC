@@ -152,6 +152,64 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             }
             return bAns;
         }
+        /// <summary>
+        /// Sets the login option
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="isEnabled">if set to <c>true</c> [is enabled].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool SetLogin(string databasePath, long id,bool isEnabled, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                int iUsePassword = isEnabled ? 1 : 0;
+                string sql =
+                    $"UPDATE Owner_Info set UsePWD={iUsePassword},sync_lastupdate=Now() where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetLogin", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Checks to see if then Login field the is enabled.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool LoginIsEnabled(string databasePath, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Owner_Info where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<OwnerInfo> lst = GetList(dt, out errOut);
+
+                foreach (OwnerInfo l in lst)
+                {
+                    bAns = l.UsePassword;
+                    break;
+                }
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Gets the owner information from the database
