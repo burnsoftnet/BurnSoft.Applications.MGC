@@ -288,6 +288,17 @@ namespace BurnSoft.Applications.MGC
             return passed;
         }
         /// <summary>
+        /// Runs the SQL.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool RunSql(string databasePath, string sql, out string errOut)
+        {
+            return hotixes.HfDatabase.RunSql(databasePath, sql, out errOut, true);
+        }
+        /// <summary>
         /// Gets the data.
         /// </summary>
         /// <param name="connectionString">The connection string.</param>

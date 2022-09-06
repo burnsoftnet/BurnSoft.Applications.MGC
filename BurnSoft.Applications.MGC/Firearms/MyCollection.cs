@@ -751,7 +751,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 switch (type)
                 {
                     case CatalogType.Numeric:
-                        sql = "ALTER TABLE Gun_Collection ALTER COLUMN CustomID Integer;";
+                        sql = "ALTER TABLE Gun_Collection ALTER COLUMN CustomID INTEGER;";
                         break;
                     case CatalogType.Text:
                         sql = "ALTER TABLE Gun_Collection ALTER COLUMN CustomID Text(255);";

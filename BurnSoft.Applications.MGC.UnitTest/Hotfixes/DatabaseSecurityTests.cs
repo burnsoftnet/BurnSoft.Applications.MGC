@@ -53,6 +53,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Database Security")]
         public void AddPasswordTest()
         {
+            hotixes.HfDatabase.Security.RemovePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             bool value = hotixes.HfDatabase.Security.AddPassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             General.HasTrueValue(value, _errOut);
         }
