@@ -188,9 +188,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 foreach (OwnerInfo l in lst)
                 {
                     username = l.UserName;
-                    password = l.Password;
-                    forgotword = l.ForgotWord;
-                    forgotphrase = l.ForgotPhrase;
+                    password = l.Password.Length == 0 ? username : l.Password;
+                    forgotword = l.ForgotWord.Length == 0 ? "same as login" : l.ForgotWord;
+                    forgotphrase = l.ForgotPhrase.Length == 0 ? "same as login" : l.ForgotPhrase;
                     name = l.Name;
                     license = l.Ccdwl;
                     address = l.Address;

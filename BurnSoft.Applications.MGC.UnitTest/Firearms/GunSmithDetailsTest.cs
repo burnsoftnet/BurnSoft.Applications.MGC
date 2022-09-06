@@ -136,7 +136,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gunsmith Information")]
         public void AddTest()
         {
             VerifyDoesntExist();
@@ -149,7 +149,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ExistsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gunsmith Information")]
         public void ExistsTest()
         {
             VerifyExists();
@@ -160,7 +160,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method DeleteTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gunsmith Information")]
         public void DeleteTest()
         {
             VerifyExists();
@@ -172,7 +172,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method UpdateTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gunsmith Information")]
         public void UpdateTest()
         {
             VerifyExists();
@@ -184,7 +184,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gunsmith Information")]
         public void GetIdTest()
         {
             VerifyExists();
@@ -196,7 +196,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListAllTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gunsmith Information")]
         public void ListAllTest()
         {
             VerifyExists();
@@ -206,7 +206,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
-        [TestMethod]
+        [TestMethod, TestCategory("Gunsmith Information")]
         public void ListByGunSmithTest()
         {
             VerifyExists();
@@ -219,7 +219,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListByGunTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gunsmith Information")]
         public void ListByGunTest()
         {
             VerifyExists();

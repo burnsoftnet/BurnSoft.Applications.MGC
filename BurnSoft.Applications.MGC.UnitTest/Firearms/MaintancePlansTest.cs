@@ -110,7 +110,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void AddTest()
         {
             VerifyDoesntExist();
@@ -121,7 +121,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method UpdateTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void UpdateTest()
         {
             VerifyExists();
@@ -134,7 +134,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ExistsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void ExistsTest()
         {
             VerifyExists();
@@ -145,7 +145,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method DeleteTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void DeleteTest()
         {
             VerifyExists();
@@ -157,7 +157,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void GetIdTest()
         {
             VerifyExists();
@@ -169,7 +169,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetNameTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void GetNameTest()
         {
             VerifyExists();
@@ -182,7 +182,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListFromGunAndBarrelTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void ListByIdTest()
         {
             VerifyExists();
@@ -194,7 +194,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListFromGunTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void ListAllTest()
         {
             VerifyExists();
@@ -205,7 +205,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListByNameTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Plans")]
         public void ListByNameTest()
         {
             VerifyExists();

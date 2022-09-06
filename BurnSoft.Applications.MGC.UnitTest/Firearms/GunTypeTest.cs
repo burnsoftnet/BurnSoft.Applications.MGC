@@ -61,7 +61,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void AddTest()
         {
             DoesEixst();
@@ -74,7 +74,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ExistsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void ExistsTest()
         {
             DoesneExist();
@@ -85,7 +85,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void GetIdTest()
         {
             DoesneExist();
@@ -96,7 +96,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method DeleteByNameTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void DeleteByNameTest()
         {
             DoesneExist();
@@ -107,7 +107,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method DeleteByIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void DeleteByIdTest()
         {
             DoesneExist();
@@ -119,7 +119,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method UpdateTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void UpdateTest()
         {
             DoesneExist();
@@ -147,7 +147,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetListByIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void GetListByIdTest()
         {
             DoesneExist();
@@ -159,7 +159,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetListAllTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void GetListAllTest()
         {
             DoesneExist();
@@ -171,7 +171,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method UpdateGunTypeTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Gun Types")]
         public void UpdateGunTypeTest()
         {
             DoesEixst();

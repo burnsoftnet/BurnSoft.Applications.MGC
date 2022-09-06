@@ -85,7 +85,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Nationality")]
         public void AddTest()
         {
             VerifyDoesntExist();
@@ -96,7 +96,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method UpdateTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Nationality")]
         public void UpdateTest()
         {
             VerifyExists();
@@ -109,7 +109,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ExistsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Nationality")]
         public void ExistsTest()
         {
             VerifyExists();
@@ -120,7 +120,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method DeleteTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Nationality")]
         public void DeleteTest()
         {
             VerifyExists();
@@ -132,7 +132,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Nationality")]
         public void GetIdTest()
         {
             VerifyExists();
@@ -144,7 +144,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetNameTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Nationality")]
         public void GetNameTest()
         {
             VerifyExists();
@@ -157,7 +157,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListFromGunAndBarrelTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Nationality")]
         public void ListByIdTest()
         {
             VerifyExists();
@@ -169,7 +169,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListFromGunTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Nationality")]
         public void ListAllTest()
         {
             VerifyExists();
