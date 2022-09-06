@@ -61,7 +61,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         [TestMethod, TestCategory("Owner Informaiton")]
         public void LoginEnabledTest()
         {
-            SetLogOffIfEnabled(OwnerId);
+            SetLoginIfEnabled(OwnerId);
             bool value = OwnerInformation.LoginEnabled(_databasePath, out var uid, out var pwd, out var forgotWord,
                 out var forgotPhrase, out _errOut);
             if (value)
@@ -158,7 +158,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         public void GetOwnerIdTest()
         {
             long id = OwnerInformation.GetOwnerId(_databasePath, out var ownerName, out var ownerLic, out _errOut);
-            bool value = id > 0;
+            bool value = id > 0 && _errOut.Length == 0;
             if (value)
             {
                 TestContext.WriteLine($"id: {id}");
@@ -193,9 +193,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 foreach (OwnerInfo l in lst)
                 {
                     username = l.UserName;
-                    password = l.Password.Length == 0 ? username : l.Password;
-                    forgotword = l.ForgotWord.Length == 0 ? "same as login" : l.ForgotWord;
-                    forgotphrase = l.ForgotPhrase.Length == 0 ? "same as login" : l.ForgotPhrase;
+                    password = l.Password.Trim().Length == 0 ? username : l.Password;
+                    forgotword = l.ForgotWord.Trim().Length == 0 ? "same as login" : l.ForgotWord;
+                    forgotphrase = l.ForgotPhrase.Trim().Length == 0 ? "same as login" : l.ForgotPhrase;
                     name = l.Name;
                     license = l.Ccdwl;
                     address = l.Address;

@@ -259,7 +259,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                 {
                     lAns = l.Id;
                     ownerName = l.Name;
-                    ownerLic = One.Decrypt(l.Ccdwl);
+                    ownerLic = l.Ccdwl;
                 }
             }
             catch (Exception e)
@@ -390,19 +390,11 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
                     bAns = o.UsePassword;
                     if (bAns)
                     {
-                        uid = One.Decrypt(o.UserName);
-                        pwd = One.Decrypt(o.Password);
-                        if (o.ForgotPhrase.Length > 0)
-                        {
-                            forgotPhrase = One.Decrypt(o.ForgotPhrase);
-                        }
-
-                        if (o.ForgotWord.Length > 0)
-                        {
-                            forgotWord = One.Decrypt(o.ForgotWord);
-                        }
-
-                    }
+                        uid = o.UserName;
+                        pwd = o.Password;
+                        if (o.ForgotPhrase.Length > 0) forgotPhrase = o.ForgotPhrase;
+                        if (o.ForgotWord.Length > 0) forgotWord = o.ForgotWord;
+                    } 
                 }
             }
             catch (Exception e)
