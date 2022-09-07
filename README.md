@@ -13,6 +13,13 @@ and any other related program.
 
 ## Release Log
 
+### v1.7.0.4
+
+* Fixed issue with The Login Function
+* Fixed Issue with the Needs Hot Fix Function
+* Added Categories to Unit Test to Group By Traits in Test Explorer.
+* Added Additional Function to Check Login or Enable Login Option in database, mostly used for the unit tests, but Can also be used in the program if needed.
+
 ### v1.7.0.0
 
 - Initial Release
