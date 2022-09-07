@@ -94,6 +94,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Gun Collection - Get Firearm ID")]
         public void GetFirearmIdByFullName()
         {
+            VerifyExists();
             long gunId = MyCollection.GetId(_databasePath, _fullName, out _errOut);
             TestContext.WriteLine($"FireArm Id from full name {_fullName} is {gunId}");
             General.HasTrueValue(gunId > 0, _errOut);

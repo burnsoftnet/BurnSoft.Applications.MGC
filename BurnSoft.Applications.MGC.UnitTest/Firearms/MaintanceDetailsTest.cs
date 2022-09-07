@@ -130,7 +130,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Details")]
         public void AddTest()
         {
             VerifyDoesntExist();
@@ -141,7 +141,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ExistsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Details")]
         public void ExistsTest()
         {
             VerifyExists();
@@ -154,7 +154,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method DeleteTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Details")]
         public void DeleteTest()
         {
             VerifyExists();
@@ -166,7 +166,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Details")]
         public void GetIdTest()
         {
             VerifyExists();
@@ -178,7 +178,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetNameTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Details")]
         public void GetNameTest()
         {
             VerifyExists();
@@ -191,7 +191,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListFromGunAndBarrelTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Details")]
         public void ListFromGunAndBarrelTest()
         {
             VerifyExists();
@@ -202,7 +202,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListFromGunTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Maintance Details")]
         public void ListFromGunTest()
         {
             VerifyExists();

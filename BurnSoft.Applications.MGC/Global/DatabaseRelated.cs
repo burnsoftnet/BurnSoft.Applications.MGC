@@ -119,7 +119,7 @@ namespace BurnSoft.Applications.MGC.Global
             errOut = "";
             try
             {
-                string sql = "SELECT top 1 dbver from DB_Version order by ID desc";
+                string sql = "SELECT top 1 dbver from DB_Version order by dbver desc";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
 
                 foreach (DataRow d in dt.Rows)

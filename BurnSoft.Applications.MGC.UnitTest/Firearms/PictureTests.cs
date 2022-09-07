@@ -48,14 +48,16 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method HasDefaultPictureTestNoAdd.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Pictures")]
         public void HasDefaultPictureTestNoAdd()
         {
             bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, AppDomain.CurrentDomain.BaseDirectory, "", out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-
-        [TestMethod]
+        /// <summary>
+        /// Defines the test method HasDefaultPictureTestAdd.
+        /// </summary>
+        [TestMethod, TestCategory("Pictures")]
         public void HasDefaultPictureTestAdd()
         {
             bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, AppDomain.CurrentDomain.BaseDirectory, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mgc_default.jpg"), out _errOut, true);
@@ -64,7 +66,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method IsFirstPicTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Pictures")]
         public void IsFirstPicTest()
         {
             bool value = Pictures.IsFirstPic(_databasePath, _gunId, out _errOut);
@@ -73,7 +75,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method CountPicsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Pictures")]
         public void CountPicsTest()
         {
             long value = Pictures.CountPics(_databasePath, _gunId, out _errOut);
@@ -83,7 +85,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method SaveTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Pictures")]
         public void SaveTest()
         {
             string picPath = "C:\\TestData\\p365-380-web-left.jpg";
@@ -123,7 +125,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetPicturesForFirearmTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Pictures")]
         public void GetPicturesForFirearmTest()
         {
             List<PictureDetails> value = Pictures.GetList(_databasePath, _gunId, out _errOut);

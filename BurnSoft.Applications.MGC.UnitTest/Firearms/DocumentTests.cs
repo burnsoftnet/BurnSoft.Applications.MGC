@@ -5,6 +5,7 @@ using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
+// ReSharper disable NotAccessedField.Local
 
 namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 {
@@ -28,12 +29,30 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// The database path
         /// </summary>
         private string _databasePath;
-        private string Doc_Title;
-        private string Doc_Description;
-        private string Doc_Category;
-        private string Doc_Ext;
-        private string Doc_Path;
-        private int Doc_Ext_Number;
+        /// <summary>
+        /// The document title
+        /// </summary>
+        private string _docTitle;
+        /// <summary>
+        /// The document description
+        /// </summary>
+        private string _docDescription;
+        /// <summary>
+        /// The document category
+        /// </summary>
+        private string _docCategory;
+        /// <summary>
+        /// The document ext
+        /// </summary>
+        private string _docExt;
+        /// <summary>
+        /// The document path
+        /// </summary>
+        private string _docPath;
+        /// <summary>
+        /// The document ext number
+        /// </summary>
+        private int _docExtNumber;
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -45,12 +64,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
-            Doc_Title = obj.FC(Vs2019.GetSetting("Doc_Title", TestContext));
-            Doc_Description = obj.FC(Vs2019.GetSetting("Doc_Description", TestContext));
-            Doc_Category = obj.FC(Vs2019.GetSetting("Doc_Category", TestContext));
-            Doc_Ext = obj.FC(Vs2019.GetSetting("Doc_Ext", TestContext));
-            Doc_Path = Vs2019.GetSetting("Doc_Path", TestContext);
-            Doc_Ext_Number = Convert.ToInt32(Vs2019.GetSetting("Doc_Ext_Number", TestContext));
+            _docTitle = obj.FC(Vs2019.GetSetting("Doc_Title", TestContext));
+            _docDescription = obj.FC(Vs2019.GetSetting("Doc_Description", TestContext));
+            _docCategory = obj.FC(Vs2019.GetSetting("Doc_Category", TestContext));
+            _docExt = obj.FC(Vs2019.GetSetting("Doc_Ext", TestContext));
+            _docPath = Vs2019.GetSetting("Doc_Path", TestContext);
+            _docExtNumber = Convert.ToInt32(Vs2019.GetSetting("Doc_Ext_Number", TestContext));
         }
         /// <summary>
         /// Verifies the doesnt exists.
@@ -61,9 +80,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             try
             {
-                if (Documents.Exists(_databasePath, Doc_Title, out _errOut))
+                if (Documents.Exists(_databasePath, _docTitle, out _errOut))
                 {
-                    long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                    long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
                     if (_errOut.Length > 0) throw new Exception(_errOut);
                     if (!Documents.Delete(_databasePath, id, out _errOut)) throw new Exception(_errOut);
                 }
@@ -82,9 +101,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             try
             {
-                if (!Documents.Exists(_databasePath, Doc_Title, out _errOut))
+                if (!Documents.Exists(_databasePath, _docTitle, out _errOut))
                 {
-                    if (!Documents.Add(_databasePath, Doc_Title, Doc_Description, Doc_Category, Doc_Path, Doc_Ext_Number,
+                    if (!Documents.Add(_databasePath, _docTitle, _docDescription, _docCategory, _docPath, _docExtNumber,
                         out _errOut)) throw new Exception(_errOut);
                 }
             }
@@ -96,11 +115,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void AddTest()
         {
             VerifyDoesntExists();
-            bool value = Documents.Add(_databasePath, Doc_Title, Doc_Description, Doc_Category, Doc_Path, Doc_Ext_Number,
+            bool value = Documents.Add(_databasePath, _docTitle, _docDescription, _docCategory, _docPath, _docExtNumber,
                 out _errOut);
 
             General.HasTrueValue(value, _errOut);
@@ -108,11 +127,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ExistsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void ExistsTest()
         {
             VerifyExists();
-            bool value = Documents.Exists(_databasePath, Doc_Title, out _errOut);
+            bool value = Documents.Exists(_databasePath, _docTitle, out _errOut);
 
             General.HasTrueValue(value, _errOut);
         }
@@ -121,14 +140,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// </summary>
         /// <exception cref="System.Exception"></exception>
         /// <exception cref="System.Exception"></exception>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void DeleteTest()
         {
             VerifyExists();
             bool value = false;
             try
             {
-                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 if (!Documents.Delete(_databasePath, id, out _errOut)) throw new Exception(_errOut);
                 value = true;
@@ -143,23 +162,23 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void GetIdTest()
         {
             VerifyExists();
-            long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
-            TestContext.WriteLine($"ID for {Doc_Title} is {id}");
+            long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
+            TestContext.WriteLine($"ID for {_docTitle} is {id}");
             General.HasTrueValue(id > 0, _errOut);
         }
         /// <summary>
         /// Defines the test method GetLastIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void GetLastIdTest()
         {
             VerifyExists();
             long id = Documents.GetLastId(_databasePath, out _errOut);
-            TestContext.WriteLine($"ID for {Doc_Title} is {id}");
+            TestContext.WriteLine($"ID for {_docTitle} is {id}");
             General.HasTrueValue(id > 0, _errOut);
         }
         /// <summary>
@@ -172,7 +191,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             {
                 foreach (DocumentList d in value)
                 {
-                    TestContext.WriteLine($"");
+                    TestContext.WriteLine("");
                     TestContext.WriteLine($"id: {d.Id}");
                     TestContext.WriteLine($"DocName: {d.DocName}");
                     TestContext.WriteLine($"DocDescription: {d.DocDescription}");
@@ -182,8 +201,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     TestContext.WriteLine($"DocFilename: {d.DocFilename}");
                     TestContext.WriteLine($"Dta: {d.Dta}");
                     TestContext.WriteLine($"DataFile: {d.DataFile}");
-                    TestContext.WriteLine($"");
-                    TestContext.WriteLine($"-------------------------------------------------------");
+                    TestContext.WriteLine("");
+                    TestContext.WriteLine("-------------------------------------------------------");
                 }
             }
         }
@@ -197,25 +216,24 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             {
                 foreach (DocumentLinkList d in value)
                 {
-                    TestContext.WriteLine($"");
+                    TestContext.WriteLine("");
                     TestContext.WriteLine($"id: {d.Id}");
                     TestContext.WriteLine($"gun id: {d.GunId}");
                     TestContext.WriteLine($"doc id: {d.DocId}");
                     TestContext.WriteLine($"Dta: {d.Dta}");
                     TestContext.WriteLine($"Last Sync: {d.LastSync}");
-                    TestContext.WriteLine($"");
-                    TestContext.WriteLine($"-------------------------------------------------------");
+                    TestContext.WriteLine("");
+                    TestContext.WriteLine("-------------------------------------------------------");
                 }
             }
         }
         /// <summary>
         /// Defines the test method GetListAllTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void GetListAllTest()
         {
             VerifyExists();
-            long id = Documents.GetLastId(_databasePath, out _errOut);
             List<DocumentList> value = Documents.GetList(_databasePath, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
@@ -223,7 +241,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetListByIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void GetListByIdTest()
         {
             VerifyExists();
@@ -235,7 +253,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// 
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void GetListLinkAllTest()
         {
             VerifyExists();
@@ -280,14 +298,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Adds the doc link
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void AddDockLinkTest()
         {
             VerifyExists();
             bool value = false;
             try
             {
-                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 VerifyDockLinkDoesNotExists(id, _gunId);
 
@@ -304,14 +322,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Delete Doc Link test
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void DeleteDocLinkTest()
         {
             VerifyExists();
             bool value = false;
             try
             {
-                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 VerifyDockLinkExists(id, _gunId);
                 long linkId = Documents.GetDocLinkId(_databasePath, id, _gunId, out _errOut);
@@ -330,14 +348,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Verify doc link exists
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void DocLinkExistsTest()
         {
             VerifyExists();
             bool value = false;
             try
             {
-                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 VerifyDockLinkExists(id, _gunId);
                 long linkId = Documents.GetDocLinkId(_databasePath, id, _gunId, out _errOut);
@@ -356,14 +374,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Get doc link Id test
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void GetDocLinkIdTest()
         {
             VerifyExists();
             bool value = false;
             try
             {
-                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 VerifyDockLinkExists(id, _gunId);
                 long linkId = Documents.GetDocLinkId(_databasePath, id, _gunId, out _errOut);
@@ -381,14 +399,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Get documentat from database test
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Documents")]
         public void GetDocumentFromDbTest()
         {
             VerifyExists();
             bool value = false;
             try
             {
-                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 if (!Documents.GetDocumentFromDb(_databasePath,AppDomain.CurrentDomain.BaseDirectory, id, out _errOut)) throw new Exception(_errOut);
                 value = true;
@@ -410,7 +428,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             try
             {
                 VerifyExists();
-                long id = Documents.GetId(_databasePath, Doc_Title, out _errOut);
+                long id = Documents.GetId(_databasePath, _docTitle, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
                 VerifyDockLinkExists(id, _gunId);
                 value = Documents.CountLinkedDocs(_databasePath, id, out _errOut);

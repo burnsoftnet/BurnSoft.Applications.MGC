@@ -179,7 +179,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             try
             {
                 string sql = "SELECT DISTINCT(Gun_Collection_Pictures.CID) as CID FROM Gun_Collection_Pictures";
-                OleDbConnection conn = new OleDbConnection(Database.ConnectionString(databasePath, out errOut));
+                OleDbConnection conn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
                 conn.Open();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
 

@@ -69,7 +69,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
         /// <summary>
         /// Defines the test method GetListTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Column Lists")]
         public void GetListTest()
         {
             List<ColumnLists> value = ColumnList.GetList(_databasePath, _crColumnTableId, out _errOut);
@@ -79,7 +79,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.ReportTesting
         /// <summary>
         /// Defines the test method GetFullNameTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Column Lists")]
         public void GetFullNameTest()
         {
             string value = ColumnList.GetColumnName(_databasePath, _crColumnTableId, _crColumnDisplayName, out _errOut);

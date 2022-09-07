@@ -56,7 +56,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ImportFileTest. This will use all the import function just like the application would, but with out the update to the progress bar
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Import XML")]
         public void ImportFileTest()
         {
             bool value = false;

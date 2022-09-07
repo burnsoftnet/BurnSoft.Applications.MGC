@@ -252,7 +252,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             {
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ISMAIN", "Gun_Collection_Pictures", "Number", "0", out errOut))
                     throw new Exception(errOut);
-                if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection_Pictures set ISMAIN=0 where ISMAIN <> 1", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection_Pictures set ISMAIN=0 where ISMAIN <> 1", out errOut, true)) throw new Exception(errOut);
   
                 if (!Pictures.SetMainPictures(databasePath, out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
@@ -360,7 +360,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (6,'Gun_Collection_SoldTo','Buyer List')",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
-                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (7,'Wishlist','Wishlist",
+                    "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (7,'Wishlist','Wishlist')",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
                     "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(1,'Cal','Caliber')",
@@ -396,7 +396,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'SerialNumber','Serial Number')",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
-                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Type','Firearm Type'",
+                    "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Type','Firearm Type')",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
                     "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'Caliber','Caliber')",
@@ -761,7 +761,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             try
             {
                 if (!HfDatabase.RunSql(databasePath,
-                    "CREATE TABLE IF NOT EXISTS sync_tables(ID AUTOINCREMENT PRIMARY KEY,tblname TEXT(255));",
+                    "CREATE TABLE sync_tables(ID AUTOINCREMENT PRIMARY KEY,tblname TEXT(255));",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.AddSyncToTable(databasePath, "CR_SavedReports", out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.AddSyncToTable(databasePath, "GunSmith_Details", out errOut, true)) throw new Exception(errOut);

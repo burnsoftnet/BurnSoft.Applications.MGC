@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.OleDb;
+using System.Threading;
 using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
@@ -226,6 +227,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                     // do stuff
                 }
 
+                if (e.Message.Contains("already exists"))
+                {
+                    bAns = true;
+                }
+
                 switch (code)
                 {
                     case -2147217887:
@@ -265,7 +271,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 bool bAns = false;
                 try
                 {
-                    string sql = $"ALTER DATABASE PASSWORD {Database.DbPassword} NULL";
+                    string sql = $"ALTER DATABASE PASSWORD {Database.DbPassword} NULL;";
                     if (!RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
                     bAns = true;
                 }
@@ -587,7 +593,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                     conn.Open();
                     OleDbCommand cmd = new OleDbCommand($"Select id,{column1},{column2} from {table}", conn);
-
+                    List<string> cmdBuilder = new List<string>();
                     using (OleDbDataReader dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
@@ -595,15 +601,20 @@ namespace BurnSoft.Applications.MGC.hotixes
                             var id = dr.GetValue(dr.GetOrdinal("id"));
                             string col1Value = dr.GetValue(dr.GetOrdinal(column1)).ToString();
                             string col2Value = dr.GetValue(dr.GetOrdinal(column2)).ToString();
-                            if (col2Value != null)
+                            if (col2Value != null && col1Value.Trim().Length > 0)
                             {
-                                sql = $"UPDATE {table} set {column2}={col1Value} where id = {id}";
-                                if (!RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                                sql = $"UPDATE {table} set {column2}='{col1Value}' where id = {id}";
+                                cmdBuilder.Add(sql);
+                                //if (!RunSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
+                                //Thread.Sleep(2000);
                             }
                         }
                     }
-
                     conn.Close();
+                    foreach (string c in cmdBuilder)
+                    {
+                        if (!RunSql(databasePath, c, out errOut, true)) throw new Exception(errOut);
+                    }
                     bAns = true;
                 }
                 catch (Exception e)

@@ -65,7 +65,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Classification")]
         public void AddTest()
         {
             VerifyDoesntExist();
@@ -75,7 +75,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ExistsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Classification")]
         public void ExistsTest()
         {
             VerifyExists();
@@ -85,7 +85,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method GetIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Classification")]
         public void GetIdTest()
         {
             VerifyExists();
@@ -96,7 +96,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method DeleteTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Classification")]
         public void DeleteTest()
         {
             VerifyExists();
@@ -114,20 +114,20 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             {
                 foreach (ClassificationList v in value)
                 {
-                    TestContext.WriteLine($"");
+                    TestContext.WriteLine("");
                     TestContext.WriteLine($"id: {v.Id}");
                     TestContext.WriteLine($"Class Name: {v.Name}");
                     TestContext.WriteLine($"Last Sync: {v.LastSync}");
-                    TestContext.WriteLine($"");
-                    TestContext.WriteLine($"--------------------------------------");
-                    TestContext.WriteLine($"");
+                    TestContext.WriteLine("");
+                    TestContext.WriteLine("--------------------------------------");
+                    TestContext.WriteLine("");
                 }
             }
         }
         /// <summary>
         /// Defines the test method ListsTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Classification")]
         public void ListsTest()
         {
             VerifyExists();
@@ -138,7 +138,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method ListsByNameTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Classification")]
         public void ListsByNameTest()
         {
             VerifyExists();
@@ -149,7 +149,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <summary>
         /// Defines the test method InUseInCollectionTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Classification")]
         public void InUseInCollectionTest()
         {
             VerifyExists();

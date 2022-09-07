@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 using BurnSoft.Applications.MGC.PeopleAndPlaces;
 using BurnSoft.Applications.MGC.Types;
@@ -36,7 +37,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// The gun smith name
         /// </summary>
         private string _gunSmithName;
-
+        /// <summary>
+        /// The owner identifier
+        /// </summary>
+        private long OwnerId;
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -49,14 +53,65 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             _gunSmithName = obj.FC(Vs2019.GetSetting("GunSmith_Name", TestContext));
-
+            OwnerId = Convert.ToInt32(Vs2019.GetSetting("OwnerId", TestContext));
         }
         /// <summary>
         /// Logins the enabled test.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Owner Informaiton")]
         public void LoginEnabledTest()
         {
+            SetLoginIfEnabled(OwnerId);
+            bool value = OwnerInformation.LoginEnabled(_databasePath, out var uid, out var pwd, out var forgotWord,
+                out var forgotPhrase, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"uid: {uid}");
+                TestContext.WriteLine($"pwd: {pwd}");
+                TestContext.WriteLine($"forgot word: {forgotWord}");
+                TestContext.WriteLine($"forgot phrase: {forgotPhrase}");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Sets the login if enabled.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        private void SetLoginIfEnabled(long id)
+        {
+            if (!OwnerInformation.LoginIsEnabled(_databasePath, id, out _errOut))
+            {
+                OwnerInformation.SetLogin(_databasePath, id, true, out _errOut);
+            }
+        }
+        /// <summary>
+        /// Sets the log off if enabled.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        private void SetLogOffIfEnabled(long id)
+        {
+            if (OwnerInformation.LoginIsEnabled(_databasePath, id, out _errOut))
+            {
+                OwnerInformation.SetLogin(_databasePath, id, false, out _errOut);
+            }
+        }
+        /// <summary>
+        /// Defines the test method LoginIsEnabledTest.
+        /// </summary>
+        [TestMethod, TestCategory("Owner Informaiton")]
+        public void LoginIsEnabledTest()
+        {
+            SetLoginIfEnabled(OwnerId);
+            bool value = OwnerInformation.LoginIsEnabled(_databasePath, OwnerId, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method GetLoginWhenEnabledTest.
+        /// </summary>
+        [TestMethod, TestCategory("Owner Informaiton")]
+        public void GetLoginWhenEnabledTest()
+        {
+            SetLoginIfEnabled(OwnerId);
             bool value = OwnerInformation.LoginEnabled(_databasePath, out var uid, out var pwd, out var forgotWord,
                 out var forgotPhrase, out _errOut);
             if (value)
@@ -71,7 +126,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// <summary>
         /// Defines the test method GetOwnerInfoTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Owner Informaiton")]
         public void GetOwnerInfoTest()
         {
             List<OwnerInfo> lst = OwnerInformation.GetOwnerInfo(_databasePath, out _errOut);
@@ -99,11 +154,11 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// <summary>
         /// Defines the test method GetOwnerIdTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Owner Informaiton")]
         public void GetOwnerIdTest()
         {
             long id = OwnerInformation.GetOwnerId(_databasePath, out var ownerName, out var ownerLic, out _errOut);
-            bool value = id > 0;
+            bool value = id > 0 && _errOut.Length == 0;
             if (value)
             {
                 TestContext.WriteLine($"id: {id}");
@@ -115,7 +170,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// <summary>
         /// Defines the test method EditOwnerInformationTest.
         /// </summary>
-        [TestMethod]
+        [TestMethod, TestCategory("Owner Informaiton")]
         public void EditOwnerInformationTest()
         {
             long id = OwnerInformation.GetOwnerId(_databasePath, out var ownerName, out var ownerLic, out _errOut);
@@ -138,9 +193,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 foreach (OwnerInfo l in lst)
                 {
                     username = l.UserName;
-                    password = l.Password;
-                    forgotword = l.ForgotWord;
-                    forgotphrase = l.ForgotPhrase;
+                    password = l.Password.Trim().Length == 0 ? username : l.Password;
+                    forgotword = l.ForgotWord.Trim().Length == 0 ? "same as login" : l.ForgotWord;
+                    forgotphrase = l.ForgotPhrase.Trim().Length == 0 ? "same as login" : l.ForgotPhrase;
                     name = l.Name;
                     license = l.Ccdwl;
                     address = l.Address;
