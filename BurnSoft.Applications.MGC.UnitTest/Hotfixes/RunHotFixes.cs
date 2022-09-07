@@ -38,6 +38,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix1Test()
         {
+            hotixes.HfDatabase.Security.RemovePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
             bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 1, out _errOut);
             General.HasTrueValue(value, _errOut);
         }

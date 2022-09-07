@@ -751,6 +751,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 switch (type)
                 {
                     case CatalogType.Numeric:
+                        if (!Database.Execute(databasePath, "UPDATE Gun_Collection set CustomID='0'", out errOut)) throw new Exception(errOut);
                         sql = "ALTER TABLE Gun_Collection ALTER COLUMN CustomID INTEGER;";
                         break;
                     case CatalogType.Text:

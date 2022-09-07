@@ -1127,7 +1127,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             try
             {
                 List<int> hotFixList = UpdateList(databasePath, out errOut);
-                bAns = hotFixList.Count > 0;
+                bAns = hotFixList.Count.Equals(0);
             }
             catch (Exception e)
             {
