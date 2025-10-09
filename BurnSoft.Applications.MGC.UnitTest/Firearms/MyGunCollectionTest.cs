@@ -250,6 +250,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ",
                     true, "1-8", "2 lbs", " ", "Modern", "11/09/2021 14:20:45", false, " ", false, false,out _errOut);
             }
+            _gunId = Convert.ToInt32(MyCollection.GetLastId(_databasePath, out _errOut));
         }
         /// <summary>
         /// Defines the test method AddFirearm.

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable ConvertIfStatementToConditionalTernaryExpression
@@ -111,6 +112,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix9Test()
         {
+            Thread.Sleep(5000);
             bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 9, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
@@ -120,6 +122,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix10Test()
         {
+            Thread.Sleep(5000);
             bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath),10, out _errOut);
             General.HasTrueValue(value, _errOut);
         }

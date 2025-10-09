@@ -547,6 +547,40 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lAns;
         }
         /// <summary>
+        /// Gets the top identifier from the database
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="Exception"></exception>
+        public static long GetTopId(string databasePath, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                List<GunCollectionList> lst = new List<GunCollectionList>();
+                errOut = @"";
+
+                string sql = $"select TOP 1 * from Gun_Collection";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut, databasePath);
+
+                foreach (GunCollectionList g in lst)
+                {
+                    lAns = g.Id;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetTopId", e);
+            }
+
+            return lAns;
+        }
+
+        /// <summary>
         /// Catalogs the identifier exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>

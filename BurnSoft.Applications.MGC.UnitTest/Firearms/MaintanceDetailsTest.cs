@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BurnSoft.Applications.MGC.Firearms;
+﻿using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.UnitTest.Firearms
@@ -110,7 +111,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// </summary>
         private void VerifyExists()
         {
-
+            _gunId = Convert.ToInt32(MyCollection.GetLastId(_databasePath, out _errOut));
             if (!MaintanceDetails.Exists(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, out _errOut))
             {
                 MaintanceDetails.Add(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, _maintenanceDetailsRoundsFired, _maintenanceDetailsNotes, "N/A", _maintenanceDetailsBarrelSystemId, _maintenanceDetailsDoesCount, out _errOut);
