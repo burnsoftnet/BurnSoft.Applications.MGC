@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Globalization;
+﻿using BurnSoft.Applications.MGC.AutoFill;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Globalization;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 // ReSharper disable RedundantAssignment
@@ -1131,6 +1132,26 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
+        public static List<GunCollectionFullList> GetFullList(string databasePath, long id, out string errOut)
+        {
+            List<GunCollectionFullList> lst = new List<GunCollectionFullList>();
+            errOut = @"";
+            try
+            {
+                List<GunCollectionList> gd = GetList(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bool BsHasmultibarrels = ExtraBarrelConvoKits.HasMultiBarrelsListed(databasePath, id, out errOut);
+                //List<BarrelSystems> bs = ExtraBarrelConvoKits.GetList(databasePath, id, out errOut);
+                //List<AccessoriesList> list = Accessories.Get
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+        }
+
         /// <summary>
         /// Private class to sort the informatimon from a datatable into the Gun Collection List ype
         /// </summary>
