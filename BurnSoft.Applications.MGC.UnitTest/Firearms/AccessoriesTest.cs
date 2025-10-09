@@ -4,6 +4,7 @@ using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
+using System;
 
 namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 {
@@ -224,6 +225,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void DeleteTest()
         {
             VerifyExists();
+            _gunId = Convert.ToInt32(MyCollection.GetLastId(_databasePath, out _errOut));
             long id = Accessories.GetId(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
                 _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
                 _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
