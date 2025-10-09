@@ -379,6 +379,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 cmd.ExecuteNonQuery();
 
                 bAns = true;
+                myConn.Close();
             }
             catch (Exception e)
             {
