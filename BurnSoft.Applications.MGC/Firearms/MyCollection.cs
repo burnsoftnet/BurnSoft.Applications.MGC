@@ -1155,6 +1155,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                 List<AccessoriesList> a = Accessories.List(databasePath, id, out errOut);
                 List<MaintanceDetailsList> md = MaintanceDetails.Lists(databasePath, id, out errOut);
                 List<GunSmithWorkDone> gswd = GunSmithDetails.Lists(databasePath, id, out errOut);
+                bool HasDocs = Documents.HasDocumentsAttached(databasePath, (int)id, out errOut);
+                long DocCount = Documents.CountLinkedDocs(databasePath, id, out errOut);
                 foreach (GunCollectionList g in gd)
                 {
                     lst.Add(new GunCollectionFullList
@@ -1231,7 +1233,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                         BarrelSystem = bs,
                         Accessories = a,
                         MaintanceDetails = md,
-                        GunSmithWork = gswd
+                        GunSmithWork = gswd,
+                        HasDocuments = HasDocs,
+                        LinkedDocuments = DocCount
                     });
                 }
             }

@@ -167,6 +167,8 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"Is Stogun: {g.IsShotGun}{Environment.NewLine}";
                     sAns += $"HasExtraBarrels: {g.HasExtraBarrels}{Environment.NewLine}";
                     sAns += $"BarrelSystemCount: {g.BarrelSystemCount}{Environment.NewLine}";
+                    sAns += $"HasDocuments: {g.HasDocuments}{Environment.NewLine}";
+                    sAns += $"LinkedDocuments: {g.LinkedDocuments}{Environment.NewLine}";
                     sAns += $"-----------------Barrel System---------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                     sAns += BarrelSystemsDetails(g.BarrelSystem);

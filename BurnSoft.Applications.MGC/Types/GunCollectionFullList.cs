@@ -376,5 +376,15 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value>The gun smith work.</value>
         public List<GunSmithWorkDone> GunSmithWork { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has documents.
+        /// </summary>
+        /// <value><c>true</c> if this instance has documents; otherwise, <c>false</c>.</value>
+        public bool HasDocuments { get; set; }
+        /// <summary>
+        /// Gets or sets the linked documents.
+        /// </summary>
+        /// <value>The linked documents.</value>
+        public long LinkedDocuments { get; set; }
     }
 }
