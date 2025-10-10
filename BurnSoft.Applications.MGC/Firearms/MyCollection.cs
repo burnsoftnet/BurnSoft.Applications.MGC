@@ -1150,13 +1150,21 @@ namespace BurnSoft.Applications.MGC.Firearms
                 List<GunCollectionList> gd = GetList(databasePath, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bool HasExtraBarrels = ExtraBarrelConvoKits.HasMultiBarrelsListed(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 List<BarrelSystems> bs = ExtraBarrelConvoKits.GetListForFirearm(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 int BarrelSystemCount = bs.Count;
                 List<AccessoriesList> a = Accessories.List(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 List<MaintanceDetailsList> md = MaintanceDetails.Lists(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 List<GunSmithWorkDone> gswd = GunSmithDetails.Lists(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 bool HasDocs = Documents.HasDocumentsAttached(databasePath, (int)id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 long DocCount = Documents.CountLinkedDocs(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
                 foreach (GunCollectionList g in gd)
                 {
                     lst.Add(new GunCollectionFullList
