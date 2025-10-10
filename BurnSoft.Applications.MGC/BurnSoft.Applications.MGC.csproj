@@ -90,6 +90,7 @@
     <Compile Include="Global\DatabaseRelated.cs" />
     <Compile Include="Global\Helpers.cs" />
     <Compile Include="Global\MyRegistry.cs" />
+    <Compile Include="DebugHelpers\PrintListValues.cs" />
     <Compile Include="hotixes\AccessDatabaseHandler.cs" />
     <Compile Include="hotixes\HfDatabase.cs" />
     <Compile Include="hotixes\HotFix.cs" />
