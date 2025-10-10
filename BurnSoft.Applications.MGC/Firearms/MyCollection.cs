@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Runtime.Remoting;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 // ReSharper disable RedundantAssignment
@@ -1132,7 +1133,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
-
+        /// <summary>
+        /// Gets the full list of the firearm details, accessories, BarrelSystems, etc.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;GunCollectionFullList&gt;.</returns>
+        /// <exception cref="Exception"></exception>
         public static List<GunCollectionFullList> GetFullList(string databasePath, long id, out string errOut)
         {
             List<GunCollectionFullList> lst = new List<GunCollectionFullList>();
@@ -1141,13 +1149,90 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 List<GunCollectionList> gd = GetList(databasePath, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                bool BsHasmultibarrels = ExtraBarrelConvoKits.HasMultiBarrelsListed(databasePath, id, out errOut);
-                //List<BarrelSystems> bs = ExtraBarrelConvoKits.GetList(databasePath, id, out errOut);
+                bool HasExtraBarrels = ExtraBarrelConvoKits.HasMultiBarrelsListed(databasePath, id, out errOut);
+                List<BarrelSystems> bs = ExtraBarrelConvoKits.GetListForFirearm(databasePath, id, out errOut);
+                int BarrelSystemCount = bs.Count;
                 //List<AccessoriesList> list = Accessories.Get
+                foreach (GunCollectionList g in gd)
+                {
+                    lst.Add(new GunCollectionFullList
+                    {
+                        Id = g.Id,
+                        Oid = g.Oid,
+                        Mid = g.Mid,
+                        Manufacturer = g.Manufacturer,
+                        FullName = g.FullName ,
+                        ModelName = g.ModelName,
+                        ModelId = g.ModelId,
+                        SerialNumber = g.SerialNumber,
+                        Type = g.Type,
+                        Caliber = g.Caliber,
+                        Caliber3 = g.Caliber3,
+                        PetLoads = g.PetLoads,
+                        Finish = g.Finish,
+                        FeedSystem = g.FeedSystem,
+                        Condition = g.Condition,
+                        CustomId = g.CustomId,
+                        NationalityId = g.NationalityId,
+                        Nationality = g.Nationality,
+                        BarrelLength = g.BarrelLength,
+                        GripId = g.GripId,
+                        GripType = g.GripType,
+                        Qty = g.Qty,
+                        Weight = g.Weight,
+                        Height = g.Height,
+                        StockType = g.StockType,
+                        BarrelHeight = g.BarrelHeight,
+                        BarrelWidth = g.BarrelWidth,
+                        Action = g.Action,
+                        Sights = g.Sights,
+                        PurchasePrice = g.PurchasePrice,
+                        PurchaseFrom = g.PurchaseFrom,
+                        AppriasedBy = g.AppriasedBy,
+                        AppriasedValue = g.AppriasedValue,
+                        AppriaserId = g.AppriaserId,
+                        AppraisalDate = g.AppraisalDate,
+                        InsuredValue = g.InsuredValue,
+                        StorageLocation = g.StorageLocation,
+                        ConditionComments = g.ConditionComments,
+                        AdditionalNotes = g.AdditionalNotes,
+                        HasAccessory = g.HasAccessory,
+                        DateProduced = g.DateProduced,
+                        DateTimeAddedInDb = g.DateTimeAddedInDb,
+                        ItemSold = g.ItemSold,
+                        IsShotGun = g.IsShotGun,
+                        Sid = g.Sid,
+                        Bid = g.Bid,
+                        DateSold = g.DateSold,
+                        IsCAndR = g.IsCAndR,
+                        DateTimeAdded = g.DateTimeAdded,
+                        Importer = g.Importer,
+                        RemanufactureDate = g.RemanufactureDate,
+                        Poi = g.Poi,
+                        HasMb = g.HasMb,
+                        DbId = g.DbId,
+                        ShotGunChoke = g.ShotGunChoke,
+                        IsInBoundBook = g.IsInBoundBook,
+                        TwistRate = g.TwistRate,
+                        TriggerPullInPounds = g.TriggerPullInPounds,
+                        Classification = g.Classification,
+                        DateOfCAndR = g.DateOfCAndR,
+                        LastSyncDate = g.LastSyncDate,
+                        IsClass3Item = g.IsClass3Item,
+                        Class3Owner = g.Class3Owner,
+                        WasStolen = g.WasStolen,
+                        WasSold = g.WasSold,
+                        IsCompetition = g.IsCompetition,
+                        IsNonLethal = g.IsNonLethal,
+                        HasExtraBarrels = HasExtraBarrels,
+                        BarrelSystemCount = BarrelSystemCount,
+                        BarrelSystem = bs
+                    });
+                }
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("GetList", e);
+                errOut = ErrorMessage("GetFullList", e);
             }
             return lst;
         }

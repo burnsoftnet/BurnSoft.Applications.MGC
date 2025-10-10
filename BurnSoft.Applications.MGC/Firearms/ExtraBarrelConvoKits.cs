@@ -601,6 +601,31 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
+        /// <summary>
+        /// Gets the list of barrel system by gun id.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The Firearm identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;BarrelSystems&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        public static List<BarrelSystems> GetListForFirearm(string databasePath, long gunId, out string errOut)
+        {
+            List<BarrelSystems> lst = new List<BarrelSystems>();
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from Gun_Collection_Ext where gid={gunId}";
+                lst = GetList(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetListForFirearm", e);
+            }
+            return lst;
+        }
         /// <summary>
         /// Gets the list.
         /// </summary>
