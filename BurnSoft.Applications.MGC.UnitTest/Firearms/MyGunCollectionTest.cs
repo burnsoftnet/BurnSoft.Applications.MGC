@@ -301,164 +301,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
         }
 
-
-        public void PrintFullList(List<GunCollectionFullList> value)
-        {
-            if (value.Count > 0)
-            {
-                foreach (GunCollectionFullList g in value)
-                {
-                    Console.WriteLine($"id : {g.Id}");
-                    Console.WriteLine($"Full Name: {g.FullName}");
-                    Console.WriteLine($"Owner id: {g.Oid}");
-                    Console.WriteLine($"Manufacture Id: {g.Mid}");
-                    Console.WriteLine($"ModelName: {g.ModelName}");
-                    Console.WriteLine($"Model Id: {g.ModelId}");
-                    Console.WriteLine($"SerialNumber: {g.SerialNumber}");
-                    Console.WriteLine($"Type: {g.Type}");
-                    Console.WriteLine($"Caliber: {g.Caliber}");
-                    Console.WriteLine($"Caliber 2: {g.PetLoads}");
-                    Console.WriteLine($"Caliber 3: {g.Caliber3}");
-                    Console.WriteLine($"Feed System: {g.FeedSystem}");
-                    Console.WriteLine($"Finish: {g.Finish}");
-                    Console.WriteLine($"Condition: {g.Condition}");
-                    Console.WriteLine($"CustomId: {g.CustomId}");
-                    Console.WriteLine($"NationalityId: {g.NationalityId}");
-                    Console.WriteLine($"BarrelLength: {g.BarrelLength}");
-                    Console.WriteLine($"GripId: {g.GripId}");
-                    Console.WriteLine($"Qty: {g.Qty}");
-                    Console.WriteLine($"Weight: {g.Weight}");
-                    Console.WriteLine($"Height: {g.Height}");
-                    Console.WriteLine($"StockType: {g.StockType}");
-                    Console.WriteLine($"BarrelHeight: {g.BarrelHeight}");
-                    Console.WriteLine($"BarrelWidth: {g.BarrelWidth}");
-                    Console.WriteLine($"Action: {g.Action}");
-                    Console.WriteLine($"Sights: {g.Sights}");
-                    Console.WriteLine($"PurchasePrice: {g.PurchasePrice}");
-                    Console.WriteLine($"PurchaseFrom: {g.PurchaseFrom}");
-                    Console.WriteLine($"AppriasedBy: {g.AppriasedBy}");
-                    Console.WriteLine($"AppriasedValue: {g.AppriasedValue}");
-                    Console.WriteLine($"AppriaserId: {g.AppriaserId}");
-                    Console.WriteLine($"AppraisalDate: {g.AppraisalDate}");
-                    Console.WriteLine($"InsuredValue: {g.InsuredValue}");
-                    Console.WriteLine($"StorageLocation: {g.StorageLocation}");
-                    Console.WriteLine($"ConditionComments: {g.ConditionComments}");
-                    Console.WriteLine($"AdditionalNotes: {g.AdditionalNotes}");
-                    Console.WriteLine($"HasAccessory: {g.HasAccessory}");
-                    Console.WriteLine($"DateProduced: {g.DateProduced}");
-                    Console.WriteLine($"DateTimeAddedInDb: {g.DateTimeAddedInDb}");
-                    Console.WriteLine($"ItemSold: {g.ItemSold}");
-                    Console.WriteLine($"Selled Id: {g.Sid}");
-                    Console.WriteLine($"Buyer Id: {g.Bid}");
-                    Console.WriteLine($"Date Sold: {g.DateSold}");
-                    Console.WriteLine($"Is C&R Items: {g.IsCAndR}");
-                    Console.WriteLine($"DateTimeAdded: {g.DateTimeAddedInDb}");
-                    Console.WriteLine($"Importer: {g.Importer}");
-                    Console.WriteLine($"RemanufactureDate: {g.RemanufactureDate}");
-                    Console.WriteLine($"Poi: {g.Poi}");
-                    Console.WriteLine($"HasMb : {g.HasMb}");
-                    Console.WriteLine($"DbId: {g.DbId}");
-                    Console.WriteLine($"ShotGunChoke: {g.ShotGunChoke}");
-                    Console.WriteLine($"IsInBoundBook: {g.IsInBoundBook}");
-                    Console.WriteLine($"TwistRate: {g.TwistRate}");
-                    Console.WriteLine($"TriggerPullInPounds: {g.TriggerPullInPounds}");
-                    Console.WriteLine($"Classification: {g.Classification}");
-                    Console.WriteLine($"DateOfCAndR: {g.DateOfCAndR}");
-                    Console.WriteLine($"LastSyncDate: {g.LastSyncDate}");
-                    Console.WriteLine($"IsClass3Item: {g.IsClass3Item}");
-                    Console.WriteLine($"Class3Owner: {g.Class3Owner}");
-                    Console.WriteLine($"WaS Stolen: {g.WasStolen}");
-                    Console.WriteLine($"Was Sold: {g.WasSold}");
-                    Console.WriteLine($"Is Stogun: {g.IsShotGun}");
-                    Console.WriteLine($"HasExtraBarrels: {g.HasExtraBarrels}");
-                    Console.WriteLine($"BarrelSystemCount: {g.BarrelSystemCount}");
-                    Console.WriteLine("-----------------Barrel System---------------------");
-                    Console.WriteLine("");
-                    foreach (BarrelSystems b in g.BarrelSystem)
-                    {
-                        Console.WriteLine($"id : {b.Id}");
-                        Console.WriteLine($"Full Name: {b.FullName}");
-                        Console.WriteLine($"Finish: {b.Finish}");
-                        Console.WriteLine($"BarrelLength: {b.BarrelLength}");
-                        Console.WriteLine($"Height: {b.Height}");
-                        Console.WriteLine($"Action: {b.Action}");
-                        Console.WriteLine($"Sights: {b.Sights}");
-                        Console.WriteLine($"PurchasePrice: {b.PurchasedPrice}");
-                        Console.WriteLine($"PurchaseFrom: {b.PurchasedFrom}");
-                        Console.WriteLine($"Petloads/Caliber2: {g.PetLoads}");
-                        Console.WriteLine($"Gun Id: {b.GunId}");
-                        Console.WriteLine($"Model Name: {b.ModelName}");
-                        Console.WriteLine($"Caliber: {b.Caliber}");
-                        Console.WriteLine($"Is Default: {b.IsDefault}");
-                        Console.WriteLine($"Last Updated: {b.LastUpdated}");
-                        Console.WriteLine($"");
-                        Console.WriteLine($"--------------------------------------");
-                        Console.WriteLine($"");
-                    }
-                    Console.WriteLine("-----------------Accessories---------------------");
-                    Console.WriteLine("");
-                    foreach (AccessoriesList v in g.Accessories)
-                    {
-                        Console.WriteLine($"id :{v.Id}");
-                        Console.WriteLine($"gun id: {v.GunId}");
-                        Console.WriteLine($"manufacturer: {v.Manufacturer}");
-                        Console.WriteLine($"Model: {v.Model}");
-                        Console.WriteLine($"Condition: {v.Condition}");
-                        Console.WriteLine($"AppriasedValue: {v.AppriasedValue}");
-                        Console.WriteLine($"CountInValue: {v.CountInValue}");
-                        Console.WriteLine($"IsChoke: {v.IsChoke}");
-                        Console.WriteLine($"LastSync: {v.LastSync}");
-                        Console.WriteLine($"Notes: {v.Notes}");
-                        Console.WriteLine($"PurchaseValue: {v.PurchaseValue}");
-                        Console.WriteLine($"SerialNumber: {v.SerialNumber}");
-                        Console.WriteLine($"Use: {v.Use}");
-                        Console.WriteLine($"");
-                        Console.WriteLine($"--------------------------");
-                        Console.WriteLine($"");
-                    }
-                    Console.WriteLine("--------------------Maintance Details------------------");
-                    Console.WriteLine("");
-                    foreach (MaintanceDetailsList md in g.MaintanceDetails)
-                    {
-                        Console.WriteLine($"id : {md.Id}");
-                        Console.WriteLine($"Plan Id: {md.PlanId}");
-                        Console.WriteLine($"Name: {md.Name}");
-                        Console.WriteLine($"Gun Id: {md.GunId}");
-                        Console.WriteLine($"Operation Date: {md.OperationStartDate}");
-                        Console.WriteLine($"Operation Due Date: {md.OperationDueDate}");
-                        Console.WriteLine($"Notes: {md.Notes}");
-                        Console.WriteLine($"Barrel System Id: {md.BarrelSystemId}");
-                        Console.WriteLine($"Counts in Total: {md.DoesCount}");
-                        Console.WriteLine($"Last Updated: {md.LastSync}");
-                        Console.WriteLine($"");
-                        Console.WriteLine($"--------------------------------------");
-                        Console.WriteLine($"");
-                    }
-                    Console.WriteLine("--------------------Gun Smith Work------------------");
-                    Console.WriteLine("");
-
-                    foreach (GunSmithWorkDone wd in g.GunSmithWork)
-                    {
-                        Console.WriteLine($"id : {wd.Id}");
-                        Console.WriteLine($"Smith Name: {wd.GunSmithName}");
-                        Console.WriteLine($"Smith ID: {wd.GunSmithId}");
-                        Console.WriteLine($"Gun Id: {wd.GunId}");
-                        Console.WriteLine($"OrderDetails: {wd.OrderDetails}");
-                        Console.WriteLine($"Notes: {wd.Notes}");
-                        Console.WriteLine($"Return Date: {wd.ReturnDate}");
-                        Console.WriteLine($"Start Date: {wd.StartDate}");
-                        Console.WriteLine($"Last Updated: {wd.LastSync}");
-                        Console.WriteLine($"");
-                        Console.WriteLine($"--------------------------------------");
-                        Console.WriteLine($"");
-                    }
-
-                    Console.WriteLine("--------------------------------------");
-                    Console.WriteLine("");
-                }
-            }
-        }
-
         /// <summary>
         /// Defines the test method GetFullList.
         /// </summary>
@@ -468,7 +310,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             VerifyExists();
             _gunId = 3;
             List<GunCollectionFullList> value = MyCollection.GetFullList(_databasePath, _gunId, out _errOut);
-            PrintFullList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintGunCollectionFullList(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
@@ -480,7 +322,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<GunCollectionList> value = MyCollection.GetList(_databasePath, _gunId, out _errOut);
-            //PrintList(value);
             TestContext.WriteLine(DebugHelpers.PrintListValues.PrintGunCollectionList(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }

@@ -1152,7 +1152,6 @@ namespace BurnSoft.Applications.MGC.Firearms
                 bool HasExtraBarrels = ExtraBarrelConvoKits.HasMultiBarrelsListed(databasePath, id, out errOut);
                 List<BarrelSystems> bs = ExtraBarrelConvoKits.GetListForFirearm(databasePath, id, out errOut);
                 int BarrelSystemCount = bs.Count;
-                //List<AccessoriesList> list = Accessories.Get
                 List<AccessoriesList> a = Accessories.List(databasePath, id, out errOut);
                 List<MaintanceDetailsList> md = MaintanceDetails.Lists(databasePath, id, out errOut);
                 List<GunSmithWorkDone> gswd = GunSmithDetails.Lists(databasePath, id, out errOut);
