@@ -343,5 +343,69 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             return sAns;
         }
+
+        /// <summary>
+        /// Prints the appraisers contact details list.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string PrintAppraisersContactDetailsList(List<AppraisersContactDetails> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (AppraisersContactDetails g in value)
+                {
+                    sAns += $"id: {g.Id}{Environment.NewLine}";
+                    sAns += $"Name: {g.Name}{Environment.NewLine}";
+                    sAns += $"Address: {g.Address1}{Environment.NewLine}";
+                    sAns += $"Address2: {g.Address2}{Environment.NewLine}";
+                    sAns += $"City: {g.City}{Environment.NewLine}";
+                    sAns += $"State: {g.State}{Environment.NewLine}";
+                    sAns += $"Zip Code: {g.ZipCode}{Environment.NewLine}";
+                    sAns += $"Country: {g.Country}{Environment.NewLine}";
+                    sAns += $"Phone: {g.Phone}{Environment.NewLine}";
+                    sAns += $"Website: {g.WebSite}{Environment.NewLine}";
+                    sAns += $"License: {g.Lic}{Environment.NewLine}";
+                    sAns += $"Fax: {g.Fax}{Environment.NewLine}";
+                    sAns += $"Still in Business: {g.StillInBusiness}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"-------------------------------------{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
+        /// Prints the buyers list.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string PrintBuyersList(List<BuyersList> value)
+        {
+            string sAns = "";
+            foreach (BuyersList v in value)
+            {
+                sAns += $"id: {v.Id}{Environment.NewLine}";
+                sAns += $"Name: {v.Name}{Environment.NewLine}";
+                sAns += $"Address1: {v.Address1}{Environment.NewLine}";
+                sAns += $"Address2: {v.Address2}{Environment.NewLine}";
+                sAns += $"City: {v.City}{Environment.NewLine}";
+                sAns += $"State: {v.State}{Environment.NewLine}";
+                sAns += $"ZipCode: {v.ZipCode}{Environment.NewLine}";
+                sAns += $"Phone: {v.Phone}{Environment.NewLine}";
+                sAns += $"Fax: {v.Fax}{Environment.NewLine}";
+                sAns += $"email: {v.Email}{Environment.NewLine}";
+                sAns += $"Driver Lic: {v.Dlic}{Environment.NewLine}";
+                sAns += $"Date of Birth: {v.Dob}{Environment.NewLine}";
+                sAns += $"Country: {v.Country}{Environment.NewLine}";
+                sAns += $"Resident: {v.Resident}{Environment.NewLine}";
+                sAns += $"License: {v.Lic}{Environment.NewLine}";
+                sAns += $"{Environment.NewLine}";
+                sAns += $"----------------------------------{Environment.NewLine}";
+            }
+            return sAns;
+        }
     }
 }
