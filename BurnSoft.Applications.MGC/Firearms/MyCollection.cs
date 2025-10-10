@@ -1153,6 +1153,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                 List<BarrelSystems> bs = ExtraBarrelConvoKits.GetListForFirearm(databasePath, id, out errOut);
                 int BarrelSystemCount = bs.Count;
                 //List<AccessoriesList> list = Accessories.Get
+                List<AccessoriesList> a = Accessories.List(databasePath, id, out errOut);
+                List<MaintanceDetailsList> md = MaintanceDetails.Lists(databasePath, id, out errOut);
+                List<GunSmithWorkDone> gswd = GunSmithDetails.Lists(databasePath, id, out errOut);
                 foreach (GunCollectionList g in gd)
                 {
                     lst.Add(new GunCollectionFullList
@@ -1226,7 +1229,10 @@ namespace BurnSoft.Applications.MGC.Firearms
                         IsNonLethal = g.IsNonLethal,
                         HasExtraBarrels = HasExtraBarrels,
                         BarrelSystemCount = BarrelSystemCount,
-                        BarrelSystem = bs
+                        BarrelSystem = bs,
+                        Accessories = a,
+                        MaintanceDetails = md,
+                        GunSmithWork = gswd
                     });
                 }
             }

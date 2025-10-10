@@ -449,7 +449,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     Console.WriteLine($"Is Stogun: {g.IsShotGun}");
                     Console.WriteLine($"HasExtraBarrels: {g.HasExtraBarrels}");
                     Console.WriteLine($"BarrelSystemCount: {g.BarrelSystemCount}");
-                    Console.WriteLine("--------------------------------------");
+                    Console.WriteLine("-----------------Barrel System---------------------");
                     Console.WriteLine("");
                     foreach (BarrelSystems b in g.BarrelSystem)
                     {
@@ -472,6 +472,64 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                         TestContext.WriteLine($"--------------------------------------");
                         TestContext.WriteLine($"");
                     }
+                    Console.WriteLine("-----------------Accessories---------------------");
+                    Console.WriteLine("");
+                    foreach (AccessoriesList v in g.Accessories)
+                    {
+                        TestContext.WriteLine($"id :{v.Id}");
+                        TestContext.WriteLine($"gun id: {v.GunId}");
+                        TestContext.WriteLine($"manufacturer: {v.Manufacturer}");
+                        TestContext.WriteLine($"Model: {v.Model}");
+                        TestContext.WriteLine($"Condition: {v.Condition}");
+                        TestContext.WriteLine($"AppriasedValue: {v.AppriasedValue}");
+                        TestContext.WriteLine($"CountInValue: {v.CountInValue}");
+                        TestContext.WriteLine($"IsChoke: {v.IsChoke}");
+                        TestContext.WriteLine($"LastSync: {v.LastSync}");
+                        TestContext.WriteLine($"Notes: {v.Notes}");
+                        TestContext.WriteLine($"PurchaseValue: {v.PurchaseValue}");
+                        TestContext.WriteLine($"SerialNumber: {v.SerialNumber}");
+                        TestContext.WriteLine($"Use: {v.Use}");
+                        TestContext.WriteLine($"");
+                        TestContext.WriteLine($"--------------------------");
+                        TestContext.WriteLine($"");
+                    }
+                    Console.WriteLine("--------------------Maintance Details------------------");
+                    Console.WriteLine("");
+                    foreach (MaintanceDetailsList md in g.MaintanceDetails)
+                    {
+                        TestContext.WriteLine($"id : {md.Id}");
+                        TestContext.WriteLine($"Plan Id: {md.PlanId}");
+                        TestContext.WriteLine($"Name: {md.Name}");
+                        TestContext.WriteLine($"Gun Id: {md.GunId}");
+                        TestContext.WriteLine($"Operation Date: {md.OperationStartDate}");
+                        TestContext.WriteLine($"Operation Due Date: {md.OperationDueDate}");
+                        TestContext.WriteLine($"Notes: {md.Notes}");
+                        TestContext.WriteLine($"Barrel System Id: {md.BarrelSystemId}");
+                        TestContext.WriteLine($"Counts in Total: {md.DoesCount}");
+                        TestContext.WriteLine($"Last Updated: {md.LastSync}");
+                        TestContext.WriteLine($"");
+                        TestContext.WriteLine($"--------------------------------------");
+                        TestContext.WriteLine($"");
+                    }
+                    Console.WriteLine("--------------------Gun Smith Work------------------");
+                    Console.WriteLine("");
+
+                    foreach (GunSmithWorkDone wd in g.GunSmithWork)
+                    {
+                        TestContext.WriteLine($"id : {wd.Id}");
+                        TestContext.WriteLine($"Smith Name: {wd.GunSmithName}");
+                        TestContext.WriteLine($"Smith ID: {wd.GunSmithId}");
+                        TestContext.WriteLine($"Gun Id: {wd.GunId}");
+                        TestContext.WriteLine($"OrderDetails: {wd.OrderDetails}");
+                        TestContext.WriteLine($"Notes: {wd.Notes}");
+                        TestContext.WriteLine($"Return Date: {wd.ReturnDate}");
+                        TestContext.WriteLine($"Start Date: {wd.StartDate}");
+                        TestContext.WriteLine($"Last Updated: {wd.LastSync}");
+                        TestContext.WriteLine($"");
+                        TestContext.WriteLine($"--------------------------------------");
+                        TestContext.WriteLine($"");
+                    }
+
                     Console.WriteLine("--------------------------------------");
                     Console.WriteLine("");
                 }
