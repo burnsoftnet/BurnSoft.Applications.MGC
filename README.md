@@ -15,6 +15,13 @@ and any other related program.
 
 ## Release Log
 
+### v1.7.x.x
+
+* Fixed unit Tests to run on full
+* Added GunFullDetails List to pull all the data that is used in the XML Export to maybe also be used in the application to speed up and corrent some details and reduce code
+* Fixed some Database Connection closure issues in the Pictures and Hotfixes section
+* Added Additional HotFix Function to wait for database to be unlocked in admin mode for x seconds.
+
 ### v1.7.0.4
 
 * Fixed issue with The Login Function
