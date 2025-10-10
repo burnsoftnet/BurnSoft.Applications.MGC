@@ -32,6 +32,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// The gun identifier
         /// </summary>
         private long _gunId;
+        /// <summary>
+        /// The pic path
+        /// </summary>
+        private string _picPath;
 
         /// <summary>
         /// Initializes this instance.
@@ -44,6 +48,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             BSOtherObjects obj = new BSOtherObjects();
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _gunId = Convert.ToInt32(Vs2019.GetSetting("MyGunCollectionID", TestContext));
+            //_gunId = MyCollection.GetTopId(_databasePath,out _errOut);
+            _picPath = "C:\\TestData\\p365-380-web-left.jpg";
         }
         /// <summary>
         /// Defines the test method HasDefaultPictureTestNoAdd.
@@ -60,6 +66,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Pictures")]
         public void HasDefaultPictureTestAdd()
         {
+            VerifyExists();
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
             bool value = Pictures.HasDefaultPicture(_databasePath, _gunId, AppDomain.CurrentDomain.BaseDirectory, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mgc_default.jpg"), out _errOut, true);
             General.HasTrueValue(value, _errOut);
         }
@@ -69,6 +77,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Pictures")]
         public void IsFirstPicTest()
         {
+            VerifyExists();
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            TestContext.WriteLine($"Using GunID {_gunId}");
             bool value = Pictures.IsFirstPic(_databasePath, _gunId, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
@@ -78,18 +89,35 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Pictures")]
         public void CountPicsTest()
         {
+            VerifyExists();
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            TestContext.WriteLine($"Using GunID {_gunId}");
             long value = Pictures.CountPics(_databasePath, _gunId, out _errOut);
             TestContext.WriteLine($"Number of pics in collection: {value}");
             General.HasTrueValue(value > 0, _errOut);
         }
+
+        public void VerifyExists()
+        {
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            long value = Pictures.CountPics(_databasePath, _gunId, out _errOut);
+            if (value == 0)
+            {
+                Pictures.Save(_databasePath, _picPath, AppDomain.CurrentDomain.BaseDirectory, _gunId, "test", "test", out _errOut);
+                Pictures.SetMainPictures(_databasePath, out _errOut);
+            }
+        }
+
         /// <summary>
         /// Defines the test method SaveTest.
         /// </summary>
         [TestMethod, TestCategory("Pictures")]
         public void SaveTest()
         {
-            string picPath = "C:\\TestData\\p365-380-web-left.jpg";
-            bool value = Pictures.Save(_databasePath, picPath, AppDomain.CurrentDomain.BaseDirectory, _gunId, "test",
+           
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            TestContext.WriteLine($"Using GunID {_gunId}");
+            bool value = Pictures.Save(_databasePath, _picPath, AppDomain.CurrentDomain.BaseDirectory, _gunId, "test",
                 "test", out _errOut);
             General.HasTrueValue(value, _errOut);
         }
@@ -99,6 +127,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         /// <param name="p">The p.</param>
         public void PrintList(List<PictureDetails> p)
         {
+            // TODO: #63 Add to PrintListValues Function
             if (p.Count > 0)
             {
                 foreach (PictureDetails d in p)
@@ -128,6 +157,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Pictures")]
         public void GetPicturesForFirearmTest()
         {
+            VerifyExists();
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            TestContext.WriteLine($"Using GunID {_gunId}");
             List<PictureDetails> value = Pictures.GetList(_databasePath, _gunId, out _errOut);
             PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);

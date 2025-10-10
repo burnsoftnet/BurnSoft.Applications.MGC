@@ -1024,6 +1024,62 @@ namespace BurnSoft.Applications.MGC.hotixes
             }
             return bans;
         }
+
+        /// <summary>
+        /// Runs the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="hotFixNumber">The hot fix number.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool RunObj(string databasePath, int hotFixNumber, out string errOut)
+        {
+            bool bans = false;
+            errOut = "";
+            try
+            {
+                SendStatus($"Starting up hot fix number: {hotFixNumber}");
+
+                switch (hotFixNumber)
+                {
+                    case 1:
+                        bans = One(databasePath, out errOut);
+                        break;
+                    case 2:
+                        bans = Two(databasePath, out errOut);
+                        break;
+                    case 3:
+                        bans = Three(databasePath, out errOut);
+                        break;
+                    case 4:
+                        bans = Four(databasePath, out errOut);
+                        break;
+                    case 5:
+                        bans = Five(databasePath, out errOut);
+                        break;
+                    case 6:
+                        bans = Six(databasePath, out errOut);
+                        break;
+                    case 7:
+                        bans = Seven(databasePath, out errOut);
+                        break;
+                    case 8:
+                        bans = Eight(databasePath, out errOut);
+                        break;
+                    case 9:
+                        bans = Nine(databasePath, out errOut);
+                        break;
+                    case 10:
+                        bans = Ten(databasePath, out errOut);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Run", e);
+            }
+            return bans;
+        }
         /// <summary>
         /// Hotfixes to database version.
         /// </summary>

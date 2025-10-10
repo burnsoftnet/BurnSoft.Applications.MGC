@@ -94,9 +94,9 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             bool bAns = false;
+            OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
             try
             {
-                OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                 conn.Open();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
 
@@ -104,13 +104,12 @@ namespace BurnSoft.Applications.MGC.hotixes
                 {
                     bAns = dr.HasRows;
                 }
-
-                conn.Close();
             }
             catch (Exception e)
             {
                 errOut = $"{ErrorMessage($"HasData-->{fromFunction}", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
             }
+            conn.Close();
             return bAns;
         }
         /// <summary>
@@ -192,6 +191,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             string sql = $"SELECT * from {table} where {column}={value}";
             return HasData(databasePath, sql, "ValueDoesExist", out errOut, usePassword);
         }
+
         /// <summary>
         /// Executes the SQL.
         /// </summary>
@@ -204,7 +204,9 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             bool bAns = false;
-            OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
+            string connectionString = DatabaseConnectionString(databasePath, usePassword);
+            AccessDatabaseHandler.WaitForAccessDatabase(connectionString, timeoutSeconds: 240);
+            OleDbConnection conn = new OleDbConnection(connectionString);
             try
             {
                 conn.Open();
@@ -588,9 +590,9 @@ namespace BurnSoft.Applications.MGC.hotixes
                 errOut = "";
                 bool bAns = false;
                 string sql = "";
+                OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                 try
                 {
-                    OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                     conn.Open();
                     OleDbCommand cmd = new OleDbCommand($"Select id,{column1},{column2} from {table}", conn);
                     List<string> cmdBuilder = new List<string>();
@@ -614,12 +616,14 @@ namespace BurnSoft.Applications.MGC.hotixes
                     foreach (string c in cmdBuilder)
                     {
                         if (!RunSql(databasePath, c, out errOut, true)) throw new Exception(errOut);
+                        Thread.Sleep(1000);
                     }
                     bAns = true;
                 }
                 catch (Exception e)
                 {
                     errOut = $"{ErrorMessage("SwapValues", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                    conn.Close();
                 }
                 return bAns;
             }

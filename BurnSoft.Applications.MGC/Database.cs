@@ -258,6 +258,7 @@ namespace BurnSoft.Applications.MGC
                     OdbcCommand cmd = new OdbcCommand(sql, _conn);
                     cmd.ExecuteNonQuery();
                     cmd.Connection.Close();
+                    _conn.Close();
                     _conn = null;
                     bAns = true;
                 }

@@ -90,6 +90,8 @@
     <Compile Include="Global\DatabaseRelated.cs" />
     <Compile Include="Global\Helpers.cs" />
     <Compile Include="Global\MyRegistry.cs" />
+    <Compile Include="DebugHelpers\PrintListValues.cs" />
+    <Compile Include="hotixes\AccessDatabaseHandler.cs" />
     <Compile Include="hotixes\HfDatabase.cs" />
     <Compile Include="hotixes\HotFix.cs" />
     <Compile Include="hotixes\types\DbAddData.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Types\DocumentList.cs" />
     <Compile Include="Types\GlobalCaliberList.cs" />
     <Compile Include="Types\GripLists.cs" />
+    <Compile Include="Types\GunCollectionFullList.cs" />
     <Compile Include="Types\GunCollectionList.cs" />
     <Compile Include="Types\GunShopDetails.cs" />
     <Compile Include="Types\GunSmithContacts.cs" />
@@ -149,6 +152,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName)</PostBuildEvent>
+    <PostBuildEvent>REM $(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName)</PostBuildEvent>
   </PropertyGroup>
 </Project>

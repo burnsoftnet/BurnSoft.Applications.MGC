@@ -158,6 +158,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         /// <param name="value">The value.</param>
         private void PrintList(List<GunShopDetails> value)
         {
+            // TODO: #63 Add to PrintListValues Function
             if (value.Count > 0)
             {
                 foreach (GunShopDetails g in value)
