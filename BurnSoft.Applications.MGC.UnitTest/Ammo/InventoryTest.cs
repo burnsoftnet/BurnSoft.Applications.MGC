@@ -187,7 +187,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
             VerifyExists();
             long id = Inventory.GetLastAmmoId(_databasePath, out _errOut);
             List<Ammunition> value = Inventory.GetList(_databasePath, id,out  _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAmmunitionList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AmmunitionDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -199,7 +199,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
             VerifyExists();
             
             List<Ammunition> value = Inventory.GetList(_databasePath, _ammoName, _ammoManufacturer, _ammoCaliber, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAmmunitionList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AmmunitionDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -211,7 +211,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
             VerifyExists();
 
             List<Ammunition> value = Inventory.GetList(_databasePath,  out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAmmunitionList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AmmunitionDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }

@@ -15,7 +15,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The GunCollectionList container.</param>
         /// <returns>System.String.</returns>
-        public static string PrintGunCollectionList(List<GunCollectionList> value)
+        public static string GunCollectionData(List<GunCollectionList> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -96,7 +96,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The GunCollectionFullList container.</param>
         /// <returns>System.String.</returns>
-        public static string PrintGunCollectionFullList(List<GunCollectionFullList> value)
+        public static string GunCollectionFullDetails(List<GunCollectionFullList> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -169,16 +169,16 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"BarrelSystemCount: {g.BarrelSystemCount}{Environment.NewLine}";
                     sAns += $"-----------------Barrel System---------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
-                    sAns += PrintBarrelSystemsList(g.BarrelSystem);
+                    sAns += BarrelSystemsDetails(g.BarrelSystem);
                     sAns += $"-----------------Accessories---------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
-                    sAns += PrintAccessoriesList(g.Accessories);
+                    sAns += AccessoriesDetails(g.Accessories);
                     sAns += $"-----------------Maintance Details---------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
-                    sAns += PrintMaintanceDetailsList(g.MaintanceDetails);
+                    sAns += GunMaintanceDetails(g.MaintanceDetails);
                     sAns += $"-----------------Gun Smith Work---------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
-                    sAns += PrintGunSmithWorkDoneList(g.GunSmithWork);
+                    sAns += GunSmithWorkDoneDetails(g.GunSmithWork);
                     sAns += $"--------------------------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                 }
@@ -191,7 +191,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string PrintBarrelSystemsList(List<BarrelSystems> value)
+        public static string BarrelSystemsDetails(List<BarrelSystems> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -226,7 +226,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The AccessoriesList container value.</param>
         /// <returns>System.String.</returns>
-        public static string PrintAccessoriesList(List<AccessoriesList> value)
+        public static string AccessoriesDetails(List<AccessoriesList> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -259,7 +259,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string PrintMaintanceDetailsList(List<MaintanceDetailsList> value)
+        public static string GunMaintanceDetails(List<MaintanceDetailsList> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -289,7 +289,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string PrintGunSmithWorkDoneList(List<GunSmithWorkDone> value)
+        public static string GunSmithWorkDoneDetails(List<GunSmithWorkDone> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -318,7 +318,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string PrintAmmunitionList(List<Ammunition> value)
+        public static string AmmunitionDetails(List<Ammunition> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -349,7 +349,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string PrintAppraisersContactDetailsList(List<AppraisersContactDetails> value)
+        public static string AppraisersContactInfo(List<AppraisersContactDetails> value)
         {
             string sAns = "";
             if (value.Count > 0)
@@ -382,7 +382,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>System.String.</returns>
-        public static string PrintBuyersList(List<BuyersList> value)
+        public static string BuyersListInfo(List<BuyersList> value)
         {
             string sAns = "";
             foreach (BuyersList v in value)

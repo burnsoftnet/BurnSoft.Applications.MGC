@@ -82,7 +82,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 
                 List<GunCollectionList> lst = MyCollection.GetList(_databasePath, gunId, out _errOut);
                 if (_errOut.Length > 0) throw new Exception(_errOut);
-                TestContext.WriteLine(DebugHelpers.PrintListValues.PrintGunCollectionList(lst));
+                TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionData(lst));
                 value = true;
             }
             catch (Exception e)

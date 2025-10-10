@@ -136,7 +136,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             VerifyExists();
             long id = Appraisers.GetId(_databasePath, _appraisersName, out _errOut);
             List<AppraisersContactDetails> value = Appraisers.Get(_databasePath, id, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAppraisersContactDetailsList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AppraisersContactInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -147,7 +147,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         {
             VerifyExists();
             List<AppraisersContactDetails> value = Appraisers.Get(_databasePath, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAppraisersContactDetailsList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AppraisersContactInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }

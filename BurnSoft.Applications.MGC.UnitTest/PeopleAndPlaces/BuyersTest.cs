@@ -194,7 +194,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             VerifyExists();
             long id = Buyers.GetId(_databasePath, _buyerName, out _errOut);
             List<BuyersList> value = Buyers.Get(_databasePath, id, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintBuyersList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BuyersListInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -205,7 +205,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         {
             VerifyExists();
             List<BuyersList> value = Buyers.Get(_databasePath, _buyerName, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintBuyersList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BuyersListInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -216,7 +216,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         {
             VerifyExists();
             List<BuyersList> value = Buyers.Get(_databasePath, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintBuyersList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BuyersListInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>

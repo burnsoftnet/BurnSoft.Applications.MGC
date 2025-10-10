@@ -310,7 +310,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             VerifyExists();
             _gunId = 3;
             List<GunCollectionFullList> value = MyCollection.GetFullList(_databasePath, _gunId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintGunCollectionFullList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionFullDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
@@ -322,7 +322,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<GunCollectionList> value = MyCollection.GetList(_databasePath, _gunId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintGunCollectionList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionData(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -332,7 +332,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void GetListAll()
         {
             List<GunCollectionList> value = MyCollection.GetList(_databasePath, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintGunCollectionList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionData(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>

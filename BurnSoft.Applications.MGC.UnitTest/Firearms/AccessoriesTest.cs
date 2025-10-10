@@ -214,7 +214,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
                 _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
             List<AccessoriesList> value = Accessories.List(_databasePath, (int)id, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAccessoriesList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -225,7 +225,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<AccessoriesList> value = Accessories.List(_databasePath, _gunId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAccessoriesList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
@@ -240,7 +240,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = Accessories.Copy(_databasePath, id, _gunId, out _errOut);
             General.HasTrueValue(value, _errOut);
             List<AccessoriesList> lst = Accessories.List(_databasePath, (long)_gunId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAccessoriesList(lst));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(lst));
         }
         /// <summary>
         /// Defines the test method ListTest.
@@ -250,7 +250,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<AccessoriesList> value = Accessories.List(_databasePath, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintAccessoriesList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }

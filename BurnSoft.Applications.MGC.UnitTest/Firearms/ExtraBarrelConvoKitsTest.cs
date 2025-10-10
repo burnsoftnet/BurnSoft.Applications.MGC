@@ -155,7 +155,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<BarrelSystems> value = ExtraBarrelConvoKits.GetCurrentBarrelDetailstList(_databasePath, _gunId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintBarrelSystemsList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BarrelSystemsDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -271,7 +271,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void GetListAllTest()
         {
             List<BarrelSystems> value = ExtraBarrelConvoKits.GetList(_databasePath, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintBarrelSystemsList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BarrelSystemsDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -282,7 +282,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<BarrelSystems> value = ExtraBarrelConvoKits.GetList(_databasePath, _barrelConvoKitDefaultId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintBarrelSystemsList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BarrelSystemsDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>

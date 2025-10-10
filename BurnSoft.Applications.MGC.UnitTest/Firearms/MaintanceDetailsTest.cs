@@ -172,7 +172,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, _gunId, _maintenanceDetailsBarrelSystemId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintMaintanceDetailsList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunMaintanceDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -183,7 +183,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, _gunId,  out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.PrintMaintanceDetailsList(value));
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunMaintanceDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }
