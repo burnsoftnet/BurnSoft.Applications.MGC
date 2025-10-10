@@ -126,35 +126,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             TestContext.WriteLine($"Id: {value}");
             General.HasTrueValue(value > 0, _errOut);
         }
-        /// <summary>
-        /// Prints the list.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        public void PrintList(List<AppraisersContactDetails> value)
-        {
-            if (value.Count > 0)
-            {
-                foreach (AppraisersContactDetails g in value)
-                {
-                    TestContext.WriteLine($"id: {g.Id}");
-                    TestContext.WriteLine($"Name: {g.Name}");
-                    TestContext.WriteLine($"Address: {g.Address1}");
-                    TestContext.WriteLine($"Address2: {g.Address2}");
-                    TestContext.WriteLine($"City: {g.City}");
-                    TestContext.WriteLine($"State: {g.State}");
-                    TestContext.WriteLine($"Zip Code: {g.ZipCode}");
-                    TestContext.WriteLine($"Country: {g.Country}");
-                    TestContext.WriteLine($"Phone: {g.Phone}");
-                    TestContext.WriteLine($"Website: {g.WebSite}");
-                    TestContext.WriteLine($"License: {g.Lic}");
-                    TestContext.WriteLine($"Fax: {g.Fax}");
-                    TestContext.WriteLine($"Still in Business: {g.StillInBusiness}");
-                    TestContext.WriteLine($"");
-                    TestContext.WriteLine($"-------------------------------------");
-                    TestContext.WriteLine($"");
-                }
-            }
-        }
+
         /// <summary>
         /// Defines the test method GetByIdTest.
         /// </summary>
@@ -164,7 +136,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             VerifyExists();
             long id = Appraisers.GetId(_databasePath, _appraisersName, out _errOut);
             List<AppraisersContactDetails> value = Appraisers.Get(_databasePath, id, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AppraisersContactInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -175,7 +147,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         {
             VerifyExists();
             List<AppraisersContactDetails> value = Appraisers.Get(_databasePath, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AppraisersContactInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }
