@@ -6,7 +6,7 @@ This library was created to perform the main database function that the [My Gun 
 This application was seperated from the project to be added to the site nuget package so we can also use this in the [My Loaders Log(https://github.com/burnsoftnet/MyLoadersLog)]
 and any other related program.
 
-You can view the API Docs by (Clicking Here)[docs/README.md]
+You can view the API Docs by [Clicking Here](docs/README.md)
 
 
 ## Resources
