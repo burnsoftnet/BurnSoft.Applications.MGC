@@ -6,6 +6,9 @@ This library was created to perform the main database function that the [My Gun 
 This application was seperated from the project to be added to the site nuget package so we can also use this in the [My Loaders Log(https://github.com/burnsoftnet/MyLoadersLog)]
 and any other related program.
 
+You can view the API Docs by [Clicking Here](docs/README.md)
+
+
 ## Resources
 - [BurnSoft.Universal](https://github.com/burnsoftnet/BurnSoft.Universal)
 
@@ -21,6 +24,7 @@ and any other related program.
 * Added GunFullDetails List to pull all the data that is used in the XML Export to maybe also be used in the application to speed up and corrent some details and reduce code
 * Fixed some Database Connection closure issues in the Pictures and Hotfixes section
 * Added Additional HotFix Function to wait for database to be unlocked in admin mode for x seconds.
+* Added online API Docs
 
 ### v1.7.0.4
 
