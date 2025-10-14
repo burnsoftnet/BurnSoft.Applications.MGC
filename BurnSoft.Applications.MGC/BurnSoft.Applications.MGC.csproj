@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BurnSoft.Applications.MGC</RootNamespace>
     <AssemblyName>BurnSoft.Applications.MGC</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>false</Deterministic>
     <TargetFrameworkProfile />
@@ -36,11 +36,11 @@
     <DocumentationFile>bin\Release\BurnSoft.Applications.MGC.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BurnSoft.Security.RegularEncryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BurnSoft.Security.RegularEncryption.1.0.0\lib\net452\BurnSoft.Security.RegularEncryption.dll</HintPath>
+    <Reference Include="BurnSoft.Security.RegularEncryption, Version=1.1.1.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BurnSoft.Security.RegularEncryption.1.1.1.2\lib\net481\BurnSoft.Security.RegularEncryption.dll</HintPath>
     </Reference>
-    <Reference Include="BurnSoft.Universal, Version=4.0.32.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BurnSoft.Universal.4.0.32.5\lib\net472\BurnSoft.Universal.dll</HintPath>
+    <Reference Include="BurnSoft.Universal, Version=4.1.33.8, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BurnSoft.Universal.4.1.33.9\lib\net481\BurnSoft.Universal.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -152,6 +152,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>REM $(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName)</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)postbuild.bat $(SolutionDir) $(ProjectDir) $(ConfigurationName) $(ProjectName)</PostBuildEvent>
   </PropertyGroup>
 </Project>
