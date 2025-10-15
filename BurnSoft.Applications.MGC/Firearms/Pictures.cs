@@ -126,7 +126,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Determines whether [has default picture] [the specified database path].
         /// </summary>
         /// <param name="databasePath">The Database Path</param>
-        /// <param name="id"></param>
+        /// <param name="id">The id of the Accessory that you want to work with</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool HasDefaultPicture(string databasePath, long id, out string errOut)

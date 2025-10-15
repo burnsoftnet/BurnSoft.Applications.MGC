@@ -56,7 +56,10 @@ namespace BurnSoft.Applications.MGC
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
-        //End Snippet
+        //End Snippet        
+        /// <summary>
+        /// The connection
+        /// </summary>
         internal OdbcConnection _conn;
         #region "Connection Strings"
 

@@ -295,7 +295,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Get the Fulle name, Manufacture and model name in one from the accessories table
         /// </summary>
         /// <param name="databasePath">The Database Path</param>
-        /// <param name="id"></param>
+        /// <param name="id">The id of the Accessory that you want to work with</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static string GetFullName(string databasePath, long id, out string errOut)
@@ -410,7 +410,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Return a List of the accessoriy based on it's id
         /// </summary>
         /// <param name="databasePath">The Database Path</param>
-        /// <param name="id"></param>
+        /// <param name="id">The id of the Accessory that you want to work with</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<AccessoriesList> List(string databasePath, int id, out string errOut)
