@@ -196,9 +196,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Check to see if the gun type exists int he database, if it does not then add it.
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="value"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="value">The Name of the gun type</param>
+        /// <param name="errOut">Error details if an exception occured</param>
         /// <returns></returns>
         public static bool UpdateGunType(string databasePath, string value, out string errOut)
         {
