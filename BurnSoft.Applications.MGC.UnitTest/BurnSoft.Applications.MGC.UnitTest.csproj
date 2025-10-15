@@ -118,7 +118,9 @@
       <Name>BurnSoft.Applications.MGC</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DebugHelpers\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="data\ExportFirearm_Glock_G17_Open_Class.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
