@@ -192,7 +192,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="Exception"></exception>
-        public static long GetId(string databasePath, string name, long manufacturerId, bool AddIfNotExists = false, out string errOut)
+        public static long GetId(string databasePath, string name, long manufacturerId, out string errOut, bool AddIfNotExists = false)
         {
             long lAns = 0;
             errOut = @"";
