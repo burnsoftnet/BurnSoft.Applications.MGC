@@ -138,6 +138,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             General.HasTrueValue(value, _errOut);
 
         }
+
         /// <summary>
         /// Defines the test method DeleteTest.
         /// </summary>
@@ -160,6 +161,30 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             long id = Models.GetId(_databasePath, _modelsName, _modelsManufacturerId, out _errOut);
             TestContext.WriteLine($"id: {id}");
             General.HasTrueValue(id > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Models Information")]
+        public void GetIdTestExpectFail()
+        {
+            long id = Models.GetId(_databasePath, _modelsName, _modelsManufacturerId, out _errOut);
+            TestContext.WriteLine($"id: {id}");
+            General.HasFalseValue(id > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Models Information")]
+        public void GetIdAddIfTest()
+        {
+            long id = Models.GetId(_databasePath, $"{_modelsName}-Test", _modelsManufacturerId, out _errOut, true);
+            TestContext.WriteLine($"id: {id} for {_modelsName}-Test");
+            General.HasTrueValue(id > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Models Information")]
+        public void GetIdAddIfTestFail()
+        {
+            long id = Models.GetId(_databasePath, $"{_modelsName}-TestFail", _modelsManufacturerId, out _errOut);
+            TestContext.WriteLine($"id: {id} for {_modelsName}-TestFail");
+            General.HasFalseValue(id > 0, _errOut);
         }
 
         /// <summary>
