@@ -294,9 +294,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get the Fulle name, Manufacture and model name in one from the accessories table
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static string GetFullName(string databasePath, long id, out string errOut)
         {
@@ -356,8 +356,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get a list of all the accessories
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<AccessoriesList> List(string databasePath, out string errOut)
         {
@@ -383,9 +383,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get all the accessories for a particular firearm
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="gunId"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<AccessoriesList> List(string databasePath, long gunId,out string errOut)
         {
@@ -409,9 +409,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Return a List of the accessoriy based on it's id
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<AccessoriesList> List(string databasePath, int id, out string errOut)
         {
@@ -436,7 +436,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Send a datable to get that converted into an AcceeoriesList type
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private static List<AccessoriesList> MyList(DataTable dt, out string errOut)
         {

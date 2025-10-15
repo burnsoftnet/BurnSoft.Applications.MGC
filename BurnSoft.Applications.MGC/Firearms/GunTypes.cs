@@ -57,9 +57,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Add the Gun Type to the datbaase table
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="value"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool Add(string databasePath, string value, out string errOut)
         {
@@ -80,9 +80,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Check to see if the value already exists in the database
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="value"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool Exists(string databasePath, string value, out string errOut)
         {
@@ -103,9 +103,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get the ID tied to the name fo the gun type based ont he name from the database
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="value"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static int GetId(string databasePath, string value, out string errOut)
         {
@@ -126,9 +126,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Delete the gun type from the database based on the id
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool Delete(string databasePath, int id, out string errOut)
         {
@@ -149,9 +149,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Delete the gun type from the database based on tie name
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="value"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool Delete(string databasePath, string value, out string errOut)
         {
@@ -172,10 +172,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Update the gun type in the database
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
         /// <param name="value"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool Update(string databasePath,int id, string value, out string errOut)
         {
@@ -223,8 +223,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get a list of all the Gun Types in the database
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<Types.GunTypes> GetList(string databasePath, out string errOut)
         {
@@ -246,9 +246,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get a lit os the Gun Types by the ID, 
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<Types.GunTypes> GetList(string databasePath, long id, out string errOut)
         {
