@@ -92,7 +92,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                 if (errOut.Length > 0)  throw new Exception(errOut);
                 foreach (GunCollectionFullList l in lst)
                 {
-                    if (!IsNotEmptyOrNull(l.FullName))) throw new Exception("Full Name is Empty");
+                    if (!IsNotEmptyOrNull(l.FullName)) throw new Exception("Full Name is Empty");
                     if (!IsNotEmptyOrNull(l.ModelId)) throw new Exception("Model ID is 0 or Exmpty");
 
                     //sAns += $"id : {g.Id}{Environment.NewLine}";

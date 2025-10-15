@@ -70,6 +70,7 @@
     <Compile Include="AutoFill\GunCollectionTest.cs" />
     <Compile Include="AutoFill\GunsmithTest.cs" />
     <Compile Include="AutoFill\WishlistTest.cs" />
+    <Compile Include="DebugHelpersTests\VerifyDataTests.cs" />
     <Compile Include="Firearms\MyGunCollectionTest.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
@@ -118,9 +119,7 @@
       <Name>BurnSoft.Applications.MGC</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DebugHelpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="data\ExportFirearm_Glock_G17_Open_Class.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
