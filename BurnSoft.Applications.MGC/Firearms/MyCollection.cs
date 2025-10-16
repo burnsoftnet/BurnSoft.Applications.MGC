@@ -999,7 +999,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Sets the firearm rating.
+        /// Sets the firearm rating. This will bet set while you are viewing the firearm and not during add or edit.
+        /// Because if might be a new gun and you don't know how it handles.  So something that can be changed more 
+        /// on the fly.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="id">The identifier.</param>

@@ -352,5 +352,41 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             }
             General.HasTrueValue(value, _errOut);
         }
+
+        /// <summary>
+        /// Defines the test method SetAsCompetitionGunTest.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetAsCompetitionGunTest()
+        {
+            bool value = MyCollection.SetAsCompetitionGun(_databasePath, _gunId, true, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to competition gun");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} to competition gun");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+        /// <summary>
+        /// Defines the test method SetFirearmRatingTest.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetFirearmRatingTest()
+        {
+            int rating = 5;
+            bool value = MyCollection.SetFirearmRating(_databasePath, _gunId, rating, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to raiting of {rating}");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} to raiting of {rating}");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }
