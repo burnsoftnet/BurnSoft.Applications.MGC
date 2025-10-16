@@ -51,7 +51,8 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion        
+        #endregion
+        #region "Internal Helper Functions
         /// <summary>
         /// Determines whether [is not empty or null] [the specified value].
         /// </summary>
@@ -59,11 +60,13 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// <returns><c>true</c> if [is not empty or null] [the specified value]; otherwise, <c>false</c>.</returns>
         private static bool IsNotEmptyOrNull(string value)
         {
-            if (string.IsNullOrEmpty(value)) 
-            { 
-                return false; 
-            } else { 
-                return true; 
+            if (string.IsNullOrEmpty(value))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
         /// <summary>
@@ -82,7 +85,8 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                 if (value == 0)
                 {
                     return false;
-                } else
+                }
+                else
                 {
                     return true;
                 }
@@ -99,11 +103,13 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             if (!isNumber)
             {
                 return $"{control} is empty or null";
-            } else
+            }
+            else
             {
                 return $"{control} is 0 ot null";
             }
         }
+        #endregion
 
         /// <summary>
         /// Firearms the details by identifier.
