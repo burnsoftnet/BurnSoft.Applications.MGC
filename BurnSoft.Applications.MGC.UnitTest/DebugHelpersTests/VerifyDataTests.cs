@@ -45,6 +45,15 @@ namespace BurnSoft.Applications.MGC.UnitTest.DebugHelpersTests
         {
             bool passed = VerifyData.FirearmDetailsAll(_databasePath, out _errOut);
             if (_errOut.Length > 0) TestContext.WriteLine(_errOut);
+         
+            Assert.IsTrue(passed);
+        }
+
+        [TestMethod, TestCategory("Verify Data")]
+        public void CheckBarrelTableTest()
+        {
+            bool passed = VerifyData.CheckBarrelTable(_databasePath, out _errOut);
+            if (_errOut.Length > 0) TestContext.WriteLine(_errOut);
             Assert.IsTrue(passed);
         }
     }
