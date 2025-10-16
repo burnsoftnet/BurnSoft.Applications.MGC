@@ -194,8 +194,14 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             return bAns;
         }
         #endregion
-        #region "Extra Barrel or Conversion Kit"
-
+        #region "Extra Barrel or Conversion Kit"        
+        /// <summary>
+        /// Checks the barrel table.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool CheckBarrelTable(string databasePath, out string errOut)
         {
             errOut = "";
@@ -207,6 +213,38 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                 foreach (BarrelSystems l in lst)
                 {
                     if (!IsNotEmptyOrNull(Convert.ToInt32(l.GunId))) throw new Exception(MsgFormat("Firearm ID", true));
+                }
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                ErrorMessage("FirearmDetails", e);
+            }
+            return bAns;
+        }
+        #endregion
+
+        #region "Maintance Plans"        
+        /// <summary>
+        /// Checks the maintance details table.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CheckMaintanceDetailsTable(string databasePath, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                List<MaintanceDetailsList> lst = MaintanceDetails.Lists(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (MaintanceDetailsList l in lst)
+                {
+                    if (!IsNotEmptyOrNull(Convert.ToInt32(l.GunId))) throw new Exception(MsgFormat("Firearm ID", true));
+                    if (!IsNotEmptyOrNull(Convert.ToInt32(l.PlanId))) throw new Exception(MsgFormat("Maintance Plan ID", true));
+                    if (!IsNotEmptyOrNull(Convert.ToInt32(l.BarrelSystemId))) throw new Exception(MsgFormat("Barrel System ID", true));
                 }
                 bAns = true;
             }
