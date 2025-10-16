@@ -82,6 +82,18 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                 }
             }
         }
+
+        private static string MsgFormat(string control, bool isNumber = false)
+        {
+            if (!isNumber)
+            {
+                return $"{control} is empty or null";
+            } else
+            {
+                return $"{control} is 0 ot null";
+            }
+        }
+
         public static bool FirearmDetailsById(string databasePath, long id, out string errOut)
         {
             bool bAns =false;
@@ -92,89 +104,53 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                 if (errOut.Length > 0)  throw new Exception(errOut);
                 foreach (GunCollectionFullList l in lst)
                 {
-                    if (!IsNotEmptyOrNull(l.FullName)) throw new Exception("Full Name is Empty");
-                    if (!IsNotEmptyOrNull(l.ModelId)) throw new Exception("Model ID is 0 or Exmpty");
+                    if (!IsNotEmptyOrNull(l.FullName)) throw new Exception(MsgFormat("Full Name"));
+                    if (!IsNotEmptyOrNull(l.ModelId)) throw new Exception(MsgFormat("Model ID", true));
+                    if (!IsNotEmptyOrNull(l.Mid)) throw new Exception(MsgFormat("Manufacturer ID", true));
+                    if (!IsNotEmptyOrNull(l.ModelName)) throw new Exception(MsgFormat("Model Name"));
+                    if (!IsNotEmptyOrNull(l.SerialNumber)) throw new Exception(MsgFormat("Serial Name"));
+                    if (!IsNotEmptyOrNull(l.Type)) throw new Exception(MsgFormat("Type"));
+                    if (!IsNotEmptyOrNull(l.Caliber)) throw new Exception(MsgFormat("Caliber"));
+                    if (!IsNotEmptyOrNull(l.Finish)) throw new Exception(MsgFormat("Finish"));
+                    if (!IsNotEmptyOrNull(l.Condition)) throw new Exception(MsgFormat("Condition"));
+                    if (!IsNotEmptyOrNull(l.NationalityId)) throw new Exception(MsgFormat("Nationality ID", true));
+                    if (!IsNotEmptyOrNull(l.GripId)) throw new Exception(MsgFormat("Grip ID", true));
+                    if (!IsNotEmptyOrNull(l.Sid)) throw new Exception(MsgFormat("Seller ID", true));
+                    if (!IsNotEmptyOrNull(l.DbId)) throw new Exception(MsgFormat("Default Barrel ID", true));
+                }
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                ErrorMessage("FirearmDetails", e);
+            }
 
-                    //sAns += $"id : {g.Id}{Environment.NewLine}";
-                    //sAns += $"Full Name: {g.FullName}{Environment.NewLine}";
-                    //sAns += $"Owner id: {g.Oid}{Environment.NewLine}";
-                    //sAns += $"Manufacture Id: {g.Mid}{Environment.NewLine}";
-                    //sAns += $"ModelName: {g.ModelName}{Environment.NewLine}";
-                    //sAns += $"Model Id: {g.ModelId}{Environment.NewLine}";
-                    //sAns += $"SerialNumber: {g.SerialNumber}{Environment.NewLine}";
-                    //sAns += $"Type: {g.Type}{Environment.NewLine}";
-                    //sAns += $"Caliber: {g.Caliber}{Environment.NewLine}";
-                    //sAns += $"Caliber 2: {g.PetLoads}{Environment.NewLine}";
-                    //sAns += $"Caliber 3: {g.Caliber3}{Environment.NewLine}";
-                    //sAns += $"Feed System: {g.FeedSystem}{Environment.NewLine}";
-                    //sAns += $"Finish: {g.Finish}{Environment.NewLine}";
-                    //sAns += $"Condition: {g.Condition}{Environment.NewLine}";
-                    //sAns += $"CustomId: {g.CustomId}{Environment.NewLine}";
-                    //sAns += $"NationalityId: {g.NationalityId}{Environment.NewLine}";
-                    //sAns += $"BarrelLength: {g.BarrelLength}{Environment.NewLine}";
-                    //sAns += $"GripId: {g.GripId}{Environment.NewLine}";
-                    //sAns += $"Qty: {g.Qty}{Environment.NewLine}";
-                    //sAns += $"Weight: {g.Weight}{Environment.NewLine}";
-                    //sAns += $"Height: {g.Height}{Environment.NewLine}";
-                    //sAns += $"StockType: {g.StockType}{Environment.NewLine}";
-                    //sAns += $"BarrelHeight: {g.BarrelHeight}{Environment.NewLine}";
-                    //sAns += $"BarrelWidth: {g.BarrelWidth}{Environment.NewLine}";
-                    //sAns += $"Action: {g.Action}{Environment.NewLine}";
-                    //sAns += $"Sights: {g.Sights}{Environment.NewLine}";
-                    //sAns += $"PurchasePrice: {g.PurchasePrice}{Environment.NewLine}";
-                    //sAns += $"PurchaseFrom: {g.PurchaseFrom}{Environment.NewLine}";
-                    //sAns += $"AppriasedBy: {g.AppriasedBy}{Environment.NewLine}";
-                    //sAns += $"AppriasedValue: {g.AppriasedValue}{Environment.NewLine}";
-                    //sAns += $"AppriaserId: {g.AppriaserId}{Environment.NewLine}";
-                    //sAns += $"AppraisalDate: {g.AppraisalDate}{Environment.NewLine}";
-                    //sAns += $"InsuredValue: {g.InsuredValue}{Environment.NewLine}";
-                    //sAns += $"StorageLocation: {g.StorageLocation}{Environment.NewLine}";
-                    //sAns += $"ConditionComments: {g.ConditionComments}{Environment.NewLine}";
-                    //sAns += $"AdditionalNotes: {g.AdditionalNotes}{Environment.NewLine}";
-                    //sAns += $"HasAccessory: {g.HasAccessory}{Environment.NewLine}";
-                    //sAns += $"DateProduced: {g.DateProduced}{Environment.NewLine}";
-                    //sAns += $"DateTimeAddedInDb: {g.DateTimeAddedInDb}{Environment.NewLine}";
-                    //sAns += $"ItemSold: {g.ItemSold}{Environment.NewLine}";
-                    //sAns += $"Selled Id: {g.Sid}{Environment.NewLine}";
-                    //sAns += $"Buyer Id: {g.Bid}{Environment.NewLine}";
-                    //sAns += $"Date Sold: {g.DateSold}{Environment.NewLine}";
-                    //sAns += $"Is C&R Items: {g.IsCAndR}{Environment.NewLine}";
-                    //sAns += $"DateTimeAdded: {g.DateTimeAddedInDb}{Environment.NewLine}";
-                    //sAns += $"Importer: {g.Importer}{Environment.NewLine}";
-                    //sAns += $"RemanufactureDate: {g.RemanufactureDate}{Environment.NewLine}";
-                    //sAns += $"Poi: {g.Poi}{Environment.NewLine}";
-                    //sAns += $"HasMb : {g.HasMb}{Environment.NewLine}";
-                    //sAns += $"DbId: {g.DbId}{Environment.NewLine}";
-                    //sAns += $"ShotGunChoke: {g.ShotGunChoke}{Environment.NewLine}";
-                    //sAns += $"IsInBoundBook: {g.IsInBoundBook}{Environment.NewLine}";
-                    //sAns += $"TwistRate: {g.TwistRate}{Environment.NewLine}";
-                    //sAns += $"TriggerPullInPounds: {g.TriggerPullInPounds}{Environment.NewLine}";
-                    //sAns += $"Classification: {g.Classification}{Environment.NewLine}";
-                    //sAns += $"DateOfCAndR: {g.DateOfCAndR}{Environment.NewLine}";
-                    //sAns += $"LastSyncDate: {g.LastSyncDate}{Environment.NewLine}";
-                    //sAns += $"IsClass3Item: {g.IsClass3Item}{Environment.NewLine}";
-                    //sAns += $"Class3Owner: {g.Class3Owner}{Environment.NewLine}";
-                    //sAns += $"WaS Stolen: {g.WasStolen}{Environment.NewLine}";
-                    //sAns += $"Was Sold: {g.WasSold}{Environment.NewLine}";
-                    //sAns += $"Is Stogun: {g.IsShotGun}{Environment.NewLine}";
-                    //sAns += $"HasExtraBarrels: {g.HasExtraBarrels}{Environment.NewLine}";
-                    //sAns += $"BarrelSystemCount: {g.BarrelSystemCount}{Environment.NewLine}";
-                    //sAns += $"HasDocuments: {g.HasDocuments}{Environment.NewLine}";
-                    //sAns += $"LinkedDocuments: {g.LinkedDocuments}{Environment.NewLine}";
-                    //sAns += $"-----------------Barrel System---------------------{Environment.NewLine}";
-                    //sAns += $"{Environment.NewLine}";
-                    //sAns += BarrelSystemsDetails(g.BarrelSystem);
-                    //sAns += $"-----------------Accessories---------------------{Environment.NewLine}";
-                    //sAns += $"{Environment.NewLine}";
-                    //sAns += AccessoriesDetails(g.Accessories);
-                    //sAns += $"-----------------Maintance Details---------------------{Environment.NewLine}";
-                    //sAns += $"{Environment.NewLine}";
-                    //sAns += GunMaintanceDetails(g.MaintanceDetails);
-                    //sAns += $"-----------------Gun Smith Work---------------------{Environment.NewLine}";
-                    //sAns += $"{Environment.NewLine}";
-                    //sAns += GunSmithWorkDoneDetails(g.GunSmithWork);
-                    //sAns += $"--------------------------------------{Environment.NewLine}";
-                    //sAns += $"{Environment.NewLine}";
+            return bAns;
+        }
+
+        public static bool FirearmDetailsAll(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                List<GunCollectionList> lst = MyCollection.GetList(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (GunCollectionList l in lst)
+                {
+                    if (!IsNotEmptyOrNull(l.FullName)) throw new Exception(MsgFormat("Full Name"));
+                    if (!IsNotEmptyOrNull(l.ModelId)) throw new Exception(MsgFormat("Model ID", true));
+                    if (!IsNotEmptyOrNull(l.Mid)) throw new Exception(MsgFormat("Manufacturer ID", true));
+                    if (!IsNotEmptyOrNull(l.ModelName)) throw new Exception(MsgFormat("Model Name"));
+                    if (!IsNotEmptyOrNull(l.SerialNumber)) throw new Exception(MsgFormat("Serial Name"));
+                    if (!IsNotEmptyOrNull(l.Type)) throw new Exception(MsgFormat("Type"));
+                    if (!IsNotEmptyOrNull(l.Caliber)) throw new Exception(MsgFormat("Caliber"));
+                    if (!IsNotEmptyOrNull(l.Finish)) throw new Exception(MsgFormat("Finish"));
+                    if (!IsNotEmptyOrNull(l.Condition)) throw new Exception(MsgFormat("Condition"));
+                    if (!IsNotEmptyOrNull(l.NationalityId)) throw new Exception(MsgFormat("Nationality ID", true));
+                    if (!IsNotEmptyOrNull(l.GripId)) throw new Exception(MsgFormat("Grip ID", true));
+                    if (!IsNotEmptyOrNull(l.Sid)) throw new Exception(MsgFormat("Seller ID", true));
+                    if (!IsNotEmptyOrNull(l.DbId)) throw new Exception(MsgFormat("Default Barrel ID", true));
                 }
                 bAns = true;
             }

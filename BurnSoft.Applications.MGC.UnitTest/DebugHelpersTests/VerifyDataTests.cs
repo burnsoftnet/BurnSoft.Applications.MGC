@@ -31,10 +31,19 @@ namespace BurnSoft.Applications.MGC.UnitTest.DebugHelpersTests
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
         }
-        [TestMethod]
+
+        [TestMethod, TestCategory("Verify Data")]
         public void FirearmDetailsByIdTest()
         {
             bool passed = VerifyData.FirearmDetailsById(_databasePath, 2, out _errOut);
+            if (_errOut.Length > 0) TestContext.WriteLine(_errOut);
+            Assert.IsTrue(passed);
+        }
+
+        [TestMethod, TestCategory("Verify Data")]
+        public void FirearmDetailsAllTest()
+        {
+            bool passed = VerifyData.FirearmDetailsAll(_databasePath, out _errOut);
             if (_errOut.Length > 0) TestContext.WriteLine(_errOut);
             Assert.IsTrue(passed);
         }

@@ -1131,6 +1131,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
         /// <summary>
         /// Gets the full list of the firearm details, accessories, BarrelSystems, etc.
         /// </summary>
