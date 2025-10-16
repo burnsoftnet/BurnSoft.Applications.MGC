@@ -4,6 +4,7 @@ using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
+using System.Runtime.InteropServices;
 
 // ReSharper disable UnusedMember.Local
 
@@ -166,8 +167,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Models Information")]
         public void GetIdTestExpectFail()
         {
-            long id = Models.GetId(_databasePath, _modelsName, _modelsManufacturerId, out _errOut);
-            TestContext.WriteLine($"id: {id}");
+            string newMod = $"{_modelsName}-TestBreak";
+            long id = Models.GetId(_databasePath, newMod, _modelsManufacturerId, out _errOut);
+            TestContext.WriteLine($"id: {id} for model {newMod} with manufacturer id of {_modelsManufacturerId} ");
             General.HasFalseValue(id > 0, _errOut);
         }
 

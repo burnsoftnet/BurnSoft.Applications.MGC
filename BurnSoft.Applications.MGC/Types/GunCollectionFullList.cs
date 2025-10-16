@@ -386,5 +386,10 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value>The linked documents.</value>
         public long LinkedDocuments { get; set; }
+        /// <summary>
+        /// Gets or sets the rating.
+        /// </summary>
+        /// <value>The rating.</value>
+        public int Rating { get; set; }
     }
 }

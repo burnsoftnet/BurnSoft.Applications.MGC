@@ -26,7 +26,13 @@ You can view the API Docs by [Clicking Here](docs/README.md)
 * Added Additional HotFix Function to wait for database to be unlocked in admin mode for x seconds.
 * Added online API Docs
 * Added Verification Functions for ID Linking in the Main Tables and Unit Tests for those functions.
-* 
+* Added Function TO add Raiting to firearm.
+* Added new Rating field to GunCollection List containers
+* Added to HotFix 10 the Create Rating Column
+* Added to Hotfix 10 to set all ratings in gun collection to 0 after Raiting column is created.
+* FIXED issue with When Adding a firearm at times, that the default barrel id for the stock barrel doesn't return an ID
+* FIXED issue with Importing a Firearm where the Default Barrel ID and Model ID return 0.
+
 
 ### v1.7.0.4
 

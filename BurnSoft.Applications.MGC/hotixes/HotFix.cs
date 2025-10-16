@@ -922,7 +922,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             return bAns;
         }
         /// <summary>
-        /// Hot Fix number 10
+        /// Hot Fix number 10, Mostly Related to the 7.x release
         /// </summary>
         /// <param name="databasePath">The Database Path</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
@@ -957,6 +957,12 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GSID", "GunSmith_Details", "number", "0", out errOut))
                     throw new Exception(errOut);
 
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Rating", "Gun_Collection", "number", "0", out errOut))
+                    throw new Exception(errOut);
+
+                if (!HfDatabase.RunSql(databasePath,
+                   "UPDATE Gun_Collection set Rating=0",
+                   out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
                 if (!Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);

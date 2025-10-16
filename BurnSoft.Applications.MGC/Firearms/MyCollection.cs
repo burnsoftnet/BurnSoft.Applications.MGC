@@ -176,10 +176,13 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = ExtraBarrelConvoKits.Add(databasePath, id, modelName, caliber, finish, barrelLength, petLoads,
                     action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", true, dtp, out errOut);
-                long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, id, out errOut);
+
+                long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, id, out errOut, useDefault: true);
                 if (errOut.Length > 0) throw new Exception(errOut);
+                
                 bAns = UpdateDefaultBarrel(databasePath, barrelId, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
+
                 bAns = ExtraBarrelConvoKits.AddLink(databasePath, barrelId, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
 
@@ -994,6 +997,34 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("SetAsCompetitionGun", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Sets the firearm rating. This will bet set while you are viewing the firearm and not during add or edit.
+        /// Because if might be a new gun and you don't know how it handles.  So something that can be changed more 
+        /// on the fly.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="rating">The rating.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetFirearmRating(string databasePath, int id, int rating, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set Rating={rating} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetFirearmRating", e);
             }
             return bAns;
         }

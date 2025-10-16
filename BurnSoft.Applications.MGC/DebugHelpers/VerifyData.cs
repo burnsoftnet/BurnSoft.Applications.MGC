@@ -97,16 +97,18 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// </summary>
         /// <param name="control">The control/field Name.</param>
         /// <param name="isNumber">if set to <c>true</c> [is number].</param>
+        /// <param name="msg">Extra message to help with location</param>
         /// <returns>System.String.</returns>
-        private static string MsgFormat(string control, bool isNumber = false)
+        private static string MsgFormat(string control, bool isNumber = false, string msg = "")
         {
+            if (msg.Length > 0) msg = $" for {msg}";
             if (!isNumber)
             {
-                return $"{control} is empty or null";
+                return $"{control} is empty or null{msg}";
             }
             else
             {
-                return $"{control} is 0 ot null";
+                return $"{control} is 0 ot null{msg}";
             }
         }
         #endregion
@@ -147,7 +149,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             catch (Exception e)
             {
-                ErrorMessage("FirearmDetails", e);
+                errOut = ErrorMessage("FirearmDetails", e);
             }
 
             return bAns;
@@ -170,25 +172,27 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (GunCollectionList l in lst)
                 {
-                    if (!IsNotEmptyOrNull(l.FullName)) throw new Exception(MsgFormat("Full Name"));
-                    if (!IsNotEmptyOrNull(l.ModelId)) throw new Exception(MsgFormat("Model ID", true));
-                    if (!IsNotEmptyOrNull(l.Mid)) throw new Exception(MsgFormat("Manufacturer ID", true));
-                    if (!IsNotEmptyOrNull(l.ModelName)) throw new Exception(MsgFormat("Model Name"));
-                    if (!IsNotEmptyOrNull(l.SerialNumber)) throw new Exception(MsgFormat("Serial Name"));
-                    if (!IsNotEmptyOrNull(l.Type)) throw new Exception(MsgFormat("Type"));
-                    if (!IsNotEmptyOrNull(l.Caliber)) throw new Exception(MsgFormat("Caliber"));
-                    if (!IsNotEmptyOrNull(l.Finish)) throw new Exception(MsgFormat("Finish"));
-                    if (!IsNotEmptyOrNull(l.Condition)) throw new Exception(MsgFormat("Condition"));
-                    if (!IsNotEmptyOrNull(l.NationalityId)) throw new Exception(MsgFormat("Nationality ID", true));
-                    if (!IsNotEmptyOrNull(l.GripId)) throw new Exception(MsgFormat("Grip ID", true));
-                    if (!IsNotEmptyOrNull(l.Sid)) throw new Exception(MsgFormat("Seller ID", true));
-                    if (!IsNotEmptyOrNull(l.DbId)) throw new Exception(MsgFormat("Default Barrel ID", true));
+                    string msg = $"{l.Id}";
+                    if (!IsNotEmptyOrNull(l.FullName)) throw new Exception(MsgFormat("Full Name", msg: msg));
+                    msg = $"{l.FullName} with ID of {l.Id}";
+                    if (!IsNotEmptyOrNull(l.ModelId)) throw new Exception(MsgFormat("Model ID", true, msg: msg));
+                    if (!IsNotEmptyOrNull(l.Mid)) throw new Exception(MsgFormat("Manufacturer ID", true, msg: msg));
+                    if (!IsNotEmptyOrNull(l.ModelName)) throw new Exception(MsgFormat("Model Name", msg: msg));
+                    if (!IsNotEmptyOrNull(l.SerialNumber)) throw new Exception(MsgFormat("Serial Name", msg: msg));
+                    if (!IsNotEmptyOrNull(l.Type)) throw new Exception(MsgFormat("Type", msg: msg));
+                    if (!IsNotEmptyOrNull(l.Caliber)) throw new Exception(MsgFormat("Caliber", msg: msg));
+                    if (!IsNotEmptyOrNull(l.Finish)) throw new Exception(MsgFormat("Finish", msg: msg));
+                    if (!IsNotEmptyOrNull(l.Condition)) throw new Exception(MsgFormat("Condition", msg: msg));
+                    if (!IsNotEmptyOrNull(l.NationalityId)) throw new Exception(MsgFormat("Nationality ID", true, msg: msg));
+                    if (!IsNotEmptyOrNull(l.GripId)) throw new Exception(MsgFormat("Grip ID", true, msg: msg));
+                    if (!IsNotEmptyOrNull(l.Sid)) throw new Exception(MsgFormat("Seller ID", true, msg: msg));
+                    if (!IsNotEmptyOrNull(l.DbId)) throw new Exception(MsgFormat("Default Barrel ID", true, msg: msg));
                 }
                 bAns = true;
             }
             catch (Exception e)
             {
-                ErrorMessage("FirearmDetails", e);
+                errOut = ErrorMessage("FirearmDetails", e);
             }
 
             return bAns;
@@ -218,7 +222,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             catch (Exception e)
             {
-                ErrorMessage("FirearmDetails", e);
+                errOut = ErrorMessage("FirearmDetails", e);
             }
             return bAns;
         }
@@ -250,7 +254,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             catch (Exception e)
             {
-                ErrorMessage("FirearmDetails", e);
+                errOut = ErrorMessage("FirearmDetails", e);
             }
             return bAns;
         }
