@@ -84,6 +84,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"WaS Stolen: {g.WasStolen}{Environment.NewLine}";
                     sAns += $"Was Sold: {g.WasSold}{Environment.NewLine}";
                     sAns += $"Is Stogun: {g.IsShotGun}{Environment.NewLine}";
+                    sAns += $"Ratigin: {g.Rating}{Environment.NewLine}";
                     sAns += $"--------------------------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                 }
@@ -165,6 +166,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"WaS Stolen: {g.WasStolen}{Environment.NewLine}";
                     sAns += $"Was Sold: {g.WasSold}{Environment.NewLine}";
                     sAns += $"Is Stogun: {g.IsShotGun}{Environment.NewLine}";
+                    sAns += $"Ratigin: {g.Rating}{Environment.NewLine}";
                     sAns += $"HasExtraBarrels: {g.HasExtraBarrels}{Environment.NewLine}";
                     sAns += $"BarrelSystemCount: {g.BarrelSystemCount}{Environment.NewLine}";
                     sAns += $"HasDocuments: {g.HasDocuments}{Environment.NewLine}";

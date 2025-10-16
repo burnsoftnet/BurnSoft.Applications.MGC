@@ -147,7 +147,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             catch (Exception e)
             {
-                ErrorMessage("FirearmDetails", e);
+                errOut = ErrorMessage("FirearmDetails", e);
             }
 
             return bAns;
@@ -188,7 +188,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             catch (Exception e)
             {
-                ErrorMessage("FirearmDetails", e);
+                errOut = ErrorMessage("FirearmDetails", e);
             }
 
             return bAns;
@@ -218,7 +218,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             catch (Exception e)
             {
-                ErrorMessage("FirearmDetails", e);
+                errOut = ErrorMessage("FirearmDetails", e);
             }
             return bAns;
         }
@@ -250,7 +250,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             catch (Exception e)
             {
-                ErrorMessage("FirearmDetails", e);
+                errOut = ErrorMessage("FirearmDetails", e);
             }
             return bAns;
         }
