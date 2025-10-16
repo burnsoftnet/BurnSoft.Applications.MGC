@@ -303,8 +303,37 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return sAns;
         }
+
         /// <summary>
-        /// Listses the specified database path.
+        /// Get the Full List of Maintance Details in a list for all firearms.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;MaintanceDetailsList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static List<MaintanceDetailsList> Lists(string databasePath, out string errOut)
+        {
+            List<MaintanceDetailsList> lst = new List<MaintanceDetailsList>();
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from  Maintance_Details";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Lists", e);
+            }
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Get the Full List of Maintance Details in a list for a specific firearm.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="gunId">The gun identifier.</param>
@@ -332,7 +361,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lst;
         }
         /// <summary>
-        /// Listses the specified database path.
+        /// Get the Full List of Maintance Details in a list for a specific firearm.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="gunId">The Firearm identifier.</param>
@@ -360,7 +389,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lst;
         }
         /// <summary>
-        /// Listses the specified database path.
+        /// Get the Full List of Maintance Details in a list for a specific firearm and barrel sytem.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="gunId">The gun identifier.</param>
