@@ -110,7 +110,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
         }
         #endregion
-
+        #region " Gun Collection Table"
         /// <summary>
         /// Firearms the details by identifier.
         /// </summary>
@@ -121,12 +121,12 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// <exception cref="System.Exception"></exception>
         public static bool FirearmDetailsById(string databasePath, long id, out string errOut)
         {
-            bool bAns =false;
+            bool bAns = false;
             errOut = "";
             try
             {
                 List<GunCollectionFullList> lst = MyCollection.GetFullList(databasePath, id, out errOut);
-                if (errOut.Length > 0)  throw new Exception(errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (GunCollectionFullList l in lst)
                 {
                     if (!IsNotEmptyOrNull(l.FullName)) throw new Exception(MsgFormat("Full Name"));
@@ -193,5 +193,29 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
 
             return bAns;
         }
+        #endregion
+        #region "Extra Barrel or Conversion Kit"
+
+        public static bool CheckBarrelTable(string databasePath, out string errOut)
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                List<BarrelSystems> lst = ExtraBarrelConvoKits.GetList(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (BarrelSystems l in lst)
+                {
+                    if (!IsNotEmptyOrNull(Convert.ToInt32(l.GunId))) throw new Exception(MsgFormat("Firearm ID", true));
+                }
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                ErrorMessage("FirearmDetails", e);
+            }
+            return bAns;
+        }
+        #endregion
     }
 }
