@@ -997,6 +997,32 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Sets the firearm rating.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="rating">The rating.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetFirearmRating(string databasePath, int id, int rating, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set Rating={rating} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetFirearmRating", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Sets as non lethal.
         /// </summary>
