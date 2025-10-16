@@ -1,12 +1,10 @@
-﻿using BurnSoft.Applications.MGC.AutoFill;
-using BurnSoft.Applications.MGC.Global;
+﻿using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
-using System.Runtime.Remoting;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 // ReSharper disable RedundantAssignment
@@ -1133,6 +1131,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
         /// <summary>
         /// Gets the full list of the firearm details, accessories, BarrelSystems, etc.
         /// </summary>

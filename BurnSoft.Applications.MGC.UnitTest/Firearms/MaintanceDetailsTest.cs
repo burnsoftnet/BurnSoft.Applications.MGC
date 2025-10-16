@@ -186,5 +186,17 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             TestContext.WriteLine(DebugHelpers.PrintListValues.GunMaintanceDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
+
+        /// <summary>
+        /// Defines the test method ListFromGunTest.
+        /// </summary>
+        [TestMethod, TestCategory("Maintance Details")]
+        public void ListFromAllTest()
+        {
+            VerifyExists();
+            List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunMaintanceDetails(value));
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
     }
 }

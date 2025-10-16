@@ -25,6 +25,8 @@ You can view the API Docs by [Clicking Here](docs/README.md)
 * Fixed some Database Connection closure issues in the Pictures and Hotfixes section
 * Added Additional HotFix Function to wait for database to be unlocked in admin mode for x seconds.
 * Added online API Docs
+* Added Verification Functions for ID Linking in the Main Tables and Unit Tests for those functions.
+* 
 
 ### v1.7.0.4
 

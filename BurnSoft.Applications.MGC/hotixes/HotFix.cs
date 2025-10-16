@@ -267,8 +267,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// hot fix 4
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Four(string databasePath, out string errOut)
         {
@@ -315,8 +315,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// hot Fix 5
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Five(string databasePath, out string errOut)
         {
@@ -581,8 +581,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// hot fix 6
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Six(string databasePath, out string errOut)
         {
@@ -801,8 +801,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// Hotfix Number 9
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Nine(string databasePath, out string errOut)
         {
@@ -924,8 +924,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// Hot Fix number 10
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Ten(string databasePath, out string errOut)
         {

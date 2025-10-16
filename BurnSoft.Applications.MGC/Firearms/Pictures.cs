@@ -125,9 +125,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Determines whether [has default picture] [the specified database path].
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="id">The id of the Accessory that you want to work with</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool HasDefaultPicture(string databasePath, long id, out string errOut)
         {
@@ -169,8 +169,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// HOTFIX - If there is no default picture set but collection has pictures, then set the first picture as the default picture
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool SetMainPictures(string databasePath, out string errOut)
         {
@@ -391,9 +391,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Count all the pictures that are tied to a particular firearm
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="gunId"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static long CountPics(string databasePath, long gunId, out string errOut)
         {
@@ -448,7 +448,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Generate a list of the data returned from the datatable query relating to the pictures table.
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <param name="isDetails"></param>
         /// <param name="dbPath"></param>
         /// <param name="formPictureBox"></param>
