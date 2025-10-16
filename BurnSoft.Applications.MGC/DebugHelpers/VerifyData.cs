@@ -2,9 +2,6 @@
 using BurnSoft.Applications.MGC.Types;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MGC.DebugHelpers
 {
@@ -54,7 +51,12 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
-        #endregion
+        #endregion        
+        /// <summary>
+        /// Determines whether [is not empty or null] [the specified value].
+        /// </summary>
+        /// <param name="value">The value to evalutate</param>
+        /// <returns><c>true</c> if [is not empty or null] [the specified value]; otherwise, <c>false</c>.</returns>
         private static bool IsNotEmptyOrNull(string value)
         {
             if (string.IsNullOrEmpty(value)) 
@@ -64,7 +66,11 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                 return true; 
             }
         }
-
+        /// <summary>
+        /// Determines whether [is not empty or null] [the specified value].
+        /// </summary>
+        /// <param name="value">The value to evalutate.</param>
+        /// <returns><c>true</c> if [is not empty or null] [the specified value]; otherwise, <c>false</c>.</returns>
         private static bool IsNotEmptyOrNull(int? value)
         {
             if (value == null)
@@ -82,7 +88,12 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                 }
             }
         }
-
+        /// <summary>
+        /// Standard format of the message when a value is empty null or 0
+        /// </summary>
+        /// <param name="control">The control/field Name.</param>
+        /// <param name="isNumber">if set to <c>true</c> [is number].</param>
+        /// <returns>System.String.</returns>
         private static string MsgFormat(string control, bool isNumber = false)
         {
             if (!isNumber)
@@ -94,6 +105,14 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
         }
 
+        /// <summary>
+        /// Firearms the details by identifier.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool FirearmDetailsById(string databasePath, long id, out string errOut)
         {
             bool bAns =false;
@@ -128,6 +147,13 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             return bAns;
         }
 
+        /// <summary>
+        /// Firearms the details all.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool FirearmDetailsAll(string databasePath, out string errOut)
         {
             bool bAns = false;
