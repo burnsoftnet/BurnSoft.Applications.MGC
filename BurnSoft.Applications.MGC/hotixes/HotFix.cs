@@ -960,6 +960,9 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Rating", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
 
+                if (!HfDatabase.RunSql(databasePath,
+                   "UPDATE Gun_Collection set Rating=0",
+                   out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
                 if (!Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);
