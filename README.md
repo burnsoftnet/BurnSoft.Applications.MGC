@@ -26,7 +26,10 @@ You can view the API Docs by [Clicking Here](docs/README.md)
 * Added Additional HotFix Function to wait for database to be unlocked in admin mode for x seconds.
 * Added online API Docs
 * Added Verification Functions for ID Linking in the Main Tables and Unit Tests for those functions.
-* 
+* Added Function TO add Raiting to firearm.
+* Added new Rating field to GunCollection List containers
+* Added to HotFix 10 the Create Rating Column
+* Added to Hotfix 10 to set all ratings in gun collection to 0 after Raiting column is created.
 
 ### v1.7.0.4
 
