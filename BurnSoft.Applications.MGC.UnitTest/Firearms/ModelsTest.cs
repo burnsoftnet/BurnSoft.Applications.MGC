@@ -167,8 +167,9 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         [TestMethod, TestCategory("Models Information")]
         public void GetIdTestExpectFail()
         {
-            long id = Models.GetId(_databasePath, _modelsName, _modelsManufacturerId, out _errOut);
-            TestContext.WriteLine($"id: {id} for model { _modelsName} with manufacturer id of {_modelsManufacturerId} ");
+            string newMod = $"{_modelsName}-TestBreak";
+            long id = Models.GetId(_databasePath, newMod, _modelsManufacturerId, out _errOut);
+            TestContext.WriteLine($"id: {id} for model {newMod} with manufacturer id of {_modelsManufacturerId} ");
             General.HasFalseValue(id > 0, _errOut);
         }
 
