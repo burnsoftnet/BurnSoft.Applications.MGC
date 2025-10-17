@@ -388,5 +388,55 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             }
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod, TestCategory("Gun Collection - Ratings")]
+        public void GetRatingListTestFive()
+        {
+            bool value = false;
+
+            List<Ratings> lst = MyCollection.GetRatingList();
+            foreach (Ratings r in lst)
+            {
+                TestContext.WriteLine($"ID: {r.Id}");
+                TestContext.WriteLine($"Name: {r.Name}");
+            }
+            value = lst.Count == 5;
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Ratings")]
+        public void GetRatingListTestTen()
+        {
+            bool value = false;
+
+            List<Ratings> lst = MyCollection.GetRatingList(true);
+            foreach (Ratings r in lst)
+            {
+                TestContext.WriteLine($"ID: {r.Id}");
+                TestContext.WriteLine($"Name: {r.Name}");
+            }
+            value = lst.Count == 10;
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Ratings")]
+        public void GetRatingIdTestTen()
+        {
+            bool value = false;
+
+            int id = MyCollection.GetRatingId("Notable", true);
+            value = id == 6;
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Ratings")]
+        public void GetRatingIdTestFive()
+        {
+            bool value = false;
+
+            int id = MyCollection.GetRatingId("Depressingly bad");
+            value = id == 2;
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }
