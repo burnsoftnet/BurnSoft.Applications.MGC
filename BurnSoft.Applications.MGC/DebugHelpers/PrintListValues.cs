@@ -84,7 +84,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"WaS Stolen: {g.WasStolen}{Environment.NewLine}";
                     sAns += $"Was Sold: {g.WasSold}{Environment.NewLine}";
                     sAns += $"Is Stogun: {g.IsShotGun}{Environment.NewLine}";
-                    sAns += $"Ratigin: {g.Rating}{Environment.NewLine}";
+                    sAns += $"Rating: {g.Rating}{Environment.NewLine}";
                     sAns += $"--------------------------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                 }

@@ -1275,7 +1275,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         MaintanceDetails = md,
                         GunSmithWork = gswd,
                         HasDocuments = HasDocs,
-                        LinkedDocuments = DocCount
+                        LinkedDocuments = DocCount,
+                        Rating = g.Rating
                     });
                 }
             }
@@ -1410,7 +1411,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         WasStolen = wasStolen,
                         WasSold = wasSold,
                         IsCompetition =  obj.ConvertIntToBool(Convert.ToInt32(d["isCompetition"] != DBNull.Value ? d["isCompetition"].ToString() : "0")),
-                        IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0"))
+                        IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0")),
+                        Rating = Convert.ToInt32(d["Rating"] != DBNull.Value ? d["Rating"].ToString() : "0")
 
                     });
                 }
