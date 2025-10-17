@@ -32,6 +32,7 @@ You can view the API Docs by [Clicking Here](docs/README.md)
 * Added to Hotfix 10 to set all ratings in gun collection to 0 after Raiting column is created.
 * FIXED issue with When Adding a firearm at times, that the default barrel id for the stock barrel doesn't return an ID
 * FIXED issue with Importing a Firearm where the Default Barrel ID and Model ID return 0.
+* Added Function to produce and look up the ID of the Rating list.
 
 
 ### v1.7.0.4
