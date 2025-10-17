@@ -137,6 +137,7 @@
     <Compile Include="Types\BuyersList.cs" />
     <Compile Include="Types\PictureDetails.cs" />
     <Compile Include="Types\PictureDisplayList.cs" />
+    <Compile Include="Types\Ratings.cs" />
     <Compile Include="Types\TableLists.cs" />
     <Compile Include="Types\WishlistList.cs" />
   </ItemGroup>

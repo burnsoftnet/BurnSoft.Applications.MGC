@@ -811,7 +811,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Catalogs the exists details.
+        /// Check to see if the Custom Catalog ID already exists exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="customId">The custom identifier.</param>
@@ -831,12 +831,14 @@ namespace BurnSoft.Applications.MGC.Firearms
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 List<GunCollectionList> lst = MyList(dt, out errOut, databasePath);
-                sAns = $"The following firearms have been found {Environment.NewLine} with the same Catalog ID({customId}):{Environment.NewLine}";
-                foreach (GunCollectionList l in lst)
+                if (lst.Count > 0)
                 {
-                    sAns += $"{l.FullName}{Environment.NewLine}";
+                    sAns = $"The following firearms have been found {Environment.NewLine} with the same Catalog ID({customId}):{Environment.NewLine}";
+                    foreach (GunCollectionList l in lst)
+                    {
+                        sAns += $"{l.FullName}{Environment.NewLine}";
+                    }
                 }
-
             }
             catch (Exception e)
             {
@@ -1273,7 +1275,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         MaintanceDetails = md,
                         GunSmithWork = gswd,
                         HasDocuments = HasDocs,
-                        LinkedDocuments = DocCount
+                        LinkedDocuments = DocCount,
+                        Rating = g.Rating
                     });
                 }
             }
@@ -1408,7 +1411,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         WasStolen = wasStolen,
                         WasSold = wasSold,
                         IsCompetition =  obj.ConvertIntToBool(Convert.ToInt32(d["isCompetition"] != DBNull.Value ? d["isCompetition"].ToString() : "0")),
-                        IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0"))
+                        IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0")),
+                        Rating = Convert.ToInt32(d["Rating"] != DBNull.Value ? d["Rating"].ToString() : "0")
 
                     });
                 }
@@ -1523,6 +1527,126 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("RenameFullName", e);
             }
             return bAns;
+        }
+        /// <summary>
+        /// Gets the rating list.
+        /// </summary>
+        /// <param name="useTen">if set to <c>true</c> [use ten].</param>
+        /// <returns>List&lt;Ratings&gt;.</returns>
+        public static List<Ratings> GetRatingList(bool useTen = false)
+        {
+            List<Ratings> lst = new List<Ratings>();
+            if (!useTen)
+            {
+                lst.Add(new Ratings()
+                {
+                    Id = 0,
+                    Name = "Not Rated"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 1,
+                    Name = "Terrible"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 2,
+                    Name = "Depressingly bad"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 3,
+                    Name = "Not Bad"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 4,
+                    Name = "Good"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 5,
+                    Name = "Perfection"
+                });
+            } else
+            {
+                lst.Add(new Ratings()
+                {
+                    Id = 0,
+                    Name = "Not Rated"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 1,
+                    Name = "Terrible"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 2,
+                    Name = "Not Good At All"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 3,
+                    Name = "Depressingly bad"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 4,
+                    Name = "Poor"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 5,
+                    Name = "Solid"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 6,
+                    Name = "Notable"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 7,
+                    Name = "Good"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 8,
+                    Name = "Very Good"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 9,
+                    Name = "Excellent"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 10,
+                    Name = "Perfection"
+                });
+            }
+                return lst;
+        }
+        /// <summary>
+        /// Gets the rating identifier.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="useTen">if set to <c>true</c> [use ten].</param>
+        /// <returns>System.Int32.</returns>
+        public static int GetRatingId(string name, bool useTen = false)
+        {
+            int iAns = 0;
+            List<Ratings> lst = GetRatingList(useTen);
+            foreach (Ratings r in lst)
+            {
+                if (r.Name == name)
+                {
+                    iAns = r.Id;
+                    break;
+                }
+            }
+            return iAns;
         }
     }
 }
