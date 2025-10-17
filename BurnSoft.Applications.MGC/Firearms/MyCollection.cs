@@ -811,7 +811,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Catalogs the exists details.
+        /// Check to see if the Custom Catalog ID already exists exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="customId">The custom identifier.</param>
@@ -831,12 +831,14 @@ namespace BurnSoft.Applications.MGC.Firearms
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 List<GunCollectionList> lst = MyList(dt, out errOut, databasePath);
-                sAns = $"The following firearms have been found {Environment.NewLine} with the same Catalog ID({customId}):{Environment.NewLine}";
-                foreach (GunCollectionList l in lst)
+                if (lst.Count > 0)
                 {
-                    sAns += $"{l.FullName}{Environment.NewLine}";
+                    sAns = $"The following firearms have been found {Environment.NewLine} with the same Catalog ID({customId}):{Environment.NewLine}";
+                    foreach (GunCollectionList l in lst)
+                    {
+                        sAns += $"{l.FullName}{Environment.NewLine}";
+                    }
                 }
-
             }
             catch (Exception e)
             {
