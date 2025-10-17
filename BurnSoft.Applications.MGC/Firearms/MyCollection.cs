@@ -1538,6 +1538,11 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 lst.Add(new Ratings()
                 {
+                    Id = 0,
+                    Name = "Not Rated"
+                });
+                lst.Add(new Ratings()
+                {
                     Id = 1,
                     Name = "Terrible"
                 });
@@ -1563,6 +1568,11 @@ namespace BurnSoft.Applications.MGC.Firearms
                 });
             } else
             {
+                lst.Add(new Ratings()
+                {
+                    Id = 0,
+                    Name = "Not Rated"
+                });
                 lst.Add(new Ratings()
                 {
                     Id = 1,
