@@ -518,7 +518,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                             ThumbMemoryStream = thumbStream,
                             PictureMemoryStream = picStream,
                             ThumbBmp = tBmp,
-                            PictureBmp = bmp
+                            PictureBmp = bmp,
+                            PicOrder = Convert.ToInt32(d["PicOrder"] != DBNull.Value ? d["PicOrder"] : 0)
                         });
                     }
                     else
@@ -530,7 +531,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                             CollectionId = Convert.ToInt32(d["CID"] != DBNull.Value ? d["CID"] : 0),
                             IsMain = obj.ConvertIntToBool(Convert.ToInt32(d["ISMAIN"] != DBNull.Value ? d["ISMAIN"] : 0)),
                             PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
-                            PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : ""
+                            PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : "",
+                            PicOrder = Convert.ToInt32(d["PicOrder"] != DBNull.Value ? d["PicOrder"] : 0)
                         });
                     }
                     
