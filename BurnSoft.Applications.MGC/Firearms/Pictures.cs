@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
@@ -605,6 +606,54 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("UpdatePictureDetails", e);
             }
             return bAns;
+        }
+        /// <summary>
+        /// Sets the picture order.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The Firearm identifier.</param>
+        /// <param name="orderId">The order identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetPictureOrder(string databasePath, long id, int orderId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Pictures set PicOrder={orderId} ,sync_lastupdate=Now() where ID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetPictureOrder", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Gets the next order number.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The firearm identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
+        public static int GetNextOrderNumber(string databasePath, long id, out string errOut)
+        {
+            int iAns = 0;
+            errOut = "";
+            try
+            {
+                List<PictureDetails> lst = new List<PictureDetails>();
+                int maxOrder = lst.Max(i => i.PicOrder);
+                iAns = maxOrder + 1;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetNextOrderNumber", e);
+            }
+            return iAns;
         }
 
         /// <summary>
