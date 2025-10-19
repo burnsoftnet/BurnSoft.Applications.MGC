@@ -188,5 +188,36 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             TestContext.WriteLine(PrintListValues.PictureDetailsList(value));
             General.HasTrueValue(pass, _errOut);
         }
+
+        [TestMethod, TestCategory("Pictures")]
+        public void GetPictureTest()
+        {
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            var picId = Pictures.GetFirstPictureInCollection(_databasePath, _gunId, out _errOut);
+            var obj = Pictures.GetPicture(_databasePath, picId, out _errOut);
+            TestContext.WriteLine($"Getting picture for picid {picId} for firearm {_gunId}");
+            General.HasTrueValue(obj != null, _errOut);
+        }
+
+        [TestMethod, TestCategory("Pictures")]
+        public void GetThumbnailPictureTest()
+        {
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            var picId = Pictures.GetFirstPictureInCollection(_databasePath, _gunId, out _errOut);
+            var obj = Pictures.GetThumbnailPicture(_databasePath, picId, out _errOut);
+            TestContext.WriteLine($"Getting thumbnail for picid {picId} for firearm {_gunId}");
+            General.HasTrueValue(obj != null, _errOut);
+        }
+
+        [TestMethod, TestCategory("Pictures")]
+        public void ResetDefaultPicTest()
+        {
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            bool pass = Pictures.ResetDefaultPic(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine($"Reset Pic Order for all firearms to 0");
+            List<PictureDetails> value = Pictures.GetList(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine(PrintListValues.PictureDetailsList(value));
+            General.HasTrueValue(pass, _errOut);
+        }
     }
 }
