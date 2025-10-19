@@ -413,9 +413,9 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         }
 
         /// <summary>
-        /// Prints the list.
+        /// Prints the list for the PictureDetails list.
         /// </summary>
-        /// <param name="p">The p.</param>
+        /// <param name="p">The PictureDetails List</param>
         public static string PictureDetailsList(List<PictureDetails> p)
         {
             string sAns = "";
@@ -423,18 +423,19 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             {
                 foreach (PictureDetails d in p)
                 {
-                    sAns += "";
-                    sAns += $"id: {d.Id}";
-                    sAns += $"isMain: {d.IsMain}";
-                    sAns += $"Last Sync: {d.LastSyncDate}";
-                    sAns += $"Picture: {d.Picture}";
-                    sAns += $"Thumb: {d.Thumb}";
-                    sAns += $"Display Name: {d.PictureDisplayName}";
-                    sAns += $"Display Note: {d.PictureNotes}";
-                    sAns += $"Pic Stream: {d.PictureMemoryStream}";
-                    sAns += $"Thumb Stream: {d.ThumbMemoryStream}";
-                    sAns += "";
-                    sAns += "----------------------------------------";
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"id: {d.Id}{Environment.NewLine}";
+                    sAns += $"isMain: {d.IsMain}{Environment.NewLine}";
+                    sAns += $"Last Sync: {d.LastSyncDate}{Environment.NewLine}";
+                    sAns += $"Picture: {d.Picture}{Environment.NewLine}";
+                    sAns += $"Thumb: {d.Thumb}{Environment.NewLine}";
+                    sAns += $"Display Name: {d.PictureDisplayName}{Environment.NewLine}";
+                    sAns += $"Display Note: {d.PictureNotes}{Environment.NewLine}";
+                    sAns += $"Pic Stream: {d.PictureMemoryStream}{Environment.NewLine}";
+                    sAns += $"Thumb Stream: {d.ThumbMemoryStream}{Environment.NewLine}";
+                    sAns += $"PicOrder: {d.PicOrder}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"----------------------------------------{Environment.NewLine}";
                 }
             }
             else
