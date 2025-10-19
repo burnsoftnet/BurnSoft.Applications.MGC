@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
+using BurnSoft.Applications.MGC.DebugHelpers;
 
 // ReSharper disable UnusedMember.Local
 
@@ -121,36 +122,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 "test", out _errOut);
             General.HasTrueValue(value, _errOut);
         }
-        /// <summary>
-        /// Prints the list.
-        /// </summary>
-        /// <param name="p">The p.</param>
-        public void PrintList(List<PictureDetails> p)
-        {
-            // TODO: #63 Add to PrintListValues Function
-            if (p.Count > 0)
-            {
-                foreach (PictureDetails d in p)
-                {
-                    TestContext.WriteLine("");
-                    TestContext.WriteLine($"id: {d.Id}");
-                    TestContext.WriteLine($"isMain: {d.IsMain}");
-                    TestContext.WriteLine($"Last Sync: {d.LastSyncDate}");
-                    TestContext.WriteLine($"Picture: {d.Picture}");
-                    TestContext.WriteLine($"Thumb: {d.Thumb}");
-                    TestContext.WriteLine($"Display Name: {d.PictureDisplayName}");
-                    TestContext.WriteLine($"Display Note: {d.PictureNotes}");
-                    TestContext.WriteLine($"Pic Stream: {d.PictureMemoryStream}");
-                    TestContext.WriteLine($"Thumb Stream: {d.ThumbMemoryStream}");
-                    TestContext.WriteLine("");
-                    TestContext.WriteLine("----------------------------------------");
-                }
-            }
-            else
-            {
-                TestContext.WriteLine("NO DATA IN LIST!");
-            }
-        }
+        
         /// <summary>
         /// Defines the test method GetPicturesForFirearmTest.
         /// </summary>
@@ -161,7 +133,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
             TestContext.WriteLine($"Using GunID {_gunId}");
             List<PictureDetails> value = Pictures.GetList(_databasePath, _gunId, out _errOut);
-            PrintList(value);
+            PrintListValues.PictureDetailsList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }

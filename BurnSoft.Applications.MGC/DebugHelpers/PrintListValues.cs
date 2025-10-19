@@ -411,5 +411,37 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             return sAns;
         }
+
+        /// <summary>
+        /// Prints the list.
+        /// </summary>
+        /// <param name="p">The p.</param>
+        public static string PictureDetailsList(List<PictureDetails> p)
+        {
+            string sAns = "";
+            if (p.Count > 0)
+            {
+                foreach (PictureDetails d in p)
+                {
+                    sAns += "";
+                    sAns += $"id: {d.Id}";
+                    sAns += $"isMain: {d.IsMain}";
+                    sAns += $"Last Sync: {d.LastSyncDate}";
+                    sAns += $"Picture: {d.Picture}";
+                    sAns += $"Thumb: {d.Thumb}";
+                    sAns += $"Display Name: {d.PictureDisplayName}";
+                    sAns += $"Display Note: {d.PictureNotes}";
+                    sAns += $"Pic Stream: {d.PictureMemoryStream}";
+                    sAns += $"Thumb Stream: {d.ThumbMemoryStream}";
+                    sAns += "";
+                    sAns += "----------------------------------------";
+                }
+            }
+            else
+            {
+                sAns += "NO DATA IN LIST!";
+            }
+            return sAns;
+        }
     }
 }
