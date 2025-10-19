@@ -400,7 +400,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 TestContext.WriteLine($"ID: {r.Id}");
                 TestContext.WriteLine($"Name: {r.Name}");
             }
-            value = lst.Count == 5;
+            value = lst.Count == 6;
             General.HasTrueValue(value, _errOut);
         }
 
@@ -415,7 +415,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 TestContext.WriteLine($"ID: {r.Id}");
                 TestContext.WriteLine($"Name: {r.Name}");
             }
-            value = lst.Count == 10;
+            value = lst.Count == 11;
             General.HasTrueValue(value, _errOut);
         }
 
