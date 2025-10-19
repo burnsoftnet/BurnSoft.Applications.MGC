@@ -446,6 +446,34 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
+        /// Get all the data from the picture table.
+        /// </summary>
+        /// <param name="databasePath">full path and file name to the database</param>
+        /// <param name="errOut">exception message</param>
+        /// <param name="isDetails">toggle if just the text is returned or all</param>
+        /// <param name="formPictureBox"></param>
+        /// <returns></returns>
+        public static List<PictureDetails> GetList(string databasePath, out string errOut, bool isDetails = true, PictureBox formPictureBox = null)
+        {
+            List<PictureDetails> lst = new List<PictureDetails>();
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection_Pictures";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut, isDetails, "", formPictureBox);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+
+        }
+
+        /// <summary>
         /// Generate a list of the data returned from the datatable query relating to the pictures table.
         /// </summary>
         /// <param name="dt"></param>
@@ -636,16 +664,17 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Gets the next order number.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="id">The firearm identifier.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int32.</returns>
-        public static int GetNextOrderNumber(string databasePath, long id, out string errOut)
+        public static int GetNextOrderNumber(string databasePath, long firearmId, out string errOut)
         {
             int iAns = 0;
             errOut = "";
             try
             {
                 List<PictureDetails> lst = new List<PictureDetails>();
+                lst = GetList(databasePath, firearmId, out errOut);
                 int maxOrder = lst.Max(i => i.PicOrder);
                 iAns = maxOrder + 1;
             }
@@ -726,5 +755,54 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return oAns;
         }
+        /// <summary>
+        /// Resets the pictures order for a particular firearm collection
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ResetPictures(string databasePath, long firearmId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Update Gun_Collection_Pictures set PicOrder=0 where CID={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ResetPictures", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Resets the pictures for all the collection in the table.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ResetPictures(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Update Gun_Collection_Pictures set PicOrder=0";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ResetPictures", e);
+            }
+            return bAns;
+        }
+
     }
 }
