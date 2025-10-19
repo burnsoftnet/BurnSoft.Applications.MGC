@@ -310,7 +310,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Save a gun picture to the database, this function will convert this picture into a thumbnail and upload the orginal picture and the thumbnail
+        /// Save a gun picture to the database, this function will convert this picture 
+        /// into a thumbnail and upload the orginal picture and the thumbnail
         /// to the database, you can also add a name and notes to it.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -322,7 +323,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <param name="setAsDefault"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Save(string databasePath, string file, string applicationPathData, long gunId,string name, string notes, out string errOut, bool setAsDefault = false)
+        public static bool Save(string databasePath, string file, string applicationPathData, 
+            long gunId,string name, string notes, out string errOut, bool setAsDefault = false)
         {
             bool bAns = false;
             errOut = @"";
@@ -389,6 +391,93 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return bAns;
         }
+
+        /// <summary>
+        /// Save a gun picture to the database, this function will convert this picture 
+        /// into a thumbnail and upload the orginal picture and the thumbnail
+        /// to the database, you can also add a name and notes to it.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="file">The file.</param>
+        /// <param name="applicationPathData">The application path data.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="picOrder">The Picture Order</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="setAsDefault"></param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Save(string databasePath, string file, string applicationPathData, 
+            long gunId, string name, string notes, int picOrder, out string errOut, 
+            bool setAsDefault = false)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+
+                FileStream st = new FileStream(file, FileMode.Open, FileAccess.Read);
+                BinaryReader mbr = new BinaryReader(st);
+                byte[] buffer = new byte[st.Length + 1];
+                mbr.Read(buffer, 0, Convert.ToInt32(st.Length));
+                st.Close();
+
+                int intPicHeight = 64;
+                int intPicWidth = 64;
+                string sThumbName = $"{applicationPathData}\\mgc_thumb.jpg";
+
+                Image myBitmap = Image.FromFile(file);
+                Image.GetThumbnailImageAbort myPicCallback = null;
+                Image myNewPic = myBitmap.GetThumbnailImage(intPicWidth, intPicHeight, myPicCallback, IntPtr.Zero);
+                myBitmap.Dispose();
+                File.Delete(sThumbName);
+                myNewPic.Save(sThumbName, ImageFormat.Jpeg);
+                myNewPic.Dispose();
+                FileStream stT = new FileStream(sThumbName, FileMode.Open, FileAccess.Read);
+                BinaryReader mbrT = new BinaryReader(stT);
+                byte[] bufferT = new byte[stT.Length + 1];
+                mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
+                stT.Close();
+
+                OleDbConnection myConn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
+
+                int iMain = 0;
+                if (setAsDefault)
+                {
+                    iMain = 1;
+                }
+                else
+                {
+                    iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
+                }
+
+                string sql = "INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note, PicOrder) " +
+                             "VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now(),@pd_name,@pd_note,@PicOrder)";
+                OleDbCommand cmd = new OleDbCommand(sql);
+
+                cmd.Parameters.AddWithValue("CID", gunId);
+                cmd.Parameters.AddWithValue("PICTURE", buffer);
+                cmd.Parameters.AddWithValue("THUMB", bufferT);
+                cmd.Parameters.AddWithValue("ISMAIN", iMain);
+                cmd.Parameters.AddWithValue("pd_name", name);
+                cmd.Parameters.AddWithValue("pd_note", notes);
+                cmd.Parameters.AddWithValue("PicOrder", picOrder);
+
+                myConn.Open();
+                cmd.Connection = myConn;
+                cmd.ExecuteNonQuery();
+
+                bAns = true;
+                myConn.Close();
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Save", e);
+            }
+
+            return bAns;
+        }
+
         /// <summary>
         /// Count all the pictures that are tied to a particular firearm
         /// </summary>
