@@ -12,7 +12,7 @@ Class Firearms the handles anything related with the firearms
 public class Firearms
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Firearms](./burnsoft.applications.mgc.thirdparty.firearms.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Firearms](./burnsoft.applications.mgc.thirdparty.firearms)
 
 ## Constructors
 

@@ -12,7 +12,7 @@ Class MyCollection, The majority of this class will hand the data from the gun_c
 public class MyCollection
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyCollection](./burnsoft.applications.mgc.firearms.mycollection.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyCollection](./burnsoft.applications.mgc.firearms.mycollection)
 
 ## Constructors
 
@@ -759,7 +759,7 @@ public static bool SetCatalogType(string databasePath, CatalogType type, String&
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
 
-`type` [CatalogType](./burnsoft.applications.mgc.firearms.mycollection.catalogtype.md)<br>
+`type` [CatalogType](./burnsoft.applications.mgc.firearms.mycollection.catalogtype)<br>
 The type.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
@@ -776,7 +776,7 @@ The error out.
 
 ### **CatalogExistsDetails(String, String, String&, Int32)**
 
-Catalogs the exists details.
+Check to see if the Custom Catalog ID already exists exists.
 
 ```csharp
 public static string CatalogExistsDetails(string databasePath, string customId, String& errOut, int gunId)
@@ -958,6 +958,39 @@ The identifier.
 
 `isCompetition` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 if set to `true` [is competition].
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **SetFirearmRating(String, Int32, Int32, String&)**
+
+Sets the firearm rating. This will bet set while you are viewing the firearm and not during add or edit.
+ Because if might be a new gun and you don't know how it handles. So something that can be changed more 
+ on the fly.
+
+```csharp
+public static bool SetFirearmRating(string databasePath, int id, int rating, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The identifier.
+
+`rating` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The rating.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -1275,6 +1308,45 @@ The error out.
 #### Exceptions
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetRatingList(Boolean)**
+
+Gets the rating list.
+
+```csharp
+public static List<Ratings> GetRatingList(bool useTen)
+```
+
+#### Parameters
+
+`useTen` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [use ten].
+
+#### Returns
+
+[List&lt;Ratings&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;Ratings&gt;.
+
+### **GetRatingId(String, Boolean)**
+
+Gets the rating identifier.
+
+```csharp
+public static int GetRatingId(string name, bool useTen)
+```
+
+#### Parameters
+
+`name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The name.
+
+`useTen` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [use ten].
+
+#### Returns
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+System.Int32.
 
 ---
 

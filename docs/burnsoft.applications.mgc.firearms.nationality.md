@@ -12,7 +12,7 @@ Class Nationality will help manage the Gun_Nationality table data
 public class Nationality
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Nationality](./burnsoft.applications.mgc.firearms.nationality.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Nationality](./burnsoft.applications.mgc.firearms.nationality)
 
 ## Constructors
 
@@ -139,12 +139,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetId(String, String, String&)**
+### **GetId(String, String, String&, Boolean)**
 
 Gets the identifier.
 
 ```csharp
-public static long GetId(string databasePath, string name, String& errOut)
+public static long GetId(string databasePath, string name, String& errOut, bool AddIfNotExists)
 ```
 
 #### Parameters
@@ -157,6 +157,9 @@ The name.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`AddIfNotExists` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Add if Nationality does not exist
 
 #### Returns
 

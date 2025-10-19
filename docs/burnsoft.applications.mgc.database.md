@@ -12,7 +12,7 @@ Class Database. General Database functions needed.
 public class Database
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Database](./burnsoft.applications.mgc.database.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Database](./burnsoft.applications.mgc.database)
 
 ## Constructors
 
@@ -35,10 +35,12 @@ public static string ConnectionString(string databasePath, string databaseName, 
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `databaseName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 `password` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
@@ -88,6 +90,7 @@ The database path.
 Name of the database.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 `password` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The password.
@@ -284,6 +287,7 @@ public static int GetIDFromTableBasedOnTSQL(string connection, string sql, strin
 `identitySeedColumnName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 

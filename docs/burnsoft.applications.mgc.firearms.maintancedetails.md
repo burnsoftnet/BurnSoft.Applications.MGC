@@ -12,7 +12,7 @@ Class MaintanceDetails that will help manage the details of teh Maintance_Detail
 public class MaintanceDetails
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintanceDetails](./burnsoft.applications.mgc.firearms.maintancedetails.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintanceDetails](./burnsoft.applications.mgc.firearms.maintancedetails)
 
 ## Constructors
 
@@ -387,9 +387,36 @@ System.String.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **Lists(String, String&)**
+
+Get the Full List of Maintance Details in a list for all firearms.
+
+```csharp
+public static List<MaintanceDetailsList> Lists(string databasePath, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[List&lt;MaintanceDetailsList&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;MaintanceDetailsList&gt;.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **Lists(String, Int64, String&)**
 
-Listses the specified database path.
+Get the Full List of Maintance Details in a list for a specific firearm.
 
 ```csharp
 public static List<MaintanceDetailsList> Lists(string databasePath, long gunId, String& errOut)
@@ -419,7 +446,7 @@ List&lt;MaintanceDetailsList&gt;.
 
 ### **Lists(String, Int32, String&)**
 
-Listses the specified database path.
+Get the Full List of Maintance Details in a list for a specific firearm.
 
 ```csharp
 public static List<MaintanceDetailsList> Lists(string databasePath, int gunId, String& errOut)
@@ -449,7 +476,7 @@ List&lt;MaintanceDetailsList&gt;.
 
 ### **Lists(String, Int64, Int64, String&)**
 
-Listses the specified database path.
+Get the Full List of Maintance Details in a list for a specific firearm and barrel sytem.
 
 ```csharp
 public static List<MaintanceDetailsList> Lists(string databasePath, long gunId, long barrelSystem, String& errOut)

@@ -12,7 +12,7 @@ Class Documents to manage the doucments section, upload, edit assisgn, and delet
 public class Documents
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Documents](./burnsoft.applications.mgc.firearms.documents.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Documents](./burnsoft.applications.mgc.firearms.documents)
 
 ## Fields
 
@@ -308,12 +308,14 @@ public static bool DocLinkExists(string databasePath, long firearmId, long docum
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `firearmId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `documentId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -330,12 +332,14 @@ public static long GetDocLinkId(string databasePath, long docId, long gunId, Str
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `docId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -352,10 +356,12 @@ public static bool DeleteDocLink(string databasePath, long id, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -372,10 +378,12 @@ public static bool DeleteFirearmFromLinkList(string databasePath, long gunId, St
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -419,8 +427,10 @@ public static List<DocumentLinkList> GetLinkList(string databasePath, String& er
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -514,12 +524,14 @@ public static bool GetDocumentFromDb(string databasePath, string applicationPath
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `applicationPathData` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 

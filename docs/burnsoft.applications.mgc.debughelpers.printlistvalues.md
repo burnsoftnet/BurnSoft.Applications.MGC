@@ -13,7 +13,7 @@ Get the data from the lists and put them in a format that can be
 public class PrintListValues
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrintListValues](./burnsoft.applications.mgc.debughelpers.printlistvalues.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrintListValues](./burnsoft.applications.mgc.debughelpers.printlistvalues)
 
 ## Constructors
 
@@ -186,6 +186,23 @@ The value.
 
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
+
+### **PictureDetailsList(List&lt;PictureDetails&gt;)**
+
+Prints the list for the PictureDetails list.
+
+```csharp
+public static string PictureDetailsList(List<PictureDetails> p)
+```
+
+#### Parameters
+
+`p` [List&lt;PictureDetails&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The PictureDetails List
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 ---
 

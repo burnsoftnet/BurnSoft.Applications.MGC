@@ -12,7 +12,7 @@ Class Appraisers will handle the general functions needed to manage the Appraise
 public class Appraisers
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Appraisers](./burnsoft.applications.mgc.peopleandplaces.appraisers.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Appraisers](./burnsoft.applications.mgc.peopleandplaces.appraisers)
 
 ## Constructors
 

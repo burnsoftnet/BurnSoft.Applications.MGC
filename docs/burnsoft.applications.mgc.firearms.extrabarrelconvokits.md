@@ -12,7 +12,7 @@ Class ExtraBarrelConvoKits functions to manage the barrels or conversion kits fo
 public class ExtraBarrelConvoKits : System.IDisposable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ExtraBarrelConvoKits](./burnsoft.applications.mgc.firearms.extrabarrelconvokits.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ExtraBarrelConvoKits](./burnsoft.applications.mgc.firearms.extrabarrelconvokits)<br>
 Implements [IDisposable](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable)
 
 ## Constructors
@@ -186,10 +186,12 @@ public static long AverageRoundsFiredBs(string databasePath, int barrelSystemId,
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `barrelSystemId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -210,6 +212,7 @@ public static bool Update(string databasePath, long barrelId, long gunId, string
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `barrelId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
@@ -242,6 +245,7 @@ public static bool Update(string databasePath, long barrelId, long gunId, string
 `isDefault` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -258,6 +262,7 @@ public static bool Update(string databasePath, long barrelId, long gunId, string
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `barrelId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
@@ -288,6 +293,7 @@ public static bool Update(string databasePath, long barrelId, long gunId, string
 `type` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -433,10 +439,12 @@ public static bool Delete(string databasePath, long id, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -571,12 +579,14 @@ public static long GetBarrelId(string databasePath, long gunId, string name, Str
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 

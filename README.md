@@ -7,6 +7,7 @@ This application was seperated from the project to be added to the site nuget pa
 and any other related program.
 
 You can view the API Docs by [Clicking Here](docs/README.md)
+Additional [Developer Notes](docs/DeveloperNotest.md) are available.
 
 
 ## Resources
@@ -21,6 +22,7 @@ You can view the API Docs by [Clicking Here](docs/README.md)
 ### v1.7.x.x
 
 * Fixed unit Tests to run on full
+* Updated Unit Tests
 * Added GunFullDetails List to pull all the data that is used in the XML Export to maybe also be used in the application to speed up and corrent some details and reduce code
 * Fixed some Database Connection closure issues in the Pictures and Hotfixes section
 * Added Additional HotFix Function to wait for database to be unlocked in admin mode for x seconds.
@@ -33,6 +35,7 @@ You can view the API Docs by [Clicking Here](docs/README.md)
 * FIXED issue with When Adding a firearm at times, that the default barrel id for the stock barrel doesn't return an ID
 * FIXED issue with Importing a Firearm where the Default Barrel ID and Model ID return 0.
 * Added Function to produce and look up the ID of the Rating list.
+* Added Function for Settings Picture Order, Reseting orders and addition List functions for the Picture Table
 
 
 ### v1.7.0.4

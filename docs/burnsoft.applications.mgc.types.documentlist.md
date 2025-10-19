@@ -12,7 +12,7 @@ Class DocumentList container
 public class DocumentList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DocumentList](./burnsoft.applications.mgc.types.documentlist.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DocumentList](./burnsoft.applications.mgc.types.documentlist)
 
 ## Properties
 

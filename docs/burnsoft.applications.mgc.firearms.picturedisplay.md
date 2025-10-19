@@ -12,7 +12,7 @@ Class PictureDisplay.
 public class PictureDisplay
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PictureDisplay](./burnsoft.applications.mgc.firearms.picturedisplay.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PictureDisplay](./burnsoft.applications.mgc.firearms.picturedisplay)
 
 ## Constructors
 

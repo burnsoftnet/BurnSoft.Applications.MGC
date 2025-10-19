@@ -12,7 +12,7 @@ Class GunCollectionList. List container to hold the database taken from the data
 public class GunCollectionList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunCollectionList](./burnsoft.applications.mgc.types.guncollectionlist.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunCollectionList](./burnsoft.applications.mgc.types.guncollectionlist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties
@@ -885,6 +885,19 @@ public bool IsNonLethal { get; set; }
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if this instance is no lethal; otherwise, `false`.
+
+### **Rating**
+
+Gets or sets the rating.
+
+```csharp
+public int Rating { get; set; }
+```
+
+#### Property Value
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The rating.
 
 ## Constructors
 
