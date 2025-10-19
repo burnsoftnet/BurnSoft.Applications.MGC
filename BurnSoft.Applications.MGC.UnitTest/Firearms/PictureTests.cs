@@ -133,8 +133,60 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
             TestContext.WriteLine($"Using GunID {_gunId}");
             List<PictureDetails> value = Pictures.GetList(_databasePath, _gunId, out _errOut);
-            PrintListValues.PictureDetailsList(value);
+            TestContext.WriteLine(PrintListValues.PictureDetailsList(value));
             General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method GetPicturesForFirearmTest.
+        /// </summary>
+        [TestMethod, TestCategory("Pictures")]
+        public void GetPicturesTest()
+        {
+            List<PictureDetails> value = Pictures.GetList(_databasePath, out _errOut);
+            TestContext.WriteLine(PrintListValues.PictureDetailsList(value));
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Pictures")]
+        public void SetPictureOrderTest()
+        {
+            int picOrder = 1;
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            var picId = Pictures.GetFirstPictureInCollection(_databasePath, _gunId, out _errOut);
+            bool passed = Pictures.SetPictureOrder(_databasePath, picId, picOrder, out _errOut);
+            TestContext.WriteLine($"Set Picture order for Picture id {picId} for firearm {_gunId} to {picOrder}");
+            General.HasTrueValue(passed, _errOut);
+        }
+
+        [TestMethod, TestCategory("Pictures")]
+        public void GetNextOrderNumberTest()
+        {
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            int NextOrder = Pictures.GetNextOrderNumber(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine($"Next Order for Pictures for firearm {_gunId} is {NextOrder}");
+            General.HasTrueValue(NextOrder != 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Pictures")]
+        public void ResetPicturesForFirearmTest()
+        {
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            bool pass = Pictures.ResetPictures(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine($"Reset Pic Order for firearm {_gunId} to 0");
+            List<PictureDetails> value = Pictures.GetList(_databasePath, out _errOut);
+            TestContext.WriteLine(PrintListValues.PictureDetailsList(value));
+            General.HasTrueValue(pass, _errOut);
+        }
+
+        [TestMethod, TestCategory("Pictures")]
+        public void ResetPicturesForAllTest()
+        {
+            bool pass = Pictures.ResetPictures(_databasePath, out _errOut);
+            TestContext.WriteLine($"Reset Pic Order for all firearms to 0");
+            List<PictureDetails> value = Pictures.GetList(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine(PrintListValues.PictureDetailsList(value));
+            General.HasTrueValue(pass, _errOut);
         }
     }
 }
