@@ -724,6 +724,35 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Updates the picture details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="picOrder">The Picture Order</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool UpdatePictureDetails(string databasePath, long id, string title, 
+            string notes, int picOrder, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Pictures set pd_name='{title}', pd_note='{notes}', PicOrder={picOrder} sync_lastupdate=Now() where ID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdatePictureDetails", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Sets the picture order.
         /// </summary>
