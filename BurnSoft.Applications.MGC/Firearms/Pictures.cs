@@ -819,7 +819,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 List<PictureDetails> lst = new List<PictureDetails>();
                 lst = GetList(databasePath, firearmId, out errOut);
                 int maxOrder = lst.Max(i => i.Id);
-                iAns = maxOrder + 1;
+                iAns = maxOrder;
             }
             catch (Exception e)
             {
