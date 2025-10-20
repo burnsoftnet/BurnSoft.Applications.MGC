@@ -169,6 +169,15 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         }
 
         [TestMethod, TestCategory("Pictures")]
+        public void GetLastPictureTest()
+        {
+            _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
+            int picId = Pictures.GetLastPicture(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine($"The Last ID for the Pictures for firearm {_gunId} is {picId}");
+            General.HasTrueValue(picId != 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Pictures")]
         public void ResetPicturesForFirearmTest()
         {
             _gunId = MyCollection.GetTopId(_databasePath, out _errOut);
