@@ -519,7 +519,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"SELECT * from Gun_Collection_Pictures where CID={id}";
+                string sql = $"SELECT * from Gun_Collection_Pictures where CID={id} Order By PicOrder ASC";
                 if (isDirect) sql = $"SELECT * from Gun_Collection_Pictures where ID={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
