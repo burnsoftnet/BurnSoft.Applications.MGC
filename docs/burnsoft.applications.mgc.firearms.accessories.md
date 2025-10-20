@@ -12,7 +12,7 @@ Class Accessories that handles firearm accessories database calls
 public class Accessories
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Accessories](./burnsoft.applications.mgc.firearms.accessories.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Accessories](./burnsoft.applications.mgc.firearms.accessories)
 
 ## Constructors
 
@@ -338,10 +338,13 @@ public static string GetFullName(string databasePath, long id, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The id of the Accessory that you want to work with
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -391,8 +394,10 @@ public static List<AccessoriesList> List(string databasePath, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -409,10 +414,12 @@ public static List<AccessoriesList> List(string databasePath, long gunId, String
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -429,10 +436,13 @@ public static List<AccessoriesList> List(string databasePath, int id, String& er
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The id of the Accessory that you want to work with
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 

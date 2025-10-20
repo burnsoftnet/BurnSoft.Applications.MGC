@@ -12,7 +12,7 @@ Class Buyers, which will handle the information relating to the Gun_Collection_S
 public class Buyers
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Buyers](./burnsoft.applications.mgc.peopleandplaces.buyers.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Buyers](./burnsoft.applications.mgc.peopleandplaces.buyers)
 
 ## Constructors
 
@@ -112,10 +112,12 @@ public static long GetId(string databasePath, string name, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -160,10 +162,12 @@ public static List<BuyersList> Get(string databasePath, long id, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -180,10 +184,12 @@ public static List<BuyersList> Get(string databasePath, string name, String& err
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -200,8 +206,10 @@ public static List<BuyersList> Get(string databasePath, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -218,6 +226,7 @@ public static bool Add(string databasePath, string name, string address1, string
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
@@ -250,6 +259,7 @@ public static bool Add(string databasePath, string name, string address1, string
 `resident` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -266,10 +276,12 @@ public static bool Delete(string databasePath, long id, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -286,6 +298,7 @@ public static bool Update(string databasePath, long id, string name, string addr
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 
@@ -320,6 +333,7 @@ public static bool Update(string databasePath, long id, string name, string addr
 `resident` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 

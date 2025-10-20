@@ -12,7 +12,7 @@ Class OwnerInfo. List container for the Owner_Ino Table
 public class OwnerInfo
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [OwnerInfo](./burnsoft.applications.mgc.types.ownerinfo.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [OwnerInfo](./burnsoft.applications.mgc.types.ownerinfo)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

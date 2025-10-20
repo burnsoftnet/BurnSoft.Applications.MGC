@@ -2,186 +2,190 @@
 
 ## BurnSoft.Applications.MGC
 
-[Database](./burnsoft.applications.mgc.database.md)
+[Database](./burnsoft.applications.mgc.database)
 
-[DatabaseCleanUp](./burnsoft.applications.mgc.databasecleanup.md)
+[DatabaseCleanUp](./burnsoft.applications.mgc.databasecleanup)
 
 ## BurnSoft.Applications.MGC.Ammo
 
-[Audit](./burnsoft.applications.mgc.ammo.audit.md)
+[Audit](./burnsoft.applications.mgc.ammo.audit)
 
-[GlobalList](./burnsoft.applications.mgc.ammo.globallist.md)
+[GlobalList](./burnsoft.applications.mgc.ammo.globallist)
 
-[Inventory](./burnsoft.applications.mgc.ammo.inventory.md)
+[Inventory](./burnsoft.applications.mgc.ammo.inventory)
 
 ## BurnSoft.Applications.MGC.AutoFill
 
-[Accessory](./burnsoft.applications.mgc.autofill.accessory.md)
+[Accessory](./burnsoft.applications.mgc.autofill.accessory)
 
-[Ammo](./burnsoft.applications.mgc.autofill.ammo.md)
+[Ammo](./burnsoft.applications.mgc.autofill.ammo)
 
-[Appraisers](./burnsoft.applications.mgc.autofill.appraisers.md)
+[Appraisers](./burnsoft.applications.mgc.autofill.appraisers)
 
-[Documents](./burnsoft.applications.mgc.autofill.documents.md)
+[Documents](./burnsoft.applications.mgc.autofill.documents)
 
-[General](./burnsoft.applications.mgc.autofill.general.md)
+[General](./burnsoft.applications.mgc.autofill.general)
 
-[Gun](./burnsoft.applications.mgc.autofill.gun.md)
+[Gun](./burnsoft.applications.mgc.autofill.gun)
 
-[GunCollection](./burnsoft.applications.mgc.autofill.guncollection.md)
+[GunCollection](./burnsoft.applications.mgc.autofill.guncollection)
 
-[GunSmith](./burnsoft.applications.mgc.autofill.gunsmith.md)
+[GunSmith](./burnsoft.applications.mgc.autofill.gunsmith)
 
-[WhisList](./burnsoft.applications.mgc.autofill.whislist.md)
+[WhisList](./burnsoft.applications.mgc.autofill.whislist)
 
 ## BurnSoft.Applications.MGC.DebugHelpers
 
-[PrintListValues](./burnsoft.applications.mgc.debughelpers.printlistvalues.md)
+[PrintListValues](./burnsoft.applications.mgc.debughelpers.printlistvalues)
+
+[VerifyData](./burnsoft.applications.mgc.debughelpers.verifydata)
 
 ## BurnSoft.Applications.MGC.Firearms
 
-[Accessories](./burnsoft.applications.mgc.firearms.accessories.md)
+[Accessories](./burnsoft.applications.mgc.firearms.accessories)
 
-[Classification](./burnsoft.applications.mgc.firearms.classification.md)
+[Classification](./burnsoft.applications.mgc.firearms.classification)
 
-[Documents](./burnsoft.applications.mgc.firearms.documents.md)
+[Documents](./burnsoft.applications.mgc.firearms.documents)
 
-[ExtraBarrelConvoKits](./burnsoft.applications.mgc.firearms.extrabarrelconvokits.md)
+[ExtraBarrelConvoKits](./burnsoft.applications.mgc.firearms.extrabarrelconvokits)
 
-[Grips](./burnsoft.applications.mgc.firearms.grips.md)
+[Grips](./burnsoft.applications.mgc.firearms.grips)
 
-[GunSmithDetails](./burnsoft.applications.mgc.firearms.gunsmithdetails.md)
+[GunSmithDetails](./burnsoft.applications.mgc.firearms.gunsmithdetails)
 
-[GunTypes](./burnsoft.applications.mgc.firearms.guntypes.md)
+[GunTypes](./burnsoft.applications.mgc.firearms.guntypes)
 
-[MaintanceDetails](./burnsoft.applications.mgc.firearms.maintancedetails.md)
+[MaintanceDetails](./burnsoft.applications.mgc.firearms.maintancedetails)
 
-[MaintancePlans](./burnsoft.applications.mgc.firearms.maintanceplans.md)
+[MaintancePlans](./burnsoft.applications.mgc.firearms.maintanceplans)
 
-[Manufacturers](./burnsoft.applications.mgc.firearms.manufacturers.md)
+[Manufacturers](./burnsoft.applications.mgc.firearms.manufacturers)
 
-[Models](./burnsoft.applications.mgc.firearms.models.md)
+[Models](./burnsoft.applications.mgc.firearms.models)
 
-[MyCollection](./burnsoft.applications.mgc.firearms.mycollection.md)
+[MyCollection](./burnsoft.applications.mgc.firearms.mycollection)
 
-[MyCollectionQry](./burnsoft.applications.mgc.firearms.mycollectionqry.md)
+[MyCollectionQry](./burnsoft.applications.mgc.firearms.mycollectionqry)
 
-[Nationality](./burnsoft.applications.mgc.firearms.nationality.md)
+[Nationality](./burnsoft.applications.mgc.firearms.nationality)
 
-[PictureDisplay](./burnsoft.applications.mgc.firearms.picturedisplay.md)
+[PictureDisplay](./burnsoft.applications.mgc.firearms.picturedisplay)
 
-[Pictures](./burnsoft.applications.mgc.firearms.pictures.md)
+[Pictures](./burnsoft.applications.mgc.firearms.pictures)
 
-[XmlExport](./burnsoft.applications.mgc.firearms.xmlexport.md)
+[XmlExport](./burnsoft.applications.mgc.firearms.xmlexport)
 
-[XmlImport](./burnsoft.applications.mgc.firearms.xmlimport.md)
+[XmlImport](./burnsoft.applications.mgc.firearms.xmlimport)
 
 ## BurnSoft.Applications.MGC.Global
 
-[DatabaseRelated](./burnsoft.applications.mgc.global.databaserelated.md)
+[DatabaseRelated](./burnsoft.applications.mgc.global.databaserelated)
 
-[Helpers](./burnsoft.applications.mgc.global.helpers.md)
+[Helpers](./burnsoft.applications.mgc.global.helpers)
 
-[MyRegistry](./burnsoft.applications.mgc.global.myregistry.md)
+[MyRegistry](./burnsoft.applications.mgc.global.myregistry)
 
 ## BurnSoft.Applications.MGC.hotixes
 
-[HfDatabase](./burnsoft.applications.mgc.hotixes.hfdatabase.md)
+[HfDatabase](./burnsoft.applications.mgc.hotixes.hfdatabase)
 
-[HotFix](./burnsoft.applications.mgc.hotixes.hotfix.md)
+[HotFix](./burnsoft.applications.mgc.hotixes.hotfix)
 
 ## BurnSoft.Applications.MGC.hotixes.types
 
-[DbColumns](./burnsoft.applications.mgc.hotixes.types.dbcolumns.md)
+[DbColumns](./burnsoft.applications.mgc.hotixes.types.dbcolumns)
 
-[HotFixList](./burnsoft.applications.mgc.hotixes.types.hotfixlist.md)
+[HotFixList](./burnsoft.applications.mgc.hotixes.types.hotfixlist)
 
-[HotFixToDbList](./burnsoft.applications.mgc.hotixes.types.hotfixtodblist.md)
+[HotFixToDbList](./burnsoft.applications.mgc.hotixes.types.hotfixtodblist)
 
 ## BurnSoft.Applications.MGC.Other
 
-[WishList](./burnsoft.applications.mgc.other.wishlist.md)
+[WishList](./burnsoft.applications.mgc.other.wishlist)
 
 ## BurnSoft.Applications.MGC.PeopleAndPlaces
 
-[Appraisers](./burnsoft.applications.mgc.peopleandplaces.appraisers.md)
+[Appraisers](./burnsoft.applications.mgc.peopleandplaces.appraisers)
 
-[Buyers](./burnsoft.applications.mgc.peopleandplaces.buyers.md)
+[Buyers](./burnsoft.applications.mgc.peopleandplaces.buyers)
 
-[GunSmiths](./burnsoft.applications.mgc.peopleandplaces.gunsmiths.md)
+[GunSmiths](./burnsoft.applications.mgc.peopleandplaces.gunsmiths)
 
-[OwnerInformation](./burnsoft.applications.mgc.peopleandplaces.ownerinformation.md)
+[OwnerInformation](./burnsoft.applications.mgc.peopleandplaces.ownerinformation)
 
-[Shops](./burnsoft.applications.mgc.peopleandplaces.shops.md)
+[Shops](./burnsoft.applications.mgc.peopleandplaces.shops)
 
 ## BurnSoft.Applications.MGC.Reports
 
-[ColumnList](./burnsoft.applications.mgc.reports.columnlist.md)
+[ColumnList](./burnsoft.applications.mgc.reports.columnlist)
 
-[CustomReports](./burnsoft.applications.mgc.reports.customreports.md)
+[CustomReports](./burnsoft.applications.mgc.reports.customreports)
 
-[TableList](./burnsoft.applications.mgc.reports.tablelist.md)
+[TableList](./burnsoft.applications.mgc.reports.tablelist)
 
 ## BurnSoft.Applications.MGC.ThirdParty
 
-[Ammunition](./burnsoft.applications.mgc.thirdparty.ammunition.md)
+[Ammunition](./burnsoft.applications.mgc.thirdparty.ammunition)
 
-[Firearms](./burnsoft.applications.mgc.thirdparty.firearms.md)
+[Firearms](./burnsoft.applications.mgc.thirdparty.firearms)
 
-[Main](./burnsoft.applications.mgc.thirdparty.main.md)
+[Main](./burnsoft.applications.mgc.thirdparty.main)
 
 ## BurnSoft.Applications.MGC.Types
 
-[AccessoriesList](./burnsoft.applications.mgc.types.accessorieslist.md)
+[AccessoriesList](./burnsoft.applications.mgc.types.accessorieslist)
 
-[Ammunition](./burnsoft.applications.mgc.types.ammunition.md)
+[Ammunition](./burnsoft.applications.mgc.types.ammunition)
 
-[AppraisersContactDetails](./burnsoft.applications.mgc.types.appraiserscontactdetails.md)
+[AppraisersContactDetails](./burnsoft.applications.mgc.types.appraiserscontactdetails)
 
-[BarrelSystems](./burnsoft.applications.mgc.types.barrelsystems.md)
+[BarrelSystems](./burnsoft.applications.mgc.types.barrelsystems)
 
-[BuyersList](./burnsoft.applications.mgc.types.buyerslist.md)
+[BuyersList](./burnsoft.applications.mgc.types.buyerslist)
 
-[ClassificationList](./burnsoft.applications.mgc.types.classificationlist.md)
+[ClassificationList](./burnsoft.applications.mgc.types.classificationlist)
 
-[ColumnLists](./burnsoft.applications.mgc.types.columnlists.md)
+[ColumnLists](./burnsoft.applications.mgc.types.columnlists)
 
-[CustomReportsLists](./burnsoft.applications.mgc.types.customreportslists.md)
+[CustomReportsLists](./burnsoft.applications.mgc.types.customreportslists)
 
-[DocumentLinkList](./burnsoft.applications.mgc.types.documentlinklist.md)
+[DocumentLinkList](./burnsoft.applications.mgc.types.documentlinklist)
 
-[DocumentList](./burnsoft.applications.mgc.types.documentlist.md)
+[DocumentList](./burnsoft.applications.mgc.types.documentlist)
 
-[GlobalCaliberList](./burnsoft.applications.mgc.types.globalcaliberlist.md)
+[GlobalCaliberList](./burnsoft.applications.mgc.types.globalcaliberlist)
 
-[GripLists](./burnsoft.applications.mgc.types.griplists.md)
+[GripLists](./burnsoft.applications.mgc.types.griplists)
 
-[GunCollectionFullList](./burnsoft.applications.mgc.types.guncollectionfulllist.md)
+[GunCollectionFullList](./burnsoft.applications.mgc.types.guncollectionfulllist)
 
-[GunCollectionList](./burnsoft.applications.mgc.types.guncollectionlist.md)
+[GunCollectionList](./burnsoft.applications.mgc.types.guncollectionlist)
 
-[GunShopDetails](./burnsoft.applications.mgc.types.gunshopdetails.md)
+[GunShopDetails](./burnsoft.applications.mgc.types.gunshopdetails)
 
-[GunSmithContacts](./burnsoft.applications.mgc.types.gunsmithcontacts.md)
+[GunSmithContacts](./burnsoft.applications.mgc.types.gunsmithcontacts)
 
-[GunSmithWorkDone](./burnsoft.applications.mgc.types.gunsmithworkdone.md)
+[GunSmithWorkDone](./burnsoft.applications.mgc.types.gunsmithworkdone)
 
-[GunTypes](./burnsoft.applications.mgc.types.guntypes.md)
+[GunTypes](./burnsoft.applications.mgc.types.guntypes)
 
-[MaintanceDetailsList](./burnsoft.applications.mgc.types.maintancedetailslist.md)
+[MaintanceDetailsList](./burnsoft.applications.mgc.types.maintancedetailslist)
 
-[MaintancePlansList](./burnsoft.applications.mgc.types.maintanceplanslist.md)
+[MaintancePlansList](./burnsoft.applications.mgc.types.maintanceplanslist)
 
-[ModelList](./burnsoft.applications.mgc.types.modellist.md)
+[ModelList](./burnsoft.applications.mgc.types.modellist)
 
-[NationalityList](./burnsoft.applications.mgc.types.nationalitylist.md)
+[NationalityList](./burnsoft.applications.mgc.types.nationalitylist)
 
-[OwnerInfo](./burnsoft.applications.mgc.types.ownerinfo.md)
+[OwnerInfo](./burnsoft.applications.mgc.types.ownerinfo)
 
-[PictureDetails](./burnsoft.applications.mgc.types.picturedetails.md)
+[PictureDetails](./burnsoft.applications.mgc.types.picturedetails)
 
-[PictureDisplayList](./burnsoft.applications.mgc.types.picturedisplaylist.md)
+[PictureDisplayList](./burnsoft.applications.mgc.types.picturedisplaylist)
 
-[TableLists](./burnsoft.applications.mgc.types.tablelists.md)
+[Ratings](./burnsoft.applications.mgc.types.ratings)
 
-[WishlistList](./burnsoft.applications.mgc.types.wishlistlist.md)
+[TableLists](./burnsoft.applications.mgc.types.tablelists)
+
+[WishlistList](./burnsoft.applications.mgc.types.wishlistlist)

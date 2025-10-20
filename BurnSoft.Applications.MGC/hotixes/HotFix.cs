@@ -935,37 +935,47 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Creating Table Accessories Link");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE Gun_Collection_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number, AID Number);",
                     out errOut, true))
                 {
                     if (!errOut.Contains(" already exists")) throw new Exception(errOut);
                 }
-
+                SendStatus($"Adding Accessories Link to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Accessories_Link", out errOut, true)) throw new Exception(errOut);
-                
 
+                SendStatus($"Adding Column isCompetitition to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "isCompetition", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
-
+                SendStatus($"Adding column is Non Lethal to Gun Collection");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsNoLeathal", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
-
+                SendStatus($"Setting new columns to 0 in Gun Collection table");
                 if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection set isCompetition=0,IsNoLeathal=0",
                     out errOut, true)) throw new Exception(errOut);
-
+                SendStatus($"Adding GunSmith ID to Gunsmith Details Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GSID", "GunSmith_Details", "number", "0", out errOut))
                     throw new Exception(errOut);
-
+                SendStatus($"Adding Rating column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Rating", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
-
+                SendStatus($"Settings all Ratings to 0 for Gun Collection Table");
                 if (!HfDatabase.RunSql(databasePath,
                    "UPDATE Gun_Collection set Rating=0",
                    out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding PicOrder to Gun Collection Pictures Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "PicOrder", "Gun_Collection_Pictures", "number", "0", out errOut))
+                    throw new Exception(errOut);
+                SendStatus($"Settings Order to 0 on pic Orders");
+                if (!HfDatabase.RunSql(databasePath,
+                  "UPDATE Gun_Collection_Pictures set PicOrder=0",
+                  out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
-                if (!Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);
+                SendStatus($"Updating Databbase version to 7.1");
+                if (!Database.SaveDatabaseVersion(databasePath, "7.1", out errOut)) throw new Exception(errOut);
+                SendStatus($"Applying hotfix to registry ");
                 if (!UpdateReg(hotFixNumber, out errOut, DateTime.Now.ToString(CultureInfo.InvariantCulture))) throw new Exception(errOut);
                 bAns = true;
             }

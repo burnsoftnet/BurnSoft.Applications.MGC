@@ -12,7 +12,7 @@ Class Registry. General Registry class for the My gun Collection Application to 
 public class MyRegistry
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyRegistry](./burnsoft.applications.mgc.global.myregistry.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyRegistry](./burnsoft.applications.mgc.global.myregistry)
 
 ## Properties
 
@@ -297,6 +297,7 @@ if set to `true` [use unique customer identifier].
 if set to `true` [b useselectiveboundbook].
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 

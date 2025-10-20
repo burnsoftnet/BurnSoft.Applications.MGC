@@ -411,5 +411,38 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             return sAns;
         }
+
+        /// <summary>
+        /// Prints the list for the PictureDetails list.
+        /// </summary>
+        /// <param name="p">The PictureDetails List</param>
+        public static string PictureDetailsList(List<PictureDetails> p)
+        {
+            string sAns = "";
+            if (p.Count > 0)
+            {
+                foreach (PictureDetails d in p)
+                {
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"id: {d.Id}{Environment.NewLine}";
+                    sAns += $"isMain: {d.IsMain}{Environment.NewLine}";
+                    sAns += $"Last Sync: {d.LastSyncDate}{Environment.NewLine}";
+                    sAns += $"Picture: {d.Picture}{Environment.NewLine}";
+                    sAns += $"Thumb: {d.Thumb}{Environment.NewLine}";
+                    sAns += $"Display Name: {d.PictureDisplayName}{Environment.NewLine}";
+                    sAns += $"Display Note: {d.PictureNotes}{Environment.NewLine}";
+                    sAns += $"Pic Stream: {d.PictureMemoryStream}{Environment.NewLine}";
+                    sAns += $"Thumb Stream: {d.ThumbMemoryStream}{Environment.NewLine}";
+                    sAns += $"PicOrder: {d.PicOrder}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"----------------------------------------{Environment.NewLine}";
+                }
+            }
+            else
+            {
+                sAns += "NO DATA IN LIST!";
+            }
+            return sAns;
+        }
     }
 }

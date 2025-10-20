@@ -12,7 +12,7 @@ Class Manufacturers.
 public class Manufacturers
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Manufacturers](./burnsoft.applications.mgc.firearms.manufacturers.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Manufacturers](./burnsoft.applications.mgc.firearms.manufacturers)
 
 ## Constructors
 

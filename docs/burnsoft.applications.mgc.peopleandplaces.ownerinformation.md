@@ -12,7 +12,7 @@ Class OwnerInformation. handing the Owner_infotable in the database
 public class OwnerInformation
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [OwnerInformation](./burnsoft.applications.mgc.peopleandplaces.ownerinformation.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [OwnerInformation](./burnsoft.applications.mgc.peopleandplaces.ownerinformation)
 
 ## Constructors
 

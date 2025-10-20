@@ -12,7 +12,7 @@ Class DocumentLinkList. Container for the doc link table.
 public class DocumentLinkList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DocumentLinkList](./burnsoft.applications.mgc.types.documentlinklist.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DocumentLinkList](./burnsoft.applications.mgc.types.documentlinklist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

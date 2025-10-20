@@ -12,7 +12,7 @@ Class Grips. Handles data relating to gun grips
 public class Grips
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Grips](./burnsoft.applications.mgc.firearms.grips.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Grips](./burnsoft.applications.mgc.firearms.grips)
 
 ## Constructors
 
@@ -127,12 +127,12 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **GetId(String, String, String&)**
+### **GetId(String, String, String&, Boolean)**
 
 Gets the identifier.
 
 ```csharp
-public static long GetId(string databasePath, string gripName, String& errOut)
+public static long GetId(string databasePath, string name, String& errOut, bool AddIfNotExists)
 ```
 
 #### Parameters
@@ -140,11 +140,14 @@ public static long GetId(string databasePath, string gripName, String& errOut)
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
 
-`gripName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+`name` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 Name of the class.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`AddIfNotExists` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Add if Nationality does not exist
 
 #### Returns
 

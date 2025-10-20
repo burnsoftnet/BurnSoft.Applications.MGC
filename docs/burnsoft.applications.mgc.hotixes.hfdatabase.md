@@ -13,7 +13,7 @@ This HfDatabase class uses ADODB for database connection, unlike the HfDatabase 
 public class HfDatabase
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HfDatabase](./burnsoft.applications.mgc.hotixes.hfdatabase.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HfDatabase](./burnsoft.applications.mgc.hotixes.hfdatabase)
 
 ## Constructors
 

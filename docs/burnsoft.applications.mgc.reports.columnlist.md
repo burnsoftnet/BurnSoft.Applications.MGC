@@ -12,7 +12,7 @@ Class ColumnList to handle all the database functions relating to the cr_ColumnL
 public class ColumnList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ColumnList](./burnsoft.applications.mgc.reports.columnlist.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ColumnList](./burnsoft.applications.mgc.reports.columnlist)
 
 ## Constructors
 

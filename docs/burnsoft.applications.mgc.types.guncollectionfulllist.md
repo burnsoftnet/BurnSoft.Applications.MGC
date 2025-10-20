@@ -13,7 +13,7 @@ Class GunCollectionFullList. List container to hold the database taken
 public class GunCollectionFullList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunCollectionFullList](./burnsoft.applications.mgc.types.guncollectionfulllist.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunCollectionFullList](./burnsoft.applications.mgc.types.guncollectionfulllist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties
@@ -990,6 +990,19 @@ public long LinkedDocuments { get; set; }
 
 [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The linked documents.
+
+### **Rating**
+
+Gets or sets the rating.
+
+```csharp
+public int Rating { get; set; }
+```
+
+#### Property Value
+
+[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The rating.
 
 ## Constructors
 

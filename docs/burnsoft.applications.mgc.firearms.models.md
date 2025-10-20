@@ -12,7 +12,7 @@ Class Models will help manage the data in the Gun_Model table
 public class Models
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Models](./burnsoft.applications.mgc.firearms.models.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Models](./burnsoft.applications.mgc.firearms.models)
 
 ## Constructors
 
@@ -179,12 +179,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetId(String, String, Int64, String&)**
+### **GetId(String, String, Int64, String&, Boolean)**
 
 Gets the identifier.
 
 ```csharp
-public static long GetId(string databasePath, string name, long manufacturerId, String& errOut)
+public static long GetId(string databasePath, string name, long manufacturerId, String& errOut, bool AddIfNotExists)
 ```
 
 #### Parameters
@@ -200,6 +200,9 @@ The manufacturer identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`AddIfNotExists` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Add the Model if it doesn't exists
 
 #### Returns
 

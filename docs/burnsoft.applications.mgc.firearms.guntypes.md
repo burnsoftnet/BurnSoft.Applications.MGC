@@ -12,7 +12,7 @@ Class GunTypes. This class is to help manage the Gun_Type table.
 public class GunTypes
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunTypes](./burnsoft.applications.mgc.firearms.guntypes.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunTypes](./burnsoft.applications.mgc.firearms.guntypes)
 
 ## Constructors
 
@@ -35,10 +35,13 @@ public static bool Add(string databasePath, string value, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gun type value to use
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -55,10 +58,13 @@ public static bool Exists(string databasePath, string value, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gun type value to use
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -75,10 +81,13 @@ public static int GetId(string databasePath, string value, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gun type value to use
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -95,10 +104,13 @@ public static bool Delete(string databasePath, int id, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The id of the Accessory that you want to work with
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -115,10 +127,13 @@ public static bool Delete(string databasePath, string value, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gun type value to use
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -135,12 +150,16 @@ public static bool Update(string databasePath, int id, string value, String& err
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The id of the Accessory that you want to work with
 
 `value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The gun type value to use
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -157,10 +176,13 @@ public static bool UpdateGunType(string databasePath, string value, String& errO
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `value` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Name of the gun type
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+Error details if an exception occured
 
 #### Returns
 
@@ -177,8 +199,10 @@ public static List<GunTypes> GetList(string databasePath, String& errOut)
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 
@@ -195,10 +219,13 @@ public static List<GunTypes> GetList(string databasePath, long id, String& errOu
 #### Parameters
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The Database Path
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The id of the Accessory that you want to work with
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+If an exception occurs the message will be in this string
 
 #### Returns
 

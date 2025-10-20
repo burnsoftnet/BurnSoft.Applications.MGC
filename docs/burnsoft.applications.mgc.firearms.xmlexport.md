@@ -12,7 +12,7 @@ Class XmlExport. Export the firearm information in the view collection details f
 public class XmlExport
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [XmlExport](./burnsoft.applications.mgc.firearms.xmlexport.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [XmlExport](./burnsoft.applications.mgc.firearms.xmlexport)
 
 ## Constructors
 

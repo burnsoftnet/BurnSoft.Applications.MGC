@@ -12,7 +12,7 @@ Class WishlistList. The list container for the data from the Wishlist table
 public class WishlistList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [WishlistList](./burnsoft.applications.mgc.types.wishlistlist.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [WishlistList](./burnsoft.applications.mgc.types.wishlistlist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties
