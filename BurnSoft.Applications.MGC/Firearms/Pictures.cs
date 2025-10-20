@@ -804,6 +804,32 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
+        /// Gets the last picture that was added for that collection
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32 the id of the picture in the database</returns>
+        public static int GetLastPicture(string databasePath, long firearmId, out string errOut)
+        {
+            int iAns = 0;
+            errOut = "";
+            try
+            {
+                List<PictureDetails> lst = new List<PictureDetails>();
+                lst = GetList(databasePath, firearmId, out errOut);
+                int maxOrder = lst.Max(i => i.Id);
+                iAns = maxOrder + 1;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetLastPicture", e);
+            }
+            return iAns;
+        }
+
+
+        /// <summary>
         /// Gets the pcture.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
