@@ -7,7 +7,8 @@ This application was seperated from the project to be added to the site nuget pa
 and any other related program.
 
 You can view the API Docs by [Clicking Here](docs/README.md)
-Additional [Developer Notes](docs/DeveloperNotest.md) are available.
+
+Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 
 ## Resources

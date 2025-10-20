@@ -4,6 +4,12 @@ This section is misc developer notes.  Things that might be needed for the proje
 
 ## Required Software
 
+* Visual Studio 2022
+* Microsoft Report Viewer
+* Visual Studio Installer
+* MS Access Drivers 32-bit
+* 
+
 ## Other Helpers
 
 * [xmldoc2md](https://charlesdevandiere.github.io/xmldoc2md/)
