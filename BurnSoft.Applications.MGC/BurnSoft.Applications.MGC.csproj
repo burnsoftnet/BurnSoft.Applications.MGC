@@ -121,6 +121,7 @@
     <Compile Include="Types\CustomReportsLists.cs" />
     <Compile Include="Types\DocumentLinkList.cs" />
     <Compile Include="Types\DocumentList.cs" />
+    <Compile Include="Types\GeneralAccessories.cs" />
     <Compile Include="Types\GlobalCaliberList.cs" />
     <Compile Include="Types\GripLists.cs" />
     <Compile Include="Types\GunCollectionFullList.cs" />
