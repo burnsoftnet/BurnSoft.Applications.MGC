@@ -99,6 +99,7 @@
     <Compile Include="hotixes\types\DbColumns.cs" />
     <Compile Include="hotixes\types\HotFixList.cs" />
     <Compile Include="hotixes\types\HotFixToDbList.cs" />
+    <Compile Include="Other\GeneralAccessories.cs" />
     <Compile Include="Other\WishList.cs" />
     <Compile Include="PeopleAndPlaces\Appraisers.cs" />
     <Compile Include="PeopleAndPlaces\Buyers.cs" />
