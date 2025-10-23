@@ -272,7 +272,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="civ">if set to <c>true</c> [civ].</param>
         /// <param name="ic">if set to <c>true</c> [ic].</param>
         /// <param name="errOut">The error out.</param>
-        /// <returns>System.Int64.</returns>
+        /// <returns>System.Int64. The id in the table based on the information passed</returns>
         /// <exception cref="System.Exception"></exception>
         public static long GetId(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, 
             string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
@@ -301,6 +301,26 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return lAns;
         }
+
+        /// <summary>
+        /// Gets the identifier of the selected accessorie details 
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="condition">The condition.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="use">The use.</param>
+        /// <param name="purValue">The pur value.</param>
+        /// <param name="appValue">The appriased value.</param>
+        /// <param name="civ">if set to <c>true</c> [civ].</param>
+        /// <param name="ic">if set to <c>true</c> [ic].</param>
+        /// <param name="galId">The general accessories link identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64. The id in the table based on the information passed</returns>
+        /// <exception cref="System.Exception"></exception>
         public static long GetId(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes,
             string use, double purValue, double appValue, bool civ, bool ic, int galId, out string errOut)
         {
