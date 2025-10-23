@@ -473,7 +473,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         PurchaseValue = d["PurValue"] != DBNull.Value ? d["PurValue"].ToString() : " ",
                         AppriasedValue = d["AppValue"] != DBNull.Value ? d["AppValue"].ToString() : " ",
                         CountInValue = countinValue,
-                        IsChoke = isChoke
+                        IsChoke = isChoke,
+                        GALID = Convert.ToInt32(d["GALID"] != DBNull.Value ? d["GALID"] : 0),
                     });
                 }
             }
