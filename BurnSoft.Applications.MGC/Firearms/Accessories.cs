@@ -257,7 +257,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             return bAns;
         }
         /// <summary>
-        /// Gets the identifier.
+        /// Gets the identifier of the selected accessorie details 
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="gunId">The gun identifier.</param>
@@ -286,6 +286,33 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string sql = $"select * from  Gun_Collection_Accessories where GID={gunId} and Manufacturer='{manufacturer}' and Model='{model}' and " +
                     $"SerialNumber='{serialNumber}' and Condition='{condition}' and Notes='{notes}' and Use='{use}' and PurValue='{purValue}' and " +
                     $"AppValue={appValue} and CIV={iCiv} and IC={iIc}";
+
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["id"]);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
+        public static long GetId(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes,
+            string use, double purValue, double appValue, bool civ, bool ic, int galId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                int iCiv = civ ? 1 : 0;
+                int iIc = ic ? 1 : 0;
+                string sql = $"select * from  Gun_Collection_Accessories where GID={gunId} and Manufacturer='{manufacturer}' and Model='{model}' and " +
+                    $"SerialNumber='{serialNumber}' and Condition='{condition}' and Notes='{notes}' and Use='{use}' and PurValue='{purValue}' and " +
+                    $"AppValue={appValue} and CIV={iCiv} and IC={iIc} and GALID={galId}";
 
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
