@@ -92,6 +92,31 @@ namespace BurnSoft.Applications.MGC.Other
             return bAns;
         }
         /// <summary>
+        /// Adds the specified linker id's to the linker table
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The general accessory identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Add(string databasePath, int id, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"INSERT INTO General_Accessories_Link(GID, AID) Values({gunId},{id})";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Add", e);
+            }
+
+            return bAns;
+        }
+
+        /// <summary>
         /// Updates the firearm accessory with the details that was updated in the general accessories table..
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -240,5 +265,35 @@ namespace BurnSoft.Applications.MGC.Other
             return lst;
         }
         #endregion
+
+        /// <summary>
+        /// Gets the identifier for the general accessory attached to the firearm in the linker table
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="galId">The general accessory identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64. Linker table ID</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath, long gunId, int galId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                List<GeneralAccessoriesLinkers> lst = List(databasePath, gunId, galId, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (GeneralAccessoriesLinkers a in lst)
+                {
+                    lAns = a.Id;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
     }
 }
