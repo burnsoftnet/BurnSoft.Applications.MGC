@@ -1,4 +1,5 @@
-﻿using BurnSoft.Applications.MGC.Firearms;
+﻿using BurnSoft.Applications.MGC.AutoFill;
+using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using System;
 using System.Collections.Generic;
@@ -115,7 +116,84 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+        /// <summary>
+        /// Deletes the specified Link by id from the tabl
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="linkId">The link identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Delete(string databasePath, int linkId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"DELETE from General_Accessories_Link where id={linkId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
 
+            return bAns;
+        }
+        /// <summary>
+        /// Deletes the specified link(s) from the table based on the accessory id and gun id.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="accessory_id">The accessory identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Delete(string databasePath, int accessory_id, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"DELETE from General_Accessories_Link where aid={accessory_id} and gid={gunId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+
+            return bAns;
+        }
+        /// <summary>
+        /// Deletes the specified links from the table based on the provided list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="deleteList">The delete list.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Delete(string databasePath, List<GeneralAccessoriesLinkers> deleteList, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                foreach(GeneralAccessoriesLinkers a in deleteList)
+                {
+                    int id = a.Id;
+                    if (!Delete(databasePath, id, out errOut)) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+
+            return bAns;
+        }
         /// <summary>
         /// Updates the firearm accessory with the details that was updated in the general accessories table..
         /// </summary>
