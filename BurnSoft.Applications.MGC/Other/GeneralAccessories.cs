@@ -88,5 +88,44 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+
+        /// <summary>
+        /// Updates the specified accessory in the database.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="condition">The condition.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="use">The use.</param>
+        /// <param name="purValue">The pur value.</param>
+        /// <param name="appValue">The application value.</param>
+        /// <param name="civ">if set to <c>true</c> [civ].</param>
+        /// <param name="ic">if set to <c>true</c> [ic].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Update(string databasePath, long id, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                int iCiv = civ ? 1 : 0;
+                int iIc = ic ? 1 : 0;
+
+                string sql = $"Update General_Accessories set Manufacturer='{manufacturer}',Model='{model}'," +
+                             $"SerialNumber='{serialNumber}',Condition='{condition}',Notes='{notes}',Use='{use}'," +
+                             $"PurValue={purValue},AppValue={appValue},CIV={iCiv},IC={iIc},sync_lastupdate=Now() where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+
+            return bAns;
+        }
     }
 }
