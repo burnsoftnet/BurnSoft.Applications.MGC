@@ -2,6 +2,7 @@
 using BurnSoft.Applications.MGC.Types;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,7 +91,15 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
-
+        /// <summary>
+        /// Updates the firearm accessory with the details that was updated in the general accessories table..
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool UpdateFirearm(string databasePath, int id, long gunId, out string errOut)
         {
             bool bAns = false;
@@ -118,5 +127,118 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+        #region "Data Lists"
+        /// <summary>
+        /// Send a datable to get that converted into an GeneralAcceeories List type
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <returns>GeneralAccessoriesLinkers list format</returns>
+        private static List<GeneralAccessoriesLinkers> MyList(DataTable dt, out string errOut)
+        {
+            //General_Accessories_Link
+            List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    lst.Add(new GeneralAccessoriesLinkers()
+                    {
+                        Id = Convert.ToInt32(d["id"] != DBNull.Value ? d["id"] : 0),
+                        Gid = Convert.ToInt32(d["gid"] != DBNull.Value ? d["gid"] : 0),
+                        Aid = Convert.ToInt32(d["aid"] != DBNull.Value ? d["aid"] : 0),
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Return a List of all the general accessories linkers based
+        /// </summary>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <returns></returns>
+        public static List<GeneralAccessoriesLinkers> List(string databasePath, out string errOut)
+        {
+            List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
+            try
+            {
+                string sql = $"select * from General_Accessories_Link";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Return a List of the general accessories linkers based accessory id
+        /// </summary>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="accessoryId">The id of the Accessory that you want to work with</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <returns></returns>
+        public static List<GeneralAccessoriesLinkers> List(string databasePath, int accessoryId, out string errOut)
+        {
+            List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
+            try
+            {
+                string sql = $"select * from General_Accessories_Link where aid={accessoryId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Return a List of the general accessories linkers based accessory and firearm id
+        /// </summary>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="gunId">the firearm ID</param>
+        /// <param name="accessoryId">The id of the Accessory that you want to work with</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <returns></returns>
+        public static List<GeneralAccessoriesLinkers> List(string databasePath, long gunId, int accessoryId, out string errOut)
+        {
+            List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
+            try
+            {
+                string sql = $"select * from General_Accessories_Link where aid={accessoryId} and=gid{gunId}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+        #endregion
     }
 }

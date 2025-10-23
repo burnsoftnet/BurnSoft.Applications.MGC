@@ -141,7 +141,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// </summary>
         /// <param name="dt"></param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
-        /// <returns></returns>
+        /// <returns>GeneralAccessoriesList List Format</returns>
         private static List<GeneralAccessoriesList> MyList(DataTable dt, out string errOut)
         {
             List<GeneralAccessoriesList> lst = new List<GeneralAccessoriesList>();
