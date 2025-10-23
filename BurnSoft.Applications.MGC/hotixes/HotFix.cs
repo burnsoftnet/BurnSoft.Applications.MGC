@@ -961,6 +961,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GALID", "Gun_Collection_Accessories", "number", "0", out errOut))
                     throw new Exception(errOut);
 
+                SendStatus($"Settings all GALID to 0 for Gun Collection Accessories Table");
+                if (!HfDatabase.RunSql(databasePath,
+                   "UPDATE Gun_Collection_Accessories set GALID=0",
+                   out errOut, true)) throw new Exception(errOut);
+
                 SendStatus($"Adding Column isCompetitition to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "isCompetition", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
