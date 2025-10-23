@@ -66,12 +66,13 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="notes">The notes.</param>
         /// <param name="use">The use.</param>
         /// <param name="purValue">The pur value.</param>
-        /// <param name="appValue">The application value.</param>
-        /// <param name="civ">if set to <c>true</c> [civ].</param>
-        /// <param name="ic">if set to <c>true</c> [ic].</param>
+        /// <param name="appValue">The appriased value.</param>
+        /// <param name="civ">Count in Value.</param>
+        /// <param name="ic">Is Shotgun Choke.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Add(string databasePath,long gunId, string manufacturer,string model,string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ,bool ic, out string errOut)
+        public static bool Add(string databasePath,long gunId, string manufacturer,string model,string serialNumber, string condition, string notes, string use, 
+            double purValue, double appValue, bool civ,bool ic, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -82,6 +83,45 @@ namespace BurnSoft.Applications.MGC.Firearms
 
                 string sql = $"INSERT INTO Gun_Collection_Accessories(GID,Manufacturer,Model,SerialNumber,Condition,Notes,Use,PurValue,AppValue,CIV,IC,sync_lastupdate) VALUES({gunId}," +
                              $"'{manufacturer}','{model}','{serialNumber}','{condition}','{notes}','{use}',{purValue},{appValue}, {iCiv},{iIc},Now())";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Add", e);
+            }
+
+            return bAns;
+        }
+        /// <summary>
+        /// Adds the specified accessory to the database.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="condition">The condition.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="use">The use.</param>
+        /// <param name="purValue">The pur value.</param>
+        /// <param name="appValue">The appriased value.</param>
+        /// <param name="civ">Count in Value.</param>
+        /// <param name="ic">Is Shotgun Choke.</param>
+        /// <param name="galid">The general accessory list id.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Add(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, 
+            double purValue, double appValue, bool civ, bool ic, int galid, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                int iCiv = civ ? 1 : 0;
+                int iIc = ic ? 1 : 0;
+
+                string sql = $"INSERT INTO Gun_Collection_Accessories(GID,Manufacturer,Model,SerialNumber,Condition,Notes,Use,PurValue,AppValue,CIV,IC,GALID,sync_lastupdate) VALUES({gunId}," +
+                             $"'{manufacturer}','{model}','{serialNumber}','{condition}','{notes}','{use}',{purValue},{appValue}, {iCiv},{iIc},{galid},Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -104,12 +144,13 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="notes">The notes.</param>
         /// <param name="use">The use.</param>
         /// <param name="purValue">The pur value.</param>
-        /// <param name="appValue">The application value.</param>
+        /// <param name="appValue">The appriased value.</param>
         /// <param name="civ">if set to <c>true</c> [civ].</param>
         /// <param name="ic">if set to <c>true</c> [ic].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath, long id, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
+        public static bool Update(string databasePath, long id, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, 
+            double purValue, double appValue, bool civ, bool ic, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -121,6 +162,47 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string sql = $"Update Gun_Collection_Accessories set GID={gunId},Manufacturer='{manufacturer}',Model='{model}'," +
                              $"SerialNumber='{serialNumber}',Condition='{condition}',Notes='{notes}',Use='{use}'," +
                              $"PurValue={purValue},AppValue={appValue},CIV={iCiv},IC={iIc},sync_lastupdate=Now() where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Update", e);
+            }
+
+            return bAns;
+        }
+        /// <summary>
+        /// Updates the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="condition">The condition.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="use">The use.</param>
+        /// <param name="purValue">The pur value.</param>
+        /// <param name="appValue">The appriased value.</param>
+        /// <param name="civ">if set to <c>true</c> [civ].</param>
+        /// <param name="ic">if set to <c>true</c> [ic].</param>
+        /// <param name="gaId">The General Accessor Link identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Update(string databasePath, long id, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, 
+            double purValue, double appValue, bool civ, bool ic, int gaId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                int iCiv = civ ? 1 : 0;
+                int iIc = ic ? 1 : 0;
+
+                string sql = $"Update Gun_Collection_Accessories set GID={gunId},Manufacturer='{manufacturer}',Model='{model}'," +
+                             $"SerialNumber='{serialNumber}',Condition='{condition}',Notes='{notes}',Use='{use}'," +
+                             $"PurValue={purValue},AppValue={appValue},CIV={iCiv},IC={iIc},GALID={gaId},sync_lastupdate=Now() where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -144,12 +226,13 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="notes">The notes.</param>
         /// <param name="use">The use.</param>
         /// <param name="purValue">The pur value.</param>
-        /// <param name="appValue">The application value.</param>
+        /// <param name="appValue">The appriased value.</param>
         /// <param name="civ">if set to <c>true</c> [civ].</param>
         /// <param name="ic">if set to <c>true</c> [ic].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Exists(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
+        public static bool Exists(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, 
+            string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -158,7 +241,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                 int iCiv = civ ? 1 : 0;
                 int iIc = ic ? 1 : 0;
 
-                string sql = $"select * from  Gun_Collection_Accessories where GID={gunId} and Manufacturer='{manufacturer}' and Model='{model}' and SerialNumber='{serialNumber}' and Condition='{condition}' and Notes='{notes}' and Use='{use}' and PurValue='{purValue}' and AppValue={appValue} and CIV={iCiv} and IC={iIc}";
+                string sql = $"select * from  Gun_Collection_Accessories where GID={gunId} and Manufacturer='{manufacturer}' and Model='{model}' and " +
+                    $"SerialNumber='{serialNumber}' and Condition='{condition}' and Notes='{notes}' and Use='{use}' and PurValue='{purValue}' " +
+                    $"and AppValue={appValue} and CIV={iCiv} and IC={iIc}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 
@@ -183,13 +268,14 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="notes">The notes.</param>
         /// <param name="use">The use.</param>
         /// <param name="purValue">The pur value.</param>
-        /// <param name="appValue">The application value.</param>
+        /// <param name="appValue">The appriased value.</param>
         /// <param name="civ">if set to <c>true</c> [civ].</param>
         /// <param name="ic">if set to <c>true</c> [ic].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
+        public static long GetId(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, 
+            string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
         {
             long lAns = 0;
             errOut = @"";
@@ -197,7 +283,9 @@ namespace BurnSoft.Applications.MGC.Firearms
             {
                 int iCiv = civ ? 1 : 0;
                 int iIc = ic ? 1 : 0;
-                string sql = $"select * from  Gun_Collection_Accessories where GID={gunId} and Manufacturer='{manufacturer}' and Model='{model}' and SerialNumber='{serialNumber}' and Condition='{condition}' and Notes='{notes}' and Use='{use}' and PurValue='{purValue}' and AppValue={appValue} and CIV={iCiv} and IC={iIc}";
+                string sql = $"select * from  Gun_Collection_Accessories where GID={gunId} and Manufacturer='{manufacturer}' and Model='{model}' and " +
+                    $"SerialNumber='{serialNumber}' and Condition='{condition}' and Notes='{notes}' and Use='{use}' and PurValue='{purValue}' and " +
+                    $"AppValue={appValue} and CIV={iCiv} and IC={iIc}";
 
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
