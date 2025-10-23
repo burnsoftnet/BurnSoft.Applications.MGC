@@ -1,5 +1,9 @@
-﻿using System;
+﻿using BurnSoft.Applications.MGC.Firearms;
+using BurnSoft.Applications.MGC.Types;
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -68,7 +72,8 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="ic">if set to <c>true</c> [ic].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Add(string databasePath, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
+        public static bool Add(string databasePath, string manufacturer, string model, string serialNumber, string condition, 
+            string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -77,8 +82,10 @@ namespace BurnSoft.Applications.MGC.Other
                 int iCiv = civ ? 1 : 0;
                 int iIc = ic ? 1 : 0;
 
-                string sql = $"INSERT INTO General_Accessories(Manufacturer,Model,SerialNumber,Condition,Notes,Use,PurValue,AppValue,CIV,IC,sync_lastupdate) VALUES(" +
-                             $"'{manufacturer}','{model}','{serialNumber}','{condition}','{notes}','{use}',{purValue},{appValue}, {iCiv},{iIc},Now())";
+                string sql = $"INSERT INTO General_Accessories(Manufacturer,Model,SerialNumber,Condition,Notes,Use,PurValue," +
+                    $"AppValue,CIV,IC,sync_lastupdate) VALUES(" +
+                             $"'{manufacturer}','{model}','{serialNumber}','{condition}','{notes}','{use}',{purValue}," +
+                             $"{appValue}, {iCiv},{iIc},Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -106,7 +113,8 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="ic">if set to <c>true</c> [ic].</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath, long id, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
+        public static bool Update(string databasePath, long id, string manufacturer, string model, string serialNumber, 
+            string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -127,5 +135,86 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+
+        /// <summary>
+        /// Send a datable to get that converted into an GeneralAcceeories List type
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <returns></returns>
+        private static List<GeneralAccessoriesList> MyList(DataTable dt, out string errOut)
+        {
+            List<GeneralAccessoriesList> lst = new List<GeneralAccessoriesList>();
+            errOut = @"";
+            try
+            {
+                foreach (DataRow d in dt.Rows)
+                {
+                    bool countinValue = false;
+                    bool isChoke = false;
+
+                    if (d["CIV"] != DBNull.Value)
+                    {
+                        countinValue = Convert.ToInt32(d["CIV"]) == 1;
+                    }
+
+                    if (d["IC"] != DBNull.Value)
+                    {
+                        isChoke = Convert.ToInt32(d["IC"]) == 1;
+                    }
+
+                    lst.Add(new GeneralAccessoriesList()
+                    {
+                        Id = Convert.ToInt32(d["id"]),
+                        Manufacturer = d["Manufacturer"] != DBNull.Value ? d["Manufacturer"].ToString() : " ",
+                        Model = d["Model"] != DBNull.Value ? d["Model"].ToString() : " ",
+                        LastSync = d["sync_lastupdate"] != DBNull.Value ? d["sync_lastupdate"].ToString() : " ",
+                        Notes = d["notes"] != DBNull.Value ? d["notes"].ToString() : " ",
+                        SerialNumber = d["SerialNumber"] != DBNull.Value ? d["SerialNumber"].ToString() : " ",
+                        Condition = d["Condition"] != DBNull.Value ? d["Condition"].ToString() : " ",
+                        Use = d["Use"] != DBNull.Value ? d["Use"].ToString() : " ",
+                        PurchaseValue = d["PurValue"] != DBNull.Value ? d["PurValue"].ToString() : " ",
+                        AppriasedValue = d["AppValue"] != DBNull.Value ? d["AppValue"].ToString() : " ",
+                        CountInValue = countinValue,
+                        IsChoke = isChoke
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MyList", e);
+            }
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Return a List of the general accessoriy based on it's id
+        /// </summary>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="id">The id of the Accessory that you want to work with</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <returns></returns>
+        public static List<GeneralAccessoriesList> List(string databasePath, int id, out string errOut)
+        {
+            List<GeneralAccessoriesList> lst = new List<GeneralAccessoriesList>();
+            try
+            {
+                string sql = $"select * from General_Accessories where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+
+
     }
 }

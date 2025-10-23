@@ -7,7 +7,7 @@ namespace BurnSoft.Applications.MGC.Types
     /// Class AccessoriesList list container that will contain the information from the General_Accessories table.
     /// </summary>
     [Serializable]
-    public class GeneralAccessories
+    public class GeneralAccessoriesList
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -68,33 +68,12 @@ namespace BurnSoft.Applications.MGC.Types
         /// Gets or sets the attached to firearmns list identirifers.
         /// </summary>
         /// <value>The attached to firearmns.</value>
-        public List<Linkers> AttachedToFirearmns { get; set; }
+        public List<GeneralAccessoriesLinkers> AttachedToFirearmns { get; set; }
         /// <summary>
         /// Gets or sets the last synchronize. Is called sync_lastupdate in the table
         /// </summary>
         /// <value>The last synchronize.</value>
         public string LastSync { get; set; }
 
-        /// <summary>
-        /// Class Linkers.Information from the linker table
-        /// </summary>
-        public class Linkers
-        {
-            /// <summary>
-            /// Gets or sets the identifier.
-            /// </summary>
-            /// <value>The identifier.</value>
-            public int Id { get; set; }
-            /// <summary>
-            /// Gets or sets the Gun Id that it is attached to.
-            /// </summary>
-            /// <value>The gid.</value>
-            public int Gid { get; set; }
-            /// <summary>
-            /// Gets or sets the General Accessory that is used.
-            /// </summary>
-            /// <value>The aid.</value>
-            public int Aid { get; set; }
-        }
     }
 }
