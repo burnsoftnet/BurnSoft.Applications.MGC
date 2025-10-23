@@ -937,13 +937,34 @@ namespace BurnSoft.Applications.MGC.hotixes
             {
                 SendStatus($"Creating Table Accessories Link");
                 if (!HfDatabase.RunSql(databasePath,
-                    "CREATE TABLE Gun_Collection_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number, AID Number);",
+                    "CREATE TABLE General_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number, AID Number, " +
+                    "sync_lastupdate DATETIME \"NOW()\");",
+                    out errOut, true))
+                {
+                    if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                }
+                SendStatus($"Creating Table General Accessories Table");
+                if (!HfDatabase.RunSql(databasePath,
+                    "CREATE TABLE General_Accessories (ID AUTOINCREMENT PRIMARY KEY, Manufacturer Text(255), Model Text(255), " +
+                    "SerialNumber Text(255), Condition Text(255), Notes Text(255), Use Text(255), PurValue Text(255), " +
+                    "AppValue Number, CIV NUmber, IC Number, sync_lastupdate DATETIME \"NOW()\");",
                     out errOut, true))
                 {
                     if (!errOut.Contains(" already exists")) throw new Exception(errOut);
                 }
                 SendStatus($"Adding Accessories Link to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Accessories_Link", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding General Accessories to Sync Table");
+                if (!HfDatabase.AddSyncToTable(databasePath, "General_Accessories", out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Adding Column General Accessories Link ID ( GALID ) to Gun Collection Accessories Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GALID", "Gun_Collection_Accessories", "number", "0", out errOut))
+                    throw new Exception(errOut);
+
+                SendStatus($"Settings all GALID to 0 for Gun Collection Accessories Table");
+                if (!HfDatabase.RunSql(databasePath,
+                   "UPDATE Gun_Collection_Accessories set GALID=0",
+                   out errOut, true)) throw new Exception(errOut);
 
                 SendStatus($"Adding Column isCompetitition to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "isCompetition", "Gun_Collection", "number", "0", out errOut))
