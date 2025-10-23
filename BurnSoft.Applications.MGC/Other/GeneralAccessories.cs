@@ -189,7 +189,7 @@ namespace BurnSoft.Applications.MGC.Other
         }
 
         /// <summary>
-        /// Return a List of the general accessoriy based on it's id
+        /// Return a List of the general accessories based on it's id
         /// </summary>
         /// <param name="databasePath">The Database Path</param>
         /// <param name="id">The id of the Accessory that you want to work with</param>
@@ -201,6 +201,32 @@ namespace BurnSoft.Applications.MGC.Other
             try
             {
                 string sql = $"select * from General_Accessories where id={id}";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("List", e);
+            }
+
+            return lst;
+        }
+
+        /// <summary>
+        /// Return a List of all the general accessories
+        /// </summary>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <returns></returns>
+        public static List<GeneralAccessoriesList> List(string databasePath, out string errOut)
+        {
+            List<GeneralAccessoriesList> lst = new List<GeneralAccessoriesList>();
+            try
+            {
+                string sql = $"select * from General_Accessories";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 lst = MyList(dt, out errOut);
