@@ -1,4 +1,5 @@
 ﻿using BurnSoft.Applications.MGC.Firearms;
+using BurnSoft.Applications.MGC.Types;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -54,9 +55,17 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion                        
-
-        public static bool AttachToFirearm(string databasePath, long id, long gunId, out string errOut)
+        #endregion                                
+        /// <summary>
+        /// Attaches The general accessory to the select firearm accessories and adds it to the link list.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool AttachToFirearm(string databasePath, int id, long gunId, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -64,15 +73,47 @@ namespace BurnSoft.Applications.MGC.Other
             {
                 string sql = $"INSERT INTO General_Accessories_Link(GID, AID) Values({gunId},{id})";
                 if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
-                //bAns = Accessories.Add
-                ////string sql = $"Update General_Accessories set Manufacturer='{manufacturer}',Model='{model}'," +
-                ////             $"SerialNumber='{serialNumber}',Condition='{condition}',Notes='{notes}',Use='{use}'," +
-                ////             $"PurValue={purValue},AppValue={appValue},CIV={iCiv},IC={iIc},sync_lastupdate=Now() where id={id}";
-                //bAns = Database.Execute(databasePath, sql, out errOut);
+                List<GeneralAccessoriesList> lst = GeneralAccessories.List(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (GeneralAccessoriesList l in lst)
+                {
+                    if (!Accessories.Add(databasePath, gunId, l.Manufacturer, l.Model, l.SerialNumber, l.Condition, 
+                        l.Notes, l.Use, Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue), 
+                        l.CountInValue, l.IsChoke, id, out errOut)) throw new Exception(errOut);
+                }
+                bAns = true;
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("AttachToFirearm", e);
+            }
+
+            return bAns;
+        }
+
+        public static bool UpdateFirearm(string databasePath, int id, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                List<GeneralAccessoriesList> lst = GeneralAccessories.List(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                foreach (GeneralAccessoriesList l in lst)
+                {
+                    long gaid = Accessories.GetId(databasePath, gunId, l.Manufacturer, l.Model, l.SerialNumber, l.Condition,
+                        l.Notes, l.Use, Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue), l.CountInValue,
+                        l.IsChoke, id, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    if (!Accessories.Update(databasePath, gaid, gunId, l.Manufacturer, l.Model, l.SerialNumber, l.Condition,
+                        l.Notes, l.Use, Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue),
+                        l.CountInValue, l.IsChoke, id, out errOut)) throw new Exception(errOut);
+                }
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateFirearm", e);
             }
 
             return bAns;
