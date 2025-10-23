@@ -937,7 +937,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             {
                 SendStatus($"Creating Table Accessories Link");
                 if (!HfDatabase.RunSql(databasePath,
-                    "CREATE TABLE Gun_Collection_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number, AID Number);",
+                    "CREATE TABLE General_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number, AID Number);",
                     out errOut, true))
                 {
                     if (!errOut.Contains(" already exists")) throw new Exception(errOut);
