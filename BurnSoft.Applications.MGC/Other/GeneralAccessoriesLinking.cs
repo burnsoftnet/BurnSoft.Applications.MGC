@@ -75,7 +75,7 @@ namespace BurnSoft.Applications.MGC.Other
             {
                 string sql = $"INSERT INTO General_Accessories_Link(GID, AID) Values({gunId},{id})";
                 if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
-                List<GeneralAccessoriesList> lst = GeneralAccessories.List(databasePath, id, out errOut);
+                List<GeneralAccessoriesList> lst = GeneralAccessories.Lists(databasePath, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (GeneralAccessoriesList l in lst)
                 {
@@ -209,7 +209,7 @@ namespace BurnSoft.Applications.MGC.Other
             errOut = @"";
             try
             {
-                List<GeneralAccessoriesList> lst = GeneralAccessories.List(databasePath, id, out errOut);
+                List<GeneralAccessoriesList> lst = GeneralAccessories.Lists(databasePath, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (GeneralAccessoriesList l in lst)
                 {
@@ -268,7 +268,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="databasePath">The Database Path</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
-        public static List<GeneralAccessoriesLinkers> List(string databasePath, out string errOut)
+        public static List<GeneralAccessoriesLinkers> Lists(string databasePath, out string errOut)
         {
             List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
             try
@@ -295,7 +295,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="accessoryId">The id of the Accessory that you want to work with</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
-        public static List<GeneralAccessoriesLinkers> List(string databasePath, int accessoryId, out string errOut)
+        public static List<GeneralAccessoriesLinkers> Lists(string databasePath, int accessoryId, out string errOut)
         {
             List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
             try
@@ -323,7 +323,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="accessoryId">The id of the Accessory that you want to work with</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
-        public static List<GeneralAccessoriesLinkers> List(string databasePath, long gunId, int accessoryId, out string errOut)
+        public static List<GeneralAccessoriesLinkers> Lists(string databasePath, long gunId, int accessoryId, out string errOut)
         {
             List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
             try
@@ -359,7 +359,7 @@ namespace BurnSoft.Applications.MGC.Other
             errOut = @"";
             try
             {
-                List<GeneralAccessoriesLinkers> lst = List(databasePath, gunId, galId, out errOut);
+                List<GeneralAccessoriesLinkers> lst = Lists(databasePath, gunId, galId, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (GeneralAccessoriesLinkers a in lst)
                 {
@@ -372,6 +372,32 @@ namespace BurnSoft.Applications.MGC.Other
             }
 
             return lAns;
+        }
+
+        /// <summary>
+        /// Check to see if an accessory and gun id already exist in the linkers table.
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="gunId"></param>
+        /// <param name="galid"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Exists(string databasePath, long gunId, int galid, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                List<GeneralAccessoriesLinkers> lst = Lists(databasePath, gunId, galid, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Any(a => a.Gid.Equals(gunId) && a.Aid.Equals(galid));
+
+            }
+            catch (Exception e)
+            {
+                ErrorMessage("Exists", e);
+            }
+            return bAns;
         }
     }
 }

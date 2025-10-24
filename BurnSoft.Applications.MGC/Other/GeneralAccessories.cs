@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -136,6 +137,7 @@ namespace BurnSoft.Applications.MGC.Other
             return bAns;
         }
 
+        #region "List functions"
         /// <summary>
         /// Send a datable to get that converted into an GeneralAcceeories List type
         /// </summary>
@@ -195,7 +197,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="id">The id of the Accessory that you want to work with</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
-        public static List<GeneralAccessoriesList> List(string databasePath, int id, out string errOut)
+        public static List<GeneralAccessoriesList> Lists(string databasePath, int id, out string errOut)
         {
             List<GeneralAccessoriesList> lst = new List<GeneralAccessoriesList>();
             try
@@ -209,7 +211,7 @@ namespace BurnSoft.Applications.MGC.Other
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("List", e);
+                errOut = ErrorMessage("Lists", e);
             }
 
             return lst;
@@ -221,7 +223,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="databasePath">The Database Path</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
-        public static List<GeneralAccessoriesList> List(string databasePath, out string errOut)
+        public static List<GeneralAccessoriesList> Lists(string databasePath, out string errOut)
         {
             List<GeneralAccessoriesList> lst = new List<GeneralAccessoriesList>();
             try
@@ -235,12 +237,46 @@ namespace BurnSoft.Applications.MGC.Other
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("List", e);
+                errOut = ErrorMessage("Lists", e);
             }
 
             return lst;
         }
+        #endregion
+        #region "Exist Functions
+        /// <summary>
+        /// Check to see an in accessory exists based on the Manufacture, Model and serial number.
+        /// Might not even be needed since This section is designed to hold misc accessories which 
+        /// can contain multiple of the same product.  But not listed in qty since they can be different
+        /// in some way and not all equal, or you might have or create a serial number for it.
+        /// </summary>
+        /// <param name="databasePath"></param>
+        /// <param name="manufacturer"></param>
+        /// <param name="model"></param>
+        /// <param name="serialNumber"></param>
+        /// <param name="errOut"></param>
+        /// <returns></returns>
+        public static bool Exists(string databasePath, string manufacturer, string model, 
+            string serialNumber, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                List<GeneralAccessoriesList> lst = Lists(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Any(a => a.Model.Equals(model) && a.Manufacturer.Equals(manufacturer) && 
+                a.SerialNumber.Equals(serialNumber)); ;
 
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Exists", e);
+            }
 
+            return bAns;
+        }
+
+        #endregion
     }
 }
