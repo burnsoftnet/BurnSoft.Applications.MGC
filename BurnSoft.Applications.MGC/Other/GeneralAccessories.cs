@@ -128,6 +128,7 @@ namespace BurnSoft.Applications.MGC.Other
                              $"SerialNumber='{serialNumber}',Condition='{condition}',Notes='{notes}',Use='{use}'," +
                              $"PurValue={purValue},AppValue={appValue},CIV={iCiv},IC={iIc},sync_lastupdate=Now() where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
             }
             catch (Exception e)
             {
@@ -278,5 +279,47 @@ namespace BurnSoft.Applications.MGC.Other
         }
 
         #endregion
+
+        /// <summary>
+        /// Delete an Accessory from the General Accessory list.
+        /// </summary>
+        /// <param name="databasePath">The Database path</param>
+        /// <param name="id">The Accessory ID</param>
+        /// <param name="errOut">Exception error message</param>
+        /// <returns>Truw if delete was ok, false if there was an error</returns>
+        public static bool Delete(string databasePath, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                if (!GeneralAccessoriesLinking.Delete(databasePath, ))
+                string sql = $"Delete from General_Accessories where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception ex)
+            {
+                errOut = ErrorMessage("Delete", ex);
+            }
+            return bAns;
+        }
+
+        public static bool Delete(string databasePath, long id, bool deleteFromFirearms, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+
+            return bAns;
+        }
+
     }
 }
