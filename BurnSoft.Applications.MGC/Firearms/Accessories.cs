@@ -431,16 +431,16 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// and the request to delete all related accessory from the database has been requested
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="linkId">The link identifier.</param>
+        /// <param name="genAssId">The General Accessory identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Delete(string databasePath, int linkId, out string errOut)
+        public static bool Delete(string databasePath, int genAssId, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                string sql = $"Delete from Gun_Collection_Accessories where GALID={linkId}";
+                string sql = $"Delete from Gun_Collection_Accessories where GALID={genAssId}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
