@@ -281,19 +281,20 @@ namespace BurnSoft.Applications.MGC.Other
         #endregion
 
         /// <summary>
-        /// Delete an Accessory from the General Accessory list.
+        /// Delete an Accessory from the General Accessory list and removes all the links.
         /// </summary>
         /// <param name="databasePath">The Database path</param>
         /// <param name="id">The Accessory ID</param>
         /// <param name="errOut">Exception error message</param>
         /// <returns>Truw if delete was ok, false if there was an error</returns>
-        public static bool Delete(string databasePath, long id, out string errOut)
+        public static bool Delete(string databasePath, int id, out string errOut)
         {
             bool bAns = false;
             errOut = "";
             try
             {
-                if (!GeneralAccessoriesLinking.Delete(databasePath, ))
+                List<GeneralAccessoriesLinkers> delLst = GeneralAccessoriesLinking.Lists(databasePath, id, out errOut);
+                if (!GeneralAccessoriesLinking.Delete(databasePath, delLst, out errOut)) throw new Exception(errOut);
                 string sql = $"Delete from General_Accessories where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
@@ -305,7 +306,7 @@ namespace BurnSoft.Applications.MGC.Other
             return bAns;
         }
 
-        public static bool Delete(string databasePath, long id, bool deleteFromFirearms, out string errOut)
+        public static bool Delete(string databasePath, int id, bool deleteFromFirearms, out string errOut)
         {
             bool bAns = false;
             errOut = "";
