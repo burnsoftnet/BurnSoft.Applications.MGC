@@ -1,13 +1,9 @@
 ﻿using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
-using Microsoft.VisualBasic.ApplicationServices;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MGC.Other
 {
