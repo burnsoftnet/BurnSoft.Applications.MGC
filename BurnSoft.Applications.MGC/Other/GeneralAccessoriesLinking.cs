@@ -391,11 +391,10 @@ namespace BurnSoft.Applications.MGC.Other
                 List<GeneralAccessoriesLinkers> lst = Lists(databasePath, gunId, galid, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = lst.Any(a => a.Gid.Equals(gunId) && a.Aid.Equals(galid));
-
             }
             catch (Exception e)
             {
-                ErrorMessage("Exists", e);
+                errOut = ErrorMessage("Exists", e);
             }
             return bAns;
         }
