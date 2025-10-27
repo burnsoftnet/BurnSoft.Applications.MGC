@@ -450,6 +450,54 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return bAns;
         }
+
+        /// <summary>
+        /// Resets the general accessory to zero.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ResetGeneralAccessoryToZero(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Accessories set GALID=0";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+
+            return bAns;
+        }
+
+        /// <summary>
+        /// Resets the general accessory to zero based onthe selected general accessory id..
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="genAssId">The gen ass identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool ResetGeneralAccessoryToZero(string databasePath, int genAssId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Accessories set GALID=0 where GALID={genAssId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+
+            return bAns;
+        }
+
         /// <summary>
         /// Get the Fulle name, Manufacture and model name in one from the accessories table
         /// </summary>
