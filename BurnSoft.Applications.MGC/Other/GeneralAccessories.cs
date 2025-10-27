@@ -305,14 +305,28 @@ namespace BurnSoft.Applications.MGC.Other
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Deletes the specified Accessory from the links and general tables, as well as the option to delete it
+        /// from all the firearms that it is attacted to so a complete clelan up.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="deleteFromFirearms">if set to <c>true</c> [delete from firearms].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool Delete(string databasePath, int id, bool deleteFromFirearms, out string errOut)
         {
             bool bAns = false;
             errOut = "";
             try
             {
-
+                if (deleteFromFirearms)
+                {
+                    if (!Accessories.Delete(databasePath, id, out errOut)) throw new Exception(errOut);
+                }
+                if (!Delete(databasePath, id, out errOut)) throw new Exception(errOut);
+                bAns= true;
             }
             catch (Exception e)
             {
