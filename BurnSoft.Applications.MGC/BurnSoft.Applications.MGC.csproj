@@ -99,6 +99,8 @@
     <Compile Include="hotixes\types\DbColumns.cs" />
     <Compile Include="hotixes\types\HotFixList.cs" />
     <Compile Include="hotixes\types\HotFixToDbList.cs" />
+    <Compile Include="Other\GeneralAccessories.cs" />
+    <Compile Include="Other\GeneralAccessoriesLinking.cs" />
     <Compile Include="Other\WishList.cs" />
     <Compile Include="PeopleAndPlaces\Appraisers.cs" />
     <Compile Include="PeopleAndPlaces\Buyers.cs" />
@@ -121,7 +123,8 @@
     <Compile Include="Types\CustomReportsLists.cs" />
     <Compile Include="Types\DocumentLinkList.cs" />
     <Compile Include="Types\DocumentList.cs" />
-    <Compile Include="Types\GeneralAccessories.cs" />
+    <Compile Include="Types\GeneralAccessoriesLinkers.cs" />
+    <Compile Include="Types\GeneralAccessoriesList.cs" />
     <Compile Include="Types\GlobalCaliberList.cs" />
     <Compile Include="Types\GripLists.cs" />
     <Compile Include="Types\GunCollectionFullList.cs" />
