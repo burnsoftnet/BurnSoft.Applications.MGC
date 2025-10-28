@@ -87,30 +87,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
                 WishList.Add(_databasePath, _wishListManufacturer, _wishListModel, _wishListPlaceToBuy, _wishListQty, _wishListPrice, _wishListNotes,out _errOut);
             }
         }
-        /// <summary>
-        /// Prints the list.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        private void PrintList(List<WishlistList> value)
-        {
-            // TODO: #63 Add to PrintListValues Function
-            if (value.Count > 0)
-            {
-                foreach (WishlistList v in value)
-                {
-                    TestContext.WriteLine($"id :{v.Id}");
-                    TestContext.WriteLine($"manufacturer: {v.Manufacturer}");
-                    TestContext.WriteLine($"Model: {v.Model}");
-                    TestContext.WriteLine($"Qty: {v.Qty}");
-                    TestContext.WriteLine($"Value: {v.Value}");
-                    TestContext.WriteLine($"LastSync: {v.LastSync}");
-                    TestContext.WriteLine($"Notes: {v.Notes}");
-                    TestContext.WriteLine("");
-                    TestContext.WriteLine("--------------------------");
-                    TestContext.WriteLine("");
-                }
-            }
-        }
+        
         /// <summary>
         /// Defines the test method AddTest.
         /// </summary>
@@ -177,7 +154,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             VerifyExists();
             long id = WishList.GetId(_databasePath, _wishListManufacturer, _wishListModel, out _errOut);
             List<WishlistList> value = WishList.List(_databasePath, (int)id, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.WishListList(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -188,7 +165,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         {
             VerifyExists();
             List<WishlistList> value = WishList.List(_databasePath, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.WishListList(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }

@@ -448,7 +448,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         /// Prints the Wish Listlist.
         /// </summary>
         /// <param name="value">The value.</param>
-        private string WishListList(List<WishlistList> value)
+        public static string WishListList(List<WishlistList> value)
         {
             string sAns = "";
             if (value.Count > 0)
