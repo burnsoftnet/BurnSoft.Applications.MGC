@@ -444,5 +444,34 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             return sAns;
         }
+        /// <summary>
+        /// Prints the Wish Listlist.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        private string WishListList(List<WishlistList> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (WishlistList v in value)
+                {
+                    sAns += $"id :{v.Id}";
+                    sAns += $"manufacturer: {v.Manufacturer}";
+                    sAns += $"Model: {v.Model}";
+                    sAns += $"Qty: {v.Qty}";
+                    sAns += $"Value: {v.Value}";
+                    sAns += $"LastSync: {v.LastSync}";
+                    sAns += $"Notes: {v.Notes}";
+                    sAns += "";
+                    sAns += "--------------------------";
+                    sAns += "";
+                }
+            }
+            else
+            {
+                sAns += "NO DATA IN LIST!";
+            }
+            return sAns;
+        }
     }
 }
