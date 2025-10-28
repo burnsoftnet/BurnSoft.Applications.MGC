@@ -253,5 +253,21 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void ResetGeneralAccessoryToZeroTest()
+        {
+            VerifyExists();
+            bool value = Accessories.ResetGeneralAccessoryToZero(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void ResetGeneralAccessoryToZeroByIDTest()
+        {
+            VerifyExists();
+            bool value = Accessories.ResetGeneralAccessoryToZero(_databasePath, 1, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }
