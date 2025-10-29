@@ -113,6 +113,38 @@ namespace BurnSoft.Applications.MGC.hotixes
             return bAns;
         }
         /// <summary>
+        /// check to see if theTables the exists in the database.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool TableExists(string databasePath, string tableName, out string errOut, bool usePassword = true)
+        {
+            errOut = "";
+            string sql = $"SELECT COUNT(*) FROM MSysObjects WHERE Name = '{tableName}' AND Type = 1";
+            bool bAns = false;
+            OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
+            try
+            {
+                conn.Open();
+                OleDbCommand cmd = new OleDbCommand(sql, conn);
+
+                using (OleDbDataReader dr = cmd.ExecuteReader())
+                {
+                    bAns = dr.HasRows;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = $"{ErrorMessage("TableExists", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+            }
+            conn.Close();
+            return bAns;
+        }
+
+        /// <summary>
         /// Values the does exist.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
