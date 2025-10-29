@@ -970,7 +970,7 @@ namespace BurnSoft.Applications.MGC.hotixes
 
                     
                 SendStatus($"Adding Accessories Link to Sync Table");
-                if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Accessories_Link", out errOut, true)) throw new Exception(errOut);
+                if (!HfDatabase.AddSyncToTable(databasePath, "General_Accessories_Link", out errOut, true)) throw new Exception(errOut);
                 SendStatus($"Adding General Accessories to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "General_Accessories", out errOut, true)) throw new Exception(errOut);
 

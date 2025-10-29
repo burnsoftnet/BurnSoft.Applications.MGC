@@ -123,24 +123,45 @@ namespace BurnSoft.Applications.MGC.hotixes
         public static bool TableExists(string databasePath, string tableName, out string errOut, bool usePassword = true)
         {
             errOut = "";
-            string sql = $"SELECT COUNT(*) FROM MSysObjects WHERE Name = '{tableName}' AND Type = 1";
+            //string sql = $"SELECT COUNT(*) FROM MSysObjects WHERE Name = '{tableName}' AND Type = 1";
+            //string sql = $"SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{tableName}'";
+            string sql = $"SELECT * from {tableName}";
             bool bAns = false;
-            OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
             try
             {
-                conn.Open();
-                OleDbCommand cmd = new OleDbCommand(sql, conn);
-
-                using (OleDbDataReader dr = cmd.ExecuteReader())
-                {
-                    bAns = dr.HasRows;
-                }
+                HasData(databasePath, sql, "TableExists", out errOut, usePassword);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {
+                bAns = false;
                 errOut = $"{ErrorMessage("TableExists", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
             }
-            conn.Close();
+            return bAns;
+        }
+        /// <summary>
+        /// Grants the admin system objects.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool GrantAdminSysObjects(string databasePath, out string errOut, bool usePassword = true)
+        {
+            errOut = "";
+            string sql = $"GRANT SELECT ON MSysObjects TO Admin;";
+            bool bAns = false;
+            try
+            {
+                if (!RunSql(databasePath, sql, out errOut, usePassword)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = $"{ErrorMessage("GrantAdminSysObjects", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+            }
             return bAns;
         }
 
