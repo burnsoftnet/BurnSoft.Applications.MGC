@@ -258,6 +258,38 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             return sAns;
         }
 
+
+        // <summary>
+        /// Prints the general accessories list.
+        /// </summary>
+        /// <param name="value">The AccessoriesList container value.</param>
+        /// <returns>System.String.</returns>
+        public static string GeneralAccessoriesDetails(List<GeneralAccessoriesList> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (GeneralAccessoriesList v in value)
+                {
+                    sAns += $"id :{v.Id}{Environment.NewLine}";
+                    sAns += $"manufacturer: {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Model: {v.Model}{Environment.NewLine}";
+                    sAns += $"Condition: {v.Condition}{Environment.NewLine}";
+                    sAns += $"AppriasedValue: {v.AppriasedValue}{Environment.NewLine}";
+                    sAns += $"CountInValue: {v.CountInValue}{Environment.NewLine}";
+                    sAns += $"IsChoke: {v.IsChoke}{Environment.NewLine}";
+                    sAns += $"LastSync: {v.LastSync}{Environment.NewLine}";
+                    sAns += $"Notes: {v.Notes}{Environment.NewLine}";
+                    sAns += $"PurchaseValue: {v.PurchaseValue}{Environment.NewLine}";
+                    sAns += $"SerialNumber: {v.SerialNumber}{Environment.NewLine}";
+                    sAns += $"Use: {v.Use}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"--------------------------{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
         /// <summary>
         /// Prints the maintance details list.
         /// </summary>
