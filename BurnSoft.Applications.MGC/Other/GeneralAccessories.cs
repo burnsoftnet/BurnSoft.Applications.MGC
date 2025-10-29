@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BurnSoft.Applications.MGC.Other
 {
@@ -275,7 +276,84 @@ namespace BurnSoft.Applications.MGC.Other
         }
 
         #endregion
+        /// <summary>
+        /// Gets the identifier of the selected accessorie details 
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="condition">The condition.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="use">The use.</param>
+        /// <param name="purValue">The pur value.</param>
+        /// <param name="appValue">The appriased value.</param>
+        /// <param name="civ">if set to <c>true</c> [civ].</param>
+        /// <param name="ic">if set to <c>true</c> [ic].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64. The id in the table based on the information passed</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath, string manufacturer, string model, string serialNumber, string condition, string notes,
+            string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                int iCiv = civ ? 1 : 0;
+                int iIc = ic ? 1 : 0;
+                List<GeneralAccessoriesList> lst = Lists(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
 
+                foreach (GeneralAccessoriesList ag in lst.Where(a => a.Model.Equals(model) && a.Manufacturer.Equals(manufacturer) &&
+                a.SerialNumber.Equals(serialNumber) && a.Condition.Equals(condition) && a.Notes.Equals(notes) && a.Use.Equals(use) && 
+                a.PurchaseValue.Equals(purValue) && a.CountInValue.Equals(iCiv) && a.IsChoke.Equals(iIc)))
+                {
+                    lAns = ag.Id;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
+
+        /// <summary>
+        /// Gets the identifier of the selected accessorie details 
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64. The id in the table based on the information passed</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath, string manufacturer, string model, string serialNumber, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                List<GeneralAccessoriesList> lst = Lists(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                foreach (GeneralAccessoriesList ag in lst.Where(a => a.Model.Equals(model) && a.Manufacturer.Equals(manufacturer) && 
+                a.SerialNumber.Equals(serialNumber)))
+                {
+                    lAns = ag.Id;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
         /// <summary>
         /// Delete an Accessory from the General Accessory list and removes all the links.
         /// </summary>
