@@ -290,6 +290,29 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             }
             return sAns;
         }
+
+        /// <summary>
+        /// Generals the accessories linkers details.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string GeneralAccessoriesLinkersDetails(List<GeneralAccessoriesLinkers> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (GeneralAccessoriesLinkers v in value)
+                {
+                    sAns += $"id :{v.Id}{Environment.NewLine}";
+                    sAns += $"Gid: {v.Gid}{Environment.NewLine}";
+                    sAns += $"Aid: {v.Aid}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"--------------------------{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
         /// <summary>
         /// Prints the maintance details list.
         /// </summary>
