@@ -104,8 +104,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
                 _accessoriesSerialNumber, out _errOut))
             {
                 long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
-                    _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
-                    _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+                    _accessoriesSerialNumber, _accessoriesCondition, _accessoriesUse,
+                    _accessoriesCiv, _accessoriesIc, out _errOut);
                 Accessories.Delete(_databasePath, id, out _errOut);
             }
         }
@@ -138,8 +138,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         {
             VerifyExists();
             long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
-                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
-                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesUse,
+                _accessoriesCiv, _accessoriesIc, out _errOut);
 
             bool value = GeneralAccessories.Update(_databasePath, id, _accessoriesManufacturer, _accessoriesName,
                 _accessoriesSerialNumber, _accessoriesCondition, $"UPDATE TEST {_accessoriesNotes}", _accessoriesUse,
@@ -179,8 +179,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         {
             VerifyExists();
             long value = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
-                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
-                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesUse,
+                _accessoriesCiv, _accessoriesIc, out _errOut);
             TestContext.WriteLine($"ID = {value}");
             General.HasTrueValue(value > 0, _errOut);
         }
