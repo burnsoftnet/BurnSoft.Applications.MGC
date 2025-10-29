@@ -37,6 +37,9 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * FIXED issue with Importing a Firearm where the Default Barrel ID and Model ID return 0.
 * Added Function to produce and look up the ID of the Rating list.
 * Added Function for Settings Picture Order, Reseting orders and addition List functions for the Picture Table
+* Added General Accessories Table and Functions
+* Added General Accessories Link Table and Functions
+* Added Another Column to the Gun Accessories Table to link between the two types of accessories. If this was done in the first place it would be just the general and the link, but right now this is an experiment and I will see if the link table is needed as tests go on.
 
 
 ### v1.7.0.4
