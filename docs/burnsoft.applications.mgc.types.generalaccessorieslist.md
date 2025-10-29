@@ -2,17 +2,17 @@
 
 ---
 
-# AccessoriesList
+# GeneralAccessoriesList
 
 Namespace: BurnSoft.Applications.MGC.Types
 
-Class AccessoriesList list container that will contain the information from the Gun_Collection_Accessories table.
+Class AccessoriesList list container that will contain the information from the General_Accessories table.
 
 ```csharp
-public class AccessoriesList
+public class GeneralAccessoriesList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AccessoriesList](./burnsoft.applications.mgc.types.accessorieslist)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesList](./burnsoft.applications.mgc.types.generalaccessorieslist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties
@@ -29,19 +29,6 @@ public long Id { get; set; }
 
 [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The identifier.
-
-### **GunId**
-
-Gets or sets the gun identifier. This is gid in the table
-
-```csharp
-public long GunId { get; set; }
-```
-
-#### Property Value
-
-[Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-The gun identifier.
 
 ### **Manufacturer**
 
@@ -173,18 +160,18 @@ public bool IsChoke { get; set; }
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if this instance is choke; otherwise, `false`.
 
-### **GALID**
+### **AttachedToFirearmns**
 
-Gets or sets the galid ( General Accessories Link ID ).
+Gets or sets the attached to firearmns list identirifers.
 
 ```csharp
-public int GALID { get; set; }
+public List<GeneralAccessoriesLinkers> AttachedToFirearmns { get; set; }
 ```
 
 #### Property Value
 
-[Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-The galid.
+[List&lt;GeneralAccessoriesLinkers&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The attached to firearmns.
 
 ### **LastSync**
 
@@ -201,10 +188,10 @@ The last synchronize.
 
 ## Constructors
 
-### **AccessoriesList()**
+### **GeneralAccessoriesList()**
 
 ```csharp
-public AccessoriesList()
+public GeneralAccessoriesList()
 ```
 
 ---

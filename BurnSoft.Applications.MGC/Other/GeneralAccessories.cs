@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BurnSoft.Applications.MGC.Other
 {
@@ -275,7 +276,79 @@ namespace BurnSoft.Applications.MGC.Other
         }
 
         #endregion
+        /// <summary>
+        /// Gets the identifier of the selected accessorie details 
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="condition">The condition.</param>
+        /// <param name="use">The use.</param>
+        /// <param name="civ">if set to <c>true</c> [civ].</param>
+        /// <param name="ic">if set to <c>true</c> [ic].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64. The id in the table based on the information passed</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath, string manufacturer, string model, string serialNumber, string condition,
+            string use, bool civ, bool ic, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                List<GeneralAccessoriesList> lst = Lists(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
 
+                foreach (GeneralAccessoriesList a in lst.Where( w=> w.Model.Equals(model) && w.Manufacturer.Equals(manufacturer) 
+                && serialNumber.Equals(serialNumber) && w.Condition.Equals(condition) && w.Use.Equals(use) && 
+                w.CountInValue.Equals(civ) && w.IsChoke.Equals(ic)))
+                {
+                    lAns = a.Id;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
+
+        /// <summary>
+        /// Gets the identifier of the selected accessorie details 
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64. The id in the table based on the information passed</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static long GetId(string databasePath, string manufacturer, string model, string serialNumber, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                List<GeneralAccessoriesList> lst = Lists(databasePath, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                foreach (GeneralAccessoriesList ag in lst.Where(a => a.Model.Equals(model) && a.Manufacturer.Equals(manufacturer) && 
+                a.SerialNumber.Equals(serialNumber)))
+                {
+                    lAns = ag.Id;
+                    break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
         /// <summary>
         /// Delete an Accessory from the General Accessory list and removes all the links.
         /// </summary>
@@ -289,8 +362,8 @@ namespace BurnSoft.Applications.MGC.Other
             errOut = "";
             try
             {
-                List<GeneralAccessoriesLinkers> delLst = GeneralAccessoriesLinking.Lists(databasePath, id, out errOut);
-                if (!GeneralAccessoriesLinking.Delete(databasePath, delLst, out errOut)) throw new Exception(errOut);
+                //List<GeneralAccessoriesLinkers> delLst = GeneralAccessoriesLinking.Lists(databasePath, id, out errOut);
+                //if (!GeneralAccessoriesLinking.Delete(databasePath, delLst, out errOut)) throw new Exception(errOut);
                 string sql = $"Delete from General_Accessories where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);

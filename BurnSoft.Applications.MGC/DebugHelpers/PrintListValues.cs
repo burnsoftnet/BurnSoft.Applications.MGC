@@ -258,6 +258,61 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
             return sAns;
         }
 
+
+        /// <summary>
+        /// Prints the general accessories list.
+        /// </summary>
+        /// <param name="value">The AccessoriesList container value.</param>
+        /// <returns>System.String.</returns>
+        public static string GeneralAccessoriesDetails(List<GeneralAccessoriesList> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (GeneralAccessoriesList v in value)
+                {
+                    sAns += $"id :{v.Id}{Environment.NewLine}";
+                    sAns += $"manufacturer: {v.Manufacturer}{Environment.NewLine}";
+                    sAns += $"Model: {v.Model}{Environment.NewLine}";
+                    sAns += $"Condition: {v.Condition}{Environment.NewLine}";
+                    sAns += $"AppriasedValue: {v.AppriasedValue}{Environment.NewLine}";
+                    sAns += $"CountInValue: {v.CountInValue}{Environment.NewLine}";
+                    sAns += $"IsChoke: {v.IsChoke}{Environment.NewLine}";
+                    sAns += $"LastSync: {v.LastSync}{Environment.NewLine}";
+                    sAns += $"Notes: {v.Notes}{Environment.NewLine}";
+                    sAns += $"PurchaseValue: {v.PurchaseValue}{Environment.NewLine}";
+                    sAns += $"SerialNumber: {v.SerialNumber}{Environment.NewLine}";
+                    sAns += $"Use: {v.Use}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"--------------------------{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
+
+        /// <summary>
+        /// Generals the accessories linkers details.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        /// <returns>System.String.</returns>
+        public static string GeneralAccessoriesLinkersDetails(List<GeneralAccessoriesLinkers> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (GeneralAccessoriesLinkers v in value)
+                {
+                    sAns += $"id :{v.Id}{Environment.NewLine}";
+                    sAns += $"Gid: {v.Gid}{Environment.NewLine}";
+                    sAns += $"Aid: {v.Aid}{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                    sAns += $"--------------------------{Environment.NewLine}";
+                    sAns += $"{Environment.NewLine}";
+                }
+            }
+            return sAns;
+        }
         /// <summary>
         /// Prints the maintance details list.
         /// </summary>
@@ -436,6 +491,35 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"PicOrder: {d.PicOrder}{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                     sAns += $"----------------------------------------{Environment.NewLine}";
+                }
+            }
+            else
+            {
+                sAns += "NO DATA IN LIST!";
+            }
+            return sAns;
+        }
+        /// <summary>
+        /// Prints the Wish Listlist.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        public static string WishListList(List<WishlistList> value)
+        {
+            string sAns = "";
+            if (value.Count > 0)
+            {
+                foreach (WishlistList v in value)
+                {
+                    sAns += $"id :{v.Id}";
+                    sAns += $"manufacturer: {v.Manufacturer}";
+                    sAns += $"Model: {v.Model}";
+                    sAns += $"Qty: {v.Qty}";
+                    sAns += $"Value: {v.Value}";
+                    sAns += $"LastSync: {v.LastSync}";
+                    sAns += $"Notes: {v.Notes}";
+                    sAns += "";
+                    sAns += "--------------------------";
+                    sAns += "";
                 }
             }
             else

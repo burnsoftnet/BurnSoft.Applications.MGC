@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("www.burnsoft.net")]
 [assembly: AssemblyProduct("BurnSoft.Applications.MGC.UnitTest")]
-[assembly: AssemblyCopyright("Copyright ©www.burnsoft.net  2021-2022")]
+[assembly: AssemblyCopyright("Copyright ©www.burnsoft.net  2021-2025")]
 [assembly: AssemblyTrademark("www.burnsoft.net")]
 [assembly: AssemblyCulture("")]
 
@@ -15,5 +15,5 @@ using System.Runtime.InteropServices;
 [assembly: Guid("726a484c-ebee-4973-aa0f-b4422cf8f693")]
 
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.7.0.3")]
-[assembly: AssemblyFileVersion("1.7.0.3")]
+[assembly: AssemblyVersion("1.7.3.321")]
+[assembly: AssemblyFileVersion("1.7.3.321")]

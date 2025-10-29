@@ -97,6 +97,42 @@ The AccessoriesList container value.
 [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 System.String.
 
+### **GeneralAccessoriesDetails(List&lt;GeneralAccessoriesList&gt;)**
+
+Prints the general accessories list.
+
+```csharp
+public static string GeneralAccessoriesDetails(List<GeneralAccessoriesList> value)
+```
+
+#### Parameters
+
+`value` [List&lt;GeneralAccessoriesList&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The AccessoriesList container value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
+### **GeneralAccessoriesLinkersDetails(List&lt;GeneralAccessoriesLinkers&gt;)**
+
+Generals the accessories linkers details.
+
+```csharp
+public static string GeneralAccessoriesLinkersDetails(List<GeneralAccessoriesLinkers> value)
+```
+
+#### Parameters
+
+`value` [List&lt;GeneralAccessoriesLinkers&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+System.String.
+
 ### **GunMaintanceDetails(List&lt;MaintanceDetailsList&gt;)**
 
 Prints the maintance details list.
@@ -199,6 +235,23 @@ public static string PictureDetailsList(List<PictureDetails> p)
 
 `p` [List&lt;PictureDetails&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 The PictureDetails List
+
+#### Returns
+
+[String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+
+### **WishListList(List&lt;WishlistList&gt;)**
+
+Prints the Wish Listlist.
+
+```csharp
+public static string WishListList(List<WishlistList> value)
+```
+
+#### Parameters
+
+`value` [List&lt;WishlistList&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+The value.
 
 #### Returns
 

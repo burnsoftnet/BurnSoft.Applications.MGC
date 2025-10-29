@@ -102,6 +102,10 @@
 
 ## BurnSoft.Applications.MGC.Other
 
+[GeneralAccessories](./burnsoft.applications.mgc.other.generalaccessories)
+
+[GeneralAccessoriesLinking](./burnsoft.applications.mgc.other.generalaccessorieslinking)
+
 [WishList](./burnsoft.applications.mgc.other.wishlist)
 
 ## BurnSoft.Applications.MGC.PeopleAndPlaces
@@ -153,6 +157,10 @@
 [DocumentLinkList](./burnsoft.applications.mgc.types.documentlinklist)
 
 [DocumentList](./burnsoft.applications.mgc.types.documentlist)
+
+[GeneralAccessoriesLinkers](./burnsoft.applications.mgc.types.generalaccessorieslinkers)
+
+[GeneralAccessoriesList](./burnsoft.applications.mgc.types.generalaccessorieslist)
 
 [GlobalCaliberList](./burnsoft.applications.mgc.types.globalcaliberlist)
 

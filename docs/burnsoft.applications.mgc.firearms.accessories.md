@@ -62,13 +62,70 @@ The use.
 The pur value.
 
 `appValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The application value.
+The appriased value.
 
 `civ` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [civ].
+Count in Value.
 
 `ic` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
-if set to `true` [ic].
+Is Shotgun Choke.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **Add(String, Int64, String, String, String, String, String, String, Double, Double, Boolean, Boolean, Int32, String&)**
+
+Adds the specified accessory to the database.
+
+```csharp
+public static bool Add(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, int galid, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The gun identifier.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
+
+`model` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The model.
+
+`serialNumber` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The serial number.
+
+`condition` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The condition.
+
+`notes` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The notes.
+
+`use` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The use.
+
+`purValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The pur value.
+
+`appValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The appriased value.
+
+`civ` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Count in Value.
+
+`ic` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Is Shotgun Choke.
+
+`galid` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The general accessory list id.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -119,13 +176,73 @@ The use.
 The pur value.
 
 `appValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The application value.
+The appriased value.
 
 `civ` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 if set to `true` [civ].
 
 `ic` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 if set to `true` [ic].
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **Update(String, Int64, Int64, String, String, String, String, String, String, Double, Double, Boolean, Boolean, Int32, String&)**
+
+Updates the specified database path.
+
+```csharp
+public static bool Update(string databasePath, long id, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, int gaId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The identifier.
+
+`gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The gun identifier.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
+
+`model` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The model.
+
+`serialNumber` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The serial number.
+
+`condition` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The condition.
+
+`notes` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The notes.
+
+`use` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The use.
+
+`purValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The pur value.
+
+`appValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The appriased value.
+
+`civ` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [civ].
+
+`ic` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [ic].
+
+`gaId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The General Accessor Link identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
@@ -173,7 +290,7 @@ The use.
 The pur value.
 
 `appValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The application value.
+The appriased value.
 
 `civ` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 if set to `true` [civ].
@@ -195,7 +312,7 @@ This is mostyl used for Unit Testing, the application allos copy of duplicate va
 
 ### **GetId(String, Int64, String, String, String, String, String, String, Double, Double, Boolean, Boolean, String&)**
 
-Gets the identifier.
+Gets the identifier of the selected accessorie details
 
 ```csharp
 public static long GetId(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, String& errOut)
@@ -231,7 +348,7 @@ The use.
 The pur value.
 
 `appValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
-The application value.
+The appriased value.
 
 `civ` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 if set to `true` [civ].
@@ -245,7 +362,68 @@ The error out.
 #### Returns
 
 [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
-System.Int64.
+System.Int64. The id in the table based on the information passed
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetId(String, Int64, String, String, String, String, String, String, Double, Double, Boolean, Boolean, Int32, String&)**
+
+Gets the identifier of the selected accessorie details
+
+```csharp
+public static long GetId(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, int galId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The gun identifier.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
+
+`model` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The model.
+
+`serialNumber` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The serial number.
+
+`condition` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The condition.
+
+`notes` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The notes.
+
+`use` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The use.
+
+`purValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The pur value.
+
+`appValue` [Double](https://docs.microsoft.com/en-us/dotnet/api/system.double)<br>
+The appriased value.
+
+`civ` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [civ].
+
+`ic` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [ic].
+
+`galId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The general accessories link identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+System.Int64. The id in the table based on the information passed
 
 #### Exceptions
 
@@ -318,6 +496,76 @@ The database path.
 
 `id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **Delete(String, Int32, String&)**
+
+Deletes the specified accessories that are linked from a General Accessory
+ and the request to delete all related accessory from the database has been requested
+
+```csharp
+public static bool Delete(string databasePath, int genAssId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`genAssId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The General Accessory identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **ResetGeneralAccessoryToZero(String, String&)**
+
+Resets the general accessory to zero.
+
+```csharp
+public static bool ResetGeneralAccessoryToZero(string databasePath, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **ResetGeneralAccessoryToZero(String, Int32, String&)**
+
+Resets the general accessory to zero based onthe selected general accessory id..
+
+```csharp
+public static bool ResetGeneralAccessoryToZero(string databasePath, int genAssId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`genAssId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The gen ass identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.

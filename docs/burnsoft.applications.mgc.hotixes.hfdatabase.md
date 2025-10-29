@@ -25,6 +25,61 @@ public HfDatabase()
 
 ## Methods
 
+### **TableExists(String, String, String&, Boolean)**
+
+check to see if theTables the exists in the database.
+
+```csharp
+public static bool TableExists(string databasePath, string tableName, String& errOut, bool usePassword)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`tableName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+Name of the table.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+`usePassword` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [use password].
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+### **GrantAdminSysObjects(String, String&, Boolean)**
+
+Grants the admin system objects.
+
+```csharp
+public static bool GrantAdminSysObjects(string databasePath, String& errOut, bool usePassword)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+`usePassword` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [use password].
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **ValueDoesExist(String, String, String, String, String&, Boolean)**
 
 Values the does exist.
