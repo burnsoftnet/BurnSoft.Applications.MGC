@@ -1,4 +1,6 @@
-﻿using BurnSoft.Applications.MGC.UnitTest.Settings;
+﻿using BurnSoft.Applications.MGC.Firearms;
+using BurnSoft.Applications.MGC.Other;
+using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -21,7 +23,50 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         /// The database path
         /// </summary>
         private string _databasePath;
-
+        /// <summary>
+        /// The gun identifier
+        /// </summary>
+        private int _gunId;
+        /// <summary>
+        /// The accessories manufacturer
+        /// </summary>
+        private string _accessoriesManufacturer;
+        /// <summary>
+        /// The accessories name
+        /// </summary>
+        private string _accessoriesName;
+        /// <summary>
+        /// The accessories serial number
+        /// </summary>
+        private string _accessoriesSerialNumber;
+        /// <summary>
+        /// The accessories condition
+        /// </summary>
+        private string _accessoriesCondition;
+        /// <summary>
+        /// The accessories notes
+        /// </summary>
+        private string _accessoriesNotes;
+        /// <summary>
+        /// The accessories use
+        /// </summary>
+        private string _accessoriesUse;
+        /// <summary>
+        /// The accessories pur value
+        /// </summary>
+        private double _accessoriesPurValue;
+        /// <summary>
+        /// The accessories application value
+        /// </summary>
+        private double _accessoriesAppValue;
+        /// <summary>
+        /// The accessories civ
+        /// </summary>
+        private bool _accessoriesCiv;
+        /// <summary>
+        /// The accessories ic
+        /// </summary>
+        private bool _accessoriesIc;
         /// <summary>
         /// Initializes this instance.
         /// </summary>
@@ -32,11 +77,49 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
+            _accessoriesManufacturer = obj.FC(Vs2019.GetSetting("Accessories_Manufacturer", TestContext));
+            _accessoriesName = obj.FC(Vs2019.GetSetting("Accessories_Name", TestContext));
+            _accessoriesSerialNumber = obj.FC(Vs2019.GetSetting("Accessories_serialNumber", TestContext));
+            _accessoriesCondition = obj.FC(Vs2019.GetSetting("Accessories_condition", TestContext));
+            _accessoriesNotes = obj.FC(Vs2019.GetSetting("Accessories_notes", TestContext));
+            _accessoriesUse = obj.FC(Vs2019.GetSetting("Accessories_use", TestContext));
+            _accessoriesPurValue = Vs2019.DGetSetting("Accessories_purValue", TestContext);
+            _accessoriesAppValue = Vs2019.DGetSetting("Accessories_appValue", TestContext);
+            _accessoriesCiv = Vs2019.BGetSetting("Accessories_civ", TestContext);
+            _accessoriesIc = Vs2019.BGetSetting("Accessories_ic", TestContext);
         }
-
-        [TestMethod]
-        public void TestMethod1()
+        /// <summary>
+        /// Verifies the doesnt exist.
+        /// </summary>
+        private void VerifyDoesntExist()
         {
+            if (GeneralAccessories.Exists(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut))
+            {
+                long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                    _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                    _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+                Accessories.Delete(_databasePath, id, out _errOut);
+            }
+        }
+        /// <summary>
+        /// Verifies the exists.
+        /// </summary>
+        private void VerifyExists()
+        {
+            if (!GeneralAccessories.Exists(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut))
+            {
+                GeneralAccessories.Add(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
+                    _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                    _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+            }
+        }
+        [TestMethod]
+        public void AddTest()
+        {
+
         }
     }
 }
