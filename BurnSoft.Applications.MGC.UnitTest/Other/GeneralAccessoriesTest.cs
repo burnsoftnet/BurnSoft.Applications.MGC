@@ -165,12 +165,53 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
-        [TestMethod, TestCategory("Accessories")]
+        [TestMethod, TestCategory("General Accessories")]
         public void ExistsTest()
         {
             VerifyExists();
             bool value = GeneralAccessories.Exists(_databasePath, _accessoriesManufacturer, _accessoriesName,
                 _accessoriesSerialNumber, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void GetId()
+        {
+            VerifyExists();
+            long value = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+            TestContext.WriteLine($"ID = {value}");
+            General.HasTrueValue(value > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void GetIdShort()
+        {
+            VerifyExists();
+            long value = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut);
+            TestContext.WriteLine($"ID = {value}");
+            General.HasTrueValue(value > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void DeleteTest()
+        {
+            VerifyExists();
+            long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut);
+            bool value = GeneralAccessories.Delete(_databasePath, Convert.ToInt32(id), out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void DeleteFromFirearmTest()
+        {
+            VerifyExists();
+            long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut);
+            bool value = GeneralAccessories.Delete(_databasePath, Convert.ToInt32(id), deleteFromFirearms: true, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
     }
