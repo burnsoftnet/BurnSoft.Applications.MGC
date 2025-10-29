@@ -325,7 +325,7 @@ namespace BurnSoft.Applications.MGC.Other
             List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
             try
             {
-                string sql = $"select * from General_Accessories_Link where aid={accessoryId} and=gid{gunId}";
+                string sql = $"select * from General_Accessories_Link where AID={accessoryId} and GID={gunId}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 lst = MyList(dt, out errOut);
@@ -387,7 +387,7 @@ namespace BurnSoft.Applications.MGC.Other
             {
                 List<GeneralAccessoriesLinkers> lst = Lists(databasePath, gunId, galid, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                bAns = lst.Any(a => a.Gid.Equals(gunId) && a.Aid.Equals(galid));
+                bAns = lst.Any(a => a.Gid.Equals(Convert.ToInt32(gunId)) && a.Aid.Equals(galid));
             }
             catch (Exception e)
             {
