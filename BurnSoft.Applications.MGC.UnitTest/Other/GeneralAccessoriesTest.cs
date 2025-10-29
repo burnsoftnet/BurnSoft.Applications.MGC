@@ -1,9 +1,11 @@
 ﻿using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Other;
+using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 
 namespace BurnSoft.Applications.MGC.UnitTest.Other
 {
@@ -68,6 +70,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         /// </summary>
         private bool _accessoriesIc;
         /// <summary>
+        /// The main accessory that is already default in the database
+        /// </summary>
+        private int _mainAccessory;
+        /// <summary>
         /// Initializes this instance.
         /// </summary>
         [TestInitialize]
@@ -76,6 +82,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             // Vs2019.GetSetting("", TestContext);
             BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
+            _mainAccessory = 1;
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _accessoriesManufacturer = obj.FC(Vs2019.GetSetting("Accessories_Manufacturer", TestContext));
             _accessoriesName = obj.FC(Vs2019.GetSetting("Accessories_Name", TestContext));
@@ -108,18 +115,63 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         private void VerifyExists()
         {
             if (!GeneralAccessories.Exists(_databasePath, _accessoriesManufacturer, _accessoriesName,
-                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
-                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut))
+                _accessoriesSerialNumber, out _errOut))
             {
-                GeneralAccessories.Add(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
+                GeneralAccessories.Add(_databasePath, _accessoriesManufacturer, _accessoriesName,
                     _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
                     _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
             }
         }
-        [TestMethod]
+
+        [TestMethod, TestCategory("General Accessories")]
         public void AddTest()
         {
+            VerifyDoesntExist();
+            bool value = GeneralAccessories.Add(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
 
+        [TestMethod, TestCategory("General Accessories")]
+        public void UpdateTest()
+        {
+            VerifyExists();
+            long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+
+            bool value = GeneralAccessories.Update(_databasePath, id, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, $"UPDATE TEST {_accessoriesNotes}", _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void ListTest()
+        {
+            VerifyExists();
+            List<GeneralAccessoriesList> value = GeneralAccessories.Lists(_databasePath, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GeneralAccessoriesDetails(value));
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void ListByIdTest()
+        {
+            VerifyExists();
+            List<GeneralAccessoriesList> value = GeneralAccessories.Lists(_databasePath, _mainAccessory, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GeneralAccessoriesDetails(value));
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void ExistsTest()
+        {
+            VerifyExists();
+            bool value = GeneralAccessories.Exists(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
     }
 }
