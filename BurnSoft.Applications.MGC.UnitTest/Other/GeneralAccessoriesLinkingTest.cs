@@ -128,6 +128,22 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         }
 
         [TestMethod, TestCategory("General Accessories Links")]
+        public void AttachToFirearmTest()
+        {
+            VerifyDoesntExist();
+            bool value = GeneralAccessoriesLinking.AttachToFirearm(_databasePath, _mainAccessory, _gunId, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories Links")]
+        public void UpdateFirearmTest()
+        {
+            VerifyDoesntExist();
+            bool value = GeneralAccessoriesLinking.UpdateFirearm(_databasePath, _mainAccessory, _gunId, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories Links")]
         public void ListsAllTest()
         {
             VerifyExists();
