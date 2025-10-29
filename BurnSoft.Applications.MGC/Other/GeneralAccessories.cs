@@ -303,7 +303,8 @@ namespace BurnSoft.Applications.MGC.Other
                 List<GeneralAccessoriesList> lst = Lists(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
 
-                foreach (GeneralAccessoriesList a in lst.Where( w=> w.Model.Equals(model) && w.Manufacturer.Equals(manufacturer) && serialNumber.Equals(serialNumber)))
+                foreach (GeneralAccessoriesList a in lst.Where( w=> w.Model.Equals(model) && w.Manufacturer.Equals(manufacturer) 
+                && serialNumber.Equals(serialNumber) && w.Condition.Equals(condition)))
                 {
                     //    if (a.Condition.Equals(condition) && a.Notes.Equals(notes) && a.Use.Equals(use) &&
                     //a.PurchaseValue.Equals(purValue) && a.CountInValue.Equals(civ) && a.IsChoke.Equals(ic))
@@ -311,39 +312,6 @@ namespace BurnSoft.Applications.MGC.Other
                     //        lAns = a.Id;
                     //        break;
                     //    }
-                    lAns = a.Id;
-                    break;
-                }
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("GetId", e);
-            }
-
-            return lAns;
-        }
-
-        /// <summary>
-        /// Gets the identifier of the selected accessorie details 
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="manufacturer">The manufacturer.</param>
-        /// <param name="model">The model.</param>
-        /// <param name="serialNumber">The serial number.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>System.Int64. The id in the table based on the information passed</returns>
-        /// <exception cref="System.Exception"></exception>
-        public static long GetId(string databasePath, string manufacturer, string model, string serialNumber, out string errOut)
-        {
-            long lAns = 0;
-            errOut = @"";
-            try
-            {
-                List<GeneralAccessoriesList> lst = Lists(databasePath, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
-
-                foreach (GeneralAccessoriesList a in lst.Where(w => w.Model.Equals(model) && w.Manufacturer.Equals(manufacturer) && serialNumber.Equals(serialNumber)))
-                {
                     lAns = a.Id;
                     break;
                 }
