@@ -259,7 +259,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
         }
 
 
-        // <summary>
+        /// <summary>
         /// Prints the general accessories list.
         /// </summary>
         /// <param name="value">The AccessoriesList container value.</param>
