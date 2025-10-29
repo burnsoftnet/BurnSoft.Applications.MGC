@@ -1,23 +1,19 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace BurnSoft.Applications.MGC.Types
 {
     /// <summary>
-    /// Class AccessoriesList list container that will contain the information from the Gun_Collection_Accessories table.
+    /// Class AccessoriesList list container that will contain the information from the General_Accessories table.
     /// </summary>
     [Serializable]
-    public class AccessoriesList
+    public class GeneralAccessoriesList
     {
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
         /// <value>The identifier.</value>
         public long Id { get; set; }
-        /// <summary>
-        /// Gets or sets the gun identifier.  This is gid in the table
-        /// </summary>
-        /// <value>The gun identifier.</value>
-        public long GunId { get; set; }
         /// <summary>
         /// Gets or sets the manufacturer.
         /// </summary>
@@ -69,14 +65,15 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value><c>true</c> if this instance is choke; otherwise, <c>false</c>.</value>
         public bool IsChoke { get; set; }
         /// <summary>
-        /// Gets or sets the galid ( General Accessories Link ID ).
+        /// Gets or sets the attached to firearmns list identirifers.
         /// </summary>
-        /// <value>The galid.</value>
-        public int GALID { get; set; }
+        /// <value>The attached to firearmns.</value>
+        public List<GeneralAccessoriesLinkers> AttachedToFirearmns { get; set; }
         /// <summary>
         /// Gets or sets the last synchronize. Is called sync_lastupdate in the table
         /// </summary>
         /// <value>The last synchronize.</value>
         public string LastSync { get; set; }
+
     }
 }
