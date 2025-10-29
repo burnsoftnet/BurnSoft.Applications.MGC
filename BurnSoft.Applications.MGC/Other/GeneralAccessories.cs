@@ -300,17 +300,19 @@ namespace BurnSoft.Applications.MGC.Other
             errOut = @"";
             try
             {
-                int iCiv = civ ? 1 : 0;
-                int iIc = ic ? 1 : 0;
                 List<GeneralAccessoriesList> lst = Lists(databasePath, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
 
-                foreach (GeneralAccessoriesList ag in lst.Where(a => a.Model.Equals(model) && a.Manufacturer.Equals(manufacturer) &&
-                a.SerialNumber.Equals(serialNumber) && a.Condition.Equals(condition) && a.Notes.Equals(notes) && a.Use.Equals(use) && 
-                a.PurchaseValue.Equals(purValue) && a.CountInValue.Equals(iCiv) && a.IsChoke.Equals(iIc)))
+                foreach (GeneralAccessoriesList a in lst)
                 {
-                    lAns = ag.Id;
-                    break;
+                    if (a.Model.Equals(model) && a.Manufacturer.Equals(manufacturer) &&
+                a.SerialNumber.Equals(serialNumber) && a.Condition.Equals(condition) && a.Notes.Equals(notes) && a.Use.Equals(use) &&
+                a.PurchaseValue.Equals(purValue) && a.CountInValue.Equals(civ) && a.IsChoke.Equals(ic))
+                    {
+                        lAns = a.Id;
+                        break;
+                    }
+                    
                 }
             }
             catch (Exception e)
@@ -367,8 +369,8 @@ namespace BurnSoft.Applications.MGC.Other
             errOut = "";
             try
             {
-                List<GeneralAccessoriesLinkers> delLst = GeneralAccessoriesLinking.Lists(databasePath, id, out errOut);
-                if (!GeneralAccessoriesLinking.Delete(databasePath, delLst, out errOut)) throw new Exception(errOut);
+                //List<GeneralAccessoriesLinkers> delLst = GeneralAccessoriesLinking.Lists(databasePath, id, out errOut);
+                //if (!GeneralAccessoriesLinking.Delete(databasePath, delLst, out errOut)) throw new Exception(errOut);
                 string sql = $"Delete from General_Accessories where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
