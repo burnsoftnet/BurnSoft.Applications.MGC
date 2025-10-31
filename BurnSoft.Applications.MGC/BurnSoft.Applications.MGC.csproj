@@ -62,6 +62,7 @@
     <Compile Include="AutoFill\Appraisers.cs" />
     <Compile Include="AutoFill\Documents.cs" />
     <Compile Include="AutoFill\General.cs" />
+    <Compile Include="AutoFill\GeneralAccessories.cs" />
     <Compile Include="AutoFill\Gun.cs" />
     <Compile Include="AutoFill\GunCollection.cs" />
     <Compile Include="AutoFill\GunSmith.cs" />
