@@ -41,6 +41,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * Added General Accessories Link Table and Functions
 * Added Another Column to the Gun Accessories Table to link between the two types of accessories. If this was done in the first place it would be just the general and the link, but right now this is an experiment and I will see if the link table is needed as tests go on.
 * Created Function to Check if table exists for hotfix section
+* Added AutoFill for General Accessories
 
 ### v1.7.0.4
 
