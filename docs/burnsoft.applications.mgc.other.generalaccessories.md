@@ -12,7 +12,7 @@ Main Class to handle the General_Accessories table.
 public class GeneralAccessories
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessories](./burnsoft.applications.mgc.other.generalaccessories)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessories](./burnsoft.applications.mgc.other.generalaccessories.md)
 
 ## Constructors
 

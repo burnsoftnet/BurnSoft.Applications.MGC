@@ -12,7 +12,7 @@ Class Third Party Class for some simply functions that another application can u
 public class Main
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Main](./burnsoft.applications.mgc.thirdparty.main)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Main](./burnsoft.applications.mgc.thirdparty.main.md)
 
 ## Constructors
 

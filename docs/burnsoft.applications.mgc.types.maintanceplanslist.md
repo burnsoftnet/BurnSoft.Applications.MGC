@@ -12,7 +12,7 @@ Class MaintancePlans to hold the information from the Maintance_Plans table
 public class MaintancePlansList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintancePlansList](./burnsoft.applications.mgc.types.maintanceplanslist)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintancePlansList](./burnsoft.applications.mgc.types.maintanceplanslist.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

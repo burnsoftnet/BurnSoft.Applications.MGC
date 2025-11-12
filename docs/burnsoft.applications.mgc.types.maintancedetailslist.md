@@ -12,7 +12,7 @@ Class MaintanceDetailsList to store the information from the Maintance_Details t
 public class MaintanceDetailsList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintanceDetailsList](./burnsoft.applications.mgc.types.maintancedetailslist)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintanceDetailsList](./burnsoft.applications.mgc.types.maintancedetailslist.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

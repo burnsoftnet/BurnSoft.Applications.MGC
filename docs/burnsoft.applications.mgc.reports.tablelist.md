@@ -12,7 +12,7 @@ Class TableList. Class to manage the CR_TableList table in the database
 public class TableList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TableList](./burnsoft.applications.mgc.reports.tablelist)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TableList](./burnsoft.applications.mgc.reports.tablelist.md)
 
 ## Constructors
 

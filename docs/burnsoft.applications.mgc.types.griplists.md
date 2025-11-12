@@ -12,7 +12,7 @@ Class GripLists data container.
 public class GripLists
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GripLists](./burnsoft.applications.mgc.types.griplists)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GripLists](./burnsoft.applications.mgc.types.griplists.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

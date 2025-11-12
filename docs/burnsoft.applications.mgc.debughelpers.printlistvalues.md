@@ -13,7 +13,7 @@ Get the data from the lists and put them in a format that can be
 public class PrintListValues
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrintListValues](./burnsoft.applications.mgc.debughelpers.printlistvalues)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PrintListValues](./burnsoft.applications.mgc.debughelpers.printlistvalues.md)
 
 ## Constructors
 

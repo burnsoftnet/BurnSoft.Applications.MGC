@@ -12,7 +12,7 @@ Class TableLists. List container for data from the CR_TableList table.
 public class TableLists
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TableLists](./burnsoft.applications.mgc.types.tablelists)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [TableLists](./burnsoft.applications.mgc.types.tablelists.md)
 
 ## Properties
 

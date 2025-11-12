@@ -12,7 +12,7 @@ Class to hold the information about the Barrel System and Conversion kits for a 
 public class BarrelSystems
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [BarrelSystems](./burnsoft.applications.mgc.types.barrelsystems)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [BarrelSystems](./burnsoft.applications.mgc.types.barrelsystems.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

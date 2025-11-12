@@ -12,7 +12,7 @@ Class HotFixToDbList is the container for the hotfix to Database Version list co
 public class HotFixToDbList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HotFixToDbList](./burnsoft.applications.mgc.hotixes.types.hotfixtodblist)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HotFixToDbList](./burnsoft.applications.mgc.hotixes.types.hotfixtodblist.md)
 
 ## Properties
 

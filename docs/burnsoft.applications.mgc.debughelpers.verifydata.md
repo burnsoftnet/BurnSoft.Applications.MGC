@@ -13,7 +13,7 @@ The Verify Data Class will get the data returned to help validate that
 public class VerifyData
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [VerifyData](./burnsoft.applications.mgc.debughelpers.verifydata)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [VerifyData](./burnsoft.applications.mgc.debughelpers.verifydata.md)
 
 ## Constructors
 

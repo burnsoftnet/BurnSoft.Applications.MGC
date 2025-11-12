@@ -12,7 +12,7 @@ Class ColumnLists list container for the CR_ColumnList table.
 public class ColumnLists
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ColumnLists](./burnsoft.applications.mgc.types.columnlists)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ColumnLists](./burnsoft.applications.mgc.types.columnlists.md)
 
 ## Properties
 

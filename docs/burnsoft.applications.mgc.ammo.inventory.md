@@ -12,7 +12,7 @@ Class Inventory contains all the functions used to manage the ammo in the databa
 public class Inventory : System.IDisposable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Inventory](./burnsoft.applications.mgc.ammo.inventory)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Inventory](./burnsoft.applications.mgc.ammo.inventory.md)<br>
 Implements [IDisposable](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable)
 
 ## Constructors

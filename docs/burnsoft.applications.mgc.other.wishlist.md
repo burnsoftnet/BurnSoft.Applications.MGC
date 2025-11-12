@@ -12,7 +12,7 @@ Class WishList will handle the functions to add, edit, get or delete data from t
 public class WishList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [WishList](./burnsoft.applications.mgc.other.wishlist)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [WishList](./burnsoft.applications.mgc.other.wishlist.md)
 
 ## Constructors
 

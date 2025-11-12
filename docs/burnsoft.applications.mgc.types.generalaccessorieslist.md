@@ -12,7 +12,7 @@ Class AccessoriesList list container that will contain the information from the 
 public class GeneralAccessoriesList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesList](./burnsoft.applications.mgc.types.generalaccessorieslist)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesList](./burnsoft.applications.mgc.types.generalaccessorieslist.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

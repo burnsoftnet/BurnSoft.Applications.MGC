@@ -12,7 +12,7 @@ Class MyCollection, The majority of this class will hand the data from the qryGu
 public class MyCollectionQry
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyCollectionQry](./burnsoft.applications.mgc.firearms.mycollectionqry)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyCollectionQry](./burnsoft.applications.mgc.firearms.mycollectionqry.md)
 
 ## Constructors
 

@@ -12,7 +12,7 @@ Class Ammunition quick ref functions foro third party
 public class Ammunition
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Ammunition](./burnsoft.applications.mgc.thirdparty.ammunition)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Ammunition](./burnsoft.applications.mgc.thirdparty.ammunition.md)
 
 ## Constructors
 

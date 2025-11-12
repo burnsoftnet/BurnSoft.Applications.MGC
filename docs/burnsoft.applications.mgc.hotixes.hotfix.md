@@ -12,7 +12,7 @@ Class HotFix. Hotfix fix main functions
 public class HotFix
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HotFix](./burnsoft.applications.mgc.hotixes.hotfix)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HotFix](./burnsoft.applications.mgc.hotixes.hotfix.md)
 
 ## Fields
 

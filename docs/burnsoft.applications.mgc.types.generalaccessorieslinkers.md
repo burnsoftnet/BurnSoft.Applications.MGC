@@ -12,7 +12,7 @@ Class Linkers.Information from the linker table
 public class GeneralAccessoriesLinkers
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesLinkers](./burnsoft.applications.mgc.types.generalaccessorieslinkers)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesLinkers](./burnsoft.applications.mgc.types.generalaccessorieslinkers.md)
 
 ## Properties
 

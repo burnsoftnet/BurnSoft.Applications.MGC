@@ -12,7 +12,7 @@ Class Documents to manage the doucments section, upload, edit assisgn, and delet
 public class Documents
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Documents](./burnsoft.applications.mgc.firearms.documents)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Documents](./burnsoft.applications.mgc.firearms.documents.md)
 
 ## Fields
 

@@ -12,7 +12,7 @@ Class MaintancePlans, Main class that handles the Maintance_Plans table data
 public class MaintancePlans
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintancePlans](./burnsoft.applications.mgc.firearms.maintanceplans)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintancePlans](./burnsoft.applications.mgc.firearms.maintanceplans.md)
 
 ## Constructors
 

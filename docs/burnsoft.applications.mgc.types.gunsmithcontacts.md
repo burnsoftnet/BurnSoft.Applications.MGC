@@ -12,7 +12,7 @@ Class GunSmithLists. Main container to store information about the Gun Smiths in
 public class GunSmithContacts
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunSmithContacts](./burnsoft.applications.mgc.types.gunsmithcontacts)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunSmithContacts](./burnsoft.applications.mgc.types.gunsmithcontacts.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

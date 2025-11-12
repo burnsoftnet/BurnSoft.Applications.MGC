@@ -14,7 +14,7 @@ General Class to handline the linking between the firearm and the General Access
 public class GeneralAccessoriesLinking
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesLinking](./burnsoft.applications.mgc.other.generalaccessorieslinking)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesLinking](./burnsoft.applications.mgc.other.generalaccessorieslinking.md)
 
 ## Constructors
 
@@ -52,6 +52,34 @@ The error out.
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **IsAttached(String, Int32, String&)**
+
+Determines whether the accessory by id is attached to other firearm accessories
+
+```csharp
+public static bool IsAttached(string databasePath, int id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The accessory identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if the specified database path is attached; otherwise, `false`.
 
 #### Exceptions
 

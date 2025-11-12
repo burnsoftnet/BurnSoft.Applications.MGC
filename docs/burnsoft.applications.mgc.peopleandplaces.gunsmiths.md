@@ -12,7 +12,7 @@ Class GunSmiths, Main class to handle information about the gun smiths in the da
 public class GunSmiths
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunSmiths](./burnsoft.applications.mgc.peopleandplaces.gunsmiths)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunSmiths](./burnsoft.applications.mgc.peopleandplaces.gunsmiths.md)
 
 ## Constructors
 

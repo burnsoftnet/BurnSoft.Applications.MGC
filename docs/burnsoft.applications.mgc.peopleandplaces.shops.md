@@ -12,7 +12,7 @@ Class Contacts handling class
 public class Shops
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Shops](./burnsoft.applications.mgc.peopleandplaces.shops)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Shops](./burnsoft.applications.mgc.peopleandplaces.shops.md)
 
 ## Constructors
 

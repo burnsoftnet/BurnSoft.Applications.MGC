@@ -12,7 +12,7 @@ Class Helpers.
 public class Helpers
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Helpers](./burnsoft.applications.mgc.global.helpers)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Helpers](./burnsoft.applications.mgc.global.helpers.md)
 
 ## Constructors
 

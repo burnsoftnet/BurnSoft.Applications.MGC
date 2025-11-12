@@ -12,7 +12,7 @@ Class MaintanceDetails that will help manage the details of teh Maintance_Detail
 public class MaintanceDetails
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintanceDetails](./burnsoft.applications.mgc.firearms.maintancedetails)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MaintanceDetails](./burnsoft.applications.mgc.firearms.maintancedetails.md)
 
 ## Constructors
 
