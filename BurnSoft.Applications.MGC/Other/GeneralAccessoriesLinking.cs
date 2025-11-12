@@ -99,7 +99,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if the specified database path is attached; otherwise, <c>false</c>.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool IsAttached(string databasePath, int id, out string errOut)
+        public static bool IsAttached(string databasePath, long id, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -320,7 +320,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="accessoryId">The id of the Accessory that you want to work with</param>
         /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
-        public static List<GeneralAccessoriesLinkers> Lists(string databasePath, int accessoryId, out string errOut)
+        public static List<GeneralAccessoriesLinkers> Lists(string databasePath, long accessoryId, out string errOut)
         {
             List<GeneralAccessoriesLinkers> lst = new List<GeneralAccessoriesLinkers>();
             try
