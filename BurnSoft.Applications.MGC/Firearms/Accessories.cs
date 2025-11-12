@@ -364,8 +364,6 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                int iCiv = civ ? 1 : 0;
-                int iIc = ic ? 1 : 0;
                 string sql = $"select * from  Gun_Collection_Accessories where GID={gunId} and GALID={galId}";
 
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
