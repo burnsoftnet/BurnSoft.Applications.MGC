@@ -138,7 +138,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         [TestMethod, TestCategory("General Accessories Links")]
         public void IsAttachedTest()
         {
-            VerifyDoesntExist();
+            //VerifyDoesntExist();
             bool value = GeneralAccessoriesLinking.IsAttached(_databasePath, _mainAccessory, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
