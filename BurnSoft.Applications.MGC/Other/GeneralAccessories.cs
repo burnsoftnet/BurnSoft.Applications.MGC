@@ -133,7 +133,7 @@ namespace BurnSoft.Applications.MGC.Other
                     if (errOut.Length > 0) throw new Exception(errOut);
                     foreach(GeneralAccessoriesLinkers o in ga)
                     {
-                        if (!GeneralAccessoriesLinking.UpdateFirearm(databasePath, Convert.ToInt32(id), o.Gid, out errOut)) throw new Exception(errOut)
+                        if (!GeneralAccessoriesLinking.UpdateFirearm(databasePath, Convert.ToInt32(id), o.Gid, out errOut)) throw new Exception(errOut);
                     }
                 }
             }
