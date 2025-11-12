@@ -82,7 +82,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             // Vs2019.GetSetting("", TestContext);
             BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
-            _mainAccessory = 1;
+            _mainAccessory = 4;
             _gunId = Vs2019.IGetSetting("MyGunCollectionID", TestContext);
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _accessoriesManufacturer = obj.FC(Vs2019.GetSetting("Accessories_Manufacturer", TestContext));
@@ -132,6 +132,14 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         {
             VerifyDoesntExist();
             bool value = GeneralAccessoriesLinking.AttachToFirearm(_databasePath, _mainAccessory, _gunId, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories Links")]
+        public void IsAttachedTest()
+        {
+            VerifyDoesntExist();
+            bool value = GeneralAccessoriesLinking.IsAttached(_databasePath, _mainAccessory, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
 
