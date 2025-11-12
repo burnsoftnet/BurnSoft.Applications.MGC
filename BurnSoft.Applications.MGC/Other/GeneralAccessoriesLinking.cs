@@ -1,4 +1,5 @@
-﻿using BurnSoft.Applications.MGC.Firearms;
+﻿using BurnSoft.Applications.MGC.AutoFill;
+using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using System;
 using System.Collections.Generic;
@@ -89,6 +90,33 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+
+        /// <summary>
+        /// Determines whether the accessory by id is attached to other firearm accessories
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The accessory identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if the specified database path is attached; otherwise, <c>false</c>.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool IsAttached(string databasePath, int id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                List<GeneralAccessoriesLinkers> lst = Lists(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = lst.Count > 0;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("IsAttached", e);
+            }
+
+            return bAns;
+        }
+
         /// <summary>
         /// Adds the specified linker id's to the linker table
         /// </summary>
