@@ -57,12 +57,12 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **IsAttached(String, Int32, String&)**
+### **IsAttached(String, Int64, String&)**
 
 Determines whether the accessory by id is attached to other firearm accessories
 
 ```csharp
-public static bool IsAttached(string databasePath, int id, String& errOut)
+public static bool IsAttached(string databasePath, long id, String& errOut)
 ```
 
 #### Parameters
@@ -70,7 +70,7 @@ public static bool IsAttached(string databasePath, int id, String& errOut)
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
 
-`id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The accessory identifier.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
@@ -250,12 +250,12 @@ If an exception occurs the message will be in this string
 
 [List&lt;GeneralAccessoriesLinkers&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 
-### **Lists(String, Int32, String&)**
+### **Lists(String, Int64, String&)**
 
 Return a List of the general accessories linkers based accessory id
 
 ```csharp
-public static List<GeneralAccessoriesLinkers> Lists(string databasePath, int accessoryId, String& errOut)
+public static List<GeneralAccessoriesLinkers> Lists(string databasePath, long accessoryId, String& errOut)
 ```
 
 #### Parameters
@@ -263,7 +263,7 @@ public static List<GeneralAccessoriesLinkers> Lists(string databasePath, int acc
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The Database Path
 
-`accessoryId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`accessoryId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The id of the Accessory that you want to work with
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>

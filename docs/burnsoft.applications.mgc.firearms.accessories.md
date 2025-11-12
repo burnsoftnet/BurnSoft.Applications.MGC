@@ -429,6 +429,37 @@ System.Int64. The id in the table based on the information passed
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **GetId(String, Int64, Int32, String&)**
+
+Gets the accessory identifier based on the general accessory id and the gun id.
+
+```csharp
+public static long GetId(string databasePath, long gunId, int galId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`gunId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The gun identifier.
+
+`galId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The gal identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+System.Int64.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **SumUpPurchaseValue(String, Int64, String&)**
 
 Sums up purchase value.
