@@ -238,9 +238,7 @@ namespace BurnSoft.Applications.MGC.Other
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (GeneralAccessoriesList l in lst)
                 {
-                    long gaid = Accessories.GetId(databasePath, gunId, l.Manufacturer, l.Model, l.SerialNumber, l.Condition,
-                        l.Notes, l.Use, Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue), l.CountInValue,
-                        l.IsChoke, id, out errOut);
+                    long gaid = Accessories.GetId(databasePath, gunId, id, out errOut);
                     if (errOut.Length > 0) throw new Exception(errOut);
                     if (!Accessories.Update(databasePath, gaid, gunId, l.Manufacturer, l.Model, l.SerialNumber, l.Condition,
                         l.Notes, l.Use, Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue),
