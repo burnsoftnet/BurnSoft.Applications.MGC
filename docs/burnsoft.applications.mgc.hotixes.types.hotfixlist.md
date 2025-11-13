@@ -12,7 +12,7 @@ Class HotFixList to hold the hotfixes that have been installed
 public class HotFixList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HotFixList](./burnsoft.applications.mgc.hotixes.types.hotfixlist)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [HotFixList](./burnsoft.applications.mgc.hotixes.types.hotfixlist.md)
 
 ## Properties
 

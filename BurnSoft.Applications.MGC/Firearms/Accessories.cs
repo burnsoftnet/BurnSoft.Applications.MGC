@@ -348,6 +348,39 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return lAns;
         }
+
+        /// <summary>
+        /// Gets the accessory identifier based on the general accessory id and the gun id.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="galId">The gal identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="Exception"></exception>
+        public static long GetId(string databasePath, long gunId, int galId, out string errOut)
+        {
+            long lAns = 0;
+            errOut = @"";
+            try
+            {
+                string sql = $"select * from  Gun_Collection_Accessories where GID={gunId} and GALID={galId}";
+
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (DataRow d in dt.Rows)
+                {
+                    lAns = Convert.ToInt32(d["id"]);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetId", e);
+            }
+
+            return lAns;
+        }
+
         /// <summary>
         /// Sums up purchase value.
         /// </summary>

@@ -12,7 +12,7 @@ Class DbColumns.
 public class DbColumns
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DbColumns](./burnsoft.applications.mgc.hotixes.types.dbcolumns)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DbColumns](./burnsoft.applications.mgc.hotixes.types.dbcolumns.md)
 
 ## Properties
 

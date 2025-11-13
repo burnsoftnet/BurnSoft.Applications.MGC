@@ -12,7 +12,7 @@ Class Grips. Handles data relating to gun grips
 public class Grips
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Grips](./burnsoft.applications.mgc.firearms.grips)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Grips](./burnsoft.applications.mgc.firearms.grips.md)
 
 ## Constructors
 

@@ -12,7 +12,7 @@ Container for the Appraisers_Contact_Details table
 public class AppraisersContactDetails
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AppraisersContactDetails](./burnsoft.applications.mgc.types.appraiserscontactdetails)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [AppraisersContactDetails](./burnsoft.applications.mgc.types.appraiserscontactdetails.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

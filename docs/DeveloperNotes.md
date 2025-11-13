@@ -8,7 +8,7 @@ This section is misc developer notes.  Things that might be needed for the proje
 * Microsoft Report Viewer
 * Visual Studio Installer
 * MS Access Drivers 32-bit
-* 
+* .Net Framework 4.8.1
 
 ## Other Helpers
 

@@ -12,7 +12,7 @@ Class Audit that contains the functions for the ammo audit section
 public class Audit : System.IDisposable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Audit](./burnsoft.applications.mgc.ammo.audit)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Audit](./burnsoft.applications.mgc.ammo.audit.md)<br>
 Implements [IDisposable](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable)
 
 ## Constructors

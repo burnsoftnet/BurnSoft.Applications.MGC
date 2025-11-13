@@ -12,7 +12,7 @@ Class Classification, handdles all the management of the Gun_Collection_Classifi
 public class Classification
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Classification](./burnsoft.applications.mgc.firearms.classification)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Classification](./burnsoft.applications.mgc.firearms.classification.md)
 
 ## Constructors
 

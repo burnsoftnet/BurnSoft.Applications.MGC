@@ -12,7 +12,7 @@ Class XmlImport. Imports the firearm information from the xml file and insert it
 public class XmlImport
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [XmlImport](./burnsoft.applications.mgc.firearms.xmlimport)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [XmlImport](./burnsoft.applications.mgc.firearms.xmlimport.md)
 
 ## Constructors
 

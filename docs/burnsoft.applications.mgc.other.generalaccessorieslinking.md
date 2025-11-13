@@ -14,7 +14,7 @@ General Class to handline the linking between the firearm and the General Access
 public class GeneralAccessoriesLinking
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesLinking](./burnsoft.applications.mgc.other.generalaccessorieslinking)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesLinking](./burnsoft.applications.mgc.other.generalaccessorieslinking.md)
 
 ## Constructors
 
@@ -52,6 +52,34 @@ The error out.
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **IsAttached(String, Int64, String&)**
+
+Determines whether the accessory by id is attached to other firearm accessories
+
+```csharp
+public static bool IsAttached(string databasePath, long id, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The accessory identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if the specified database path is attached; otherwise, `false`.
 
 #### Exceptions
 
@@ -222,12 +250,12 @@ If an exception occurs the message will be in this string
 
 [List&lt;GeneralAccessoriesLinkers&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
 
-### **Lists(String, Int32, String&)**
+### **Lists(String, Int64, String&)**
 
 Return a List of the general accessories linkers based accessory id
 
 ```csharp
-public static List<GeneralAccessoriesLinkers> Lists(string databasePath, int accessoryId, String& errOut)
+public static List<GeneralAccessoriesLinkers> Lists(string databasePath, long accessoryId, String& errOut)
 ```
 
 #### Parameters
@@ -235,7 +263,7 @@ public static List<GeneralAccessoriesLinkers> Lists(string databasePath, int acc
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The Database Path
 
-`accessoryId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+`accessoryId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 The id of the Accessory that you want to work with
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>

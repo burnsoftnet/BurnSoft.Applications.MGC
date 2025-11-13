@@ -12,7 +12,7 @@ Class DatabaseRelated.
 public class DatabaseRelated
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DatabaseRelated](./burnsoft.applications.mgc.global.databaserelated)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DatabaseRelated](./burnsoft.applications.mgc.global.databaserelated.md)
 
 ## Constructors
 

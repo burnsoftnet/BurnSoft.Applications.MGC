@@ -12,7 +12,7 @@ Class CustomReports handles custom reports for the CR_SavedReports table
 public class CustomReports
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CustomReports](./burnsoft.applications.mgc.reports.customreports)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CustomReports](./burnsoft.applications.mgc.reports.customreports.md)
 
 ## Fields
 

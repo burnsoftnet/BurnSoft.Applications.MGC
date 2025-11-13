@@ -12,7 +12,7 @@ Class General functions for ammo handling from the global list gun_cal table
 public class GlobalList : System.IDisposable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GlobalList](./burnsoft.applications.mgc.ammo.globallist)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GlobalList](./burnsoft.applications.mgc.ammo.globallist.md)<br>
 Implements [IDisposable](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable)
 
 ## Constructors

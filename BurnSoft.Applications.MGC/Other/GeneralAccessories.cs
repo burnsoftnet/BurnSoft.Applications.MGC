@@ -126,6 +126,16 @@ namespace BurnSoft.Applications.MGC.Other
                              $"PurValue={purValue},AppValue={appValue},CIV={iCiv},IC={iIc},sync_lastupdate=Now() where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
+
+                if (GeneralAccessoriesLinking.IsAttached(databasePath, id, out errOut))
+                {
+                    List<GeneralAccessoriesLinkers> ga = GeneralAccessoriesLinking.Lists(databasePath, id, out errOut);
+                    if (errOut.Length > 0) throw new Exception(errOut);
+                    foreach(GeneralAccessoriesLinkers o in ga)
+                    {
+                        if (!GeneralAccessoriesLinking.UpdateFirearm(databasePath, Convert.ToInt32(id), o.Gid, out errOut)) throw new Exception(errOut);
+                    }
+                }
             }
             catch (Exception e)
             {

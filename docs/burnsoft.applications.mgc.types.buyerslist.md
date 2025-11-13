@@ -12,7 +12,7 @@ Class SolToList. List container for the Gun_Collection_SoldTo table
 public class BuyersList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [BuyersList](./burnsoft.applications.mgc.types.buyerslist)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [BuyersList](./burnsoft.applications.mgc.types.buyerslist.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

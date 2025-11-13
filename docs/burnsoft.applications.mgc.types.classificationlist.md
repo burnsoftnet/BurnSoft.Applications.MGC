@@ -12,7 +12,7 @@ Class ClassificationList, container for classification list data
 public class ClassificationList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ClassificationList](./burnsoft.applications.mgc.types.classificationlist)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ClassificationList](./burnsoft.applications.mgc.types.classificationlist.md)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

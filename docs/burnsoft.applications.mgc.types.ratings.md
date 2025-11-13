@@ -12,7 +12,7 @@ Class Ratings to hold the id and display rating name
 public class Ratings
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Ratings](./burnsoft.applications.mgc.types.ratings)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Ratings](./burnsoft.applications.mgc.types.ratings.md)
 
 ## Properties
 

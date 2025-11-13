@@ -12,7 +12,7 @@ Class Database. General Database functions needed.
 public class Database
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Database](./burnsoft.applications.mgc.database)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Database](./burnsoft.applications.mgc.database.md)
 
 ## Constructors
 
