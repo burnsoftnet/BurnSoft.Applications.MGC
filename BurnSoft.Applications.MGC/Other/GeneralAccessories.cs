@@ -1,5 +1,6 @@
 ﻿using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Universal;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -91,6 +92,38 @@ namespace BurnSoft.Applications.MGC.Other
                 errOut = ErrorMessage("Add", e);
             }
 
+            return bAns;
+        }
+
+        /// <summary>
+        /// Uplicates the specified accessory in the General Accessories
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="itemId">The item identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="Exception"></exception>
+        /// <exception cref="Exception"></exception>
+        public static bool Duplicate(string databasePath, long itemId,out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                BSOtherObjects obj = new BSOtherObjects();
+                List<GeneralAccessoriesList> details = Lists(databasePath, (int)itemId, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (GeneralAccessoriesList d in details)
+                {
+                    bAns = Add(databasePath, manufacturer: obj.FC(d.Manufacturer), model: obj.FC(d.Model), serialNumber: obj.FC(d.SerialNumber), 
+                        condition: obj.FC(d.Condition), notes: obj.FC(d.Notes), use: obj.FC(d.Use), purValue: Convert.ToDouble(d.PurchaseValue), 
+                        appValue: Convert.ToDouble(d.AppriasedValue), civ: d.CountInValue, ic: d.IsChoke, out errOut);
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Duplicate", e);
+            }
             return bAns;
         }
 
