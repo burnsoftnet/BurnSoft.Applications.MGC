@@ -12,7 +12,7 @@ Class GunSmithDetails, Class to handle management of the gunsmith_details table.
 public class GunSmithDetails
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunSmithDetails](./burnsoft.applications.mgc.firearms.gunsmithdetails.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunSmithDetails](./burnsoft.applications.mgc.firearms.gunsmithdetails)
 
 ## Constructors
 

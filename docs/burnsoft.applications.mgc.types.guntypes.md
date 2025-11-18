@@ -12,7 +12,7 @@ Class GunTypes.
 public class GunTypes
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunTypes](./burnsoft.applications.mgc.types.guntypes.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunTypes](./burnsoft.applications.mgc.types.guntypes)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

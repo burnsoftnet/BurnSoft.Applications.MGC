@@ -12,7 +12,7 @@ Class Registry. General Registry class for the My gun Collection Application to 
 public class MyRegistry
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyRegistry](./burnsoft.applications.mgc.global.myregistry.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyRegistry](./burnsoft.applications.mgc.global.myregistry)
 
 ## Properties
 

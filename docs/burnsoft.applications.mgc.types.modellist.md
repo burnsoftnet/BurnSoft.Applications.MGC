@@ -12,7 +12,7 @@ Class ModelList which will contain all the information gathered form the Gun_Mod
 public class ModelList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ModelList](./burnsoft.applications.mgc.types.modellist.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ModelList](./burnsoft.applications.mgc.types.modellist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

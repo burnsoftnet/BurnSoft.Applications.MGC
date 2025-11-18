@@ -12,7 +12,7 @@ Class CustomReportsLists. List container for the CR_SavedReports table.
 public class CustomReportsLists
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CustomReportsLists](./burnsoft.applications.mgc.types.customreportslists.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [CustomReportsLists](./burnsoft.applications.mgc.types.customreportslists)
 
 ## Properties
 

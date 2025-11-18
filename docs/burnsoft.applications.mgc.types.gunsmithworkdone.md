@@ -12,7 +12,7 @@ Class GunSmithWorkDone. Stores the information for the work that was done to a f
 public class GunSmithWorkDone
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunSmithWorkDone](./burnsoft.applications.mgc.types.gunsmithworkdone.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunSmithWorkDone](./burnsoft.applications.mgc.types.gunsmithworkdone)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

@@ -12,7 +12,7 @@ Class NationalityList. Container for the results in the Gun_Nationality table
 public class NationalityList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [NationalityList](./burnsoft.applications.mgc.types.nationalitylist.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [NationalityList](./burnsoft.applications.mgc.types.nationalitylist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

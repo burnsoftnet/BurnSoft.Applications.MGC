@@ -12,7 +12,7 @@ Class ExtraBarrelConvoKits functions to manage the barrels or conversion kits fo
 public class ExtraBarrelConvoKits : System.IDisposable
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ExtraBarrelConvoKits](./burnsoft.applications.mgc.firearms.extrabarrelconvokits.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [ExtraBarrelConvoKits](./burnsoft.applications.mgc.firearms.extrabarrelconvokits)<br>
 Implements [IDisposable](https://docs.microsoft.com/en-us/dotnet/api/system.idisposable)
 
 ## Constructors

@@ -14,7 +14,7 @@ General Class to handline the linking between the firearm and the General Access
 public class GeneralAccessoriesLinking
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesLinking](./burnsoft.applications.mgc.other.generalaccessorieslinking.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessoriesLinking](./burnsoft.applications.mgc.other.generalaccessorieslinking)
 
 ## Constructors
 
