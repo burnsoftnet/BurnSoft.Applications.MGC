@@ -12,7 +12,7 @@ Class GunCollectionList. List container to hold the database taken from the data
 public class GunCollectionList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunCollectionList](./burnsoft.applications.mgc.types.guncollectionlist.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunCollectionList](./burnsoft.applications.mgc.types.guncollectionlist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

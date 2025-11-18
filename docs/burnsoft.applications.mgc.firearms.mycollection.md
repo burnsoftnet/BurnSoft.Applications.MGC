@@ -12,7 +12,7 @@ Class MyCollection, The majority of this class will hand the data from the gun_c
 public class MyCollection
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyCollection](./burnsoft.applications.mgc.firearms.mycollection.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [MyCollection](./burnsoft.applications.mgc.firearms.mycollection)
 
 ## Constructors
 
@@ -759,7 +759,7 @@ public static bool SetCatalogType(string databasePath, CatalogType type, String&
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
 
-`type` [CatalogType](./burnsoft.applications.mgc.firearms.mycollection.catalogtype.md)<br>
+`type` [CatalogType](./burnsoft.applications.mgc.firearms.mycollection.catalogtype)<br>
 The type.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>

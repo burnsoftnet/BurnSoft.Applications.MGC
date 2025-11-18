@@ -12,7 +12,7 @@ Class that will contain data from the Gun_Shop_Details table
 public class GunShopDetails
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunShopDetails](./burnsoft.applications.mgc.types.gunshopdetails.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunShopDetails](./burnsoft.applications.mgc.types.gunshopdetails)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

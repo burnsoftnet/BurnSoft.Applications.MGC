@@ -12,7 +12,7 @@ Class Global Caliber List.
 public class GlobalCaliberList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GlobalCaliberList](./burnsoft.applications.mgc.types.globalcaliberlist.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GlobalCaliberList](./burnsoft.applications.mgc.types.globalcaliberlist)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

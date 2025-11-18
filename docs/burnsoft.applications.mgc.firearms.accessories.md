@@ -12,7 +12,7 @@ Class Accessories that handles firearm accessories database calls
 public class Accessories
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Accessories](./burnsoft.applications.mgc.firearms.accessories.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Accessories](./burnsoft.applications.mgc.firearms.accessories)
 
 ## Constructors
 

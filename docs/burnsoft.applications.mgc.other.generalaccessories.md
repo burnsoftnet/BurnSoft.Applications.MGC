@@ -12,7 +12,7 @@ Main Class to handle the General_Accessories table.
 public class GeneralAccessories
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessories](./burnsoft.applications.mgc.other.generalaccessories.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GeneralAccessories](./burnsoft.applications.mgc.other.generalaccessories)
 
 ## Constructors
 
@@ -74,6 +74,36 @@ The error out.
 
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
+
+### **Duplicate(String, Int64, String&)**
+
+Uplicates the specified accessory in the General Accessories
+
+```csharp
+public static bool Duplicate(string databasePath, long itemId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`itemId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The item identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
 ### **Update(String, Int64, String, String, String, String, String, String, Double, Double, Boolean, Boolean, String&)**
 

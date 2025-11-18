@@ -12,7 +12,7 @@ Class GunTypes. This class is to help manage the Gun_Type table.
 public class GunTypes
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunTypes](./burnsoft.applications.mgc.firearms.guntypes.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [GunTypes](./burnsoft.applications.mgc.firearms.guntypes)
 
 ## Constructors
 

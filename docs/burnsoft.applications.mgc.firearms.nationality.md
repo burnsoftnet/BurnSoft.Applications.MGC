@@ -12,7 +12,7 @@ Class Nationality will help manage the Gun_Nationality table data
 public class Nationality
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Nationality](./burnsoft.applications.mgc.firearms.nationality.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Nationality](./burnsoft.applications.mgc.firearms.nationality)
 
 ## Constructors
 

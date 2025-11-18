@@ -12,7 +12,7 @@ Class PictureDisplayList.
 public class PictureDisplayList
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PictureDisplayList](./burnsoft.applications.mgc.types.picturedisplaylist.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [PictureDisplayList](./burnsoft.applications.mgc.types.picturedisplaylist)
 
 ## Properties
 

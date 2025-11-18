@@ -12,7 +12,7 @@ Class General.
 public class General
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [General](./burnsoft.applications.mgc.autofill.general.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [General](./burnsoft.applications.mgc.autofill.general)
 
 ## Constructors
 

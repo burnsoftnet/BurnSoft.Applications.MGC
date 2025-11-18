@@ -12,7 +12,7 @@ Class DatabaseCleanUp. General class to handle clean up data from teh database.
 public class DatabaseCleanUp
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DatabaseCleanUp](./burnsoft.applications.mgc.databasecleanup.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [DatabaseCleanUp](./burnsoft.applications.mgc.databasecleanup)
 
 ## Constructors
 

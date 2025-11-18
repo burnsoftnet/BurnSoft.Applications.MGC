@@ -12,7 +12,7 @@ Class Ammunition list container for the Gun_Collection_Ammo table
 public class Ammunition
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Ammunition](./burnsoft.applications.mgc.types.ammunition.md)<br>
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Ammunition](./burnsoft.applications.mgc.types.ammunition)<br>
 Attributes [SerializableAttribute](https://docs.microsoft.com/en-us/dotnet/api/system.serializableattribute)
 
 ## Properties

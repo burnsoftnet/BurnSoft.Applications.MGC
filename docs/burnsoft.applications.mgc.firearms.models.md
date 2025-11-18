@@ -12,7 +12,7 @@ Class Models will help manage the data in the Gun_Model table
 public class Models
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Models](./burnsoft.applications.mgc.firearms.models.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Models](./burnsoft.applications.mgc.firearms.models)
 
 ## Constructors
 

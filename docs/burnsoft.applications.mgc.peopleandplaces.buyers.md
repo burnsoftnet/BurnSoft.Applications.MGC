@@ -12,7 +12,7 @@ Class Buyers, which will handle the information relating to the Gun_Collection_S
 public class Buyers
 ```
 
-Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Buyers](./burnsoft.applications.mgc.peopleandplaces.buyers.md)
+Inheritance [Object](https://docs.microsoft.com/en-us/dotnet/api/system.object) → [Buyers](./burnsoft.applications.mgc.peopleandplaces.buyers)
 
 ## Constructors
 
