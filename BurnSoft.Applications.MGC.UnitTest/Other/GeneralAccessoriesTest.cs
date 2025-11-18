@@ -157,7 +157,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
 
             bool value = GeneralAccessories.Duplicate(_databasePath, id, out _errOut);
             General.HasTrueValue(value, _errOut);
-            List<GeneralAccessoriesList> lst = GeneralAccessories.Lists(_databasePath, id, out _errOut);
+            List<GeneralAccessoriesList> lst = GeneralAccessories.Lists(_databasePath, (int)id, out _errOut);
             TestContext.WriteLine(DebugHelpers.PrintListValues.GeneralAccessoriesDetails(lst));
             General.HasTrueValue(lst.Count > 0, _errOut);
         }
