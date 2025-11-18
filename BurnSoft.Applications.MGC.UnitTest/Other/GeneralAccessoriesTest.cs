@@ -148,6 +148,21 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         }
 
         [TestMethod, TestCategory("General Accessories")]
+        public void DuplicateTest()
+        {
+            VerifyExists();
+            long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesUse,
+                _accessoriesCiv, _accessoriesIc, out _errOut);
+
+            bool value = GeneralAccessories.Duplicate(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+            List<GeneralAccessoriesList> lst = GeneralAccessories.Lists(_databasePath, id, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GeneralAccessoriesDetails(lst));
+            General.HasTrueValue(lst.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
         public void ListTest()
         {
             VerifyExists();
