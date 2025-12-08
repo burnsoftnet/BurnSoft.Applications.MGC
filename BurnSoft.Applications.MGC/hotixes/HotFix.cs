@@ -931,6 +931,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 10;
+            double dbVersion = 7.2;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -1011,8 +1012,8 @@ namespace BurnSoft.Applications.MGC.hotixes
                   out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
-                SendStatus($"Updating Databbase version to 7.1");
-                if (!Database.SaveDatabaseVersion(databasePath, "7.1", out errOut)) throw new Exception(errOut);
+                SendStatus($"Updating Databbase version to {dbVersion}");
+                if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
                 SendStatus($"Applying hotfix to registry ");
                 if (!UpdateReg(hotFixNumber, out errOut, DateTime.Now.ToString(CultureInfo.InvariantCulture))) throw new Exception(errOut);
                 bAns = true;
