@@ -958,7 +958,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE General_Accessories (ID AUTOINCREMENT PRIMARY KEY, Manufacturer Text(255), Model Text(255), " +
                     "SerialNumber Text(255), Condition Text(255), Notes Text(255), Use Text(255), PurValue Text(255), " +
-                    "AppValue Number, CIV NUmber, IC Number, sync_lastupdate DATETIME);",
+                    "AppValue Number, CIV NUmber, IC Number, FAID Number, sync_lastupdate DATETIME);",
                     out errOut, true))
                     {
                         if (!errOut.Contains(" already exists")) throw new Exception(errOut);
