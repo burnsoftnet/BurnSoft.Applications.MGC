@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using BurnSoft.Applications.MGC.Other;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 
@@ -593,6 +594,30 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
+        public static bool CopyToGeneralAccessories(string databasePath, long itemId, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                BSOtherObjects obj = new BSOtherObjects();
+                List<AccessoriesList> details = List(databasePath, (int)itemId, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (AccessoriesList d in details)
+                {
+                    bAns = GeneralAccessories.Add(databasePath, obj.FC(d.Manufacturer), obj.FC(d.Model), obj.FC(d.SerialNumber), obj.FC(d.Condition), obj.FC(d.Notes),
+                        obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue), Convert.ToDouble(d.AppriasedValue), d.CountInValue,
+                        d.IsChoke, out errOut);
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Copy", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Get a list of all the accessories
         /// </summary>
