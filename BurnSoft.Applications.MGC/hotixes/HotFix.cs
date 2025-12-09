@@ -664,6 +664,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 7;
+            double dbVersion = 4.5;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -710,7 +711,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Conversion Kit", out errOut)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
-                if (!Database.SaveDatabaseVersion(databasePath, "4.5", out errOut)) throw new Exception(errOut);
+                if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -756,6 +757,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 8;
+            double dbVersion = 5.0;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -788,7 +790,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.AddSyncToTable(databasePath, "Wishlist", out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
-                if (!Database.SaveDatabaseVersion(databasePath, "5.0", out errOut)) throw new Exception(errOut);
+                if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -808,6 +810,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 9;
+            double dbVersion = 6.0;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -911,7 +914,7 @@ namespace BurnSoft.Applications.MGC.hotixes
 
 
                 //Perform Update in Registry of new hotfix
-                if (!Database.SaveDatabaseVersion(databasePath, "6.0", out errOut)) throw new Exception(errOut);
+                if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
