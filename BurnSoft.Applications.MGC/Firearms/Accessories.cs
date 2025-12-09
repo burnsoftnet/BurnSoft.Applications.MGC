@@ -594,7 +594,14 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Copies Firearm Accessory to general accessories.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="itemId">The item identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
         public static bool CopyToGeneralAccessories(string databasePath, long itemId, out string errOut)
         {
             bool bAns = false;
@@ -607,13 +614,13 @@ namespace BurnSoft.Applications.MGC.Firearms
                 {
                     bAns = GeneralAccessories.Add(databasePath, obj.FC(d.Manufacturer), obj.FC(d.Model), obj.FC(d.SerialNumber), obj.FC(d.Condition), obj.FC(d.Notes),
                         obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue), Convert.ToDouble(d.AppriasedValue), d.CountInValue,
-                        d.IsChoke, out errOut);
+                        d.IsChoke, out errOut, IsLinked: true, FAID: itemId);
                     if (errOut?.Length > 0) throw new Exception(errOut);
                 }
             }
             catch (Exception e)
             {
-                errOut = ErrorMessage("Copy", e);
+                errOut = ErrorMessage("CopyToGeneralAccessories", e);
             }
             return bAns;
         }

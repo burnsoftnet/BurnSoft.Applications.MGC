@@ -54,7 +54,7 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="e">The e.</param>
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
-        #endregion                        
+        #endregion
         /// <summary>
         /// Adds the specified accessory to the database.
         /// </summary>
@@ -70,9 +70,11 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="civ">if set to <c>true</c> [civ].</param>
         /// <param name="ic">if set to <c>true</c> [ic].</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="IsLinked">Mark if the Accessory is Linked</param>
+        /// <param name="FAID">Firearm Accessory ID for reverse linking</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, string manufacturer, string model, string serialNumber, string condition, 
-            string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut)
+            string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut, bool IsLinked = false, long FAID = 0)
         {
             bool bAns = false;
             errOut = @"";
@@ -82,9 +84,9 @@ namespace BurnSoft.Applications.MGC.Other
                 int iIc = ic ? 1 : 0;
 
                 string sql = $"INSERT INTO General_Accessories(Manufacturer,Model,SerialNumber,Condition,Notes,Use,PurValue," +
-                    $"AppValue,CIV,IC,sync_lastupdate) VALUES(" +
+                    $"AppValue,CIV,IC,sync_lastupdate, IsLinked, FAID) VALUES(" +
                              $"'{manufacturer}','{model}','{serialNumber}','{condition}','{notes}','{use}',{purValue}," +
-                             $"{appValue}, {iCiv},{iIc},Now())";
+                             $"{appValue}, {iCiv},{iIc},Now(), {IsLinked}, {FAID})";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
