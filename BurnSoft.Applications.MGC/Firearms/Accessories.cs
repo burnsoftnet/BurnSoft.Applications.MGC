@@ -612,15 +612,47 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 foreach (AccessoriesList d in details)
                 {
-                    bAns = GeneralAccessories.Add(databasePath, obj.FC(d.Manufacturer), obj.FC(d.Model), obj.FC(d.SerialNumber), obj.FC(d.Condition), obj.FC(d.Notes),
-                        obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue), Convert.ToDouble(d.AppriasedValue), d.CountInValue,
-                        d.IsChoke, out errOut, IsLinked: true, FAID: itemId);
+                    bAns = GeneralAccessories.Add(databasePath, obj.FC(d.Manufacturer), obj.FC(d.Model), obj.FC(d.SerialNumber), 
+                        obj.FC(d.Condition), obj.FC(d.Notes), obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue),
+                        Convert.ToDouble(d.AppriasedValue), d.CountInValue, d.IsChoke, out errOut, IsLinked: true, FAID: itemId);
                     if (errOut?.Length > 0) throw new Exception(errOut);
                 }
             }
             catch (Exception e)
             {
                 errOut = ErrorMessage("CopyToGeneralAccessories", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Moves The Firearm Accessory to the to general accessories and then deletes it from the firearm accessories table..
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="itemId">The item identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool MoveToGeneralAccessories(string databasePath, long itemId, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                BSOtherObjects obj = new BSOtherObjects();
+                List<AccessoriesList> details = List(databasePath, (int)itemId, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (AccessoriesList d in details)
+                {
+                    bAns = GeneralAccessories.Add(databasePath, obj.FC(d.Manufacturer), obj.FC(d.Model), obj.FC(d.SerialNumber),
+                        obj.FC(d.Condition), obj.FC(d.Notes), obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue),
+                        Convert.ToDouble(d.AppriasedValue), d.CountInValue, d.IsChoke, out errOut);
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                    if (!Delete(databasePath, (int)itemId, out errOut)) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MoveToGeneralAccessories", e);
             }
             return bAns;
         }
