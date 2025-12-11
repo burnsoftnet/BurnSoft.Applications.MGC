@@ -24,12 +24,12 @@ public GeneralAccessories()
 
 ## Methods
 
-### **Add(String, String, String, String, String, String, String, Double, Double, Boolean, Boolean, String&)**
+### **Add(String, String, String, String, String, String, String, Double, Double, Boolean, Boolean, String&, Boolean, Int64)**
 
 Adds the specified accessory to the database.
 
 ```csharp
-public static bool Add(string databasePath, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, String& errOut)
+public static bool Add(string databasePath, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, String& errOut, bool IsLinked, long FAID)
 ```
 
 #### Parameters
@@ -69,6 +69,12 @@ if set to `true` [ic].
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`IsLinked` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Mark if the Accessory is Linked
+
+`FAID` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+Firearm Accessory ID for reverse linking
 
 #### Returns
 

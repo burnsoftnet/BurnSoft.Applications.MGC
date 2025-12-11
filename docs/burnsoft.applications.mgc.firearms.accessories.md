@@ -662,6 +662,62 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **CopyToGeneralAccessories(String, Int64, String&)**
+
+Copies Firearm Accessory to general accessories.
+
+```csharp
+public static bool CopyToGeneralAccessories(string databasePath, long itemId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`itemId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The item identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **MoveToGeneralAccessories(String, Int64, String&)**
+
+Moves The Firearm Accessory to the to general accessories and then deletes it from the firearm accessories table..
+
+```csharp
+public static bool MoveToGeneralAccessories(string databasePath, long itemId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`itemId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The item identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **List(String, String&)**
 
 Get a list of all the accessories
