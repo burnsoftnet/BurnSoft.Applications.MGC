@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BurnSoft.Applications.MGC.Other
 {
@@ -407,8 +406,6 @@ namespace BurnSoft.Applications.MGC.Other
             errOut = "";
             try
             {
-                //List<GeneralAccessoriesLinkers> delLst = GeneralAccessoriesLinking.Lists(databasePath, id, out errOut);
-                //if (!GeneralAccessoriesLinking.Delete(databasePath, delLst, out errOut)) throw new Exception(errOut);
                 string sql = $"Delete from General_Accessories where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);

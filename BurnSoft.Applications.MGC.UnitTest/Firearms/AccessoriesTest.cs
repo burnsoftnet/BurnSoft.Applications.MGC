@@ -5,6 +5,7 @@ using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
 using System;
+using BurnSoft.Applications.MGC.Other;
 
 namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 {
@@ -242,6 +243,39 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             List<AccessoriesList> lst = Accessories.List(_databasePath, (long)_gunId, out _errOut);
             TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(lst));
         }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void CopyToGeneralAccessoriesTest()
+        {
+            VerifyExists();
+            long id = Accessories.GetId(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+
+            bool value = Accessories.CopyToGeneralAccessories(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+            List<AccessoriesList> lst = Accessories.List(_databasePath, (long)_gunId, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(lst));
+            List<GeneralAccessoriesList> valueg = GeneralAccessories.Lists(_databasePath, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GeneralAccessoriesDetails(valueg));
+        }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void MoveToGeneralAccessoriesTest()
+        {
+            VerifyExists();
+            long id = Accessories.GetId(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+
+            bool value = Accessories.MoveToGeneralAccessories(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+            List<AccessoriesList> lst = Accessories.List(_databasePath, (long)_gunId, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(lst));
+            List<GeneralAccessoriesList> valueg = GeneralAccessories.Lists(_databasePath, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GeneralAccessoriesDetails(valueg));
+        }
+
         /// <summary>
         /// Defines the test method ListTest.
         /// </summary>
