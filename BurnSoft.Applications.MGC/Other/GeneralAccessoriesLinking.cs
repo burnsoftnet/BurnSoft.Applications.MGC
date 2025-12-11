@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace BurnSoft.Applications.MGC.Other
 {
@@ -166,6 +167,34 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+
+        /// <summary>
+        /// Deletes the specified Link by id from the tabl
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="GID">The Firearm identifier.</param>
+        /// <param name="AID">The Accessory identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Delete(string databasePath, int GID, int AID, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"DELETE from General_Accessories_Link where GID={GID} and AID={AID}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Delete", e);
+            }
+
+            return bAns;
+        }
+
         /// <summary>
         /// Deletes the specified link(s) from the table based on the accessory id and gun id.
         /// </summary>
