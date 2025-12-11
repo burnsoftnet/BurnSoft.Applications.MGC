@@ -450,7 +450,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"Delete from  Gun_Collection_Accessories where id={id}";
+                string sql = $"Delete from Gun_Collection_Accessories where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)

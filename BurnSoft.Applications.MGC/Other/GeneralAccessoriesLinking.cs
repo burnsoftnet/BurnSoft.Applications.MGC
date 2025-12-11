@@ -173,17 +173,17 @@ namespace BurnSoft.Applications.MGC.Other
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="GID">The Firearm identifier.</param>
-        /// <param name="AID">The Accessory identifier.</param>
+        /// <param name="genAssId">The General Accessory identifier.</param>
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool Delete(string databasePath, int GID, int AID, out string errOut)
+        public static bool Delete(string databasePath, int GID, int genAssId, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
             try
             {
-                string sql = $"DELETE from General_Accessories_Link where GID={GID} and AID={AID}";
+                string sql = $"DELETE from General_Accessories_Link where GID={GID} and AID={genAssId}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
             }
