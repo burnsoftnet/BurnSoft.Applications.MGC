@@ -647,7 +647,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                         obj.FC(d.Condition), obj.FC(d.Notes), obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue),
                         Convert.ToDouble(d.AppriasedValue), d.CountInValue, d.IsChoke, out errOut);
                     if (errOut?.Length > 0) throw new Exception(errOut);
-                    if (!Delete(databasePath, (int)itemId, out errOut)) throw new Exception(errOut);
+                    if (!Delete(databasePath, itemId, out errOut)) throw new Exception(errOut);
                 }
             }
             catch (Exception e)
