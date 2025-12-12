@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using BurnSoft.Applications.MGC.Other;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 
@@ -449,7 +450,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"Delete from  Gun_Collection_Accessories where id={id}";
+                string sql = $"Delete from Gun_Collection_Accessories where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -593,6 +594,69 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Copies Firearm Accessory to general accessories.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="itemId">The item identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool CopyToGeneralAccessories(string databasePath, long itemId, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                BSOtherObjects obj = new BSOtherObjects();
+                List<AccessoriesList> details = List(databasePath, (int)itemId, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (AccessoriesList d in details)
+                {
+                    bAns = GeneralAccessories.Add(databasePath, obj.FC(d.Manufacturer), obj.FC(d.Model), obj.FC(d.SerialNumber), 
+                        obj.FC(d.Condition), obj.FC(d.Notes), obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue),
+                        Convert.ToDouble(d.AppriasedValue), d.CountInValue, d.IsChoke, out errOut, IsLinked: true, FAID: itemId);
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CopyToGeneralAccessories", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Moves The Firearm Accessory to the to general accessories and then deletes it from the firearm accessories table..
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="itemId">The item identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool MoveToGeneralAccessories(string databasePath, long itemId, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                BSOtherObjects obj = new BSOtherObjects();
+                List<AccessoriesList> details = List(databasePath, (int)itemId, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (AccessoriesList d in details)
+                {
+                    bAns = GeneralAccessories.Add(databasePath, obj.FC(d.Manufacturer), obj.FC(d.Model), obj.FC(d.SerialNumber),
+                        obj.FC(d.Condition), obj.FC(d.Notes), obj.FC(d.Use), Convert.ToDouble(d.PurchaseValue),
+                        Convert.ToDouble(d.AppriasedValue), d.CountInValue, d.IsChoke, out errOut);
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                    if (!Delete(databasePath, (int)itemId, out errOut)) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MoveToGeneralAccessories", e);
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Get a list of all the accessories
         /// </summary>

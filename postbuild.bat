@@ -54,6 +54,7 @@ FOR /F "tokens=* USEBACKQ" %%F IN (`%SolutionDir%StringReplace %nupak% %HELPFILE
 )
 echo "PackageVersion: %ver%"
 
+if NOT "%~5"=="-g" goto GITHUB
 SET targetstatus=
 for /f "skip=3 tokens=6" %%g in ('ping %LOCALNUGET%^|find /i "TTL"') do @set targetstatus=%%g
 if "%targetstatus%"=="" echo %LOCALNUGET% is not reachable & goto GITHUB
@@ -65,7 +66,7 @@ nuget push %nupak%.%NUGETEXT% burnsoft -Source %USENUGETSERVER%
 
 :GITHUB
 
-if NOT "%~5"=="-g" goto END
+if NOT "%~5"=="-g" goto NUGET
 echo "nuget guthub push"
 nuget push %nupak%.%NUGETEXT% -source "github"
 
