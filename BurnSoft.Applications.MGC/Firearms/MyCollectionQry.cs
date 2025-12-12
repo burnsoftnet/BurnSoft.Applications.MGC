@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Universal;
 
 namespace BurnSoft.Applications.MGC.Firearms
 {

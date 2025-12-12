@@ -3,7 +3,7 @@
 namespace BurnSoft.Applications.MGC.Types
 {
     /// <summary>
-    /// Class GunCollectionList.  List container to hold the database taken from the database for the gun collection details.
+    /// Class GunCollectionList.  List container to hold the database taken from the database fort he gun collection details.
     /// </summary>
     [Serializable]
     public class GunCollectionList
@@ -341,10 +341,5 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value><c>true</c> if this instance is no lethal; otherwise, <c>false</c>.</value>
         public bool IsNonLethal { get; set; }
-        /// <summary>
-        /// Gets or sets the rating.
-        /// </summary>
-        /// <value>The rating.</value>
-        public int Rating { get; set; }
     }
 }
