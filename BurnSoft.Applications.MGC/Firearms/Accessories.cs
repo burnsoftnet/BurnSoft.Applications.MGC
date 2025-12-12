@@ -110,9 +110,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="ic">Is Shotgun Choke.</param>
         /// <param name="galid">The general accessory list id.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="isLinked">Mark is this is linked or not from general accessories</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, 
-            double purValue, double appValue, bool civ, bool ic, int galid, out string errOut)
+            double purValue, double appValue, bool civ, bool ic, int galid, out string errOut, bool isLinked = false)
         {
             bool bAns = false;
             errOut = @"";
@@ -121,8 +122,10 @@ namespace BurnSoft.Applications.MGC.Firearms
                 int iCiv = civ ? 1 : 0;
                 int iIc = ic ? 1 : 0;
 
-                string sql = $"INSERT INTO Gun_Collection_Accessories(GID,Manufacturer,Model,SerialNumber,Condition,Notes,Use,PurValue,AppValue,CIV,IC,GALID,sync_lastupdate) VALUES({gunId}," +
-                             $"'{manufacturer}','{model}','{serialNumber}','{condition}','{notes}','{use}',{purValue},{appValue}, {iCiv},{iIc},{galid},Now())";
+                string sql = $"INSERT INTO Gun_Collection_Accessories(GID,Manufacturer,Model,SerialNumber,Condition," +
+                    $"Notes,Use,PurValue,AppValue,CIV,IC,GALID, IsLinked, sync_lastupdate) VALUES({gunId}," +
+                             $"'{manufacturer}','{model}','{serialNumber}','{condition}','{notes}','{use}'," +
+                             $"{purValue},{appValue}, {iCiv},{iIc},{galid},{isLinked},Now())";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)

@@ -80,7 +80,7 @@ namespace BurnSoft.Applications.MGC.Other
                 {
                     if (!Accessories.Add(databasePath, gunId, l.Manufacturer, l.Model, l.SerialNumber, l.Condition, 
                         l.Notes, l.Use, Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue), 
-                        l.CountInValue, l.IsChoke, id, out errOut)) throw new Exception(errOut);
+                        l.CountInValue, l.IsChoke, id, out errOut, isLinked: true)) throw new Exception(errOut);
                 }
                 bAns = true;
             }

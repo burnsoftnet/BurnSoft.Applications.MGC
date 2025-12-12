@@ -220,7 +220,9 @@ namespace BurnSoft.Applications.MGC.Other
                         PurchaseValue = d["PurValue"] != DBNull.Value ? d["PurValue"].ToString() : " ",
                         AppriasedValue = d["AppValue"] != DBNull.Value ? d["AppValue"].ToString() : " ",
                         CountInValue = countinValue,
-                        IsChoke = isChoke
+                        IsChoke = isChoke,
+                        FAID = Convert.ToInt32(d["FAID"]),
+                        IsLinked = Convert.ToBoolean(d["IsLinked"])
                     });
                 }
             }
