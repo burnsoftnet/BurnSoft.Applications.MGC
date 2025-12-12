@@ -782,6 +782,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                         CountInValue = countinValue,
                         IsChoke = isChoke,
                         GALID = Convert.ToInt32(d["GALID"] != DBNull.Value ? d["GALID"] : 0),
+                        IsLinked = d["IsLinked"] != DBNull.Value ? Convert.ToBoolean(d["IsLinked"]) : false
                     });
                 }
             }

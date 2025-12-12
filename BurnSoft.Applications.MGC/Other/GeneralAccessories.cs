@@ -221,8 +221,8 @@ namespace BurnSoft.Applications.MGC.Other
                         AppriasedValue = d["AppValue"] != DBNull.Value ? d["AppValue"].ToString() : " ",
                         CountInValue = countinValue,
                         IsChoke = isChoke,
-                        FAID = Convert.ToInt32(d["FAID"]),
-                        IsLinked = Convert.ToBoolean(d["IsLinked"])
+                        FAID = d["FAID"] != DBNull.Value ? Convert.ToInt32(d["FAID"]) : 0,
+                        IsLinked = d["IsLinked"] != DBNull.Value ? Convert.ToBoolean(d["IsLinked"]) : false
                     });
                 }
             }
