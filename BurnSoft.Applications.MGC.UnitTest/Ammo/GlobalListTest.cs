@@ -134,7 +134,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
         /// <param name="value">The value.</param>
         private void PrintList(List<GlobalCaliberList> value)
         {
-            // TODO: #63 Add to PrintListValues Function
             if (value.Count > 0)
             {
                 foreach (GlobalCaliberList g in value)
