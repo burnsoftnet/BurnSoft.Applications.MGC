@@ -68,7 +68,31 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _gunDetailsStartDate = Vs2019.GetSetting("GunDetails_StartDate", TestContext);
             _gunDetailsReturnDate = Vs2019.GetSetting("GunDetails_ReturnDate", TestContext);
         }
-
+        /// <summary>
+        /// Prints the list.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        private void PrintList(List<GunSmithWorkDone> value)
+        {
+            if (value.Count > 0)
+            {
+                foreach (GunSmithWorkDone g in value)
+                {
+                    TestContext.WriteLine($"id : {g.Id}");
+                    TestContext.WriteLine($"Smith Name: {g.GunSmithName}");
+                    TestContext.WriteLine($"Smith ID: {g.GunSmithId}");
+                    TestContext.WriteLine($"Gun Id: {g.GunId}");
+                    TestContext.WriteLine($"OrderDetails: {g.OrderDetails}");
+                    TestContext.WriteLine($"Notes: {g.Notes}");
+                    TestContext.WriteLine($"Return Date: {g.ReturnDate}");
+                    TestContext.WriteLine($"Start Date: {g.StartDate}");
+                    TestContext.WriteLine($"Last Updated: {g.LastSync}");
+                    TestContext.WriteLine($"");
+                    TestContext.WriteLine($"--------------------------------------");
+                    TestContext.WriteLine($"");
+                }
+            }
+        }
         /// <summary>
         /// Verifies the exists.
         /// </summary>
@@ -177,7 +201,8 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<GunSmithWorkDone> value = GunSmithDetails.Lists(_databasePath, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.GunSmithWorkDoneDetails(value));
+            PrintList(value);
+
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
@@ -186,7 +211,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<GunSmithWorkDone> value = GunSmithDetails.Lists(_databasePath, _gunSmithName, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.GunSmithWorkDoneDetails(value));
+            PrintList(value);
 
             General.HasTrueValue(value.Count > 0, _errOut);
         }
@@ -199,7 +224,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<GunSmithWorkDone> value = GunSmithDetails.Lists(_databasePath, _gunId, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.GunSmithWorkDoneDetails(value));
+            PrintList(value);
 
             General.HasTrueValue(value.Count > 0, _errOut);
         }

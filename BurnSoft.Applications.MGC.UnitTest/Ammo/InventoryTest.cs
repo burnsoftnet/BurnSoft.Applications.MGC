@@ -177,7 +177,33 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
             TestContext.WriteLine($"id: {id}");
             General.HasTrueValue(id > 0, _errOut);
         }
+        /// <summary>
+        /// Prints the list.
+        /// </summary>
+        /// <param name="value">The value.</param>
+        private void PrintList(List<Ammunition> value)
+        {
+            if (value.Count > 0)
+            {
+                foreach (Ammunition a in value)
+                {
+                    TestContext.WriteLine($"id: {a.Id}");
+                    TestContext.WriteLine($"Manufacture: {a.Manufacturer}");
+                    TestContext.WriteLine($"Name: {a.Name}");
+                    TestContext.WriteLine($"Caliber: {a.Cal}"); 
+                    TestContext.WriteLine($"Grain: {a.Grain}");
+                    TestContext.WriteLine($"Jacket: {a.Jacket}");
+                    TestContext.WriteLine($"Qty: {a.Qty}");
+                    TestContext.WriteLine($"Number Version caliber: {a.Dcal}");
+                    TestContext.WriteLine($"Velocity: {a.Vel_n}");
+                    TestContext.WriteLine($"Last Updated: {a.Sync_lastupdate}");
+                    TestContext.WriteLine($"");
+                    TestContext.WriteLine($"----------------------------------");
+                    TestContext.WriteLine($"");
 
+                }
+            }
+        }
         /// <summary>
         /// Defines the test method GetListByID.
         /// </summary>
@@ -187,7 +213,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
             VerifyExists();
             long id = Inventory.GetLastAmmoId(_databasePath, out _errOut);
             List<Ammunition> value = Inventory.GetList(_databasePath, id,out  _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.AmmunitionDetails(value));
+            PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -199,7 +225,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
             VerifyExists();
             
             List<Ammunition> value = Inventory.GetList(_databasePath, _ammoName, _ammoManufacturer, _ammoCaliber, out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.AmmunitionDetails(value));
+            PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -211,7 +237,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Ammo
             VerifyExists();
 
             List<Ammunition> value = Inventory.GetList(_databasePath,  out _errOut);
-            TestContext.WriteLine(DebugHelpers.PrintListValues.AmmunitionDetails(value));
+            PrintList(value);
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }
