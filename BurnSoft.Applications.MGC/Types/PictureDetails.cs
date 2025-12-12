@@ -70,5 +70,10 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value>The last synchronize date.</value>
         public string LastSyncDate { get; set; }
+        /// <summary>
+        /// Gets or sets the pic order.
+        /// </summary>
+        /// <value>The pic order.</value>
+        public int PicOrder { get; set; }
     }
 }

@@ -94,9 +94,9 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             bool bAns = false;
+            OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
             try
             {
-                OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                 conn.Open();
                 OleDbCommand cmd = new OleDbCommand(sql, conn);
 
@@ -104,15 +104,67 @@ namespace BurnSoft.Applications.MGC.hotixes
                 {
                     bAns = dr.HasRows;
                 }
-
-                conn.Close();
             }
             catch (Exception e)
             {
                 errOut = $"{ErrorMessage($"HasData-->{fromFunction}", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
             }
+            conn.Close();
             return bAns;
         }
+        /// <summary>
+        /// check to see if theTables the exists in the database.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="tableName">Name of the table.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool TableExists(string databasePath, string tableName, out string errOut, bool usePassword = true)
+        {
+            errOut = "";
+            //string sql = $"SELECT COUNT(*) FROM MSysObjects WHERE Name = '{tableName}' AND Type = 1";
+            //string sql = $"SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = '{tableName}'";
+            string sql = $"SELECT * from {tableName}";
+            bool bAns = false;
+            try
+            {
+                HasData(databasePath, sql, "TableExists", out errOut, usePassword);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                bAns = false;
+                errOut = $"{ErrorMessage("TableExists", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Grants the admin system objects.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="usePassword">if set to <c>true</c> [use password].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool GrantAdminSysObjects(string databasePath, out string errOut, bool usePassword = true)
+        {
+            errOut = "";
+            string sql = $"GRANT SELECT ON MSysObjects TO Admin;";
+            bool bAns = false;
+            try
+            {
+                if (!RunSql(databasePath, sql, out errOut, usePassword)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = $"{ErrorMessage("GrantAdminSysObjects", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+            }
+            return bAns;
+        }
+
         /// <summary>
         /// Values the does exist.
         /// </summary>
@@ -192,6 +244,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             string sql = $"SELECT * from {table} where {column}={value}";
             return HasData(databasePath, sql, "ValueDoesExist", out errOut, usePassword);
         }
+
         /// <summary>
         /// Executes the SQL.
         /// </summary>
@@ -204,7 +257,9 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             bool bAns = false;
-            OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
+            string connectionString = DatabaseConnectionString(databasePath, usePassword);
+            AccessDatabaseHandler.WaitForAccessDatabase(connectionString, timeoutSeconds: 240);
+            OleDbConnection conn = new OleDbConnection(connectionString);
             try
             {
                 conn.Open();
@@ -588,9 +643,9 @@ namespace BurnSoft.Applications.MGC.hotixes
                 errOut = "";
                 bool bAns = false;
                 string sql = "";
+                OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                 try
                 {
-                    OleDbConnection conn = new OleDbConnection(DatabaseConnectionString(databasePath, usePassword));
                     conn.Open();
                     OleDbCommand cmd = new OleDbCommand($"Select id,{column1},{column2} from {table}", conn);
                     List<string> cmdBuilder = new List<string>();
@@ -614,12 +669,14 @@ namespace BurnSoft.Applications.MGC.hotixes
                     foreach (string c in cmdBuilder)
                     {
                         if (!RunSql(databasePath, c, out errOut, true)) throw new Exception(errOut);
+                        Thread.Sleep(1000);
                     }
                     bAns = true;
                 }
                 catch (Exception e)
                 {
                     errOut = $"{ErrorMessage("SwapValues", e)}.  {Environment.NewLine} {Environment.NewLine}SQL - {sql}";
+                    conn.Close();
                 }
                 return bAns;
             }

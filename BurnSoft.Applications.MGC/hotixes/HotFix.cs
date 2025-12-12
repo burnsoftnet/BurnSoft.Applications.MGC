@@ -267,8 +267,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// hot fix 4
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Four(string databasePath, out string errOut)
         {
@@ -315,8 +315,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// hot Fix 5
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Five(string databasePath, out string errOut)
         {
@@ -581,8 +581,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// hot fix 6
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Six(string databasePath, out string errOut)
         {
@@ -664,6 +664,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 7;
+            double dbVersion = 4.5;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -710,7 +711,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Conversion Kit", out errOut)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
-                if (!Database.SaveDatabaseVersion(databasePath, "4.5", out errOut)) throw new Exception(errOut);
+                if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -756,6 +757,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 8;
+            double dbVersion = 5.0;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -788,7 +790,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.AddSyncToTable(databasePath, "Wishlist", out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
-                if (!Database.SaveDatabaseVersion(databasePath, "5.0", out errOut)) throw new Exception(errOut);
+                if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -801,13 +803,14 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// <summary>
         /// Hotfix Number 9
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Nine(string databasePath, out string errOut)
         {
             errOut = "";
             int hotFixNumber = 9;
+            double dbVersion = 6.0;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -911,7 +914,7 @@ namespace BurnSoft.Applications.MGC.hotixes
 
 
                 //Perform Update in Registry of new hotfix
-                if (!Database.SaveDatabaseVersion(databasePath, "6.0", out errOut)) throw new Exception(errOut);
+                if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -922,44 +925,99 @@ namespace BurnSoft.Applications.MGC.hotixes
             return bAns;
         }
         /// <summary>
-        /// Hot Fix number 10
+        /// Hot Fix number 10, Mostly Related to the 7.x release
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         private bool Ten(string databasePath, out string errOut)
         {
             errOut = "";
             int hotFixNumber = 10;
+            double dbVersion = 7.2;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
-                if (!HfDatabase.RunSql(databasePath,
-                    "CREATE TABLE Gun_Collection_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number, AID Number);",
-                    out errOut, true))
+                if (!HfDatabase.TableExists(databasePath, "General_Accessories_Link", out errOut))
                 {
-                    if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                    SendStatus($"Creating Table Accessories Link");
+                    if (!HfDatabase.RunSql(databasePath,
+                    "CREATE TABLE General_Accessories_Link (ID AUTOINCREMENT PRIMARY KEY, GID Number, AID Number, " +
+                    "sync_lastupdate DATETIME);",
+                    out errOut, true))
+                    {
+                        if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                    }
+                }
+                else
+                {
+                    SendStatus($"Table Accessories Link Already Exists");
                 }
 
-                if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Accessories_Link", out errOut, true)) throw new Exception(errOut);
-                
+                if (!HfDatabase.TableExists(databasePath, "General_Accessories", out errOut))
+                {
+                    SendStatus($"Creating Table General Accessories Table");
+                    if (!HfDatabase.RunSql(databasePath,
+                    "CREATE TABLE General_Accessories (ID AUTOINCREMENT PRIMARY KEY, Manufacturer Text(255), Model Text(255), " +
+                    "SerialNumber Text(255), Condition Text(255), Notes Text(255), Use Text(255), PurValue Text(255), " +
+                    "AppValue Number, CIV NUmber, IC Number, FAID Number, IsLinked Yes/No, sync_lastupdate DATETIME);",
+                    out errOut, true))
+                    {
+                        if (!errOut.Contains(" already exists")) throw new Exception(errOut);
+                    }
+                }
+                else
+                {
+                    SendStatus($"Table General Accessories Already Exists");
+                }
 
+                    
+                SendStatus($"Adding Accessories Link to Sync Table");
+                if (!HfDatabase.AddSyncToTable(databasePath, "General_Accessories_Link", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding General Accessories to Sync Table");
+                if (!HfDatabase.AddSyncToTable(databasePath, "General_Accessories", out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Adding Column General Accessories Link ID ( GALID ) to Gun Collection Accessories Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GALID", "Gun_Collection_Accessories", "number", "0", out errOut))
+                    throw new Exception(errOut);
+
+                SendStatus($"Settings all GALID to 0 for Gun Collection Accessories Table");
+                if (!HfDatabase.RunSql(databasePath,
+                   "UPDATE Gun_Collection_Accessories set GALID=0",
+                   out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Adding Column isCompetitition to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "isCompetition", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
-
+                SendStatus($"Adding column is Non Lethal to Gun Collection");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsNoLeathal", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
-
+                SendStatus($"Setting new columns to 0 in Gun Collection table");
                 if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection set isCompetition=0,IsNoLeathal=0",
                     out errOut, true)) throw new Exception(errOut);
-
+                SendStatus($"Adding GunSmith ID to Gunsmith Details Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GSID", "GunSmith_Details", "number", "0", out errOut))
                     throw new Exception(errOut);
-
+                SendStatus($"Adding Rating column to Gun Collection Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Rating", "Gun_Collection", "number", "0", out errOut))
+                    throw new Exception(errOut);
+                SendStatus($"Settings all Ratings to 0 for Gun Collection Table");
+                if (!HfDatabase.RunSql(databasePath,
+                   "UPDATE Gun_Collection set Rating=0",
+                   out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding PicOrder to Gun Collection Pictures Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "PicOrder", "Gun_Collection_Pictures", "number", "0", out errOut))
+                    throw new Exception(errOut);
+                SendStatus($"Settings Order to 0 on pic Orders");
+                if (!HfDatabase.RunSql(databasePath,
+                  "UPDATE Gun_Collection_Pictures set PicOrder=0",
+                  out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
-                if (!Database.SaveDatabaseVersion(databasePath, "6.1", out errOut)) throw new Exception(errOut);
+                SendStatus($"Updating Databbase version to {dbVersion}");
+                if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
+                SendStatus($"Applying hotfix to registry ");
                 if (!UpdateReg(hotFixNumber, out errOut, DateTime.Now.ToString(CultureInfo.InvariantCulture))) throw new Exception(errOut);
                 bAns = true;
             }
@@ -1015,6 +1073,62 @@ namespace BurnSoft.Applications.MGC.hotixes
                         break;
                     case 10:
                         bans = hotfix.Ten(databasePath, out errOut);
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Run", e);
+            }
+            return bans;
+        }
+
+        /// <summary>
+        /// Runs the specified database path.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="hotFixNumber">The hot fix number.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public bool RunObj(string databasePath, int hotFixNumber, out string errOut)
+        {
+            bool bans = false;
+            errOut = "";
+            try
+            {
+                SendStatus($"Starting up hot fix number: {hotFixNumber}");
+
+                switch (hotFixNumber)
+                {
+                    case 1:
+                        bans = One(databasePath, out errOut);
+                        break;
+                    case 2:
+                        bans = Two(databasePath, out errOut);
+                        break;
+                    case 3:
+                        bans = Three(databasePath, out errOut);
+                        break;
+                    case 4:
+                        bans = Four(databasePath, out errOut);
+                        break;
+                    case 5:
+                        bans = Five(databasePath, out errOut);
+                        break;
+                    case 6:
+                        bans = Six(databasePath, out errOut);
+                        break;
+                    case 7:
+                        bans = Seven(databasePath, out errOut);
+                        break;
+                    case 8:
+                        bans = Eight(databasePath, out errOut);
+                        break;
+                    case 9:
+                        bans = Nine(databasePath, out errOut);
+                        break;
+                    case 10:
+                        bans = Ten(databasePath, out errOut);
                         break;
                 }
             }
