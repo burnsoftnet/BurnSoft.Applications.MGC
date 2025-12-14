@@ -250,6 +250,8 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"PurchaseValue: {v.PurchaseValue}{Environment.NewLine}";
                     sAns += $"SerialNumber: {v.SerialNumber}{Environment.NewLine}";
                     sAns += $"Use: {v.Use}{Environment.NewLine}";
+                    sAns += $"Is LInked: {v.IsLinked}{Environment.NewLine}";
+                    sAns += $"Gen Accessory ID: {v.GALID}{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                     sAns += $"--------------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
@@ -283,6 +285,8 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"PurchaseValue: {v.PurchaseValue}{Environment.NewLine}";
                     sAns += $"SerialNumber: {v.SerialNumber}{Environment.NewLine}";
                     sAns += $"Use: {v.Use}{Environment.NewLine}";
+                    sAns += $"FAID: {v.FAID}{Environment.NewLine}";
+                    sAns += $"Is LInked: {v.IsLinked}{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                     sAns += $"--------------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";

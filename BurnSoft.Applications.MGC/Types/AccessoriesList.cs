@@ -74,6 +74,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value>The galid.</value>
         public int GALID { get; set; }
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is linked.
+        /// </summary>
+        /// <value><c>true</c> if this instance is linked; otherwise, <c>false</c>.</value>
+        public bool IsLinked { get; set; }
+        /// <summary>
         /// Gets or sets the last synchronize. Is called sync_lastupdate in the table
         /// </summary>
         /// <value>The last synchronize.</value>

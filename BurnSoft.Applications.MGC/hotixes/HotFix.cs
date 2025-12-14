@@ -934,7 +934,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 10;
-            double dbVersion = 7.2;
+            double dbVersion = 7.3;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -978,8 +978,12 @@ namespace BurnSoft.Applications.MGC.hotixes
                 SendStatus($"Adding General Accessories to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "General_Accessories", out errOut, true)) throw new Exception(errOut);
 
-                SendStatus($"Adding Column General Accessories Link ID ( GALID ) to Gun Collection Accessories Table");
+                SendStatus($"Adding Column Firearm Accessories Link ID ( GALID ) to Gun Collection Accessories Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GALID", "Gun_Collection_Accessories", "number", "0", out errOut))
+                    throw new Exception(errOut);
+
+                SendStatus($"Adding Column Firearm Accessories IsLinked ( IsLinked ) to Gun Collection Accessories Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsLinked", "Gun_Collection_Accessories", "Yes/No", out errOut))
                     throw new Exception(errOut);
 
                 SendStatus($"Settings all GALID to 0 for Gun Collection Accessories Table");

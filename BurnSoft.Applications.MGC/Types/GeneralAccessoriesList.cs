@@ -65,6 +65,16 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value><c>true</c> if this instance is choke; otherwise, <c>false</c>.</value>
         public bool IsChoke { get; set; }
         /// <summary>
+        /// Gets or sets the firearm accessory id that this came from on a copy
+        /// </summary>
+        /// <value>The faid.</value>
+        public long FAID { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance is linked.
+        /// </summary>
+        /// <value><c>true</c> if this instance is linked; otherwise, <c>false</c>.</value>
+        public bool IsLinked { get; set; }
+        /// <summary>
         /// Gets or sets the attached to firearmns list identirifers.
         /// </summary>
         /// <value>The attached to firearmns.</value>
