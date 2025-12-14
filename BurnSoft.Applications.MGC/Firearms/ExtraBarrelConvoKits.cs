@@ -191,9 +191,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Average Round Fired out of barrel System
         /// </summary>
-        /// <param name="databasePath">The Database Path</param>
+        /// <param name="databasePath"></param>
         /// <param name="barrelSystemId"></param>
-        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <param name="errOut"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
         public static long AverageRoundsFiredBs(string databasePath, int barrelSystemId, out string errOut)
@@ -220,7 +220,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// update the barrel  or conversion kit information in the database
         /// </summary>
-        /// <param name="databasePath">The Database Path</param>
+        /// <param name="databasePath"></param>
         /// <param name="barrelId"></param>
         /// <param name="gunId"></param>
         /// <param name="modelName"></param>
@@ -236,7 +236,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="height"></param>
         /// <param name="type"></param>
         /// <param name="isDefault"></param>
-        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <param name="errOut"></param>
         /// <returns></returns>
         public static bool Update(string databasePath,long barrelId, long gunId, string modelName, string caliber, string finish,
             string barrelLength, string petLoads, string action, string feedSystem, string sights, string purchasePrice,
@@ -253,7 +253,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Update with no default setter
         /// </summary>
-        /// <param name="databasePath">The Database Path</param>
+        /// <param name="databasePath"></param>
         /// <param name="barrelId"></param>
         /// <param name="gunId"></param>
         /// <param name="modelName"></param>
@@ -268,7 +268,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="purchasedFrom"></param>
         /// <param name="height"></param>
         /// <param name="type"></param>
-        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <param name="errOut"></param>
         /// <returns></returns>
         public static bool Update(string databasePath, long barrelId, long gunId, string modelName, string caliber, string finish,
             string barrelLength, string petLoads, string action, string feedSystem, string sights, string purchasePrice,
@@ -368,9 +368,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Delete a barrel/conversion system from the database in the main table and the extended links table.
         /// </summary>
-        /// <param name="databasePath">The Database Path</param>
+        /// <param name="databasePath"></param>
         /// <param name="id"></param>
-        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <param name="errOut"></param>
         /// <returns></returns>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
@@ -468,7 +468,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 string sql = $"SELECT Count(*) as T from Gun_Collection_Ext where GID={id}";
                 long count = DatabaseRelated.GetTotal(databasePath, sql, "HasMultiBarrelsListed", out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                bAns = count > 1;
+                bAns = count > 0;
             }
             catch (Exception e)
             {
@@ -514,10 +514,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Gets the barrel identifier.
         /// </summary>
-        /// <param name="databasePath">The Database Path</param>
+        /// <param name="databasePath"></param>
         /// <param name="gunId"></param>
         /// <param name="name"></param>
-        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <param name="errOut"></param>
         /// <returns></returns>
         public static long GetBarrelId(string databasePath, long gunId, string name, out string errOut)
         {
@@ -598,31 +598,6 @@ namespace BurnSoft.Applications.MGC.Firearms
             catch (Exception e)
             {
                 errOut = ErrorMessage("GetList", e);
-            }
-            return lst;
-        }
-
-        /// <summary>
-        /// Gets the list of barrel system by gun id.
-        /// </summary>
-        /// <param name="databasePath">The database path.</param>
-        /// <param name="gunId">The Firearm identifier.</param>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>List&lt;BarrelSystems&gt;.</returns>
-        /// <exception cref="Exception"></exception>
-        public static List<BarrelSystems> GetListForFirearm(string databasePath, long gunId, out string errOut)
-        {
-            List<BarrelSystems> lst = new List<BarrelSystems>();
-            errOut = @"";
-            try
-            {
-                string sql = $"select * from Gun_Collection_Ext where gid={gunId}";
-                lst = GetList(databasePath, sql, out errOut);
-                if (errOut?.Length > 0) throw new Exception(errOut);
-            }
-            catch (Exception e)
-            {
-                errOut = ErrorMessage("GetListForFirearm", e);
             }
             return lst;
         }

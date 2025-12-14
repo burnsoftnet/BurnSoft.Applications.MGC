@@ -158,23 +158,14 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="databasePath">The database path.</param>
         /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
-        /// <param name="AddIfNotExists">Add if Nationality does not exist</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="Exception"></exception>
-        public static long GetId(string databasePath, string name,out string errOut, bool AddIfNotExists = false)
+        public static long GetId(string databasePath, string name,out string errOut)
         {
             long lAns = 0;
             errOut = @"";
             try
             {
-                if (AddIfNotExists)
-                {
-                    if (!Exists(databasePath, name, out errOut))
-                    {
-                        if (!Add(databasePath, name, out errOut)) throw new Exception(errOut);
-                    }
-                    if (errOut?.Length > 0) throw new Exception(errOut);
-                }
                 string sql = $"SELECT * from  Gun_Nationality where Country='{name}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);

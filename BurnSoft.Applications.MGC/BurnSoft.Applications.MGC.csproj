@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BurnSoft.Applications.MGC</RootNamespace>
     <AssemblyName>BurnSoft.Applications.MGC</AssemblyName>
-    <TargetFrameworkVersion>v4.8.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>false</Deterministic>
     <TargetFrameworkProfile />
@@ -36,11 +36,11 @@
     <DocumentationFile>bin\Release\BurnSoft.Applications.MGC.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BurnSoft.Security.RegularEncryption, Version=1.1.1.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BurnSoft.Security.RegularEncryption.1.1.1.2\lib\net481\BurnSoft.Security.RegularEncryption.dll</HintPath>
+    <Reference Include="BurnSoft.Security.RegularEncryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BurnSoft.Security.RegularEncryption.1.0.0\lib\net452\BurnSoft.Security.RegularEncryption.dll</HintPath>
     </Reference>
-    <Reference Include="BurnSoft.Universal, Version=4.1.33.8, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\BurnSoft.Universal.4.1.33.9\lib\net481\BurnSoft.Universal.dll</HintPath>
+    <Reference Include="BurnSoft.Universal, Version=4.0.32.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BurnSoft.Universal.4.0.32.5\lib\net472\BurnSoft.Universal.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
@@ -62,14 +62,12 @@
     <Compile Include="AutoFill\Appraisers.cs" />
     <Compile Include="AutoFill\Documents.cs" />
     <Compile Include="AutoFill\General.cs" />
-    <Compile Include="AutoFill\GeneralAccessories.cs" />
     <Compile Include="AutoFill\Gun.cs" />
     <Compile Include="AutoFill\GunCollection.cs" />
     <Compile Include="AutoFill\GunSmith.cs" />
     <Compile Include="AutoFill\WhisList.cs" />
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseCleanUp.cs" />
-    <Compile Include="DebugHelpers\VerifyData.cs" />
     <Compile Include="Firearms\Accessories.cs" />
     <Compile Include="Firearms\Classification.cs" />
     <Compile Include="Firearms\Documents.cs" />
@@ -92,16 +90,12 @@
     <Compile Include="Global\DatabaseRelated.cs" />
     <Compile Include="Global\Helpers.cs" />
     <Compile Include="Global\MyRegistry.cs" />
-    <Compile Include="DebugHelpers\PrintListValues.cs" />
-    <Compile Include="hotixes\AccessDatabaseHandler.cs" />
     <Compile Include="hotixes\HfDatabase.cs" />
     <Compile Include="hotixes\HotFix.cs" />
     <Compile Include="hotixes\types\DbAddData.cs" />
     <Compile Include="hotixes\types\DbColumns.cs" />
     <Compile Include="hotixes\types\HotFixList.cs" />
     <Compile Include="hotixes\types\HotFixToDbList.cs" />
-    <Compile Include="Other\GeneralAccessories.cs" />
-    <Compile Include="Other\GeneralAccessoriesLinking.cs" />
     <Compile Include="Other\WishList.cs" />
     <Compile Include="PeopleAndPlaces\Appraisers.cs" />
     <Compile Include="PeopleAndPlaces\Buyers.cs" />
@@ -124,11 +118,8 @@
     <Compile Include="Types\CustomReportsLists.cs" />
     <Compile Include="Types\DocumentLinkList.cs" />
     <Compile Include="Types\DocumentList.cs" />
-    <Compile Include="Types\GeneralAccessoriesLinkers.cs" />
-    <Compile Include="Types\GeneralAccessoriesList.cs" />
     <Compile Include="Types\GlobalCaliberList.cs" />
     <Compile Include="Types\GripLists.cs" />
-    <Compile Include="Types\GunCollectionFullList.cs" />
     <Compile Include="Types\GunCollectionList.cs" />
     <Compile Include="Types\GunShopDetails.cs" />
     <Compile Include="Types\GunSmithContacts.cs" />
@@ -142,7 +133,6 @@
     <Compile Include="Types\BuyersList.cs" />
     <Compile Include="Types\PictureDetails.cs" />
     <Compile Include="Types\PictureDisplayList.cs" />
-    <Compile Include="Types\Ratings.cs" />
     <Compile Include="Types\TableLists.cs" />
     <Compile Include="Types\WishlistList.cs" />
   </ItemGroup>
