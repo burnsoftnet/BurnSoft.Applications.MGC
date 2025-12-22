@@ -361,7 +361,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lst;
         }
         /// <summary>
-        /// Get the Full List of Maintance Details in a list for a specific firearm.
+        /// Get the Full List of Maintance Details in a list for a specific row in the table..
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="gunId">The Firearm identifier.</param>
@@ -369,13 +369,13 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <returns>List&lt;MaintanceDetailsList&gt;.</returns>
         /// <exception cref="Exception"></exception>
         /// <exception cref="Exception"></exception>
-        public static List<MaintanceDetailsList> Lists(string databasePath, int gunId, out string errOut)
+        public static List<MaintanceDetailsList> Lists(string databasePath, int id, out string errOut)
         {
             List<MaintanceDetailsList> lst = new List<MaintanceDetailsList>();
             errOut = @"";
             try
             {
-                string sql = $"SELECT * from  Maintance_Details where gid={gunId}";
+                string sql = $"SELECT * from  Maintance_Details where id={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 lst = MyList(dt, out errOut);
