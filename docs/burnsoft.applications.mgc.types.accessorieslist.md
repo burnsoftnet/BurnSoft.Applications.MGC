@@ -186,6 +186,19 @@ public int GALID { get; set; }
 [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 The galid.
 
+### **IsLinked**
+
+Gets or sets a value indicating whether this instance is linked.
+
+```csharp
+public bool IsLinked { get; set; }
+```
+
+#### Property Value
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if this instance is linked; otherwise, `false`.
+
 ### **LastSync**
 
 Gets or sets the last synchronize. Is called sync_lastupdate in the table

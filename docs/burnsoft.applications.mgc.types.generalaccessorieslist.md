@@ -160,6 +160,32 @@ public bool IsChoke { get; set; }
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if this instance is choke; otherwise, `false`.
 
+### **FAID**
+
+Gets or sets the firearm accessory id that this came from on a copy
+
+```csharp
+public long FAID { get; set; }
+```
+
+#### Property Value
+
+[Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The faid.
+
+### **IsLinked**
+
+Gets or sets a value indicating whether this instance is linked.
+
+```csharp
+public bool IsLinked { get; set; }
+```
+
+#### Property Value
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if this instance is linked; otherwise, `false`.
+
 ### **AttachedToFirearmns**
 
 Gets or sets the attached to firearmns list identirifers.

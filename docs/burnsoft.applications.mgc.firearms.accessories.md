@@ -78,12 +78,12 @@ The error out.
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
-### **Add(String, Int64, String, String, String, String, String, String, Double, Double, Boolean, Boolean, Int32, String&)**
+### **Add(String, Int64, String, String, String, String, String, String, Double, Double, Boolean, Boolean, Int32, String&, Boolean)**
 
 Adds the specified accessory to the database.
 
 ```csharp
-public static bool Add(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, int galid, String& errOut)
+public static bool Add(string databasePath, long gunId, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, int galid, String& errOut, bool isLinked)
 ```
 
 #### Parameters
@@ -129,6 +129,9 @@ The general accessory list id.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`isLinked` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+Mark is this is linked or not from general accessories
 
 #### Returns
 
