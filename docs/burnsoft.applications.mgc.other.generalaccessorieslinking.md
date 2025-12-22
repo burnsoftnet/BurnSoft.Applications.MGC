@@ -140,6 +140,37 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **Delete(String, Int32, Int32, String&)**
+
+Deletes the specified Link by id from the tabl
+
+```csharp
+public static bool Delete(string databasePath, int GID, int genAssId, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`GID` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The Firearm identifier.
+
+`genAssId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The General Accessory identifier.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **Delete(String, Int32, Int64, String&)**
 
 Deletes the specified link(s) from the table based on the accessory id and gun id.

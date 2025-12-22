@@ -446,10 +446,10 @@ List&lt;MaintanceDetailsList&gt;.
 
 ### **Lists(String, Int32, String&)**
 
-Get the Full List of Maintance Details in a list for a specific firearm.
+Get the Full List of Maintance Details in a list for a specific row in the table..
 
 ```csharp
-public static List<MaintanceDetailsList> Lists(string databasePath, int gunId, String& errOut)
+public static List<MaintanceDetailsList> Lists(string databasePath, int id, String& errOut)
 ```
 
 #### Parameters
@@ -457,8 +457,7 @@ public static List<MaintanceDetailsList> Lists(string databasePath, int gunId, S
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
 
-`gunId` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
-The Firearm identifier.
+`id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
