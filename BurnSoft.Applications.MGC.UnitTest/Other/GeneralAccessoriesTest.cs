@@ -83,6 +83,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _mainAccessory = 1;
+            _gunId = 3;
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _accessoriesManufacturer = obj.FC(Vs2019.GetSetting("Accessories_Manufacturer", TestContext));
             _accessoriesName = obj.FC(Vs2019.GetSetting("Accessories_Name", TestContext));
@@ -217,6 +218,25 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
                 _accessoriesSerialNumber, out _errOut);
             bool value = GeneralAccessories.Delete(_databasePath, Convert.ToInt32(id), out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void MoveTest()
+        {
+            VerifyExists();
+            long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut);
+            TestContext.WriteLine($"Attempting to move accesory id {id} to firearm id {_gunId}");
+            bool value = GeneralAccessories.Move(_databasePath, Convert.ToInt32(id), _gunId, out _errOut);
+            if ( value )
+            {
+                TestContext.WriteLine($"PASSED! Attempting to move accesory id {id} to firearm id {_gunId}");
+            } else
+            {
+                TestContext.WriteLine($"FAILED! Attempting to move accesory id {id} to firearm id {_gunId}");
+            }
+
             General.HasTrueValue(value, _errOut);
         }
 
