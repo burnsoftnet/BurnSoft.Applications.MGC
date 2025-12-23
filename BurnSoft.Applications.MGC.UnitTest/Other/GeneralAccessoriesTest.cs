@@ -221,6 +221,25 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
         }
 
         [TestMethod, TestCategory("General Accessories")]
+        public void MoveTest()
+        {
+            VerifyExists();
+            long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut);
+            TestContext.WriteLine($"Attempting to move accesory id {id} to firearm id {_gunId}");
+            bool value = GeneralAccessories.Move(_databasePath, Convert.ToInt32(id), _gunId, out _errOut);
+            if ( value )
+            {
+                TestContext.WriteLine($"PASSED! Attempting to move accesory id {id} to firearm id {_gunId}");
+            } else
+            {
+                TestContext.WriteLine($"FAILED! Attempting to move accesory id {id} to firearm id {_gunId}");
+            }
+
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
         public void DeleteFromFirearmTest()
         {
             VerifyExists();
