@@ -20,7 +20,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 ## Release Log
 
-### v1.7.x.x
+### v1.7.4.45
 
 * Fixed unit Tests to run on full
 * Updated Unit Tests
@@ -43,6 +43,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * Created Function to Check if table exists for hotfix section
 * Added AutoFill for General Accessories
 * Added Move, Delete, and Copy from firearm accessories to General Accessories
+* Added Move to firearm accessories and delete from general accessories.
 
 ### v1.7.0.4
 
