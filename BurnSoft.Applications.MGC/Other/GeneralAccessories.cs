@@ -1,4 +1,5 @@
-﻿using BurnSoft.Applications.MGC.Firearms;
+﻿using BurnSoft.Applications.MGC.AutoFill;
+using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Universal;
 using System;
@@ -127,6 +128,40 @@ namespace BurnSoft.Applications.MGC.Other
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Adds the accessory to the selected firearm and remove it from the general Accessories.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="itemId">The item identifier.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool Move(string databasePath, long itemId, long gunId, out string errOut)
+        {
+            bool bAns = false;
+            try
+            {
+                BSOtherObjects obj = new BSOtherObjects();
+                List<GeneralAccessoriesList> details = Lists(databasePath, (int)itemId, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                foreach (GeneralAccessoriesList l in details)
+                {
+                    if (!Accessories.Add(databasePath, gunId, l.Manufacturer, l.Model, l.SerialNumber, l.Condition,
+                        l.Notes, l.Use, Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue),
+                        l.CountInValue, l.IsChoke, 0, out errOut)) throw new Exception(errOut);
+                    bAns = true;
+                    if (!Delete(databasePath, (int)itemId, out errOut)) throw new Exception(errOut);
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Move", e);
+            }
+            return bAns;
+        }
+
 
         /// <summary>
         /// Updates the specified accessory in the database.
