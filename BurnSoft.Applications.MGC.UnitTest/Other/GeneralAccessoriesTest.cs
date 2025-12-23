@@ -83,6 +83,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             BSOtherObjects obj = new BSOtherObjects();
             _errOut = @"";
             _mainAccessory = 1;
+            _gunId = 3;
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
             _accessoriesManufacturer = obj.FC(Vs2019.GetSetting("Accessories_Manufacturer", TestContext));
             _accessoriesName = obj.FC(Vs2019.GetSetting("Accessories_Name", TestContext));

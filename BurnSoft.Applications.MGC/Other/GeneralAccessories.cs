@@ -149,7 +149,7 @@ namespace BurnSoft.Applications.MGC.Other
                 foreach (GeneralAccessoriesList l in details)
                 {
                     if (!Accessories.Add(databasePath, gunId, l.Manufacturer, l.Model, l.SerialNumber, l.Condition,
-                        l.Notes, l.Use, Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue),
+                        obj.FC(l.Notes), obj.FC(l.Use), Convert.ToDouble(l.PurchaseValue), Convert.ToDouble(l.AppriasedValue),
                         l.CountInValue, l.IsChoke, 0, out errOut)) throw new Exception(errOut);
                     bAns = true;
                     if (!Delete(databasePath, (int)itemId, out errOut)) throw new Exception(errOut);
