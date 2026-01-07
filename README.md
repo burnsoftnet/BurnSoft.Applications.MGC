@@ -20,7 +20,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 ## Release Log
 
-### v1.7.4.46
+### v1.7.5.48
 
 * Fixed unit Tests to run on full
 * Updated Unit Tests
@@ -44,6 +44,8 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * Added AutoFill for General Accessories
 * Added Move, Delete, and Copy from firearm accessories to General Accessories
 * Added Move to firearm accessories and delete from general accessories.
+* Added functions to handle the new column in the gun collection table that can mark a firearm as for sale
+* Added functions to handle the new column in the gun collection table that can mark a firearm as a gun smith project
 
 ### v1.7.0.4
 
