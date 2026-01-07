@@ -934,11 +934,19 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 10;
-            double dbVersion = 7.3;
+            double dbVersion = 7.4;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Adding Column Firearm Accessories ToSell ( ToSell ) to Gun Collection Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ToSell", "Gun_Collection", "Yes/No", out errOut))
+                    throw new Exception(errOut);
+
+                SendStatus($"Adding Column Firearm Accessories GunSmithJob ( GunSmithJob ) to Gun Collection Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GunSmithJob", "Gun_Collection", "Yes/No", out errOut))
+                    throw new Exception(errOut);
+
                 if (!HfDatabase.TableExists(databasePath, "General_Accessories_Link", out errOut))
                 {
                     SendStatus($"Creating Table Accessories Link");
