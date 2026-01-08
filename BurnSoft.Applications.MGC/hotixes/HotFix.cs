@@ -711,7 +711,9 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Conversion Kit", out errOut)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Adding new database Version {dbVersion}");
                 if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -762,35 +764,61 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Creating Sync Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE sync_tables(ID AUTOINCREMENT PRIMARY KEY,tblname TEXT(255));",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value CR_SavedReports Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "CR_SavedReports", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value GunSmith_Details Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "GunSmith_Details", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Cal Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Cal", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Accessories Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Accessories", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Ammo Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Ammo", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Ammo_PriceAudit Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Ammo_PriceAudit", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_BarrelSysTypes Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_BarrelSysTypes", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Condition Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Condition", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Ext Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Ext", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Ext_Links Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Ext_Links", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Pictures Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Pictures", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_SoldTo Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_SoldTo", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_GripType Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_GripType", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Manufacturer Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Manufacturer", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Model Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Model", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Nationality Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Nationality", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Shop_Details Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Shop_Details", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Type Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Type", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Maintance_Details Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Maintance_Details", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Maintance_Plans Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Maintance_Plans", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Owner_Info Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Owner_Info", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Wishlist Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Wishlist", out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Adding new database Version {dbVersion}");
                 if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
