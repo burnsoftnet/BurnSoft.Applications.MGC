@@ -444,6 +444,42 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         }
 
         /// <summary>
+        /// Defines the test method SetAsForCollectingTestToggleOn.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetAsForCollectingTestToggleOn()
+        {
+            bool value = MyCollection.SetAsForCollecting(_databasePath, _gunId, true, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as For Collection to on");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as For Collection to on");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetAsForCollectingTestToggleOff.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetAsForCollectingTestToggleOff()
+        {
+            bool value = MyCollection.SetAsForCollecting(_databasePath, _gunId, false, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as For Collection to off");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as For Collection to off");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
         /// Defines the test method SetFirearmRatingTest.
         /// </summary>
         [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]

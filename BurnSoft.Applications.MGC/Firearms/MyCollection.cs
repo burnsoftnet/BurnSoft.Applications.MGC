@@ -1054,6 +1054,32 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Sets as for collecting.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetAsForCollecting(string databasePath, int id, bool value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set ForCollecting={value} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetAsForCollecting", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Sets the firearm rating. This will bet set while you are viewing the firearm and not during add or edit.
         /// Because if might be a new gun and you don't know how it handles.  So something that can be changed more 
@@ -1329,7 +1355,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         LinkedDocuments = DocCount,
                         Rating = g.Rating,
                         ToSell = g.ToSell,
-                        GunSmithJob = g.GunSmithJob
+                        GunSmithJob = g.GunSmithJob,
+                        ForCollecting = g.ForCollecting,
                     });
                 }
             }
@@ -1467,7 +1494,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                         IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0")),
                         Rating = Convert.ToInt32(d["Rating"] != DBNull.Value ? d["Rating"].ToString() : "0"),
                         ToSell = d["ToSell"] != DBNull.Value ? Convert.ToBoolean(d["ToSell"]) : false,
-                        GunSmithJob = d["GunSmithJob"] != DBNull.Value ? Convert.ToBoolean(d["GunSmithJob"]) : false
+                        GunSmithJob = d["GunSmithJob"] != DBNull.Value ? Convert.ToBoolean(d["GunSmithJob"]) : false,
+                        ForCollecting = d["ForCollecting"] != DBNull.Value ? Convert.ToBoolean(d["ForCollecting"]) : false
 
                     });
                 }
