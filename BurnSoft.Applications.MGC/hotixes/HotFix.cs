@@ -669,6 +669,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Adding Data to Gun Collection Condition.");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "New", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "New, Discontinued", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Perfect", out errOut)) throw new Exception(errOut);
@@ -701,9 +702,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Broken", out errOut)) throw new Exception(errOut);
 
                 //Create barrel System Types
+                SendStatus($"Creating new Table for Barrel System Types");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE Gun_Collection_BarrelSysTypes (ID AUTOINCREMENT PRIMARY KEY, [Name] TEXT(255));",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Data System Types to Barrel System Types");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Regular Barrel", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Ported Barrel", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Threaded Barrel", out errOut)) throw new Exception(errOut);
