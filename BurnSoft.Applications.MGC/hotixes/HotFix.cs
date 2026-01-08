@@ -152,6 +152,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsCandR", "Gun_Collection", "Number", "0", out errOut))
                     throw new Exception(errOut);
 
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -224,6 +225,8 @@ namespace BurnSoft.Applications.MGC.hotixes
                     if (!HfDatabase.ApplicationSpecific.SwapValues(databasePath, "Gun_Collection", "dt", "dtp", out errOut))
                         throw new Exception(errOut);
                 }
+
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -255,6 +258,8 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection_Pictures set ISMAIN=0 where ISMAIN <> 1", out errOut, true)) throw new Exception(errOut);
   
                 if (!Pictures.SetMainPictures(databasePath, out errOut)) throw new Exception(errOut);
+
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -278,21 +283,28 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Adding Settings Values to Registry");
                 if (!MyRegistry.SetValue("Settings", "BackupOnExit", "False", out errOut)) throw new Exception(errOut);
                 if (!MyRegistry.SetValue("Settings", "UseOrgImage", "False", out errOut)) throw new Exception(errOut);
                 if (!MyRegistry.SetValue("Settings", "ViewPetLoads", "true", out errOut)) throw new Exception(errOut);
                 if (!MyRegistry.SetValue("Settings", "IndvReports", "true", out errOut)) throw new Exception(errOut);
-                
+
+                SendStatus($"Adding Importer to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Importer", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Dropping Table Gun Collection Ammo Details");
                 if (!HfDatabase.Management.Tables.Drop(databasePath, "Gun_Collection_Ammo_Details", out errOut)) throw new Exception(errOut);
+                SendStatus($"Dropping Table Gun Collection Ammo Details Pictures");
                 if (!HfDatabase.Management.Tables.Drop(databasePath, "Gun_Collection_Ammo_Details_Pictures", out errOut)) throw new Exception(errOut);
+                SendStatus($"Dropping Table Gun Shop Sales Emp");
                 if (!HfDatabase.Management.Tables.Drop(databasePath, "Gun_Shop_SalesEmp", out errOut)) throw new Exception(errOut);
 
+                SendStatus($"Adding New Gun Calibers to Table ");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", ".223 Remington", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "5.56 x 45mm", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", ".30-06", out errOut)) throw new Exception(errOut);
 
+                SendStatus($"Adding new Columns to Owner Info Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "UID", "Owner_Info", "Memo", "N/A", out errOut))
                     throw new Exception(errOut);
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "forgot_word", "Owner_Info", "Memo", "N/A", out errOut))
@@ -303,6 +315,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     throw new Exception(errOut);
                 if (!Ammo.Inventory.ConvertAmmoGrainsToNum(databasePath, out errOut)) throw new Exception(errOut);
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -326,21 +339,26 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Creating Custom Reports Column List Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE CR_ColumnList (ID AUTOINCREMENT PRIMARY KEY,TID INTEGER, Col Text(255), DN Text(255));",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Creating Custom Reports Saved Report Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE CR_SavedReports (ID AUTOINCREMENT PRIMARY KEY,ReportName Text(255), MySQL MEMO,DTC DATETIME);",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Creating Custom Reports Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE CR_TableList (ID INTEGER PRIMARY KEY,Tables Text(255), DN Text(255));",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
                     "DELETE from CR_ColumnList",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Deleting Data into the Custom Reports Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "DELETE from CR_TableList",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Inserting Data into the Custom Reports Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (1,'Gun_Cal','Caliber List')",
                     out errOut, true)) throw new Exception(errOut);
@@ -569,6 +587,7 @@ namespace BurnSoft.Applications.MGC.hotixes
 
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -592,13 +611,17 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Creating new Table Gun_Collection_Ammo_PriceAudit");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE Gun_Collection_Ammo_PriceAudit (ID AUTOINCREMENT PRIMARY KEY,AID INTEGER,DTA DATETIME,Qty INTEGER,PricePaid DOUBLE,PPB DOUBLE);",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Column ReManDT to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ReManDT", "Gun_Collection", "DATETIME", "Now()", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding Column POI to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "POI", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Updating Custom Report Column Lists");
                 if (!HfDatabase.RunSql(databasePath,
                     "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'ReManDT','Remanufacture Date')",
                     out errOut, true)) throw new Exception(errOut);
@@ -607,6 +630,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -669,6 +693,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Adding Data to Gun Collection Condition.");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "New", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "New, Discontinued", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Perfect", out errOut)) throw new Exception(errOut);
@@ -701,9 +726,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Condition", "[Name]", "Broken", out errOut)) throw new Exception(errOut);
 
                 //Create barrel System Types
+                SendStatus($"Creating new Table for Barrel System Types");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE Gun_Collection_BarrelSysTypes (ID AUTOINCREMENT PRIMARY KEY, [Name] TEXT(255));",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Data System Types to Barrel System Types");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Regular Barrel", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Ported Barrel", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Threaded Barrel", out errOut)) throw new Exception(errOut);
@@ -711,7 +738,9 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_BarrelSysTypes", "[Name]", "Conversion Kit", out errOut)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Adding new database Version {dbVersion}");
                 if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -762,35 +791,61 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Creating Sync Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE sync_tables(ID AUTOINCREMENT PRIMARY KEY,tblname TEXT(255));",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value CR_SavedReports Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "CR_SavedReports", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value GunSmith_Details Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "GunSmith_Details", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Cal Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Cal", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Accessories Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Accessories", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Ammo Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Ammo", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Ammo_PriceAudit Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Ammo_PriceAudit", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_BarrelSysTypes Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_BarrelSysTypes", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Condition Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Condition", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Ext Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Ext", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Ext_Links Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Ext_Links", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_Pictures Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Pictures", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Collection_SoldTo Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_SoldTo", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_GripType Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_GripType", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Manufacturer Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Manufacturer", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Model Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Model", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Nationality Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Nationality", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Shop_Details Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Shop_Details", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Gun_Type Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Type", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Maintance_Details Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Maintance_Details", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Maintance_Plans Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Maintance_Plans", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Owner_Info Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Owner_Info", out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Value Wishlist Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Wishlist", out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Adding new database Version {dbVersion}");
                 if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -810,39 +865,56 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 9;
-            double dbVersion = 6.0;
+            double dbVersion = 6.1;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Adding AppraisalDate colum to CR_ColumnList Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "UPDATE CR_ColumnList set Col='AppraisalDate' where Col='AppraisedDate'",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding IsInBoundBook column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsInBoundBook", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding IsClassIII column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsClassIII", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding ClassIII_owner column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ClassIII_owner", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding TwistRate column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "TwistRate", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding lbs_trigger column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "lbs_trigger", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding Caliber3 column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Caliber3", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding Classification column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Classification", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding DateofCR column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "DateofCR", "Gun_Collection", "DATETIME", "Now()", out errOut))
                     throw new Exception(errOut);
+
+                SendStatus($"Setting New IsInBoundBook to 1 where values are Null");
                 if (!HfDatabase.RunSql(databasePath,
-                    "UPDATE Gun_Collection set IsInBoundBook=1",
+                    "UPDATE Gun_Collection set IsInBoundBook=1 where IsInBoundBook Is Null",
                     out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Setting New IsClassIII to 0 where values are Null");
                 if (!HfDatabase.RunSql(databasePath,
-                    "UPDATE Gun_Collection set IsClassIII=0",
+                    "UPDATE Gun_Collection set IsClassIII=0 where IsClassIII Is Null",
                     out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Setting New Classification to Modern where values are Nul");
                 if (!HfDatabase.RunSql(databasePath,
-                    "UPDATE Gun_Collection set Classification='Modern'",
+                    "UPDATE Gun_Collection set Classification='Modern' where Classification Is Null",
                     out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Creating new table Appriaser_Contact_Details");
                 string sql =
                     "CREATE TABLE Appriaser_Contact_Details (ID AUTOINCREMENT PRIMARY KEY,aName Text(255), Address1 Text(255)" +
                     ", Address2 Text(255),City Text(255),State Text(255), Country Text(255), Phone Text(255), fax Text(255)" +
@@ -853,11 +925,16 @@ namespace BurnSoft.Applications.MGC.hotixes
                 {
                     if (!errOut.Contains(" already exists")) throw new Exception(errOut);
                 }
+
+                SendStatus($"Adding Appriaser_Contact_Details to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Appriaser_Contact_Details", out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Adding Colum SIB to Appriaser_Contact_Details Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "ALTER TABLE Appriaser_Contact_Details ALTER SIB Number DEFAULT 1 NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
 
+                SendStatus($"Creating new Table GunSmith_Contact_Details");
                 sql ="CREATE TABLE GunSmith_Contact_Details (ID AUTOINCREMENT PRIMARY KEY,gName Text(255), Address1 Text(255)" +
                     ", Address2 Text(255),City Text(255),State Text(255), Country Text(255), Phone Text(255), fax Text(255)" +
                     ",website Text(255), email Text(255), lic Text(255), zip Text(255), SIB INTEGER);";
@@ -868,13 +945,21 @@ namespace BurnSoft.Applications.MGC.hotixes
                     if (!errOut.Contains(" already exists")) throw new Exception(errOut);
                 }
 
+                SendStatus($"Adding GunSmith_Contact_Details Table to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "GunSmith_Contact_Details", out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Adding Column SIB to GunSmith_Contact_Details Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "ALTER TABLE GunSmith_Contact_Details ALTER SIB Number DEFAULT 1 NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Moving Appraisers to New Table");
                 if (!HfDatabase.ApplicationSpecific.MoveAppraisers(databasePath, out errOut)) throw new Exception(errOut);
+
+                SendStatus($"Moving Gunsmiths to New Table");
                 if (!HfDatabase.ApplicationSpecific.MoveGunSmiths(databasePath, out errOut)) throw new Exception(errOut);
 
+                SendStatus($"Creating New Table for Document Storage");
                 sql =
                     "CREATE TABLE Gun_Collection_Docs (ID AUTOINCREMENT PRIMARY KEY,doc_name Text(255), doc_description Text(255)" +
                     ", doc_filename Text(255),dta DATETIME,doc_file OLEOBJECT,length Number, doc_thumb OLEOBJECT,doc_ext Text(255), doc_cat Text(255));";
@@ -884,12 +969,16 @@ namespace BurnSoft.Applications.MGC.hotixes
                 {
                     if (!errOut.Contains(" already exists")) throw new Exception(errOut);
                 }
+
+                SendStatus($"Adding Table Gun_Collection_Docs to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Docs", out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Adding Table Gun_Collection_Docs to Sync Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "ALTER TABLE Gun_Collection_Docs ALTER dta DATETIME DEFAULT NOW() NOT NULL;",
                     out errOut, true)) throw new Exception(errOut);
 
-
+                SendStatus($"Creating new Table Gun_Collection_Docs_Links");
                 sql = "CREATE TABLE Gun_Collection_Docs_Links (ID AUTOINCREMENT PRIMARY KEY,DID INTEGER, GID INTEGER,dta DATETIME)";
                 if (!HfDatabase.RunSql(databasePath,
                     sql,
@@ -897,8 +986,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                 {
                     if (!errOut.Contains(" already exists")) throw new Exception(errOut);
                 }
+
+                SendStatus($"Adding Table Gun_Collection_Docs_Links to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Docs_Links", out errOut, true)) throw new Exception(errOut);
 
+                SendStatus($"Creating new Table Gun_Collection_Classification");
                 sql = "CREATE TABLE Gun_Collection_Classification (ID AUTOINCREMENT PRIMARY KEY,myclass Text(255))";
                 if (!HfDatabase.RunSql(databasePath,
                     sql,
@@ -906,15 +998,25 @@ namespace BurnSoft.Applications.MGC.hotixes
                 {
                     if (!errOut.Contains(" already exists")) throw new Exception(errOut);
                 }
+
+                SendStatus($"Adding Table Gun_Collection_Classification to Sync Table");
                 if (!HfDatabase.AddSyncToTable(databasePath, "Gun_Collection_Classification", out errOut, true)) throw new Exception(errOut);
 
+                SendStatus($"Adding Antique to Gun_Collection_Classification");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Classification", "[myclass]", "Antique", out errOut)) throw new Exception(errOut);
+
+                SendStatus($"Adding C&R to Gun_Collection_Classification");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Classification", "[myclass]", "C&R", out errOut)) throw new Exception(errOut);
+
+                SendStatus($"Adding Modern to Gun_Collection_Classification");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Collection_Classification", "[myclass]", "Modern", out errOut)) throw new Exception(errOut);
 
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Adding new database Version {dbVersion}");
                 if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
+
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -939,12 +1041,16 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
-                SendStatus($"Adding Column Firearm Accessories ToSell ( ToSell ) to Gun Collection Table");
-                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ToSell", "Gun_Collection", "Yes/No", out errOut))
+                SendStatus($"Adding Column ToSell ( ToSell ) to Gun Collection Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ToSell", "Gun_Collection", "YESNO", out errOut))
                     throw new Exception(errOut);
 
-                SendStatus($"Adding Column Firearm Accessories GunSmithJob ( GunSmithJob ) to Gun Collection Table");
-                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GunSmithJob", "Gun_Collection", "Yes/No", out errOut))
+                SendStatus($"Adding Column GunSmithJob ( GunSmithJob ) to Gun Collection Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GunSmithJob", "Gun_Collection", "YESNO", out errOut))
+                    throw new Exception(errOut);
+
+                SendStatus($"Adding Column For Collecting ( ForCollecting ) to Gun Collection Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ForCollecting", "Gun_Collection", "YESNO", out errOut))
                     throw new Exception(errOut);
 
                 if (!HfDatabase.TableExists(databasePath, "General_Accessories_Link", out errOut))
@@ -969,7 +1075,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE General_Accessories (ID AUTOINCREMENT PRIMARY KEY, Manufacturer Text(255), Model Text(255), " +
                     "SerialNumber Text(255), Condition Text(255), Notes Text(255), Use Text(255), PurValue Text(255), " +
-                    "AppValue Number, CIV NUmber, IC Number, FAID Number, IsLinked Yes/No, sync_lastupdate DATETIME);",
+                    "AppValue Number, CIV NUmber, IC Number, FAID Number, IsLinked YESNO, sync_lastupdate DATETIME);",
                     out errOut, true))
                     {
                         if (!errOut.Contains(" already exists")) throw new Exception(errOut);
@@ -991,7 +1097,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     throw new Exception(errOut);
 
                 SendStatus($"Adding Column Firearm Accessories IsLinked ( IsLinked ) to Gun Collection Accessories Table");
-                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsLinked", "Gun_Collection_Accessories", "Yes/No", out errOut))
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsLinked", "Gun_Collection_Accessories", "YESNO", out errOut))
                     throw new Exception(errOut);
 
                 SendStatus($"Settings all GALID to 0 for Gun Collection Accessories Table");
@@ -1014,17 +1120,30 @@ namespace BurnSoft.Applications.MGC.hotixes
                 SendStatus($"Adding Rating column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Rating", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
-                SendStatus($"Settings all Ratings to 0 for Gun Collection Table");
+
+                SendStatus($"Settings all Ratings to 0 for Gun Collection Table if all colmuns are null");
                 if (!HfDatabase.RunSql(databasePath,
-                   "UPDATE Gun_Collection set Rating=0",
-                   out errOut, true)) throw new Exception(errOut);
+                  "UPDATE Gun_Collection set Rating=0 where Rating is Null",
+                  out errOut, true)) throw new Exception(errOut);
+
                 SendStatus($"Adding PicOrder to Gun Collection Pictures Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "PicOrder", "Gun_Collection_Pictures", "number", "0", out errOut))
                     throw new Exception(errOut);
                 SendStatus($"Settings Order to 0 on pic Orders");
                 if (!HfDatabase.RunSql(databasePath,
-                  "UPDATE Gun_Collection_Pictures set PicOrder=0",
+                  "UPDATE Gun_Collection_Pictures set PicOrder=0 where PicOrder is Null",
                   out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Adding New Gun Calibers to Table ");
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6.8x51mm SIG Fury", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "7 PRC", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6mm ARC", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6.8 Western", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", ".30 Super Carry", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "25 RPM", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", ".350 Legend", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6.5 PRC", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6mm Creedmoor", out errOut)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
                 SendStatus($"Updating Databbase version to {dbVersion}");
