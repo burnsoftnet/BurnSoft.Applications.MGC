@@ -20,7 +20,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 ## Release Log
 
-### v1.7.5.48
+### v1.7.15.48
 
 * Fixed unit Tests to run on full
 * Updated Unit Tests
@@ -46,6 +46,10 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * Added Move to firearm accessories and delete from general accessories.
 * Added functions to handle the new column in the gun collection table that can mark a firearm as for sale
 * Added functions to handle the new column in the gun collection table that can mark a firearm as a gun smith project
+* Updated HotFixes to include more status messages and fix anything that might reset data if re-ran.
+* Added version 6.1 database to the Unit Test Backup Section to use for hotfix updates.
+* Added Sub Folders in unit test data based on previous version for future update tests
+* 
 
 ### v1.7.0.4
 
