@@ -20,7 +20,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 ## Release Log
 
-### v1.7.15.53
+### v1.7.15.54
 
 * Fixed unit Tests to run on full
 * Updated Unit Tests
