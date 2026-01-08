@@ -815,6 +815,7 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"");
                 if (!HfDatabase.RunSql(databasePath,
                     "UPDATE CR_ColumnList set Col='AppraisalDate' where Col='AppraisedDate'",
                     out errOut, true)) throw new Exception(errOut);
@@ -835,13 +836,13 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "DateofCR", "Gun_Collection", "DATETIME", "Now()", out errOut))
                     throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
-                    "UPDATE Gun_Collection set IsInBoundBook=1",
+                    "UPDATE Gun_Collection set IsInBoundBook=1 where IsInBoundBook Is Null",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
-                    "UPDATE Gun_Collection set IsClassIII=0",
+                    "UPDATE Gun_Collection set IsClassIII=0 where IsClassIII Is Null",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
-                    "UPDATE Gun_Collection set Classification='Modern'",
+                    "UPDATE Gun_Collection set Classification='Modern' where Classification Is Null",
                     out errOut, true)) throw new Exception(errOut);
                 string sql =
                     "CREATE TABLE Appriaser_Contact_Details (ID AUTOINCREMENT PRIMARY KEY,aName Text(255), Address1 Text(255)" +
