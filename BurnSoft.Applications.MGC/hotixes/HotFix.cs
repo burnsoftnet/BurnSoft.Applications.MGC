@@ -288,17 +288,23 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!MyRegistry.SetValue("Settings", "UseOrgImage", "False", out errOut)) throw new Exception(errOut);
                 if (!MyRegistry.SetValue("Settings", "ViewPetLoads", "true", out errOut)) throw new Exception(errOut);
                 if (!MyRegistry.SetValue("Settings", "IndvReports", "true", out errOut)) throw new Exception(errOut);
-                
+
+                SendStatus($"Adding Importer to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Importer", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Dropping Table Gun Collection Ammo Details");
                 if (!HfDatabase.Management.Tables.Drop(databasePath, "Gun_Collection_Ammo_Details", out errOut)) throw new Exception(errOut);
+                SendStatus($"Dropping Table Gun Collection Ammo Details Pictures");
                 if (!HfDatabase.Management.Tables.Drop(databasePath, "Gun_Collection_Ammo_Details_Pictures", out errOut)) throw new Exception(errOut);
+                SendStatus($"Dropping Table Gun Shop Sales Emp");
                 if (!HfDatabase.Management.Tables.Drop(databasePath, "Gun_Shop_SalesEmp", out errOut)) throw new Exception(errOut);
 
+                SendStatus($"Adding New Gun Calibers to Table ");
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", ".223 Remington", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "5.56 x 45mm", out errOut)) throw new Exception(errOut);
                 if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", ".30-06", out errOut)) throw new Exception(errOut);
 
+                SendStatus($"Adding new Columns to Owner Info Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "UID", "Owner_Info", "Memo", "N/A", out errOut))
                     throw new Exception(errOut);
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "forgot_word", "Owner_Info", "Memo", "N/A", out errOut))
