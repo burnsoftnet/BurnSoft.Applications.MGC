@@ -592,13 +592,17 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Creating new Table Gun_Collection_Ammo_PriceAudit");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE Gun_Collection_Ammo_PriceAudit (ID AUTOINCREMENT PRIMARY KEY,AID INTEGER,DTA DATETIME,Qty INTEGER,PricePaid DOUBLE,PPB DOUBLE);",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Adding Column ReManDT to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ReManDT", "Gun_Collection", "DATETIME", "Now()", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Adding Column POI to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "POI", "Gun_Collection", "Text(255)", "N/A", out errOut))
                     throw new Exception(errOut);
+                SendStatus($"Updating Custom Report Column Lists");
                 if (!HfDatabase.RunSql(databasePath,
                     "INSERT INTO CR_ColumnList(TID,Col,DN) VALUES(4,'ReManDT','Remanufacture Date')",
                     out errOut, true)) throw new Exception(errOut);
@@ -607,6 +611,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
