@@ -152,6 +152,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsCandR", "Gun_Collection", "Number", "0", out errOut))
                     throw new Exception(errOut);
 
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -224,6 +225,8 @@ namespace BurnSoft.Applications.MGC.hotixes
                     if (!HfDatabase.ApplicationSpecific.SwapValues(databasePath, "Gun_Collection", "dt", "dtp", out errOut))
                         throw new Exception(errOut);
                 }
+
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -255,6 +258,8 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection_Pictures set ISMAIN=0 where ISMAIN <> 1", out errOut, true)) throw new Exception(errOut);
   
                 if (!Pictures.SetMainPictures(databasePath, out errOut)) throw new Exception(errOut);
+
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -303,6 +308,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     throw new Exception(errOut);
                 if (!Ammo.Inventory.ConvertAmmoGrainsToNum(databasePath, out errOut)) throw new Exception(errOut);
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
@@ -326,21 +332,26 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
+                SendStatus($"Creating Custom Reports Column List Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE CR_ColumnList (ID AUTOINCREMENT PRIMARY KEY,TID INTEGER, Col Text(255), DN Text(255));",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Creating Custom Reports Saved Report Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE CR_SavedReports (ID AUTOINCREMENT PRIMARY KEY,ReportName Text(255), MySQL MEMO,DTC DATETIME);",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Creating Custom Reports Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE CR_TableList (ID INTEGER PRIMARY KEY,Tables Text(255), DN Text(255));",
                     out errOut, true)) throw new Exception(errOut);
                 if (!HfDatabase.RunSql(databasePath,
                     "DELETE from CR_ColumnList",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Deleting Data into the Custom Reports Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "DELETE from CR_TableList",
                     out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Inserting Data into the Custom Reports Table");
                 if (!HfDatabase.RunSql(databasePath,
                     "INSERT INTO CR_TableList (ID,Tables,DN) VALUES (1,'Gun_Cal','Caliber List')",
                     out errOut, true)) throw new Exception(errOut);
@@ -569,6 +580,7 @@ namespace BurnSoft.Applications.MGC.hotixes
 
 
                 //Perform Update in Registry of new hotfix
+                SendStatus($"Updating Registry with hotfix {hotFixNumber} being applied");
                 if (!UpdateReg(hotFixNumber, out errOut)) throw new Exception(errOut);
                 bAns = true;
             }
