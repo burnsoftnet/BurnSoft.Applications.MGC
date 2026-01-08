@@ -1041,12 +1041,16 @@ namespace BurnSoft.Applications.MGC.hotixes
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
             {
-                SendStatus($"Adding Column Firearm Accessories ToSell ( ToSell ) to Gun Collection Table");
+                SendStatus($"Adding Column ToSell ( ToSell ) to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ToSell", "Gun_Collection", "YESNO", out errOut))
                     throw new Exception(errOut);
 
-                SendStatus($"Adding Column Firearm Accessories GunSmithJob ( GunSmithJob ) to Gun Collection Table");
+                SendStatus($"Adding Column GunSmithJob ( GunSmithJob ) to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GunSmithJob", "Gun_Collection", "YESNO", out errOut))
+                    throw new Exception(errOut);
+
+                SendStatus($"Adding Column For Collecting ( ForCollecting ) to Gun Collection Table");
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ForCollecting", "Gun_Collection", "YESNO", out errOut))
                     throw new Exception(errOut);
 
                 if (!HfDatabase.TableExists(databasePath, "General_Accessories_Link", out errOut))
