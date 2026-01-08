@@ -1014,17 +1014,19 @@ namespace BurnSoft.Applications.MGC.hotixes
                 SendStatus($"Adding Rating column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Rating", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
-                //SendStatus($"Settings all Ratings to 0 for Gun Collection Table");
-                //if (!HfDatabase.RunSql(databasePath,
-                //   "UPDATE Gun_Collection set Rating=0",
-                //   out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Settings all Ratings to 0 for Gun Collection Table if all colmuns are null");
+                if (!HfDatabase.RunSql(databasePath,
+                  "UPDATE Gun_Collection set Rating=0 where Rating is Null",
+                  out errOut, true)) throw new Exception(errOut);
+
                 SendStatus($"Adding PicOrder to Gun Collection Pictures Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "PicOrder", "Gun_Collection_Pictures", "number", "0", out errOut))
                     throw new Exception(errOut);
-                //SendStatus($"Settings Order to 0 on pic Orders");
-                //if (!HfDatabase.RunSql(databasePath,
-                //  "UPDATE Gun_Collection_Pictures set PicOrder=0",
-                //  out errOut, true)) throw new Exception(errOut);
+                SendStatus($"Settings Order to 0 on pic Orders");
+                if (!HfDatabase.RunSql(databasePath,
+                  "UPDATE Gun_Collection_Pictures set PicOrder=0 where PicOrder is Null",
+                  out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
                 SendStatus($"Updating Databbase version to {dbVersion}");

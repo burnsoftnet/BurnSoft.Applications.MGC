@@ -128,7 +128,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="data\MGC.mdb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="data\unittest_fiream.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
