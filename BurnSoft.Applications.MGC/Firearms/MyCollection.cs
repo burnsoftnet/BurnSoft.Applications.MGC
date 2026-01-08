@@ -1004,6 +1004,57 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
+        /// Sets as to be sold true or false
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetAsToBeSold(string databasePath, int id, bool value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set ToSell={value} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetAsToBeSold", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Sets as gun smith job to true or false
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetAsGunSmithJob(string databasePath, int id, bool value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set GunSmithJob={value} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetAsGunSmithJob", e);
+            }
+            return bAns;
+        }
+        /// <summary>
         /// Sets the firearm rating. This will bet set while you are viewing the firearm and not during add or edit.
         /// Because if might be a new gun and you don't know how it handles.  So something that can be changed more 
         /// on the fly.
@@ -1276,7 +1327,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                         GunSmithWork = gswd,
                         HasDocuments = HasDocs,
                         LinkedDocuments = DocCount,
-                        Rating = g.Rating
+                        Rating = g.Rating,
+                        ToSell = g.ToSell,
+                        GunSmithJob = g.GunSmithJob
                     });
                 }
             }
@@ -1412,7 +1465,9 @@ namespace BurnSoft.Applications.MGC.Firearms
                         WasSold = wasSold,
                         IsCompetition =  obj.ConvertIntToBool(Convert.ToInt32(d["isCompetition"] != DBNull.Value ? d["isCompetition"].ToString() : "0")),
                         IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0")),
-                        Rating = Convert.ToInt32(d["Rating"] != DBNull.Value ? d["Rating"].ToString() : "0")
+                        Rating = Convert.ToInt32(d["Rating"] != DBNull.Value ? d["Rating"].ToString() : "0"),
+                        ToSell = d["ToSell"] != DBNull.Value ? Convert.ToBoolean(d["ToSell"]) : false,
+                        GunSmithJob = d["GunSmithJob"] != DBNull.Value ? Convert.ToBoolean(d["GunSmithJob"]) : false
 
                     });
                 }

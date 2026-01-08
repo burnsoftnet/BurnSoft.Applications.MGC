@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("www.burnsoft.net")]
 [assembly: AssemblyProduct("BurnSoft.Applications.MGC")]
-[assembly: AssemblyCopyright("Copyright © www.burnsoft.net  2021-2025")]
+[assembly: AssemblyCopyright("Copyright © www.burnsoft.net  2021-2026")]
 [assembly: AssemblyTrademark("www.burnsoft.net")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.7.4.46")]
-[assembly: AssemblyFileVersion("1.7.4.46")]
+[assembly: AssemblyVersion("1.7.5.48")]
+[assembly: AssemblyFileVersion("1.7.5.48")]

@@ -370,6 +370,79 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             }
             General.HasTrueValue(value, _errOut);
         }
+
+        /// <summary>
+        /// Defines the test method SetToSellTestToggleOn.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetToSellTestToggleOn()
+        {
+            bool value = MyCollection.SetAsToBeSold(_databasePath, _gunId, true, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as selling");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as selling");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetToSellTestToggleOff.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetToSellTestToggleOff()
+        {
+            bool value = MyCollection.SetAsToBeSold(_databasePath, _gunId, false, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as selling");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as selling");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetToGunSmithJobTestToggleOn.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetToGunSmithJobTestToggleOn()
+        {
+            bool value = MyCollection.SetAsGunSmithJob(_databasePath, _gunId, true, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as Gun Smith JOb to on");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as Gun Smith JOb to on");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetToGunSmithJobTestToggleOff.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetToGunSmithJobTestToggleOff()
+        {
+            bool value = MyCollection.SetAsGunSmithJob(_databasePath, _gunId, false, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as Gun Smith JOb to off");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as Gun Smith JOb to off");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
         /// <summary>
         /// Defines the test method SetFirearmRatingTest.
         /// </summary>

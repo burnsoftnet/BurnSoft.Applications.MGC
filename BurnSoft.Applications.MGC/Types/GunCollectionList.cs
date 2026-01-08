@@ -346,5 +346,15 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value>The rating.</value>
         public int Rating { get; set; }
+        /// <summary>
+        /// set if the firearm is mark as being sold
+        /// </summary>
+        /// <value><c>true</c> if [to sell]; otherwise, <c>false</c>.</value>
+        public bool ToSell { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether gun smith job was performed.
+        /// </summary>
+        /// <value><c>true</c> if [gun smith job]; otherwise, <c>false</c>.</value>
+        public bool GunSmithJob { get; set; }
     }
 }

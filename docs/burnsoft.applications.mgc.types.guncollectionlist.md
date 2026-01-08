@@ -899,6 +899,32 @@ public int Rating { get; set; }
 [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
 The rating.
 
+### **ToSell**
+
+set if the firearm is mark as being sold
+
+```csharp
+public bool ToSell { get; set; }
+```
+
+#### Property Value
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if [to sell]; otherwise, `false`.
+
+### **GunSmithJob**
+
+Gets or sets a value indicating whether gun smith job was performed.
+
+```csharp
+public bool GunSmithJob { get; set; }
+```
+
+#### Property Value
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if [gun smith job]; otherwise, `false`.
+
 ## Constructors
 
 ### **GunCollectionList()**
