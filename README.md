@@ -20,7 +20,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 ## Release Log
 
-### v1.7.15.48
+### v1.7.15.52
 
 * Fixed unit Tests to run on full
 * Updated Unit Tests
@@ -49,7 +49,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * Updated HotFixes to include more status messages and fix anything that might reset data if re-ran.
 * Added version 6.1 database to the Unit Test Backup Section to use for hotfix updates.
 * Added Sub Folders in unit test data based on previous version for future update tests
-* 
+* ADDED - New Calibers to Caliber List Table: 6.8x51mm SIG Fury, 7 PRC, 6mm ARC, 6.8 Western, .30 Super Carry, 25 RPM, .350 Legend, 6.5 PRC, and 6mm Creedmoor
 
 ### v1.7.0.4
 

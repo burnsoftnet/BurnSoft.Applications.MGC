@@ -1130,6 +1130,17 @@ namespace BurnSoft.Applications.MGC.hotixes
                   "UPDATE Gun_Collection_Pictures set PicOrder=0 where PicOrder is Null",
                   out errOut, true)) throw new Exception(errOut);
 
+                SendStatus($"Adding New Gun Calibers to Table ");
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6.8x51mm SIG Fury", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "7 PRC", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6mm ARC", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6.8 Western", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", ".30 Super Carry", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "25 RPM", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", ".350 Legend", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6.5 PRC", out errOut)) throw new Exception(errOut);
+                if (!HfDatabase.AddNewData(databasePath, "Gun_Cal", "Cal", "6mm Creedmoor", out errOut)) throw new Exception(errOut);
+
                 //Perform Update in Registry of new hotfix
                 SendStatus($"Updating Databbase version to {dbVersion}");
                 if (!Database.SaveDatabaseVersion(databasePath, $"{dbVersion}", out errOut)) throw new Exception(errOut);
