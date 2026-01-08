@@ -810,7 +810,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 9;
-            double dbVersion = 6.0;
+            double dbVersion = 6.1;
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -940,11 +940,11 @@ namespace BurnSoft.Applications.MGC.hotixes
             try
             {
                 SendStatus($"Adding Column Firearm Accessories ToSell ( ToSell ) to Gun Collection Table");
-                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ToSell", "Gun_Collection", "Yes/No", out errOut))
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "ToSell", "Gun_Collection", "YESNO", out errOut))
                     throw new Exception(errOut);
 
                 SendStatus($"Adding Column Firearm Accessories GunSmithJob ( GunSmithJob ) to Gun Collection Table");
-                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GunSmithJob", "Gun_Collection", "Yes/No", out errOut))
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "GunSmithJob", "Gun_Collection", "YESNO", out errOut))
                     throw new Exception(errOut);
 
                 if (!HfDatabase.TableExists(databasePath, "General_Accessories_Link", out errOut))
@@ -969,7 +969,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     if (!HfDatabase.RunSql(databasePath,
                     "CREATE TABLE General_Accessories (ID AUTOINCREMENT PRIMARY KEY, Manufacturer Text(255), Model Text(255), " +
                     "SerialNumber Text(255), Condition Text(255), Notes Text(255), Use Text(255), PurValue Text(255), " +
-                    "AppValue Number, CIV NUmber, IC Number, FAID Number, IsLinked Yes/No, sync_lastupdate DATETIME);",
+                    "AppValue Number, CIV NUmber, IC Number, FAID Number, IsLinked YESNO, sync_lastupdate DATETIME);",
                     out errOut, true))
                     {
                         if (!errOut.Contains(" already exists")) throw new Exception(errOut);
@@ -991,7 +991,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                     throw new Exception(errOut);
 
                 SendStatus($"Adding Column Firearm Accessories IsLinked ( IsLinked ) to Gun Collection Accessories Table");
-                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsLinked", "Gun_Collection_Accessories", "Yes/No", out errOut))
+                if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsLinked", "Gun_Collection_Accessories", "YESNO", out errOut))
                     throw new Exception(errOut);
 
                 SendStatus($"Settings all GALID to 0 for Gun Collection Accessories Table");
@@ -1014,17 +1014,17 @@ namespace BurnSoft.Applications.MGC.hotixes
                 SendStatus($"Adding Rating column to Gun Collection Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "Rating", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
-                SendStatus($"Settings all Ratings to 0 for Gun Collection Table");
-                if (!HfDatabase.RunSql(databasePath,
-                   "UPDATE Gun_Collection set Rating=0",
-                   out errOut, true)) throw new Exception(errOut);
+                //SendStatus($"Settings all Ratings to 0 for Gun Collection Table");
+                //if (!HfDatabase.RunSql(databasePath,
+                //   "UPDATE Gun_Collection set Rating=0",
+                //   out errOut, true)) throw new Exception(errOut);
                 SendStatus($"Adding PicOrder to Gun Collection Pictures Table");
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "PicOrder", "Gun_Collection_Pictures", "number", "0", out errOut))
                     throw new Exception(errOut);
-                SendStatus($"Settings Order to 0 on pic Orders");
-                if (!HfDatabase.RunSql(databasePath,
-                  "UPDATE Gun_Collection_Pictures set PicOrder=0",
-                  out errOut, true)) throw new Exception(errOut);
+                //SendStatus($"Settings Order to 0 on pic Orders");
+                //if (!HfDatabase.RunSql(databasePath,
+                //  "UPDATE Gun_Collection_Pictures set PicOrder=0",
+                //  out errOut, true)) throw new Exception(errOut);
 
                 //Perform Update in Registry of new hotfix
                 SendStatus($"Updating Databbase version to {dbVersion}");
