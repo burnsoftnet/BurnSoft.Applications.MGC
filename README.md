@@ -20,7 +20,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 ## Release Log
 
-### v1.7.15.54
+### v1.7.15.55
 
 * Fixed unit Tests to run on full
 * Updated Unit Tests
@@ -51,6 +51,8 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * Added Sub Folders in unit test data based on previous version for future update tests
 * ADDED - New Calibers to Caliber List Table: 6.8x51mm SIG Fury, 7 PRC, 6mm ARC, 6.8 Western, .30 Super Carry, 25 RPM, .350 Legend, 6.5 PRC, and 6mm Creedmoor
 * ADDED - The Ability to Mark a Firearm as in a Collection, meaning that this is something that is just to collect value and is hardy shot or easily sold.
+* ADDED - Hotfix 11 to Update the Database
+* REFACTOR - The Run Function in the Hotfixes to reduce the amount of duplicate code and simplify future updates
 
 ### v1.7.0.4
 
