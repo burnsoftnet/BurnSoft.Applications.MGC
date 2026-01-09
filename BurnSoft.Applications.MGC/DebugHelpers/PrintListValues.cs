@@ -87,6 +87,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"Rating: {g.Rating}{Environment.NewLine}";
                     sAns += $"ToSell: {g.ToSell}{Environment.NewLine}";
                     sAns += $"GunSmithJob: {g.GunSmithJob}{Environment.NewLine}";
+                    sAns += $"ForCollecting: {g.ForCollecting}{Environment.NewLine}";
                     sAns += $"--------------------------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                 }
@@ -175,6 +176,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"LinkedDocuments: {g.LinkedDocuments}{Environment.NewLine}";
                     sAns += $"ToSell: {g.ToSell}{Environment.NewLine}";
                     sAns += $"GunSmithJob: {g.GunSmithJob}{Environment.NewLine}";
+                    sAns += $"ForCollecting: {g.ForCollecting}{Environment.NewLine}";
                     sAns += $"-----------------Barrel System---------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                     sAns += BarrelSystemsDetails(g.BarrelSystem);

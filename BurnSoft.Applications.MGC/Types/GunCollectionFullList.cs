@@ -401,5 +401,10 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value><c>true</c> if [gun smith job]; otherwise, <c>false</c>.</value>
         public bool GunSmithJob { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether [for collecting].
+        /// </summary>
+        /// <value><c>true</c> if [for collecting]; otherwise, <c>false</c>.</value>
+        public bool ForCollecting { get; set; }
     }
 }
