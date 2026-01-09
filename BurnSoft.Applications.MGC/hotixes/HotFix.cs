@@ -20,8 +20,8 @@ namespace BurnSoft.Applications.MGC.hotixes
         /// The number of fixes for this version in the datrabase
         /// </summary>
         public const int NumberOfFixes = 11;
+        private List<HotFixToDbList> _availableHotfixList;
 
-        
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
@@ -88,7 +88,15 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             Errors?.Invoke(this, value);
         }
-        #endregion
+        #endregion        
+        /// <summary>
+        /// Initializes a new instance of the <see cref="HotFix"/> class.
+        /// </summary>
+        public HotFix()
+        {
+            _availableHotfixList = HotfixToDbVersion();
+        }
+
         #region "Private Hotfix Helpers"
 
         /// <summary>
@@ -118,6 +126,24 @@ namespace BurnSoft.Applications.MGC.hotixes
             return bAns;
         }
 
+        /// <summary>
+        /// Gets the database version for hot fix.
+        /// </summary>
+        /// <param name="hotfixNumber">The hotfix number.</param>
+        /// <returns>System.Double.</returns>
+        private double GetDatabaseVersionForHotFix(int hotfixNumber)
+        {
+            double value = 0;
+            foreach(var hotfix in _availableHotfixList)
+            {
+                if (hotfix.HotFix.Equals(hotfixNumber))
+                {
+                    value = hotfix.DbVersion; 
+                    break;
+                }
+            }
+            return value;
+        }
 
         #endregion
         #region "Private Hotfixes"        
@@ -688,7 +714,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 7;
-            double dbVersion = 4.5;
+            double dbVersion = GetDatabaseVersionForHotFix(hotFixNumber);
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -786,7 +812,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 8;
-            double dbVersion = 5.0;
+            double dbVersion = GetDatabaseVersionForHotFix(hotFixNumber);
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -865,7 +891,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 9;
-            double dbVersion = 6.1;
+            double dbVersion = GetDatabaseVersionForHotFix(hotFixNumber);
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -1036,7 +1062,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 10;
-            double dbVersion = 7.4;
+            double dbVersion = GetDatabaseVersionForHotFix(hotFixNumber);
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
@@ -1096,7 +1122,7 @@ namespace BurnSoft.Applications.MGC.hotixes
         {
             errOut = "";
             int hotFixNumber = 11;
-            double dbVersion = 7.4;
+            double dbVersion = GetDatabaseVersionForHotFix(hotFixNumber);
             bool bAns = false;
             SendStatus($"Starting Hotfix {hotFixNumber}.");
             try
