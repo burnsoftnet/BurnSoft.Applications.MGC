@@ -1247,42 +1247,8 @@ namespace BurnSoft.Applications.MGC.hotixes
             try
             {
                 HotFix hotfix = new HotFix();
-                switch (hotFixNumber)
-                {
-                    case 1:
-                        bans = hotfix.One(databasePath, out errOut);
-                        break;
-                    case 2:
-                        bans = hotfix.Two(databasePath, out errOut);
-                        break;
-                    case 3:
-                        bans = hotfix.Three(databasePath, out errOut);
-                        break;
-                    case 4:
-                        bans = hotfix.Four(databasePath, out errOut);
-                        break;
-                    case 5:
-                        bans = hotfix.Five(databasePath, out errOut);
-                        break;
-                    case 6:
-                        bans = hotfix.Six(databasePath, out errOut);
-                        break;
-                    case 7:
-                        bans = hotfix.Seven(databasePath, out errOut);
-                        break;
-                    case 8:
-                        bans = hotfix.Eight(databasePath, out errOut);
-                        break;
-                    case 9:
-                        bans = hotfix.Nine(databasePath, out errOut);
-                        break;
-                    case 10:
-                        bans = hotfix.Ten(databasePath, out errOut);
-                        break;
-                    case 11:
-                        bans = hotfix.Eleven(databasePath, out errOut);
-                        break;
-                }
+                if (!hotfix.RunObj(databasePath, hotFixNumber, out errOut)) throw new Exception(errOut);
+                bans = true;
             }
             catch (Exception e)
             {
