@@ -1326,6 +1326,11 @@ namespace BurnSoft.Applications.MGC.hotixes
                 HotFix = 10,
                 DbVersion = 6.1
             });
+            cmd.Add(new HotFixToDbList()
+            {
+                HotFix = 11,
+                DbVersion = 7.4
+            });
             return cmd;
         }
         /// <summary>
