@@ -1058,8 +1058,12 @@ namespace BurnSoft.Applications.MGC.hotixes
                 if (!HfDatabase.Management.Tables.Columns.Add(databasePath, "IsNoLeathal", "Gun_Collection", "number", "0", out errOut))
                     throw new Exception(errOut);
 
-                SendStatus($"Setting new columns to 0 in Gun Collection table");
-                if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection set isCompetition=0,IsNoLeathal=0",
+                SendStatus($"Setting new column isCompetition to 0 in Gun Collection table");
+                if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection set isCompetition=0 where isCompetition is Null",
+                    out errOut, true)) throw new Exception(errOut);
+
+                SendStatus($"Setting new column IsNoLeathal to 0 in Gun Collection table");
+                if (!HfDatabase.RunSql(databasePath, "UPDATE Gun_Collection set IsNoLeathal=0 where IsNoLeathal is Null",
                     out errOut, true)) throw new Exception(errOut);
 
                 SendStatus($"Adding GunSmith ID to Gunsmith Details Table");
@@ -1158,7 +1162,7 @@ namespace BurnSoft.Applications.MGC.hotixes
 
                 SendStatus($"Settings all GALID to 0 for Gun Collection Accessories Table");
                 if (!HfDatabase.RunSql(databasePath,
-                   "UPDATE Gun_Collection_Accessories set GALID=0",
+                   "UPDATE Gun_Collection_Accessories set GALID=0 where GALID is Null",
                    out errOut, true)) throw new Exception(errOut);
 
                 SendStatus($"Adding Rating column to Gun Collection Table");
