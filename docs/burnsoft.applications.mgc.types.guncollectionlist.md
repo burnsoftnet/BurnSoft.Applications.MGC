@@ -925,6 +925,19 @@ public bool GunSmithJob { get; set; }
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if [gun smith job]; otherwise, `false`.
 
+### **ForCollecting**
+
+Gets or sets a value indicating whether [for collecting].
+
+```csharp
+public bool ForCollecting { get; set; }
+```
+
+#### Property Value
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if [for collecting]; otherwise, `false`.
+
 ## Constructors
 
 ### **GunCollectionList()**

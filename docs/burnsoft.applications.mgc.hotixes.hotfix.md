@@ -28,6 +28,8 @@ public static int NumberOfFixes;
 
 ### **HotFix()**
 
+Initializes a new instance of the [HotFix](./burnsoft.applications.mgc.hotixes.hotfix) class.
+
 ```csharp
 public HotFix()
 ```

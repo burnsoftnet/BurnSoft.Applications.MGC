@@ -1033,6 +1033,37 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **SetAsForCollecting(String, Int32, Boolean, String&)**
+
+Sets as for collecting.
+
+```csharp
+public static bool SetAsForCollecting(string databasePath, int id, bool value, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The identifier.
+
+`value` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [value].
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **SetFirearmRating(String, Int32, Int32, String&)**
 
 Sets the firearm rating. This will bet set while you are viewing the firearm and not during add or edit.
