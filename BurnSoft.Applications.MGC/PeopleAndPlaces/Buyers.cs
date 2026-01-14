@@ -126,9 +126,9 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <summary>
         /// Get the Id of the buyer record
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="name"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static long GetId(string databasePath, string name, out string errOut)
         {
@@ -177,9 +177,9 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             return sAns;
         }
         /// <summary>Get information from the database based on the buyers ID</summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<BuyersList> Get(string databasePath, long id, out string errOut)
         {
@@ -202,9 +202,9 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <summary>
         /// Get the buyer information based on a specific name
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="name"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<BuyersList> Get(string databasePath, string name, out string errOut)
         {
@@ -227,8 +227,8 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <summary>
         /// Get all the Buyers List from the database
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<BuyersList> Get(string databasePath, out string errOut)
         {
@@ -253,7 +253,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// One stop shopping for updates
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         internal static List<BuyersList> GetList(DataTable dt, out string errOut)
         {
@@ -295,7 +295,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <summary>
         /// Add a new buyer and related information into the database
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="name"></param>
         /// <param name="address1"></param>
         /// <param name="address2"></param>
@@ -311,7 +311,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <param name="dob"></param>
         /// <param name="dLic"></param>
         /// <param name="resident"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool Add(string databasePath, string name, string address1, string address2,
             string city, string state, string zipCode, string phone, string country, string eMail,
@@ -336,9 +336,9 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <summary>
         /// Delete a buyer from the database
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool Delete(string databasePath, long id, out string errOut)
         {
@@ -358,7 +358,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <summary>
         /// Update a buyers information in the database
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="address1"></param>
@@ -375,7 +375,7 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <param name="dob"></param>
         /// <param name="dLic"></param>
         /// <param name="resident"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool Update(string databasePath,long id, string name, string address1, string address2,
             string city, string state, string zipCode, string phone, string country, string eMail,

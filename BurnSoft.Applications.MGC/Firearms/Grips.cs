@@ -1,7 +1,8 @@
-﻿using System;
+﻿using BurnSoft.Applications.MGC.Types;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using BurnSoft.Applications.MGC.Types;
+using System.Xml.Linq;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 
@@ -158,18 +159,27 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Gets the identifier.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
-        /// <param name="gripName">Name of the class.</param>
+        /// <param name="name">Name of the class.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="AddIfNotExists">Add if Nationality does not exist</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="Exception"></exception>
-        public static long GetId(string databasePath, string gripName, out string errOut)
+        public static long GetId(string databasePath, string name, out string errOut, bool AddIfNotExists = false)
         {
             long lAns = 0;
             errOut = @"";
             try
             {
+                if (AddIfNotExists)
+                {
+                    if (!Exists(databasePath, name, out errOut))
+                    {
+                        if (!Add(databasePath, name, out errOut)) throw new Exception(errOut);
+                    }
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                }
                 string sql =
-                    $"SELECT * from Gun_GripType where grip='{gripName}'";
+                    $"SELECT * from Gun_GripType where grip='{name}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
                 foreach (DataRow d in dt.Rows)

@@ -4,6 +4,8 @@ using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
 using BurnSoft.Universal;
+using System;
+using BurnSoft.Applications.MGC.Other;
 
 namespace BurnSoft.Applications.MGC.UnitTest.Firearms
 {
@@ -118,35 +120,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
             }
         }
-        /// <summary>
-        /// Prints the list.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        private void PrintList(List<AccessoriesList> value)
-        {
-            if (value.Count > 0)
-            {
-                foreach (AccessoriesList v in value)
-                {
-                    TestContext.WriteLine($"id :{v.Id}");
-                    TestContext.WriteLine($"gun id: {v.GunId}");
-                    TestContext.WriteLine($"manufacturer: {v.Manufacturer}");
-                    TestContext.WriteLine($"Model: {v.Model}");
-                    TestContext.WriteLine($"Condition: {v.Condition}");
-                    TestContext.WriteLine($"AppriasedValue: {v.AppriasedValue}");
-                    TestContext.WriteLine($"CountInValue: {v.CountInValue}");
-                    TestContext.WriteLine($"IsChoke: {v.IsChoke}");
-                    TestContext.WriteLine($"LastSync: {v.LastSync}");
-                    TestContext.WriteLine($"Notes: {v.Notes}");
-                    TestContext.WriteLine($"PurchaseValue: {v.PurchaseValue}");
-                    TestContext.WriteLine($"SerialNumber: {v.SerialNumber}");
-                    TestContext.WriteLine($"Use: {v.Use}");
-                    TestContext.WriteLine($"");
-                    TestContext.WriteLine($"--------------------------");
-                    TestContext.WriteLine($"");
-                }
-            }
-        }
 
         /// <summary>
         /// Defines the test method AddTest.
@@ -224,6 +197,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void DeleteTest()
         {
             VerifyExists();
+            _gunId = Convert.ToInt32(MyCollection.GetLastId(_databasePath, out _errOut));
             long id = Accessories.GetId(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
                 _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
                 _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
@@ -241,7 +215,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                 _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
                 _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
             List<AccessoriesList> value = Accessories.List(_databasePath, (int)id, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -252,7 +226,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<AccessoriesList> value = Accessories.List(_databasePath, _gunId, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
 
@@ -267,8 +241,41 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             bool value = Accessories.Copy(_databasePath, id, _gunId, out _errOut);
             General.HasTrueValue(value, _errOut);
             List<AccessoriesList> lst = Accessories.List(_databasePath, (long)_gunId, out _errOut);
-            PrintList(lst);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(lst));
         }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void CopyToGeneralAccessoriesTest()
+        {
+            VerifyExists();
+            long id = Accessories.GetId(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+
+            bool value = Accessories.CopyToGeneralAccessories(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+            List<AccessoriesList> lst = Accessories.List(_databasePath, (long)_gunId, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(lst));
+            List<GeneralAccessoriesList> valueg = GeneralAccessories.Lists(_databasePath, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GeneralAccessoriesDetails(valueg));
+        }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void MoveToGeneralAccessoriesTest()
+        {
+            VerifyExists();
+            long id = Accessories.GetId(_databasePath, _gunId, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, _accessoriesCondition, _accessoriesNotes, _accessoriesUse,
+                _accessoriesPurValue, _accessoriesAppValue, _accessoriesCiv, _accessoriesIc, out _errOut);
+
+            bool value = Accessories.MoveToGeneralAccessories(_databasePath, id, out _errOut);
+            General.HasTrueValue(value, _errOut);
+            List<AccessoriesList> lst = Accessories.List(_databasePath, (long)_gunId, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(lst));
+            List<GeneralAccessoriesList> valueg = GeneralAccessories.Lists(_databasePath, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GeneralAccessoriesDetails(valueg));
+        }
+
         /// <summary>
         /// Defines the test method ListTest.
         /// </summary>
@@ -277,8 +284,24 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<AccessoriesList> value = Accessories.List(_databasePath, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.AccessoriesDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void ResetGeneralAccessoryToZeroTest()
+        {
+            VerifyExists();
+            bool value = Accessories.ResetGeneralAccessoryToZero(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Accessories")]
+        public void ResetGeneralAccessoryToZeroByIDTest()
+        {
+            VerifyExists();
+            bool value = Accessories.ResetGeneralAccessoryToZero(_databasePath, 1, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
     }
 }
