@@ -123,6 +123,22 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
             bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath),10, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod, TestCategory("Run Hotfixes")]
+        public void HotFix11Test()
+        {
+            hotixes.HotFix obj = new hotixes.HotFix();
+            obj.Status += (ss, ee) =>
+            {
+                TestContext.WriteLine($"STATUS: {ee}");
+            };
+            obj.Errors += (ss, ee) =>
+            {
+                TestContext.WriteLine($"ERROR: {ee}");
+            };
+            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 11, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
         /// <summary>
         /// Defines the test method NeedsUpdateTest.
         /// </summary>

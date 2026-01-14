@@ -1,12 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MGC.Types
 {
     /// <summary>
-    /// Class GunCollectionList.  List container to hold the database taken from the database for the gun collection details.
+    /// Class GunCollectionFullList.  List container to hold the database taken 
+    /// from the database for the gun collection details and everything else for export
     /// </summary>
     [Serializable]
-    public class GunCollectionList
+    public class GunCollectionFullList
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -341,6 +346,46 @@ namespace BurnSoft.Applications.MGC.Types
         /// </summary>
         /// <value><c>true</c> if this instance is no lethal; otherwise, <c>false</c>.</value>
         public bool IsNonLethal { get; set; }
+        /// <summary>
+        /// Gets or sets the accessories.
+        /// </summary>
+        /// <value>The accessories.</value>
+        public List<AccessoriesList> Accessories { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has extra barrels.
+        /// </summary>
+        /// <value><c>true</c> if this instance has extra barrels; otherwise, <c>false</c>.</value>
+        public bool HasExtraBarrels { get; set; }
+        /// <summary>
+        /// Gets or sets the barrel system count.
+        /// </summary>
+        /// <value>The barrel system count.</value>
+        public int BarrelSystemCount { get; set; }
+        /// <summary>
+        /// Gets or sets the barrel systems.
+        /// </summary>
+        /// <value>The barrel systems.</value>
+        public List<BarrelSystems> BarrelSystem { get; set; }
+        /// <summary>
+        /// Gets or sets the maintance details.
+        /// </summary>
+        /// <value>The maintance details.</value>
+        public List<MaintanceDetailsList> MaintanceDetails { get; set; }
+        /// <summary>
+        /// Gets or sets the gun smith work.
+        /// </summary>
+        /// <value>The gun smith work.</value>
+        public List<GunSmithWorkDone> GunSmithWork { get; set; }
+        /// <summary>
+        /// Gets or sets a value indicating whether this instance has documents.
+        /// </summary>
+        /// <value><c>true</c> if this instance has documents; otherwise, <c>false</c>.</value>
+        public bool HasDocuments { get; set; }
+        /// <summary>
+        /// Gets or sets the linked documents.
+        /// </summary>
+        /// <value>The linked documents.</value>
+        public long LinkedDocuments { get; set; }
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>

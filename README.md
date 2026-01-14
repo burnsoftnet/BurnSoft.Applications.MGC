@@ -6,6 +6,11 @@ This library was created to perform the main database function that the [My Gun 
 This application was seperated from the project to be added to the site nuget package so we can also use this in the [My Loaders Log(https://github.com/burnsoftnet/MyLoadersLog)]
 and any other related program.
 
+You can view the API Docs by [Clicking Here](docs/README.md)
+
+Additional [Developer Notes](docs/DeveloperNotes.md) are available.
+
+
 ## Resources
 - [BurnSoft.Universal](https://github.com/burnsoftnet/BurnSoft.Universal)
 
@@ -14,6 +19,40 @@ and any other related program.
 
 
 ## Release Log
+
+### v1.7.15.55
+
+* Fixed unit Tests to run on full
+* Updated Unit Tests
+* Added GunFullDetails List to pull all the data that is used in the XML Export to maybe also be used in the application to speed up and corrent some details and reduce code
+* Fixed some Database Connection closure issues in the Pictures and Hotfixes section
+* Added Additional HotFix Function to wait for database to be unlocked in admin mode for x seconds.
+* Added online API Docs
+* Added Verification Functions for ID Linking in the Main Tables and Unit Tests for those functions.
+* Added Function TO add Raiting to firearm.
+* Added new Rating field to GunCollection List containers
+* Added to HotFix 10 the Create Rating Column
+* Added to Hotfix 10 to set all ratings in gun collection to 0 after Raiting column is created.
+* FIXED issue with When Adding a firearm at times, that the default barrel id for the stock barrel doesn't return an ID
+* FIXED issue with Importing a Firearm where the Default Barrel ID and Model ID return 0.
+* Added Function to produce and look up the ID of the Rating list.
+* Added Function for Settings Picture Order, Reseting orders and addition List functions for the Picture Table
+* Added General Accessories Table and Functions
+* Added General Accessories Link Table and Functions
+* Added Another Column to the Gun Accessories Table to link between the two types of accessories. If this was done in the first place it would be just the general and the link, but right now this is an experiment and I will see if the link table is needed as tests go on.
+* Created Function to Check if table exists for hotfix section
+* Added AutoFill for General Accessories
+* Added Move, Delete, and Copy from firearm accessories to General Accessories
+* Added Move to firearm accessories and delete from general accessories.
+* Added functions to handle the new column in the gun collection table that can mark a firearm as for sale
+* Added functions to handle the new column in the gun collection table that can mark a firearm as a gun smith project
+* Updated HotFixes to include more status messages and fix anything that might reset data if re-ran.
+* Added version 6.1 database to the Unit Test Backup Section to use for hotfix updates.
+* Added Sub Folders in unit test data based on previous version for future update tests
+* ADDED - New Calibers to Caliber List Table: 6.8x51mm SIG Fury, 7 PRC, 6mm ARC, 6.8 Western, .30 Super Carry, 25 RPM, .350 Legend, 6.5 PRC, and 6mm Creedmoor
+* ADDED - The Ability to Mark a Firearm as in a Collection, meaning that this is something that is just to collect value and is hardy shot or easily sold.
+* ADDED - Hotfix 11 to Update the Database
+* REFACTOR - The Run Function in the Hotfixes to reduce the amount of duplicate code and simplify future updates
 
 ### v1.7.0.4
 

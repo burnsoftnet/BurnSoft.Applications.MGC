@@ -385,7 +385,7 @@ namespace BurnSoft.Applications.MGC.hotixes
                         try
                         {
                             string sql = $"ALTER TABLE {table} ADD COLUMN {name} {type};";
-                            if (RunSql(databasePath, sql, out errOut)) throw new Exception(errOut);
+                            if (!RunSql(databasePath, sql, out errOut, true)) throw new Exception(errOut);
                             bAns = true;
                         }
                         catch (Exception e)

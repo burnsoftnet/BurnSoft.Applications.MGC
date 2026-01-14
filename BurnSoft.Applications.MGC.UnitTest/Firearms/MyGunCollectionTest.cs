@@ -250,6 +250,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
                     DateTime.Now.ToString(CultureInfo.InvariantCulture), false, " ", "11/09/2021 14:20:45", " ", " ",
                     true, "1-8", "2 lbs", " ", "Modern", "11/09/2021 14:20:45", false, " ", false, false,out _errOut);
             }
+            _gunId = Convert.ToInt32(MyCollection.GetLastId(_databasePath, out _errOut));
         }
         /// <summary>
         /// Defines the test method AddFirearm.
@@ -301,82 +302,18 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         }
 
         /// <summary>
-        /// Prints the list.
+        /// Defines the test method GetFullList.
         /// </summary>
-        /// <param name="value">The value.</param>
-        public void PrintList(List<GunCollectionList> value)
+        [TestMethod, TestCategory("Gun Collection - Get From Table")]
+        public void GetFullList()
         {
-            if (value.Count > 0)
-            {
-                foreach (GunCollectionList g in value)
-                {
-                    Console.WriteLine($"id : {g.Id}");
-                    Console.WriteLine($"Full Name: {g.FullName}");
-                    Console.WriteLine($"Owner id: {g.Oid}");
-                    Console.WriteLine($"Manufacture Id: {g.Mid}");
-                    Console.WriteLine($"ModelName: {g.ModelName}");
-                    Console.WriteLine($"Model Id: {g.ModelId}");
-                    Console.WriteLine($"SerialNumber: {g.SerialNumber}");
-                    Console.WriteLine($"Type: {g.Type}");
-                    Console.WriteLine($"Caliber: {g.Caliber}");
-                    Console.WriteLine($"Caliber 2: {g.PetLoads}");
-                    Console.WriteLine($"Caliber 3: {g.Caliber3}");
-                    Console.WriteLine($"Feed System: {g.FeedSystem}");
-                    Console.WriteLine($"Finish: {g.Finish}");
-                    Console.WriteLine($"Condition: {g.Condition}");
-                    Console.WriteLine($"CustomId: {g.CustomId}");
-                    Console.WriteLine($"NationalityId: {g.NationalityId}");
-                    Console.WriteLine($"BarrelLength: {g.BarrelLength}");
-                    Console.WriteLine($"GripId: {g.GripId}");
-                    Console.WriteLine($"Qty: {g.Qty}");
-                    Console.WriteLine($"Weight: {g.Weight}");
-                    Console.WriteLine($"Height: {g.Height}");
-                    Console.WriteLine($"StockType: {g.StockType}");
-                    Console.WriteLine($"BarrelHeight: {g.BarrelHeight}");
-                    Console.WriteLine($"BarrelWidth: {g.BarrelWidth}");
-                    Console.WriteLine($"Action: {g.Action}");
-                    Console.WriteLine($"Sights: {g.Sights}");
-                    Console.WriteLine($"PurchasePrice: {g.PurchasePrice}");
-                    Console.WriteLine($"PurchaseFrom: {g.PurchaseFrom}");
-                    Console.WriteLine($"AppriasedBy: {g.AppriasedBy}");
-                    Console.WriteLine($"AppriasedValue: {g.AppriasedValue}");
-                    Console.WriteLine($"AppriaserId: {g.AppriaserId}");
-                    Console.WriteLine($"AppraisalDate: {g.AppraisalDate}");
-                    Console.WriteLine($"InsuredValue: {g.InsuredValue}");
-                    Console.WriteLine($"StorageLocation: {g.StorageLocation}");
-                    Console.WriteLine($"ConditionComments: {g.ConditionComments}");
-                    Console.WriteLine($"AdditionalNotes: {g.AdditionalNotes}");
-                    Console.WriteLine($"HasAccessory: {g.HasAccessory}");
-                    Console.WriteLine($"DateProduced: {g.DateProduced}");
-                    Console.WriteLine($"DateTimeAddedInDb: {g.DateTimeAddedInDb}");
-                    Console.WriteLine($"ItemSold: {g.ItemSold}");
-                    Console.WriteLine($"Selled Id: {g.Sid}");
-                    Console.WriteLine($"Buyer Id: {g.Bid}");
-                    Console.WriteLine($"Date Sold: {g.DateSold}");
-                    Console.WriteLine($"Is C&R Items: {g.IsCAndR}");
-                    Console.WriteLine($"DateTimeAdded: {g.DateTimeAddedInDb}");
-                    Console.WriteLine($"Importer: {g.Importer}");
-                    Console.WriteLine($"RemanufactureDate: {g.RemanufactureDate}");
-                    Console.WriteLine($"Poi: {g.Poi}");
-                    Console.WriteLine($"HasMb : {g.HasMb}");
-                    Console.WriteLine($"DbId: {g.DbId}");
-                    Console.WriteLine($"ShotGunChoke: {g.ShotGunChoke}");
-                    Console.WriteLine($"IsInBoundBook: {g.IsInBoundBook}");
-                    Console.WriteLine($"TwistRate: {g.TwistRate}");
-                    Console.WriteLine($"TriggerPullInPounds: {g.TriggerPullInPounds}");
-                    Console.WriteLine($"Classification: {g.Classification}");
-                    Console.WriteLine($"DateOfCAndR: {g.DateOfCAndR}");
-                    Console.WriteLine($"LastSyncDate: {g.LastSyncDate}");
-                    Console.WriteLine($"IsClass3Item: {g.IsClass3Item}");
-                    Console.WriteLine($"Class3Owner: {g.Class3Owner}");
-                    Console.WriteLine($"WaS Stolen: {g.WasStolen}");
-                    Console.WriteLine($"Was Sold: {g.WasSold}");
-                    Console.WriteLine($"Is Stogun: {g.IsShotGun}");
-                    Console.WriteLine("--------------------------------------");
-                    Console.WriteLine("");
-                }
-            }
+            VerifyExists();
+            _gunId = 3;
+            List<GunCollectionFullList> value = MyCollection.GetFullList(_databasePath, _gunId, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionFullDetails(value));
+            General.HasTrueValue(value.Count > 0, _errOut);
         }
+
         /// <summary>
         /// Defines the test method GetList.
         /// </summary>
@@ -385,7 +322,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<GunCollectionList> value = MyCollection.GetList(_databasePath, _gunId, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionData(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -395,7 +332,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         public void GetListAll()
         {
             List<GunCollectionList> value = MyCollection.GetList(_databasePath, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionData(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -413,6 +350,201 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             {
                 TestContext.WriteLine($"Was not able to update database and change name from {_shopOldName} to {_shopNewName}");
             }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetAsCompetitionGunTest.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetAsCompetitionGunTest()
+        {
+            bool value = MyCollection.SetAsCompetitionGun(_databasePath, _gunId, true, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to competition gun");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} to competition gun");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetToSellTestToggleOn.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetToSellTestToggleOn()
+        {
+            bool value = MyCollection.SetAsToBeSold(_databasePath, _gunId, true, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as selling");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as selling");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetToSellTestToggleOff.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetToSellTestToggleOff()
+        {
+            bool value = MyCollection.SetAsToBeSold(_databasePath, _gunId, false, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as selling");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as selling");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetToGunSmithJobTestToggleOn.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetToGunSmithJobTestToggleOn()
+        {
+            bool value = MyCollection.SetAsGunSmithJob(_databasePath, _gunId, true, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as Gun Smith JOb to on");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as Gun Smith JOb to on");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetToGunSmithJobTestToggleOff.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetToGunSmithJobTestToggleOff()
+        {
+            bool value = MyCollection.SetAsGunSmithJob(_databasePath, _gunId, false, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as Gun Smith JOb to off");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as Gun Smith JOb to off");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetAsForCollectingTestToggleOn.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetAsForCollectingTestToggleOn()
+        {
+            bool value = MyCollection.SetAsForCollecting(_databasePath, _gunId, true, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as For Collection to on");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as For Collection to on");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetAsForCollectingTestToggleOff.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetAsForCollectingTestToggleOff()
+        {
+            bool value = MyCollection.SetAsForCollecting(_databasePath, _gunId, false, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to mark as For Collection to off");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} tomark as For Collection to off");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method SetFirearmRatingTest.
+        /// </summary>
+        [TestMethod, TestCategory("Gun Collection - On the Fly Changes")]
+        public void SetFirearmRatingTest()
+        {
+            int rating = 5;
+            bool value = MyCollection.SetFirearmRating(_databasePath, _gunId, rating, out _errOut);
+            if (value)
+            {
+                TestContext.WriteLine($"Was able to set firearm id {_gunId} to raiting of {rating}");
+            }
+            else
+            {
+                TestContext.WriteLine($"Was not able to set firearm id {_gunId} to raiting of {rating}");
+            }
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Ratings")]
+        public void GetRatingListTestFive()
+        {
+            bool value = false;
+
+            List<Ratings> lst = MyCollection.GetRatingList();
+            foreach (Ratings r in lst)
+            {
+                TestContext.WriteLine($"ID: {r.Id}");
+                TestContext.WriteLine($"Name: {r.Name}");
+            }
+            value = lst.Count == 6;
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Ratings")]
+        public void GetRatingListTestTen()
+        {
+            bool value = false;
+
+            List<Ratings> lst = MyCollection.GetRatingList(true);
+            foreach (Ratings r in lst)
+            {
+                TestContext.WriteLine($"ID: {r.Id}");
+                TestContext.WriteLine($"Name: {r.Name}");
+            }
+            value = lst.Count == 11;
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Ratings")]
+        public void GetRatingIdTestTen()
+        {
+            bool value = false;
+
+            int id = MyCollection.GetRatingId("Notable", true);
+            value = id == 6;
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("Gun Collection - Ratings")]
+        public void GetRatingIdTestFive()
+        {
+            bool value = false;
+
+            int id = MyCollection.GetRatingId("Depressingly bad");
+            value = id == 2;
             General.HasTrueValue(value, _errOut);
         }
     }

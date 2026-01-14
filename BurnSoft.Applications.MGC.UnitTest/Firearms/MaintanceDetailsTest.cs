@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BurnSoft.Applications.MGC.Firearms;
+﻿using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.UnitTest.Firearms
@@ -79,38 +80,13 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             _maintenanceDetailsBarrelSystemId = Vs2019.IGetSetting("MaintenanceDetails_BarrelSystemId", TestContext);
             _maintenanceDetailsDoesCount = Vs2019.BGetSetting("MaintenanceDetails_DoesCount", TestContext);
         }
-        /// <summary>
-        /// Prints the list.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        private void PrintList(List<MaintanceDetailsList> value)
-        {
-            if (value.Count > 0)
-            {
-                foreach (MaintanceDetailsList g in value)
-                {
-                    TestContext.WriteLine($"id : {g.Id}");
-                    TestContext.WriteLine($"Plan Id: {g.PlanId}");
-                    TestContext.WriteLine($"Name: {g.Name}");
-                    TestContext.WriteLine($"Gun Id: {g.GunId}");
-                    TestContext.WriteLine($"Operation Date: {g.OperationStartDate}");
-                    TestContext.WriteLine($"Operation Due Date: {g.OperationDueDate}");
-                    TestContext.WriteLine($"Notes: {g.Notes}");
-                    TestContext.WriteLine($"Barrel System Id: {g.BarrelSystemId}");
-                    TestContext.WriteLine($"Counts in Total: {g.DoesCount}");
-                    TestContext.WriteLine($"Last Updated: {g.LastSync}");
-                    TestContext.WriteLine($"");
-                    TestContext.WriteLine($"--------------------------------------");
-                    TestContext.WriteLine($"");
-                }
-            }
-        }
+        
         /// <summary>
         /// Verifies the exists.
         /// </summary>
         private void VerifyExists()
         {
-
+            _gunId = Convert.ToInt32(MyCollection.GetLastId(_databasePath, out _errOut));
             if (!MaintanceDetails.Exists(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, out _errOut))
             {
                 MaintanceDetails.Add(_databasePath, _maintenanceDetailsName, _gunId, _maintenanceDetailsPlanId, _maintenanceDetailsOperationDate, _maintenanceDetailsOperationDueDate, _maintenanceDetailsRoundsFired, _maintenanceDetailsNotes, "N/A", _maintenanceDetailsBarrelSystemId, _maintenanceDetailsDoesCount, out _errOut);
@@ -196,18 +172,30 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
         {
             VerifyExists();
             List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, _gunId, _maintenanceDetailsBarrelSystemId, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunMaintanceDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
         /// Defines the test method ListFromGunTest.
         /// </summary>
         [TestMethod, TestCategory("Maintance Details")]
-        public void ListFromGunTest()
+        public void ListFromForRow()
         {
             VerifyExists();
-            List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, _gunId,  out _errOut);
-            PrintList(value);
+            List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, 2,  out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunMaintanceDetails(value));
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
+
+        /// <summary>
+        /// Defines the test method ListFromGunTest.
+        /// </summary>
+        [TestMethod, TestCategory("Maintance Details")]
+        public void ListFromAllTest()
+        {
+            VerifyExists();
+            List<MaintanceDetailsList> value = MaintanceDetails.Lists(_databasePath, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunMaintanceDetails(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
     }

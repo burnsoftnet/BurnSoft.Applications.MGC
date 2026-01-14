@@ -1,10 +1,10 @@
-﻿using System;
+﻿using BurnSoft.Applications.MGC.Global;
+using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Universal;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
-using BurnSoft.Applications.MGC.Global;
-using BurnSoft.Applications.MGC.Types;
-using BurnSoft.Universal;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable UnusedMember.Global
 // ReSharper disable RedundantAssignment
@@ -176,10 +176,13 @@ namespace BurnSoft.Applications.MGC.Firearms
                 if (errOut.Length > 0) throw new Exception(errOut);
                 bAns = ExtraBarrelConvoKits.Add(databasePath, id, modelName, caliber, finish, barrelLength, petLoads,
                     action, feedsystem, sights, "0.00", purchasedFrom, height, "Fixed Barrel", true, dtp, out errOut);
-                long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, id, out errOut);
+
+                long barrelId = ExtraBarrelConvoKits.GetBarrelId(databasePath, id, out errOut, useDefault: true);
                 if (errOut.Length > 0) throw new Exception(errOut);
+                
                 bAns = UpdateDefaultBarrel(databasePath, barrelId, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
+
                 bAns = ExtraBarrelConvoKits.AddLink(databasePath, barrelId, id, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
 
@@ -547,6 +550,40 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lAns;
         }
         /// <summary>
+        /// Gets the top identifier from the database
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="Exception"></exception>
+        public static long GetTopId(string databasePath, out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                List<GunCollectionList> lst = new List<GunCollectionList>();
+                errOut = @"";
+
+                string sql = $"select TOP 1 * from Gun_Collection";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut, databasePath);
+
+                foreach (GunCollectionList g in lst)
+                {
+                    lAns = g.Id;
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetTopId", e);
+            }
+
+            return lAns;
+        }
+
+        /// <summary>
         /// Catalogs the identifier exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -774,7 +811,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Catalogs the exists details.
+        /// Check to see if the Custom Catalog ID already exists exists.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="customId">The custom identifier.</param>
@@ -794,12 +831,14 @@ namespace BurnSoft.Applications.MGC.Firearms
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
                 List<GunCollectionList> lst = MyList(dt, out errOut, databasePath);
-                sAns = $"The following firearms have been found {Environment.NewLine} with the same Catalog ID({customId}):{Environment.NewLine}";
-                foreach (GunCollectionList l in lst)
+                if (lst.Count > 0)
                 {
-                    sAns += $"{l.FullName}{Environment.NewLine}";
+                    sAns = $"The following firearms have been found {Environment.NewLine} with the same Catalog ID({customId}):{Environment.NewLine}";
+                    foreach (GunCollectionList l in lst)
+                    {
+                        sAns += $"{l.FullName}{Environment.NewLine}";
+                    }
                 }
-
             }
             catch (Exception e)
             {
@@ -963,6 +1002,111 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+
+        /// <summary>
+        /// Sets as to be sold true or false
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetAsToBeSold(string databasePath, int id, bool value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set ToSell={value} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetAsToBeSold", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Sets as gun smith job to true or false
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetAsGunSmithJob(string databasePath, int id, bool value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set GunSmithJob={value} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetAsGunSmithJob", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Sets as for collecting.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="value">if set to <c>true</c> [value].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetAsForCollecting(string databasePath, int id, bool value, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set ForCollecting={value} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetAsForCollecting", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Sets the firearm rating. This will bet set while you are viewing the firearm and not during add or edit.
+        /// Because if might be a new gun and you don't know how it handles.  So something that can be changed more 
+        /// on the fly.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="rating">The rating.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetFirearmRating(string databasePath, int id, int rating, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"update gun_collection set Rating={rating} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetFirearmRating", e);
+            }
+            return bAns;
+        }
         /// <summary>
         /// Sets as non lethal.
         /// </summary>
@@ -1097,6 +1241,132 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return lst;
         }
+
+        /// <summary>
+        /// Gets the full list of the firearm details, accessories, BarrelSystems, etc.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;GunCollectionFullList&gt;.</returns>
+        /// <exception cref="Exception"></exception>
+        public static List<GunCollectionFullList> GetFullList(string databasePath, long id, out string errOut)
+        {
+            List<GunCollectionFullList> lst = new List<GunCollectionFullList>();
+            errOut = @"";
+            try
+            {
+                List<GunCollectionList> gd = GetList(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bool HasExtraBarrels = ExtraBarrelConvoKits.HasMultiBarrelsListed(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<BarrelSystems> bs = ExtraBarrelConvoKits.GetListForFirearm(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                int BarrelSystemCount = bs.Count;
+                List<AccessoriesList> a = Accessories.List(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<MaintanceDetailsList> md = MaintanceDetails.Lists(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                List<GunSmithWorkDone> gswd = GunSmithDetails.Lists(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bool HasDocs = Documents.HasDocumentsAttached(databasePath, (int)id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                long DocCount = Documents.CountLinkedDocs(databasePath, id, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+
+                foreach (GunCollectionList g in gd)
+                {
+                    lst.Add(new GunCollectionFullList
+                    {
+                        Id = g.Id,
+                        Oid = g.Oid,
+                        Mid = g.Mid,
+                        Manufacturer = g.Manufacturer,
+                        FullName = g.FullName ,
+                        ModelName = g.ModelName,
+                        ModelId = g.ModelId,
+                        SerialNumber = g.SerialNumber,
+                        Type = g.Type,
+                        Caliber = g.Caliber,
+                        Caliber3 = g.Caliber3,
+                        PetLoads = g.PetLoads,
+                        Finish = g.Finish,
+                        FeedSystem = g.FeedSystem,
+                        Condition = g.Condition,
+                        CustomId = g.CustomId,
+                        NationalityId = g.NationalityId,
+                        Nationality = g.Nationality,
+                        BarrelLength = g.BarrelLength,
+                        GripId = g.GripId,
+                        GripType = g.GripType,
+                        Qty = g.Qty,
+                        Weight = g.Weight,
+                        Height = g.Height,
+                        StockType = g.StockType,
+                        BarrelHeight = g.BarrelHeight,
+                        BarrelWidth = g.BarrelWidth,
+                        Action = g.Action,
+                        Sights = g.Sights,
+                        PurchasePrice = g.PurchasePrice,
+                        PurchaseFrom = g.PurchaseFrom,
+                        AppriasedBy = g.AppriasedBy,
+                        AppriasedValue = g.AppriasedValue,
+                        AppriaserId = g.AppriaserId,
+                        AppraisalDate = g.AppraisalDate,
+                        InsuredValue = g.InsuredValue,
+                        StorageLocation = g.StorageLocation,
+                        ConditionComments = g.ConditionComments,
+                        AdditionalNotes = g.AdditionalNotes,
+                        HasAccessory = g.HasAccessory,
+                        DateProduced = g.DateProduced,
+                        DateTimeAddedInDb = g.DateTimeAddedInDb,
+                        ItemSold = g.ItemSold,
+                        IsShotGun = g.IsShotGun,
+                        Sid = g.Sid,
+                        Bid = g.Bid,
+                        DateSold = g.DateSold,
+                        IsCAndR = g.IsCAndR,
+                        DateTimeAdded = g.DateTimeAdded,
+                        Importer = g.Importer,
+                        RemanufactureDate = g.RemanufactureDate,
+                        Poi = g.Poi,
+                        HasMb = g.HasMb,
+                        DbId = g.DbId,
+                        ShotGunChoke = g.ShotGunChoke,
+                        IsInBoundBook = g.IsInBoundBook,
+                        TwistRate = g.TwistRate,
+                        TriggerPullInPounds = g.TriggerPullInPounds,
+                        Classification = g.Classification,
+                        DateOfCAndR = g.DateOfCAndR,
+                        LastSyncDate = g.LastSyncDate,
+                        IsClass3Item = g.IsClass3Item,
+                        Class3Owner = g.Class3Owner,
+                        WasStolen = g.WasStolen,
+                        WasSold = g.WasSold,
+                        IsCompetition = g.IsCompetition,
+                        IsNonLethal = g.IsNonLethal,
+                        HasExtraBarrels = HasExtraBarrels,
+                        BarrelSystemCount = BarrelSystemCount,
+                        BarrelSystem = bs,
+                        Accessories = a,
+                        MaintanceDetails = md,
+                        GunSmithWork = gswd,
+                        HasDocuments = HasDocs,
+                        LinkedDocuments = DocCount,
+                        Rating = g.Rating,
+                        ToSell = g.ToSell,
+                        GunSmithJob = g.GunSmithJob,
+                        ForCollecting = g.ForCollecting,
+                    });
+                }
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetFullList", e);
+            }
+            return lst;
+        }
+
         /// <summary>
         /// Private class to sort the informatimon from a datatable into the Gun Collection List ype
         /// </summary>
@@ -1221,7 +1491,11 @@ namespace BurnSoft.Applications.MGC.Firearms
                         WasStolen = wasStolen,
                         WasSold = wasSold,
                         IsCompetition =  obj.ConvertIntToBool(Convert.ToInt32(d["isCompetition"] != DBNull.Value ? d["isCompetition"].ToString() : "0")),
-                        IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0"))
+                        IsNonLethal = obj.ConvertIntToBool(Convert.ToInt32(d["IsNoLeathal"] != DBNull.Value ? d["IsNoLeathal"].ToString() : "0")),
+                        Rating = Convert.ToInt32(d["Rating"] != DBNull.Value ? d["Rating"].ToString() : "0"),
+                        ToSell = d["ToSell"] != DBNull.Value ? Convert.ToBoolean(d["ToSell"]) : false,
+                        GunSmithJob = d["GunSmithJob"] != DBNull.Value ? Convert.ToBoolean(d["GunSmithJob"]) : false,
+                        ForCollecting = d["ForCollecting"] != DBNull.Value ? Convert.ToBoolean(d["ForCollecting"]) : false
 
                     });
                 }
@@ -1336,6 +1610,126 @@ namespace BurnSoft.Applications.MGC.Firearms
                 errOut = ErrorMessage("RenameFullName", e);
             }
             return bAns;
+        }
+        /// <summary>
+        /// Gets the rating list.
+        /// </summary>
+        /// <param name="useTen">if set to <c>true</c> [use ten].</param>
+        /// <returns>List&lt;Ratings&gt;.</returns>
+        public static List<Ratings> GetRatingList(bool useTen = false)
+        {
+            List<Ratings> lst = new List<Ratings>();
+            if (!useTen)
+            {
+                lst.Add(new Ratings()
+                {
+                    Id = 0,
+                    Name = "Not Rated"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 1,
+                    Name = "Terrible"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 2,
+                    Name = "Depressingly bad"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 3,
+                    Name = "Not Bad"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 4,
+                    Name = "Good"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 5,
+                    Name = "Perfection"
+                });
+            } else
+            {
+                lst.Add(new Ratings()
+                {
+                    Id = 0,
+                    Name = "Not Rated"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 1,
+                    Name = "Terrible"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 2,
+                    Name = "Not Good At All"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 3,
+                    Name = "Depressingly bad"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 4,
+                    Name = "Poor"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 5,
+                    Name = "Solid"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 6,
+                    Name = "Notable"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 7,
+                    Name = "Good"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 8,
+                    Name = "Very Good"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 9,
+                    Name = "Excellent"
+                });
+                lst.Add(new Ratings()
+                {
+                    Id = 10,
+                    Name = "Perfection"
+                });
+            }
+                return lst;
+        }
+        /// <summary>
+        /// Gets the rating identifier.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="useTen">if set to <c>true</c> [use ten].</param>
+        /// <returns>System.Int32.</returns>
+        public static int GetRatingId(string name, bool useTen = false)
+        {
+            int iAns = 0;
+            List<Ratings> lst = GetRatingList(useTen);
+            foreach (Ratings r in lst)
+            {
+                if (r.Name == name)
+                {
+                    iAns = r.Id;
+                    break;
+                }
+            }
+            return iAns;
         }
     }
 }
