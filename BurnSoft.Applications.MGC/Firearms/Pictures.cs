@@ -6,6 +6,7 @@ using System.Data.OleDb;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 using BurnSoft.Applications.MGC.Global;
 using BurnSoft.Applications.MGC.Types;
@@ -125,9 +126,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Determines whether [has default picture] [the specified database path].
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="id">The id of the Accessory that you want to work with</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool HasDefaultPicture(string databasePath, long id, out string errOut)
         {
@@ -169,8 +170,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// HOTFIX - If there is no default picture set but collection has pictures, then set the first picture as the default picture
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool SetMainPictures(string databasePath, out string errOut)
         {
@@ -309,7 +310,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
-        /// Save a gun picture to the database, this function will convert this picture into a thumbnail and upload the orginal picture and the thumbnail
+        /// Save a gun picture to the database, this function will convert this picture 
+        /// into a thumbnail and upload the orginal picture and the thumbnail
         /// to the database, you can also add a name and notes to it.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -321,7 +323,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="errOut">The error out.</param>
         /// <param name="setAsDefault"></param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Save(string databasePath, string file, string applicationPathData, long gunId,string name, string notes, out string errOut, bool setAsDefault = false)
+        public static bool Save(string databasePath, string file, string applicationPathData, 
+            long gunId,string name, string notes, out string errOut, bool setAsDefault = false)
         {
             bool bAns = false;
             errOut = @"";
@@ -379,6 +382,7 @@ namespace BurnSoft.Applications.MGC.Firearms
                 cmd.ExecuteNonQuery();
 
                 bAns = true;
+                myConn.Close();
             }
             catch (Exception e)
             {
@@ -387,12 +391,99 @@ namespace BurnSoft.Applications.MGC.Firearms
 
             return bAns;
         }
+
+        /// <summary>
+        /// Save a gun picture to the database, this function will convert this picture 
+        /// into a thumbnail and upload the orginal picture and the thumbnail
+        /// to the database, you can also add a name and notes to it.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="file">The file.</param>
+        /// <param name="applicationPathData">The application path data.</param>
+        /// <param name="gunId">The gun identifier.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="picOrder">The Picture Order</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="setAsDefault"></param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool Save(string databasePath, string file, string applicationPathData, 
+            long gunId, string name, string notes, int picOrder, out string errOut, 
+            bool setAsDefault = false)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+
+                FileStream st = new FileStream(file, FileMode.Open, FileAccess.Read);
+                BinaryReader mbr = new BinaryReader(st);
+                byte[] buffer = new byte[st.Length + 1];
+                mbr.Read(buffer, 0, Convert.ToInt32(st.Length));
+                st.Close();
+
+                int intPicHeight = 64;
+                int intPicWidth = 64;
+                string sThumbName = $"{applicationPathData}\\mgc_thumb.jpg";
+
+                Image myBitmap = Image.FromFile(file);
+                Image.GetThumbnailImageAbort myPicCallback = null;
+                Image myNewPic = myBitmap.GetThumbnailImage(intPicWidth, intPicHeight, myPicCallback, IntPtr.Zero);
+                myBitmap.Dispose();
+                File.Delete(sThumbName);
+                myNewPic.Save(sThumbName, ImageFormat.Jpeg);
+                myNewPic.Dispose();
+                FileStream stT = new FileStream(sThumbName, FileMode.Open, FileAccess.Read);
+                BinaryReader mbrT = new BinaryReader(stT);
+                byte[] bufferT = new byte[stT.Length + 1];
+                mbrT.Read(bufferT, 0, Convert.ToInt32(stT.Length));
+                stT.Close();
+
+                OleDbConnection myConn = new OleDbConnection(Database.ConnectionStringOle(databasePath, out errOut));
+
+                int iMain = 0;
+                if (setAsDefault)
+                {
+                    iMain = 1;
+                }
+                else
+                {
+                    iMain = IsFirstPic(databasePath, gunId, out errOut) ? 1 : 0;
+                }
+
+                string sql = "INSERT INTO Gun_Collection_Pictures(CID, PICTURE, THUMB, ISMAIN,sync_lastupdate,pd_name,pd_note, PicOrder) " +
+                             "VALUES(@CID,@PICTURE,@THUMB,@ISMAIN,Now(),@pd_name,@pd_note,@PicOrder)";
+                OleDbCommand cmd = new OleDbCommand(sql);
+
+                cmd.Parameters.AddWithValue("CID", gunId);
+                cmd.Parameters.AddWithValue("PICTURE", buffer);
+                cmd.Parameters.AddWithValue("THUMB", bufferT);
+                cmd.Parameters.AddWithValue("ISMAIN", iMain);
+                cmd.Parameters.AddWithValue("pd_name", name);
+                cmd.Parameters.AddWithValue("pd_note", notes);
+                cmd.Parameters.AddWithValue("PicOrder", picOrder);
+
+                myConn.Open();
+                cmd.Connection = myConn;
+                cmd.ExecuteNonQuery();
+
+                bAns = true;
+                myConn.Close();
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("Save", e);
+            }
+
+            return bAns;
+        }
+
         /// <summary>
         /// Count all the pictures that are tied to a particular firearm
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="gunId"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static long CountPics(string databasePath, long gunId, out string errOut)
         {
@@ -428,7 +519,7 @@ namespace BurnSoft.Applications.MGC.Firearms
             errOut = @"";
             try
             {
-                string sql = $"SELECT * from Gun_Collection_Pictures where CID={id}";
+                string sql = $"SELECT * from Gun_Collection_Pictures where CID={id} Order By PicOrder ASC";
                 if (isDirect) sql = $"SELECT * from Gun_Collection_Pictures where ID={id}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
@@ -444,10 +535,38 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
+        /// Get all the data from the picture table.
+        /// </summary>
+        /// <param name="databasePath">full path and file name to the database</param>
+        /// <param name="errOut">exception message</param>
+        /// <param name="isDetails">toggle if just the text is returned or all</param>
+        /// <param name="formPictureBox"></param>
+        /// <returns></returns>
+        public static List<PictureDetails> GetList(string databasePath, out string errOut, bool isDetails = true, PictureBox formPictureBox = null)
+        {
+            List<PictureDetails> lst = new List<PictureDetails>();
+            errOut = @"";
+            try
+            {
+                string sql = $"SELECT * from Gun_Collection_Pictures";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut, isDetails, "", formPictureBox);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+
+        }
+
+        /// <summary>
         /// Generate a list of the data returned from the datatable query relating to the pictures table.
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <param name="isDetails"></param>
         /// <param name="dbPath"></param>
         /// <param name="formPictureBox"></param>
@@ -517,7 +636,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                             ThumbMemoryStream = thumbStream,
                             PictureMemoryStream = picStream,
                             ThumbBmp = tBmp,
-                            PictureBmp = bmp
+                            PictureBmp = bmp,
+                            PicOrder = Convert.ToInt32(d["PicOrder"] != DBNull.Value ? d["PicOrder"] : 0)
                         });
                     }
                     else
@@ -529,7 +649,8 @@ namespace BurnSoft.Applications.MGC.Firearms
                             CollectionId = Convert.ToInt32(d["CID"] != DBNull.Value ? d["CID"] : 0),
                             IsMain = obj.ConvertIntToBool(Convert.ToInt32(d["ISMAIN"] != DBNull.Value ? d["ISMAIN"] : 0)),
                             PictureDisplayName = d["pd_name"] != DBNull.Value ? d["pd_name"].ToString().Trim() : "",
-                            PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : ""
+                            PictureNotes = d["pd_note"] != DBNull.Value ? d["pd_note"].ToString().Trim() : "",
+                            PicOrder = Convert.ToInt32(d["PicOrder"] != DBNull.Value ? d["PicOrder"] : 0)
                         });
                     }
                     
@@ -605,6 +726,110 @@ namespace BurnSoft.Applications.MGC.Firearms
         }
 
         /// <summary>
+        /// Updates the picture details.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="title">The title.</param>
+        /// <param name="notes">The notes.</param>
+        /// <param name="picOrder">The Picture Order</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool UpdatePictureDetails(string databasePath, long id, string title, 
+            string notes, int picOrder, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Pictures set pd_name='{title}', pd_note='{notes}', PicOrder={picOrder} sync_lastupdate=Now() where ID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdatePictureDetails", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Sets the picture order.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The Firearm identifier.</param>
+        /// <param name="orderId">The order identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetPictureOrder(string databasePath, long id, int orderId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Pictures set PicOrder={orderId} ,sync_lastupdate=Now() where ID={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetPictureOrder", e);
+            }
+            return bAns;
+        }
+        /// <summary>
+        /// Gets the next order number.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
+        public static int GetNextOrderNumber(string databasePath, long firearmId, out string errOut)
+        {
+            int iAns = 0;
+            errOut = "";
+            try
+            {
+                List<PictureDetails> lst = new List<PictureDetails>();
+                lst = GetList(databasePath, firearmId, out errOut);
+                int maxOrder = lst.Max(i => i.PicOrder);
+                iAns = maxOrder + 1;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetNextOrderNumber", e);
+            }
+            return iAns;
+        }
+
+        /// <summary>
+        /// Gets the last picture that was added for that collection
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32 the id of the picture in the database</returns>
+        public static int GetLastPicture(string databasePath, long firearmId, out string errOut)
+        {
+            int iAns = 0;
+            errOut = "";
+            try
+            {
+                List<PictureDetails> lst = new List<PictureDetails>();
+                lst = GetList(databasePath, firearmId, out errOut);
+                int maxOrder = lst.Max(i => i.Id);
+                iAns = maxOrder;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetLastPicture", e);
+            }
+            return iAns;
+        }
+
+
+        /// <summary>
         /// Gets the pcture.
         /// </summary>
         /// <param name="databasePath">The database path.</param>
@@ -674,5 +899,54 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return oAns;
         }
+        /// <summary>
+        /// Resets the pictures order for a particular firearm collection
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="firearmId">The firearm identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ResetPictures(string databasePath, long firearmId, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Update Gun_Collection_Pictures set PicOrder=0 where CID={firearmId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ResetPictures", e);
+            }
+            return bAns;
+        }
+
+        /// <summary>
+        /// Resets the pictures for all the collection in the table.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool ResetPictures(string databasePath, out string errOut)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"Update Gun_Collection_Pictures set PicOrder=0";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("ResetPictures", e);
+            }
+            return bAns;
+        }
+
     }
 }

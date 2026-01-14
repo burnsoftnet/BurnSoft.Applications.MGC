@@ -377,10 +377,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Check to seeif a doc link already exists between the firearm and the document
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="firearmId"></param>
         /// <param name="documentId"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool DocLinkExists(string databasePath, long firearmId, long documentId, out string errOut)
         {
@@ -401,10 +401,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get the Doc link Id
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="docId"></param>
         /// <param name="gunId"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static long GetDocLinkId(string databasePath, long docId, long gunId, out string errOut)
         {
@@ -433,9 +433,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool DeleteDocLink(string databasePath, long id, out string errOut)
         {
@@ -457,9 +457,9 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Remove firearm from link lists
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="gunId"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool DeleteFirearmFromLinkList(string databasePath, long gunId, out string errOut)
         {
@@ -506,8 +506,8 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get all the Doc Link Lists
         /// </summary>
-        /// <param name="databasePath"></param>
-        /// <param name="errOut"></param>
+        /// <param name="databasePath">The Database Path</param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static List<DocumentLinkList> GetLinkList(string databasePath, out string errOut)
         {
@@ -630,7 +630,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Get the doc link list from the data table and convert it into the doc link list container
         /// </summary>
         /// <param name="dt"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         internal static List<DocumentLinkList> MyListLinks(DataTable dt, out string errOut)
         {
@@ -660,10 +660,10 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <summary>
         /// Get the Data of the document from the database and save it to the hard drive to view or export
         /// </summary>
-        /// <param name="databasePath"></param>
+        /// <param name="databasePath">The Database Path</param>
         /// <param name="applicationPathData"></param>
         /// <param name="id"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         public static bool GetDocumentFromDb(string databasePath,string applicationPathData, long id, out string errOut)
         {
@@ -695,7 +695,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// </summary>
         /// <param name="data"></param>
         /// <param name="path"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         internal static bool SaveDocToHdd(object data, string path, out string errOut)
         {
@@ -723,7 +723,7 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// Open file with default viewer
         /// </summary>
         /// <param name="filePathAndName"></param>
-        /// <param name="errOut"></param>
+        /// <param name="errOut">If an exception occurs the message will be in this string</param>
         /// <returns></returns>
         internal static bool OpenFile(string filePathAndName, out string errOut)
         {

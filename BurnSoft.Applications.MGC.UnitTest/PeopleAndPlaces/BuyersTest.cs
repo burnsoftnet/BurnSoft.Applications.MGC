@@ -141,33 +141,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
                 bool value = Buyers.Add(_databasePath, _buyerName, _buyerAddress1, _buyerAddress2, _buyerCity, _buyerState, _buyerZipCode, _buyerPhone, _buyerCountry, _buyerEMail, _buyerLic , _buyerWebSite, _buyerFax, _buyerDob, _buyerDLic, _buyerResident, out _errOut);
             }
         }
-        /// <summary>
-        /// Print the list of buyers information
-        /// </summary>
-        /// <param name="value"></param>
-        private void PrintList(List<BuyersList> value)
-        {
-            foreach (BuyersList v in value)
-            {
-                TestContext.WriteLine($"id: {v.Id}");
-                TestContext.WriteLine($"Name: {v.Name}");
-                TestContext.WriteLine($"Address1: {v.Address1}");
-                TestContext.WriteLine($"Address2: {v.Address2}");
-                TestContext.WriteLine($"City: {v.City}");
-                TestContext.WriteLine($"State: {v.State}");
-                TestContext.WriteLine($"ZipCode: {v.ZipCode}");
-                TestContext.WriteLine($"Phone: {v.Phone}");
-                TestContext.WriteLine($"Fax: {v.Fax}");
-                TestContext.WriteLine($"email: {v.Email}");
-                TestContext.WriteLine($"Driver Lic: {v.Dlic}");
-                TestContext.WriteLine($"Date of Birth: {v.Dob}");
-                TestContext.WriteLine($"Country: {v.Country}");
-                TestContext.WriteLine($"Resident: {v.Resident}");
-                TestContext.WriteLine($"License: {v.Lic}");
-                TestContext.WriteLine($"");
-                TestContext.WriteLine($"----------------------------------");
-            }
-        }
 
         /// <summary>
         /// Defines the test method AddTest.
@@ -221,7 +194,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
             VerifyExists();
             long id = Buyers.GetId(_databasePath, _buyerName, out _errOut);
             List<BuyersList> value = Buyers.Get(_databasePath, id, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BuyersListInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -232,7 +205,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         {
             VerifyExists();
             List<BuyersList> value = Buyers.Get(_databasePath, _buyerName, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BuyersListInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
@@ -243,7 +216,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.PeopleAndPlaces
         {
             VerifyExists();
             List<BuyersList> value = Buyers.Get(_databasePath, out _errOut);
-            PrintList(value);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.BuyersListInfo(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
         /// <summary>
