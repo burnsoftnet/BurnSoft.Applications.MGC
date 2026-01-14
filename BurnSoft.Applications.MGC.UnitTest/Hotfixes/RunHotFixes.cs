@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 using BurnSoft.Applications.MGC.UnitTest.Settings;
-using BurnSoft.Universal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 // ReSharper disable ConvertIfStatementToConditionalTernaryExpression
 
@@ -33,16 +31,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
             // Vs2019.GetSetting("", TestContext);
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
-            //DeleteLockFile();
-        }
-        /// <summary>
-        /// Deletes the lock file.
-        /// </summary>
-        private void DeleteLockFile()
-        {
-            FileIO obj = new FileIO();
-            string lockFile = _databasePath.Replace("mdb", "ldb");
-            obj.DeleteFile(lockFile);
         }
         /// <summary>
         /// Defines the test method HotFix1Test.
@@ -51,17 +39,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         public void HotFix1Test()
         {
             hotixes.HfDatabase.Security.RemovePassword(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), out _errOut);
-            
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 1, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 1, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -70,16 +48,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix2Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 2, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 2, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -88,16 +57,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix3Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 3, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 3, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -106,16 +66,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix4Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 4, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 4, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -124,16 +75,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix5Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 5, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 5, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -142,16 +84,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix6Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 6, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 6, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -160,16 +93,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix7Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 7, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 7, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -178,16 +102,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix8Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 8, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 8, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -196,16 +111,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix9Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 9, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 9, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
         /// <summary>
@@ -214,16 +120,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.Hotfixes
         [TestMethod, TestCategory("Run Hotfixes")]
         public void HotFix10Test()
         {
-            hotixes.HotFix obj = new hotixes.HotFix();
-            obj.Status += (ss, ee) =>
-            {
-                TestContext.WriteLine($"STATUS: {ee}");
-            };
-            obj.Errors += (ss, ee) =>
-            {
-                TestContext.WriteLine($"ERROR: {ee}");
-            };
-            bool value = obj.RunObj(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath), 10, out _errOut);
+            bool value = hotixes.HotFix.Run(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, _databasePath),10, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
 

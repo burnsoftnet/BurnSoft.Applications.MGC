@@ -34,7 +34,6 @@ namespace BurnSoft.Applications.MGC.UnitTest.Settings
             string testCaliber = @"10mm gunny";
             List<Tuple<string, string>> ls = new List<Tuple<string, string>>();
             ls.Add(new Tuple<string, string>("DatabasePath", "data\\mgc.mdb"));
-            ls.Add(new Tuple<string, string>("SkipCleanupTests", "true"));
             ls.Add(new Tuple<string, string>("XMLImport", "data\\unittest_fiream.xml"));
             ls.Add(new Tuple<string, string>("XMLImport2", "data\\ExportFirearm_Glock_G17_Open_Class.xml"));
             ls.Add(new Tuple<string, string>("OwnerId", "1"));

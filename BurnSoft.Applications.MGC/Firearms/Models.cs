@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.IO;
-using System.Net.Security;
 using BurnSoft.Applications.MGC.Types;
 
 // ReSharper disable UnusedMember.Local
@@ -188,25 +186,15 @@ namespace BurnSoft.Applications.MGC.Firearms
         /// <param name="databasePath">The database path.</param>
         /// <param name="name">The name.</param>
         /// <param name="manufacturerId">The manufacturer identifier.</param>
-        /// <param name="AddIfNotExists">Add the Model if it doesn't exists</param>
         /// <param name="errOut">The error out.</param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="Exception"></exception>
-        public static long GetId(string databasePath, string name, long manufacturerId, out string errOut, bool AddIfNotExists = false)
+        public static long GetId(string databasePath, string name, long manufacturerId, out string errOut)
         {
             long lAns = 0;
             errOut = @"";
             try
             {
-                if (AddIfNotExists)
-                {
-                    if (!Exists(databasePath, name, manufacturerId, out errOut))
-                    {
-                        if (!Add(databasePath, name, manufacturerId, out errOut)) throw new Exception(errOut);
-                    }
-                    if (errOut?.Length > 0) throw new Exception(errOut);
-                }
-
                 string sql = $"SELECT * from  Gun_Model where Model='{name}' and GMID={manufacturerId}";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);

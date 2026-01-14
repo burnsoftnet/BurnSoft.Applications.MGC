@@ -20,10 +20,6 @@ namespace BurnSoft.Applications.MGC.UnitTest
         /// </summary>
         private string _databasePath;
         /// <summary>
-        /// The skip test Skip the clean up tests for sake of other tests.
-        /// </summary>
-        private bool _skipTest;
-        /// <summary>
         /// Initializes this instance.
         /// </summary>
         [TestInitialize]
@@ -32,7 +28,6 @@ namespace BurnSoft.Applications.MGC.UnitTest
             // Vs2019.GetSetting("", TestContext);
             _errOut = @"";
             _databasePath = Vs2019.GetSetting("DatabasePath", TestContext);
-            _skipTest = Vs2019.BGetSetting("SkipCleanupTests", TestContext);
         }
         /// <summary>
         /// Defines the test method KillDataTest.
@@ -40,15 +35,8 @@ namespace BurnSoft.Applications.MGC.UnitTest
         [TestMethod, TestCategory("Database Cleanup")]
         public void KillDataTest()
         {
-            if (!_skipTest)
-            {
-                bool value = MGC.DatabaseCleanUp.KillData(_databasePath, "Gun_Type", out _errOut);
-                General.HasTrueValue(value, _errOut);
-            }
-            else
-            {
-                General.HasTrueValue(true);
-            }                            
+            bool value = MGC.DatabaseCleanUp.KillData(_databasePath, "Gun_Type", out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Defines the test method ClearGripTypesTest.
@@ -56,15 +44,8 @@ namespace BurnSoft.Applications.MGC.UnitTest
         [TestMethod, TestCategory("Database Cleanup")]
         public void ClearGripTypesTest()
         {
-            if (!_skipTest)
-            {
-                bool value = MGC.DatabaseCleanUp.ClearGripTypes(_databasePath, out _errOut);
-                General.HasTrueValue(value, _errOut);
-            }
-            else
-            {
-                General.HasTrueValue(true);
-            }
+            bool value = MGC.DatabaseCleanUp.ClearGripTypes(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Defines the test method ClearBuyerListTest.
@@ -72,15 +53,8 @@ namespace BurnSoft.Applications.MGC.UnitTest
         [TestMethod, TestCategory("Database Cleanup")]
         public void ClearBuyerListTest()
         {
-            if (!_skipTest)
-            {
-                bool value = MGC.DatabaseCleanUp.ClearBuyerList(_databasePath, out _errOut);
-                General.HasTrueValue(value, _errOut);
-            }
-            else
-            {
-                General.HasTrueValue(true);
-            }
+            bool value = MGC.DatabaseCleanUp.ClearBuyerList(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Defines the test method ClearGunShopListTest.
@@ -88,15 +62,8 @@ namespace BurnSoft.Applications.MGC.UnitTest
         [TestMethod, TestCategory("Database Cleanup")]
         public void ClearGunShopListTest()
         {
-            if (!_skipTest)
-            {
-                bool value = MGC.DatabaseCleanUp.ClearGunShopList(_databasePath, out _errOut);
-                General.HasTrueValue(value, _errOut);
-            }
-            else
-            {
-                General.HasTrueValue(true);
-            }
+            bool value = MGC.DatabaseCleanUp.ClearGunShopList(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Defines the test method ClearNationalityTest.
@@ -104,15 +71,8 @@ namespace BurnSoft.Applications.MGC.UnitTest
         [TestMethod, TestCategory("Database Cleanup")]
         public void ClearNationalityTest()
         {
-            if (!_skipTest)
-            {
-                bool value = MGC.DatabaseCleanUp.ClearNationality(_databasePath, out _errOut);
-                General.HasTrueValue(value, _errOut);
-            }
-            else
-            {
-                General.HasTrueValue(true);
-            }
+            bool value = MGC.DatabaseCleanUp.ClearNationality(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Defines the test method ClearManufacturersTest.
@@ -120,15 +80,8 @@ namespace BurnSoft.Applications.MGC.UnitTest
         [TestMethod, TestCategory("Database Cleanup")]
         public void ClearManufacturersTest()
         {
-            if (!_skipTest)
-            {
-                bool value = MGC.DatabaseCleanUp.ClearGunShopList(_databasePath, out _errOut);
-                General.HasTrueValue(value, _errOut);
-            }
-            else
-            {
-                General.HasTrueValue(true);
-            }
+            bool value = MGC.DatabaseCleanUp.ClearGunShopList(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Defines the test method ClearModelsTest.
@@ -136,15 +89,8 @@ namespace BurnSoft.Applications.MGC.UnitTest
         [TestMethod, TestCategory("Database Cleanup")]
         public void ClearModelsTest()
         {
-            if (!_skipTest)
-            {
-                bool value = MGC.DatabaseCleanUp.ClearNationality(_databasePath, out _errOut);
-                General.HasTrueValue(value, _errOut);
-            }
-            else
-            {
-                General.HasTrueValue(true);
-            }
+            bool value = MGC.DatabaseCleanUp.ClearNationality(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
         /// <summary>
         /// Defines the test method ClearCollectionTest.
@@ -152,15 +98,8 @@ namespace BurnSoft.Applications.MGC.UnitTest
         [TestMethod, TestCategory("Database Cleanup")]
         public void ClearCollectionTest()
         {
-            if (!_skipTest)
-            {
-                bool value = MGC.DatabaseCleanUp.ClearCollection(_databasePath, out _errOut);
-                General.HasTrueValue(value, _errOut);
-            }
-            else
-            {
-                General.HasTrueValue(true);
-            }
+            bool value = MGC.DatabaseCleanUp.ClearCollection(_databasePath, out _errOut);
+            General.HasTrueValue(value, _errOut);
         }
 
     }

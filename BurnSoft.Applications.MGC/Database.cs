@@ -56,19 +56,16 @@ namespace BurnSoft.Applications.MGC
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{ClassLocation}.{functionName} - {e.Message}";
         #endregion
-        //End Snippet        
-        /// <summary>
-        /// The connection
-        /// </summary>
+        //End Snippet
         internal OdbcConnection _conn;
         #region "Connection Strings"
 
         /// <summary>
         /// Connection String Format Used to Connect to MS Access Databases using the Microsoft Access Driver
         /// </summary>
-        /// <param name="databasePath">The Database Path</param>
+        /// <param name="databasePath"></param>
         /// <param name="databaseName"></param>
-        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <param name="errOut"></param>
         /// <param name="password"></param>
         /// <returns>string</returns>
         /// <example>
@@ -120,7 +117,7 @@ namespace BurnSoft.Applications.MGC
         /// </summary>
         /// <param name="databasePath">The database path.</param>
         /// <param name="databaseName">Name of the database.</param>
-        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <param name="errOut"></param>
         /// <param name="password">The password.</param>
         /// <returns>System.String.</returns>
         /// <example>
@@ -261,7 +258,6 @@ namespace BurnSoft.Applications.MGC
                     OdbcCommand cmd = new OdbcCommand(sql, _conn);
                     cmd.ExecuteNonQuery();
                     cmd.Connection.Close();
-                    _conn.Close();
                     _conn = null;
                     bAns = true;
                 }
@@ -355,7 +351,7 @@ namespace BurnSoft.Applications.MGC
         /// <param name="connection"></param>
         /// <param name="sql"></param>
         /// <param name="identitySeedColumnName"></param>
-        /// <param name="errOut">If an exception occurs the message will be in this string</param>
+        /// <param name="errOut"></param>
         /// <returns>number</returns>
         /// <example>
         /// string sql = "select id from sometable where something='something'"; <br/>

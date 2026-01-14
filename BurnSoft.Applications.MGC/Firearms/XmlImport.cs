@@ -160,15 +160,15 @@ namespace BurnSoft.Applications.MGC.Firearms
                     if (errOut.Length > 0)
                         throw new Exception(errOut);
 
-                    long modId = Models.GetId(databasePath, modelName, manId, out errOut, AddIfNotExists: true);
+                    long modId = Models.GetId(databasePath, modelName, manId, out errOut);
                     if (errOut.Length > 0)
                         throw new Exception(errOut);
 
-                    long lGripId = Grips.GetId(databasePath, gripId, out errOut, AddIfNotExists: true);
+                    long lGripId = Grips.GetId(databasePath, gripId, out errOut);
                     if (errOut.Length > 0)
                         throw new Exception(errOut);
 
-                    long lNatId = Nationality.GetId(databasePath, natId, out errOut, AddIfNotExists: true);
+                    long lNatId = Nationality.GetId(databasePath, natId, out errOut);
                     if (errOut.Length > 0)
                         throw new Exception(errOut);
 
