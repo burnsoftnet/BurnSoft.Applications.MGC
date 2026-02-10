@@ -72,9 +72,11 @@ namespace BurnSoft.Applications.MGC.Other
         /// <param name="errOut">The error out.</param>
         /// <param name="IsLinked">Mark if the Accessory is Linked</param>
         /// <param name="FAID">Firearm Accessory ID for reverse linking</param>
+        /// <param name="IsLinkedFromGa">This is Linked from the General Accessories List</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool Add(string databasePath, string manufacturer, string model, string serialNumber, string condition, 
-            string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut, bool IsLinked = false, long FAID = 0)
+            string notes, string use, double purValue, double appValue, bool civ, bool ic, out string errOut, bool IsLinked = false, 
+            long FAID = 0, bool IsLinkedFromGa = false)
         {
             bool bAns = false;
             errOut = @"";
@@ -84,9 +86,9 @@ namespace BurnSoft.Applications.MGC.Other
                 int iIc = ic ? 1 : 0;
 
                 string sql = $"INSERT INTO General_Accessories(Manufacturer,Model,SerialNumber,Condition,Notes,Use,PurValue," +
-                    $"AppValue,CIV,IC,sync_lastupdate, IsLinked, FAID) VALUES(" +
+                    $"AppValue,CIV,IC,sync_lastupdate, IsLinked, FAID, IsGALinked) VALUES(" +
                              $"'{manufacturer}','{model}','{serialNumber}','{condition}','{notes}','{use}',{purValue}," +
-                             $"{appValue}, {iCiv},{iIc},Now(), {IsLinked}, {FAID})";
+                             $"{appValue}, {iCiv},{iIc},Now(), {IsLinked}, {FAID}, {IsLinkedFromGa})";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -257,7 +259,8 @@ namespace BurnSoft.Applications.MGC.Other
                         CountInValue = countinValue,
                         IsChoke = isChoke,
                         FAID = d["FAID"] != DBNull.Value ? Convert.ToInt32(d["FAID"]) : 0,
-                        IsLinked = d["IsLinked"] != DBNull.Value ? Convert.ToBoolean(d["IsLinked"]) : false
+                        IsLinked = d["IsLinked"] != DBNull.Value ? Convert.ToBoolean(d["IsLinked"]) : false,
+                        IsLinkedFromGa = d["IsGALinked"] != DBNull.Value ? Convert.ToBoolean(d["IsGALinked"]) : false
                     });
                 }
             }
@@ -481,6 +484,32 @@ namespace BurnSoft.Applications.MGC.Other
                 errOut = ErrorMessage("Delete", e);
             }
 
+            return bAns;
+        }
+
+        /// <summary>
+        /// Sets the link from general accessories status to mark if an Accessory is linked to a firearm or not.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="isLinked">if set to <c>true</c> [is linked].</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool SetLinkFromGaStatus(string databasePath, int id, bool isLinked, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                string sql = $"update General_Accessories set IsGALinked={isLinked} where id={id}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("SetLinkFromGaStatus", e);
+            }
             return bAns;
         }
 
