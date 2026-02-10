@@ -75,6 +75,11 @@ namespace BurnSoft.Applications.MGC.Types
         /// <value><c>true</c> if this instance is linked; otherwise, <c>false</c>.</value>
         public bool IsLinked { get; set; }
         /// <summary>
+        /// Gets or sets a value indicating whether this instance is linked from general accessories.
+        /// </summary>
+        /// <value><c>true</c> if this instance is linked from ga; otherwise, <c>false</c>.</value>
+        public bool IsLinkedFromGa { get; set; }
+        /// <summary>
         /// Gets or sets the attached to firearmns list identirifers.
         /// </summary>
         /// <value>The attached to firearmns.</value>

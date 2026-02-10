@@ -249,5 +249,25 @@ namespace BurnSoft.Applications.MGC.UnitTest.Other
             bool value = GeneralAccessories.Delete(_databasePath, Convert.ToInt32(id), deleteFromFirearms: true, out _errOut);
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void SetGAStatusToTrue()
+        {
+            VerifyExists();
+            long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut);
+            bool value = GeneralAccessories.SetLinkFromGaStatus(_databasePath, Convert.ToInt32(id), true, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("General Accessories")]
+        public void SetGAStatusToFalse()
+        {
+            VerifyExists();
+            long id = GeneralAccessories.GetId(_databasePath, _accessoriesManufacturer, _accessoriesName,
+                _accessoriesSerialNumber, out _errOut);
+            bool value = GeneralAccessories.SetLinkFromGaStatus(_databasePath, Convert.ToInt32(id), false, out _errOut);
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }

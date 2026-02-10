@@ -131,7 +131,10 @@ namespace BurnSoft.Applications.MGC.Other
             try
             {
                 string sql = $"INSERT INTO General_Accessories_Link(GID, AID) Values({gunId},{id})";
-                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                if (!GeneralAccessories.SetLinkFromGaStatus(databasePath, id, true, out errOut)) 
+                    throw new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -140,6 +143,7 @@ namespace BurnSoft.Applications.MGC.Other
 
             return bAns;
         }
+
         /// <summary>
         /// Deletes the specified Link by id from the tabl
         /// </summary>
@@ -155,8 +159,8 @@ namespace BurnSoft.Applications.MGC.Other
             try
             {
                 string sql = $"DELETE from General_Accessories_Link where id={linkId}";
-                bAns = Database.Execute(databasePath, sql, out errOut);
-                if (errOut.Length > 0) throw new Exception(errOut);
+                if (!Database.Execute(databasePath, sql, out errOut)) throw new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {

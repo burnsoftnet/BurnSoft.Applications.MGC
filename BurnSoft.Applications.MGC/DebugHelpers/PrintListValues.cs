@@ -293,6 +293,7 @@ namespace BurnSoft.Applications.MGC.DebugHelpers
                     sAns += $"Use: {v.Use}{Environment.NewLine}";
                     sAns += $"FAID: {v.FAID}{Environment.NewLine}";
                     sAns += $"Is LInked: {v.IsLinked}{Environment.NewLine}";
+                    sAns += $"Is LInked from GA: {v.IsLinkedFromGa}{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";
                     sAns += $"--------------------------{Environment.NewLine}";
                     sAns += $"{Environment.NewLine}";

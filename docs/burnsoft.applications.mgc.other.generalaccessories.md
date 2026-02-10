@@ -24,12 +24,12 @@ public GeneralAccessories()
 
 ## Methods
 
-### **Add(String, String, String, String, String, String, String, Double, Double, Boolean, Boolean, String&, Boolean, Int64)**
+### **Add(String, String, String, String, String, String, String, Double, Double, Boolean, Boolean, String&, Boolean, Int64, Boolean)**
 
 Adds the specified accessory to the database.
 
 ```csharp
-public static bool Add(string databasePath, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, String& errOut, bool IsLinked, long FAID)
+public static bool Add(string databasePath, string manufacturer, string model, string serialNumber, string condition, string notes, string use, double purValue, double appValue, bool civ, bool ic, String& errOut, bool IsLinked, long FAID, bool IsLinkedFromGa)
 ```
 
 #### Parameters
@@ -75,6 +75,9 @@ Mark if the Accessory is Linked
 
 `FAID` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
 Firearm Accessory ID for reverse linking
+
+`IsLinkedFromGa` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+This is Linked from the General Accessories List
 
 #### Returns
 
@@ -389,6 +392,37 @@ The identifier.
 
 `deleteFromFirearms` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 if set to `true` [delete from firearms].
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **SetLinkFromGaStatus(String, Int32, Boolean, String&)**
+
+Sets the link from general accessories status to mark if an Accessory is linked to a firearm or not.
+
+```csharp
+public static bool SetLinkFromGaStatus(string databasePath, int id, bool isLinked, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`id` [Int32](https://docs.microsoft.com/en-us/dotnet/api/system.int32)<br>
+The identifier.
+
+`isLinked` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [is linked].
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
