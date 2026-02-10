@@ -186,6 +186,19 @@ public bool IsLinked { get; set; }
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if this instance is linked; otherwise, `false`.
 
+### **IsLinkedFromGa**
+
+Gets or sets a value indicating whether this instance is linked from general accessories.
+
+```csharp
+public bool IsLinkedFromGa { get; set; }
+```
+
+#### Property Value
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if this instance is linked from ga; otherwise, `false`.
+
 ### **AttachedToFirearmns**
 
 Gets or sets the attached to firearmns list identirifers.
