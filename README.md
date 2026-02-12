@@ -20,7 +20,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 ## Release Log
 
-### v1.7.15.56
+### v1.7.15.57
 
 * Fixed unit Tests to run on full
 * Updated Unit Tests
@@ -53,6 +53,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * ADDED - The Ability to Mark a Firearm as in a Collection, meaning that this is something that is just to collect value and is hardy shot or easily sold.
 * ADDED - Hotfix 11 to Update the Database
 * REFACTOR - The Run Function in the Hotfixes to reduce the amount of duplicate code and simplify future updates
+* ADDED - Function that will mark or unmark a General Accessory if it shows that it is or isn't linked based on the link table.
 
 ### v1.7.0.4
 
