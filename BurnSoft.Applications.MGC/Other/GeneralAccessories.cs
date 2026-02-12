@@ -163,7 +163,31 @@ namespace BurnSoft.Applications.MGC.Other
             }
             return bAns;
         }
-
+        /// <summary>
+        /// Marks as linked if linked in the table, or unlinks it if needed.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool MarkAsLinkedIfLinked(string databasePath, long id, out string errOut)
+        {
+            bool bAns = false;
+            errOut = "";
+            try
+            {
+                bool isAttached = GeneralAccessoriesLinking.IsAttached(databasePath, id,out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                if (!SetLinkFromGaStatus(databasePath, Convert.ToInt32(id), isAttached, out errOut)) throw new Exception(errOut);
+                bAns = true;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("MarkAsLinkedIfLinked", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Updates the specified accessory in the database.
