@@ -20,7 +20,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 
 ## Release Log
 
-### v1.7.15.57
+### v1.7.16.58
 
 * Fixed unit Tests to run on full
 * Updated Unit Tests
@@ -54,6 +54,7 @@ Additional [Developer Notes](docs/DeveloperNotes.md) are available.
 * ADDED - Hotfix 11 to Update the Database
 * REFACTOR - The Run Function in the Hotfixes to reduce the amount of duplicate code and simplify future updates
 * ADDED - Function that will mark or unmark a General Accessory if it shows that it is or isn't linked based on the link table.
+* ADDED - Functions from MyLoadersLog that is used in the application to this library to use the functions that already exists and to help keep up-to-date all in one place.
 
 ### v1.7.0.4
 
