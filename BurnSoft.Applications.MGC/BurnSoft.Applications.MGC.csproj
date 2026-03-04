@@ -100,6 +100,7 @@
     <Compile Include="hotixes\types\DbColumns.cs" />
     <Compile Include="hotixes\types\HotFixList.cs" />
     <Compile Include="hotixes\types\HotFixToDbList.cs" />
+    <Compile Include="LoadersLog\FirearmHelpers.cs" />
     <Compile Include="LoadersLog\RegistryHelpers.cs" />
     <Compile Include="Other\GeneralAccessories.cs" />
     <Compile Include="Other\GeneralAccessoriesLinking.cs" />
