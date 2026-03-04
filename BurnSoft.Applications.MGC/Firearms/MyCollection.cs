@@ -1217,6 +1217,31 @@ namespace BurnSoft.Applications.MGC.Firearms
             return lst;
         }
         /// <summary>
+        /// Gets the list using a custom sql statement to pull something specific back
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="sql">The SQL.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;GunCollectionList&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static List<GunCollectionList> GetList(string databasePath, string sql, out string errOut)
+        {
+            List<GunCollectionList> lst = new List<GunCollectionList>();
+            errOut = @"";
+            try
+            {
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyList(dt, out errOut, databasePath);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("GetList", e);
+            }
+            return lst;
+        }
+
+        /// <summary>
         /// Gets a specfic firearm from the database
         /// </summary>
         /// <param name="databasePath">The database path.</param>
