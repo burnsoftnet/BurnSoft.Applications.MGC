@@ -84,17 +84,27 @@ namespace BurnSoft.Applications.MGC.LoadersLog
         /// <returns>System.Int64.</returns>
         public static long GetLastFirearmId(out string errOut) => 
             MyCollection.GetLastId(RegistryHelpers.GetMGCPath(out _), out errOut);
-
+        /// <summary>
+        /// Updates the type of the gun.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool UpdateGunType(string name, out string errOut) => 
             Firearms.GunTypes.Add(RegistryHelpers.GetMGCPath(out _), name, out errOut);
-
+        /// <summary>
+        /// Calibers the exists.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool CaliberExists(string name, out string errOut) =>
             Ammo.GlobalList.Exists(RegistryHelpers.GetMGCPath(out _), name, out errOut);
 
         public static bool AddFirearmToMGC(string fullName, string manufacturer, string model,
-            string caliber, string barrel, string serialNumber, string gripType,
+            string caliber, string barrel, string serialNumber, string gunType,
             out string errOut, long MgcId = 1) => MyCollection.QuickAdd(RegistryHelpers.GetMGCPath(out _), 
-                fullName, manufacturer, model, caliber, barrel, serialNumber, gripType, out errOut, MgcId: MgcId);
+                fullName, manufacturer, model, caliber, barrel, serialNumber, gunType, out errOut, MgcId: MgcId);
 
         public static bool AmmoIsAlreadyListed(string manufacturer, string name,
             string cal, string grain, string jacket, out long qty, out long mid, out string errOut) =>
