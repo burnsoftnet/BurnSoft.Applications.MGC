@@ -34,5 +34,21 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
             TestContext.WriteLine($"VALUE RETURNED: {value}");
             General.HasTrueValue(value > 0, _errOut);
         }
+     
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void GetManufacturersIdTest()
+        {
+            long value = FirearmHelpers.GetManufacturersId("Beretta", out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value == 3, _errOut);
+        }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void GetManufacturersNameTest()
+        {
+            string value = FirearmHelpers.GetManufacturersName(3, out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value.Equals("Beretta"), _errOut);
+        }
     }
 }

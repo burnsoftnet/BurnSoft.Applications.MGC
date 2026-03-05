@@ -15,6 +15,11 @@ namespace BurnSoft.Applications.MGC.LoadersLog
     /// </summary>
     public class FirearmHelpers
     {
+        /// <summary>
+        /// Counts the firearms.
+        /// </summary>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int32.</returns>
         public static int CountFirearms(out string errOut)
         {
             string databasePath = RegistryHelpers.GetMGCPath(out errOut);
@@ -22,10 +27,20 @@ namespace BurnSoft.Applications.MGC.LoadersLog
             List<GunCollectionList> value = MyCollection.GetList(databasePath, sql, out errOut);
             return value.Count;
         }
-
+        /// <summary>
+        /// Gets the manufacturers identifier.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
         public static long GetManufacturersId(string name, out string errOut) => 
             Manufacturers.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut);
-
+        /// <summary>
+        /// Gets the name of the manufacturers.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.String.</returns>
         public static string GetManufacturersName(int id, out string errOut) => 
             Manufacturers.GetName(RegistryHelpers.GetMGCPath(out _), id, out errOut);
 
