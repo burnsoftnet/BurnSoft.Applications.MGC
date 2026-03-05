@@ -100,12 +100,35 @@ namespace BurnSoft.Applications.MGC.LoadersLog
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool CaliberExists(string name, out string errOut) =>
             Ammo.GlobalList.Exists(RegistryHelpers.GetMGCPath(out _), name, out errOut);
-
+        /// <summary>
+        /// Adds the firearm to MGC.
+        /// </summary>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="barrel">The barrel.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="gunType">Type of the gun.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="MgcId">The MGC identifier.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool AddFirearmToMGC(string fullName, string manufacturer, string model,
             string caliber, string barrel, string serialNumber, string gunType,
             out string errOut, long MgcId = 1) => MyCollection.QuickAdd(RegistryHelpers.GetMGCPath(out _), 
                 fullName, manufacturer, model, caliber, barrel, serialNumber, gunType, out errOut, MgcId: MgcId);
-
+        /// <summary>
+        /// Ammoes the is already listed.
+        /// </summary>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="cal">The cal.</param>
+        /// <param name="grain">The grain.</param>
+        /// <param name="jacket">The jacket.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="mid">The mid.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool AmmoIsAlreadyListed(string manufacturer, string name,
             string cal, string grain, string jacket, out long qty, out long mid, out string errOut) =>
             Ammo.Inventory.AmmoIsAlreadyListed(RegistryHelpers.GetMGCPath(out _), manufacturer, name, 

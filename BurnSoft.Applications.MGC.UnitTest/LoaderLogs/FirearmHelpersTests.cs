@@ -146,5 +146,28 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
             TestContext.WriteLine($"VALUE RETURNED: {value}");
             General.HasTrueValue(value, _errOut);
         }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void AddFirearmToMGCTest()
+        {
+            bool value = FirearmHelpers.AddFirearmToMGC("Canik Open Gun", "Canik","Canik TTI", 
+                "9mm Luger", "5\"", "FAKE12345", _gunType, out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value, _errOut);
+        }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void AmmoIsAlreadyListedTest()
+        {
+            long qty = 0;
+            long id = 0;
+            bool value = FirearmHelpers.AmmoIsAlreadyListed("Remington", 
+                "Golden Saber", "9mm Luger", "147 Grains", "Brass Jacketed Hollow Point", 
+                out qty, out id, out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            TestContext.WriteLine($"qty: {qty}");
+            TestContext.WriteLine($"id: {id}");
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }
