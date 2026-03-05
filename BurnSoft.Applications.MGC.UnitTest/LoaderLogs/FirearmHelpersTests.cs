@@ -50,5 +50,37 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
             TestContext.WriteLine($"VALUE RETURNED: {value}");
             General.HasTrueValue(value.Equals("Beretta"), _errOut);
         }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void GetModelIdTest()
+        {
+            long value = FirearmHelpers.GetModelId("MODEL 92D", 3, out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value == 1288, _errOut);
+        }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void GetNationalityIdTest()
+        {
+            long value = FirearmHelpers.GetNationalityId("UNITED STATES", out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value == 231, _errOut);
+        }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void GetGripIdTest()
+        {
+            long value = FirearmHelpers.GetManufacturersId("Plastic", out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value == 2, _errOut);
+        }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void GetGripIdAddTest()
+        {
+            long value = FirearmHelpers.GetManufacturersId("Plastic & Brass Grip Strap", out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value > 0, _errOut);
+        }
     }
 }
