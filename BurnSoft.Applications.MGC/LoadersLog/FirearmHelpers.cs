@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BurnSoft.Applications.MGC.LoadersLog
 {
@@ -37,5 +38,12 @@ namespace BurnSoft.Applications.MGC.LoadersLog
 
         public static long GetGripId(string name, out string errOut) => 
             Grips.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut, true);
+
+        public static long GetGunShopId(string name, out string errOut) => 
+            Nationality.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut);
+
+        public static long GetLastFirearmId(out string errOut) => 
+            MyCollection.GetLastId(RegistryHelpers.GetMGCPath(out _), out errOut);
+        
     }
 }
