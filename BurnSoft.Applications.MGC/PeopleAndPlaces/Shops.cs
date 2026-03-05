@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Universal;
 // ReSharper disable UnusedMember.Local
 
 namespace BurnSoft.Applications.MGC.PeopleAndPlaces
@@ -67,8 +68,6 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             errOut = @"";
             try
             {
-                //BSOtherObjects obj = new BSOtherObjects();
-                //name = obj.FC(name);
                 string sql = $"select * from Gun_Shop_Details where name like '{name}%'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);
@@ -165,7 +164,9 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <param name="email">email</param>
         /// <param name="license">FFLor drivers license or CR license</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool Update(string databasePath,int id, string name, string address, string address2, string city, string state, string zipCode,string country, string phone, string fax, string website, string email,string license, bool isStillInBusiness, out string errOut)
+        public static bool Update(string databasePath,int id, string name, string address, string address2, string city, 
+            string state, string zipCode,string country, string phone, string fax, string website, string email,
+            string license, bool isStillInBusiness, out string errOut)
         {
             bool bAns = false;
             errOut = @"";
@@ -173,7 +174,10 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
             {
                 int sib = isStillInBusiness ? 1 : 0;
                 string sql =
-                    $"UPDATE Gun_Shop_Details set name='{name}',Address1='{address}',Address2='{address2}',City='{city}',State='{state}',Zip='{zipCode}',sync_lastupdate=Now(), Country='{country}', phone='{phone}', fax='{fax}', website='{website}', email='{email}', lic='{license}',SIB={sib} where id={id}";
+                    $"UPDATE Gun_Shop_Details set name='{name}',Address1='{address}',Address2='{address2}'," +
+                    $"City='{city}',State='{state}',Zip='{zipCode}',sync_lastupdate=Now(), Country='{country}', " +
+                    $"phone='{phone}', fax='{fax}', website='{website}', email='{email}', lic='{license}'," +
+                    $"SIB={sib} where id={id}";
                 bAns = Database.Execute(databasePath, sql, out errOut);
             }
             catch (Exception e)
@@ -265,14 +269,23 @@ namespace BurnSoft.Applications.MGC.PeopleAndPlaces
         /// <param name="databasePath">The database path.</param>
         /// <param name="name">The name.</param>
         /// <param name="errOut">The error out.</param>
+        /// <param name="AddIfNotExists"></param>
         /// <returns>System.Int64.</returns>
         /// <exception cref="Exception"></exception>
-        public static long GetId(string databasePath, string name, out string errOut)
+        public static long GetId(string databasePath, string name, out string errOut, bool AddIfNotExists = false)
         {
             long lAns = 0;
             errOut = @"";
             try
             {
+                if (AddIfNotExists)
+                {
+                    if (!Exists(databasePath, name, out errOut))
+                    {
+                        if (!Add(databasePath, name, out errOut)) throw new Exception(errOut);
+                    }
+                    if (errOut?.Length > 0) throw new Exception(errOut);
+                }
                 string sql = $"SELECT id from Gun_Shop_Details where name='{name}'";
                 DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
                 if (errOut?.Length > 0) throw new Exception(errOut);

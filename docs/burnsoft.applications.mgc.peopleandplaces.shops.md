@@ -282,12 +282,12 @@ System.String.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
-### **GetId(String, String, String&)**
+### **GetId(String, String, String&, Boolean)**
 
 Gets the identifier by the shop name.
 
 ```csharp
-public static long GetId(string databasePath, string name, String& errOut)
+public static long GetId(string databasePath, string name, String& errOut, bool AddIfNotExists)
 ```
 
 #### Parameters
@@ -300,6 +300,8 @@ The name.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.
+
+`AddIfNotExists` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 
 #### Returns
 
