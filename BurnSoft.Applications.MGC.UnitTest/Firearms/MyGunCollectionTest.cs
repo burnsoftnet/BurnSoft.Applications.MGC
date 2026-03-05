@@ -335,6 +335,15 @@ namespace BurnSoft.Applications.MGC.UnitTest.Firearms
             TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionData(value));
             General.HasTrueValue(value.Count > 0, _errOut);
         }
+
+        [TestMethod, TestCategory("Gun Collection - Get From Table")]
+        public void GetListSQL()
+        {
+            string sql = "SELECT * from Gun_Collection where ItemSold=0";
+            List<GunCollectionList> value = MyCollection.GetList(_databasePath, sql, out _errOut);
+            TestContext.WriteLine(DebugHelpers.PrintListValues.GunCollectionData(value));
+            General.HasTrueValue(value.Count > 0, _errOut);
+        }
         /// <summary>
         /// Defines the test method UpdateShopNames.
         /// </summary>

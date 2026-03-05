@@ -211,6 +211,58 @@ The error out.
 
 [Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
 
+### **QuickAdd(String, String, String, String, String, String, String, String, String&, Int64, String)**
+
+Quicks the add to just add the basics, mostly used for the MyLoadersLog App.
+
+```csharp
+public static bool QuickAdd(string databasePath, string fullName, string manufacturer, string model, string caliber, string barrel, string serialNumber, string gunType, String& errOut, long MgcId, string purchasedFrom)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`fullName` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The full name.
+
+`manufacturer` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The manufacturer.
+
+`model` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The model.
+
+`caliber` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The caliber.
+
+`barrel` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The barrel.
+
+`serialNumber` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The serial number.
+
+`gunType` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+Type of the gun.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+`MgcId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The MGC identifier.
+
+`purchasedFrom` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The purchased from.
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
 ### **Update(String, Int32, Boolean, Int64, Int64, String, Int64, String, String, String, String, String, String, Int64, Int64, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, String, Boolean, String, String, String, String, Boolean, String, String, String, String, String, Boolean, Boolean, String, String, Boolean, Boolean, String&)**
 
 Updates the specified database path.
@@ -1200,6 +1252,34 @@ public static List<GunCollectionList> GetList(string databasePath, String& errOu
 
 `databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
 The database path.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+#### Returns
+
+[List&lt;GunCollectionList&gt;](https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1)<br>
+List&lt;GunCollectionList&gt;.
+
+#### Exceptions
+
+[Exception](https://docs.microsoft.com/en-us/dotnet/api/system.exception)<br>
+
+### **GetList(String, String, String&)**
+
+Gets the list using a custom sql statement to pull something specific back
+
+```csharp
+public static List<GunCollectionList> GetList(string databasePath, string sql, String& errOut)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`sql` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The SQL.
 
 `errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
 The error out.

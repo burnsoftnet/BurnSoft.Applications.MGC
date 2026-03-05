@@ -1,15 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.OleDb;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace BurnSoft.Applications.MGC.hotixes
 {
+    /// <summary>
+    /// Class AccessDatabaseHandler used for locking issues
+    /// </summary>
     internal class AccessDatabaseHandler
     {
+        /// <summary>
+        /// Waits for access database to not be locked.
+        /// </summary>
+        /// <param name="connectionString">The connection string.</param>
+        /// <param name="timeoutSeconds">The timeout seconds.</param>
+        /// <param name="retryIntervalMilliseconds">The retry interval milliseconds.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public static bool WaitForAccessDatabase(string connectionString, int timeoutSeconds = 60, int retryIntervalMilliseconds = 500)
         {
             DateTime startTime = DateTime.Now;

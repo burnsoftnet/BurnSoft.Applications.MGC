@@ -94,6 +94,8 @@
     <Compile Include="Global\MyRegistryTest.cs" />
     <Compile Include="Hotfixes\DatabaseSecurityTests.cs" />
     <Compile Include="Hotfixes\RunHotFixes.cs" />
+    <Compile Include="LoaderLogs\RegistryHelpersTests.cs" />
+    <Compile Include="LoaderLogs\FirearmHelpersTests.cs" />
     <Compile Include="Other\GeneralAccessoriesTest.cs" />
     <Compile Include="Other\GeneralAccessoriesLinkingTest.cs" />
     <Compile Include="Other\WishlistTest.cs" />
