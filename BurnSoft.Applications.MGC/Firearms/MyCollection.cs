@@ -218,6 +218,51 @@ namespace BurnSoft.Applications.MGC.Firearms
             }
             return bAns;
         }
+        /// <summary>
+        /// Quicks the add to just add the basics, mostly used for the MyLoadersLog App.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="fullName">The full name.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="model">The model.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="barrel">The barrel.</param>
+        /// <param name="serialNumber">The serial number.</param>
+        /// <param name="gunType">Type of the gun.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="MgcId">The MGC identifier.</param>
+        /// <param name="purchasedFrom">The purchased from.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static bool QuickAdd(string databasePath, string fullName, string manufacturer, string model,
+            string caliber, string barrel, string serialNumber, string gunType,
+            out string errOut, long MgcId = 1, string purchasedFrom = "N/A")
+        {
+            errOut = "";
+            bool bAns = false;
+            try
+            {
+                long ManufacturerId = Manufacturers.GetId(databasePath, manufacturer, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                long modelId = Models.GetId(databasePath, model, ManufacturerId, out errOut, true);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                long nationalityId = Nationality.GetId(databasePath, "N/A", out errOut, true);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                long gripId = Grips.GetId(databasePath, "N/A", out errOut, true);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                bAns = Add(databasePath, false, MgcId, ManufacturerId, fullName, model, modelId, serialNumber,
+                    gunType, caliber, "N/A", "N/A", "N/A", nationalityId, gripId, "N/A", "N/A", "N/A",
+                    barrel, "N/A", "N/A", "N/A", "N/A", "N/A", "N/A", purchasedFrom, "N/A", "N/A", "N/A", "N/A",
+                    "N/A", "N/A", "N/A", "N/A", "N/A", DateTime.Now.ToString(), false, "N/A",
+                    DateTime.Now.ToString(), "N/A", "N/A", true, "N/A", "N/A", "N/A", "N/A",
+                    DateTime.Now.ToString(), false, "N/A", false, false, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("QuickAdd", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Updates the specified database path.

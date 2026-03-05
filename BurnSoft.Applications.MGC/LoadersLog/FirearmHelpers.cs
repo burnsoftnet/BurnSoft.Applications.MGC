@@ -84,6 +84,16 @@ namespace BurnSoft.Applications.MGC.LoadersLog
         /// <returns>System.Int64.</returns>
         public static long GetLastFirearmId(out string errOut) => 
             MyCollection.GetLastId(RegistryHelpers.GetMGCPath(out _), out errOut);
-        
+
+        public static bool UpdateGunType(string name, out string errOut) => 
+            Firearms.GunTypes.Add(RegistryHelpers.GetMGCPath(out _), name, out errOut);
+
+        public static bool CaliberExists(string name, out string errOut) =>
+            Ammo.GlobalList.Exists(RegistryHelpers.GetMGCPath(out _), name, out errOut);
+
+        public static bool AddFirearmToMGC(string fullName, string manufacturer, string model,
+            string caliber, string barrel, string serialNumber, string gripType,
+            out string errOut, long MgcId = 1) => MyCollection.QuickAdd(RegistryHelpers.GetMGCPath(out _), 
+                fullName, manufacturer, model, caliber, barrel, serialNumber, gripType, out errOut, MgcId: MgcId);
     }
 }
