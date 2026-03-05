@@ -95,5 +95,10 @@ namespace BurnSoft.Applications.MGC.LoadersLog
             string caliber, string barrel, string serialNumber, string gripType,
             out string errOut, long MgcId = 1) => MyCollection.QuickAdd(RegistryHelpers.GetMGCPath(out _), 
                 fullName, manufacturer, model, caliber, barrel, serialNumber, gripType, out errOut, MgcId: MgcId);
+
+        public static bool AmmoIsAlreadyListed(string manufacturer, string name,
+            string cal, string grain, string jacket, out long qty, out long mid, out string errOut) =>
+            Ammo.Inventory.AmmoIsAlreadyListed(RegistryHelpers.GetMGCPath(out _), manufacturer, name, 
+                cal, grain, jacket, out qty, out mid, out errOut);
     }
 }
