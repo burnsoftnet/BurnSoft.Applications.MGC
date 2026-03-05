@@ -42,5 +42,13 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
             TestContext.WriteLine($"VALUE RETURNED: {value}");
             General.HasTrueValue(value.Length > 0, _errOut);
         }
+
+        [TestMethod, TestCategory("MyLoadersLog - Registry Tests")]
+        public void MyGunCollectionIsInstalledTest()
+        {
+            bool value = RegistryHelpers.MyGunCollectionIsInstalled(out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value, _errOut);
+        }
     }
 }
