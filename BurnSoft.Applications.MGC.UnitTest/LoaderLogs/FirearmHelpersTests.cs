@@ -1,11 +1,11 @@
 ﻿using BurnSoft.Applications.MGC.LoadersLog;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using System;
 
 namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
 {
     [TestClass]
-    public class RegistryHelpersTests
+    public class FirearmHelpersTests
     {
         /// <summary>
         /// Gets or sets the test context.
@@ -27,20 +27,12 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
             _errOut = @"";
         }
 
-        [TestMethod, TestCategory("MyLoadersLog - Registry Tests")]
-        public void GetMgcExePathTest()
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void CountFirearmsTest()
         {
-            string value = RegistryHelpers.GetMgcExePath(out _errOut);
+            long value = FirearmHelpers.CountFirearms(out _errOut);
             TestContext.WriteLine($"VALUE RETURNED: {value}");
-            General.HasTrueValue(value.Length > 0, _errOut);
-        }
-
-        [TestMethod, TestCategory("MyLoadersLog - Registry Tests")]
-        public void GetMGCPathTest()
-        {
-            string value = RegistryHelpers.GetMGCPath(out _errOut);
-            TestContext.WriteLine($"VALUE RETURNED: {value}");
-            General.HasTrueValue(value.Length > 0, _errOut);
+            General.HasTrueValue(value > 0, _errOut);
         }
     }
 }

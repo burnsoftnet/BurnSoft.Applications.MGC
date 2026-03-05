@@ -40,7 +40,7 @@ namespace BurnSoft.Applications.MGC.LoadersLog
             Grips.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut, true);
 
         public static long GetGunShopId(string name, out string errOut) => 
-            Nationality.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut);
+            Nationality.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut, true);
 
         public static long GetLastFirearmId(out string errOut) => 
             MyCollection.GetLastId(RegistryHelpers.GetMGCPath(out _), out errOut);
