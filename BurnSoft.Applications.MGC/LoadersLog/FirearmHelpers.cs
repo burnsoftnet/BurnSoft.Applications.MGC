@@ -69,10 +69,19 @@ namespace BurnSoft.Applications.MGC.LoadersLog
         /// <returns>System.Int64.</returns>
         public static long GetGripId(string name, out string errOut) => 
             Grips.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut, true);
-
+        /// <summary>
+        /// Gets the gun shop identifier.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
         public static long GetGunShopId(string name, out string errOut) => 
-            Nationality.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut, true);
-
+            PeopleAndPlaces.Shops.GetId(RegistryHelpers.GetMGCPath(out _), name, out errOut, true);
+        /// <summary>
+        /// Gets the last firearm identifier.
+        /// </summary>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
         public static long GetLastFirearmId(out string errOut) => 
             MyCollection.GetLastId(RegistryHelpers.GetMGCPath(out _), out errOut);
         

@@ -1,4 +1,5 @@
 ﻿using BurnSoft.Applications.MGC.LoadersLog;
+using BurnSoft.Universal;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -16,6 +17,10 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
         /// The error out
         /// </summary>
         private string _errOut;
+        /// <summary>
+        /// The o
+        /// </summary>
+        private BSOtherObjects o;
 
         /// <summary>
         /// Initializes this instance.
@@ -24,6 +29,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
         public void Init()
         {
             // Vs2019.GetSetting("", TestContext);
+            o = new BSOtherObjects();
             _errOut = @"";
         }
 
@@ -70,7 +76,7 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
         [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
         public void GetGripIdTest()
         {
-            long value = FirearmHelpers.GetManufacturersId("Plastic", out _errOut);
+            long value = FirearmHelpers.GetGripId("Plastic", out _errOut);
             TestContext.WriteLine($"VALUE RETURNED: {value}");
             General.HasTrueValue(value == 2, _errOut);
         }
@@ -78,7 +84,24 @@ namespace BurnSoft.Applications.MGC.UnitTest.LoaderLogs
         [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
         public void GetGripIdAddTest()
         {
-            long value = FirearmHelpers.GetManufacturersId("Plastic & Brass Grip Strap", out _errOut);
+            long value = FirearmHelpers.GetGripId("Plastic & Brass Grip Strap", out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value > 0, _errOut);
+        }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void GetGunShopIdTest()
+        {
+            string name = o.FC("Mike's Guns");
+            long value = FirearmHelpers.GetGunShopId(name, out _errOut);
+            TestContext.WriteLine($"VALUE RETURNED: {value}");
+            General.HasTrueValue(value == 1, _errOut);
+        }
+
+        [TestMethod, TestCategory("MyLoadersLog - Gun Collects")]
+        public void GetLastFirearmIdTest()
+        {
+            long value = FirearmHelpers.GetLastFirearmId(out _errOut);
             TestContext.WriteLine($"VALUE RETURNED: {value}");
             General.HasTrueValue(value > 0, _errOut);
         }
