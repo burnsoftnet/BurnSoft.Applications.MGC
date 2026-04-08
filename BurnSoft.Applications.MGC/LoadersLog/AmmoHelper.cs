@@ -1,5 +1,5 @@
 ﻿using BurnSoft.Applications.MGC.Ammo;
-using BurnSoft.Applications.MGC.Types;
+using BurnSoft.Applications.MGC.Global;
 using System;
 using System.Collections.Generic;
 
@@ -59,7 +59,7 @@ namespace BurnSoft.Applications.MGC.LoadersLog
         /// <param name="errOut">The error out.</param>
         /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         /// <exception cref="System.Exception"></exception>
-        public static bool ImportAmmoMade(List<Ammunition> newAmmo, out string errOut)
+        public static bool ImportAmmoMade(List<Types.Ammunition> newAmmo, out string errOut)
         {
             bool bAns = false;
             errOut = "";
@@ -67,7 +67,7 @@ namespace BurnSoft.Applications.MGC.LoadersLog
             {
                 string databasePath = RegistryHelpers.GetMGCPath(out errOut);
                 if (errOut.Length > 0) throw new Exception(errOut);
-                foreach (Ammunition a in newAmmo)
+                foreach (Types.Ammunition a in newAmmo)
                 {
                     if (FirearmHelpers.AmmoIsAlreadyListed(a.Manufacturer, a.Name, a.Cal, a.Grain, a.Jacket,
                         out var qty, out var ammoId, out errOut))
@@ -86,6 +86,51 @@ namespace BurnSoft.Applications.MGC.LoadersLog
             }
             return bAns;
         }
-        public static AddedToAmmoList(List<Ammunition> ammoList, )
+        /// <summary>
+        /// Addeds to ammo list.
+        /// </summary>
+        /// <param name="ammoList">The ammo list.</param>
+        /// <param name="manufacturer">The manufacturer.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="caliber">The caliber.</param>
+        /// <param name="grain">The grain.</param>
+        /// <param name="jacket">The jacket.</param>
+        /// <param name="qty">The qty.</param>
+        /// <param name="velocity">The velocity.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>List&lt;Types.Ammunition&gt;.</returns>
+        /// <exception cref="System.Exception"></exception>
+        public static List<Types.Ammunition> AddedToAmmoList(List<Types.Ammunition> ammoList, string manufacturer, string name, string caliber, 
+            string grain, string jacket, int qty, int velocity, out string errOut)
+        {
+            errOut = "";
+            List<Types.Ammunition> lst = ammoList;
+            try
+            {
+                int id = lst.Count + 1;
+                double decimalGrain = Helpers.ConvertTextToNumber(grain, out errOut);
+                if (errOut.Length > 0) throw new Exception(errOut);
+                lst.Add(new Types.Ammunition
+                {
+                    Id = id,
+                    Manufacturer = manufacturer,
+                    Name = name,
+                    Cal = caliber,
+                    Grain = grain,
+                    Dcal = decimalGrain,
+                    Vel_n = velocity,
+                    Vel_t = velocity.ToString(), 
+                    Jacket = jacket, 
+                    Qty = qty,
+                    Sync_lastupdate = DateTime.Now.ToString(),
+                });
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("AddedToAmmoList", e);
+            }
+            return lst;
+        }
+            
     }
 }
