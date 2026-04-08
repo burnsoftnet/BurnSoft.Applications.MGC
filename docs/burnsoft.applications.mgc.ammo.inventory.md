@@ -58,6 +58,36 @@ by default it will subtract, is this is set to true it will add it instead
 [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
 `true` if XXXX, `false` otherwise.
 
+### **UpdateQty(String, Int64, Int64, String&, Boolean)**
+
+Updates the qty.
+
+```csharp
+public static bool UpdateQty(string databasePath, long ammoId, long newQty, String& errOut, bool doAdd)
+```
+
+#### Parameters
+
+`databasePath` [String](https://docs.microsoft.com/en-us/dotnet/api/system.string)<br>
+The database path.
+
+`ammoId` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The ammo identifier.
+
+`newQty` [Int64](https://docs.microsoft.com/en-us/dotnet/api/system.int64)<br>
+The new qty.
+
+`errOut` [String&](https://docs.microsoft.com/en-us/dotnet/api/system.string&)<br>
+The error out.
+
+`doAdd` [Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+if set to `true` [do add].
+
+#### Returns
+
+[Boolean](https://docs.microsoft.com/en-us/dotnet/api/system.boolean)<br>
+`true` if XXXX, `false` otherwise.
+
 ### **Delete(String, Int64, String&)**
 
 Deletes the specified ammo from the database as well as the audit information
