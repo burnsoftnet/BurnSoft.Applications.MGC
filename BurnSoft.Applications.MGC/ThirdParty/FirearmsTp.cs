@@ -1,20 +1,23 @@
 ﻿using System;
-using BurnSoft.Applications.MGC.Global;
+using System.Collections.Generic;
+using System.Data;
+using BurnSoft.Applications.MGC.Firearms;
+using BurnSoft.Applications.MGC.Types;
 // ReSharper disable UnusedMember.Local
-// ReSharper disable UnusedMember.Global
+// ReSharper disable RedundantAssignment
 
 namespace BurnSoft.Applications.MGC.ThirdParty
 {
     /// <summary>
-    /// Class Third Party Class for some simply functions that another application can use to interact with the Gun Collection Application. This is mostly based off the My Loader Load Functions
+    /// Class Firearms the handles anything related with the firearms
     /// </summary>
-    public class Main
+    public class FirearmsTp
     {
         #region "Exception Error Handling"        
         /// <summary>
         /// The class location
         /// </summary>
-        private static string _classLocation = "BurnSoft.Applications.MGC.ThirdParty.Main";
+        private static string _classLocation = "BurnSoft.Applications.MGC.ThirdParty.Firearms";
         /// <summary>
         /// Errors the message for regular Exceptions
         /// </summary>
@@ -51,33 +54,37 @@ namespace BurnSoft.Applications.MGC.ThirdParty
         /// <returns>System.String.</returns>
         private static string ErrorMessage(string functionName, ArgumentNullException e) => $"{_classLocation}.{functionName} - {e.Message}";
         #endregion
+        
+        /// <summary>
+        /// Counts the firearms.
+        /// </summary>
+        /// <param name="errOut">The error out.</param>
+        /// <returns>System.Int64.</returns>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        /// <exception cref="System.Exception"></exception>
+        public static long CountFirearms(out string errOut)
+        {
+            long lAns = 0;
+            errOut = "";
+            try
+            {
+                string databasePath = MainTp.GetDatabaseLocation(out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                List<GunCollectionList> lst = new List<GunCollectionList>();
+                string sql = $"SELECT * from Gun_Collection where ItemSold=0";
+                DataTable dt = Database.GetDataFromTable(databasePath, sql, out errOut);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lst = MyCollection.MyList(dt, out errOut, databasePath);
+                if (errOut?.Length > 0) throw new Exception(errOut);
+                lAns = lst.Count;
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("CountFirearms", e);
+            }
 
-        /// <summary>
-        /// Gets the database location.
-        /// </summary>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>System.String.</returns>
-        public static string GetDatabaseLocation(out string errOut)
-        {
-            return MyRegistry.GetDatabaseLocation(out errOut);
-        }
-        /// <summary>
-        /// Gets the MGC executable path.
-        /// </summary>
-        /// <param name="errOut">The error out.</param>
-        /// <returns>System.String.</returns>
-        public static string GetMgcExePath(out string errOut)
-        {
-            return MyRegistry.GetMgcExePath(out errOut);
-        }
-        /// <summary>
-        /// Mies the gun collection is installed.
-        /// </summary>
-        /// <param name="errOut">The error out.</param>
-        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        public static bool MyGunCollectionIsInstalled(out string errOut)
-        {
-            return MyRegistry.MyGunCollectionIsInstalled(out errOut);
+            return lAns;
         }
     }
 }

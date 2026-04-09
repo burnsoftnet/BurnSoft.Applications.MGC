@@ -104,6 +104,8 @@
 
 ## BurnSoft.Applications.MGC.LoadersLog
 
+[AmmoHelper](./burnsoft.applications.mgc.loaderslog.ammohelper.md)
+
 [FirearmHelpers](./burnsoft.applications.mgc.loaderslog.firearmhelpers.md)
 
 [RegistryHelpers](./burnsoft.applications.mgc.loaderslog.registryhelpers.md)
@@ -138,11 +140,11 @@
 
 ## BurnSoft.Applications.MGC.ThirdParty
 
-[Ammunition](./burnsoft.applications.mgc.thirdparty.ammunition.md)
+[AmmunitionTp](./burnsoft.applications.mgc.thirdparty.ammunitiontp.md)
 
-[Firearms](./burnsoft.applications.mgc.thirdparty.firearms.md)
+[FirearmsTp](./burnsoft.applications.mgc.thirdparty.firearmstp.md)
 
-[Main](./burnsoft.applications.mgc.thirdparty.main.md)
+[MainTp](./burnsoft.applications.mgc.thirdparty.maintp.md)
 
 ## BurnSoft.Applications.MGC.Types
 
