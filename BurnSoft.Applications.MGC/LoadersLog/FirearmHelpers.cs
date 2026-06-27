@@ -1,12 +1,7 @@
 ﻿using BurnSoft.Applications.MGC.Firearms;
 using BurnSoft.Applications.MGC.Types;
-using Microsoft.VisualBasic;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+
 
 namespace BurnSoft.Applications.MGC.LoadersLog
 {

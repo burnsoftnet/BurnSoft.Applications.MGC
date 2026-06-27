@@ -5,7 +5,7 @@ namespace BurnSoft.Applications.MGC.ThirdParty
     /// <summary>
     /// Class Ammunition quick ref functions foro third party
     /// </summary>
-    public class Ammunition
+    public class AmmunitionTp
     {
         /// <summary>
         /// Ammoes the is already listed.

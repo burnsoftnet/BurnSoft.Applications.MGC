@@ -77,8 +77,8 @@ namespace BurnSoft.Applications.MGC.Ammo
             {
                 long endTotal = currentQty - roundCountUsed;
                 if (doAdd) endTotal = currentQty + roundCountUsed;
-                string sql = $"UPDATE Gun_Collection_Ammo set Qty={endTotal} where id={ammoId}";
-                bAns = Database.Execute(databasePath, sql, out errOut);
+                if (!UpdateQty(databasePath, ammoId, endTotal,out errOut, doAdd)) throw new Exception(errOut);
+                bAns = true;
             }
             catch (Exception e)
             {
@@ -87,6 +87,30 @@ namespace BurnSoft.Applications.MGC.Ammo
             return bAns;
         }
 
+        /// <summary>
+        /// Updates the qty.
+        /// </summary>
+        /// <param name="databasePath">The database path.</param>
+        /// <param name="ammoId">The ammo identifier.</param>
+        /// <param name="newQty">The new qty.</param>
+        /// <param name="errOut">The error out.</param>
+        /// <param name="doAdd">if set to <c>true</c> [do add].</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        public static bool UpdateQty(string databasePath, long ammoId, long newQty, out string errOut, bool doAdd = false)
+        {
+            bool bAns = false;
+            errOut = @"";
+            try
+            {
+                string sql = $"UPDATE Gun_Collection_Ammo set Qty={newQty} where id={ammoId}";
+                bAns = Database.Execute(databasePath, sql, out errOut);
+            }
+            catch (Exception e)
+            {
+                errOut = ErrorMessage("UpdateQty", e);
+            }
+            return bAns;
+        }
 
         /// <summary>
         /// Deletes the specified ammo from the database as well as the audit information
